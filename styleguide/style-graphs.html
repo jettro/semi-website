@@ -10,19 +10,45 @@ title: SeMI, our style; getting input from our users through form elements
     <h3>Textual input</h3>
 
     <section>
-            <h4>Style graphs</h4>
-        <h4>Search field</h4>
-        <form>
-        	<fieldset>
-            	<label for="semi-sg-input-search">Label for input type="search"</label>
-                <input id="semi-sg-input-search" placeholder="Search the SeMI site" type="search" />
-            </fieldset>
-        </form>
-        <section class="semi-sg-codesnippet">
-            <p><abbr>HTML</abbr> code snippet</p>
-            <xmp><label for="input-search">Label text</label>
-            <input id="input-search" placeholder="Placeholder text" type="search" /></xmp>
-        </section>
+        <h4>Sankey</h4>
+       
+           <div id="sankey_basic" style="width: 600px; height: 400px;"></div>
+        
+              
+                <section class="semi-sg-codesnippet">
+                        <p><abbr>JS</abbr> code snippet</p>
+                        <xmp>let myarr = [[["Amsterdam", "Mike", 1], ["Mike", "13", 1], ["13", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "28", 1], ["28", "Netflix", 1]], [["Amsterdam", "Paula", 1], ["Paula", "2", 1], ["2", "Mediamarkt", 1]], [["Rotterdam", "James", 1], ["James", "33", 1], ["33", "Albert Heijn", 1]], [["Amsterdam", "Mike", 1], ["Mike", "18", 1], ["18", "Mediamarkt", 1]], [["Rotterdam", "James", 1], ["James", "15", 1], ["15", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "12", 1], ["12", "Mediamarkt", 1]], [["Amsterdam", "John", 1], ["John", "16", 1], ["16", "Mediamarkt", 1]], [["Amsterdam", "Mike", 1], ["Mike", "29", 1], ["29", "Netflix", 1]], [["Amsterdam", "Paula", 1], ["Paula", "14", 1], ["14", "Netflix", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "17", 1], ["17", "Mediamarkt", 1]]];
+
+       
+        
+        
+                                var flatarr = [].concat.apply([], myarr);
+                                console.log(flatarr);
+                                
+                                
+                                
+                                
+                                google.charts.load('current', {'packages':['sankey']});
+                                      google.charts.setOnLoadCallback(drawChart);
+                                
+                                      function drawChart() {
+                                        var data = new google.visualization.DataTable();
+                                        data.addColumn('string', 'From');
+                                        data.addColumn('string', 'To');
+                                        data.addColumn('number', 'Weight');
+                                        data.addRows(flatarr);
+                                
+                                        // Sets chart options.
+                                        var options = {
+                                
+                                        };
+                                
+                                        // Instantiates and draws our chart, passing in some options.
+                                        var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+                                        chart.draw(data, options);
+                                      }</xmp>
+                    </section>
+      
     </section>
         
     <section>
@@ -361,4 +387,40 @@ title: SeMI, our style; getting input from our users through form elements
     
 </article>
 
+
+
 <script type="text/javascript" src="/js/multirange.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+let myarr = [[["Amsterdam", "Mike", 1], ["Mike", "13", 1], ["13", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "28", 1], ["28", "Netflix", 1]], [["Amsterdam", "Paula", 1], ["Paula", "2", 1], ["2", "Mediamarkt", 1]], [["Rotterdam", "James", 1], ["James", "33", 1], ["33", "Albert Heijn", 1]], [["Amsterdam", "Mike", 1], ["Mike", "18", 1], ["18", "Mediamarkt", 1]], [["Rotterdam", "James", 1], ["James", "15", 1], ["15", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "12", 1], ["12", "Mediamarkt", 1]], [["Amsterdam", "John", 1], ["John", "16", 1], ["16", "Mediamarkt", 1]], [["Amsterdam", "Mike", 1], ["Mike", "29", 1], ["29", "Netflix", 1]], [["Amsterdam", "Paula", 1], ["Paula", "14", 1], ["14", "Netflix", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "17", 1], ["17", "Mediamarkt", 1]]];
+
+       
+        
+        
+        var flatarr = [].concat.apply([], myarr);
+        console.log(flatarr);
+        
+        
+        
+        
+        google.charts.load('current', {'packages':['sankey']});
+              google.charts.setOnLoadCallback(drawChart);
+        
+              function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'From');
+                data.addColumn('string', 'To');
+                data.addColumn('number', 'Weight');
+                data.addRows(flatarr);
+        
+                // Sets chart options.
+                var options = {
+        
+                };
+        
+                // Instantiates and draws our chart, passing in some options.
+                var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+                chart.draw(data, options);
+              }
+</script>
