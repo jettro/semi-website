@@ -17,36 +17,72 @@ title: SeMI, our style; getting input from our users through form elements
               
                 <section class="semi-sg-codesnippet">
                         <p><abbr>JS</abbr> code snippet</p>
-                        <xmp>let myarr = [[["Amsterdam", "Mike", 1], ["Mike", "13", 1], ["13", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "28", 1], ["28", "Netflix", 1]], [["Amsterdam", "Paula", 1], ["Paula", "2", 1], ["2", "Mediamarkt", 1]], [["Rotterdam", "James", 1], ["James", "33", 1], ["33", "Albert Heijn", 1]], [["Amsterdam", "Mike", 1], ["Mike", "18", 1], ["18", "Mediamarkt", 1]], [["Rotterdam", "James", 1], ["James", "15", 1], ["15", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "12", 1], ["12", "Mediamarkt", 1]], [["Amsterdam", "John", 1], ["John", "16", 1], ["16", "Mediamarkt", 1]], [["Amsterdam", "Mike", 1], ["Mike", "29", 1], ["29", "Netflix", 1]], [["Amsterdam", "Paula", 1], ["Paula", "14", 1], ["14", "Netflix", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "17", 1], ["17", "Mediamarkt", 1]]];
-
-       
-        
-        
-                                var flatarr = [].concat.apply([], myarr);
-                                console.log(flatarr);
-                                
-                                
-                                
-                                
-                                google.charts.load('current', {'packages':['sankey']});
-                                      google.charts.setOnLoadCallback(drawChart);
-                                
-                                      function drawChart() {
-                                        var data = new google.visualization.DataTable();
-                                        data.addColumn('string', 'From');
-                                        data.addColumn('string', 'To');
-                                        data.addColumn('number', 'Weight');
-                                        data.addRows(flatarr);
-                                
-                                        // Sets chart options.
-                                        var options = {
-                                
-                                        };
-                                
-                                        // Instantiates and draws our chart, passing in some options.
-                                        var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
-                                        chart.draw(data, options);
-                                      }</xmp>
+                        <xmp>
+                            let myarr = [["Amsterdam","AMS",55],
+                            ["Berlin","TXL",36],
+                            ["London","LHR",72],
+                            ["London","LGW",20],
+                            ["AMS","British Airways",10],
+                            ["AMS","KLM",30],
+                            ["AMS","Air France",5],
+                            ["AMS","Lufthansa",10],
+                            ["TXL","British Airways",6],
+                            ["TXL","Lufthansa",30],
+                            ["LHR","British Airways",50],
+                            ["LHR","KLM",10],
+                            ["LHR","Air France",5],
+                            ["LHR","Lufthansa",7],
+                            ["LGW","British Airways",20],
+                            ["British Airways","Airbus",14],
+                            ["British Airways","Boeing",13],
+                            ["KLM","Airbus",3],
+                            ["KLM","Boeing",10],
+                            ["Air France","Airbus",13],
+                            ["Air France","Boeing",7],
+                            ["Lufthansa","Airbus",25],
+                            ["Lufthansa","Boeing",3]];
+                            
+                            
+                            
+                            console.log('myarr');
+                            
+                            
+                            //var flatarr = [].concat.apply([], myarr);
+                            //console.log(flatarr);
+                            
+                            var flatarr = myarr;
+                            
+                            
+                            google.charts.load('current', {'packages':['sankey']});
+                                  google.charts.setOnLoadCallback(drawChart);
+                            
+                                  function drawChart() {
+                                    var data = new google.visualization.DataTable();
+                                    data.addColumn('string', 'From');
+                                    data.addColumn('string', 'To');
+                                    data.addColumn('number', 'Weight');
+                                    data.addRows(flatarr);
+                            
+                                    // Sets chart options.
+                                   var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
+                                              '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', 'FCE81C'];
+                            
+                                var options = {
+                                  height: 400,
+                                  sankey: {
+                                    node: {
+                                                colors: colors,
+                                      colorMode: 'unique'
+                                    },
+                                    link: {
+                                      color: { fill: '#eaeaea' }
+                                    }
+                                  }
+                                };
+                                    // Instantiates and draws our chart, passing in some options.
+                                    var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+                                    chart.draw(data, options);
+                                  }</xmp>
                     </section>
       
     </section>
@@ -393,34 +429,76 @@ title: SeMI, our style; getting input from our users through form elements
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-let myarr = [[["Amsterdam", "Mike", 1], ["Mike", "13", 1], ["13", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "28", 1], ["28", "Netflix", 1]], [["Amsterdam", "Paula", 1], ["Paula", "2", 1], ["2", "Mediamarkt", 1]], [["Rotterdam", "James", 1], ["James", "33", 1], ["33", "Albert Heijn", 1]], [["Amsterdam", "Mike", 1], ["Mike", "18", 1], ["18", "Mediamarkt", 1]], [["Rotterdam", "James", 1], ["James", "15", 1], ["15", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "12", 1], ["12", "Mediamarkt", 1]], [["Amsterdam", "John", 1], ["John", "16", 1], ["16", "Mediamarkt", 1]], [["Amsterdam", "Mike", 1], ["Mike", "29", 1], ["29", "Netflix", 1]], [["Amsterdam", "Paula", 1], ["Paula", "14", 1], ["14", "Netflix", 1]], [["Rotterdam", "Larissa", 1], ["Larissa", "17", 1], ["17", "Mediamarkt", 1]]];
+//cypher query to generate the array below
+/*MATCH path1 = (city:City)<--(p:Person), path2 = (p)<--(t:Transaction)-->(company:Company) WITH [city.name,p.name,count(path1)] AS path1Data, [p.name,company.name,count(path2)] AS path2Data
+WITH [path1Data,path2Data] AS totalData RETURN collect(totalData)
+*/
 
-       
-        
-        
-        var flatarr = [].concat.apply([], myarr);
-        console.log(flatarr);
-        
-        
-        
-        
-        google.charts.load('current', {'packages':['sankey']});
-              google.charts.setOnLoadCallback(drawChart);
-        
-              function drawChart() {
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'From');
-                data.addColumn('string', 'To');
-                data.addColumn('number', 'Weight');
-                data.addRows(flatarr);
-        
-                // Sets chart options.
-                var options = {
-        
-                };
-        
-                // Instantiates and draws our chart, passing in some options.
-                var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
-                chart.draw(data, options);
-              }
+/*let myarr = [[["Amsterdam", "Paula", 1], ["Paula", "Mediamarkt", 1]], [["Amsterdam", "Paula", 1], ["Paula", "Netflix", 1]], [["Rotterdam", "James", 1], ["James", "Mediamarkt", 1]], [["Amsterdam", "John", 1], ["John", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 2], ["Larissa", "Mediamarkt", 2]], [["Amsterdam", "Mike", 2], ["Mike", "Mediamarkt", 2]], [["Rotterdam", "Larissa", 1], ["Larissa", "Netflix", 1]], [["Amsterdam", "Mike", 1], ["Mike", "Netflix", 1]], [["Rotterdam", "James", 1], ["James", "Albert Heijn", 1]]];*/
+
+let myarr = [["Amsterdam","AMS",55],
+["Berlin","TXL",36],
+["London","LHR",72],
+["London","LGW",20],
+["AMS","British Airways",10],
+["AMS","KLM",30],
+["AMS","Air France",5],
+["AMS","Lufthansa",10],
+["TXL","British Airways",6],
+["TXL","Lufthansa",30],
+["LHR","British Airways",50],
+["LHR","KLM",10],
+["LHR","Air France",5],
+["LHR","Lufthansa",7],
+["LGW","British Airways",20],
+["British Airways","Airbus",14],
+["British Airways","Boeing",13],
+["KLM","Airbus",3],
+["KLM","Boeing",10],
+["Air France","Airbus",13],
+["Air France","Boeing",7],
+["Lufthansa","Airbus",25],
+["Lufthansa","Boeing",3]];
+
+
+
+console.log('myarr');
+
+
+//var flatarr = [].concat.apply([], myarr);
+//console.log(flatarr);
+
+var flatarr = myarr;
+
+
+google.charts.load('current', {'packages':['sankey']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'From');
+        data.addColumn('string', 'To');
+        data.addColumn('number', 'Weight');
+        data.addRows(flatarr);
+
+        // Sets chart options.
+       var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
+                  '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', 'FCE81C'];
+
+    var options = {
+      height: 400,
+      sankey: {
+        node: {
+					colors: colors,
+          colorMode: 'unique'
+        },
+        link: {
+          color: { fill: '#eaeaea' }
+        }
+      }
+    };
+        // Instantiates and draws our chart, passing in some options.
+        var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+        chart.draw(data, options);
+      }
 </script>
