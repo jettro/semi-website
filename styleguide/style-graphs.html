@@ -4,109 +4,105 @@ title: SeMI, our style; getting input from our users through form elements
 ---
 
 <article class="article semi-sg">
-    
+
     <h2>Getting input from our users; form elements</h2>
-    
+
     <h3>Textual input</h3>
 
     <section>
         <h4>Sankey</h4>
-       
-           <div id="sankey_basic" style="width: 600px; height: 400px;"></div>
-        
-              
-                <section class="semi-sg-codesnippet">
-                        <p><abbr>JS</abbr> code snippet</p>
-                        <xmp>
-                            let myarr = [["Amsterdam","AMS",55],
-                            ["Berlin","TXL",36],
-                            ["London","LHR",72],
-                            ["London","LGW",20],
-                            ["AMS","British Airways",10],
-                            ["AMS","KLM",30],
-                            ["AMS","Air France",5],
-                            ["AMS","Lufthansa",10],
-                            ["TXL","British Airways",6],
-                            ["TXL","Lufthansa",30],
-                            ["LHR","British Airways",50],
-                            ["LHR","KLM",10],
-                            ["LHR","Air France",5],
-                            ["LHR","Lufthansa",7],
-                            ["LGW","British Airways",20],
-                            ["British Airways","Airbus",14],
-                            ["British Airways","Boeing",13],
-                            ["KLM","Airbus",3],
-                            ["KLM","Boeing",10],
-                            ["Air France","Airbus",13],
-                            ["Air France","Boeing",7],
-                            ["Lufthansa","Airbus",25],
-                            ["Lufthansa","Boeing",3]];
-                            
-                            
-                            
-                            console.log('myarr');
-                            
-                            
-                            //var flatarr = [].concat.apply([], myarr);
-                            //console.log(flatarr);
-                            
-                            var flatarr = myarr;
-                            
-                            
-                            google.charts.load('current', {'packages':['sankey']});
-                                  google.charts.setOnLoadCallback(drawChart);
-                            
-                                  function drawChart() {
-                                    var data = new google.visualization.DataTable();
-                                    data.addColumn('string', 'From');
-                                    data.addColumn('string', 'To');
-                                    data.addColumn('number', 'Weight');
-                                    data.addRows(flatarr);
-                            
-                                    // Sets chart options.
-                                   var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-                                              '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', 'FCE81C'];
-                            
-                                var options = {
-                                  height: 400,
-                                  sankey: {
-                                    node: {
-                                                colors: colors,
-                                      colorMode: 'unique'
-                                    },
-                                    link: {
-                                      color: { fill: '#eaeaea' }
-                                    }
-                                  }
-                                };
-                                    // Instantiates and draws our chart, passing in some options.
-                                    var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
-                                    chart.draw(data, options);
-                                  }</xmp>
-                    </section>
-      
+
+        <div id="sankey_basic" style="width: 600px; height: 400px;"></div>
+
+
+        <section class="semi-sg-codesnippet">
+            <p><abbr>JS</abbr> code snippet</p>
+            <xmp>
+                let myarr = [["Amsterdam","AMS",55],
+                ["Berlin","TXL",36],
+                ["London","LHR",72],
+                ["London","LGW",20],
+                ["AMS","British Airways",10],
+                ["AMS","KLM",30],
+                ["AMS","Air France",5],
+                ["AMS","Lufthansa",10],
+                ["TXL","British Airways",6],
+                ["TXL","Lufthansa",30],
+                ["LHR","British Airways",50],
+                ["LHR","KLM",10],
+                ["LHR","Air France",5],
+                ["LHR","Lufthansa",7],
+                ["LGW","British Airways",20],
+                ["British Airways","Airbus",14],
+                ["British Airways","Boeing",13],
+                ["KLM","Airbus",3],
+                ["KLM","Boeing",10],
+                ["Air France","Airbus",13],
+                ["Air France","Boeing",7],
+                ["Lufthansa","Airbus",25],
+                ["Lufthansa","Boeing",3]];
+
+
+
+                console.log('myarr');
+
+
+                //var flatarr = [].concat.apply([], myarr);
+                //console.log(flatarr);
+
+                var flatarr = myarr;
+
+
+                google.charts.load('current', {'packages':['sankey']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'From');
+                data.addColumn('string', 'To');
+                data.addColumn('number', 'Weight');
+                data.addRows(flatarr);
+
+                // Sets chart options.
+                var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
+                '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', 'FCE81C'];
+
+                var options = {
+                height: 400,
+                sankey: {
+                node: {
+                colors: colors,
+                colorMode: 'unique'
+                },
+                link: {
+                color: { fill: '#eaeaea' }
+                }
+                }
+                };
+                // Instantiates and draws our chart, passing in some options.
+                var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+                chart.draw(data, options);
+                }</xmp>
+        </section>
+
     </section>
-        
+
     <section>
-        <h4>Regular text input</h4>
-    	<form>
-        	<fieldset>
-            	<label for="semi-sg-input-text">Label for input type="text"</label>
-                <input id="semi-sg-input-text" placeholder="Lorem ipsum dolor sit amet" type="text" />
-            </fieldset>
-        </form>
+        <h4>Bubble Chart</h4>
+        <div id="bubble-chart" style="border: 1px solid black;">hi</div>
+
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="input-text">Label text</label>
-            <input id="input-text" placeholder="Placeholder text" type="text" /></xmp>
+                <input id="input-text" placeholder="Placeholder text" type="text" /></xmp>
         </section>
     </section>
-        
+
     <section>
         <h4>Email address input</h4>
         <form>
-        	<fieldset>
-            	<label for="semi-sg-input-email">Label for input type="email"</label>
+            <fieldset>
+                <label for="semi-sg-input-email">Label for input type="email"</label>
                 <input id="semi-sg-input-email" placeholder="hello@semi.network" type="email" />
                 <input class="button--small" type="submit" value="Check address" />
             </fieldset>
@@ -114,61 +110,63 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="input-email">Label text</label>
-            <input id="input-email" placeholder="hello@domainname.tld" type="email" /></xmp>
+                <input id="input-email" placeholder="hello@domainname.tld" type="email" /></xmp>
         </section>
     </section>
-        
+
     <section>
         <h4>Number input</h4>
         <form>
-        	<fieldset>
-            	<label for="semi-sg-input-number">Label for input type="number"</label>
+            <fieldset>
+                <label for="semi-sg-input-number">Label for input type="number"</label>
                 <input id="semi-sg-input-number" type="number" />
             </fieldset>
         </form>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="input-number">Label text</label>
-            <input id="input-number" type="number" /></xmp>
+                <input id="input-number" type="number" /></xmp>
         </section>
     </section>
-    
+
     <section>
         <h4>Password field</h4>
         <form>
-        	<fieldset>
-            	<label for="semi-sg-input-password">Label for input type="password"</label>
+            <fieldset>
+                <label for="semi-sg-input-password">Label for input type="password"</label>
                 <input id="semi-sg-input-password" placeholder="••••••••••••" type="password" />
             </fieldset>
         </form>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="input-password">Label text</label>
-            <input id="input-password" placeholder="••••••••••••" type="password" /></xmp>
+                <input id="input-password" placeholder="••••••••••••" type="password" /></xmp>
         </section>
     </section>
-    
+
     <section>
         <h4>Telephone number input</h4>
         <form>
-        	<fieldset>
-            	<label for="semi-sg-input-tel">Label for input type="tel"</label>
-                <input id="semi-sg-input-tel" pattern="[0-9\-\(\) +]{0,20}" placeholder="×××–××× ×× ××" title="Only use numbers (0–9), a plus (+), and/or dashes (-)" type="tel" />
+            <fieldset>
+                <label for="semi-sg-input-tel">Label for input type="tel"</label>
+                <input id="semi-sg-input-tel" pattern="[0-9\-\(\) +]{0,20}" placeholder="×××–××× ×× ××" title="Only use numbers (0–9), a plus (+), and/or dashes (-)"
+                    type="tel" />
                 <input class="button--small" type="submit" value="Check phone number" />
             </fieldset>
         </form>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="input-tel">Label text</label>
-            <input id="input-tel" pattern="[0-9\-\(\) +]{0,20}" placeholder="×××–××× ×× ××" title="Only use numbers (0–9), a plus (+), and/or dashes (-)" type="tel" /></xmp>
+                <input id="input-tel" pattern="[0-9\-\(\) +]{0,20}" placeholder="×××–××× ×× ××" title="Only use numbers (0–9), a plus (+), and/or dashes (-)"
+                    type="tel" /></xmp>
         </section>
     </section>
-    
+
     <section>
         <h4>Web address input</h4>
         <form>
-        	<fieldset>
-            	<label for="semi-sg-input-url">Label for input type="url"</label>
+            <fieldset>
+                <label for="semi-sg-input-url">Label for input type="url"</label>
                 <input id="semi-sg-input-url" placeholder="https://domain.com/" type="url" />
                 <input class="button--small" type="submit" value="Check URL" />
             </fieldset>
@@ -176,15 +174,15 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="input-url">Label text</label>
-            <input id="input-url" placeholder="https://domain.com/" type="url" /></xmp>
+                <input id="input-url" placeholder="https://domain.com/" type="url" /></xmp>
         </section>
     </section>
-        
+
     <section>
         <h4>Required input</h4>
-    	<form>
-        	<fieldset>
-        	    <label for="semi-sg-input-req">Label for required input</label>
+        <form>
+            <fieldset>
+                <label for="semi-sg-input-req">Label for required input</label>
                 <input id="semi-sg-input-req" placeholder="Check input to see if I validate" required="required" type="text" />
                 <input class="button--small" type="submit" value="Check input" />
             </fieldset>
@@ -192,14 +190,14 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="input-req">Label text</label>
-            <input id="input-req" placeholder="Placeholder text" required="required" type="text" /></xmp>
+                <input id="input-req" placeholder="Placeholder text" required="required" type="text" /></xmp>
         </section>
     </section>
-    
+
     <section>
         <h3>Text area</h3>
         <fieldset>
-        	<label for="semi-sg-textarea">Label for text area</label>
+            <label for="semi-sg-textarea">Label for text area</label>
             <textarea id="semi-sg-textarea">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequatur suscipit numquam earum vel debitis, quas mollitia obcaecati doloribus fugit veritatis sit culpa cumque similique. Cumque illum dolorem quo eos.
             </textarea>
@@ -207,12 +205,12 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="textarea">Label text</label>
-            <textarea id="textarea">
+                <textarea id="textarea">
                 Placeholder text
             </textarea></xmp>
         </section>
     </section>
-    
+
     <section>
         <h3>Buttons</h3>
         <section>
@@ -244,7 +242,7 @@ title: SeMI, our style; getting input from our users through form elements
             </section>
         </section>
     </section>
-    
+
     <section>
         <h3>Select menu</h3>
         <label for="semi-sg-select">Label for select menu</label>
@@ -269,10 +267,10 @@ title: SeMI, our style; getting input from our users through form elements
                         <option>Option five</option>
                     </select>
                 </section>
-                </xmp>
-            </section>
+            </xmp>
+        </section>
     </section>
-    
+
     <section>
         <h3>Select menu with grouping</h3>
         <label for="semi-sg-select-group">Label for select menu</label>
@@ -280,17 +278,17 @@ title: SeMI, our style; getting input from our users through form elements
             <select id="semi-sg-select-group">
                 <optgroup label="Option group one">
                     <option>Option group one, option one</option>
-                    <option>Option group one, option  two</option>
-                    <option>Option group one, option  three</option>
-                    <option>Option group one, option  four</option>
-                    <option>Option group one, option  five</option>
+                    <option>Option group one, option two</option>
+                    <option>Option group one, option three</option>
+                    <option>Option group one, option four</option>
+                    <option>Option group one, option five</option>
                 </optgroup>
                 <optgroup label="Option group two">
                     <option>Option group two, option one</option>
-                    <option>Option group two, option  two</option>
-                    <option>Option group two, option  three</option>
-                    <option>Option group two, option  four</option>
-                    <option>Option group two, option  five</option>
+                    <option>Option group two, option two</option>
+                    <option>Option group two, option three</option>
+                    <option>Option group two, option four</option>
+                    <option>Option group two, option five</option>
                 </optgroup>
             </select>
         </section>
@@ -301,24 +299,24 @@ title: SeMI, our style; getting input from our users through form elements
                     <select id="select-group">
                         <optgroup label="Option group one">
                             <option>Option group one, option one</option>
-                            <option>Option group one, option  two</option>
-                            <option>Option group one, option  three</option>
-                            <option>Option group one, option  four</option>
-                            <option>Option group one, option  five</option>
+                            <option>Option group one, option two</option>
+                            <option>Option group one, option three</option>
+                            <option>Option group one, option four</option>
+                            <option>Option group one, option five</option>
                         </optgroup>
                         <optgroup label="Option group two">
                             <option>Option group two, option one</option>
-                            <option>Option group two, option  two</option>
-                            <option>Option group two, option  three</option>
-                            <option>Option group two, option  four</option>
-                            <option>Option group two, option  five</option>
+                            <option>Option group two, option two</option>
+                            <option>Option group two, option three</option>
+                            <option>Option group two, option four</option>
+                            <option>Option group two, option five</option>
                         </optgroup>
                     </select>
                 </section>
-                </xmp>
-            </section>
+            </xmp>
+        </section>
     </section>
-    
+
     <section>
         <h3>Select menu with multiple selections</h3>
         <label for="semi-sg-select-multiple">Label for select menu</label>
@@ -346,55 +344,59 @@ title: SeMI, our style; getting input from our users through form elements
             </xmp>
         </section>
     </section>
-    
+
     <section>
         <h3>Search form</h3>
         <form action="/search.html?query=" class="search">
-        	<section class="search-meta">
+            <section class="search-meta">
                 <label for="search-knowledgebase">Search our knowledge base</label>
-            	<input autosave="save-search-knowledgebase" id="search-knowledgebase" name="search" results="15" type="search" />
-            	<input class="button" type="submit" value="Search" />
-        	</section>
+                <input autosave="save-search-knowledgebase" id="search-knowledgebase" name="search" results="15" type="search" />
+                <input class="button" type="submit" value="Search" />
+            </section>
         </form>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
-            <xmp><form action="/search.html?query=" class="search">
-            	<section class="search-meta">
-                    <label for="search-form">Label text</label>
-                	<input autosave="save-search-form" id="search-form" name="search" results="15" type="search" />
-                	<input class="button" type="submit" value="Search" />
-            	</section>
-            </form>
+            <xmp>
+                <form action="/search.html?query=" class="search">
+                    <section class="search-meta">
+                        <label for="search-form">Label text</label>
+                        <input autosave="save-search-form" id="search-form" name="search" results="15" type="search" />
+                        <input class="button" type="submit" value="Search" />
+                    </section>
+                </form>
             </xmp>
         </section>
     </section>
-    
+
     <section>
         <h3>Inline form</h3>
         <section class="form-inline">
             <form action="/search.html?query=" class="search">
-            	<section class="search-meta">
+                <section class="search-meta">
                     <label for="search-knowledgebase-inline">Search our knowledge base</label>
-                	<input autosave="save-search-knowledgebase-inline" id="search-knowledgebase-inline" name="search" results="15" type="search" />
-                	<input class="button" type="submit" value="Search" />
-            	</section>
+                    <input autosave="save-search-knowledgebase-inline" id="search-knowledgebase-inline" name="search"
+                        results="15" type="search" />
+                    <input class="button" type="submit" value="Search" />
+                </section>
             </form>
         </section>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
-            <xmp><section class="form-inline">
-                <form action="/search.html?query=" class="search">
-                	<section class="search-meta">
-                        <label for="search-form-inline">Label text</label>
-                    	<input autosave="save-search-form-inline" id="search-form-inline" name="search" results="15" type="search" />
-                    	<input class="button" type="submit" value="Search" />
-                	</section>
-                </form>
-            </section>
+            <xmp>
+                <section class="form-inline">
+                    <form action="/search.html?query=" class="search">
+                        <section class="search-meta">
+                            <label for="search-form-inline">Label text</label>
+                            <input autosave="save-search-form-inline" id="search-form-inline" name="search" results="15"
+                                type="search" />
+                            <input class="button" type="submit" value="Search" />
+                        </section>
+                    </form>
+                </section>
             </xmp>
         </section>
     </section>
-    
+
     <section>
         <h3>Range slider</h3>
         <label for="semi-sg-input-range">Label for range slider</label>
@@ -404,10 +406,10 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="input-range">Label text</label>
-            <input id="input-range" type="range" /></xmp>
+                <input id="input-range" type="range" /></xmp>
         </section>
     </section>
-    
+
     <section>
         <h3>Multi-handle slider</h3>
         <label for="semi-sg-input-multirange">Label for multi-range slider</label>
@@ -417,10 +419,10 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML</abbr> code snippet</p>
             <xmp><label for="semi-sg-input-multirange">Label for multi-range slider</label>
-            <input id="semi-sg-input-multirange" type="range" multiple value="25,75" /></xmp>
+                <input id="semi-sg-input-multirange" type="range" multiple value="25,75" /></xmp>
         </section>
     </section>
-    
+
 </article>
 
 
@@ -429,52 +431,52 @@ title: SeMI, our style; getting input from our users through form elements
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-//cypher query to generate the array below
-/*MATCH path1 = (city:City)<--(p:Person), path2 = (p)<--(t:Transaction)-->(company:Company) WITH [city.name,p.name,count(path1)] AS path1Data, [p.name,company.name,count(path2)] AS path2Data
-WITH [path1Data,path2Data] AS totalData RETURN collect(totalData)
-*/
+    //cypher query to generate the array below
+    /*MATCH path1 = (city:City)<--(p:Person), path2 = (p)<--(t:Transaction)-->(company:Company) WITH [city.name,p.name,count(path1)] AS path1Data, [p.name,company.name,count(path2)] AS path2Data
+    WITH [path1Data,path2Data] AS totalData RETURN collect(totalData)
+    */
 
-/*let myarr = [[["Amsterdam", "Paula", 1], ["Paula", "Mediamarkt", 1]], [["Amsterdam", "Paula", 1], ["Paula", "Netflix", 1]], [["Rotterdam", "James", 1], ["James", "Mediamarkt", 1]], [["Amsterdam", "John", 1], ["John", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 2], ["Larissa", "Mediamarkt", 2]], [["Amsterdam", "Mike", 2], ["Mike", "Mediamarkt", 2]], [["Rotterdam", "Larissa", 1], ["Larissa", "Netflix", 1]], [["Amsterdam", "Mike", 1], ["Mike", "Netflix", 1]], [["Rotterdam", "James", 1], ["James", "Albert Heijn", 1]]];*/
+    /*let myarr = [[["Amsterdam", "Paula", 1], ["Paula", "Mediamarkt", 1]], [["Amsterdam", "Paula", 1], ["Paula", "Netflix", 1]], [["Rotterdam", "James", 1], ["James", "Mediamarkt", 1]], [["Amsterdam", "John", 1], ["John", "Mediamarkt", 1]], [["Rotterdam", "Larissa", 2], ["Larissa", "Mediamarkt", 2]], [["Amsterdam", "Mike", 2], ["Mike", "Mediamarkt", 2]], [["Rotterdam", "Larissa", 1], ["Larissa", "Netflix", 1]], [["Amsterdam", "Mike", 1], ["Mike", "Netflix", 1]], [["Rotterdam", "James", 1], ["James", "Albert Heijn", 1]]];*/
 
-let myarr = [["Amsterdam","AMS",55],
-["Berlin","TXL",36],
-["London","LHR",72],
-["London","LGW",20],
-["AMS","British Airways",10],
-["AMS","KLM",30],
-["AMS","Air France",5],
-["AMS","Lufthansa",10],
-["TXL","British Airways",6],
-["TXL","Lufthansa",30],
-["LHR","British Airways",50],
-["LHR","KLM",10],
-["LHR","Air France",5],
-["LHR","Lufthansa",7],
-["LGW","British Airways",20],
-["British Airways","Airbus",14],
-["British Airways","Boeing",13],
-["KLM","Airbus",3],
-["KLM","Boeing",10],
-["Air France","Airbus",13],
-["Air France","Boeing",7],
-["Lufthansa","Airbus",25],
-["Lufthansa","Boeing",3]];
-
-
-
-console.log('myarr');
+    let myarr = [["Amsterdam", "AMS", 55],
+    ["Berlin", "TXL", 36],
+    ["London", "LHR", 72],
+    ["London", "LGW", 20],
+    ["AMS", "British Airways", 10],
+    ["AMS", "KLM", 30],
+    ["AMS", "Air France", 5],
+    ["AMS", "Lufthansa", 10],
+    ["TXL", "British Airways", 6],
+    ["TXL", "Lufthansa", 30],
+    ["LHR", "British Airways", 50],
+    ["LHR", "KLM", 10],
+    ["LHR", "Air France", 5],
+    ["LHR", "Lufthansa", 7],
+    ["LGW", "British Airways", 20],
+    ["British Airways", "Airbus", 14],
+    ["British Airways", "Boeing", 13],
+    ["KLM", "Airbus", 3],
+    ["KLM", "Boeing", 10],
+    ["Air France", "Airbus", 13],
+    ["Air France", "Boeing", 7],
+    ["Lufthansa", "Airbus", 25],
+    ["Lufthansa", "Boeing", 3]];
 
 
-//var flatarr = [].concat.apply([], myarr);
-//console.log(flatarr);
 
-var flatarr = myarr;
+    console.log('myarr');
 
 
-google.charts.load('current', {'packages':['sankey']});
-      google.charts.setOnLoadCallback(drawChart);
+    //var flatarr = [].concat.apply([], myarr);
+    //console.log(flatarr);
 
-      function drawChart() {
+    var flatarr = myarr;
+
+
+    google.charts.load('current', { 'packages': ['sankey'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'From');
         data.addColumn('string', 'To');
@@ -482,23 +484,169 @@ google.charts.load('current', {'packages':['sankey']});
         data.addRows(flatarr);
 
         // Sets chart options.
-       var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-                  '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', 'FCE81C'];
+        var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
+            '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', 'FCE81C'];
 
-    var options = {
-      height: 400,
-      sankey: {
-        node: {
-					colors: colors,
-          colorMode: 'unique'
-        },
-        link: {
-          color: { fill: '#eaeaea' }
-        }
-      }
-    };
+        var options = {
+            height: 400,
+            sankey: {
+                node: {
+                    colors: colors,
+                    colorMode: 'unique'
+                },
+                link: {
+                    color: { fill: '#eaeaea' }
+                }
+            }
+        };
         // Instantiates and draws our chart, passing in some options.
         var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
         chart.draw(data, options);
-      }
+    }
+</script>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<!-- code for the bubble chart -->
+<script type="text/javascript">
+    let parentId = 'bubble-chart';
+
+
+    //this.selectedNodes = [];
+    let closest = null;
+
+    let fontSize = 9;
+
+    let width = 500;
+    let height = 500;
+
+    // this.valScale = d3.scaleLinear()
+    //     .domain([0, 300])
+    //     .range([0, 200]);
+
+    let paddingTop = 20;
+    let paddingBottom = 20;
+
+    let border = 150;
+
+    let xScale = d3.scaleIdentity();
+    let yScale = d3.scaleIdentity();
+    let vScale = d3.scalePow()
+        .domain([0, 30])
+        .range([1, 60]);
+
+
+    let data = {};
+
+    data = {
+        class1: "Gender",
+        class2: "AgeGroup",
+        results: [
+            {
+                nrPaths: 10,
+                source: "Male",
+                target: "0-50"
+            },
+            {
+                nrPaths: 20,
+                source: "Male",
+                target: "50-100"
+            },
+            {
+                nrPaths: 5,
+                source: "Female",
+                target: "0-50"
+            },
+            {
+                nrPaths: 25,
+                source: "Female",
+                target: "50-100"
+            }
+        ]
+    }
+
+
+
+    let axisSvg = null;
+
+    // d3.select("#" + parentId).select("svg").remove();
+
+
+    let svg = d3.select("#" + parentId).append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        //.attr("id", "axis-svg")
+        .append("g");
+
+    let axisG = svg.append('g').classed('axis-g', true);
+    axisG.append("g")
+        .attr('transform', 'translate(0,' + 0.95 * height + ')')
+        .classed('x-axis axis', true);
+
+    axisG.append("g")
+        .attr('transform', 'translate(' + 120 + ',' + 0 + ')')
+        .classed('y-axis axis', true);
+
+    console.log('svg');
+    console.log(svg);
+
+    xScale = getScale(data.class1, data.results, width, accessor('source'));
+    yScale = getScale(data.class2, data.results, width, accessor('target'));
+
+    let maxVal = d3.max(data.results, (d) => {
+        return d.nrPaths;
+    });
+
+    console.log('maxVal: ' + maxVal);
+
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+    axisG.select('.x-axis').call(xAxis);
+    axisG.select('.y-axis').call(yAxis);
+
+
+    let circleG = svg.append('g').classed('circle-g',true);
+    
+    circleG.selectAll('.dot')
+        .data(data.results)
+        .enter()
+        .append('circle')
+        .classed('dot',true)
+        .attr('cx',function(d){
+            return xScale(d.source);
+        })
+        .attr('cy',function(d){
+            return yScale(d.target);
+        })
+        .attr('r', function(d){
+            return vScale(d.nrPaths);
+        })
+        .style('fill','steelblue');
+
+    function getScale(className, records, w, acc) {
+
+        let border = 150;
+        let _range = [border, w - border];
+
+        // log('records');
+        // log(records);
+
+        let _domain = d3.set(records, (d) => {
+            return acc(d);
+        }).values();
+        // log('_domain');
+        // log(_domain);
+        return d3.scalePoint()
+            .domain(_domain)
+            .range(_range);
+
+    }
+
+    function accessor(key) {
+        return function (d) {
+            return d[key];
+        };
+    }
+
+
 </script>
