@@ -5,7 +5,7 @@ function sankey(parentId,data){
     //console.log(flatarr);
 
     //var flatarr = myarr;
-
+    console.log('sass color');
 
     google.charts.load('current', { 'packages': ['sankey'] });
     google.charts.setOnLoadCallback(drawChart);
@@ -18,18 +18,20 @@ function sankey(parentId,data){
         chartData.addRows(data);
 
         // Sets chart options.
+        //colors have to be applied directly as otherwise we would have
+        //to set classes in the svg, which is a hack.
         var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-            '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', 'FCE81C'];
+            '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
 
         var options = {
             sankey: {
                 node: {
                     colors: colors,
                     colorMode: 'unique'
-                },
-                link: {
-                    color: { fill: '#eaeaea' }
                 }
+                // link: {
+                //     color: { fill: '#eaeaea' }
+                // }
             }
         };
         // Instantiates and draws our chart, passing in some options.
