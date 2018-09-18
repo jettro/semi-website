@@ -2,7 +2,7 @@
 layout: styleguide
 title: SeMI, our style; getting input from our users through form elements
 ---
-
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <article class="article semi-sg">
 
     <h2>Charts</h2>
@@ -14,7 +14,7 @@ title: SeMI, our style; getting input from our users through form elements
     <section>
         <h4>Sankey Diagram</h4>
         <style type="text/css">
-            svg path{
+            svg path {
                 fill: #eaeaea;
             }
         </style>
@@ -51,9 +51,10 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
-             
+
                 <div id="sankey-diagram"></div>
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
                 <script type="text/javascript" src="/js/charts.js"></script>
                 <script type="text/javascript">
                     let data = [["Amsterdam", "AMS", 55],
@@ -90,7 +91,7 @@ title: SeMI, our style; getting input from our users through form elements
     <section>
         <h4>Bubble Chart</h4>
         <div id="bubble-chart"></div>
-        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
         <script type="text/javascript">
 
             let bubbledata = {
@@ -180,7 +181,7 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
-                <script src="https://d3js.org/d3.v5.min.js"></script>
+                <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
                 <script type="text/javascript">
 
                     let bubbledata = {
@@ -275,7 +276,6 @@ title: SeMI, our style; getting input from our users through form elements
     <section>
         <h4>Force-Directed Graph</h4>
         <style>
-
             .links line {
               stroke: #999;
               stroke-opacity: 0.6;
@@ -285,21 +285,43 @@ title: SeMI, our style; getting input from our users through form elements
               stroke: #fff;
               stroke-width: 1.5px;
             }
-            
             </style>
-        <div id="force-graph">
-           
-        </div>
-     
+        <div id="force-graph"></div>
         <script type="text/javascript">
-
             forceDirectedGraph('force-graph');
         </script>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
-                
+            </xmp>
+        </section>
+    </section>
 
+    <section>
+        <h4>Constraint-Based Layout</h4>
+        <style>
+                .node {
+                stroke: #fff;
+                stroke-width: 1.5px;
+                }
+
+                .link {
+                stroke: #999;
+                stroke-opacity: .8;
+                }
+            </style>
+        <div id="cola-graph"></div>
+
+        <script src="https://ialab.it.monash.edu/webcola/cola.min.js"></script>
+
+        <script type="text/javascript">
+            console.log('cola');
+            console.log(cola);
+            colaGraph('cola-graph');    
+        </script>
+        <section class="semi-sg-codesnippet">
+            <p><abbr>HTML / JS</abbr> code snippet</p>
+            <xmp>
             </xmp>
         </section>
     </section>
