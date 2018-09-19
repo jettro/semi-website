@@ -6,18 +6,12 @@ title: SeMI, our style; getting input from our users through form elements
 <article class="article semi-sg">
 
     <h2>Charts</h2>
-    <p>Lorem ipsum dolor amet readymade pabst hella marfa, street art tumeric taxidermy food truck skateboard tattooed
-        next level cornhole subway tile. Craft beer yuccie viral kale chips tattooed gastropub la croix kogi hell of
-        cred truffaut salvia. Intelligentsia knausgaard roof party pickled.</p>
-    <!-- <h3>Textual input</h3> -->
-
+    <p>We selected and developed a number of useful charts when it comes to visualising
+        the data and insights from SeMI and provide them wrapped in a small charting library. The examples below are
+        simple use cases of the charts.
+    </p>
     <section>
         <h4>Sankey Diagram</h4>
-        <style type="text/css">
-            svg path {
-                fill: #eaeaea;
-            }
-        </style>
         <div id="sankey-diagram"></div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="/js/charts.js"></script>
@@ -51,10 +45,8 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
-
                 <div id="sankey-diagram"></div>
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
                 <script type="text/javascript" src="/js/charts.js"></script>
                 <script type="text/javascript">
                     let data = [["Amsterdam", "AMS", 55],
@@ -300,7 +292,7 @@ title: SeMI, our style; getting input from our users through form elements
     <section>
         <h4>Constraint-Based Layout</h4>
         <style>
-                .node {
+            .node {
                 stroke: #fff;
                 stroke-width: 1.5px;
                 }
