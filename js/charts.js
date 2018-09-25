@@ -340,6 +340,19 @@ function beeswarm(parentId, file, options) {
     let width = options && options.width ? options.width : 600;
     let height = options && options.height ? options.height : 600;
 
+      //create a container for the navigation
+      d3.select('#'+parentId).append('div').classed('beeswarm-nav',true);
+      //create a container for the chart
+      d3.select('#'+parentId).append('div').classed('beeswarm-chart',true);
+
+      //set css to ensure correct positioning of axis
+      d3.select('#'+parentId).select('.beeswarm-chart').style('position','relative');
+
+
+    let chartElement = d3.select('#'+parentId).select('.beeswarm-chart');
+
+    console.log('chartElement3');
+    console.log(chartElement.node());
 
     var sketch = function (s) {
 
@@ -351,16 +364,26 @@ function beeswarm(parentId, file, options) {
             // let w = 600;
             // let h = 600;
 
+           
+
+          
             s.createCanvas(width, height);
-
-
+            
             s.frameRate(30);
             s.noLoop();
 
-            axisSvg = d3.select("#" + parentId).append("svg")
+
+
+            axisSvg = d3.select('#'+parentId)
+                .select('.beeswarm-chart')
+                //d3.select("#" + parentId)
+                .append("svg")
                 .attr("width", s.width)
                 .attr("height", s.height)
                 .attr("id", "axis-svg")
+                .style('position','absolute')
+                .style('top','0')
+                .style('left','0')
                 .append("g");
 
             axisSvg.append("g")
@@ -397,7 +420,7 @@ function beeswarm(parentId, file, options) {
                     console.log('data', data);
 
                     createButtons(s);
-                    setFilter(s,xFilter, yFilter);
+                    setFilter(s, xFilter, yFilter);
 
                     simulation.stop();
                     for (var i = 0; i < 150; ++i) {
@@ -413,17 +436,47 @@ function beeswarm(parentId, file, options) {
 
         s.draw = function () {
             if (!ready) {
-                s.background(255,0,0);
+                s.background(255, 0, 0);
                 return;
             }
-        
-            s.background(0,255,0);
+
+            s.background(0, 255, 0);
+
+
+            //axis
+            var xAxis = d3.axisBottom(xScale).ticks(nTicks);
+            var yAxis = d3.axisRight(yScale).ticks(nTicks);
+            axisSvg.select('.x-axis').call(xAxis);
+            axisSvg.select('.y-axis').call(yAxis);
+
+
+            s.noFill();
+            s.stroke(200);
+            data.forEach(function (d, i) {
+
+                s.stroke(255);
+                s.strokeWeight(1);
+                var diameter = dia * 2;
+                var c = colScale(d.group);
+                s.fill(c);
+
+                s.ellipse(d.x, d.y, diameter, diameter);
+            });
         };
     };
 
+    // let chartElement = document.getElementById(parentId)
+    //     //.getElementsByClassName('beeswarm-chart')[0].innerHTML;
+
+    //    let chartElement2 = chartElement.getElementsByClassName('beeswarm-chart');
+
+    //    let chartElement3 = d3.select('#'+parentId).select('.beeswarm-chart');
+
+    //     console.log('chartElement3');
+    //     console.log(chartElement3);
 
     //p5 instance mode
-    var myp5 = new p5(sketch, parentId);
+    var myp5 = new p5(sketch,chartElement.node());
 
     function createButtons(s) {
         console.log('createButtons');
@@ -437,6 +490,7 @@ function beeswarm(parentId, file, options) {
         });
 
         d3.select('#' + parentId)
+            .select('.beeswarm-nav')
             .append('div')
             .attr('id', 'filter-buttons-x')
             .selectAll('button')
@@ -453,10 +507,11 @@ function beeswarm(parentId, file, options) {
             .on('click', function (d) {
                 console.log('hi ' + d);
                 xFilter = d;
-                setFilter(s,xFilter, yFilter);
+                setFilter(s, xFilter, yFilter);
             });
 
         d3.select('#' + parentId)
+            .select('.beeswarm-nav')
             .append('div')
             .attr('id', 'filter-buttons-y')
             .selectAll('button')
@@ -473,12 +528,12 @@ function beeswarm(parentId, file, options) {
             .on('click', function (d) {
                 console.log('hi ' + d);
                 yFilter = d;
-                setFilter(s,xFilter, yFilter);
+                setFilter(s, xFilter, yFilter);
             });
     }
 
 
-    function setFilter(s,filterX, filterY) {
+    function setFilter(s, filterX, filterY) {
 
         console.log('setting filter to ' + filterX + ' ' + filterY);
 
