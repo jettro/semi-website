@@ -336,6 +336,11 @@ function beeswarm(parentId, file, options) {
 
     var selectedBubbles = [];
 
+
+    let width = options && options.width ? options.width : 600;
+    let height = options && options.height ? options.height : 600;
+
+
     var sketch = function (s) {
 
         var x = 100;
@@ -343,13 +348,10 @@ function beeswarm(parentId, file, options) {
 
         s.setup = function () {
 
-            let w = options && options.width ? options.width : 600;
-            let h = options && options.height ? options.height : 600;
-
             // let w = 600;
             // let h = 600;
 
-            s.createCanvas(w, h);
+            s.createCanvas(width, height);
 
 
             s.frameRate(30);
@@ -367,7 +369,6 @@ function beeswarm(parentId, file, options) {
 
             axisSvg.append("g")
                 .classed('y-axis axis', true);
-             
             d3.csv(file)
                 .row(function (d) {
                     return {
@@ -393,38 +394,244 @@ function beeswarm(parentId, file, options) {
                         //return true;
                     });
 
-
-                    //           createButtons();
-                    //  setFilter(xFilter, yFilter);
-
-
                     console.log('data', data);
 
+                    createButtons(s);
+                    setFilter(s,xFilter, yFilter);
 
-                    //             simulation.stop();
-                    //             for (var i = 0; i < 150; ++i){
-                    //                 simulation.tick();
-                    //             } 
-                    //             simulation.restart();
+                    simulation.stop();
+                    for (var i = 0; i < 150; ++i) {
+                        simulation.tick();
+                    }
+                    simulation.restart();
 
                     ready = true;
                     s.redraw();
                 });
 
-
-       
-
         };
 
         s.draw = function () {
-            s.background(0);
-            s.fill(255);
-            s.rect(x, y, 50, 50);
+            if (!ready) {
+                s.background(255,0,0);
+                return;
+            }
+        
+            s.background(0,255,0);
         };
     };
 
 
     //p5 instance mode
     var myp5 = new p5(sketch, parentId);
+
+    function createButtons(s) {
+        console.log('createButtons');
+        //button group
+        //<button type="button" class="btn btn-secondary">Left</button>
+        //var filters = ['all', 'gender', 'age', 'frequency', 'duration', 'thiscore', 'tqscore'];
+        console.log(data);
+        var keys = Object.keys(data[0]);
+        var filters = ['all'].concat(keys).filter(function (d) {
+            return d != 'group';
+        });
+
+        d3.select('#' + parentId)
+            .append('div')
+            .attr('id', 'filter-buttons-x')
+            .selectAll('button')
+            .data(filters)
+            .enter()
+            .append('button')
+            .classed('btn btn-secondary', true)
+            .classed('active', function (d) {
+                return d == xFilter;
+            })
+            .text(function (d) {
+                return d;
+            })
+            .on('click', function (d) {
+                console.log('hi ' + d);
+                xFilter = d;
+                setFilter(s,xFilter, yFilter);
+            });
+
+        d3.select('#' + parentId)
+            .append('div')
+            .attr('id', 'filter-buttons-y')
+            .selectAll('button')
+            .data(filters)
+            .enter()
+            .append('button')
+            .classed('btn btn-secondary', true)
+            .classed('active', function (d) {
+                return d == yFilter;
+            })
+            .text(function (d) {
+                return d;
+            })
+            .on('click', function (d) {
+                console.log('hi ' + d);
+                yFilter = d;
+                setFilter(s,xFilter, yFilter);
+            });
+    }
+
+
+    function setFilter(s,filterX, filterY) {
+
+        console.log('setting filter to ' + filterX + ' ' + filterY);
+
+        var xAcc = acc(filterX);
+        var yAcc = acc(filterY);
+
+        xScale = xscl(filterX);
+        yScale = yscl(filterY);
+
+        if (simulation) {
+            simulation.stop();
+            simulation.nodes([]);
+            simulation = null;
+        }
+
+        var offScreen = -500;
+        simulation = d3.forceSimulation(data)
+            .force("x", d3.forceX(function (d) {
+                //     console.log('accessor(d)',accessor(d));
+                if (xAcc(d) == null) {
+                    d.invalid = true;
+                    return offScreen;
+                }
+                d.invalid = false;
+                //console.log('xSclae');
+                //console.log(xScale);
+                return xScale(xAcc(d));
+            }).strength(0.05))
+            .force("y", d3.forceY(function (d) {
+                //return yScale(yAcc(d));
+                if (yAcc(d) == null) {
+                    d.invalid = true;
+                    return offScreen;
+                }
+                d.invalid = false;
+                return yScale(yAcc(d));
+            }).strength(0.05))
+            .force("collision", d3.forceCollide(function (d) {
+                return dia;
+            }).strength(1))
+            .on('tick', function () {
+                s.redraw();
+            });
+
+        d3.select('#filter-buttons-x')
+            .selectAll('button')
+            .classed('active', function (d) {
+                return d == xFilter;
+            });
+
+        d3.select('#filter-buttons-y')
+            .selectAll('button')
+            .classed('active', function (d) {
+                return d == yFilter;
+            });
+
+        d3.select('#filter-buttons-r')
+            .selectAll('button')
+            .classed('active', function (d) {
+                return d == rFilter;
+            });
+    }
+
+    function acc(id) {
+        if (id == 'all') {
+            return function (d) {
+                return 0.5;
+            };
+        } else return function (d) {
+            return d[id];
+        };
+    }
+
+
+    function xscl(filter) {
+        var _range = [border, width - border];
+        var _scale = scl2(filter, _range);
+        return _scale;
+    }
+
+    function yscl(filter) {
+        var _range = [height - border, border];
+        var _scale = scl2(filter, _range);
+        return _scale;
+    }
+    function scl2(filter, range) {
+        //company,name,ref,date,percent,location,rating,type,origin
+        var _range = range;
+        var _scale = null;
+
+        if (filter == 'company') {
+            console.log('scl2 ' + filter);
+            var dom = d3.set(data, function (d) {
+                return d[filter];
+            }).values();
+            _scale = d3.scalePoint()
+                .domain(dom)
+                .range(_range);
+        } else if (filter == 'name') {
+            console.log('scl2 ' + filter);
+            var dom = d3.set(data, function (d) {
+                return d[filter];
+            }).values();
+            _scale = d3.scalePoint()
+                .domain(dom)
+                .range(_range);
+
+        } else if (filter == 'ref') {
+            console.log('scl2 ' + filter);
+            _scale = d3.scaleLinear()
+                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
+                .range(_range);
+        } else if (filter == 'date') {
+            console.log('scl2 ' + filter);
+            _scale = d3.scaleLinear()
+                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
+                .range(_range);
+        } else if (filter == 'percent') {
+            console.log('scl2 ' + filter);
+            _scale = d3.scaleLinear()
+                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
+                .range(_range);
+        } else if (filter == 'location') {
+            console.log('scl2 ' + filter);
+            var dom = d3.set(data, function (d) {
+                return d[filter];
+            }).values();
+            _scale = d3.scalePoint()
+                .domain(dom)
+                .range(_range);
+        } else if (filter == 'rating') {
+            console.log('scl2 ' + filter);
+            _scale = d3.scaleLinear()
+                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
+                .range(_range);
+        } else if (filter == 'origin') {
+            console.log('scl2 ' + filter);
+            var dom = d3.set(data, function (d) {
+                return d[filter];
+            }).values();
+            _scale = d3.scalePoint()
+                .domain(dom)
+                .range(_range);
+        } else if (filter == 'all') {
+            console.log('scl2 ' + filter);
+            _scale = d3.scaleLinear()
+                .domain([0, 1])
+                .range(_range);
+        } else {
+            console.log('error in scl2: no scale found for ' + filter);
+        }
+
+        return _scale;
+    }
 
 }
