@@ -288,9 +288,8 @@ function constrainedLayoutGraph(parentId, graphbase, options) {
 
 function beeswarm(parentId, file, options) {
 
-    var colors1 = ['#324D5C', '#46B29D', '#F0CA4D', '#E37B40', '#DE5B49', 'black'];
-    var colors2 = ['#2C594F', '#E54661', '#FFA644', '#998A2F', '#002D40', 'black'];
-    var colors3 = ['#F15B2A', '#2A9FBC', '#404040', '#A62E5C', '#9BC850', 'black'];
+   var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
+    '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
 
     var parseDate = d3.timeParse("%d-%m-%Y"); //19-4-2018 //2017-11-20
 
@@ -300,7 +299,7 @@ function beeswarm(parentId, file, options) {
     var freqScale = d3.scaleOrdinal();
     var colScale = d3.scaleOrdinal()
         .domain([0, 1, 2, 3, 4, 5])
-        .range(colors2);
+        .range(colors);
 
     var companyScale = d3.scalePoint();
     var nameScale = d3.scalePoint();
@@ -314,7 +313,6 @@ function beeswarm(parentId, file, options) {
 
     var rAcc = null;
 
-    //var file = 'assets/data/flavors_of_cacao.csv'; //'Short4Chris_Tonal3.csv' //'./Tinnitus_Hub_Survey.csv';
     var data = [];
     var ndata = [];
     var xFilter = 'all';
@@ -336,20 +334,18 @@ function beeswarm(parentId, file, options) {
 
     var selectedBubbles = [];
 
-
     let width = options && options.width ? options.width : 600;
     let height = options && options.height ? options.height : 600;
 
-      //create a container for the navigation
-      d3.select('#'+parentId).append('div').classed('beeswarm-nav',true);
-      //create a container for the chart
-      d3.select('#'+parentId).append('div').classed('beeswarm-chart',true);
+    //create a container for the navigation
+    d3.select('#' + parentId).append('div').classed('beeswarm-nav', true);
+    //create a container for the chart
+    d3.select('#' + parentId).append('div').classed('beeswarm-chart', true);
 
-      //set css to ensure correct positioning of axis
-      d3.select('#'+parentId).select('.beeswarm-chart').style('position','relative');
+    //set css to ensure correct positioning of axis
+    d3.select('#' + parentId).select('.beeswarm-chart').style('position', 'relative');
 
-
-    let chartElement = d3.select('#'+parentId).select('.beeswarm-chart');
+    let chartElement = d3.select('#' + parentId).select('.beeswarm-chart');
 
     console.log('chartElement3');
     console.log(chartElement.node());
@@ -361,29 +357,23 @@ function beeswarm(parentId, file, options) {
 
         s.setup = function () {
 
-            // let w = 600;
-            // let h = 600;
-
-           
-
-          
             s.createCanvas(width, height);
-            
+
             s.frameRate(30);
             s.noLoop();
 
 
 
-            axisSvg = d3.select('#'+parentId)
+            axisSvg = d3.select('#' + parentId)
                 .select('.beeswarm-chart')
                 //d3.select("#" + parentId)
                 .append("svg")
                 .attr("width", s.width)
                 .attr("height", s.height)
                 .attr("id", "axis-svg")
-                .style('position','absolute')
-                .style('top','0')
-                .style('left','0')
+                .style('position', 'absolute')
+                .style('top', '0')
+                .style('left', '0')
                 .append("g");
 
             axisSvg.append("g")
@@ -436,11 +426,11 @@ function beeswarm(parentId, file, options) {
 
         s.draw = function () {
             if (!ready) {
-                s.background(255, 0, 0);
+                s.background(250);
                 return;
             }
 
-            s.background(0, 255, 0);
+            s.background(255);
 
 
             //axis
@@ -465,18 +455,8 @@ function beeswarm(parentId, file, options) {
         };
     };
 
-    // let chartElement = document.getElementById(parentId)
-    //     //.getElementsByClassName('beeswarm-chart')[0].innerHTML;
-
-    //    let chartElement2 = chartElement.getElementsByClassName('beeswarm-chart');
-
-    //    let chartElement3 = d3.select('#'+parentId).select('.beeswarm-chart');
-
-    //     console.log('chartElement3');
-    //     console.log(chartElement3);
-
     //p5 instance mode
-    var myp5 = new p5(sketch,chartElement.node());
+    var myp5 = new p5(sketch, chartElement.node());
 
     function createButtons(s) {
         console.log('createButtons');
@@ -489,18 +469,37 @@ function beeswarm(parentId, file, options) {
             return d != 'group';
         });
 
-        d3.select('#' + parentId)
+        // <nav class="nav-main">
+        //     <ul>
+        //         <li><a href="style-mainnav.html">Products</a></li>
+        //         <li class="main-nav--selected"><a href="style-mainnav.html">Knowledge base</a></li>
+        //         <li><a href="style-mainnav.html">Team</a></li>
+        //         <li><a href="style-mainnav.html">Contact</a></li>
+        //     </ul>
+        // </nav>
+
+        let xButtons = d3.select('#' + parentId)
             .select('.beeswarm-nav')
-            .append('div')
-            .attr('id', 'filter-buttons-x')
-            .selectAll('button')
+            .append('nav')
+            .classed('nav-main', true)
+            .append('ul')
+            .attr('id', 'filter-buttons-x');
+
+        let yButtons = d3.select('#' + parentId)
+            .select('.beeswarm-nav')
+            .append('nav')
+            .classed('nav-main', true)
+            .append('ul')
+            .attr('id', 'filter-buttons-y');
+
+        xButtons.selectAll('li')
             .data(filters)
             .enter()
-            .append('button')
-            .classed('btn btn-secondary', true)
-            .classed('active', function (d) {
+            .append('li')
+            .classed('main-nav--selected', function (d) {
                 return d == xFilter;
             })
+            .append('a')
             .text(function (d) {
                 return d;
             })
@@ -510,18 +509,14 @@ function beeswarm(parentId, file, options) {
                 setFilter(s, xFilter, yFilter);
             });
 
-        d3.select('#' + parentId)
-            .select('.beeswarm-nav')
-            .append('div')
-            .attr('id', 'filter-buttons-y')
-            .selectAll('button')
+        yButtons.selectAll('li')
             .data(filters)
             .enter()
-            .append('button')
-            .classed('btn btn-secondary', true)
-            .classed('active', function (d) {
+            .append('li')
+            .classed('main-nav--selected', function (d) {
                 return d == yFilter;
             })
+            .append('a')
             .text(function (d) {
                 return d;
             })
@@ -530,6 +525,52 @@ function beeswarm(parentId, file, options) {
                 yFilter = d;
                 setFilter(s, xFilter, yFilter);
             });
+
+
+
+
+
+        // d3.select('#' + parentId)
+        //     .select('.beeswarm-nav')
+        //     .append('div')
+        //     .attr('id', 'filter-buttons-x')
+        //     .selectAll('button')
+        //     .data(filters)
+        //     .enter()
+        //     .append('button')
+        //     .classed('btn btn-secondary', true)
+        //     .classed('active', function (d) {
+        //         return d == xFilter;
+        //     })
+        //     .text(function (d) {
+        //         return d;
+        //     })
+        //     .on('click', function (d) {
+        //         console.log('hi ' + d);
+        //         xFilter = d;
+        //         setFilter(s, xFilter, yFilter);
+        //     });
+
+        // d3.select('#' + parentId)
+        //     .select('.beeswarm-nav')
+        //     .append('div')
+        //     .attr('id', 'filter-buttons-y')
+        //     .selectAll('button')
+        //     .data(filters)
+        //     .enter()
+        //     .append('button')
+        //     .classed('btn btn-secondary', true)
+        //     .classed('active', function (d) {
+        //         return d == yFilter;
+        //     })
+        //     .text(function (d) {
+        //         return d;
+        //     })
+        //     .on('click', function (d) {
+        //         console.log('hi ' + d);
+        //         yFilter = d;
+        //         setFilter(s, xFilter, yFilter);
+        //     });
     }
 
 
@@ -579,22 +620,34 @@ function beeswarm(parentId, file, options) {
             });
 
         d3.select('#filter-buttons-x')
-            .selectAll('button')
-            .classed('active', function (d) {
+            .selectAll('li')
+            .classed('main-nav--selected', function (d) {
                 return d == xFilter;
             });
 
         d3.select('#filter-buttons-y')
-            .selectAll('button')
-            .classed('active', function (d) {
+            .selectAll('li')
+            .classed('main-nav--selected', function (d) {
                 return d == yFilter;
             });
 
-        d3.select('#filter-buttons-r')
-            .selectAll('button')
-            .classed('active', function (d) {
-                return d == rFilter;
-            });
+        // d3.select('#filter-buttons-x')
+        //     .selectAll('button')
+        //     .classed('active', function (d) {
+        //         return d == xFilter;
+        //     });
+
+        // d3.select('#filter-buttons-y')
+        //     .selectAll('button')
+        //     .classed('active', function (d) {
+        //         return d == yFilter;
+        //     });
+
+        // d3.select('#filter-buttons-r')
+        //     .selectAll('button')
+        //     .classed('active', function (d) {
+        //         return d == rFilter;
+        //     });
     }
 
     function acc(id) {
