@@ -55,9 +55,9 @@ function bubbleChart(parentId, data, options) {
     let vAcc = accessor('value');
 
     let minR = 1;
-    let maxR = width/20;
+    let maxR = width / 20;
 
-    let maxVal = d3.max(data,function(d){
+    let maxVal = d3.max(data, function (d) {
         return vAcc(d);
     });
 
@@ -69,15 +69,14 @@ function bubbleChart(parentId, data, options) {
 
     let tooltipXOffset = 20;
     let tooltipYOffset = -20;
-    
+
     render();
 
     function render() {
 
-        //remove any previously rendered svg
         d3.select("#" + parentId).select('svg').remove();
 
-        d3.select("#" + parentId).style('position','relative');
+        d3.select("#" + parentId).classed('chart-container', true);
 
         let svg = d3.select("#" + parentId).append("svg")
             .attr("width", width)
@@ -86,6 +85,7 @@ function bubbleChart(parentId, data, options) {
 
         //AXIS
         let axisG = svg.append('g').classed('axis-g', true);
+
         axisG.append("g")
             .attr('transform', 'translate(0,' + 0.93 * height + ')')
             .classed('x-axis axis', true);
@@ -94,13 +94,8 @@ function bubbleChart(parentId, data, options) {
             .attr('transform', 'translate(' + 50 + ',' + 0 + ')')
             .classed('y-axis axis', true);
 
-
         xScale = getScale(data, width, aAcc, bounds.left, bounds.right);
         yScale = getScale(data, height, bAcc, bounds.top, bounds.bottom);
-
-        let maxVal = d3.max(data, (d) => {
-            return d.value;
-        });
 
         var xAxis = d3.axisBottom(xScale);
         var yAxis = d3.axisLeft(yScale);
@@ -110,23 +105,15 @@ function bubbleChart(parentId, data, options) {
 
         //axis labels
         axisG.select('.x-axis').append('text')
-            .classed('chart-x-axis-label',true)
-            .attr('dy','2.7em')
-            .attr('transform',translate(width-bounds.right,0))
+            .classed('chart-x-axis-label', true)
+            .attr('dy', '2.7em')
+            .attr('transform', translate(width - bounds.right, 0))
             .text(xLabel);
 
         axisG.select('.y-axis').append('text')
-            .classed('chart-y-axis-label',true)
-           .attr('dy','0.8em')
-            //.attr('transform',translate(width-bounds.right,0))
-            .text(yLabel)
-
-        // svg.append("text")             
-        // .attr("transform",
-        //       "translate(" + (width/2) + " ," + 
-        //                      (height + margin.top + 20) + ")")
-        // .style("text-anchor", "middle")
-        // .text("Date");
+            .classed('chart-y-axis-label', true)
+            .attr('dy', '0.8em')
+            .text(yLabel);
 
         let circleG = svg.append('g').classed('circle-g', true);
 
@@ -145,7 +132,7 @@ function bubbleChart(parentId, data, options) {
                 return vScale(vAcc(d));
             })
             //.style('fill', '#39557E')
-            .classed('chart-cat-main',true)
+            .classed('chart-cat-main', true)
             .on('mouseover', function (d) {
                 console.log('mouseoveer');
                 d3.select("#" + parentId).selectAll('.charts-tooltip')
@@ -154,7 +141,7 @@ function bubbleChart(parentId, data, options) {
                     .append('div')
                     .classed('charts-tooltip', true)
                     .style('left', function (e, i) {
-                        let x =  xScale(aAcc(d));
+                        let x = xScale(aAcc(d));
                         return x + tooltipXOffset + 'px';
                     })
                     .style('top', function (e, i) {
@@ -162,91 +149,17 @@ function bubbleChart(parentId, data, options) {
                         return y + tooltipYOffset + 'px';
                     })
                     .html(function (e, i) {
-                        //let val = vScale(vAcc(d));
-                       // return 'hello: </br>' + val;
                         let labelText = '';
-                        labelText +=  xLabel + ': '  + aAcc(d) + '</br>';
-                        labelText +=  yLabel + ': ' + bAcc(d) + '</br>';
+                        labelText += xLabel + ': ' + aAcc(d) + '</br>';
+                        labelText += yLabel + ': ' + bAcc(d) + '</br>';
                         labelText += 'Value: ' + vAcc(d);
                         return labelText;
                     });
-
-
-
             })
             .on('mouseout', function (d) {
-                console.log('mouseout');
                 d3.select("#" + parentId).selectAll('.charts-tooltip').remove();
             });
     }
-
-
-
-
-
-    //tooltip
-    // let tooltips = d3.select('#' + this.parentId).select('.ct-svg').selectAll('.ct-tooltip')
-    //         .data(tooltipdata)
-    //         .enter()
-    //         .append('div')
-    //         .classed('ct-tooltip', true)
-    //         .style('left', function (d, i) {
-    //             log('hi' + i);
-    //             //return (i*50)+'px';
-    //             //let my = d3.mouse(svg.node());
-    //             // log(svg);
-    //             // log('my: ' + my);
-    //             // log('d');
-    //             // log(d);
-    //             let posx = 0.5*x(wertAcc(d));
-    //             let absposx = bounds.left + posx;
-    //             return absposx + 'px';
-    //         })
-    //         .style('top', function (d, i) {
-    //             // log('d');
-    //             // log(d);
-    //             //return (i*50)+'px';
-    //            // let my = d3.mouse(svg.node());
-    //             let posy = y(productCatAcc(d)) + y2(catAcc(d));
-    //             let absposy = bounds.top + posy+ 0.5 * y2.bandwidth();
-    //             return absposy + 'px';
-    //         })
-    //         .html(function (d, i) {
-    //            // let mouseY = d3.mouse(svg.node())[1];
-    //            let val = wertAcc(d);
-
-    //            let formatDecimal = function(v){
-    //             return Math.floor(v); 
-    //         };//d3.format(",.1f");
-    //            let error1 = formatDecimal(error1Acc(d)*100);
-    //            let error2 = formatDecimal(error2Acc(d)*100);
-
-    //            // let suffix = ['( ','-' , error1, '%', ' / +' , error2 ,'%' ,  ' )'  ].join('');
-
-    //             //let suffix = error1 == error2 ? compactErrorString(error1,error2) : longErrorString(error1,error2);
-    //             let suffix = errorString(error1,error2);
-    //             return formatDecimal(wertAcc(d)) + ' ' + suffix;
-    //         });
-
-    function getScale(arr, w, acc, leftBorder, rightBorder) {
-
-        let range = [leftBorder, w - rightBorder];
-        let domain = d3.set(arr, (d) => {
-            return acc(d);
-        }).values();
-
-        return d3.scalePoint()
-            .domain(domain)
-            .range(range);
-
-    }
-
-    function accessor(key) {
-        return function (d) {
-            return d[key];
-        };
-    }
-
 }
 
 function forceDirectedGraph(parentId, graph, options) {
@@ -874,6 +787,25 @@ function beeswarm(parentId, file, options) {
 
 }
 
-function translate(x,y){
+function translate(x, y) {
     return 'translate(' + x + ',' + y + ')';
+}
+
+function getScale(arr, w, acc, leftBorder, rightBorder) {
+
+    let range = [leftBorder, w - rightBorder];
+    let domain = d3.set(arr, (d) => {
+        return acc(d);
+    }).values();
+
+    return d3.scalePoint()
+        .domain(domain)
+        .range(range);
+
+}
+
+function accessor(key) {
+    return function (d) {
+        return d[key];
+    };
 }

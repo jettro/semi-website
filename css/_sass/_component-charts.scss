@@ -1,3 +1,7 @@
+.chart-container{
+    position: relative;
+}
+
 .charts-tooltip {
     position: absolute;
     /* // text-align: center;			
@@ -29,7 +33,7 @@ $chart-colors: $color-semi,$color-semi-accent,$color-interactive,$color-support,
 }
 
 .chart-cat-main{
-    fill: $color-semi;
+    fill: $color-interactive;
 }
 
 .axis{
