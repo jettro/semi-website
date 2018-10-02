@@ -154,8 +154,6 @@ function bubbleChart(parentId, data, options) {
                     .append('div')
                     .classed('charts-tooltip', true)
                     .style('left', function (e, i) {
-                        console.log('e');
-                        console.log(d);
                         let x =  xScale(aAcc(d));
                         return x + tooltipXOffset + 'px';
                     })
@@ -164,8 +162,13 @@ function bubbleChart(parentId, data, options) {
                         return y + tooltipYOffset + 'px';
                     })
                     .html(function (e, i) {
-                        let val = vScale(vAcc(d));
-                        return 'hello: ' + val;
+                        //let val = vScale(vAcc(d));
+                       // return 'hello: </br>' + val;
+                        let labelText = '';
+                        labelText +=  xLabel + ': '  + aAcc(d) + '</br>';
+                        labelText +=  yLabel + ': ' + bAcc(d) + '</br>';
+                        labelText += 'Value: ' + vAcc(d);
+                        return labelText;
                     });
 
 
