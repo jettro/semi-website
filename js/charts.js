@@ -33,13 +33,22 @@ function sankey(parentId, data) {
     }
 }
 
-
 function bubbleChart(parentId, data, options) {
 
     let fontSize = 9;
 
-    let width = options && options.width ? options.width : 600;
-    let height = options && options.height ? options.height : 600;
+    let width = options.width || 600;
+    let height = options.height || 600;
+
+    let bounds = {
+        top: options.top || 30,
+        bottom: options.bottom || 80,
+        left: options.left || 100,
+        right: options.right || 80
+    }
+
+    let xLabel = options.xLabel ? options.xLabel : '';
+    let yLabel = options.yLabel ? options.yLabel : '';
 
     let aAcc = accessor('catA');
     let bAcc = accessor('catB');
@@ -57,7 +66,6 @@ function bubbleChart(parentId, data, options) {
     render();
 
     function render() {
-        //let axisSvg = null;
 
         //remove any previously rendered svg
         d3.select("#" + parentId).select('svg').remove();
@@ -79,8 +87,10 @@ function bubbleChart(parentId, data, options) {
             .attr('transform', 'translate(' + 50 + ',' + 0 + ')')
             .classed('y-axis axis', true);
 
-        xScale = getScale(data, width, aAcc, 100, 50);
-        yScale = getScale(data, height, bAcc, 30, 80);
+    
+
+        xScale = getScale(data, width, aAcc, bounds.left, bounds.right);
+        yScale = getScale(data, height, bAcc, bounds.top, bounds.bottom);
 
         let maxVal = d3.max(data, (d) => {
             return d.value;
@@ -91,6 +101,19 @@ function bubbleChart(parentId, data, options) {
 
         axisG.select('.x-axis').call(xAxis);
         axisG.select('.y-axis').call(yAxis);
+
+        //axis labels
+        axisG.select('.x-axis').append('text')
+            .text('hallo')
+            .style('fill','black')
+            .attr('transform',translate(width-bounds.right,0))
+
+        // svg.append("text")             
+        // .attr("transform",
+        //       "translate(" + (width/2) + " ," + 
+        //                      (height + margin.top + 20) + ")")
+        // .style("text-anchor", "middle")
+        // .text("Date");
 
         let circleG = svg.append('g').classed('circle-g', true);
 
@@ -108,7 +131,8 @@ function bubbleChart(parentId, data, options) {
             .attr('r', function (d) {
                 return vScale(vAcc(d));
             })
-            .style('fill', '#39557E')
+            //.style('fill', '#39557E')
+            .classed('chart-cat-main',true)
             .on('mouseover', function (d) {
                 console.log('mouseoveer');
                 d3.select("#" + parentId).selectAll('.charts-tooltip')
@@ -832,4 +856,8 @@ function beeswarm(parentId, file, options) {
         return _scale;
     }
 
+}
+
+function translate(x,y){
+    return 'translate(' + x + ',' + y + ')';
 }

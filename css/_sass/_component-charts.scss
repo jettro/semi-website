@@ -27,3 +27,21 @@ $chart-colors: $color-semi,$color-semi-accent,$color-interactive,$color-support,
         fill: $color;
     }
 }
+
+.chart-cat-main{
+    fill: $color-semi;
+}
+
+.axis{
+    // fill: $color-semi;
+    // stroke: $color-semi-accent;
+    shape-rendering: crispEdges; 
+}
+
+.axis text{
+    fill: $color-gray-1;
+}
+
+.axis path{
+    stroke: $color-gray-1;
+}
