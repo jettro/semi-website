@@ -17,3 +17,13 @@
     pointer-events: none;
     border: 1px solid black;
 }
+
+$chart-colors: $color-semi,$color-semi-accent,$color-interactive,$color-support,$color-almostblack-tint--4,$color-almostblack-analogous-tint--5,$color-almostblack-triadic-tint--4,$color-olive-analogous-tint--4,$color-olive-triadic-tint--4,$color-info;
+
+//generate chart category classes
+@for $i from 1 through length($chart-colors) {
+    $color: nth($chart-colors, $i);
+    .chart-cat-#{$i} { 
+        fill: $color;
+    }
+}
