@@ -54,11 +54,18 @@ function bubbleChart(parentId, data, options) {
     let bAcc = accessor('catB');
     let vAcc = accessor('value');
 
+    let minR = 1;
+    let maxR = width/20;
+
+    let maxVal = d3.max(data,function(d){
+        return vAcc(d);
+    });
+
     let xScale = d3.scaleIdentity();
     let yScale = d3.scaleIdentity();
     let vScale = d3.scalePow()
-        .domain([0, 30])
-        .range([1, 30]);
+        .domain([0, maxVal])
+        .range([minR, maxR]);
 
     let tooltipXOffset = 20;
     let tooltipYOffset = -20;
