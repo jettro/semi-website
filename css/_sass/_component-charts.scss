@@ -45,3 +45,18 @@ $chart-colors: $color-semi,$color-semi-accent,$color-interactive,$color-support,
 .axis path{
     stroke: $color-gray-1;
 }
+
+$axis-label-color: black;
+$axis-label-font-size: 12px;
+
+.chart-x-axis-label{
+    text-anchor: end;
+    fill: $axis-label-color;
+    font-size: $axis-label-font-size;
+}
+
+.chart-y-axis-label{
+    text-anchor: start;
+    fill: $axis-label-color;
+    font-size: $axis-label-font-size
+}

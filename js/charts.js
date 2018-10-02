@@ -80,14 +80,13 @@ function bubbleChart(parentId, data, options) {
         //AXIS
         let axisG = svg.append('g').classed('axis-g', true);
         axisG.append("g")
-            .attr('transform', 'translate(0,' + 0.95 * height + ')')
+            .attr('transform', 'translate(0,' + 0.93 * height + ')')
             .classed('x-axis axis', true);
 
         axisG.append("g")
             .attr('transform', 'translate(' + 50 + ',' + 0 + ')')
             .classed('y-axis axis', true);
 
-    
 
         xScale = getScale(data, width, aAcc, bounds.left, bounds.right);
         yScale = getScale(data, height, bAcc, bounds.top, bounds.bottom);
@@ -104,9 +103,16 @@ function bubbleChart(parentId, data, options) {
 
         //axis labels
         axisG.select('.x-axis').append('text')
-            .text('hallo')
-            .style('fill','black')
+            .classed('chart-x-axis-label',true)
+            .attr('dy','2.7em')
             .attr('transform',translate(width-bounds.right,0))
+            .text(xLabel);
+
+        axisG.select('.y-axis').append('text')
+            .classed('chart-y-axis-label',true)
+           .attr('dy','0.8em')
+            //.attr('transform',translate(width-bounds.right,0))
+            .text(yLabel)
 
         // svg.append("text")             
         // .attr("transform",
