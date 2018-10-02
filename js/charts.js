@@ -167,14 +167,28 @@ function forceDirectedGraph(parentId, graph, options) {
     let width = options && options.width ? options.width : 600;
     let height = options && options.height ? options.height : 400;
 
+    d3.select('#' + parentId).classed('chart-container',true);
+    d3.select('#' + parentId).select('svg').remove();
+
     let svg = d3.select('#' + parentId).append('svg')
         .attr('width', width)
         .attr('height', height);
 
     //needs to come from semi css
-    var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-        '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
-    var color = d3.scaleOrdinal(colors);
+    // var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
+    //     '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
+    // var color = d3.scaleOrdinal(colors);
+
+    let categories = d3.set(graph.nodes,function(n){
+        return n.class;
+    }).values();
+
+    var catScale = d3.scaleOrdinal()
+        .domain(categories)
+        .range(range(1,10));
+
+    let tooltipXOffset = 20;
+    let tooltipYOffset = -50;
 
     var simulation = d3.forceSimulation()
         .force("link", d3.forceLink().id(function (d) { return d.name; }))
@@ -196,12 +210,50 @@ function forceDirectedGraph(parentId, graph, options) {
         .data(graph.nodes)
         .enter().append("circle")
         .attr("r", 5)
-        .attr("fill", function (d) { return color(d.class); })
-        .style('stroke', '#fff')
-        .style('stroke-width', '1.5px');
+        .attr('class',function(d){
+            return 'chart-cat-' + catScale(d.class);
+        })
+        .classed('chart-node',true);
 
     node.append("title")
         .text(function (d) { return d.name; });
+
+    let keys = keysFromNode(graph.nodes[0]);
+   
+
+    //tooltips
+    node.on('mouseover',function(d){
+        //console.log('mouseover');
+        d3.select("#" + parentId).selectAll('.charts-tooltip')
+        .data([0])
+        .enter()
+        .append('div')
+        .classed('charts-tooltip', true)
+        .style('left', function (e, i) {
+            return d.x + tooltipXOffset + 'px';
+        })
+        .style('top', function (e, i) {
+           return d.y + tooltipYOffset + 'px';
+        })
+        .html(function (e, i) {
+
+            let keyValues = keys.map(function(k){
+                return k + ': ' + d[k];
+            });
+
+            let labelText = keyValues.join('</br>');
+
+            // labelText += xLabel + ': ' + aAcc(d) + '</br>';
+            // labelText += yLabel + ': ' + bAcc(d) + '</br>';
+            // labelText += 'Value: ' + vAcc(d);
+            return labelText;
+        });
+    });
+
+    node.on('mouseout',function(d){
+       // console.log('mouseout');
+        d3.select("#" + parentId).selectAll('.charts-tooltip').remove();
+    });
 
     simulation
         .nodes(graph.nodes)
@@ -808,4 +860,20 @@ function accessor(key) {
     return function (d) {
         return d[key];
     };
+}
+
+function range(start, end) {
+    var foo = [];
+    for (var i = start; i <= end; i++) {
+        foo.push(i);
+    }
+    return foo;
+}
+
+function keysFromNode(node){
+    let allKeys = Object.keys(node);
+    let keys = allKeys.filter(function(k){
+        return ['x','y','vx','vy','index'].indexOf(k) == -1;
+    });
+    return keys;
 }

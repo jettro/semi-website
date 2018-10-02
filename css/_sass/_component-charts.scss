@@ -64,3 +64,11 @@ $axis-label-font-size: 12px;
     fill: $axis-label-color;
     font-size: $axis-label-font-size
 }
+
+.chart-node{
+    stroke: $color-white;
+    stroke-width: 1.5px;
+}
+
+        // .style('stroke', '#fff')
+        // .style('stroke-width', '1.5px');
