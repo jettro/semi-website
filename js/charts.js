@@ -51,52 +51,142 @@ function bubbleChart(parentId, data, options) {
         .domain([0, 30])
         .range([1, 30]);
 
-    let axisSvg = null;
+    let tooltipXOffset = 20;
+    let tooltipYOffset = -20;
+    
+    render();
 
-    let svg = d3.select("#" + parentId).append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
+    function render() {
+        //let axisSvg = null;
 
-    let axisG = svg.append('g').classed('axis-g', true);
-    axisG.append("g")
-        .attr('transform', 'translate(0,' + 0.95 * height + ')')
-        .classed('x-axis axis', true);
+        //remove any previously rendered svg
+        d3.select("#" + parentId).select('svg').remove();
 
-    axisG.append("g")
-        .attr('transform', 'translate(' + 50 + ',' + 0 + ')')
-        .classed('y-axis axis', true);
+        d3.select("#" + parentId).style('position','relative');
 
-    xScale = getScale(data, width, aAcc, 100, 50);
-    yScale = getScale(data, height, bAcc, 30, 80);
+        let svg = d3.select("#" + parentId).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
 
-    let maxVal = d3.max(data, (d) => {
-        return d.value;
-    });
+        //AXIS
+        let axisG = svg.append('g').classed('axis-g', true);
+        axisG.append("g")
+            .attr('transform', 'translate(0,' + 0.95 * height + ')')
+            .classed('x-axis axis', true);
 
-    var xAxis = d3.axisBottom(xScale);
-    var yAxis = d3.axisLeft(yScale);
+        axisG.append("g")
+            .attr('transform', 'translate(' + 50 + ',' + 0 + ')')
+            .classed('y-axis axis', true);
 
-    axisG.select('.x-axis').call(xAxis);
-    axisG.select('.y-axis').call(yAxis);
+        xScale = getScale(data, width, aAcc, 100, 50);
+        yScale = getScale(data, height, bAcc, 30, 80);
 
-    let circleG = svg.append('g').classed('circle-g', true);
+        let maxVal = d3.max(data, (d) => {
+            return d.value;
+        });
 
-    circleG.selectAll('.dot')
-        .data(data)
-        .enter()
-        .append('circle')
-        .classed('dot', true)
-        .attr('cx', function (d) {
-            return xScale(aAcc(d));
-        })
-        .attr('cy', function (d) {
-            return yScale(bAcc(d));
-        })
-        .attr('r', function (d) {
-            return vScale(vAcc(d));
-        })
-        .style('fill', '#39557E');
+        var xAxis = d3.axisBottom(xScale);
+        var yAxis = d3.axisLeft(yScale);
+
+        axisG.select('.x-axis').call(xAxis);
+        axisG.select('.y-axis').call(yAxis);
+
+        let circleG = svg.append('g').classed('circle-g', true);
+
+        circleG.selectAll('.dot')
+            .data(data)
+            .enter()
+            .append('circle')
+            .classed('dot', true)
+            .attr('cx', function (d) {
+                return xScale(aAcc(d));
+            })
+            .attr('cy', function (d) {
+                return yScale(bAcc(d));
+            })
+            .attr('r', function (d) {
+                return vScale(vAcc(d));
+            })
+            .style('fill', '#39557E')
+            .on('mouseover', function (d) {
+                console.log('mouseoveer');
+                d3.select("#" + parentId).selectAll('.charts-tooltip')
+                    .data([0])
+                    .enter()
+                    .append('div')
+                    .classed('charts-tooltip', true)
+                    .style('left', function (e, i) {
+                        console.log('e');
+                        console.log(d);
+                        let x =  xScale(aAcc(d));
+                        return x + tooltipXOffset + 'px';
+                    })
+                    .style('top', function (e, i) {
+                        let y = yScale(bAcc(d));
+                        return y + tooltipYOffset + 'px';
+                    })
+                    .html(function (e, i) {
+                        let val = vScale(vAcc(d));
+                        return 'hello: ' + val;
+                    });
+
+
+
+            })
+            .on('mouseout', function (d) {
+                console.log('mouseout');
+                d3.select("#" + parentId).selectAll('.charts-tooltip').remove();
+            });
+    }
+
+
+
+
+
+    //tooltip
+    // let tooltips = d3.select('#' + this.parentId).select('.ct-svg').selectAll('.ct-tooltip')
+    //         .data(tooltipdata)
+    //         .enter()
+    //         .append('div')
+    //         .classed('ct-tooltip', true)
+    //         .style('left', function (d, i) {
+    //             log('hi' + i);
+    //             //return (i*50)+'px';
+    //             //let my = d3.mouse(svg.node());
+    //             // log(svg);
+    //             // log('my: ' + my);
+    //             // log('d');
+    //             // log(d);
+    //             let posx = 0.5*x(wertAcc(d));
+    //             let absposx = bounds.left + posx;
+    //             return absposx + 'px';
+    //         })
+    //         .style('top', function (d, i) {
+    //             // log('d');
+    //             // log(d);
+    //             //return (i*50)+'px';
+    //            // let my = d3.mouse(svg.node());
+    //             let posy = y(productCatAcc(d)) + y2(catAcc(d));
+    //             let absposy = bounds.top + posy+ 0.5 * y2.bandwidth();
+    //             return absposy + 'px';
+    //         })
+    //         .html(function (d, i) {
+    //            // let mouseY = d3.mouse(svg.node())[1];
+    //            let val = wertAcc(d);
+
+    //            let formatDecimal = function(v){
+    //             return Math.floor(v); 
+    //         };//d3.format(",.1f");
+    //            let error1 = formatDecimal(error1Acc(d)*100);
+    //            let error2 = formatDecimal(error2Acc(d)*100);
+
+    //            // let suffix = ['( ','-' , error1, '%', ' / +' , error2 ,'%' ,  ' )'  ].join('');
+
+    //             //let suffix = error1 == error2 ? compactErrorString(error1,error2) : longErrorString(error1,error2);
+    //             let suffix = errorString(error1,error2);
+    //             return formatDecimal(wertAcc(d)) + ' ' + suffix;
+    //         });
 
     function getScale(arr, w, acc, leftBorder, rightBorder) {
 
@@ -288,8 +378,8 @@ function constrainedLayoutGraph(parentId, graphbase, options) {
 
 function beeswarm(parentId, file, options) {
 
-   var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-    '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
+    var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
+        '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
 
     var parseDate = d3.timeParse("%d-%m-%Y"); //19-4-2018 //2017-11-20
 
