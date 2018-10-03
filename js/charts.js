@@ -164,31 +164,30 @@ function bubbleChart(parentId, data, options) {
 
 function forceDirectedGraph(parentId, graph, options) {
 
-    let width = options && options.width ? options.width : 600;
-    let height = options && options.height ? options.height : 400;
+    let width = options.width || 600;
+    let height = options.height || 400;
 
-    d3.select('#' + parentId).classed('chart-container',true);
-    d3.select('#' + parentId).select('svg').remove();
+    let nodeRadius = options.nodeRadius || 5;
+
+    let colorCat = options.colorBy || 'name';
+
+    let tooltipXOffset = 20;
+    let tooltipYOffset = -50;
+
+    d3.select('#' + parentId).classed('chart-container', true);
+    d3.select('#' + parentId).selectAll('svg').remove();
 
     let svg = d3.select('#' + parentId).append('svg')
         .attr('width', width)
         .attr('height', height);
 
-    //needs to come from semi css
-    // var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-    //     '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
-    // var color = d3.scaleOrdinal(colors);
-
-    let categories = d3.set(graph.nodes,function(n){
-        return n.class;
+    let categories = d3.set(graph.nodes, function (n) {
+        return n[colorCat];
     }).values();
 
     var catScale = d3.scaleOrdinal()
         .domain(categories)
-        .range(range(1,10));
-
-    let tooltipXOffset = 20;
-    let tooltipYOffset = -50;
+        .range(range(1, 10));
 
     var simulation = d3.forceSimulation()
         .force("link", d3.forceLink().id(function (d) { return d.name; }))
@@ -196,62 +195,49 @@ function forceDirectedGraph(parentId, graph, options) {
         .force("center", d3.forceCenter(width / 2, height / 2));
 
     var link = svg.append("g")
-        .attr("class", "links")
         .selectAll("line")
         .data(graph.links)
-        .enter().append("line")
-        .attr("stroke-width", 1)
-        .style('stroke', '#999')
-        .style('stroke-opacity', '0.7');
+        .enter()
+        .append("line")
+        .classed("chart-graph-link", true);
 
     var node = svg.append("g")
-        .attr("class", "nodes")
         .selectAll("circle")
         .data(graph.nodes)
         .enter().append("circle")
-        .attr("r", 5)
-        .attr('class',function(d){
-            return 'chart-cat-' + catScale(d.class);
+        .attr("r", nodeRadius)
+        .attr('class', function (d) {
+            return 'chart-cat-' + catScale(d[colorCat]);
         })
-        .classed('chart-node',true);
-
-    node.append("title")
-        .text(function (d) { return d.name; });
+        .classed('chart-graph-node', true);
 
     let keys = keysFromNode(graph.nodes[0]);
-   
 
     //tooltips
-    node.on('mouseover',function(d){
-        //console.log('mouseover');
+    node.on('mouseover', function (d) {
         d3.select("#" + parentId).selectAll('.charts-tooltip')
-        .data([0])
-        .enter()
-        .append('div')
-        .classed('charts-tooltip', true)
-        .style('left', function (e, i) {
-            return d.x + tooltipXOffset + 'px';
-        })
-        .style('top', function (e, i) {
-           return d.y + tooltipYOffset + 'px';
-        })
-        .html(function (e, i) {
+            .data([0])
+            .enter()
+            .append('div')
+            .classed('charts-tooltip', true)
+            .style('left', function (e, i) {
+                return d.x + tooltipXOffset + 'px';
+            })
+            .style('top', function (e, i) {
+                return d.y + tooltipYOffset + 'px';
+            })
+            .html(function (e, i) {
 
-            let keyValues = keys.map(function(k){
-                return k + ': ' + d[k];
+                let keyValues = keys.map(function (k) {
+                    return k + ': ' + d[k];
+                });
+
+                let labelText = keyValues.join('</br>');
+                return labelText;
             });
-
-            let labelText = keyValues.join('</br>');
-
-            // labelText += xLabel + ': ' + aAcc(d) + '</br>';
-            // labelText += yLabel + ': ' + bAcc(d) + '</br>';
-            // labelText += 'Value: ' + vAcc(d);
-            return labelText;
-        });
     });
 
-    node.on('mouseout',function(d){
-       // console.log('mouseout');
+    node.on('mouseout', function (d) {
         d3.select("#" + parentId).selectAll('.charts-tooltip').remove();
     });
 
@@ -870,10 +856,10 @@ function range(start, end) {
     return foo;
 }
 
-function keysFromNode(node){
+function keysFromNode(node) {
     let allKeys = Object.keys(node);
-    let keys = allKeys.filter(function(k){
-        return ['x','y','vx','vy','index'].indexOf(k) == -1;
+    let keys = allKeys.filter(function (k) {
+        return ['x', 'y', 'vx', 'vy', 'index'].indexOf(k) == -1;
     });
     return keys;
 }
