@@ -484,7 +484,7 @@ title: SeMI, our style; getting input from our users through form elements
 
     <section>
         <h4>Constraint-Based Layout</h4>
-
+        <p>Lorem ipsum dolor amet salvia activated charcoal hoodie narwhal cold-pressed flexitarian lyft, helvetica pour-over keffiyeh heirloom yuccie poutine meggings roof party. Swag tote bag ethical asymmetrical organic kogi 8-bit scenester deep v post-ironic.</p>
         <div id="constrained-graph"></div>
 
         <script src="https://ialab.it.monash.edu/webcola/cola.min.js"></script>
@@ -580,7 +580,11 @@ title: SeMI, our style; getting input from our users through form elements
 
             let options3 = {
                 width: 600,
-                height: 400
+                height: 400,
+                nodeRadius: 7,
+                nodeSpacing: 20,
+                showGroups: true,
+                colorBy: 'class'
             };
             constrainedLayoutGraph('constrained-graph', graphbase, options3);    
         </script>
@@ -682,7 +686,8 @@ title: SeMI, our style; getting input from our users through form elements
 
                     let options = {
                         width: 600,
-                        height: 400
+                        height: 400,
+                        nodeRadius: 5
                     };
                     constrainedLayoutGraph('constrained-graph', graph, options);    
                 </script>

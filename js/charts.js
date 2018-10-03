@@ -262,13 +262,13 @@ function forceDirectedGraph(parentId, graph, options) {
 
 }
 
-function constrainedLayoutGraph(parentId, graphbase, options) {
+function constrainedLayoutGraph(parentId, ingraph, options) {
 
-    let indexedLinks = graphbase.links.map((l) => {
+    let indexedLinks = ingraph.links.map((l) => {
         let s = l.source;
         let t = l.target;
-        var sindex = graphbase.nodes.map(function (e) { return e.name; }).indexOf(s);
-        var tindex = graphbase.nodes.map(function (e) { return e.name; }).indexOf(t);
+        var sindex = ingraph.nodes.map(function (e) { return e.name; }).indexOf(s);
+        var tindex = ingraph.nodes.map(function (e) { return e.name; }).indexOf(t);
         return {
             "source": sindex,
             "target": tindex
@@ -276,19 +276,34 @@ function constrainedLayoutGraph(parentId, graphbase, options) {
     });
 
     let graph = {};
-    graph.nodes = graphbase.nodes;
+    graph.nodes = ingraph.nodes;
     graph.links = indexedLinks;
 
-    let width = options && options.width ? options.width : 600;
-    let height = options && options.height ? options.height : 400;
+    let width = options.width || 600;
+    let height = options.height || 400;
+
+    let nodeRadius = options.nodeRadius || 7;
+    let nodeSpacing = options.nodeSpacing || 20;
+    let showGroups = options.showGroups;
+    let colorCat = options.colorBy || 'name';
+
+    let tooltipXOffset = 20;
+    let tooltipYOffset = -50;
+
+    d3.select('#' + parentId).classed('chart-container', true);
+    d3.select('#' + parentId).selectAll('svg').remove();
+
     let svg = d3.select('#' + parentId).append('svg')
         .attr('width', width)
         .attr('height', height)
 
-    var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-        '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
+    let categories = d3.set(graph.nodes, function (n) {
+        return n[colorCat];
+    }).values();
 
-    var color = d3.scaleOrdinal(colors);
+    var catScale = d3.scaleOrdinal()
+        .domain(categories)
+        .range(range(1, 10));
 
     var colad3 = cola.d3adaptor(d3)
         .size([width, height]);
@@ -301,14 +316,13 @@ function constrainedLayoutGraph(parentId, graphbase, options) {
         }
         groupMap[g].push(i);
 
-        v.width = v.height = 10;
+        v.width = v.height = nodeSpacing;
     });
 
     var groups = [];
     for (var g in groupMap) {
         groups.push({ id: g, leaves: groupMap[g] });
     }
-
 
     colad3
         .nodes(graph.nodes)
@@ -318,31 +332,61 @@ function constrainedLayoutGraph(parentId, graphbase, options) {
         .avoidOverlaps(true)
         .start(50, 0, 50);
 
-    var group = svg.selectAll('.group')
+    let groupClass = showGroups ? 'chart-group' : 'chart-group-hide';
+    
+
+    var group = svg.selectAll('.chart-graph-group')
         .data(groups)
         .enter().append('rect')
-        .classed('group', true)
-        .style('stroke', '#ccc')
+        .classed(groupClass,true)
         .style('fill', 'none')
         .call(colad3.drag);
 
-    var link = svg.selectAll(".link")
+    var link = svg.selectAll(".chart-graph-link")
         .data(graph.links)
         .enter().append("line")
-        .attr("class", "link")
-        .style("stroke-width", 1)
-        .style('stroke', '#999')
-        .style('stroke-opacity', 0.8);
+        .classed('chart-graph-link',true);
 
     var node = svg.selectAll(".node")
         .data(graph.nodes)
         .enter().append("circle")
-        .attr("class", "node")
-        .attr("r", 5)
-        .style("fill", function (d) { return color(d.class); })
-        .style('stroke', '#fff')
-        .style('stroke-width', 1.5)
+        .classed('chart-graph-node', true)
+        .attr("r", nodeRadius)
+        .attr('class', function (d) {
+            return 'chart-cat-' + catScale(d[colorCat]);
+        })
+        
         .call(colad3.drag);
+
+    let keys = keysFromNode(graph.nodes[0]);
+
+    //tooltips
+    node.on('mouseover', function (d) {
+        d3.select("#" + parentId).selectAll('.charts-tooltip')
+            .data([0])
+            .enter()
+            .append('div')
+            .classed('charts-tooltip', true)
+            .style('left', function (e, i) {
+                return d.x + tooltipXOffset + 'px';
+            })
+            .style('top', function (e, i) {
+                return d.y + tooltipYOffset + 'px';
+            })
+            .html(function (e, i) {
+
+                let keyValues = keys.map(function (k) {
+                    return k + ': ' + d[k];
+                });
+
+                let labelText = keyValues.join('</br>');
+                return labelText;
+            });
+    });
+
+    node.on('mouseout', function (d) {
+        d3.select("#" + parentId).selectAll('.charts-tooltip').remove();
+    });
 
 
     colad3.on("tick", tick);
@@ -859,7 +903,7 @@ function range(start, end) {
 function keysFromNode(node) {
     let allKeys = Object.keys(node);
     let keys = allKeys.filter(function (k) {
-        return ['x', 'y', 'vx', 'vy', 'index'].indexOf(k) == -1;
+        return ['x', 'y', 'vx', 'vy', 'index','parent','variable','bounds','height','width'].indexOf(k) == -1;
     });
     return keys;
 }
