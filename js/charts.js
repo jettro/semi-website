@@ -413,6 +413,19 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
 
 function beeswarm(parentId, file, options) {
 
+    let width =  options.width || 600;
+    let height = options.height || 600;
+
+    let bounds = {
+        top: options.top || 30,
+        bottom: options.bottom || 80,
+        left: options.left || 200,
+        right: options.right || 80
+    }
+
+    let innerWidth = width - bounds.left - bounds.right;
+    let innerHeight = height - bounds.top - bounds.bottom;
+
     var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
         '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
 
@@ -434,7 +447,6 @@ function beeswarm(parentId, file, options) {
     var locationScale = d3.scalePoint();
     var ratingScale = d3.scalePoint();
     var originScale = d3.scalePoint();
-
 
     var rAcc = null;
 
@@ -458,10 +470,7 @@ function beeswarm(parentId, file, options) {
     var dia = 3;
 
     var selectedBubbles = [];
-
-    let width = options && options.width ? options.width : 600;
-    let height = options && options.height ? options.height : 600;
-
+ 
     //create a container for the navigation
     d3.select('#' + parentId).append('div').classed('beeswarm-nav', true);
     //create a container for the chart
@@ -471,9 +480,6 @@ function beeswarm(parentId, file, options) {
     d3.select('#' + parentId).select('.beeswarm-chart').style('position', 'relative');
 
     let chartElement = d3.select('#' + parentId).select('.beeswarm-chart');
-
-    console.log('chartElement3');
-    console.log(chartElement.node());
 
     var sketch = function (s) {
 
@@ -486,8 +492,6 @@ function beeswarm(parentId, file, options) {
 
             s.frameRate(30);
             s.noLoop();
-
-
 
             axisSvg = d3.select('#' + parentId)
                 .select('.beeswarm-chart')
@@ -502,10 +506,11 @@ function beeswarm(parentId, file, options) {
                 .append("g");
 
             axisSvg.append("g")
-                .attr('transform', 'translate(0,' + 0.95 * s.height + ')')
+                .attr('transform', 'translate(0,' + (s.height - 0.8*bounds.bottom) + ')')
                 .classed('x-axis axis', true);
 
             axisSvg.append("g")
+                .attr('transform', translate(0.8*bounds.left,0))
                 .classed('y-axis axis', true);
             d3.csv(file)
                 .row(function (d) {
@@ -555,12 +560,12 @@ function beeswarm(parentId, file, options) {
                 return;
             }
 
-            s.background(255);
+            s.background(200);
 
 
             //axis
             var xAxis = d3.axisBottom(xScale).ticks(nTicks);
-            var yAxis = d3.axisRight(yScale).ticks(nTicks);
+            var yAxis = d3.axisLeft(yScale).ticks(nTicks);
             axisSvg.select('.x-axis').call(xAxis);
             axisSvg.select('.y-axis').call(yAxis);
 
@@ -787,13 +792,15 @@ function beeswarm(parentId, file, options) {
 
 
     function xscl(filter) {
-        var _range = [border, width - border];
+       // var _range = [border, width - border];
+       var _range = [bounds.left,width-bounds.right];
         var _scale = scl2(filter, _range);
         return _scale;
     }
 
     function yscl(filter) {
-        var _range = [height - border, border];
+       // var _range = [height - border, border];
+       var _range = [height-bounds.bottom,bounds.top];
         var _scale = scl2(filter, _range);
         return _scale;
     }
