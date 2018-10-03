@@ -283,7 +283,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
     let height = options.height || 400;
 
     let nodeRadius = options.nodeRadius || 7;
-    let nodeSpacing = options.nodeSpacing || 20;
+    let nodeSpacing = options.nodeSpacing || 20;
     let showGroups = options.showGroups;
     let colorCat = options.colorBy || 'name';
 
@@ -333,19 +333,19 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
         .start(50, 0, 50);
 
     let groupClass = showGroups ? 'chart-group' : 'chart-group-hide';
-    
+
 
     var group = svg.selectAll('.chart-graph-group')
         .data(groups)
         .enter().append('rect')
-        .classed(groupClass,true)
+        .classed(groupClass, true)
         .style('fill', 'none')
         .call(colad3.drag);
 
     var link = svg.selectAll(".chart-graph-link")
         .data(graph.links)
         .enter().append("line")
-        .classed('chart-graph-link',true);
+        .classed('chart-graph-link', true);
 
     var node = svg.selectAll(".node")
         .data(graph.nodes)
@@ -355,7 +355,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
         .attr('class', function (d) {
             return 'chart-cat-' + catScale(d[colorCat]);
         })
-        
+
         .call(colad3.drag);
 
     let keys = keysFromNode(graph.nodes[0]);
@@ -413,7 +413,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
 
 function beeswarm(parentId, file, options) {
 
-    let width =  options.width || 600;
+    let width = options.width || 600;
     let height = options.height || 600;
 
     let bounds = {
@@ -470,7 +470,7 @@ function beeswarm(parentId, file, options) {
     var dia = 3;
 
     var selectedBubbles = [];
- 
+
     //create a container for the navigation
     d3.select('#' + parentId).append('div').classed('beeswarm-nav', true);
     //create a container for the chart
@@ -506,11 +506,11 @@ function beeswarm(parentId, file, options) {
                 .append("g");
 
             axisSvg.append("g")
-                .attr('transform', 'translate(0,' + (s.height - 0.8*bounds.bottom) + ')')
+                .attr('transform', 'translate(0,' + (s.height - 0.8 * bounds.bottom) + ')')
                 .classed('x-axis axis', true);
 
             axisSvg.append("g")
-                .attr('transform', translate(0.8*bounds.left,0))
+                .attr('transform', translate(0.8 * bounds.left, 0))
                 .classed('y-axis axis', true);
             d3.csv(file)
                 .row(function (d) {
@@ -567,8 +567,23 @@ function beeswarm(parentId, file, options) {
             var xAxis = d3.axisBottom(xScale).ticks(nTicks);
             var yAxis = d3.axisLeft(yScale).ticks(nTicks);
             axisSvg.select('.x-axis').call(xAxis);
-            axisSvg.select('.y-axis').call(yAxis);
 
+
+            //only rotate labels if longest label is a bit long
+            let doRotate = false;
+            if(doRotate){
+                axisSvg.select('.x-axis').selectAll("text")
+                .style("text-anchor", "end")
+                // .attr("y", 0)
+                // .attr("x", 9)
+                .attr('dx','-.8em')
+                .attr("dy", ".35em")
+                .attr("transform", "rotate(-45)");
+            }
+              
+              
+
+            axisSvg.select('.y-axis').call(yAxis);
 
             s.noFill();
             s.stroke(200);
@@ -792,15 +807,15 @@ function beeswarm(parentId, file, options) {
 
 
     function xscl(filter) {
-       // var _range = [border, width - border];
-       var _range = [bounds.left,width-bounds.right];
+        // var _range = [border, width - border];
+        var _range = [bounds.left, width - bounds.right];
         var _scale = scl2(filter, _range);
         return _scale;
     }
 
     function yscl(filter) {
-       // var _range = [height - border, border];
-       var _range = [height-bounds.bottom,bounds.top];
+        // var _range = [height - border, border];
+        var _range = [height - bounds.bottom, bounds.top];
         var _scale = scl2(filter, _range);
         return _scale;
     }
@@ -910,7 +925,7 @@ function range(start, end) {
 function keysFromNode(node) {
     let allKeys = Object.keys(node);
     let keys = allKeys.filter(function (k) {
-        return ['x', 'y', 'vx', 'vy', 'index','parent','variable','bounds','height','width'].indexOf(k) == -1;
+        return ['x', 'y', 'vx', 'vy', 'index', 'parent', 'variable', 'bounds', 'height', 'width'].indexOf(k) == -1;
     });
     return keys;
 }
