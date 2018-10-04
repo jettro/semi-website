@@ -84,15 +84,15 @@ function bubbleChart(parentId, data, options) {
             .append("g")
 
         //AXIS
-        let axisG = svg.append('g').classed('axis-g', true);
+        let axisG = svg.append('g').classed('chart-axis-g', true);
 
         axisG.append("g")
             .attr('transform', 'translate(0,' + 0.93 * height + ')')
-            .classed('x-axis axis', true);
+            .classed('chart-x-axis axis', true);
 
         axisG.append("g")
             .attr('transform', 'translate(' + 50 + ',' + 0 + ')')
-            .classed('y-axis axis', true);
+            .classed('chart-y-axis axis', true);
 
         xScale = getScale(data, width, aAcc, bounds.left, bounds.right);
         yScale = getScale(data, height, bAcc, bounds.top, bounds.bottom);
@@ -100,28 +100,28 @@ function bubbleChart(parentId, data, options) {
         var xAxis = d3.axisBottom(xScale);
         var yAxis = d3.axisLeft(yScale);
 
-        axisG.select('.x-axis').call(xAxis);
-        axisG.select('.y-axis').call(yAxis);
+        axisG.select('.chart-x-axis').call(xAxis);
+        axisG.select('.chart-y-axis').call(yAxis);
 
         //axis labels
-        axisG.select('.x-axis').append('text')
+        axisG.select('.chart-x-axis').append('text')
             .classed('chart-x-axis-label', true)
             .attr('dy', '2.7em')
             .attr('transform', translate(width - bounds.right, 0))
             .text(xLabel);
 
-        axisG.select('.y-axis').append('text')
+        axisG.select('.chart-y-axis').append('text')
             .classed('chart-y-axis-label', true)
             .attr('dy', '0.8em')
             .text(yLabel);
 
-        let circleG = svg.append('g').classed('circle-g', true);
+        let circleG = svg.append('g').classed('chart-circle-g', true);
 
-        circleG.selectAll('.dot')
+        circleG.selectAll('.chart-dot')
             .data(data)
             .enter()
             .append('circle')
-            .classed('dot', true)
+            .classed('chart-dot', true)
             .attr('cx', function (d) {
                 return xScale(aAcc(d));
             })
