@@ -10,7 +10,7 @@ title: SeMI, our style; getting input from our users through form elements
         the data and insights from SeMI and provide them wrapped in a small charting library. The examples below are
         simple use cases of the charts.
     </p>
-    <!-- <section>
+    <section>
         <h4>Sankey Diagram</h4>
         <div id="sankey-diagram"></div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -693,7 +693,7 @@ title: SeMI, our style; getting input from our users through form elements
                 </script>
             </xmp>
         </section>
-    </section> -->
+    </section>
     <section>
         <h4>Beeswarm</h4>
         <div id="beeswarm"></div>
@@ -704,12 +704,13 @@ title: SeMI, our style; getting input from our users through form elements
         <script type="text/javascript">
             var file = '/assets/data/flavors_of_cacao.csv';
             var options4 = {
-                width: 800,
+                width: 620,
                 height: 600,
                 top: 0,
-                left: 250,
-                bottom: 120,
-                right: 50
+                left: 150,
+                bottom: 110,
+                right: 50,
+                bubbleRadius: 3
             };
             beeswarm('beeswarm', file, options4);
         </script>

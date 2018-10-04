@@ -426,18 +426,12 @@ function beeswarm(parentId, file, options) {
     let innerWidth = width - bounds.left - bounds.right;
     let innerHeight = height - bounds.top - bounds.bottom;
 
-    var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-        '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
-
     var parseDate = d3.timeParse("%d-%m-%Y"); //19-4-2018 //2017-11-20
 
     var rScale = d3.scalePow();
     var xScale = null;
     var yScale = null;
     var freqScale = d3.scaleOrdinal();
-    var colScale = d3.scaleOrdinal()
-        .domain([0, 1, 2, 3, 4, 5])
-        .range(colors);
 
     var companyScale = d3.scalePoint();
     var nameScale = d3.scalePoint();
@@ -467,18 +461,20 @@ function beeswarm(parentId, file, options) {
     var nTicks = 10;
     var keys = null;
     var maxLabelLength = 5;
+    var mainColor = '#304a6c';
 
-    var dia = 3;
+    var dia = options.bubbleRadius || 4;
 
     var selectedBubbles = [];
 
     //create a container for the navigation
-    d3.select('#' + parentId).append('div').classed('beeswarm-nav', true);
+    d3.select('#' + parentId).append('div').classed('beeswarm-nav', true)
+        .style('padding-left', 0.8 * bounds.left + 'px');
     //create a container for the chart
     d3.select('#' + parentId).append('div').classed('beeswarm-chart', true);
 
     //set css to ensure correct positioning of axis
-    d3.select('#' + parentId).select('.beeswarm-chart').style('position', 'relative');
+    d3.select('#' + parentId).select('.beeswarm-chart').classed('chart-container', true);//.style('position', 'relative');
 
     let chartElement = d3.select('#' + parentId).select('.beeswarm-chart');
 
@@ -496,7 +492,6 @@ function beeswarm(parentId, file, options) {
 
             axisSvg = d3.select('#' + parentId)
                 .select('.beeswarm-chart')
-                //d3.select("#" + parentId)
                 .append("svg")
                 .attr("width", s.width)
                 .attr("height", s.height)
@@ -518,7 +513,7 @@ function beeswarm(parentId, file, options) {
                     return {
                         // id: d['id'],
                         company: d['company'],
-                        name: d['name'],
+                        /* name: d['name'],*/
                         ref: +d['ref'],
                         date: +d['date'],
                         percent: +d['percent'],
@@ -534,7 +529,7 @@ function beeswarm(parentId, file, options) {
                         return;
                     }
                     data = csv.filter(function (d, i) {
-                        return i < 100;
+                        return i < 200;
                         //return true;
                     });
 
@@ -561,7 +556,7 @@ function beeswarm(parentId, file, options) {
                 return;
             }
 
-            s.background(200);
+            s.background(255);
 
 
             //axis
@@ -570,28 +565,23 @@ function beeswarm(parentId, file, options) {
             axisSvg.select('.x-axis').call(xAxis);
 
             let xScaleDomain = xScale.domain();
-            console.log(xScaleDomain);
-            let longestLabel = d3.max(xScaleDomain,d=>{
+ 
+            let longestLabel = d3.max(xScaleDomain, d => {
                 let ds = '' + d;
                 return ds.length;
             });
-            console.log(longestLabel);
-
-
-
+  
             //only rotate labels if longest label is a bit long
             let doRotate = longestLabel > maxLabelLength;
-            if(doRotate){
+            if (doRotate) {
                 axisSvg.select('.x-axis').selectAll("text")
-                .style("text-anchor", "end")
-                // .attr("y", 0)
-                // .attr("x", 9)
-                .attr('dx','-.8em')
-                .attr("dy", ".35em")
-                .attr("transform", "rotate(-45)");
+                    .style("text-anchor", "end")
+                    // .attr("y", 0)
+                    // .attr("x", 9)
+                    .attr('dx', '-.8em')
+                    .attr("dy", ".35em")
+                    .attr("transform", "rotate(-45)");
             }
-              
-              
 
             axisSvg.select('.y-axis').call(yAxis);
 
@@ -602,12 +592,53 @@ function beeswarm(parentId, file, options) {
                 s.stroke(255);
                 s.strokeWeight(1);
                 var diameter = dia * 2;
-                var c = colScale(d.group);
-                s.fill(c);
+                s.fill(mainColor);
 
                 s.ellipse(d.x, d.y, diameter, diameter);
             });
+
+            //tooltip
+            let closest = simulation.find(s.mouseX, s.mouseY, 50);
+            // console.log('closest');
+            // console.log(closest);
+
+            let tooltipXOffset = 20;
+            let tooltipYOffset = -20;
+
+            d3.select('#' + parentId).select('.beeswarm-chart').selectAll('.charts-tooltip').remove();
+
+            if (closest) {
+
+                let keys = keysFromNode(closest);
+
+                d3.select('#' + parentId).select('.beeswarm-chart').selectAll('.charts-tooltip')
+                    .data([0])
+                    .enter()
+                    .append('div')
+                    .classed('charts-tooltip', true)
+                    .style('left', function (e, i) {
+                        return closest.x + 'px';
+                    })
+                    .style('top', function (e, i) {
+                        return closest.y + 'px';
+                    })
+                    .html(function (e, i) {
+                        let keyValues = keys.map(function (k) {
+                            return k + ': ' + closest[k];
+                        });
+
+                        let labelText = keyValues.join('</br>');
+                        return labelText;
+                    });
+
+            }
+
         };
+
+        s.mouseMoved = function () {
+            console.log('mouseMoved');
+            s.redraw();
+        }
     };
 
     //p5 instance mode
@@ -935,7 +966,7 @@ function range(start, end) {
 function keysFromNode(node) {
     let allKeys = Object.keys(node);
     let keys = allKeys.filter(function (k) {
-        return ['x', 'y', 'vx', 'vy', 'index', 'parent', 'variable', 'bounds', 'height', 'width'].indexOf(k) == -1;
+        return ['x', 'y', 'vx', 'vy', 'index', 'parent', 'variable', 'bounds', 'height', 'width', 'invalid'].indexOf(k) == -1;
     });
     return keys;
 }
