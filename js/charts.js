@@ -466,6 +466,7 @@ function beeswarm(parentId, file, options) {
     var axisSvg = null;
     var nTicks = 10;
     var keys = null;
+    var maxLabelLength = 5;
 
     var dia = 3;
 
@@ -568,9 +569,18 @@ function beeswarm(parentId, file, options) {
             var yAxis = d3.axisLeft(yScale).ticks(nTicks);
             axisSvg.select('.x-axis').call(xAxis);
 
+            let xScaleDomain = xScale.domain();
+            console.log(xScaleDomain);
+            let longestLabel = d3.max(xScaleDomain,d=>{
+                let ds = '' + d;
+                return ds.length;
+            });
+            console.log(longestLabel);
+
+
 
             //only rotate labels if longest label is a bit long
-            let doRotate = false;
+            let doRotate = longestLabel > maxLabelLength;
             if(doRotate){
                 axisSvg.select('.x-axis').selectAll("text")
                 .style("text-anchor", "end")
