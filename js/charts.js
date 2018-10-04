@@ -55,7 +55,7 @@ function bubbleChart(parentId, data, options) {
     let vAcc = accessor('value');
 
     let minR = 1;
-    let maxR = width / 20;
+    let maxR = width / 30;
 
     let maxVal = d3.max(data, function (d) {
         return vAcc(d);

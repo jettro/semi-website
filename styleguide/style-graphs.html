@@ -12,6 +12,7 @@ title: SeMI, our style; getting input from our users through form elements
     </p>
     <section>
         <h4>Sankey Diagram</h4>
+        <p>Lorem ipsum dolor amet 90's hexagon church-key tbh cray. Tumeric selfies wayfarers retro flexitarian, hammock direct trade cornhole roof party selvage franzen mumblecore umami chia. </p>
         <div id="sankey-diagram"></div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="/js/charts.js"></script>
@@ -370,7 +371,7 @@ title: SeMI, our style; getting input from our users through form elements
             let options2 = {
                 width: 600,
                 height: 400,
-                nodeRadius: 7,
+                nodeRadius: 5,
                 colorBy: 'class'
             };
 
@@ -581,9 +582,9 @@ title: SeMI, our style; getting input from our users through form elements
             let options3 = {
                 width: 600,
                 height: 400,
-                nodeRadius: 7,
+                nodeRadius: 5,
                 nodeSpacing: 20,
-                showGroups: true,
+                showGroups: false,
                 colorBy: 'class'
             };
             constrainedLayoutGraph('constrained-graph', graphbase, options3);    
@@ -696,6 +697,10 @@ title: SeMI, our style; getting input from our users through form elements
     </section>
     <section>
         <h4>Beeswarm</h4>
+        <p>The Beeswarm chart is a mix between the Bubble Chart and the Graph visualisations (Force-Directed Graph and Constraint-Based Layout).
+            As opposed to the Bubble Chart, which is mainly used for aggregated data, the Beeswarm can be used to display the actual data. 
+            It arranges single nodes based on selected properties, allowing to get insights about the distribution of the data. 
+        </p>
         <div id="beeswarm"></div>
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
@@ -704,12 +709,12 @@ title: SeMI, our style; getting input from our users through form elements
         <script type="text/javascript">
             var file = '/assets/data/flavors_of_cacao.csv';
             var options4 = {
-                width: 620,
+                width: 650,
                 height: 600,
                 top: 0,
                 left: 150,
                 bottom: 110,
-                right: 50,
+                right: 40,
                 bubbleRadius: 3
             };
             beeswarm('beeswarm', file, options4);
