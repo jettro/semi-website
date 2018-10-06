@@ -407,7 +407,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
 }
 
 
-function beeswarm(parentId, file, options) {
+function beeswarm(parentId, data, options) {
 
     let width = options.width || 600;
     let height = options.height || 600;
@@ -417,12 +417,12 @@ function beeswarm(parentId, file, options) {
         bottom: options.bottom || 80,
         left: options.left || 200,
         right: options.right || 80
-    }
+    };
 
     var xScale = null;
     var yScale = null;
 
-    var data = [];
+    //var data = [];
     var xFilter = 'all';
     var yFilter = 'all';
     var ready = false;
@@ -479,33 +479,49 @@ function beeswarm(parentId, file, options) {
             axisSvg.append("g")
                 .attr('transform', translate(0.8 * bounds.left, 0))
                 .classed('chart-y-axis chart-axis', true);
-            d3.csv(file)
-                .row(function (d) {
-                    return createTypeCastedObject(d);
-                })
-                .get(function (error, csv) {
-                    if (error) {
-                        console.log('error', error);
-                        return;
-                    }
-                    data = csv.filter(function (d, i) {
-                        return i < 200;
-                    });
 
-                    //console.log('data', data);
+            //console.log('data', data);
 
-                    createButtons(s);
-                    setFilter(s, xFilter, yFilter);
+            createButtons(s);
+            setFilter(s, xFilter, yFilter);
 
-                    simulation.stop();
-                    for (var i = 0; i < 150; ++i) {
-                        simulation.tick();
-                    }
-                    simulation.restart();
+            simulation.stop();
+            for (var i = 0; i < 150; ++i) {
+                simulation.tick();
+            }
+            simulation.restart();
 
-                    ready = true;
-                    s.redraw();
-                });
+            ready = true;
+            s.redraw();
+
+
+            // d3.csv(file)
+            //     .row(function (d) {
+            //         return createTypeCastedObject(d);
+            //     })
+            //     .get(function (error, csv) {
+            //         if (error) {
+            //             console.log('error', error);
+            //             return;
+            //         }
+            //         data = csv.filter(function (d, i) {
+            //             return i < 200;
+            //         });
+
+            //         //console.log('data', data);
+
+            //         createButtons(s);
+            //         setFilter(s, xFilter, yFilter);
+
+            //         simulation.stop();
+            //         for (var i = 0; i < 150; ++i) {
+            //             simulation.tick();
+            //         }
+            //         simulation.restart();
+
+            //         ready = true;
+            //         s.redraw();
+            //     });
 
         };
 

@@ -10,37 +10,17 @@ title: SeMI, our style; getting input from our users through form elements
         the data and insights from SeMI and provide them wrapped in a small charting library. The examples below are
         simple use cases of the charts.
     </p>
-    <!-- <section>
+    <section>
         <h4>Sankey Diagram</h4>
         <p>Lorem ipsum dolor amet 90's hexagon church-key tbh cray. Tumeric selfies wayfarers retro flexitarian,
             hammock direct trade cornhole roof party selvage franzen mumblecore umami chia. </p>
         <div id="sankey-diagram"></div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="/js/semi-demo-data.js"></script>
         <script type="text/javascript" src="/js/charts.js"></script>
         <script type="text/javascript">
-            let sankeyData = [["Amsterdam", "AMS", 55],
-            ["Berlin", "TXL", 36],
-            ["London", "LHR", 72],
-            ["London", "LGW", 20],
-            ["AMS", "British Airways", 10],
-            ["AMS", "KLM", 30],
-            ["AMS", "Air France", 5],
-            ["AMS", "Lufthansa", 10],
-            ["TXL", "British Airways", 6],
-            ["TXL", "Lufthansa", 30],
-            ["LHR", "British Airways", 50],
-            ["LHR", "KLM", 10],
-            ["LHR", "Air France", 5],
-            ["LHR", "Lufthansa", 7],
-            ["LGW", "British Airways", 20],
-            ["British Airways", "Airbus", 14],
-            ["British Airways", "Boeing", 13],
-            ["KLM", "Airbus", 3],
-            ["KLM", "Boeing", 10],
-            ["Air France", "Airbus", 13],
-            ["Air France", "Boeing", 7],
-            ["Lufthansa", "Airbus", 25],
-            ["Lufthansa", "Boeing", 3]];
+
+            let sankeyData = demoData.sankeyData;
 
             sankey('sankey-diagram', sankeyData);
         </script>
@@ -90,83 +70,7 @@ title: SeMI, our style; getting input from our users through form elements
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript">
 
-            let bubbleData = [
-                {
-                    value: 10,
-                    catA: "Male",
-                    catB: "0-20"
-                },
-                {
-                    value: 20,
-                    catA: "Male",
-                    catB: "20-40"
-                },
-                {
-                    value: 5,
-                    catA: "Male",
-                    catB: "40-60"
-                },
-                {
-                    value: 25,
-                    catA: "Male",
-                    catB: "60-80"
-                },
-                {
-                    value: 25,
-                    catA: "Male",
-                    catB: "80-100"
-                },
-                {
-                    value: 5,
-                    catA: "Female",
-                    catB: "0-20"
-                },
-                {
-                    value: 10,
-                    catA: "Female",
-                    catB: "20-40"
-                },
-                {
-                    value: 13,
-                    catA: "Female",
-                    catB: "40-60"
-                },
-                {
-                    value: 15,
-                    catA: "Female",
-                    catB: "60-80"
-                },
-                {
-                    value: 24,
-                    catA: "Female",
-                    catB: "80-100"
-                },
-                {
-                    value: 14,
-                    catA: "Unknown",
-                    catB: "0-20"
-                },
-                {
-                    value: 17,
-                    catA: "Unknown",
-                    catB: "20-40"
-                },
-                {
-                    value: 23,
-                    catA: "Unknown",
-                    catB: "40-60"
-                },
-                {
-                    value: 3,
-                    catA: "Unknown",
-                    catB: "60-80"
-                },
-                {
-                    value: 4,
-                    catA: "Unknown",
-                    catB: "80-100"
-                }
-            ];
+            let bubbleData = demoData.bubbleData;
 
             let bubbleOptions = {
                 width: 600,
@@ -283,94 +187,8 @@ title: SeMI, our style; getting input from our users through form elements
         </p>
         <div id="force-graph"></div>
         <script type="text/javascript">
-            let forceDirectedGraphData = {
-                "nodes": [
-                    { "name": "TV", "class": "ProductType" },
-                    { "name": "Smartphone", "class": "ProductType" },
-                    { "name": "Sony TV", "class": "Product" },
-                    { "name": "iPhone", "class": "Product" },
-                    { "name": "Purchase_1", "class": "Purchase" },
-                    { "name": "Purchase_2", "class": "Purchase" },
-                    { "name": "Purchase_3", "class": "Purchase" },
-                    { "name": "Purchase_4", "class": "Purchase" },
-                    { "name": "Purchase_5", "class": "Purchase" },
-                    { "name": "Purchase_6", "class": "Purchase" },
-                    { "name": "Purchase_7", "class": "Purchase" },
-                    { "name": "Transaction_1", "class": "Transaction" },
-                    { "name": "Transaction_2", "class": "Transaction" },
-                    { "name": "Transaction_3", "class": "Transaction" },
-                    { "name": "Transaction_4", "class": "Transaction" },
-                    { "name": "Transaction_5", "class": "Transaction" },
-                    { "name": "Transaction_6", "class": "Transaction" },
-                    { "name": "Transaction_7", "class": "Transaction" },
-                    { "name": "Transaction_8", "class": "Transaction" },
-                    { "name": "Transaction_9", "class": "Transaction" },
-                    { "name": "Transaction_10", "class": "Transaction" },
-                    { "name": "Transaction_11", "class": "Transaction" },
-                    { "name": "a", "class": "Person" },
-                    { "name": "b", "class": "Person" },
-                    { "name": "c", "class": "Person" },
-                    { "name": "d", "class": "Person" },
-                    { "name": "e", "class": "Person" },
-                    { "name": "0-50", "class": "AgeGroup" },
-                    { "name": "50-100", "class": "AgeGroup" },
-                    { "name": "Amsterdam", "class": "City" },
-                    { "name": "Rotterdam", "class": "City" },
-                    { "name": "Albert Heijn", "class": "Company" },
-                    { "name": "Netflix", "class": "Company" },
-                    { "name": "Mediamarkt", "class": "Company" }
-                ],
-                "links": [
-                    { "source": "Sony TV", "target": "TV" },
-                    { "source": "iPhone", "target": "Smartphone" },
-                    { "source": "Purchase_1", "target": "Sony TV" },
-                    { "source": "Purchase_2", "target": "Sony TV" },
-                    { "source": "Purchase_3", "target": "Sony TV" },
-                    { "source": "Purchase_4", "target": "Sony TV" },
-                    { "source": "Purchase_5", "target": "iPhone" },
-                    { "source": "Purchase_6", "target": "iPhone" },
-                    { "source": "Purchase_7", "target": "iPhone" },
-                    { "source": "Transaction_1", "target": "Purchase_1" },
-                    { "source": "Transaction_2", "target": "Purchase_2" },
-                    { "source": "Transaction_3", "target": "Purchase_3" },
-                    { "source": "Transaction_4", "target": "Purchase_4" },
-                    { "source": "Transaction_5", "target": "Purchase_5" },
-                    { "source": "Transaction_6", "target": "Purchase_6" },
-                    { "source": "Transaction_7", "target": "Purchase_7" },
-                    { "source": "Transaction_1", "target": "b" },
-                    { "source": "Transaction_2", "target": "c" },
-                    { "source": "Transaction_3", "target": "d" },
-                    { "source": "Transaction_1", "target": "Mediamarkt" },
-                    { "source": "Transaction_2", "target": "Mediamarkt" },
-                    { "source": "Transaction_3", "target": "Mediamarkt" },
-                    { "source": "Transaction_4", "target": "e" },
-                    { "source": "Transaction_4", "target": "Mediamarkt" },
-                    { "source": "Transaction_5", "target": "a" },
-                    { "source": "Transaction_5", "target": "Mediamarkt" },
-                    { "source": "Transaction_6", "target": "c" },
-                    { "source": "Transaction_6", "target": "Mediamarkt" },
-                    { "source": "Transaction_7", "target": "d" },
-                    { "source": "Transaction_7", "target": "Mediamarkt" },
-                    { "source": "Transaction_8", "target": "b" },
-                    { "source": "Transaction_8", "target": "Netflix" },
-                    { "source": "Transaction_9", "target": "c" },
-                    { "source": "Transaction_9", "target": "Netflix" },
-                    { "source": "Transaction_10", "target": "d" },
-                    { "source": "Transaction_10", "target": "Netflix" },
-                    { "source": "Transaction_11", "target": "e" },
-                    { "source": "Transaction_11", "target": "Albert Heijn" },
-                    { "source": "a", "target": "0-50" },
-                    { "source": "a", "target": "Amsterdam" },
-                    { "source": "b", "target": "0-50" },
-                    { "source": "b", "target": "Amsterdam" },
-                    { "source": "c", "target": "0-50" },
-                    { "source": "c", "target": "Rotterdam" },
-                    { "source": "d", "target": "50-100" },
-                    { "source": "d", "target": "Amsterdam" },
-                    { "source": "e", "target": "50-100" },
-                    { "source": "e", "target": "Rotterdam" }
-                ]
-            };
+           
+           let forceDirectedGraphData = demoData.forceDirectedGraphData;
 
             let forceDirectedGraphDataOptions = {
                 width: 600,
@@ -499,94 +317,8 @@ title: SeMI, our style; getting input from our users through form elements
 
         <script src="https://ialab.it.monash.edu/webcola/cola.min.js"></script>
         <script type="text/javascript">
-            let constrainedLayoutData = {
-                "nodes": [
-                    { "name": "TV", "class": "ProductType" },
-                    { "name": "Smartphone", "class": "ProductType" },
-                    { "name": "Sony TV", "class": "Product" },
-                    { "name": "iPhone", "class": "Product" },
-                    { "name": "Purchase_1", "class": "Purchase" },
-                    { "name": "Purchase_2", "class": "Purchase" },
-                    { "name": "Purchase_3", "class": "Purchase" },
-                    { "name": "Purchase_4", "class": "Purchase" },
-                    { "name": "Purchase_5", "class": "Purchase" },
-                    { "name": "Purchase_6", "class": "Purchase" },
-                    { "name": "Purchase_7", "class": "Purchase" },
-                    { "name": "Transaction_1", "class": "Transaction" },
-                    { "name": "Transaction_2", "class": "Transaction" },
-                    { "name": "Transaction_3", "class": "Transaction" },
-                    { "name": "Transaction_4", "class": "Transaction" },
-                    { "name": "Transaction_5", "class": "Transaction" },
-                    { "name": "Transaction_6", "class": "Transaction" },
-                    { "name": "Transaction_7", "class": "Transaction" },
-                    { "name": "Transaction_8", "class": "Transaction" },
-                    { "name": "Transaction_9", "class": "Transaction" },
-                    { "name": "Transaction_10", "class": "Transaction" },
-                    { "name": "Transaction_11", "class": "Transaction" },
-                    { "name": "a", "class": "Person" },
-                    { "name": "b", "class": "Person" },
-                    { "name": "c", "class": "Person" },
-                    { "name": "d", "class": "Person" },
-                    { "name": "e", "class": "Person" },
-                    { "name": "0-50", "class": "AgeGroup" },
-                    { "name": "50-100", "class": "AgeGroup" },
-                    { "name": "Amsterdam", "class": "City" },
-                    { "name": "Rotterdam", "class": "City" },
-                    { "name": "Albert Heijn", "class": "Company" },
-                    { "name": "Netflix", "class": "Company" },
-                    { "name": "Mediamarkt", "class": "Company" }
-                ],
-                "links": [
-                    { "source": "Sony TV", "target": "TV" },
-                    { "source": "iPhone", "target": "Smartphone" },
-                    { "source": "Purchase_1", "target": "Sony TV" },
-                    { "source": "Purchase_2", "target": "Sony TV" },
-                    { "source": "Purchase_3", "target": "Sony TV" },
-                    { "source": "Purchase_4", "target": "Sony TV" },
-                    { "source": "Purchase_5", "target": "iPhone" },
-                    { "source": "Purchase_6", "target": "iPhone" },
-                    { "source": "Purchase_7", "target": "iPhone" },
-                    { "source": "Transaction_1", "target": "Purchase_1" },
-                    { "source": "Transaction_2", "target": "Purchase_2" },
-                    { "source": "Transaction_3", "target": "Purchase_3" },
-                    { "source": "Transaction_4", "target": "Purchase_4" },
-                    { "source": "Transaction_5", "target": "Purchase_5" },
-                    { "source": "Transaction_6", "target": "Purchase_6" },
-                    { "source": "Transaction_7", "target": "Purchase_7" },
-                    { "source": "Transaction_1", "target": "b" },
-                    { "source": "Transaction_2", "target": "c" },
-                    { "source": "Transaction_3", "target": "d" },
-                    { "source": "Transaction_1", "target": "Mediamarkt" },
-                    { "source": "Transaction_2", "target": "Mediamarkt" },
-                    { "source": "Transaction_3", "target": "Mediamarkt" },
-                    { "source": "Transaction_4", "target": "e" },
-                    { "source": "Transaction_4", "target": "Mediamarkt" },
-                    { "source": "Transaction_5", "target": "a" },
-                    { "source": "Transaction_5", "target": "Mediamarkt" },
-                    { "source": "Transaction_6", "target": "c" },
-                    { "source": "Transaction_6", "target": "Mediamarkt" },
-                    { "source": "Transaction_7", "target": "d" },
-                    { "source": "Transaction_7", "target": "Mediamarkt" },
-                    { "source": "Transaction_8", "target": "b" },
-                    { "source": "Transaction_8", "target": "Netflix" },
-                    { "source": "Transaction_9", "target": "c" },
-                    { "source": "Transaction_9", "target": "Netflix" },
-                    { "source": "Transaction_10", "target": "d" },
-                    { "source": "Transaction_10", "target": "Netflix" },
-                    { "source": "Transaction_11", "target": "e" },
-                    { "source": "Transaction_11", "target": "Albert Heijn" },
-                    { "source": "a", "target": "0-50" },
-                    { "source": "a", "target": "Amsterdam" },
-                    { "source": "b", "target": "0-50" },
-                    { "source": "b", "target": "Amsterdam" },
-                    { "source": "c", "target": "0-50" },
-                    { "source": "c", "target": "Rotterdam" },
-                    { "source": "d", "target": "50-100" },
-                    { "source": "d", "target": "Amsterdam" },
-                    { "source": "e", "target": "50-100" },
-                    { "source": "e", "target": "Rotterdam" }
-                ]
-            };
+            
+            let constrainedLayoutData = demoData.constrainedLayoutData;
 
             let constrainedLayoutOptions = {
                 width: 600,
@@ -704,7 +436,7 @@ title: SeMI, our style; getting input from our users through form elements
                 </script>
             </xmp>
         </section>
-    </section> -->
+    </section>
     <section>
         <h4>Beeswarm</h4>
         <p>The Beeswarm chart is a mix between the Bubble Chart and the Graph visualisations (Force-Directed Graph and
@@ -720,7 +452,8 @@ title: SeMI, our style; getting input from our users through form elements
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
         <script type="text/javascript" src="/js/charts.js"></script>
         <script type="text/javascript">
-            var file = '/assets/data/flavors_of_cacao.csv';
+            //var file = '/assets/data/flavors_of_cacao.csv';
+            let beeswarmData = demoData.beeswarmDataSmall;
             var beeswarmOptions = {
                 width: 650,
                 height: 600,
@@ -728,9 +461,9 @@ title: SeMI, our style; getting input from our users through form elements
                 left: 150,
                 bottom: 110,
                 right: 40,
-                bubbleRadius: 3
+                bubbleRadius: 4
             };
-            beeswarm('beeswarm', file, beeswarmOptions);
+            beeswarm('beeswarm', beeswarmData, beeswarmOptions);
         </script>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
