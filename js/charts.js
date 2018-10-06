@@ -422,12 +422,8 @@ function beeswarm(parentId, file, options) {
     let innerWidth = width - bounds.left - bounds.right;
     let innerHeight = height - bounds.top - bounds.bottom;
 
-    var parseDate = d3.timeParse("%d-%m-%Y"); //19-4-2018 //2017-11-20
-
-    var rScale = d3.scalePow();
     var xScale = null;
     var yScale = null;
-    var freqScale = d3.scaleOrdinal();
 
     var companyScale = d3.scalePoint();
     var nameScale = d3.scalePoint();
