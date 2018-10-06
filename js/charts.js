@@ -418,23 +418,9 @@ function beeswarm(parentId, file, options) {
         left: options.left || 200,
         right: options.right || 80
     }
-
-    let innerWidth = width - bounds.left - bounds.right;
-    let innerHeight = height - bounds.top - bounds.bottom;
-
+    
     var xScale = null;
     var yScale = null;
-
-    var companyScale = d3.scalePoint();
-    var nameScale = d3.scalePoint();
-    var refScale = d3.scaleLinear();
-    var dateScale = d3.scaleLinear();
-    var percent = d3.scaleLinear();
-    var locationScale = d3.scalePoint();
-    var ratingScale = d3.scalePoint();
-    var originScale = d3.scalePoint();
-
-    var rAcc = null;
 
     var data = [];
     var xFilter = 'all';
