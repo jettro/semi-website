@@ -468,15 +468,15 @@ function beeswarm(parentId, file, options) {
     d3.select('#' + parentId).selectAll('svg').remove();
 
     //create a container for the navigation
-    d3.select('#' + parentId).append('div').classed('beeswarm-nav', true)
+    d3.select('#' + parentId).append('div').classed('chart-beeswarm-nav', true)
         .style('padding-left', 0.8 * bounds.left + 'px');
     //create a container for the chart
-    d3.select('#' + parentId).append('div').classed('beeswarm-chart', true);
+    d3.select('#' + parentId).append('div').classed('chart-beeswarm', true);
 
     //set css to ensure correct positioning of axis
-    d3.select('#' + parentId).select('.beeswarm-chart').classed('chart-container', true);//.style('position', 'relative');
+    d3.select('#' + parentId).select('.chart-beeswarm').classed('chart-container', true);//.style('position', 'relative');
 
-    let chartElement = d3.select('#' + parentId).select('.beeswarm-chart');
+    let chartElement = d3.select('#' + parentId).select('.chart-beeswarm');
 
     var sketch = function (s) {
 
@@ -491,7 +491,7 @@ function beeswarm(parentId, file, options) {
             s.noLoop();
 
             axisSvg = d3.select('#' + parentId)
-                .select('.beeswarm-chart')
+                .select('.chart-beeswarm')
                 .append("svg")
                 .attr("width", s.width)
                 .attr("height", s.height)
@@ -605,13 +605,13 @@ function beeswarm(parentId, file, options) {
             let tooltipXOffset = 20;
             let tooltipYOffset = -20;
 
-            d3.select('#' + parentId).select('.beeswarm-chart').selectAll('.chart-tooltip').remove();
+            d3.select('#' + parentId).select('.chart-beeswarm').selectAll('.chart-tooltip').remove();
 
             if (closest) {
 
                 let keys = keysFromNode(closest);
 
-                d3.select('#' + parentId).select('.beeswarm-chart').selectAll('.chart-tooltip')
+                d3.select('#' + parentId).select('.chart-beeswarm').selectAll('.chart-tooltip')
                     .data([0])
                     .enter()
                     .append('div')
@@ -663,14 +663,14 @@ function beeswarm(parentId, file, options) {
         //     </ul>
         // </nav>
         let xButtons = d3.select('#' + parentId)
-            .select('.beeswarm-nav')
+            .select('.chart-beeswarm-nav')
             .append('nav')
             .classed('nav-main', true)
             .append('ul')
             .attr('id', 'filter-buttons-x');
 
         let yButtons = d3.select('#' + parentId)
-            .select('.beeswarm-nav')
+            .select('.chart-beeswarm-nav')
             .append('nav')
             .classed('nav-main', true)
             .append('ul')
@@ -714,8 +714,6 @@ function beeswarm(parentId, file, options) {
 
     function setFilter(s, filterX, filterY) {
 
-        console.log('setting filter to ' + filterX + ' ' + filterY);
-
         var xAcc = acc(filterX);
         var yAcc = acc(filterY);
 
@@ -731,18 +729,14 @@ function beeswarm(parentId, file, options) {
         var offScreen = -500;
         simulation = d3.forceSimulation(data)
             .force("x", d3.forceX(function (d) {
-                //     console.log('accessor(d)',accessor(d));
                 if (xAcc(d) == null) {
                     d.invalid = true;
                     return offScreen;
                 }
                 d.invalid = false;
-                //console.log('xSclae');
-                //console.log(xScale);
                 return xScale(xAcc(d));
             }).strength(0.05))
             .force("y", d3.forceY(function (d) {
-                //return yScale(yAcc(d));
                 if (yAcc(d) == null) {
                     d.invalid = true;
                     return offScreen;
