@@ -418,7 +418,7 @@ function beeswarm(parentId, file, options) {
         left: options.left || 200,
         right: options.right || 80
     }
-    
+
     var xScale = null;
     var yScale = null;
 
@@ -482,18 +482,6 @@ function beeswarm(parentId, file, options) {
                 .classed('y-axis axis', true);
             d3.csv(file)
                 .row(function (d) {
-                    // return {
-                    //     // id: d['id'],
-                    //     company: d['company'],
-                    //     /* name: d['name'],*/
-                    //     ref: +d['ref'],
-                    //     date: +d['date'],
-                    //     percent: +d['percent'],
-                    //     location: d['location'],
-                    //     rating: +d['rating'],
-                    //     //  type: d['type'],
-                    //     origin: d['origin']
-                    // };
                     return createTypeCastedObject(d);
                 })
                 .get(function (error, csv) {
@@ -503,10 +491,9 @@ function beeswarm(parentId, file, options) {
                     }
                     data = csv.filter(function (d, i) {
                         return i < 200;
-                        //return true;
                     });
 
-                    console.log('data', data);
+                    //console.log('data', data);
 
                     createButtons(s);
                     setFilter(s, xFilter, yFilter);
@@ -531,7 +518,6 @@ function beeswarm(parentId, file, options) {
 
             s.background(255);
 
-
             //axis
             var xAxis = d3.axisBottom(xScale).ticks(nTicks);
             var yAxis = d3.axisLeft(yScale).ticks(nTicks);
@@ -549,8 +535,6 @@ function beeswarm(parentId, file, options) {
             if (doRotate) {
                 axisSvg.select('.x-axis').selectAll("text")
                     .style("text-anchor", "end")
-                    // .attr("y", 0)
-                    // .attr("x", 9)
                     .attr('dx', '-.8em')
                     .attr("dy", ".35em")
                     .attr("transform", "rotate(-45)");
@@ -575,6 +559,7 @@ function beeswarm(parentId, file, options) {
             // console.log('closest');
             // console.log(closest);
 
+            //tooltip
             let tooltipXOffset = 20;
             let tooltipYOffset = -20;
 
@@ -623,9 +608,7 @@ function beeswarm(parentId, file, options) {
         //var filters = ['all', 'gender', 'age', 'frequency', 'duration', 'thiscore', 'tqscore'];
         console.log(data);
         var keys = Object.keys(data[0]);
-        var filters = ['all'].concat(keys).filter(function (d) {
-            return d != 'group';
-        });
+        var filters = ['all'].concat(keys);
 
         // <nav class="nav-main">
         //     <ul>
@@ -640,14 +623,16 @@ function beeswarm(parentId, file, options) {
             .append('nav')
             .classed('nav-main', true)
             .append('ul')
-            .attr('id', 'filter-buttons-x');
+            .classed('chart-filter-buttons-x', true);
+        //.attr('id', 'filter-buttons-x');
 
         let yButtons = d3.select('#' + parentId)
             .select('.chart-beeswarm-nav')
             .append('nav')
             .classed('nav-main', true)
             .append('ul')
-            .attr('id', 'filter-buttons-y');
+            .classed('chart-filter-buttons-y', true);
+        //.attr('id', 'filter-buttons-y');
 
         xButtons.selectAll('li')
             .data(filters)
@@ -661,7 +646,6 @@ function beeswarm(parentId, file, options) {
                 return d;
             })
             .on('click', function (d) {
-                console.log('hi ' + d);
                 xFilter = d;
                 setFilter(s, xFilter, yFilter);
             });
@@ -678,7 +662,6 @@ function beeswarm(parentId, file, options) {
                 return d;
             })
             .on('click', function (d) {
-                console.log('hi ' + d);
                 yFilter = d;
                 setFilter(s, xFilter, yFilter);
             });
@@ -724,17 +707,29 @@ function beeswarm(parentId, file, options) {
                 s.redraw();
             });
 
-        d3.select('#filter-buttons-x')
+        // d3.select('#' + parentId)
+        // .select('.chart-beeswarm-nav')
+        // .append('nav')
+        // .classed('nav-main', true)
+        // .append('ul')
+        // .classed('chart-filter-buttons-y',true);
+
+        d3.select('#' + parentId)
+            .select('.chart-beeswarm-nav')
+            .select('.chart-filter-buttons-x')
             .selectAll('li')
             .classed('main-nav--selected', function (d) {
                 return d == xFilter;
             });
 
-        d3.select('#filter-buttons-y')
+        d3.select('#' + parentId)
+            .select('.chart-beeswarm-nav')
+            .select('.chart-filter-buttons-y')
             .selectAll('li')
             .classed('main-nav--selected', function (d) {
                 return d == yFilter;
             });
+
     }
 
     function acc(id) {
@@ -760,10 +755,10 @@ function beeswarm(parentId, file, options) {
         return scl(filter, range);
     }
 
-    function scl(filter,range){
+    function scl(filter, range) {
 
         //return scale identity if data is empty 
-        if(!data || data.length == 0){
+        if (!data || data.length == 0) {
             return d3.scaleIdentity();
         }
         //if filter is all then we have a special case
@@ -771,10 +766,10 @@ function beeswarm(parentId, file, options) {
             return d3.scaleLinear()
                 .domain([0, 1])
                 .range(range);
-        } 
+        }
         else {
             let sample = data[0];
-            if(isNaN(sample[filter])){
+            if (isNaN(sample[filter])) {
                 var domain = d3.set(data, function (d) {
                     return d[filter];
                 }).values();
@@ -784,8 +779,8 @@ function beeswarm(parentId, file, options) {
             }
             else {
                 return d3.scaleLinear()
-                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
-                .range(range);
+                    .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
+                    .range(range);
             }
         }
 
@@ -832,12 +827,12 @@ function keysFromNode(node) {
     return keys;
 }
 
-function createTypeCastedObject(d){
+function createTypeCastedObject(d) {
     let keys = Object.keys(d);
     let obj = {};
 
-    keys.forEach(function(key){
-        if(isNaN(d[key])){
+    keys.forEach(function (key) {
+        if (isNaN(d[key])) {
             obj[key] = d[key];
         }
         else obj[key] = +d[key];
