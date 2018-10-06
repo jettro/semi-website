@@ -26,10 +26,10 @@ function sankey(parentId, data, options) {
             }
         };
 
-        if(options && options.width){
+        if (options && options.width) {
             chartOptions.width = options.width
         }
-        if(options && options.height){
+        if (options && options.height) {
             chartOptions.height = options.height
         }
 
@@ -582,7 +582,9 @@ function beeswarm(parentId, data, options) {
         };
 
         s.mouseMoved = function () {
-            s.redraw();
+            if (ready) {
+                s.redraw();
+            }
         }
     };
 
