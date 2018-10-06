@@ -437,27 +437,17 @@ function beeswarm(parentId, file, options) {
     var rAcc = null;
 
     var data = [];
-    var ndata = [];
     var xFilter = 'all';
     var yFilter = 'all';
-    var rFilter = 'all';
     var ready = false;
 
-    var border = 100;
-    var minR = 0.2;
-    var maxR = 8;
-
     var simulation = null;
-    var kn = 1;
     var axisSvg = null;
     var nTicks = 10;
-    var keys = null;
     var maxLabelLength = 5;
     var mainColor = '#304a6c';
 
     var dia = options.bubbleRadius || 4;
-
-    var selectedBubbles = [];
 
     //remove any previously created containers
     d3.select('#' + parentId).selectAll('div').remove();
