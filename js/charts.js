@@ -131,15 +131,14 @@ function bubbleChart(parentId, data, options) {
             .attr('r', function (d) {
                 return vScale(vAcc(d));
             })
-            //.style('fill', '#39557E')
             .classed('chart-cat-main', true)
             .on('mouseover', function (d) {
-                console.log('mouseoveer');
-                d3.select("#" + parentId).selectAll('.charts-tooltip')
+               
+                d3.select("#" + parentId).selectAll('.chart-tooltip')
                     .data([0])
                     .enter()
                     .append('div')
-                    .classed('charts-tooltip', true)
+                    .classed('chart-tooltip', true)
                     .style('left', function (e, i) {
                         let x = xScale(aAcc(d));
                         return x + tooltipXOffset + 'px';
@@ -157,7 +156,7 @@ function bubbleChart(parentId, data, options) {
                     });
             })
             .on('mouseout', function (d) {
-                d3.select("#" + parentId).selectAll('.charts-tooltip').remove();
+                d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
             });
     }
 }
@@ -215,11 +214,11 @@ function forceDirectedGraph(parentId, graph, options) {
 
     //tooltips
     node.on('mouseover', function (d) {
-        d3.select("#" + parentId).selectAll('.charts-tooltip')
+        d3.select("#" + parentId).selectAll('.chart-tooltip')
             .data([0])
             .enter()
             .append('div')
-            .classed('charts-tooltip', true)
+            .classed('chart-tooltip', true)
             .style('left', function (e, i) {
                 return d.x + tooltipXOffset + 'px';
             })
@@ -238,7 +237,7 @@ function forceDirectedGraph(parentId, graph, options) {
     });
 
     node.on('mouseout', function (d) {
-        d3.select("#" + parentId).selectAll('.charts-tooltip').remove();
+        d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
     });
 
     simulation
@@ -362,11 +361,11 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
 
     //tooltips
     node.on('mouseover', function (d) {
-        d3.select("#" + parentId).selectAll('.charts-tooltip')
+        d3.select("#" + parentId).selectAll('.chart-tooltip')
             .data([0])
             .enter()
             .append('div')
-            .classed('charts-tooltip', true)
+            .classed('chart-tooltip', true)
             .style('left', function (e, i) {
                 return d.x + tooltipXOffset + 'px';
             })
@@ -385,7 +384,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
     });
 
     node.on('mouseout', function (d) {
-        d3.select("#" + parentId).selectAll('.charts-tooltip').remove();
+        d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
     });
 
 
@@ -605,17 +604,17 @@ function beeswarm(parentId, file, options) {
             let tooltipXOffset = 20;
             let tooltipYOffset = -20;
 
-            d3.select('#' + parentId).select('.beeswarm-chart').selectAll('.charts-tooltip').remove();
+            d3.select('#' + parentId).select('.beeswarm-chart').selectAll('.chart-tooltip').remove();
 
             if (closest) {
 
                 let keys = keysFromNode(closest);
 
-                d3.select('#' + parentId).select('.beeswarm-chart').selectAll('.charts-tooltip')
+                d3.select('#' + parentId).select('.beeswarm-chart').selectAll('.chart-tooltip')
                     .data([0])
                     .enter()
                     .append('div')
-                    .classed('charts-tooltip', true)
+                    .classed('chart-tooltip', true)
                     .style('left', function (e, i) {
                         return closest.x + 'px';
                     })
@@ -636,7 +635,6 @@ function beeswarm(parentId, file, options) {
         };
 
         s.mouseMoved = function () {
-            console.log('mouseMoved');
             s.redraw();
         }
     };
@@ -645,7 +643,7 @@ function beeswarm(parentId, file, options) {
     var myp5 = new p5(sketch, chartElement.node());
 
     function createButtons(s) {
-        console.log('createButtons');
+        
         //button group
         //<button type="button" class="btn btn-secondary">Left</button>
         //var filters = ['all', 'gender', 'age', 'frequency', 'duration', 'thiscore', 'tqscore'];
@@ -663,7 +661,6 @@ function beeswarm(parentId, file, options) {
         //         <li><a href="style-mainnav.html">Contact</a></li>
         //     </ul>
         // </nav>
-
         let xButtons = d3.select('#' + parentId)
             .select('.beeswarm-nav')
             .append('nav')
@@ -711,52 +708,6 @@ function beeswarm(parentId, file, options) {
                 yFilter = d;
                 setFilter(s, xFilter, yFilter);
             });
-
-
-
-
-
-        // d3.select('#' + parentId)
-        //     .select('.beeswarm-nav')
-        //     .append('div')
-        //     .attr('id', 'filter-buttons-x')
-        //     .selectAll('button')
-        //     .data(filters)
-        //     .enter()
-        //     .append('button')
-        //     .classed('btn btn-secondary', true)
-        //     .classed('active', function (d) {
-        //         return d == xFilter;
-        //     })
-        //     .text(function (d) {
-        //         return d;
-        //     })
-        //     .on('click', function (d) {
-        //         console.log('hi ' + d);
-        //         xFilter = d;
-        //         setFilter(s, xFilter, yFilter);
-        //     });
-
-        // d3.select('#' + parentId)
-        //     .select('.beeswarm-nav')
-        //     .append('div')
-        //     .attr('id', 'filter-buttons-y')
-        //     .selectAll('button')
-        //     .data(filters)
-        //     .enter()
-        //     .append('button')
-        //     .classed('btn btn-secondary', true)
-        //     .classed('active', function (d) {
-        //         return d == yFilter;
-        //     })
-        //     .text(function (d) {
-        //         return d;
-        //     })
-        //     .on('click', function (d) {
-        //         console.log('hi ' + d);
-        //         yFilter = d;
-        //         setFilter(s, xFilter, yFilter);
-        //     });
     }
 
 
@@ -816,24 +767,6 @@ function beeswarm(parentId, file, options) {
             .classed('main-nav--selected', function (d) {
                 return d == yFilter;
             });
-
-        // d3.select('#filter-buttons-x')
-        //     .selectAll('button')
-        //     .classed('active', function (d) {
-        //         return d == xFilter;
-        //     });
-
-        // d3.select('#filter-buttons-y')
-        //     .selectAll('button')
-        //     .classed('active', function (d) {
-        //         return d == yFilter;
-        //     });
-
-        // d3.select('#filter-buttons-r')
-        //     .selectAll('button')
-        //     .classed('active', function (d) {
-        //         return d == rFilter;
-        //     });
     }
 
     function acc(id) {

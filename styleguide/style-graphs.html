@@ -12,12 +12,13 @@ title: SeMI, our style; getting input from our users through form elements
     </p>
     <section>
         <h4>Sankey Diagram</h4>
-        <p>Lorem ipsum dolor amet 90's hexagon church-key tbh cray. Tumeric selfies wayfarers retro flexitarian, hammock direct trade cornhole roof party selvage franzen mumblecore umami chia. </p>
+        <p>Lorem ipsum dolor amet 90's hexagon church-key tbh cray. Tumeric selfies wayfarers retro flexitarian,
+            hammock direct trade cornhole roof party selvage franzen mumblecore umami chia. </p>
         <div id="sankey-diagram"></div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="/js/charts.js"></script>
         <script type="text/javascript">
-            let data = [["Amsterdam", "AMS", 55],
+            let sankeyData = [["Amsterdam", "AMS", 55],
             ["Berlin", "TXL", 36],
             ["London", "LHR", 72],
             ["London", "LGW", 20],
@@ -41,7 +42,7 @@ title: SeMI, our style; getting input from our users through form elements
             ["Lufthansa", "Airbus", 25],
             ["Lufthansa", "Boeing", 3]];
 
-            sankey('sankey-diagram', data);
+            sankey('sankey-diagram', sankeyData);
         </script>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
@@ -49,7 +50,6 @@ title: SeMI, our style; getting input from our users through form elements
                 <div id="sankey-diagram"></div>
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                 <script type="text/javascript" src="/js/charts.js"></script>
-
                 <script type="text/javascript">
                     let data = [["Amsterdam", "AMS", 55],
                     ["Berlin", "TXL", 36],
@@ -84,12 +84,13 @@ title: SeMI, our style; getting input from our users through form elements
 
     <section>
         <h4>Bubble Chart</h4>
-        <p>Lorem ipsum dolor amet aesthetic prism live-edge post-ironic cornhole skateboard normcore activated charcoal distillery. Gentrify flannel heirloom, tumblr iceland helvetica biodiesel authentic ugh listicle.</p>
+        <p>Lorem ipsum dolor amet aesthetic prism live-edge post-ironic cornhole skateboard normcore activated charcoal
+            distillery. Gentrify flannel heirloom, tumblr iceland helvetica biodiesel authentic ugh listicle.</p>
         <div id="bubble-chart"></div>
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript">
 
-            let bubbledata = [
+            let bubbleData = [
                 {
                     value: 10,
                     catA: "Male",
@@ -167,20 +168,21 @@ title: SeMI, our style; getting input from our users through form elements
                 }
             ];
 
-            let options = {
+            let bubbleOptions = {
                 width: 600,
                 height: 600,
                 xLabel: 'Gender',
                 yLabel: 'Age'
             };
 
-            bubbleChart('bubble-chart', bubbledata, options);
+            bubbleChart('bubble-chart', bubbleData, bubbleOptions);
         </script>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
                 <div id="bubble-chart"></div>
                 <script src="https://d3js.org/d3.v4.min.js"></script>
+                <script type="text/javascript" src="/js/charts.js"></script>
                 <script type="text/javascript">
 
                     let data = [
@@ -263,7 +265,9 @@ title: SeMI, our style; getting input from our users through form elements
 
                     let options = {
                         width: 600,
-                        height: 600
+                        height: 600,
+                        xLabel: 'Gender',
+                        yLabel: 'Age'
                     };
 
                     bubbleChart('bubble-chart', data, options);
@@ -279,7 +283,7 @@ title: SeMI, our style; getting input from our users through form elements
         </p>
         <div id="force-graph"></div>
         <script type="text/javascript">
-            let graph = {
+            let forceDirectedGraphData = {
                 "nodes": [
                     { "name": "TV", "class": "ProductType" },
                     { "name": "Smartphone", "class": "ProductType" },
@@ -368,18 +372,20 @@ title: SeMI, our style; getting input from our users through form elements
                 ]
             };
 
-            let options2 = {
+            let forceDirectedGraphDataOptions = {
                 width: 600,
                 height: 400,
                 nodeRadius: 5,
                 colorBy: 'class'
             };
 
-            forceDirectedGraph('force-graph', graph, options2);
+            forceDirectedGraph('force-graph', forceDirectedGraphData, forceDirectedGraphDataOptions);
         </script>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
+                <script src="https://d3js.org/d3.v4.min.js"></script>
+                <script type="text/javascript" src="/js/charts.js"></script>
                 <div id="force-graph"></div>
                 <script type="text/javascript">
                     let graph = {
@@ -471,10 +477,11 @@ title: SeMI, our style; getting input from our users through form elements
                         ]
                     };
 
-
                     let options = {
                         width: 600,
-                        height: 400
+                        height: 400,
+                        nodeRadius: 5,
+                        colorBy: 'class'
                     };
 
                     forceDirectedGraph('force-graph', graph, options);
@@ -485,12 +492,14 @@ title: SeMI, our style; getting input from our users through form elements
 
     <section>
         <h4>Constraint-Based Layout</h4>
-        <p>Lorem ipsum dolor amet salvia activated charcoal hoodie narwhal cold-pressed flexitarian lyft, helvetica pour-over keffiyeh heirloom yuccie poutine meggings roof party. Swag tote bag ethical asymmetrical organic kogi 8-bit scenester deep v post-ironic.</p>
+        <p>Lorem ipsum dolor amet salvia activated charcoal hoodie narwhal cold-pressed flexitarian lyft, helvetica
+            pour-over keffiyeh heirloom yuccie poutine meggings roof party. Swag tote bag ethical asymmetrical organic
+            kogi 8-bit scenester deep v post-ironic.</p>
         <div id="constrained-graph"></div>
 
         <script src="https://ialab.it.monash.edu/webcola/cola.min.js"></script>
         <script type="text/javascript">
-            let graphbase = {
+            let constrainedLayoutData = {
                 "nodes": [
                     { "name": "TV", "class": "ProductType" },
                     { "name": "Smartphone", "class": "ProductType" },
@@ -579,7 +588,7 @@ title: SeMI, our style; getting input from our users through form elements
                 ]
             };
 
-            let options3 = {
+            let constrainedLayoutOptions = {
                 width: 600,
                 height: 400,
                 nodeRadius: 5,
@@ -587,14 +596,15 @@ title: SeMI, our style; getting input from our users through form elements
                 showGroups: false,
                 colorBy: 'class'
             };
-            constrainedLayoutGraph('constrained-graph', graphbase, options3);    
+            constrainedLayoutGraph('constrained-graph', constrainedLayoutData, constrainedLayoutOptions);    
         </script>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
                 <div id="constrained-graph"></div>
-
+                <script src="https://d3js.org/d3.v4.min.js"></script>
                 <script src="https://ialab.it.monash.edu/webcola/cola.min.js"></script>
+                <script type="text/javascript" src="/js/charts.js"></script>
                 <script type="text/javascript">
                     let graph = {
                         "nodes": [
@@ -697,9 +707,12 @@ title: SeMI, our style; getting input from our users through form elements
     </section>
     <section>
         <h4>Beeswarm</h4>
-        <p>The Beeswarm chart is a mix between the Bubble Chart and the Graph visualisations (Force-Directed Graph and Constraint-Based Layout).
-            As opposed to the Bubble Chart, which is mainly used for aggregated data, the Beeswarm can be used to display the actual data. 
-            It arranges single nodes based on selected properties, allowing to get insights about the distribution of the data. 
+        <p>The Beeswarm chart is a mix between the Bubble Chart and the Graph visualisations (Force-Directed Graph and
+            Constraint-Based Layout).
+            As opposed to the Bubble Chart, which is mainly used for aggregated data, the Beeswarm can be used to
+            display the actual data.
+            It arranges single nodes based on selected properties, allowing to get insights about the distribution of
+            the data.
         </p>
         <div id="beeswarm"></div>
         <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -708,7 +721,7 @@ title: SeMI, our style; getting input from our users through form elements
         <script type="text/javascript" src="/js/charts.js"></script>
         <script type="text/javascript">
             var file = '/assets/data/flavors_of_cacao.csv';
-            var options4 = {
+            var beeswarmOptions = {
                 width: 650,
                 height: 600,
                 top: 0,
@@ -717,20 +730,26 @@ title: SeMI, our style; getting input from our users through form elements
                 right: 40,
                 bubbleRadius: 3
             };
-            beeswarm('beeswarm', file, options4);
+            beeswarm('beeswarm', file, beeswarmOptions);
         </script>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
                 <div id="beeswarm"></div>
+                <script src="https://d3js.org/d3.v4.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
                 <script type="text/javascript" src="/js/charts.js"></script>
                 <script type="text/javascript">
                     var file = '/assets/data/flavors_of_cacao.csv';
                     var options = {
-                        width: 600,
-                        height: 600
+                        width: 650,
+                        height: 600,
+                        top: 0,
+                        left: 150,
+                        bottom: 110,
+                        right: 40,
+                        bubbleRadius: 3
                     };
                     beeswarm('beeswarm', file, options);
                 </script>
