@@ -22,7 +22,11 @@ title: SeMI, our style; getting input from our users through form elements
 
             let sankeyData = demoData.sankeyData;
 
-            sankey('sankey-diagram', sankeyData);
+            let sankeyOptions = {
+                width: 700,
+                height: 300
+            };
+            sankey('sankey-diagram', sankeyData,sankeyOptions);
         </script>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>

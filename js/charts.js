@@ -1,8 +1,7 @@
-function sankey(parentId, data) {
+function sankey(parentId, data, options) {
 
     google.charts.load('current', { 'packages': ['sankey'] });
     google.charts.setOnLoadCallback(drawChart);
-    window.addEventListener('resize', drawChart, false);
 
     function drawChart() {
         var chartData = new google.visualization.DataTable();
@@ -15,7 +14,7 @@ function sankey(parentId, data) {
         var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
             '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
 
-        var options = {
+        var chartOptions = {
             sankey: {
                 node: {
                     colors: colors,
@@ -27,9 +26,16 @@ function sankey(parentId, data) {
             }
         };
 
+        if(options && options.width){
+            chartOptions.width = options.width
+        }
+        if(options && options.height){
+            chartOptions.height = options.height
+        }
+
         // Instantiates and draws our chart, passing in some options.
         var chart = new google.visualization.Sankey(document.getElementById(parentId));
-        chart.draw(chartData, options);
+        chart.draw(chartData, chartOptions);
     }
 }
 
