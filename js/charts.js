@@ -764,85 +764,45 @@ function beeswarm(parentId, file, options) {
 
     function xscl(filter) {
         // var _range = [border, width - border];
-        var _range = [bounds.left, width - bounds.right];
-        var _scale = scl2(filter, _range);
-        return _scale;
+        var range = [bounds.left, width - bounds.right];
+        return scl(filter, range);
     }
 
     function yscl(filter) {
         // var _range = [height - border, border];
-        var _range = [height - bounds.bottom, bounds.top];
-        var _scale = scl2(filter, _range);
-        return _scale;
+        var range = [height - bounds.bottom, bounds.top];
+        return scl(filter, range);
     }
-    function scl2(filter, range) {
-        //company,name,ref,date,percent,location,rating,type,origin
-        var _range = range;
-        var _scale = null;
 
-        if (filter == 'company') {
-            console.log('scl2 ' + filter);
-            var dom = d3.set(data, function (d) {
-                return d[filter];
-            }).values();
-            _scale = d3.scalePoint()
-                .domain(dom)
-                .range(_range);
-        } else if (filter == 'name') {
-            console.log('scl2 ' + filter);
-            var dom = d3.set(data, function (d) {
-                return d[filter];
-            }).values();
-            _scale = d3.scalePoint()
-                .domain(dom)
-                .range(_range);
+    function scl(filter,range){
 
-        } else if (filter == 'ref') {
-            console.log('scl2 ' + filter);
-            _scale = d3.scaleLinear()
-                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
-                .range(_range);
-        } else if (filter == 'date') {
-            console.log('scl2 ' + filter);
-            _scale = d3.scaleLinear()
-                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
-                .range(_range);
-        } else if (filter == 'percent') {
-            console.log('scl2 ' + filter);
-            _scale = d3.scaleLinear()
-                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
-                .range(_range);
-        } else if (filter == 'location') {
-            console.log('scl2 ' + filter);
-            var dom = d3.set(data, function (d) {
-                return d[filter];
-            }).values();
-            _scale = d3.scalePoint()
-                .domain(dom)
-                .range(_range);
-        } else if (filter == 'rating') {
-            console.log('scl2 ' + filter);
-            _scale = d3.scaleLinear()
-                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
-                .range(_range);
-        } else if (filter == 'origin') {
-            console.log('scl2 ' + filter);
-            var dom = d3.set(data, function (d) {
-                return d[filter];
-            }).values();
-            _scale = d3.scalePoint()
-                .domain(dom)
-                .range(_range);
-        } else if (filter == 'all') {
-            console.log('scl2 ' + filter);
-            _scale = d3.scaleLinear()
+        //return scale identity if data is empty 
+        if(!data || data.length == 0){
+            return d3.scaleIdentity();
+        }
+        //if filter is all then we have a special case
+        else if (filter == 'all') {
+            return d3.scaleLinear()
                 .domain([0, 1])
-                .range(_range);
-        } else {
-            console.log('error in scl2: no scale found for ' + filter);
+                .range(range);
+        } 
+        else {
+            let sample = data[0];
+            if(isNaN(sample[filter])){
+                var domain = d3.set(data, function (d) {
+                    return d[filter];
+                }).values();
+                return d3.scalePoint()
+                    .domain(domain)
+                    .range(range);
+            }
+            else {
+                return d3.scaleLinear()
+                .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
+                .range(range);
+            }
         }
 
-        return _scale;
     }
 
 }
