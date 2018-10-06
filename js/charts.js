@@ -480,8 +480,6 @@ function beeswarm(parentId, data, options) {
                 .attr('transform', translate(0.8 * bounds.left, 0))
                 .classed('chart-y-axis chart-axis', true);
 
-            //console.log('data', data);
-
             createButtons(s);
             setFilter(s, xFilter, yFilter);
 
@@ -493,35 +491,6 @@ function beeswarm(parentId, data, options) {
 
             ready = true;
             s.redraw();
-
-
-            // d3.csv(file)
-            //     .row(function (d) {
-            //         return createTypeCastedObject(d);
-            //     })
-            //     .get(function (error, csv) {
-            //         if (error) {
-            //             console.log('error', error);
-            //             return;
-            //         }
-            //         data = csv.filter(function (d, i) {
-            //             return i < 200;
-            //         });
-
-            //         //console.log('data', data);
-
-            //         createButtons(s);
-            //         setFilter(s, xFilter, yFilter);
-
-            //         simulation.stop();
-            //         for (var i = 0; i < 150; ++i) {
-            //             simulation.tick();
-            //         }
-            //         simulation.restart();
-
-            //         ready = true;
-            //         s.redraw();
-            //     });
 
         };
 
@@ -571,8 +540,6 @@ function beeswarm(parentId, data, options) {
 
             //tooltip
             let closest = simulation.find(s.mouseX, s.mouseY, 50);
-            // console.log('closest');
-            // console.log(closest);
 
             //tooltip
             let tooltipXOffset = 20;
@@ -618,10 +585,6 @@ function beeswarm(parentId, data, options) {
 
     function createButtons(s) {
 
-        //button group
-        //<button type="button" class="btn btn-secondary">Left</button>
-        //var filters = ['all', 'gender', 'age', 'frequency', 'duration', 'thiscore', 'tqscore'];
-        console.log(data);
         var keys = Object.keys(data[0]);
         var filters = ['all'].concat(keys);
 
