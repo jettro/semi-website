@@ -496,18 +496,19 @@ function beeswarm(parentId, file, options) {
                 .classed('y-axis axis', true);
             d3.csv(file)
                 .row(function (d) {
-                    return {
-                        // id: d['id'],
-                        company: d['company'],
-                        /* name: d['name'],*/
-                        ref: +d['ref'],
-                        date: +d['date'],
-                        percent: +d['percent'],
-                        location: d['location'],
-                        rating: +d['rating'],
-                        //  type: d['type'],
-                        origin: d['origin']
-                    };
+                    // return {
+                    //     // id: d['id'],
+                    //     company: d['company'],
+                    //     /* name: d['name'],*/
+                    //     ref: +d['ref'],
+                    //     date: +d['date'],
+                    //     percent: +d['percent'],
+                    //     location: d['location'],
+                    //     rating: +d['rating'],
+                    //     //  type: d['type'],
+                    //     origin: d['origin']
+                    // };
+                    return createTypeCastedObject(d);
                 })
                 .get(function (error, csv) {
                     if (error) {
@@ -883,4 +884,17 @@ function keysFromNode(node) {
         return ['x', 'y', 'vx', 'vy', 'index', 'parent', 'variable', 'bounds', 'height', 'width', 'invalid'].indexOf(k) == -1;
     });
     return keys;
+}
+
+function createTypeCastedObject(d){
+    let keys = Object.keys(d);
+    let obj = {};
+
+    keys.forEach(function(key){
+        if(isNaN(d[key])){
+            obj[key] = d[key];
+        }
+        else obj[key] = +d[key];
+    });
+    return obj;
 }
