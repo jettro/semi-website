@@ -467,7 +467,6 @@ function beeswarm(parentId, file, options) {
                 .append("svg")
                 .attr("width", s.width)
                 .attr("height", s.height)
-               // .attr("id", "axis-svg")
                 .style('position', 'absolute')
                 .style('top', '0')
                 .style('left', '0')
@@ -624,7 +623,6 @@ function beeswarm(parentId, file, options) {
             .classed('nav-main', true)
             .append('ul')
             .classed('chart-filter-buttons-x', true);
-        //.attr('id', 'filter-buttons-x');
 
         let yButtons = d3.select('#' + parentId)
             .select('.chart-beeswarm-nav')
@@ -632,7 +630,6 @@ function beeswarm(parentId, file, options) {
             .classed('nav-main', true)
             .append('ul')
             .classed('chart-filter-buttons-y', true);
-        //.attr('id', 'filter-buttons-y');
 
         xButtons.selectAll('li')
             .data(filters)
