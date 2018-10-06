@@ -467,7 +467,7 @@ function beeswarm(parentId, file, options) {
                 .append("svg")
                 .attr("width", s.width)
                 .attr("height", s.height)
-                .attr("id", "axis-svg")
+               // .attr("id", "axis-svg")
                 .style('position', 'absolute')
                 .style('top', '0')
                 .style('left', '0')
@@ -475,11 +475,11 @@ function beeswarm(parentId, file, options) {
 
             axisSvg.append("g")
                 .attr('transform', 'translate(0,' + (s.height - 0.8 * bounds.bottom) + ')')
-                .classed('x-axis axis', true);
+                .classed('chart-x-axis chart-axis', true);
 
             axisSvg.append("g")
                 .attr('transform', translate(0.8 * bounds.left, 0))
-                .classed('y-axis axis', true);
+                .classed('chart-y-axis chart-axis', true);
             d3.csv(file)
                 .row(function (d) {
                     return createTypeCastedObject(d);
@@ -521,7 +521,7 @@ function beeswarm(parentId, file, options) {
             //axis
             var xAxis = d3.axisBottom(xScale).ticks(nTicks);
             var yAxis = d3.axisLeft(yScale).ticks(nTicks);
-            axisSvg.select('.x-axis').call(xAxis);
+            axisSvg.select('.chart-x-axis').call(xAxis);
 
             let xScaleDomain = xScale.domain();
 
@@ -533,14 +533,14 @@ function beeswarm(parentId, file, options) {
             //only rotate labels if longest label is a bit long
             let doRotate = longestLabel > maxLabelLength;
             if (doRotate) {
-                axisSvg.select('.x-axis').selectAll("text")
+                axisSvg.select('.chart-x-axis').selectAll("text")
                     .style("text-anchor", "end")
                     .attr('dx', '-.8em')
                     .attr("dy", ".35em")
                     .attr("transform", "rotate(-45)");
             }
 
-            axisSvg.select('.y-axis').call(yAxis);
+            axisSvg.select('.chart-y-axis').call(yAxis);
 
             s.noFill();
             s.stroke(200);
