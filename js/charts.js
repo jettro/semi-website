@@ -229,7 +229,7 @@ function forceDirectedGraph(parentId, graph, options) {
             .html(function (e, i) {
 
                 let keyValues = keys.map(function (k) {
-                    return k + ': ' + d[k];
+                    return capitalizeFirstLetter(k) + ': ' + d[k];
                 });
 
                 let labelText = keyValues.join('</br>');
@@ -376,7 +376,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
             .html(function (e, i) {
 
                 let keyValues = keys.map(function (k) {
-                    return k + ': ' + d[k];
+                    return capitalizeFirstLetter(k) + ': ' + d[k];
                 });
 
                 let labelText = keyValues.join('</br>');
@@ -567,7 +567,7 @@ function beeswarmChart(parentId, data, options) {
                     })
                     .html(function (e, i) {
                         let keyValues = keys.map(function (k) {
-                            return k + ': ' + closest[k];
+                            return capitalizeFirstLetter(k) + ': ' + closest[k];
                         });
 
                         let labelText = keyValues.join('</br>');
