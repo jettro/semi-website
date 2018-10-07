@@ -171,7 +171,7 @@ function forceDirectedGraph(parentId, graph, options) {
 
     let nodeRadius = options.nodeRadius || 5;
 
-    let colorCat = options.colorBy || 'name';
+    let colorCat = options.colorBy || 'class';
 
     let tooltipXOffset = 20;
     let tooltipYOffset = -50;
@@ -192,7 +192,7 @@ function forceDirectedGraph(parentId, graph, options) {
         .range(range(1, 10));
 
     var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function (d) { return d.name; }))
+        .force("link", d3.forceLink().id(function (d) { return d.id; }))
         .force("charge", d3.forceManyBody())
         .force("center", d3.forceCenter(width / 2, height / 2));
 
@@ -269,8 +269,8 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
     let indexedLinks = ingraph.links.map((l) => {
         let s = l.source;
         let t = l.target;
-        var sindex = ingraph.nodes.map(function (e) { return e.name; }).indexOf(s);
-        var tindex = ingraph.nodes.map(function (e) { return e.name; }).indexOf(t);
+        var sindex = ingraph.nodes.map(function (e) { return e.id; }).indexOf(s);
+        var tindex = ingraph.nodes.map(function (e) { return e.id; }).indexOf(t);
         return {
             "source": sindex,
             "target": tindex
