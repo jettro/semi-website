@@ -33,7 +33,6 @@ function sankeyDiagram(parentId, data, options) {
             chartOptions.height = options.height
         }
 
-        // Instantiates and draws our chart, passing in some options.
         var chart = new google.visualization.Sankey(document.getElementById(parentId));
         chart.draw(chartData, chartOptions);
     }
@@ -53,8 +52,8 @@ function bubbleChart(parentId, data, options) {
         right: options.right || 80
     }
 
-    let xLabel = options.xLabel ? options.xLabel : '';
-    let yLabel = options.yLabel ? options.yLabel : '';
+    let xLabel = options.xLabel || '';
+    let yLabel = options.yLabel || '';
 
     let aAcc = accessor('catA');
     let bAcc = accessor('catB');
@@ -411,7 +410,6 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
     }
 
 }
-
 
 function beeswarmChart(parentId, data, options) {
 
