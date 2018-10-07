@@ -1,3 +1,8 @@
+/*jshint esversion: 6 */
+/* globals d3: true */
+/* globals google: true */
+/* globals cola: true */
+/* globals p5: true */
 function sankeyDiagram(parentId, data, options) {
 
     google.charts.load('current', { 'packages': ['sankey'] });
@@ -27,10 +32,10 @@ function sankeyDiagram(parentId, data, options) {
         };
 
         if (options && options.width) {
-            chartOptions.width = options.width
+            chartOptions.width = options.width;
         }
         if (options && options.height) {
-            chartOptions.height = options.height
+            chartOptions.height = options.height;
         }
 
         var chart = new google.visualization.Sankey(document.getElementById(parentId));
@@ -48,7 +53,7 @@ function bubbleChart(parentId, data, options) {
         bottom: options.bottom || 80,
         left: options.left || 100,
         right: options.right || 80
-    }
+    };
 
     let xCategory = options.xCategory || '';
     let yCategory = options.yCategory || '';
@@ -82,7 +87,7 @@ function bubbleChart(parentId, data, options) {
     let svg = d3.select("#" + parentId).append("svg")
         .attr("width", width)
         .attr("height", height)
-        .append("g")
+        .append("g");
 
     //AXIS
     let axisG = svg.append('g').classed('chart-axis-g', true);
@@ -264,7 +269,7 @@ function forceDirectedGraph(parentId, graph, options) {
 
 function constrainedLayoutGraph(parentId, ingraph, options) {
 
-    let indexedLinks = ingraph.links.map((l) => {
+    let indexedLinks = ingraph.links.map(function(l) {
         let s = l.source;
         let t = l.target;
         var sindex = ingraph.nodes.map(function (e) { return e.id; }).indexOf(s);
@@ -295,7 +300,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
 
     let svg = d3.select('#' + parentId).append('svg')
         .attr('width', width)
-        .attr('height', height)
+        .attr('height', height);
 
     let categories = d3.set(graph.nodes, function (n) {
         return n[colorCat];
@@ -402,10 +407,10 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
             .attr("cy", function (d) { return d.y; });
 
         group
-            .attr('x', function (d) { return d.bounds.x })
-            .attr('y', function (d) { return d.bounds.y })
-            .attr('width', function (d) { return d.bounds.width() })
-            .attr('height', function (d) { return d.bounds.height() });
+            .attr('x', function (d) { return d.bounds.x; })
+            .attr('y', function (d) { return d.bounds.y; })
+            .attr('width', function (d) { return d.bounds.width(); })
+            .attr('height', function (d) { return d.bounds.height(); });
     }
 
 }
@@ -582,7 +587,7 @@ function beeswarmChart(parentId, data, options) {
             if (ready) {
                 s.redraw();
             }
-        }
+        };
     };
 
     //p5 instance mode
