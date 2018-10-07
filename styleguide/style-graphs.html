@@ -6,14 +6,34 @@ title: SeMI, our style; getting input from our users through form elements
 <article class="semi-sg">
 
     <h2>Charts</h2>
-    <p>We selected and developed a number of useful charts when it comes to visualising
-        the data and insights from SeMI and provide them wrapped in a small charting library. The examples below are
-        simple use cases of the charts.
+    <p>We developed or adapted a number of useful charts to visualise
+        data and insights from SeMI. They are provided in a small charting library. The examples below are
+        simple use cases of the charts. The demo data used in the examples below can be found in <a href="https://rawgit.com/SeMI-network/semi-website/feature/graph-style/js/semi-demo-data.js">semi-demo-data.js</a>
     </p>
     <section>
         <h4>Sankey Diagram</h4>
-        <p>Lorem ipsum dolor amet 90's hexagon church-key tbh cray. Tumeric selfies wayfarers retro flexitarian,
-            hammock direct trade cornhole roof party selvage franzen mumblecore umami chia. </p>
+        <p>The Sankey Diagram is useful for showing the connectivity in a graph, i.e. to show through which paths
+            nodes are connected. 
+        </p>
+        <h6>Chart options</h6>
+        <p>
+            <dl class="def-list">
+                <dt><code>width</code></dt>
+                <dd>Width of the chart.
+                    <p>
+                        <em>Type:</em> number </br>
+                        <em>Default:</em> 600
+                    </p>
+                </dd>
+                <dt><code>height</code></dt>
+                <dd>Height of the chart.
+                    <p>
+                        <em>Type:</em> number </br>
+                        <em>Default:</em> 600
+                    </p>
+                </dd>
+            </dl>
+        </p>
         <div id="sankey-diagram"></div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="/js/semi-demo-data.js"></script>
