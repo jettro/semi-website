@@ -6,9 +6,9 @@ title: SeMI, our style; getting input from our users through form elements
 <article class="semi-sg">
 
     <h2>Charts</h2>
-    <p>We developed or adapted a number of useful charts to visualise
-        data and insights from SeMI. They are provided in a small charting library. The examples below are
-        simple use cases of the charts. The demo data used in the examples below can be found in <a href="https://rawgit.com/SeMI-network/semi-website/feature/graph-style/js/semi-demo-data.js">semi-demo-data.js</a>
+    <p>We developed / adapted a number of useful charts to visualise
+        data and insights from SeMI. They are provided in a small chart library. The examples below are
+        simple use cases of the charts. All charts are interactive with at least a tooltip. The demo data used in the examples below can be found in <a href="https://rawgit.com/SeMI-network/semi-website/feature/graph-style/js/semi-demo-data.js">semi-demo-data.js</a>
     </p>
     <section>
         <h4>Sankey Diagram</h4>
@@ -31,22 +31,15 @@ title: SeMI, our style; getting input from our users through form elements
             sankeyDiagram('sankey-diagram', sankeyData, sankeyOptions);
         </script>
         <section>
-            <h6>Options</h6>
+            <h6>Chart Options</h6>
             <p>
                 <dl class="def-list">
                     <dt><code>width</code></dt>
-                    <dd>Width of the chart.
-                        <p>
-                            <em>Type:</em> number </br>
-                            <em>Default:</em> 600
-                        </p>
+                    <dd>Width of the chart. <br><em>Default:</em> 600
                     </dd>
                     <dt><code>height</code></dt>
-                    <dd>Height of the chart.
-                        <p>
-                            <em>Type:</em> number </br>
-                            <em>Default:</em> 600
-                        </p>
+                    <dd>Height of the chart. <br><em>Default:</em> 600
+
                     </dd>
                 </dl>
             </p>
@@ -77,8 +70,7 @@ title: SeMI, our style; getting input from our users through form elements
 
     <section>
         <h4>Bubble Chart</h4>
-        <p>Lorem ipsum dolor amet aesthetic prism live-edge post-ironic cornhole skateboard normcore activated charcoal
-            distillery. Gentrify flannel heirloom, tumblr iceland helvetica biodiesel authentic ugh listicle.</p>
+        <p>The Bubble Chart was also used in the Playground experiments for showing the connectivity in a graph, i.e. show the number of connections between one node category to another.</p>
         <div id="bubble-chart"></div>
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript">
@@ -86,12 +78,12 @@ title: SeMI, our style; getting input from our users through form elements
             let bubbleData = demoData.bubbleData;
 
             let bubbleOptions = {
-                width: 600,
-                height: 400,
+                width: 500,
+                height: 500,
                 top: 30,
                 bottom: 80,
-                left: 130,
-                right: 80,
+                left: 80,
+                right: 30,
                 xCategory: 'gender',
                 yCategory: 'age',
                 valueCategory: 'connections'
@@ -99,6 +91,40 @@ title: SeMI, our style; getting input from our users through form elements
 
             bubbleChart('bubble-chart', bubbleData, bubbleOptions);
         </script>
+        <section>
+            <h6>Chart Options</h6>
+            <p>
+                <dl class="def-list">
+                    <dt><code>width</code></dt>
+                    <dd>Width of the chart. <br><em>Default:</em> 600
+                    </dd>
+                    <dt><code>height</code></dt>
+                    <dd>Height of the chart. <br><em>Default:</em> 600
+                    </dd>
+                    <dt><code>top</code></dt>
+                    <dd>Padding top. <br><em>Default:</em> 30
+                    </dd>
+                    <dt><code>bottom</code></dt>
+                    <dd>Padding bottom. <br><em>Default:</em> 80
+                    </dd>
+                    <dt><code>left</code></dt>
+                    <dd>Padding left. <br><em>Default:</em> 100
+                    </dd>
+                    <dt><code>right</code></dt>
+                    <dd>Padding right. <br><em>Default:</em> 80
+                    </dd>
+                    <dt><code>xCategory</code></dt>
+                    <dd>Name of the object property being mapped to the x-Axis. <br><em>Default:</em> ''
+                    </dd>
+                    <dt><code>yCategory</code></dt>
+                    <dd>Name of the object property being mapped to the y-Axis. <br><em>Default:</em> ''
+                    </dd>
+                    <dt><code>valueCategory</code></dt>
+                    <dd>Name of the object property being mapped to the bubble size. <br><em>Default:</em> ''
+                    </dd>
+                </dl>
+            </p>
+        </section>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
@@ -112,9 +138,14 @@ title: SeMI, our style; getting input from our users through form elements
 
                     let options = {
                         width: 600,
-                        height: 600,
-                        xLabel: 'Gender',
-                        yLabel: 'Age'
+                        height: 400,
+                        top: 30,
+                        bottom: 80,
+                        left: 130,
+                        right: 80,
+                        xCategory: 'gender',
+                        yCategory: 'age',
+                        valueCategory: 'connections'
                     };
 
                     bubbleChart('bubble-chart', data, options);
@@ -125,8 +156,8 @@ title: SeMI, our style; getting input from our users through form elements
 
     <section>
         <h4>Force-Directed Graph</h4>
-        <p>The Force-Directed Graph is based on <a href="https://github.com/d3/d3-force">d3-force</a> of <a href="https://d3js.org">d3.js</a>.
-            Tooltips display the keys of the node objects.
+        <p>The Force-Directed Graph is a graph visualisation based on <a href="https://github.com/d3/d3-force">d3-force</a>.
+            Tooltips display all node properties.
         </p>
         <div id="force-graph"></div>
         <script type="text/javascript">
@@ -142,6 +173,26 @@ title: SeMI, our style; getting input from our users through form elements
 
             forceDirectedGraph('force-graph', forceDirectedGraphData, forceDirectedGraphDataOptions);
         </script>
+        <section>
+            <h6>Chart Options</h6>
+            <p>
+                <dl class="def-list">
+                    <dt><code>width</code></dt>
+                    <dd>Width of the chart. <br><em>Default:</em> 600
+                    </dd>
+                    <dt><code>height</code></dt>
+                    <dd>Height of the chart. <br><em>Default:</em> 400
+                    </dd>
+                    <dt><code>nodeRadius</code></dt>
+                    <dd>Radius of each node. <br><em>Default:</em> 5
+                    </dd>
+                    <dt><code>colorBy</code></dt>
+                    <dd>Name of the object property which is used for creating categories. The colors are assigned by
+                        category. <br><em>Default:</em> 'class'
+                    </dd>
+                </dl>
+            </p>
+        </section>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
@@ -168,9 +219,7 @@ title: SeMI, our style; getting input from our users through form elements
 
     <section>
         <h4>Constraint-Based Layout</h4>
-        <p>Lorem ipsum dolor amet salvia activated charcoal hoodie narwhal cold-pressed flexitarian lyft, helvetica
-            pour-over keffiyeh heirloom yuccie poutine meggings roof party. Swag tote bag ethical asymmetrical organic
-            kogi 8-bit scenester deep v post-ironic.</p>
+        <p>The Constraint-Based Layout is a graph visualisation which groups nodes together by category and colors them accordingy. Tooltips display all node properties. </p>
         <div id="constrained-graph"></div>
 
         <script src="https://ialab.it.monash.edu/webcola/cola.min.js"></script>
@@ -188,6 +237,34 @@ title: SeMI, our style; getting input from our users through form elements
             };
             constrainedLayoutGraph('constrained-graph', constrainedLayoutData, constrainedLayoutOptions);    
         </script>
+        <section>
+            <h6>Chart Options</h6>
+            <p>
+                <dl class="def-list">
+                    <dt><code>width</code></dt>
+                    <dd>Width of the chart. <br><em>Default:</em> 600
+                    </dd>
+                    <dt><code>height</code></dt>
+                    <dd>Height of the chart. <br><em>Default:</em> 400
+                    </dd>
+                    <dt><code>nodeRadius</code></dt>
+                    <dd>Radius of each node. <br><em>Default:</em> 5
+                    </dd>
+                    <dt><code>nodeSpacing</code></dt>
+                    <dd>Value indicating how much space around each node is tried to be preserved.<br><em>Default:</em>
+                        20
+                    </dd>
+                    <dt><code>showGroups</code></dt>
+                    <dd>Shows a rectangular border around each category group if true. <br><em>Default:</em> false
+                    </dd>
+                    <dt><code>colorBy</code></dt>
+                    <dd>Name of the object property which is used for creating categories. The colors are then assigned
+                        by
+                        category. <br><em>Default:</em> 'class'
+                    </dd>
+                </dl>
+            </p>
+        </section>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
@@ -216,12 +293,12 @@ title: SeMI, our style; getting input from our users through form elements
     </section>
     <section>
         <h4>Beeswarm Chart</h4>
-        <p>The Beeswarm chart is a mix between the Bubble Chart and the Graph visualisations (Force-Directed Graph and
+        <p>The Beeswarm chart is a mix between the Bubble Chart and the Graph visualisations (Force-Directed Graph, 
             Constraint-Based Layout).
             As opposed to the Bubble Chart, which is mainly used for aggregated data, the Beeswarm can be used to
             display the actual data.
             It arranges single nodes based on selected properties, allowing to get insights about the distribution of
-            the data. <code>A piece of computer code</code>
+            the data.
         </p>
         <div id="beeswarm"></div>
         <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -239,11 +316,39 @@ title: SeMI, our style; getting input from our users through form elements
                 left: 150,
                 bottom: 120,
                 right: 20,
-                bubbleRadius: 4
+                nodeRadius: 4
             };
             beeswarmChart('beeswarm', beeswarmData, beeswarmOptions);
 
         </script>
+        <section>
+            <h6>Chart Options</h6>
+            <p>
+                <dl class="def-list">
+                    <dt><code>width</code></dt>
+                    <dd>Width of the chart. <br><em>Default:</em> 600
+                    </dd>
+                    <dt><code>height</code></dt>
+                    <dd>Height of the chart. <br><em>Default:</em> 600
+                    </dd>
+                    <dt><code>top</code></dt>
+                    <dd>Padding top. <br><em>Default:</em> 30
+                    </dd>
+                    <dt><code>bottom</code></dt>
+                    <dd>Padding bottom. <br><em>Default:</em> 80
+                    </dd>
+                    <dt><code>left</code></dt>
+                    <dd>Padding left. <br><em>Default:</em> 200
+                    </dd>
+                    <dt><code>right</code></dt>
+                    <dd>Padding right. <br><em>Default:</em> 80
+                    </dd>
+                    <dt><code>nodeRadius</code></dt>
+                    <dd>Radius of each node. <br><em>Default:</em> 4
+                    </dd>
+                </dl>
+            </p>
+        </section>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
@@ -264,7 +369,7 @@ title: SeMI, our style; getting input from our users through form elements
                         left: 150,
                         bottom: 120,
                         right: 20,
-                        bubbleRadius: 4
+                        nodeRadius: 4
                     };
                     beeswarmChart('beeswarm', data, options);
 

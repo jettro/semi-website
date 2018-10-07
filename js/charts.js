@@ -92,7 +92,7 @@ function bubbleChart(parentId, data, options) {
         .classed('chart-x-axis axis', true);
 
     axisG.append("g")
-        .attr('transform', 'translate(' + 0.8*bounds.left + ',' + 0 + ')')
+        .attr('transform', 'translate(' + 0.5*bounds.left + ',' + 0 + ')')
         .classed('chart-y-axis axis', true);
 
     xScale = getScale(data, width, xAcc, bounds.left, bounds.right);
@@ -282,10 +282,10 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
     let width = options.width || 600;
     let height = options.height || 400;
 
-    let nodeRadius = options.nodeRadius || 7;
+    let nodeRadius = options.nodeRadius || 5;
     let nodeSpacing = options.nodeSpacing || 20;
     let showGroups = options.showGroups;
-    let colorCat = options.colorBy || 'name';
+    let colorCat = options.colorBy || 'class';
 
     let tooltipXOffset = 20;
     let tooltipYOffset = -50;
@@ -436,7 +436,7 @@ function beeswarmChart(parentId, data, options) {
     var maxLabelLength = 5;
     var mainColor = '#304a6c';
 
-    var dia = options.bubbleRadius || 4;
+    var dia = options.nodeRadius || 4;
 
     //remove any previously created containers
     d3.select('#' + parentId).selectAll('div').remove();
