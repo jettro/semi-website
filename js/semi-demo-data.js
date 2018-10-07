@@ -100,6 +100,84 @@ let bubble1 = [
     }
 ];
 
+let bubble2 = [
+    {
+        connections: 10,
+        gender: "Male",
+        age: "0-20"
+    },
+    {
+        connections: 20,
+        gender: "Male",
+        age: "20-40"
+    },
+    {
+        connections: 5,
+        gender: "Male",
+        age: "40-60"
+    },
+    {
+        connections: 25,
+        gender: "Male",
+        age: "60-80"
+    },
+    {
+        connections: 25,
+        gender: "Male",
+        age: "80-100"
+    },
+    {
+        connections: 5,
+        gender: "Female",
+        age: "0-20"
+    },
+    {
+        connections: 10,
+        gender: "Female",
+        age: "20-40"
+    },
+    {
+        connections: 13,
+        gender: "Female",
+        age: "40-60"
+    },
+    {
+        connections: 15,
+        gender: "Female",
+        age: "60-80"
+    },
+    {
+        connections: 24,
+        gender: "Female",
+        age: "80-100"
+    },
+    {
+        connections: 14,
+        gender: "Unknown",
+        age: "0-20"
+    },
+    {
+        connections: 17,
+        gender: "Unknown",
+        age: "20-40"
+    },
+    {
+        connections: 23,
+        gender: "Unknown",
+        age: "40-60"
+    },
+    {
+        connections: 3,
+        gender: "Unknown",
+        age: "60-80"
+    },
+    {
+        connections: 4,
+        gender: "Unknown",
+        age: "80-100"
+    }
+];
+
 let forceDirected1 = {
     "nodes": [
         { "id": "TV", "class": "ProductType" },
@@ -16443,6 +16521,7 @@ let beeswarm2 = beeswarm1.filter(function (d, i) {
 let demoData = {
     sankeyData: sankey1,
     bubbleData: bubble1,
+    bubbleData2: bubble2,
     forceDirectedGraphData: forceDirected1,
     constrainedLayoutData: constrainedLayout1,
     beeswarmDataLarge: beeswarm1,

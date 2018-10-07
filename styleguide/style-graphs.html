@@ -80,14 +80,22 @@ title: SeMI, our style; getting input from our users through form elements
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript">
 
-            let bubbleData = demoData.bubbleData;
+            let bubbleData = demoData.bubbleData2;
+
+            // let bubbleOptions = {
+            //     width: 600,
+            //     height: 600,
+            //     xLabel: 'Gender',
+            //     yLabel: 'Age'
+            // };
 
             let bubbleOptions = {
                 width: 600,
                 height: 600,
-                xLabel: 'Gender',
-                yLabel: 'Age'
-            };
+                xCategory: 'gender',
+                yCategory: 'age',
+                valueCategory: 'connections'
+            }
 
             bubbleChart('bubble-chart', bubbleData, bubbleOptions);
         </script>

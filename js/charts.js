@@ -40,8 +40,6 @@ function sankeyDiagram(parentId, data, options) {
 
 function bubbleChart(parentId, data, options) {
 
-    let fontSize = 9;
-
     let width = options.width || 600;
     let height = options.height || 600;
 
@@ -52,12 +50,20 @@ function bubbleChart(parentId, data, options) {
         right: options.right || 80
     }
 
-    let xLabel = options.xLabel || '';
-    let yLabel = options.yLabel || '';
+    let xCategory = options.xCategory || '';
+    let yCategory = options.yCategory || '';
+    let valueCategory = options.valueCategory || '';
 
-    let aAcc = accessor('catA');
-    let bAcc = accessor('catB');
-    let vAcc = accessor('value');
+    // let xLabel = options.xLabel || '';
+    // let yLabel = options.yLabel || '';
+
+    let xAcc = accessor(xCategory);
+    let yAcc = accessor(yCategory);
+    let vAcc = accessor(valueCategory);
+
+    // let aAcc = accessor('catA');
+    // let bAcc = accessor('catB');
+    // let vAcc = accessor('value');
 
     let minR = 1;
     let maxR = width / 30;
@@ -96,8 +102,8 @@ function bubbleChart(parentId, data, options) {
         .attr('transform', 'translate(' + 50 + ',' + 0 + ')')
         .classed('chart-y-axis axis', true);
 
-    xScale = getScale(data, width, aAcc, bounds.left, bounds.right);
-    yScale = getScale(data, height, bAcc, bounds.top, bounds.bottom);
+    xScale = getScale(data, width, xAcc, bounds.left, bounds.right);
+    yScale = getScale(data, height, yAcc, bounds.top, bounds.bottom);
 
     var xAxis = d3.axisBottom(xScale);
     var yAxis = d3.axisLeft(yScale);
@@ -110,12 +116,12 @@ function bubbleChart(parentId, data, options) {
         .classed('chart-x-axis-label', true)
         .attr('dy', '2.7em')
         .attr('transform', translate(width - bounds.right, 0))
-        .text(xLabel);
+        .text(capitalizeFirstLetter(xCategory));
 
     axisG.select('.chart-y-axis').append('text')
         .classed('chart-y-axis-label', true)
         .attr('dy', '0.8em')
-        .text(yLabel);
+        .text(capitalizeFirstLetter(yCategory));
 
     let circleG = svg.append('g').classed('chart-circle-g', true);
 
@@ -125,10 +131,10 @@ function bubbleChart(parentId, data, options) {
         .append('circle')
         .classed('chart-dot', true)
         .attr('cx', function (d) {
-            return xScale(aAcc(d));
+            return xScale(xAcc(d));
         })
         .attr('cy', function (d) {
-            return yScale(bAcc(d));
+            return yScale(yAcc(d));
         })
         .attr('r', function (d) {
             return vScale(vAcc(d));
@@ -142,18 +148,18 @@ function bubbleChart(parentId, data, options) {
                 .append('div')
                 .classed('chart-tooltip', true)
                 .style('left', function (e, i) {
-                    let x = xScale(aAcc(d));
+                    let x = xScale(xAcc(d));
                     return x + tooltipXOffset + 'px';
                 })
                 .style('top', function (e, i) {
-                    let y = yScale(bAcc(d));
+                    let y = yScale(yAcc(d));
                     return y + tooltipYOffset + 'px';
                 })
                 .html(function (e, i) {
                     let labelText = '';
-                    labelText += xLabel + ': ' + aAcc(d) + '</br>';
-                    labelText += yLabel + ': ' + bAcc(d) + '</br>';
-                    labelText += 'Value: ' + vAcc(d);
+                    labelText += capitalizeFirstLetter(xCategory) + ': ' + xAcc(d) + '</br>';
+                    labelText += capitalizeFirstLetter(yCategory) + ': ' + yAcc(d) + '</br>';
+                    labelText += capitalizeFirstLetter(valueCategory) + ': ' + vAcc(d);
                     return labelText;
                 });
         })
@@ -820,4 +826,9 @@ function createTypeCastedObject(d) {
         else obj[key] = +d[key];
     });
     return obj;
+}
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
