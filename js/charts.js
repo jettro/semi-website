@@ -1,4 +1,4 @@
-function sankey(parentId, data, options) {
+function sankeyDiagram(parentId, data, options) {
 
     google.charts.load('current', { 'packages': ['sankey'] });
     google.charts.setOnLoadCallback(drawChart);
@@ -413,7 +413,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
 }
 
 
-function beeswarm(parentId, data, options) {
+function beeswarmChart(parentId, data, options) {
 
     let width = options.width || 600;
     let height = options.height || 600;
