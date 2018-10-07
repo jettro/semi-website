@@ -13,27 +13,9 @@ title: SeMI, our style; getting input from our users through form elements
     <section>
         <h4>Sankey Diagram</h4>
         <p>The Sankey Diagram is useful for showing the connectivity in a graph, i.e. to show through which paths
-            nodes are connected. 
+            nodes are connected.
         </p>
-        <h6>Chart options</h6>
-        <p>
-            <dl class="def-list">
-                <dt><code>width</code></dt>
-                <dd>Width of the chart.
-                    <p>
-                        <em>Type:</em> number </br>
-                        <em>Default:</em> 600
-                    </p>
-                </dd>
-                <dt><code>height</code></dt>
-                <dd>Height of the chart.
-                    <p>
-                        <em>Type:</em> number </br>
-                        <em>Default:</em> 600
-                    </p>
-                </dd>
-            </dl>
-        </p>
+
         <div id="sankey-diagram"></div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="/js/semi-demo-data.js"></script>
@@ -48,6 +30,27 @@ title: SeMI, our style; getting input from our users through form elements
             };
             sankeyDiagram('sankey-diagram', sankeyData, sankeyOptions);
         </script>
+        <section>
+            <h6>Options</h6>
+            <p>
+                <dl class="def-list">
+                    <dt><code>width</code></dt>
+                    <dd>Width of the chart.
+                        <p>
+                            <em>Type:</em> number </br>
+                            <em>Default:</em> 600
+                        </p>
+                    </dd>
+                    <dt><code>height</code></dt>
+                    <dd>Height of the chart.
+                        <p>
+                            <em>Type:</em> number </br>
+                            <em>Default:</em> 600
+                        </p>
+                    </dd>
+                </dl>
+            </p>
+        </section>
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>

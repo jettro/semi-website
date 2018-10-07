@@ -54,16 +54,9 @@ function bubbleChart(parentId, data, options) {
     let yCategory = options.yCategory || '';
     let valueCategory = options.valueCategory || '';
 
-    // let xLabel = options.xLabel || '';
-    // let yLabel = options.yLabel || '';
-
     let xAcc = accessor(xCategory);
     let yAcc = accessor(yCategory);
     let vAcc = accessor(valueCategory);
-
-    // let aAcc = accessor('catA');
-    // let bAcc = accessor('catB');
-    // let vAcc = accessor('value');
 
     let minR = 1;
     let maxR = width / 30;
