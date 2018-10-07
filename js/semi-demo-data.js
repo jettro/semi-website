@@ -22,85 +22,50 @@ let sankey1 = [["Amsterdam", "AMS", 55],
 ["Lufthansa", "Airbus", 25],
 ["Lufthansa", "Boeing", 3]];
 
-let bubble1 = [
-    {
-        value: 10,
-        catA: "Male",
-        catB: "0-20"
-    },
-    {
-        value: 20,
-        catA: "Male",
-        catB: "20-40"
-    },
-    {
-        value: 5,
-        catA: "Male",
-        catB: "40-60"
-    },
-    {
-        value: 25,
-        catA: "Male",
-        catB: "60-80"
-    },
-    {
-        value: 25,
-        catA: "Male",
-        catB: "80-100"
-    },
-    {
-        value: 5,
-        catA: "Female",
-        catB: "0-20"
-    },
-    {
-        value: 10,
-        catA: "Female",
-        catB: "20-40"
-    },
-    {
-        value: 13,
-        catA: "Female",
-        catB: "40-60"
-    },
-    {
-        value: 15,
-        catA: "Female",
-        catB: "60-80"
-    },
-    {
-        value: 24,
-        catA: "Female",
-        catB: "80-100"
-    },
-    {
-        value: 14,
-        catA: "Unknown",
-        catB: "0-20"
-    },
-    {
-        value: 17,
-        catA: "Unknown",
-        catB: "20-40"
-    },
-    {
-        value: 23,
-        catA: "Unknown",
-        catB: "40-60"
-    },
-    {
-        value: 3,
-        catA: "Unknown",
-        catB: "60-80"
-    },
-    {
-        value: 4,
-        catA: "Unknown",
-        catB: "80-100"
-    }
-];
-
 let bubble2 = [
+    {
+      "product": "TV",
+      "company": "Mediamarkt",
+      "value": 20
+    },
+    {
+      "product": "TV",
+      "company": "Apple",
+      "value": 36
+    },
+    {
+      "product": "TV",
+      "company": "Sony",
+      "value": 30
+    },
+    {
+      "product": "TV",
+      "company": "Albert Heijn",
+      "value": 0
+    },
+    {
+      "product": "Smartphone",
+      "company": "Mediamarkt",
+      "value": 26
+    },
+    {
+      "product": "Smartphone",
+      "company": "Apple",
+      "value": 71
+    },
+    {
+      "product": "Smartphone",
+      "company": "Sony",
+      "value": 54
+    },
+    {
+      "product": "Smartphone",
+      "company": "Albert Heijn",
+      "value": 44
+    }
+  ];
+
+let bubble1 = [
     {
         connections: 10,
         gender: "Male",

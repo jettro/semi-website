@@ -88,11 +88,11 @@ function bubbleChart(parentId, data, options) {
     let axisG = svg.append('g').classed('chart-axis-g', true);
 
     axisG.append("g")
-        .attr('transform', 'translate(0,' + 0.93 * height + ')')
+        .attr('transform', 'translate(0,' +  (height - 0.5*bounds.bottom) + ')')
         .classed('chart-x-axis axis', true);
 
     axisG.append("g")
-        .attr('transform', 'translate(' + 50 + ',' + 0 + ')')
+        .attr('transform', 'translate(' + 0.8*bounds.left + ',' + 0 + ')')
         .classed('chart-y-axis axis', true);
 
     xScale = getScale(data, width, xAcc, bounds.left, bounds.right);
