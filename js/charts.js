@@ -1,8 +1,3 @@
-/*jshint esversion: 6 */
-/* globals d3: true */
-/* globals google: true */
-/* globals cola: true */
-/* globals p5: true */
 function sankeyDiagram(parentId, data, options) {
 
     google.charts.load('current', { 'packages': ['sankey'] });
@@ -93,11 +88,11 @@ function bubbleChart(parentId, data, options) {
     let axisG = svg.append('g').classed('chart-axis-g', true);
 
     axisG.append("g")
-        .attr('transform', 'translate(0,' +  (height - 0.5*bounds.bottom) + ')')
+        .attr('transform', 'translate(0,' + (height - 0.5 * bounds.bottom) + ')')
         .classed('chart-x-axis axis', true);
 
     axisG.append("g")
-        .attr('transform', 'translate(' + 0.5*bounds.left + ',' + 0 + ')')
+        .attr('transform', 'translate(' + 0.5 * bounds.left + ',' + 0 + ')')
         .classed('chart-y-axis axis', true);
 
     xScale = getScale(data, width, xAcc, bounds.left, bounds.right);
@@ -269,7 +264,7 @@ function forceDirectedGraph(parentId, graph, options) {
 
 function constrainedLayoutGraph(parentId, ingraph, options) {
 
-    let indexedLinks = ingraph.links.map(function(l) {
+    let indexedLinks = ingraph.links.map(function (l) {
         let s = l.source;
         let t = l.target;
         var sindex = ingraph.nodes.map(function (e) { return e.id; }).indexOf(s);
@@ -326,7 +321,9 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
 
     var groups = [];
     for (var g in groupMap) {
-        groups.push({ id: g, leaves: groupMap[g] });
+        if (groupMap.hasOwnProperty(g)) {
+            groups.push({ id: g, leaves: groupMap[g] });
+        }
     }
 
     colad3
@@ -460,9 +457,6 @@ function beeswarmChart(parentId, data, options) {
 
     var sketch = function (s) {
 
-        var x = 100;
-        var y = 100;
-
         s.setup = function () {
 
             s.createCanvas(width, height);
@@ -550,8 +544,8 @@ function beeswarmChart(parentId, data, options) {
             let closest = simulation.find(s.mouseX, s.mouseY, 50);
 
             //tooltip
-            let tooltipXOffset = 20;
-            let tooltipYOffset = -20;
+            let tooltipXOffset = 0;
+            let tooltipYOffset = 0;
 
             d3.select('#' + parentId).select('.chart-beeswarm').selectAll('.chart-tooltip').remove();
 
@@ -565,10 +559,10 @@ function beeswarmChart(parentId, data, options) {
                     .append('div')
                     .classed('chart-tooltip', true)
                     .style('left', function (e, i) {
-                        return closest.x + 'px';
+                        return closest.x + tooltipXOffset +  'px';
                     })
                     .style('top', function (e, i) {
-                        return closest.y + 'px';
+                        return closest.y + tooltipYOffset +'px';
                     })
                     .html(function (e, i) {
                         let keyValues = keys.map(function (k) {
@@ -812,20 +806,6 @@ function keysFromNode(node) {
     });
     return keys;
 }
-
-function createTypeCastedObject(d) {
-    let keys = Object.keys(d);
-    let obj = {};
-
-    keys.forEach(function (key) {
-        if (isNaN(d[key])) {
-            obj[key] = d[key];
-        }
-        else obj[key] = +d[key];
-    });
-    return obj;
-}
-
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
