@@ -1,6 +1,6 @@
 $chart-colors: $color-semi,$color-semi-accent,$color-interactive,$color-support,$color-almostblack-tint--4,$color-almostblack-analogous-tint--5,$color-almostblack-triadic-tint--4,$color-olive-analogous-tint--4,$color-olive-triadic-tint--4,$color-info;
 
-//generate chart category classes
+//generate chart category classes .chart-cat-1, .chart-cat-2 etc.
 @for $i from 1 through length($chart-colors) {
     $color: nth($chart-colors, $i);
     .chart-cat-#{$i} { 
@@ -25,11 +25,9 @@ $chart-colors: $color-semi,$color-semi-accent,$color-interactive,$color-support,
     border: 1px solid $color-gray-4;
 }
 
-
 .chart-cat-main{
     fill: $color-interactive;
 }
-
 .chart-axis{
     // fill: $color-semi;
     // stroke: $color-semi-accent;
@@ -69,7 +67,6 @@ $axis-label-font-size: 12px;
     stroke: $color-gray-3;
     stroke-opacity: 0.7;
 }
-
 
 .chart-group  {
     stroke: $color-gray-5;
