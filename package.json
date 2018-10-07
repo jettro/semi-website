@@ -14,8 +14,7 @@
     "build": "JEKYLL_ENV=develop bundle exec jekyll build --config \"_config.yml\"",
     "htmlmin": "html-minifier --input-dir ./_site --output-dir ./_site --collapse-whitespace --file-ext html",
     "uglify": "uglifyjs --compress --mangle -o _site/js/semi.js -- _site/js/semi.js",
-    "local": "npm run build && npm run htmlmin && npm run uglify && jekyll serve --incremental",
-    "localfast": "npm run build && jekyll serve --incremental --watch"
+    "local": "npm run build && npm run htmlmin && npm run uglify && jekyll serve --incremental"
   },
   "repository": {
     "type": "git",
