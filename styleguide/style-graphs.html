@@ -19,7 +19,6 @@ title: SeMI, our style; getting input from our users through form elements
             nodes are connected.
         </p>
         <div id="sankey-diagram"></div>
-        <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
         <script type="text/javascript" src="/js/semi-demo-data.js"></script>
         <script type="text/javascript" src="/js/semi-charts.js"></script>
         <script type="text/javascript">
@@ -49,7 +48,19 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
-               
+                <div id="sankey-diagram"></div>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-demo-data.js"></script>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-charts.js"></script>
+                <script type="text/javascript">
+
+                    let data = semi.demoData.sankeyData;
+
+                    let options = {
+                        width: 700,
+                        height: 300
+                    };
+                    semi.charts.sankeyDiagram('sankey-diagram', data, options);
+                </script>
             </xmp>
         </section>
 
@@ -117,7 +128,27 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
-               
+                <div id="bubble-chart"></div>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-demo-data.js"></script>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-charts.js"></script>
+                <script type="text/javascript">
+
+                    let data = semi.demoData.bubbleData;
+
+                    let options = {
+                        width: 500,
+                        height: 500,
+                        top: 30,
+                        bottom: 80,
+                        left: 80,
+                        right: 30,
+                        xCategory: 'gender',
+                        yCategory: 'age',
+                        valueCategory: 'connections'
+                    };
+
+                    semi.charts.bubbleChart('bubble-chart', data, options);
+                </script>
             </xmp>
         </section>
     </section>
@@ -166,7 +197,22 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
+                <div id="force-graph"></div>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-demo-data.js"></script>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-charts.js"></script>
+                <script type="text/javascript">
 
+                    let data = semi.demoData.forceDirectedGraphData;
+
+                    let options = {
+                        width: 600,
+                        height: 400,
+                        nodeRadius: 5,
+                        colorBy: 'class'
+                    };
+
+                    semi.charts.forceDirectedGraph('force-graph', data, options);
+                </script>
             </xmp>
         </section>
     </section>
@@ -223,7 +269,23 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
-              
+                <div id="constrained-graph"></div>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-demo-data.js"></script>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-charts.js"></script>
+                <script type="text/javascript">
+
+                    let data = semi.demoData.constrainedLayoutData;
+
+                    let options = {
+                        width: 600,
+                        height: 400,
+                        nodeRadius: 5,
+                        nodeSpacing: 20,
+                        showGroups: false,
+                        colorBy: 'class'
+                    };
+                    semi.charts.constrainedLayoutGraph('constrained-graph', data, options);    
+                </script>
             </xmp>
         </section>
     </section>
@@ -285,7 +347,24 @@ title: SeMI, our style; getting input from our users through form elements
         <section class="semi-sg-codesnippet">
             <p><abbr>HTML / JS</abbr> code snippet</p>
             <xmp>
-             
+                <div id="beeswarm"></div>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-demo-data.js"></script>
+                <script type="text/javascript" src="https://www.semi.network/js/semi-charts.js"></script>
+                <script type="text/javascript">
+
+                    let data = semi.demoData.beeswarmDataSmall;
+                    var options = {
+                        width: 700,
+                        height: 700,
+                        top: 0,
+                        left: 150,
+                        bottom: 120,
+                        right: 20,
+                        nodeRadius: 4
+                    };
+                    semi.charts.beeswarmChart('beeswarm', data, options);
+
+                </script>
             </xmp>
         </section>
 
