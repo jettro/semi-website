@@ -40,125 +40,129 @@ function sankeyDiagram(parentId, data, options) {
 
 function bubbleChart(parentId, data, options) {
 
-    let width = options.width || 600;
-    let height = options.height || 600;
+    prefixScript('d3v4', 'https://d3js.org/d3.v4.min.js', function () {
+        console.log('onladscript');
+        let width = options.width || 600;
+        let height = options.height || 600;
 
-    let bounds = {
-        top: options.top || 30,
-        bottom: options.bottom || 80,
-        left: options.left || 100,
-        right: options.right || 80
-    };
+        let bounds = {
+            top: options.top || 30,
+            bottom: options.bottom || 80,
+            left: options.left || 100,
+            right: options.right || 80
+        };
 
-    let xCategory = options.xCategory || '';
-    let yCategory = options.yCategory || '';
-    let valueCategory = options.valueCategory || '';
+        let xCategory = options.xCategory || '';
+        let yCategory = options.yCategory || '';
+        let valueCategory = options.valueCategory || '';
 
-    let xAcc = accessor(xCategory);
-    let yAcc = accessor(yCategory);
-    let vAcc = accessor(valueCategory);
+        let xAcc = accessor(xCategory);
+        let yAcc = accessor(yCategory);
+        let vAcc = accessor(valueCategory);
 
-    let minR = 1;
-    let maxR = width / 30;
+        let minR = 1;
+        let maxR = width / 30;
 
-    let maxVal = d3.max(data, function (d) {
-        return vAcc(d);
-    });
-
-    let xScale = d3.scaleIdentity();
-    let yScale = d3.scaleIdentity();
-    let vScale = d3.scalePow()
-        .domain([0, maxVal])
-        .range([minR, maxR]);
-
-    let tooltipXOffset = 20;
-    let tooltipYOffset = -20;
-
-    //render the chart
-    d3.select("#" + parentId).select('svg').remove();
-
-    d3.select("#" + parentId).classed('chart-container', true);
-
-    let svg = d3.select("#" + parentId).append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g");
-
-    //AXIS
-    let axisG = svg.append('g').classed('chart-axis-g', true);
-
-    axisG.append("g")
-        .attr('transform', 'translate(0,' + (height - 0.5 * bounds.bottom) + ')')
-        .classed('chart-x-axis axis', true);
-
-    axisG.append("g")
-        .attr('transform', 'translate(' + 0.5 * bounds.left + ',' + 0 + ')')
-        .classed('chart-y-axis axis', true);
-
-    xScale = getScale(data, width, xAcc, bounds.left, bounds.right);
-    yScale = getScale(data, height, yAcc, bounds.top, bounds.bottom);
-
-    var xAxis = d3.axisBottom(xScale);
-    var yAxis = d3.axisLeft(yScale);
-
-    axisG.select('.chart-x-axis').call(xAxis);
-    axisG.select('.chart-y-axis').call(yAxis);
-
-    //axis labels
-    axisG.select('.chart-x-axis').append('text')
-        .classed('chart-x-axis-label', true)
-        .attr('dy', '2.7em')
-        .attr('transform', translate(width - bounds.right, 0))
-        .text(capitalizeFirstLetter(xCategory));
-
-    axisG.select('.chart-y-axis').append('text')
-        .classed('chart-y-axis-label', true)
-        .attr('dy', '0.8em')
-        .text(capitalizeFirstLetter(yCategory));
-
-    let circleG = svg.append('g').classed('chart-circle-g', true);
-
-    circleG.selectAll('.chart-dot')
-        .data(data)
-        .enter()
-        .append('circle')
-        .classed('chart-dot', true)
-        .attr('cx', function (d) {
-            return xScale(xAcc(d));
-        })
-        .attr('cy', function (d) {
-            return yScale(yAcc(d));
-        })
-        .attr('r', function (d) {
-            return vScale(vAcc(d));
-        })
-        .classed('chart-cat-main', true)
-        .on('mouseover', function (d) {
-
-            d3.select("#" + parentId).selectAll('.chart-tooltip')
-                .data([0])
-                .enter()
-                .append('div')
-                .classed('chart-tooltip', true)
-                .style('left', function (e, i) {
-                    let x = xScale(xAcc(d));
-                    return x + tooltipXOffset + 'px';
-                })
-                .style('top', function (e, i) {
-                    let y = yScale(yAcc(d));
-                    return y + tooltipYOffset + 'px';
-                })
-                .html(function (e, i) {
-                    let labelText = '';
-                    labelText += capitalizeFirstLetter(xCategory) + ': ' + xAcc(d) + '</br>';
-                    labelText += capitalizeFirstLetter(yCategory) + ': ' + yAcc(d) + '</br>';
-                    labelText += capitalizeFirstLetter(valueCategory) + ': ' + vAcc(d);
-                    return labelText;
-                });
-        })
-        .on('mouseout', function (d) {
-            d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
+        let maxVal = d3.max(data, function (d) {
+            return vAcc(d);
         });
+
+        let xScale = d3.scaleIdentity();
+        let yScale = d3.scaleIdentity();
+        let vScale = d3.scalePow()
+            .domain([0, maxVal])
+            .range([minR, maxR]);
+
+        let tooltipXOffset = 20;
+        let tooltipYOffset = -20;
+
+        //render the chart
+        d3.select("#" + parentId).select('svg').remove();
+
+        d3.select("#" + parentId).classed('chart-container', true);
+
+        let svg = d3.select("#" + parentId).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g");
+
+        //AXIS
+        let axisG = svg.append('g').classed('chart-axis-g', true);
+
+        axisG.append("g")
+            .attr('transform', 'translate(0,' + (height - 0.5 * bounds.bottom) + ')')
+            .classed('chart-x-axis axis', true);
+
+        axisG.append("g")
+            .attr('transform', 'translate(' + 0.5 * bounds.left + ',' + 0 + ')')
+            .classed('chart-y-axis axis', true);
+
+        xScale = getScale(data, width, xAcc, bounds.left, bounds.right);
+        yScale = getScale(data, height, yAcc, bounds.top, bounds.bottom);
+
+        var xAxis = d3.axisBottom(xScale);
+        var yAxis = d3.axisLeft(yScale);
+
+        axisG.select('.chart-x-axis').call(xAxis);
+        axisG.select('.chart-y-axis').call(yAxis);
+
+        //axis labels
+        axisG.select('.chart-x-axis').append('text')
+            .classed('chart-x-axis-label', true)
+            .attr('dy', '2.7em')
+            .attr('transform', translate(width - bounds.right, 0))
+            .text(capitalizeFirstLetter(xCategory));
+
+        axisG.select('.chart-y-axis').append('text')
+            .classed('chart-y-axis-label', true)
+            .attr('dy', '0.8em')
+            .text(capitalizeFirstLetter(yCategory));
+
+        let circleG = svg.append('g').classed('chart-circle-g', true);
+
+        circleG.selectAll('.chart-dot')
+            .data(data)
+            .enter()
+            .append('circle')
+            .classed('chart-dot', true)
+            .attr('cx', function (d) {
+                return xScale(xAcc(d));
+            })
+            .attr('cy', function (d) {
+                return yScale(yAcc(d));
+            })
+            .attr('r', function (d) {
+                return vScale(vAcc(d));
+            })
+            .classed('chart-cat-main', true)
+            .on('mouseover', function (d) {
+
+                d3.select("#" + parentId).selectAll('.chart-tooltip')
+                    .data([0])
+                    .enter()
+                    .append('div')
+                    .classed('chart-tooltip', true)
+                    .style('left', function (e, i) {
+                        let x = xScale(xAcc(d));
+                        return x + tooltipXOffset + 'px';
+                    })
+                    .style('top', function (e, i) {
+                        let y = yScale(yAcc(d));
+                        return y + tooltipYOffset + 'px';
+                    })
+                    .html(function (e, i) {
+                        let labelText = '';
+                        labelText += capitalizeFirstLetter(xCategory) + ': ' + xAcc(d) + '</br>';
+                        labelText += capitalizeFirstLetter(yCategory) + ': ' + yAcc(d) + '</br>';
+                        labelText += capitalizeFirstLetter(valueCategory) + ': ' + vAcc(d);
+                        return labelText;
+                    });
+            })
+            .on('mouseout', function (d) {
+                d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
+            });
+
+    });
 
 }
 
@@ -414,6 +418,7 @@ function constrainedLayoutGraph(parentId, ingraph, options) {
 
 function beeswarmChart(parentId, data, options) {
 
+
     let width = options.width || 600;
     let height = options.height || 600;
 
@@ -559,10 +564,10 @@ function beeswarmChart(parentId, data, options) {
                     .append('div')
                     .classed('chart-tooltip', true)
                     .style('left', function (e, i) {
-                        return closest.x + tooltipXOffset +  'px';
+                        return closest.x + tooltipXOffset + 'px';
                     })
                     .style('top', function (e, i) {
-                        return closest.y + tooltipYOffset +'px';
+                        return closest.y + tooltipYOffset + 'px';
                     })
                     .html(function (e, i) {
                         let keyValues = keys.map(function (k) {
@@ -766,6 +771,7 @@ function beeswarmChart(parentId, data, options) {
 
     }
 
+
 }
 
 function translate(x, y) {
@@ -809,4 +815,41 @@ function keysFromNode(node) {
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+//from https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement
+function loadError(oError) {
+    throw new URIError("The script " + oError.target.src + " didn't load correctly.");
+}
+
+function prefixScript(scriptId, url, onloadFunction) {
+    var existingScript = document.getElementById(scriptId);
+
+    if (!existingScript) {
+        var newScript = document.createElement("script");
+        newScript.onerror = loadError;
+        if (onloadFunction) { newScript.onload = onloadFunction; }
+        document.currentScript.parentNode.insertBefore(newScript, document.currentScript);
+        newScript.src = url;
+        script.id = scriptId;
+    }
+}
+
+function promiseExample() {
+    var urls = ["url1", "url2", "url3"];
+    var promises = [];
+
+    urls.forEach(function (url) {
+        promises.push(function () {
+            console.log('calling function on ' + url);
+            return 'hello ' + url;
+        }());
+    });
+
+    Promise.all(promises).then(function (values) {
+        //console.log(values);
+        console.log('then')
+        console.log(values);
+    });
+
 }
