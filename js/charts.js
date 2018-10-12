@@ -1,46 +1,48 @@
 function sankeyDiagram(parentId, data, options) {
 
-    google.charts.load('current', { 'packages': ['sankey'] });
-    google.charts.setOnLoadCallback(drawChart);
+    loadDependencies(['google-charts'], function () {
+        google.charts.load('current', { 'packages': ['sankey'] });
+        google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-        var chartData = new google.visualization.DataTable();
+        function drawChart() {
+            var chartData = new google.visualization.DataTable();
 
-        chartData.addColumn('string', 'From');
-        chartData.addColumn('string', 'To');
-        chartData.addColumn('number', 'Weight');
-        chartData.addRows(data);
+            chartData.addColumn('string', 'From');
+            chartData.addColumn('string', 'To');
+            chartData.addColumn('number', 'Weight');
+            chartData.addRows(data);
 
-        var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
-            '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
+            var colors = ['#fa0171', '#38d611', '#0070e6', '#b0a002',
+                '#3d577c', '#538989', '#662839', '#EE6912', '#00A18D', '#FCE81C'];
 
-        var chartOptions = {
-            sankey: {
-                node: {
-                    colors: colors,
-                    colorMode: 'unique'
-                },
-                link: {
-                    color: { fill: '#eaeaea' }
+            var chartOptions = {
+                sankey: {
+                    node: {
+                        colors: colors,
+                        colorMode: 'unique'
+                    },
+                    link: {
+                        color: { fill: '#eaeaea' }
+                    }
                 }
+            };
+
+            if (options && options.width) {
+                chartOptions.width = options.width;
             }
-        };
+            if (options && options.height) {
+                chartOptions.height = options.height;
+            }
 
-        if (options && options.width) {
-            chartOptions.width = options.width;
+            var chart = new google.visualization.Sankey(document.getElementById(parentId));
+            chart.draw(chartData, chartOptions);
         }
-        if (options && options.height) {
-            chartOptions.height = options.height;
-        }
-
-        var chart = new google.visualization.Sankey(document.getElementById(parentId));
-        chart.draw(chartData, chartOptions);
-    }
+    });
 }
 
 function bubbleChart(parentId, data, options) {
 
-    prefixScript('d3v4', 'https://d3js.org/d3.v4.min.js', function () {
+    loadDependencies(['d3'], function () {
         console.log('onladscript');
         let width = options.width || 600;
         let height = options.height || 600;
@@ -168,608 +170,615 @@ function bubbleChart(parentId, data, options) {
 
 function forceDirectedGraph(parentId, graph, options) {
 
-    let width = options.width || 600;
-    let height = options.height || 400;
+    loadDependencies(['d3'], function () {
+        console.log('forceDirectedGraph callback');
+        let width = options.width || 600;
+        let height = options.height || 400;
 
-    let nodeRadius = options.nodeRadius || 5;
+        let nodeRadius = options.nodeRadius || 5;
 
-    let colorCat = options.colorBy || 'class';
+        let colorCat = options.colorBy || 'class';
 
-    let tooltipXOffset = 20;
-    let tooltipYOffset = -50;
+        let tooltipXOffset = 20;
+        let tooltipYOffset = -50;
 
-    d3.select('#' + parentId).classed('chart-container', true);
-    d3.select('#' + parentId).selectAll('svg').remove();
+        d3.select('#' + parentId).classed('chart-container', true);
+        d3.select('#' + parentId).selectAll('svg').remove();
 
-    let svg = d3.select('#' + parentId).append('svg')
-        .attr('width', width)
-        .attr('height', height);
+        let svg = d3.select('#' + parentId).append('svg')
+            .attr('width', width)
+            .attr('height', height);
 
-    let categories = d3.set(graph.nodes, function (n) {
-        return n[colorCat];
-    }).values();
+        let categories = d3.set(graph.nodes, function (n) {
+            return n[colorCat];
+        }).values();
 
-    var catScale = d3.scaleOrdinal()
-        .domain(categories)
-        .range(range(1, 10));
+        var catScale = d3.scaleOrdinal()
+            .domain(categories)
+            .range(range(1, 10));
 
-    var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function (d) { return d.id; }))
-        .force("charge", d3.forceManyBody())
-        .force("center", d3.forceCenter(width / 2, height / 2));
+        var simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(function (d) { return d.id; }))
+            .force("charge", d3.forceManyBody())
+            .force("center", d3.forceCenter(width / 2, height / 2));
 
-    var link = svg.append("g")
-        .selectAll("line")
-        .data(graph.links)
-        .enter()
-        .append("line")
-        .classed("chart-graph-link", true);
-
-    var node = svg.append("g")
-        .selectAll("circle")
-        .data(graph.nodes)
-        .enter().append("circle")
-        .attr("r", nodeRadius)
-        .attr('class', function (d) {
-            return 'chart-cat-' + catScale(d[colorCat]);
-        })
-        .classed('chart-graph-node', true);
-
-    let keys = keysFromNode(graph.nodes[0]);
-
-    //tooltips
-    node.on('mouseover', function (d) {
-        d3.select("#" + parentId).selectAll('.chart-tooltip')
-            .data([0])
+        var link = svg.append("g")
+            .selectAll("line")
+            .data(graph.links)
             .enter()
-            .append('div')
-            .classed('chart-tooltip', true)
-            .style('left', function (e, i) {
-                return d.x + tooltipXOffset + 'px';
-            })
-            .style('top', function (e, i) {
-                return d.y + tooltipYOffset + 'px';
-            })
-            .html(function (e, i) {
+            .append("line")
+            .classed("chart-graph-link", true);
 
-                let keyValues = keys.map(function (k) {
-                    return capitalizeFirstLetter(k) + ': ' + d[k];
+        var node = svg.append("g")
+            .selectAll("circle")
+            .data(graph.nodes)
+            .enter().append("circle")
+            .attr("r", nodeRadius)
+            .attr('class', function (d) {
+                return 'chart-cat-' + catScale(d[colorCat]);
+            })
+            .classed('chart-graph-node', true);
+
+        let keys = keysFromNode(graph.nodes[0]);
+
+        //tooltips
+        node.on('mouseover', function (d) {
+            d3.select("#" + parentId).selectAll('.chart-tooltip')
+                .data([0])
+                .enter()
+                .append('div')
+                .classed('chart-tooltip', true)
+                .style('left', function (e, i) {
+                    return d.x + tooltipXOffset + 'px';
+                })
+                .style('top', function (e, i) {
+                    return d.y + tooltipYOffset + 'px';
+                })
+                .html(function (e, i) {
+
+                    let keyValues = keys.map(function (k) {
+                        return capitalizeFirstLetter(k) + ': ' + d[k];
+                    });
+
+                    let labelText = keyValues.join('</br>');
+                    return labelText;
                 });
+        });
 
-                let labelText = keyValues.join('</br>');
-                return labelText;
-            });
+        node.on('mouseout', function (d) {
+            d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
+        });
+
+        simulation
+            .nodes(graph.nodes)
+            .on("tick", tick);
+
+        simulation.force("link")
+            .links(graph.links);
+
+        function tick() {
+            link
+                .attr("x1", function (d) { return d.source.x; })
+                .attr("y1", function (d) { return d.source.y; })
+                .attr("x2", function (d) { return d.target.x; })
+                .attr("y2", function (d) { return d.target.y; });
+
+            node
+                .attr("cx", function (d) { return d.x; })
+                .attr("cy", function (d) { return d.y; });
+        }
+
     });
-
-    node.on('mouseout', function (d) {
-        d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
-    });
-
-    simulation
-        .nodes(graph.nodes)
-        .on("tick", tick);
-
-    simulation.force("link")
-        .links(graph.links);
-
-    function tick() {
-        link
-            .attr("x1", function (d) { return d.source.x; })
-            .attr("y1", function (d) { return d.source.y; })
-            .attr("x2", function (d) { return d.target.x; })
-            .attr("y2", function (d) { return d.target.y; });
-
-        node
-            .attr("cx", function (d) { return d.x; })
-            .attr("cy", function (d) { return d.y; });
-    }
 
 }
 
 function constrainedLayoutGraph(parentId, ingraph, options) {
 
-    let indexedLinks = ingraph.links.map(function (l) {
-        let s = l.source;
-        let t = l.target;
-        var sindex = ingraph.nodes.map(function (e) { return e.id; }).indexOf(s);
-        var tindex = ingraph.nodes.map(function (e) { return e.id; }).indexOf(t);
-        return {
-            "source": sindex,
-            "target": tindex
-        };
-    });
+    loadDependencies(['d3', 'cola'], function () {
+        let indexedLinks = ingraph.links.map(function (l) {
+            let s = l.source;
+            let t = l.target;
+            var sindex = ingraph.nodes.map(function (e) { return e.id; }).indexOf(s);
+            var tindex = ingraph.nodes.map(function (e) { return e.id; }).indexOf(t);
+            return {
+                "source": sindex,
+                "target": tindex
+            };
+        });
 
-    let graph = {};
-    graph.nodes = ingraph.nodes;
-    graph.links = indexedLinks;
+        let graph = {};
+        graph.nodes = ingraph.nodes;
+        graph.links = indexedLinks;
 
-    let width = options.width || 600;
-    let height = options.height || 400;
+        let width = options.width || 600;
+        let height = options.height || 400;
 
-    let nodeRadius = options.nodeRadius || 5;
-    let nodeSpacing = options.nodeSpacing || 20;
-    let showGroups = options.showGroups;
-    let colorCat = options.colorBy || 'class';
+        let nodeRadius = options.nodeRadius || 5;
+        let nodeSpacing = options.nodeSpacing || 20;
+        let showGroups = options.showGroups;
+        let colorCat = options.colorBy || 'class';
 
-    let tooltipXOffset = 20;
-    let tooltipYOffset = -50;
+        let tooltipXOffset = 20;
+        let tooltipYOffset = -50;
 
-    d3.select('#' + parentId).classed('chart-container', true);
-    d3.select('#' + parentId).selectAll('svg').remove();
+        d3.select('#' + parentId).classed('chart-container', true);
+        d3.select('#' + parentId).selectAll('svg').remove();
 
-    let svg = d3.select('#' + parentId).append('svg')
-        .attr('width', width)
-        .attr('height', height);
+        let svg = d3.select('#' + parentId).append('svg')
+            .attr('width', width)
+            .attr('height', height);
 
-    let categories = d3.set(graph.nodes, function (n) {
-        return n[colorCat];
-    }).values();
+        let categories = d3.set(graph.nodes, function (n) {
+            return n[colorCat];
+        }).values();
 
-    var catScale = d3.scaleOrdinal()
-        .domain(categories)
-        .range(range(1, 10));
+        var catScale = d3.scaleOrdinal()
+            .domain(categories)
+            .range(range(1, 10));
 
-    var colad3 = cola.d3adaptor(d3)
-        .size([width, height]);
+        var colad3 = cola.d3adaptor(d3)
+            .size([width, height]);
 
-    var groupMap = {};
-    graph.nodes.forEach(function (v, i) {
-        var g = v.class;
-        if (typeof groupMap[g] == 'undefined') {
-            groupMap[g] = [];
+        var groupMap = {};
+        graph.nodes.forEach(function (v, i) {
+            var g = v.class;
+            if (typeof groupMap[g] == 'undefined') {
+                groupMap[g] = [];
+            }
+            groupMap[g].push(i);
+
+            v.width = v.height = nodeSpacing;
+        });
+
+        var groups = [];
+        for (var g in groupMap) {
+            if (groupMap.hasOwnProperty(g)) {
+                groups.push({ id: g, leaves: groupMap[g] });
+            }
         }
-        groupMap[g].push(i);
 
-        v.width = v.height = nodeSpacing;
-    });
+        colad3
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .groups(groups)
+            .jaccardLinkLengths(40, 0.7)
+            .avoidOverlaps(true)
+            .start(50, 0, 50);
 
-    var groups = [];
-    for (var g in groupMap) {
-        if (groupMap.hasOwnProperty(g)) {
-            groups.push({ id: g, leaves: groupMap[g] });
-        }
-    }
-
-    colad3
-        .nodes(graph.nodes)
-        .links(graph.links)
-        .groups(groups)
-        .jaccardLinkLengths(40, 0.7)
-        .avoidOverlaps(true)
-        .start(50, 0, 50);
-
-    let groupClass = showGroups ? 'chart-group' : 'chart-group-hide';
+        let groupClass = showGroups ? 'chart-group' : 'chart-group-hide';
 
 
-    var group = svg.selectAll('.chart-graph-group')
-        .data(groups)
-        .enter().append('rect')
-        .classed(groupClass, true)
-        .style('fill', 'none')
-        .call(colad3.drag);
+        var group = svg.selectAll('.chart-graph-group')
+            .data(groups)
+            .enter().append('rect')
+            .classed(groupClass, true)
+            .style('fill', 'none')
+            .call(colad3.drag);
 
-    var link = svg.selectAll(".chart-graph-link")
-        .data(graph.links)
-        .enter().append("line")
-        .classed('chart-graph-link', true);
+        var link = svg.selectAll(".chart-graph-link")
+            .data(graph.links)
+            .enter().append("line")
+            .classed('chart-graph-link', true);
 
-    var node = svg.selectAll(".node")
-        .data(graph.nodes)
-        .enter().append("circle")
-        .classed('chart-graph-node', true)
-        .attr("r", nodeRadius)
-        .attr('class', function (d) {
-            return 'chart-cat-' + catScale(d[colorCat]);
-        })
-
-        .call(colad3.drag);
-
-    let keys = keysFromNode(graph.nodes[0]);
-
-    //tooltips
-    node.on('mouseover', function (d) {
-        d3.select("#" + parentId).selectAll('.chart-tooltip')
-            .data([0])
-            .enter()
-            .append('div')
-            .classed('chart-tooltip', true)
-            .style('left', function (e, i) {
-                return d.x + tooltipXOffset + 'px';
+        var node = svg.selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("circle")
+            .classed('chart-graph-node', true)
+            .attr("r", nodeRadius)
+            .attr('class', function (d) {
+                return 'chart-cat-' + catScale(d[colorCat]);
             })
-            .style('top', function (e, i) {
-                return d.y + tooltipYOffset + 'px';
-            })
-            .html(function (e, i) {
 
-                let keyValues = keys.map(function (k) {
-                    return capitalizeFirstLetter(k) + ': ' + d[k];
+            .call(colad3.drag);
+
+        let keys = keysFromNode(graph.nodes[0]);
+
+        //tooltips
+        node.on('mouseover', function (d) {
+            d3.select("#" + parentId).selectAll('.chart-tooltip')
+                .data([0])
+                .enter()
+                .append('div')
+                .classed('chart-tooltip', true)
+                .style('left', function (e, i) {
+                    return d.x + tooltipXOffset + 'px';
+                })
+                .style('top', function (e, i) {
+                    return d.y + tooltipYOffset + 'px';
+                })
+                .html(function (e, i) {
+
+                    let keyValues = keys.map(function (k) {
+                        return capitalizeFirstLetter(k) + ': ' + d[k];
+                    });
+
+                    let labelText = keyValues.join('</br>');
+                    return labelText;
                 });
+        });
 
-                let labelText = keyValues.join('</br>');
-                return labelText;
-            });
+        node.on('mouseout', function (d) {
+            d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
+        });
+
+
+        colad3.on("tick", tick);
+
+
+        function tick() {
+            link.attr("x1", function (d) { return d.source.x; })
+                .attr("y1", function (d) { return d.source.y; })
+                .attr("x2", function (d) { return d.target.x; })
+                .attr("y2", function (d) { return d.target.y; });
+
+            node.attr("cx", function (d) { return d.x; })
+                .attr("cy", function (d) { return d.y; });
+
+            group
+                .attr('x', function (d) { return d.bounds.x; })
+                .attr('y', function (d) { return d.bounds.y; })
+                .attr('width', function (d) { return d.bounds.width(); })
+                .attr('height', function (d) { return d.bounds.height(); });
+        }
     });
-
-    node.on('mouseout', function (d) {
-        d3.select("#" + parentId).selectAll('.chart-tooltip').remove();
-    });
-
-
-    colad3.on("tick", tick);
-
-
-    function tick() {
-        link.attr("x1", function (d) { return d.source.x; })
-            .attr("y1", function (d) { return d.source.y; })
-            .attr("x2", function (d) { return d.target.x; })
-            .attr("y2", function (d) { return d.target.y; });
-
-        node.attr("cx", function (d) { return d.x; })
-            .attr("cy", function (d) { return d.y; });
-
-        group
-            .attr('x', function (d) { return d.bounds.x; })
-            .attr('y', function (d) { return d.bounds.y; })
-            .attr('width', function (d) { return d.bounds.width(); })
-            .attr('height', function (d) { return d.bounds.height(); });
-    }
 
 }
 
 function beeswarmChart(parentId, data, options) {
+    loadDependencies(['d3','p5','p5.dom'], function () {
+        let width = options.width || 600;
+        let height = options.height || 600;
 
-
-    let width = options.width || 600;
-    let height = options.height || 600;
-
-    let bounds = {
-        top: options.top || 30,
-        bottom: options.bottom || 80,
-        left: options.left || 200,
-        right: options.right || 80
-    };
-
-    var xScale = null;
-    var yScale = null;
-
-    //var data = [];
-    var xFilter = 'all';
-    var yFilter = 'all';
-    var ready = false;
-
-    var simulation = null;
-    var axisSvg = null;
-    var nTicks = 10;
-    var maxLabelLength = 5;
-    var mainColor = '#304a6c';
-
-    var dia = options.nodeRadius || 4;
-
-    //remove any previously created containers
-    d3.select('#' + parentId).selectAll('div').remove();
-    d3.select('#' + parentId).selectAll('svg').remove();
-
-    //create a container for the navigation
-    d3.select('#' + parentId).append('div').classed('chart-beeswarm-nav', true)
-        .style('padding-left', 0.8 * bounds.left + 'px');
-    //create a container for the chart
-    d3.select('#' + parentId).append('div').classed('chart-beeswarm', true);
-
-    //set css to ensure correct positioning of axis
-    d3.select('#' + parentId).select('.chart-beeswarm').classed('chart-container', true);//.style('position', 'relative');
-
-    let chartElement = d3.select('#' + parentId).select('.chart-beeswarm');
-
-    var sketch = function (s) {
-
-        s.setup = function () {
-
-            s.createCanvas(width, height);
-
-            s.frameRate(30);
-            s.noLoop();
-
-            axisSvg = d3.select('#' + parentId)
-                .select('.chart-beeswarm')
-                .append("svg")
-                .attr("width", s.width)
-                .attr("height", s.height)
-                .style('position', 'absolute')
-                .style('top', '0')
-                .style('left', '0')
-                .append("g");
-
-            axisSvg.append("g")
-                .attr('transform', 'translate(0,' + (s.height - 0.8 * bounds.bottom) + ')')
-                .classed('chart-x-axis chart-axis', true);
-
-            axisSvg.append("g")
-                .attr('transform', translate(0.8 * bounds.left, 0))
-                .classed('chart-y-axis chart-axis', true);
-
-            createButtons(s);
-            setFilter(s, xFilter, yFilter);
-
-            simulation.stop();
-            for (var i = 0; i < 150; ++i) {
-                simulation.tick();
-            }
-            simulation.restart();
-
-            ready = true;
-            s.redraw();
-
+        let bounds = {
+            top: options.top || 30,
+            bottom: options.bottom || 80,
+            left: options.left || 200,
+            right: options.right || 80
         };
 
-        s.draw = function () {
-            if (!ready) {
-                s.background(250);
-                return;
-            }
+        var xScale = null;
+        var yScale = null;
 
-            s.background(255);
+        //var data = [];
+        var xFilter = 'all';
+        var yFilter = 'all';
+        var ready = false;
 
-            //axis
-            var xAxis = d3.axisBottom(xScale).ticks(nTicks);
-            var yAxis = d3.axisLeft(yScale).ticks(nTicks);
-            axisSvg.select('.chart-x-axis').call(xAxis);
+        var simulation = null;
+        var axisSvg = null;
+        var nTicks = 10;
+        var maxLabelLength = 5;
+        var mainColor = '#304a6c';
 
-            let xScaleDomain = xScale.domain();
+        var dia = options.nodeRadius || 4;
 
-            let longestLabel = d3.max(xScaleDomain, d => {
-                let ds = '' + d;
-                return ds.length;
-            });
+        //remove any previously created containers
+        d3.select('#' + parentId).selectAll('div').remove();
+        d3.select('#' + parentId).selectAll('svg').remove();
 
-            //only rotate labels if longest label is a bit long
-            let doRotate = longestLabel > maxLabelLength;
-            if (doRotate) {
-                axisSvg.select('.chart-x-axis').selectAll("text")
-                    .style("text-anchor", "end")
-                    .attr('dx', '-.8em')
-                    .attr("dy", ".35em")
-                    .attr("transform", "rotate(-45)");
-            }
+        //create a container for the navigation
+        d3.select('#' + parentId).append('div').classed('chart-beeswarm-nav', true)
+            .style('padding-left', 0.8 * bounds.left + 'px');
+        //create a container for the chart
+        d3.select('#' + parentId).append('div').classed('chart-beeswarm', true);
 
-            axisSvg.select('.chart-y-axis').call(yAxis);
+        //set css to ensure correct positioning of axis
+        d3.select('#' + parentId).select('.chart-beeswarm').classed('chart-container', true);//.style('position', 'relative');
 
-            s.noFill();
-            s.stroke(200);
-            data.forEach(function (d, i) {
+        let chartElement = d3.select('#' + parentId).select('.chart-beeswarm');
 
-                s.stroke(255);
-                s.strokeWeight(1);
-                var diameter = dia * 2;
-                s.fill(mainColor);
+        var sketch = function (s) {
 
-                s.ellipse(d.x, d.y, diameter, diameter);
-            });
+            s.setup = function () {
 
-            //tooltip
-            let closest = simulation.find(s.mouseX, s.mouseY, 50);
+                s.createCanvas(width, height);
 
-            //tooltip
-            let tooltipXOffset = 0;
-            let tooltipYOffset = 0;
+                s.frameRate(30);
+                s.noLoop();
 
-            d3.select('#' + parentId).select('.chart-beeswarm').selectAll('.chart-tooltip').remove();
+                axisSvg = d3.select('#' + parentId)
+                    .select('.chart-beeswarm')
+                    .append("svg")
+                    .attr("width", s.width)
+                    .attr("height", s.height)
+                    .style('position', 'absolute')
+                    .style('top', '0')
+                    .style('left', '0')
+                    .append("g");
 
-            if (closest) {
+                axisSvg.append("g")
+                    .attr('transform', 'translate(0,' + (s.height - 0.8 * bounds.bottom) + ')')
+                    .classed('chart-x-axis chart-axis', true);
 
-                let keys = keysFromNode(closest);
+                axisSvg.append("g")
+                    .attr('transform', translate(0.8 * bounds.left, 0))
+                    .classed('chart-y-axis chart-axis', true);
 
-                d3.select('#' + parentId).select('.chart-beeswarm').selectAll('.chart-tooltip')
-                    .data([0])
-                    .enter()
-                    .append('div')
-                    .classed('chart-tooltip', true)
-                    .style('left', function (e, i) {
-                        return closest.x + tooltipXOffset + 'px';
-                    })
-                    .style('top', function (e, i) {
-                        return closest.y + tooltipYOffset + 'px';
-                    })
-                    .html(function (e, i) {
-                        let keyValues = keys.map(function (k) {
-                            return capitalizeFirstLetter(k) + ': ' + closest[k];
+                createButtons(s);
+                setFilter(s, xFilter, yFilter);
+
+                simulation.stop();
+                for (var i = 0; i < 150; ++i) {
+                    simulation.tick();
+                }
+                simulation.restart();
+
+                ready = true;
+                s.redraw();
+
+            };
+
+            s.draw = function () {
+                if (!ready) {
+                    s.background(250);
+                    return;
+                }
+
+                s.background(255);
+
+                //axis
+                var xAxis = d3.axisBottom(xScale).ticks(nTicks);
+                var yAxis = d3.axisLeft(yScale).ticks(nTicks);
+                axisSvg.select('.chart-x-axis').call(xAxis);
+
+                let xScaleDomain = xScale.domain();
+
+                let longestLabel = d3.max(xScaleDomain, d => {
+                    let ds = '' + d;
+                    return ds.length;
+                });
+
+                //only rotate labels if longest label is a bit long
+                let doRotate = longestLabel > maxLabelLength;
+                if (doRotate) {
+                    axisSvg.select('.chart-x-axis').selectAll("text")
+                        .style("text-anchor", "end")
+                        .attr('dx', '-.8em')
+                        .attr("dy", ".35em")
+                        .attr("transform", "rotate(-45)");
+                }
+
+                axisSvg.select('.chart-y-axis').call(yAxis);
+
+                s.noFill();
+                s.stroke(200);
+                data.forEach(function (d, i) {
+
+                    s.stroke(255);
+                    s.strokeWeight(1);
+                    var diameter = dia * 2;
+                    s.fill(mainColor);
+
+                    s.ellipse(d.x, d.y, diameter, diameter);
+                });
+
+                //tooltip
+                let closest = simulation.find(s.mouseX, s.mouseY, 50);
+
+                //tooltip
+                let tooltipXOffset = 0;
+                let tooltipYOffset = 0;
+
+                d3.select('#' + parentId).select('.chart-beeswarm').selectAll('.chart-tooltip').remove();
+
+                if (closest) {
+
+                    let keys = keysFromNode(closest);
+
+                    d3.select('#' + parentId).select('.chart-beeswarm').selectAll('.chart-tooltip')
+                        .data([0])
+                        .enter()
+                        .append('div')
+                        .classed('chart-tooltip', true)
+                        .style('left', function (e, i) {
+                            return closest.x + tooltipXOffset + 'px';
+                        })
+                        .style('top', function (e, i) {
+                            return closest.y + tooltipYOffset + 'px';
+                        })
+                        .html(function (e, i) {
+                            let keyValues = keys.map(function (k) {
+                                return capitalizeFirstLetter(k) + ': ' + closest[k];
+                            });
+
+                            let labelText = keyValues.join('</br>');
+                            return labelText;
                         });
 
-                        let labelText = keyValues.join('</br>');
-                        return labelText;
-                    });
-
-            }
-
-        };
-
-        s.mouseMoved = function () {
-            if (ready) {
-                s.redraw();
-            }
-        };
-    };
-
-    //p5 instance mode
-    var myp5 = new p5(sketch, chartElement.node());
-
-    function createButtons(s) {
-
-        var keys = Object.keys(data[0]);
-        var filters = ['all'].concat(keys);
-
-        // <nav class="nav-main">
-        //     <ul>
-        //         <li><a href="style-mainnav.html">Products</a></li>
-        //         <li class="main-nav--selected"><a href="style-mainnav.html">Knowledge base</a></li>
-        //         <li><a href="style-mainnav.html">Team</a></li>
-        //         <li><a href="style-mainnav.html">Contact</a></li>
-        //     </ul>
-        // </nav>
-        let xButtons = d3.select('#' + parentId)
-            .select('.chart-beeswarm-nav')
-            .append('nav')
-            .classed('nav-main', true)
-            .append('ul')
-            .classed('chart-filter-buttons-x', true);
-
-        let yButtons = d3.select('#' + parentId)
-            .select('.chart-beeswarm-nav')
-            .append('nav')
-            .classed('nav-main', true)
-            .append('ul')
-            .classed('chart-filter-buttons-y', true);
-
-        xButtons.selectAll('li')
-            .data(filters)
-            .enter()
-            .append('li')
-            .classed('main-nav--selected', function (d) {
-                return d == xFilter;
-            })
-            .append('a')
-            .text(function (d) {
-                return d;
-            })
-            .on('click', function (d) {
-                xFilter = d;
-                setFilter(s, xFilter, yFilter);
-            });
-
-        yButtons.selectAll('li')
-            .data(filters)
-            .enter()
-            .append('li')
-            .classed('main-nav--selected', function (d) {
-                return d == yFilter;
-            })
-            .append('a')
-            .text(function (d) {
-                return d;
-            })
-            .on('click', function (d) {
-                yFilter = d;
-                setFilter(s, xFilter, yFilter);
-            });
-    }
-
-
-    function setFilter(s, filterX, filterY) {
-
-        var xAcc = acc(filterX);
-        var yAcc = acc(filterY);
-
-        xScale = xscl(filterX);
-        yScale = yscl(filterY);
-
-        if (simulation) {
-            simulation.stop();
-            simulation.nodes([]);
-            simulation = null;
-        }
-
-        var offScreen = -500;
-        simulation = d3.forceSimulation(data)
-            .force("x", d3.forceX(function (d) {
-                if (xAcc(d) == null) {
-                    d.invalid = true;
-                    return offScreen;
                 }
-                d.invalid = false;
-                return xScale(xAcc(d));
-            }).strength(0.05))
-            .force("y", d3.forceY(function (d) {
-                if (yAcc(d) == null) {
-                    d.invalid = true;
-                    return offScreen;
-                }
-                d.invalid = false;
-                return yScale(yAcc(d));
-            }).strength(0.05))
-            .force("collision", d3.forceCollide(function (d) {
-                return dia;
-            }).strength(1))
-            .on('tick', function () {
-                s.redraw();
-            });
 
-        // d3.select('#' + parentId)
-        // .select('.chart-beeswarm-nav')
-        // .append('nav')
-        // .classed('nav-main', true)
-        // .append('ul')
-        // .classed('chart-filter-buttons-y',true);
-
-        d3.select('#' + parentId)
-            .select('.chart-beeswarm-nav')
-            .select('.chart-filter-buttons-x')
-            .selectAll('li')
-            .classed('main-nav--selected', function (d) {
-                return d == xFilter;
-            });
-
-        d3.select('#' + parentId)
-            .select('.chart-beeswarm-nav')
-            .select('.chart-filter-buttons-y')
-            .selectAll('li')
-            .classed('main-nav--selected', function (d) {
-                return d == yFilter;
-            });
-
-    }
-
-    function acc(id) {
-        if (id == 'all') {
-            return function (d) {
-                return 0.5;
             };
-        } else return function (d) {
-            return d[id];
+
+            s.mouseMoved = function () {
+                if (ready) {
+                    s.redraw();
+                }
+            };
         };
-    }
 
+        //p5 instance mode
+        var myp5 = new p5(sketch, chartElement.node());
 
-    function xscl(filter) {
-        // var _range = [border, width - border];
-        var range = [bounds.left, width - bounds.right];
-        return scl(filter, range);
-    }
+        function createButtons(s) {
 
-    function yscl(filter) {
-        // var _range = [height - border, border];
-        var range = [height - bounds.bottom, bounds.top];
-        return scl(filter, range);
-    }
+            var keys = Object.keys(data[0]);
+            var filters = ['all'].concat(keys);
 
-    function scl(filter, range) {
+            // <nav class="nav-main">
+            //     <ul>
+            //         <li><a href="style-mainnav.html">Products</a></li>
+            //         <li class="main-nav--selected"><a href="style-mainnav.html">Knowledge base</a></li>
+            //         <li><a href="style-mainnav.html">Team</a></li>
+            //         <li><a href="style-mainnav.html">Contact</a></li>
+            //     </ul>
+            // </nav>
+            let xButtons = d3.select('#' + parentId)
+                .select('.chart-beeswarm-nav')
+                .append('nav')
+                .classed('nav-main', true)
+                .append('ul')
+                .classed('chart-filter-buttons-x', true);
 
-        //return scale identity if data is empty 
-        if (!data || data.length == 0) {
-            return d3.scaleIdentity();
+            let yButtons = d3.select('#' + parentId)
+                .select('.chart-beeswarm-nav')
+                .append('nav')
+                .classed('nav-main', true)
+                .append('ul')
+                .classed('chart-filter-buttons-y', true);
+
+            xButtons.selectAll('li')
+                .data(filters)
+                .enter()
+                .append('li')
+                .classed('main-nav--selected', function (d) {
+                    return d == xFilter;
+                })
+                .append('a')
+                .text(function (d) {
+                    return d;
+                })
+                .on('click', function (d) {
+                    xFilter = d;
+                    setFilter(s, xFilter, yFilter);
+                });
+
+            yButtons.selectAll('li')
+                .data(filters)
+                .enter()
+                .append('li')
+                .classed('main-nav--selected', function (d) {
+                    return d == yFilter;
+                })
+                .append('a')
+                .text(function (d) {
+                    return d;
+                })
+                .on('click', function (d) {
+                    yFilter = d;
+                    setFilter(s, xFilter, yFilter);
+                });
         }
-        //if filter is all then we have a special case
-        else if (filter == 'all') {
-            return d3.scaleLinear()
-                .domain([0, 1])
-                .range(range);
+
+
+        function setFilter(s, filterX, filterY) {
+
+            var xAcc = acc(filterX);
+            var yAcc = acc(filterY);
+
+            xScale = xscl(filterX);
+            yScale = yscl(filterY);
+
+            if (simulation) {
+                simulation.stop();
+                simulation.nodes([]);
+                simulation = null;
+            }
+
+            var offScreen = -500;
+            simulation = d3.forceSimulation(data)
+                .force("x", d3.forceX(function (d) {
+                    if (xAcc(d) == null) {
+                        d.invalid = true;
+                        return offScreen;
+                    }
+                    d.invalid = false;
+                    return xScale(xAcc(d));
+                }).strength(0.05))
+                .force("y", d3.forceY(function (d) {
+                    if (yAcc(d) == null) {
+                        d.invalid = true;
+                        return offScreen;
+                    }
+                    d.invalid = false;
+                    return yScale(yAcc(d));
+                }).strength(0.05))
+                .force("collision", d3.forceCollide(function (d) {
+                    return dia;
+                }).strength(1))
+                .on('tick', function () {
+                    s.redraw();
+                });
+
+            // d3.select('#' + parentId)
+            // .select('.chart-beeswarm-nav')
+            // .append('nav')
+            // .classed('nav-main', true)
+            // .append('ul')
+            // .classed('chart-filter-buttons-y',true);
+
+            d3.select('#' + parentId)
+                .select('.chart-beeswarm-nav')
+                .select('.chart-filter-buttons-x')
+                .selectAll('li')
+                .classed('main-nav--selected', function (d) {
+                    return d == xFilter;
+                });
+
+            d3.select('#' + parentId)
+                .select('.chart-beeswarm-nav')
+                .select('.chart-filter-buttons-y')
+                .selectAll('li')
+                .classed('main-nav--selected', function (d) {
+                    return d == yFilter;
+                });
+
         }
-        else {
-            let sample = data[0];
-            if (isNaN(sample[filter])) {
-                var domain = d3.set(data, function (d) {
-                    return d[filter];
-                }).values();
-                return d3.scalePoint()
-                    .domain(domain)
+
+        function acc(id) {
+            if (id == 'all') {
+                return function (d) {
+                    return 0.5;
+                };
+            } else return function (d) {
+                return d[id];
+            };
+        }
+
+
+        function xscl(filter) {
+            // var _range = [border, width - border];
+            var range = [bounds.left, width - bounds.right];
+            return scl(filter, range);
+        }
+
+        function yscl(filter) {
+            // var _range = [height - border, border];
+            var range = [height - bounds.bottom, bounds.top];
+            return scl(filter, range);
+        }
+
+        function scl(filter, range) {
+
+            //return scale identity if data is empty 
+            if (!data || data.length == 0) {
+                return d3.scaleIdentity();
+            }
+            //if filter is all then we have a special case
+            else if (filter == 'all') {
+                return d3.scaleLinear()
+                    .domain([0, 1])
                     .range(range);
             }
             else {
-                return d3.scaleLinear()
-                    .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
-                    .range(range);
+                let sample = data[0];
+                if (isNaN(sample[filter])) {
+                    var domain = d3.set(data, function (d) {
+                        return d[filter];
+                    }).values();
+                    return d3.scalePoint()
+                        .domain(domain)
+                        .range(range);
+                }
+                else {
+                    return d3.scaleLinear()
+                        .domain([d3.min(data, acc(filter)), d3.max(data, acc(filter))])
+                        .range(range);
+                }
             }
+
         }
 
-    }
+    });
 
 
 }
@@ -817,39 +826,75 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-//from https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement
-function loadError(oError) {
-    throw new URIError("The script " + oError.target.src + " didn't load correctly.");
-}
-
-function prefixScript(scriptId, url, onloadFunction) {
-    var existingScript = document.getElementById(scriptId);
-
-    if (!existingScript) {
-        var newScript = document.createElement("script");
-        newScript.onerror = loadError;
-        if (onloadFunction) { newScript.onload = onloadFunction; }
-        document.currentScript.parentNode.insertBefore(newScript, document.currentScript);
-        newScript.src = url;
-        script.id = scriptId;
+async function loadDependencies(libIds, callback) {
+    console.log('loadDependencies');
+    let currentScript = document.currentScript;
+    for (var i = 0; i < libIds.length; i++) {
+        var result = await loadScript(libIds[i], currentScript);
+        console.log('result: ' + result);
     }
+    callback();
 }
 
-function promiseExample() {
-    var urls = ["url1", "url2", "url3"];
-    var promises = [];
+function loadScript(id, currentScript) {
+    // This promise will be used by Promise.all to determine success or failure
+    return new Promise(function (resolve, reject) {
 
-    urls.forEach(function (url) {
-        promises.push(function () {
-            console.log('calling function on ' + url);
-            return 'hello ' + url;
-        }());
+        console.log('currentScript');
+        console.log(currentScript);
+
+        exists = mylibs[id].loaded;
+
+        if (!exists) {
+            var newScript = document.createElement('script');
+
+            // Important success and error for the promise
+            newScript.onload = function () {
+                mylibs[id].loaded = true;
+                resolve(url);
+            };
+            newScript.onerror = function () {
+                reject(url);
+            };
+
+            let url = mylibs[id].url;
+            console.log('url: ' + url);
+            currentScript.parentNode.insertBefore(newScript, currentScript);
+
+            newScript.src = url;
+
+        }
+        else {
+            console.log('script ' + id + ' was already loaded');
+            resolve(mylibs[id].url);
+        }
+
     });
-
-    Promise.all(promises).then(function (values) {
-        //console.log(values);
-        console.log('then')
-        console.log(values);
-    });
-
 }
+
+
+let mylibs = {
+    'd3': {
+        url: 'https://d3js.org/d3.v4.min.js',
+        loaded: false
+    },
+    'p5': {
+        url: 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js',
+        loaded: false
+    },
+    'p5.dom': {
+        url: 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js',
+        loaded: false
+    },
+    'cola': {
+        url: 'https://ialab.it.monash.edu/webcola/cola.min.js',
+        loaded: false
+    },
+    'google-charts': {
+        url: 'https://www.gstatic.com/charts/loader.js',
+        loaded: false
+    }
+};
+
+
+
