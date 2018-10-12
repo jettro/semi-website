@@ -50,7 +50,7 @@
     function bubbleChart(parentId, data, options) {
 
         loadDependencies(['d3'], function () {
-         
+
             let width = options.width || 600;
             let height = options.height || 600;
 
@@ -178,7 +178,7 @@
     function forceDirectedGraph(parentId, graph, options) {
 
         loadDependencies(['d3'], function () {
-          
+
             let width = options.width || 600;
             let height = options.height || 400;
 
@@ -862,14 +862,14 @@
                 };
 
                 let url = libs[id].url;
-             
+
                 currentScript.parentNode.insertBefore(newScript, currentScript);
 
                 newScript.src = url;
 
             }
             else {
-               
+
                 resolve(libs[id].url);
             }
 
