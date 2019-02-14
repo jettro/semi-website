@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     main: './js-src/main.js',
     formPage: './js-src/page-forms.js',
+    pricingPage: './js-src/page-pricing.js',
   },
   output: {
     path: path.resolve(__dirname, 'js'),

@@ -8,7 +8,7 @@
 
 {% include organism-header.html %}
 
-<main>
+<main class="{% if page.mainClass %}{{ page.mainClass }}{% endif %}">
     {{ content }}
 </main>
 

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js-src/page-forms.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./js-src/page-pricing.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -95,17 +95,6 @@
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/cookie */ \"./js-src/modules/cookie.js\");\n/* harmony import */ var _modules_mailChimp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/mailChimp */ \"./js-src/modules/mailChimp.js\");\n/* harmony import */ var _modules_video__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/video */ \"./js-src/modules/video.js\");\n/* harmony import */ var _modules_search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/search */ \"./js-src/modules/search.js\");\n/* harmony import */ var _modules_toggle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/toggle */ \"./js-src/modules/toggle.js\");\n/* harmony import */ var _modules_tagmanager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tagmanager */ \"./js-src/modules/tagmanager.js\");\n/* harmony import */ var _modules_tableOfContents__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/tableOfContents */ \"./js-src/modules/tableOfContents.js\");\n// modules\n\n\n\n\n\n\n\n/**\n * Cookie handler (based on cookie bar ID)\n */\n\nObject(_modules_cookie__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('cookie-notification');\n/**\n * Send form submission data to mailchimp\n */\n// TODO: only load this init on contact/index and workshop/index\n\nObject(_modules_mailChimp__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n/**\n * Play the video on the homepage\n */\n// TODO: limit the loading of video script to only the homepage\n\nObject(_modules_video__WEBPACK_IMPORTED_MODULE_2__[\"default\"])('js-video-homepage');\n/**\n * Search\n */\n\nObject(_modules_search__WEBPACK_IMPORTED_MODULE_3__[\"default\"])();\n/**\n * Make elements on the page collapse\n */\n\nObject(_modules_toggle__WEBPACK_IMPORTED_MODULE_4__[\"default\"])('data-toggle');\n/**\n * Initialize the tagmanager\n */\n\nObject(_modules_tagmanager__WEBPACK_IMPORTED_MODULE_5__[\"default\"])('GTM-K6DMN8N');\n/**\n * Initialize  the table of contents\n */\n\nObject(_modules_tableOfContents__WEBPACK_IMPORTED_MODULE_6__[\"default\"])('toc');\n/**\n * External scripts\n */\n\n__webpack_require__(/*! ./lib/pingdom/pa-5b22f622a42dbb00070002a5.js */ \"./js-src/lib/pingdom/pa-5b22f622a42dbb00070002a5.js\");\n\n//# sourceURL=webpack:///./js-src/common.js?");
-
-/***/ }),
-
-/***/ "./js-src/lib/multirange/multirange.js":
-/*!*********************************************!*\
-  !*** ./js-src/lib/multirange/multirange.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("(function () {\n  \"use strict\";\n\n  var supportsMultiple = self.HTMLInputElement && \"valueLow\" in HTMLInputElement.prototype;\n  var descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, \"value\");\n\n  self.multirange = function (input) {\n    if (supportsMultiple || input.classList.contains(\"multirange\")) {\n      return;\n    }\n\n    var value = input.getAttribute(\"value\");\n    var values = value === null ? [] : value.split(\",\");\n    var min = +(input.min || 0);\n    var max = +(input.max || 100);\n    var ghost = input.cloneNode();\n    input.classList.add(\"multirange\", \"original\");\n    ghost.classList.add(\"multirange\", \"ghost\");\n    input.value = values[0] || min + (max - min) / 2;\n    ghost.value = values[1] || min + (max - min) / 2;\n    input.parentNode.insertBefore(ghost, input.nextSibling);\n    Object.defineProperty(input, \"originalValue\", descriptor.get ? descriptor : {\n      // Fuck you Safari >:(\n      get: function () {\n        return this.value;\n      },\n      set: function (v) {\n        this.value = v;\n      }\n    });\n    Object.defineProperties(input, {\n      valueLow: {\n        get: function () {\n          return Math.min(this.originalValue, ghost.value);\n        },\n        set: function (v) {\n          this.originalValue = v;\n        },\n        enumerable: true\n      },\n      valueHigh: {\n        get: function () {\n          return Math.max(this.originalValue, ghost.value);\n        },\n        set: function (v) {\n          ghost.value = v;\n        },\n        enumerable: true\n      }\n    });\n\n    if (descriptor.get) {\n      // Again, fuck you Safari\n      Object.defineProperty(input, \"value\", {\n        get: function () {\n          return this.valueLow + \",\" + this.valueHigh;\n        },\n        set: function (v) {\n          var values = v.split(\",\");\n          this.valueLow = values[0];\n          this.valueHigh = values[1];\n          update();\n        },\n        enumerable: true\n      });\n    }\n\n    if (typeof input.oninput === \"function\") {\n      ghost.oninput = input.oninput.bind(input);\n    }\n\n    function update() {\n      ghost.style.setProperty(\"--low\", 100 * ((input.valueLow - min) / (max - min)) + 1 + \"%\");\n      ghost.style.setProperty(\"--high\", 100 * ((input.valueHigh - min) / (max - min)) - 1 + \"%\");\n    }\n\n    input.addEventListener(\"input\", update);\n    ghost.addEventListener(\"input\", update);\n    update();\n  };\n\n  multirange.init = function () {\n    [].slice.call(document.querySelectorAll(\"input[type=range][multiple]:not(.multirange)\")).forEach(multirange);\n  };\n\n  if (document.readyState == \"loading\") {\n    document.addEventListener(\"DOMContentLoaded\", multirange.init);\n  } else {\n    multirange.init();\n  }\n})();\n\n//# sourceURL=webpack:///./js-src/lib/multirange/multirange.js?");
 
 /***/ }),
 
@@ -204,15 +193,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/**\n * start playing the sel
 
 /***/ }),
 
-/***/ "./js-src/page-forms.js":
-/*!******************************!*\
-  !*** ./js-src/page-forms.js ***!
-  \******************************/
+/***/ "./js-src/page-pricing.js":
+/*!********************************!*\
+  !*** ./js-src/page-pricing.js ***!
+  \********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ \"./js-src/common.js\");\n\n\n__webpack_require__(/*! ./lib/multirange/multirange.js */ \"./js-src/lib/multirange/multirange.js\");\n\n//# sourceURL=webpack:///./js-src/page-forms.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ \"./js-src/common.js\");\n\nconsole.log('pricing page');\n\n//# sourceURL=webpack:///./js-src/page-pricing.js?");
 
 /***/ }),
 
