@@ -1,6 +1,12 @@
 
 import { elementExists, selectParentElementOfType, assignButtonElement } from '../helpers/helpers';
+import fieldSectionToggleFieldset from './fieldSectionToggleFieldset';
 
+/**
+ * @desc Field section radio buttons interaction
+ * @param e
+ * @param form
+ */
 export default function(e, form) {
   const targetParentIsButton = selectParentElementOfType(e, 'BUTTON');
   const targetIsButton = e.target.tagName === 'BUTTON';
@@ -18,28 +24,14 @@ export default function(e, form) {
     }
   }
 
-  /**
-   *
-   * @desc flips 'true' and 'false' (strings) so that the aria-hidden value of target gets correct string value
-   * @param showTarget {string} |
-   * @returns {string}
-   */
-  function unHideFieldset(showTarget) {
-    if (showTarget === 'false') {
-      return 'true';
-    } else if (showTarget === 'true') {
-      return 'false';
-    }
-  }
-
   if (elementExists(clickedButton)) {
     const isRadioButton = clickedButton.attributes.role.value === 'radio';
     const isInactiveButton = clickedButton.getAttribute('aria-checked') !== true;
     const isDisabledBUtton = clickedButton.disabled;
-    const parentNode = clickedButton.parentNode;
-    const fieldsetHidden = unHideFieldset(clickedButton.dataset.targetShow);
 
-    if (isDisabledBUtton) { return; }
+    if (isDisabledBUtton) {
+      return;
+    }
 
     if (isRadioButton && isInactiveButton) {
       const targetRadioGroup = clickedButton.closest('[role="radiogroup"]');
@@ -47,29 +39,6 @@ export default function(e, form) {
       clickedButton.setAttribute('aria-checked', 'true');
     }
 
-    if (elementExists(parentNode)) {
-      const parentIsFieldset = parentNode.tagName === 'FIELDSET';
-      if (parentIsFieldset) {
-        const fieldsetTarget = parentNode.dataset.target;
-        const fieldsetHasTarget = typeof(fieldsetTarget) !== 'undefined';
-        if (fieldsetHasTarget) {
-          const fieldSets = form.children;
-          if (elementExists(fieldSets)) {
-            for (let fieldset of fieldSets) {
-              const currentFieldsetIsTarget = fieldset.dataset.step === fieldsetTarget;
-              if (currentFieldsetIsTarget) {
-                fieldset.setAttribute('aria-hidden', fieldsetHidden);
-              }
-            }
-          } else {
-            console.error(`There are no fieldsets present in the selected form '${config.formId}'.`);
-          }
-        }
-      } else {
-        console.error(`parent ${parentIsFieldset} isn't a fieldset`);
-      }
-    } else {
-      console.error(`parent node ${parentNode} doesn't exist.`)
-    }
+    fieldSectionToggleFieldset(e, form, clickedButton);
   }
 }

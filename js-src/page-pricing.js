@@ -2,10 +2,18 @@ import './common';
 import fieldSectionRadioButtons from './modules/fieldSectionRadioButtons';
 import { elementExists } from './helpers/helpers';
 
+/**
+ * configuration object
+ * @type {{formId: string}}
+ */
 const config = {
   'formId': 'js-form-pricing'
 };
 
+/**
+ * Form target
+ * @type {HTMLElement}
+ */
 const formPricing = document.getElementById(config.formId);
 
 if (elementExists(formPricing)) {
