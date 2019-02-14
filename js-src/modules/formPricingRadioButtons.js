@@ -1,6 +1,6 @@
 
 import { elementExists, selectParentElementOfType, assignButtonElement } from '../helpers/helpers';
-import fieldSectionToggleFieldset from './fieldSectionToggleFieldset';
+import formPricingToggleFieldset from './formPricingToggleFieldset';
 
 /**
  * @desc Field section radio buttons interaction
@@ -39,6 +39,6 @@ export default function(e, form) {
       clickedButton.setAttribute('aria-checked', 'true');
     }
 
-    fieldSectionToggleFieldset(e, form, clickedButton);
+    formPricingToggleFieldset(e, form, clickedButton);
   }
 }

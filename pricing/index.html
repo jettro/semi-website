@@ -14,19 +14,19 @@ alternatePageScript: pricingPage.bundle.js
                 <legend>
                     <h2 id="label-use-case">Use case description</h2>
                 </legend>
-                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
+                <button class="uiButton" type="button" role="radio" data-price="123" aria-checked="false">
                     <span class="uiButton__title">Master-Data</span>
                 </button>
-                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-price="456" aria-checked="false">
                     <span class="uiButton__title">Reporting</span>
                 </button>
-                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-price="789" aria-checked="true">
                     <span class="uiButton__title">Big Data</span>
                 </button>
-                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-price="1132" aria-checked="false">
                     <span class="uiButton__title">IoT</span>
                 </button>
-                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-price="234" aria-checked="false">
                     <span class="uiButton__title">Process (Ad-Hoc)</span>
                 </button>
             </fieldset>
@@ -47,14 +47,17 @@ alternatePageScript: pricingPage.bundle.js
                 <legend>
                     <h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>
                 </legend>
-                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
                     <span class="uiButton__title">Oracle cloud</span>
                 </button>
-                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false" disabled>
-                    <span class="uiButton__title">Azure</span>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
+                    <span class="uiButton__title">Google cloud</span>
                 </button>
                 <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
                     <span class="uiButton__title">AWS</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
+                    <span class="uiButton__title">Azure</span>
                 </button>
                 <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
                     <span class="uiButton__title">Other</span>
@@ -142,7 +145,7 @@ alternatePageScript: pricingPage.bundle.js
             <dd>€ 0,00</dd>
             <dt># of clusters Adjustment</dt>
             <dd>€ 0,00</dd>
-            <dt>Adjusted Variable cost per month</dt>
+            <dt>Variable cost per month</dt>
             <dd>€ 0,00</dd>
         </dl>
 
