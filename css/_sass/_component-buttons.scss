@@ -1,0 +1,28 @@
+@import 'var-scale';
+@import 'var-color';
+@import 'var-borders';
+
+.uiButton {
+  padding: $space-inner-small;
+  appearance: none;
+  background-color: $color-white;
+
+  // hover for active and not disabled button
+  &:hover:not([disabled]):not([aria-checked="true"]) {
+    background-color: $color-semi-accent-tint--3;
+    border-color: $color-semi-accent;
+  }
+  // inactive state only
+  &:not(&[aria-checked="true"]) {
+    border: $border-2;
+  }
+  // active state
+  &[aria-checked="true"] {
+    color: $color-white;
+    background-color: $color-semi-accent;
+  }
+  &[disabled] {
+    color: $color-gray-4;
+    cursor: not-allowed;
+  }
+}
