@@ -21,8 +21,8 @@
     "htmlmin": "html-minifier --input-dir ./_site --output-dir ./_site --collapse-whitespace --file-ext html",
     "build-js": "webpack --mode=production",
     "build-js-dev": "webpack --mode=development --display-error-details --watch",
-    "prettier": "prettier --check ./js-src/modules/**",
-    "eslint": "eslint ./js-src/modules/**"
+    "prettier": "prettier --check ./js-src/**/* !./js-src/lib/**/*",
+    "eslint": "eslint ./js-src/** --ignore-path ./js-src/lib/**/*"
   },
   "repository": {
     "type": "git",
