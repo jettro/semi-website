@@ -1,5 +1,5 @@
 import './common';
-import fieldSectionButtons from './modules/fieldSectionButtons';
+import fieldSectionRadioButtons from './modules/fieldSectionRadioButtons';
 import { elementExists } from './helpers/helpers';
 
 const config = {
@@ -11,7 +11,7 @@ const formPricing = document.getElementById(config.formId);
 if (elementExists(formPricing)) {
   formPricing.addEventListener('click', e => {
     e.preventDefault();
-    fieldSectionButtons(e, formPricing);
+    fieldSectionRadioButtons(e, formPricing);
     // TODO: add calculation logic
     // TODO: add form handler
   }, false);

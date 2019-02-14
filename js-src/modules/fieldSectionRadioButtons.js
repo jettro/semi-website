@@ -1,22 +1,10 @@
 
-import { elementExists, selectParent } from '../helpers/helpers';
+import { elementExists, selectParentElementOfType, assignButtonElement } from '../helpers/helpers';
 
 export default function(e, form) {
-  const targetParentIsButton = selectParent(e.target.closest('button'), 'BUTTON');
+  const targetParentIsButton = selectParentElementOfType(e, 'BUTTON');
   const targetIsButton = e.target.tagName === 'BUTTON';
-
-  /**
-   *
-   * @desc use this to assign the correct button element based on the target
-   * @returns {*} element
-   */
-  function assignButtonElement() {
-    if (targetParentIsButton) {
-      return e.target.closest('button');
-    } else if (targetIsButton) {
-      return e.target;
-    }
-  }
+  const clickedButton = assignButtonElement(e, targetParentIsButton, targetIsButton);
 
   /**
    *
@@ -44,26 +32,20 @@ export default function(e, form) {
     }
   }
 
-  const clickedButton = assignButtonElement();
-
   if (elementExists(clickedButton)) {
     const isRadioButton = clickedButton.attributes.role.value === 'radio';
     const isInactiveButton = clickedButton.getAttribute('aria-checked') !== true;
     const isDisabledBUtton = clickedButton.disabled;
+    const parentNode = clickedButton.parentNode;
+    const fieldsetHidden = unHideFieldset(clickedButton.dataset.targetShow);
 
-    // don't do anything when button is disabled
-    if (isDisabledBUtton) {
-      return;
-    }
+    if (isDisabledBUtton) { return; }
 
     if (isRadioButton && isInactiveButton) {
       const targetRadioGroup = clickedButton.closest('[role="radiogroup"]');
       setRadioButtonsFalse(targetRadioGroup);
       clickedButton.setAttribute('aria-checked', 'true');
     }
-
-    const parentNode = clickedButton.parentNode;
-    const fieldsetHidden = unHideFieldset(clickedButton.dataset.targetShow);
 
     if (elementExists(parentNode)) {
       const parentIsFieldset = parentNode.tagName === 'FIELDSET';
