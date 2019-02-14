@@ -9,69 +9,105 @@ alternatePageScript: pricingPage.bundle.js
     <div class="layout__content">
         <h1>Weaviate pricing</h1>
         <p>To be able to provide you with a performace that matches your needs we're going to ask you a couple of questions? Based on your answers we will recommend a setup and show you an approximate price for your estimated usage.</p>
-        <form class="form-stepper js-form-stepper">
-            <fieldset class="js-form-stepper__step">
+        <form id="js-form-pricing" class="form-stepper">
+            <fieldset class="form-stepper__step" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
                 <legend>
-                    <h2>Use case description</h2>
+                    <h2 id="label-use-case">Use case description</h2>
                 </legend>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="true">
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
                     <span class="uiButton__title">Master-Data</span>
                 </button>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
                     <span class="uiButton__title">Reporting</span>
                 </button>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
                     <span class="uiButton__title">Big Data</span>
                 </button>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
                     <span class="uiButton__title">IoT</span>
                 </button>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
                     <span class="uiButton__title">Process (Ad-Hoc)</span>
                 </button>
             </fieldset>
-            <fieldset class="js-form-stepper__step">
+
+            <fieldset class="form-stepper__step" data-step="hosting-preference" data-target="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference">
                 <legend>
-                    <h2>On what platform will you be hosting the Weaviate?</h2>
+                    <h2 id="label-hosting-preference">Would you like SeMI to host data on your behalf?</h2>
                 </legend>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="true">
-                    <span class="uiButton__title">Oracle cloud</span>
-                </button>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="false" disabled>
-                    <span class="uiButton__title">Azure</span>
-                </button>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="false">
-                    <span class="uiButton__title">AWS</span>
-                </button>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="false">
-                    <span class="uiButton__title">Other</span>
-                </button>
-            </fieldset>
-            <fieldset class="js-form-stepper__step">
-                <legend>
-                    <h2>Would you like SeMI to host data on your behalf?</h2>
-                </legend>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="true">
+                <button class="uiButton" type="button" role="radio" data-target-show="false" data-subject="" aria-checked="true">
                     <span class="uiButton__title">Yes</span>
                 </button>
-                <button class="uiButton" type="buttom" role="radio" data-subject="" aria-checked="false">
+                <button class="uiButton" type="button" role="radio" data-target-show="true" data-subject="" aria-checked="false">
                     <span class="uiButton__title">No</span>
+                </button>
+            </fieldset>
+
+            <!-- if step hosting-preference is YES -->
+            <fieldset class="form-stepper__step form-stepper__step--optional" data-step="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference-input" aria-hidden="true">
+                <label id="label-hosting-preference-input" for="input-user-preference">Do you have any preference regarding the hosting provider SeMI uses?</label>
+                <input id="input-user-preference" type="text" placeholder="Text" />
+            </fieldset>
+
+            <!-- if step hosting-preference is NO -->
+            <fieldset class="form-stepper__step" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                <legend>
+                    <h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>
+                </legend>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
+                    <span class="uiButton__title">Oracle cloud</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false" disabled>
+                    <span class="uiButton__title">Azure</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
+                    <span class="uiButton__title">AWS</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="false">
+                    <span class="uiButton__title">Other</span>
                 </button>
             </fieldset>
         </form>
     </div>
     <aside class="layout__sidebar receipt">
         <p>Summary</p>
+
         <dl>
-            <dt>Total estimated usage costs</dt>
+            <dt>Adding data</dt>
             <dd>€ 0,00</dd>
-            <dt>One-Time setup costs</dt>
+            <dt>Updating Data</dt>
             <dd>€ 0,00</dd>
-            <dt>Fixed monthly recurring costs</dt>
+            <!--Requesting Data-->
+            <!--Understanding the local graph-->
+            <!--Adding to the network-->
+            <!--Getting from the network-->
+            <!--Understanding the network-->
+            <!--Querying the network-->
+            <!--Knowledge Services-->
+        <dl>
+        <p>---------------------</p>
+        <p>Totals</p>
+        <dl>
+            <dt>Variable cost per month</dt>
             <dd>€ 0,00</dd>
-            <dt class="receipt__total">Total</dt>
+            <dt>Hosting Adjustment</dt>
+            <dd>€ 0,00</dd>
+            <dt>Optimization Adjustment</dt>
+            <dd>€ 0,00</dd>
+            <dt># of clusters Adjustment</dt>
+            <dd>€ 0,00</dd>
+            <dt>Adjusted Variable cost per month</dt>
             <dd>€ 0,00</dd>
         </dl>
+            <!--<dt>Total estimated usage costs</dt>-->
+            <!--<dd>€ 0,00</dd>-->
+            <!--<dt>One-Time setup costs</dt>-->
+            <!--<dd>€ 0,00</dd>-->
+            <!--<dt>Fixed monthly recurring costs</dt>-->
+            <!--<dd>€ 0,00</dd>-->
+            <!--<dt class="receipt__total">Total</dt>-->
+            <!--<dd>€ 0,00</dd>-->
+        <!--</dl>-->
 
 
     </aside>

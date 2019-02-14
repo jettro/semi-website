@@ -1,1 +1,12 @@
+@import 'var-color';
+
 .form-stepper {}
+
+.form-stepper__step[aria-hidden="true"] {
+  display: none;
+  visibility: hidden;
+}
+
+.form-stepper__step--optional {
+  background-color: $color-gray-5;
+}

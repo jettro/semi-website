@@ -98,6 +98,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 
 /***/ }),
 
+/***/ "./js-src/helpers/helpers.js":
+/*!***********************************!*\
+  !*** ./js-src/helpers/helpers.js ***!
+  \***********************************/
+/*! exports provided: elementExists, selectParent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"elementExists\", function() { return elementExists; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"selectParent\", function() { return selectParent; });\n/**\n * \n * @param element\n * @returns {boolean}\n */\nfunction elementExists(element) {\n  return typeof element != 'undefined' && element != null;\n}\n/**\n * \n * @param target\n * @param type\n * @returns {boolean}\n */\n\nfunction selectParent(target, type) {\n  if (elementExists(target)) {\n    if (target.tagName === type) {\n      return true;\n    }\n  }\n\n  return false;\n}\n\n//# sourceURL=webpack:///./js-src/helpers/helpers.js?");
+
+/***/ }),
+
 /***/ "./js-src/lib/pingdom/pa-5b22f622a42dbb00070002a5.js":
 /*!***********************************************************!*\
   !*** ./js-src/lib/pingdom/pa-5b22f622a42dbb00070002a5.js ***!
@@ -118,6 +130,18 @@ eval("!function () {\n  \"use strict\";\n\n  function t(t, e) {\n    return Obje
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/**\n * setCookie\n * @param cname\n * @param cvalue\n * @param exdays\n * @private\n */\nconst setCookie = (cname, cvalue, exdays) => {\n  const d = new Date();\n  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);\n  const expires = `expires=${d.toUTCString()}`;\n  document.cookie = `${cname}=${cvalue};${expires};path=/`;\n};\n/**\n * getCookie\n * @param cname\n * @returns {*}\n * @private\n */\n\n\nconst getCookie = cname => {\n  const name = `${cname}=`;\n  const decodedCookie = decodeURIComponent(document.cookie);\n  const ca = decodedCookie.split(';');\n\n  for (let i = 0; i < ca.length; i++) {\n    let c = ca[i];\n\n    while (c.charAt(0) === ' ') {\n      c = c.substring(1);\n    }\n\n    if (c.indexOf(name) === 0) {\n      return c.substring(name.length, c.length);\n    }\n  }\n\n  return false;\n};\n/**\n * Starts the cookie process\n * @param id {string} | element id of the cookie bar\n */\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (id) {\n  const cookieBar = document.getElementById(id);\n  const cookieCloseButton = cookieBar.querySelector('#js-cookie-button');\n  /** show cookie notification if no consent has been given */\n\n  if (getCookie('cookieConsent') === false) {\n    cookieBar.style.display = 'flex';\n  }\n  /**\n   * Set cookies and close bar by clicking 'accept & close'\n   * @type {HTMLElement}\n   */\n\n\n  cookieCloseButton.addEventListener('click', () => {\n    cookieBar.style.display = 'none';\n    setCookie('cookieConsent', true, 100);\n  }, false);\n});\n\n//# sourceURL=webpack:///./js-src/modules/cookie.js?");
+
+/***/ }),
+
+/***/ "./js-src/modules/fieldSectionButtons.js":
+/*!***********************************************!*\
+  !*** ./js-src/modules/fieldSectionButtons.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/helpers */ \"./js-src/helpers/helpers.js\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (e, form) {\n  const targetParentIsButton = Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__[\"selectParent\"])(e.target.closest('button'), 'BUTTON');\n  const targetIsButton = e.target.tagName === 'BUTTON';\n  /**\n   *\n   * @desc use this to assign the correct button element based on the target\n   * @returns {*} element\n   */\n\n  function assignButtonElement() {\n    if (targetParentIsButton) {\n      return e.target.closest('button');\n    } else if (targetIsButton) {\n      return e.target;\n    }\n  }\n  /**\n   *\n   * @desc sets all other radio buttons to false by getting the button types\n   * @param parentElement\n   */\n\n\n  function setRadioButtonsFalse(parentElement) {\n    const radioButtons = parentElement.getElementsByTagName('BUTTON');\n\n    for (let radioButton of radioButtons) {\n      radioButton.setAttribute('aria-checked', 'false');\n    }\n  }\n  /**\n   *\n   * @desc flips 'true' and 'false' (strings) so that the aria-hidden value of target gets correct string value\n   * @param showTarget {string} |\n   * @returns {string}\n   */\n\n\n  function unHideFieldset(showTarget) {\n    if (showTarget === 'false') {\n      return 'true';\n    } else if (showTarget === 'true') {\n      return 'false';\n    }\n  }\n\n  const clickedButton = assignButtonElement();\n\n  if (Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__[\"elementExists\"])(clickedButton)) {\n    const isRadioButton = clickedButton.attributes.role.value === 'radio';\n    const isInactiveButton = clickedButton.getAttribute('aria-checked') !== true;\n    const isDisabledBUtton = clickedButton.disabled; // don't do anything when button is disabled\n\n    if (isDisabledBUtton) {\n      return;\n    }\n\n    if (isRadioButton && isInactiveButton) {\n      const targetRadioGroup = clickedButton.closest('[role=\"radiogroup\"]');\n      setRadioButtonsFalse(targetRadioGroup);\n      clickedButton.setAttribute('aria-checked', 'true');\n    }\n\n    const parentNode = clickedButton.parentNode;\n    const fieldsetHidden = unHideFieldset(clickedButton.dataset.targetShow);\n\n    if (Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__[\"elementExists\"])(parentNode)) {\n      const parentIsFieldset = parentNode.tagName === 'FIELDSET';\n\n      if (parentIsFieldset) {\n        const fieldsetTarget = parentNode.dataset.target;\n        const fieldsetHasTarget = typeof fieldsetTarget !== 'undefined';\n\n        if (fieldsetHasTarget) {\n          const fieldSets = form.children;\n\n          if (Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_0__[\"elementExists\"])(fieldSets)) {\n            for (let fieldset of fieldSets) {\n              const currentFieldsetIsTarget = fieldset.dataset.step === fieldsetTarget;\n\n              if (currentFieldsetIsTarget) {\n                fieldset.setAttribute('aria-hidden', fieldsetHidden);\n              }\n            }\n          } else {\n            console.error(`There are no fieldsets present in the selected form '${config.formId}'.`);\n          }\n        }\n      } else {\n        console.error(`parent ${parentIsFieldset} isn't a fieldset`);\n      }\n    } else {\n      console.error(`parent node ${parentNode} doesn't exist.`);\n    }\n  }\n});\n\n//# sourceURL=webpack:///./js-src/modules/fieldSectionButtons.js?");
 
 /***/ }),
 
@@ -201,7 +225,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/**\n * start playing the sel
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ \"./js-src/common.js\");\n\nconsole.log('pricing page');\n\n//# sourceURL=webpack:///./js-src/page-pricing.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ \"./js-src/common.js\");\n/* harmony import */ var _modules_fieldSectionButtons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/fieldSectionButtons */ \"./js-src/modules/fieldSectionButtons.js\");\n/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/helpers */ \"./js-src/helpers/helpers.js\");\n\n\n\nconst config = {\n  'formId': 'js-form-pricing'\n};\nconst formPricing = document.getElementById(config.formId);\n\nif (Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_2__[\"elementExists\"])(formPricing)) {\n  formPricing.addEventListener('click', e => {\n    e.preventDefault();\n    Object(_modules_fieldSectionButtons__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(e, formPricing); // TODO: add calculation logic\n    // TODO: add form handler\n  }, false);\n} else {\n  console.error(`No form present. Are you sure the form with id '${config.formId}' exists?`);\n}\n\n//# sourceURL=webpack:///./js-src/page-pricing.js?");
 
 /***/ }),
 

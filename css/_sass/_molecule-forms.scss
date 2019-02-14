@@ -211,7 +211,7 @@ fieldset {
     opacity: 1;
 }
 
-.button, .button--small, button:not(.uiButton), [type='button'], [type='reset'], [type='submit'] {
+.button, .button--small, button:not(.uiButton), [type='button']:not(.uiButton), [type='reset'], [type='submit'] {
 	@include transition-out;
 	background: $color-semi;
 	border: 0 !important;

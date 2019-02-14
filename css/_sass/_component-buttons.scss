@@ -6,6 +6,8 @@
   padding: $space-inner-small;
   appearance: none;
   background-color: $color-white;
+  border-width: $border-width-2;
+  border-style: solid;
 
   // hover for active and not disabled button
   &:hover:not([disabled]):not([aria-checked="true"]) {
@@ -13,16 +15,18 @@
     border-color: $color-semi-accent;
   }
   // inactive state only
-  &:not(&[aria-checked="true"]) {
-    border: $border-2;
+  &:not([aria-checked="true"]) {
+    border-color: $color-black;
   }
   // active state
   &[aria-checked="true"] {
     color: $color-white;
     background-color: $color-semi-accent;
+    border-color: $color-semi-accent;
   }
   &[disabled] {
     color: $color-gray-4;
     cursor: not-allowed;
+    border-color: $color-gray-4;
   }
 }
