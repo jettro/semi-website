@@ -1,1 +1,20 @@
-.receipt {}
+@import 'var-scale';
+
+.receipt {
+  .receipt__title {
+    font-size: 1.5rem;
+  }
+  dl {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: $scale-1;
+  }
+  dt {
+    flex-basis: 60%;
+  }
+  dd {
+    flex-basis: 40%;
+  }
+}

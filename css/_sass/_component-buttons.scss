@@ -3,7 +3,7 @@
 @import 'var-borders';
 
 .uiButton {
-  padding: $space-inner-small;
+  padding: $space-inner-small $space-inner-medium;
   appearance: none;
   background-color: $color-white;
   border-width: $border-width-2;

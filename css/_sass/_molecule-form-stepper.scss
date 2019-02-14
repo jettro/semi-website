@@ -1,12 +1,25 @@
 @import 'var-color';
 
-.form-stepper {}
+.form-stepper {
+  flex-direction: column;
+}
 
-.form-stepper__step[aria-hidden="true"] {
-  display: none;
-  visibility: hidden;
+.form-stepper__step {
+  flex-direction: row;
+
+  &[aria-hidden="true"] {
+    display: none;
+    visibility: hidden;
+  }
+
+  legend {
+    float: left;
+    width: 100%;
+    display: flex;
+  }
 }
 
 .form-stepper__step--optional {
   background-color: $color-gray-5;
+  padding: $scale-1;
 }

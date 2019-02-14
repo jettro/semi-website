@@ -31,7 +31,7 @@ alternatePageScript: pricingPage.bundle.js
                 </button>
             </fieldset>
 
-            <fieldset class="form-stepper__step" data-step="hosting-preference" data-target="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference">
+            <fieldset class="form-stepper__step" data-step="hosting-preference" data-target="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference">
                 <legend>
                     <h2 id="label-hosting-preference">Would you like SeMI to host data on your behalf?</h2>
                 </legend>
@@ -43,14 +43,7 @@ alternatePageScript: pricingPage.bundle.js
                 </button>
             </fieldset>
 
-            <!-- if step hosting-preference is YES -->
-            <fieldset class="form-stepper__step form-stepper__step--optional" data-step="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference-input" aria-hidden="true">
-                <label id="label-hosting-preference-input" for="input-user-preference">Do you have any preference regarding the hosting provider SeMI uses?</label>
-                <input id="input-user-preference" type="text" placeholder="Text" />
-            </fieldset>
-
-            <!-- if step hosting-preference is NO -->
-            <fieldset class="form-stepper__step" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+            <fieldset class="form-stepper__step form-stepper__step--optional" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform" aria-hidden="true">
                 <legend>
                     <h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>
                 </legend>
@@ -67,26 +60,79 @@ alternatePageScript: pricingPage.bundle.js
                     <span class="uiButton__title">Other</span>
                 </button>
             </fieldset>
+
+            <fieldset class="form-stepper__step" data-step="optimization" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                <legend>
+                    <h2 id="label-optimized">Optimized for</h2>
+                </legend>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
+                    <span class="uiButton__title">Size</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="">
+                    <span class="uiButton__title">Balance</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="">
+                    <span class="uiButton__title">Speed</span>
+                </button>
+            </fieldset>
+
+            <fieldset class="form-stepper__step" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                <legend>
+                    <h2 id="label-clusters">Required number of clusters</h2>
+                </legend>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
+                    <span class="uiButton__title">1</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="">
+                    <span class="uiButton__title">2</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="">
+                    <span class="uiButton__title">3</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="">
+                    <span class="uiButton__title">4</span>
+                </button>
+            </fieldset>
+
+            <fieldset class="form-stepper__step" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                <legend>
+                    <h2 id="label-network-nodes-question">External Network Nodes?</h2>
+                </legend>
+                <button class="uiButton" type="button" role="radio" data-subject="">
+                    <span class="uiButton__title">Yes</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
+                    <span class="uiButton__title">No</span>
+                </button>
+            </fieldset>
+
+            <fieldset class="form-stepper__step" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                <legend>
+                    <h2 id="label-network-nodes">External Network Nodes</h2>
+                </legend>
+                <p>Which Network Nodes would you like to use?</p>
+                <button class="uiButton" type="button" role="radio" data-subject="" aria-checked="true">
+                    <span class="uiButton__title">Common Knowledge</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="">
+                    <span class="uiButton__title">Places</span>
+                </button>
+                <button class="uiButton" type="button" role="radio" data-subject="">
+                    <span class="uiButton__title">Emotions</span>
+                </button>
+            </fieldset>
+
+            <fieldset class="form-stepper__step" data-step="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference-input">
+                <legend>
+                    <h2 id="label-additional-info">Additional information</h2>
+                </legend>
+                <label id="label-hosting-preference-input" for="input-user-preference">Do you have any preference regarding the hosting provider SeMI uses?</label>
+                <input id="input-user-preference" type="text" placeholder="Text" />
+            </fieldset>
         </form>
     </div>
     <aside class="layout__sidebar receipt">
-        <p>Summary</p>
-
-        <dl>
-            <dt>Adding data</dt>
-            <dd>€ 0,00</dd>
-            <dt>Updating Data</dt>
-            <dd>€ 0,00</dd>
-            <!--Requesting Data-->
-            <!--Understanding the local graph-->
-            <!--Adding to the network-->
-            <!--Getting from the network-->
-            <!--Understanding the network-->
-            <!--Querying the network-->
-            <!--Knowledge Services-->
-        <dl>
-        <p>---------------------</p>
-        <p>Totals</p>
+        <strong class="receipt__title">Summary</strong>
         <dl>
             <dt>Variable cost per month</dt>
             <dd>€ 0,00</dd>
@@ -99,16 +145,15 @@ alternatePageScript: pricingPage.bundle.js
             <dt>Adjusted Variable cost per month</dt>
             <dd>€ 0,00</dd>
         </dl>
-            <!--<dt>Total estimated usage costs</dt>-->
-            <!--<dd>€ 0,00</dd>-->
-            <!--<dt>One-Time setup costs</dt>-->
-            <!--<dd>€ 0,00</dd>-->
-            <!--<dt>Fixed monthly recurring costs</dt>-->
-            <!--<dd>€ 0,00</dd>-->
-            <!--<dt class="receipt__total">Total</dt>-->
-            <!--<dd>€ 0,00</dd>-->
-        <!--</dl>-->
 
-
+        <strong class="receipt__title">Totals</strong>
+        <dl>
+            <dt>Total estimated usage costs</dt>
+            <dd>€ 0,00</dd>
+            <dt>One-Time setup costs</dt>
+            <dd>€ 0,00</dd>
+            <dt>Fixed monthly recurring costs</dt>
+            <dd>€ 0,00</dd>
+        </dl>
     </aside>
 </div>
