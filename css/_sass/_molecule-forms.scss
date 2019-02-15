@@ -211,7 +211,7 @@ fieldset {
     opacity: 1;
 }
 
-.button, .button--small, button:not(.uiButton):not(.form-stepper-table__column), [type='button']:not(.uiButton):not(.form-stepper-table__column), [type='reset'], [type='submit'] {
+.button, .button--small, button:not(.ui-button):not(.form-stepper-table__column), [type='button']:not(.ui-button):not(.form-stepper-table__column), [type='reset'], [type='submit'] {
 	@include transition-out;
 	background: $color-semi;
 	border: 0 !important;

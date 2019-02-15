@@ -17,28 +17,34 @@ export default function(e, form) {
    * @desc sets all other radio buttons to false by getting the button types
    * @param parentElement
    */
-  function setRadioButtonsFalse(parentElement) {
+  function unsetRadioButtons(parentElement) {
     const radioButtons = parentElement.getElementsByTagName('BUTTON');
     for (let radioButton of radioButtons) {
       radioButton.setAttribute('aria-checked', 'false');
+      radioButton.classList.remove('ui-button--active');
     }
   }
 
   if (elementExists(clickedButton)) {
     const isRadioButton = clickedButton.attributes.role.value === 'radio';
     const isInactiveButton = clickedButton.getAttribute('aria-checked') !== true;
-    const isDisabledBUtton = clickedButton.disabled;
+    const isDisabledButton = clickedButton.disabled;
+    const isToggleButton = typeof(clickedButton.dataset.targetShow) !== 'undefined';
+    const isButtonInTable = clickedButton.classList.contains('form-stepper-table__column');
 
-    if (isDisabledBUtton) {
-      return;
+    if (isDisabledButton) {
+      return; // don't do anything if button is disabled
     }
 
-    if (isRadioButton && isInactiveButton) {
+    if (isRadioButton && isInactiveButton || isButtonInTable) {
       const targetRadioGroup = clickedButton.closest('[role="radiogroup"]');
-      setRadioButtonsFalse(targetRadioGroup);
+      unsetRadioButtons(targetRadioGroup);
       clickedButton.setAttribute('aria-checked', 'true');
+      clickedButton.classList.add('ui-button--active');
     }
 
-    formPricingToggleFieldset(e, form, clickedButton);
+    if (isToggleButton) {
+      formPricingToggleFieldset(e, form, clickedButton);
+    }
   }
 }

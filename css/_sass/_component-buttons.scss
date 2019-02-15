@@ -2,31 +2,31 @@
 @import 'var-color';
 @import 'var-borders';
 
-.uiButton {
-  padding: $space-inner-small $space-inner-medium;
+.ui-button {
   appearance: none;
   background-color: $color-white;
   border-width: $border-width-2;
   border-style: solid;
+  border-color: $color-black;
 
-  // hover for active and not disabled button
-  &:hover:not([disabled]):not([aria-checked="true"]) {
+  &.ui-button:not([disabled]):not(.ui-button--active):hover {
     background-color: $color-semi-accent-tint--3;
     border-color: $color-semi-accent;
   }
-  // inactive state only
-  &:not([aria-checked="true"]) {
-    border-color: $color-black;
-  }
-  // active state
-  &[aria-checked="true"] {
+
+  &.ui-button--active {
     color: $color-white;
     background-color: $color-semi-accent;
     border-color: $color-semi-accent;
   }
+
   &[disabled] {
     color: $color-gray-4;
     cursor: not-allowed;
     border-color: $color-gray-4;
+  }
+
+  &:not(.form-stepper-table__column) {
+    padding: $space-inner-small $space-inner-medium;
   }
 }

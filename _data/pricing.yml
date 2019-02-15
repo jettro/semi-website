@@ -32,6 +32,7 @@ table:
           value: Variable cost per month
     - column:
         typeButton: true
+        pricing: true
         title: Master-Data
         cellAlignment: right
         cells:

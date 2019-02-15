@@ -21,7 +21,7 @@
 }
 
 .form-stepper__step--optional {
-  background-color: $color-gray-5;
+  background-color: $color-gray-6;
   padding: $scale-1;
 }
 
@@ -31,28 +31,19 @@
   flex-direction: column;
   align-items: flex-end; // right align the prices
   display: flex;
-
-  &[type="button"] {
-    appearance: none;
-    border-width: $border-width-2;
-    border-style: solid;
-    border-color: $color-black;
-  }
 }
 
 .form-stepper-table__extended-info {
   border-bottom: 1px solid $color-black;
   flex-direction: column;
   display: flex;
-
-  // All cells of extended info are a price
-  .form-stepper-table__cell {
-    &:before {
-      content: '€';
-    }
-  }
+  background-color: $color-gray-5;
 }
 
+.price:before {
+  content: '€';
+  padding-right: .5rem;
+}
 
 .flex-align-right {
   align-items: flex-end;
@@ -72,6 +63,7 @@
 .form-stepper-table__column {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 }
 .form-stepper-table__column-info {
   border: $border-width-2 solid $color-white;
