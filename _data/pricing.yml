@@ -1,0 +1,55 @@
+table:
+    - labels: # make sure the amount of labels are the same as the number of cells
+      - addingData
+      - updatingData
+      - requestingData
+      - UnderstandingLocalGraph
+      - addingToNetwork
+      - gettingFromNetwork
+      - understandingTheNetwork
+      - queryingTheNetwork
+      - knowledgeServices
+    - column:
+        typeButton: false
+        title:
+        cells:
+          - Adding Data
+          - Updating Data
+          - Requesting Data
+          - Understanding the local graph
+          - Adding to the network
+          - Getting from the network
+          - Understanding the network
+          - Querying the network
+          - Knowledge Services
+        total:
+        - label: variableCostPerMonth
+          value: Variable cost per month
+    - column:
+        typeButton: true
+        title: Master-Data
+        cells:
+          - 1500
+          - 5000
+          - 5000
+          - 20
+          - 150
+          - 500
+          - 20
+          - 10
+          - none
+        total:
+          - label: variableCostPerMonth
+            value: t.b.d. # JS calculates this based on values above
+    - column:
+        typeButton: true
+        title: Reporting
+    - column:
+        typeButton: true
+        title: Big Data
+    - column:
+        typeButton: true
+        title: IoT
+    - column:
+        typeButton: true
+        title: Process (Ad-Hoc)

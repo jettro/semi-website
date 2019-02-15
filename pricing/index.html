@@ -14,21 +14,28 @@ alternatePageScript: pricingPage.bundle.js
                 <legend>
                     <h2 id="label-use-case">Use case description</h2>
                 </legend>
-                <button class="uiButton" type="button" role="radio" data-price="123" aria-checked="false">
-                    <span class="uiButton__title">Master-Data</span>
-                </button>
-                <button class="uiButton" type="button" role="radio" data-price="456" aria-checked="false">
-                    <span class="uiButton__title">Reporting</span>
-                </button>
-                <button class="uiButton" type="button" role="radio" data-price="789" aria-checked="true">
-                    <span class="uiButton__title">Big Data</span>
-                </button>
-                <button class="uiButton" type="button" role="radio" data-price="1132" aria-checked="false">
-                    <span class="uiButton__title">IoT</span>
-                </button>
-                <button class="uiButton" type="button" role="radio" data-price="234" aria-checked="false">
-                    <span class="uiButton__title">Process (Ad-Hoc)</span>
-                </button>
+
+                <div class="form-stepper-table">
+                    {% comment %}
+                        Note: To edit this table, look for the file './_data/pricing.yml'
+                    {% endcomment %}
+                    {% for entry in site.data.pricing.table %}
+                        {% comment %}
+                            Note: Store labels for consistent reuse over all column
+                        {% endcomment %}
+                        {% if entry.labels %}
+                            {% assign labels = entry.labels %}
+                        {% endif %}
+                        {% include
+                            components/form-stepper-table/form-stepper-table__column.html
+                            columnTypeButton=entry.column.typeButton
+                            columnTitle=entry.column.title
+                            columnLabels=labels
+                            columnCells=entry.column.cells
+                            columnTotal=entry.column.total
+                        %}
+                    {% endfor %}
+                </div>
             </fieldset>
 
             <fieldset class="form-stepper__step" data-step="hosting-preference" data-target="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference">

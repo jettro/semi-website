@@ -1,0 +1,32 @@
+
+{% capture columnContent %}
+    {% comment %}
+        Note: If no title is provided, use non-breaking-space to even out total row spacing
+    {% endcomment %}
+    {% if include.columnTitle %}
+        {% assign title = include.columnTitle %}
+    {% else %}
+        {% assign title = '&nbsp' %}
+    {% endif %}
+    <span class="form-stepper-table__cell form-stepper-table__column-title">{{ title }}</span>
+    <div class="form-stepper-table__extended-info flex-align-left">
+        {% for cell in include.columnCells %}
+            {% assign iteration = forloop.index0 %}
+            {% assign label = include.columnLabels[iteration] %}
+            <span class="form-stepper-table__cell" aria-label="{{ label }}">{{ cell }}</span>
+        {% endfor %}
+    </div>
+    {% if include.columnTotal %}
+        <span class="form-stepper-table__cell" aria-label="{{ include.columnTotal[0].label }}">{{ include.columnTotal[0].value }}</span>
+    {% endif %}
+{% endcapture %}
+
+{% if include.columnTypeButton == true %}
+    <button class="form-stepper-table__column" type="button" role="radio" aria-checked="false">
+        {{ columnContent }}
+    </button>
+{% else %}
+    <div class="form-stepper-table__column">
+        {{ columnContent }}
+    </div>
+{% endif %}

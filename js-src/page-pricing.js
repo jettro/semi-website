@@ -1,5 +1,6 @@
 import './common';
 import formPricingRadioButtons from './modules/formPricingRadioButtons';
+import { formPricingInit, formPricingCalculate } from './modules/formPricingCalculate';
 import { elementExists } from './helpers/helpers';
 
 /**
@@ -17,6 +18,11 @@ const config = {
 const formPricing = document.getElementById(config.formId);
 
 if (elementExists(formPricing)) {
+
+  // initial setting of receipt
+  formPricingInit(formPricing);
+
+  // form interactions
   formPricing.addEventListener('click', e => {
     e.preventDefault();
     formPricingRadioButtons(e, formPricing);

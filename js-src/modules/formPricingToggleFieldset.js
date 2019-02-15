@@ -31,6 +31,7 @@ export default function(e, form, button) {
       const fieldsetTarget = parentNode.dataset.target;
       const fieldsetHasTarget = typeof (fieldsetTarget) !== 'undefined';
       if (fieldsetHasTarget) {
+        // TODO: refactor and merge with similar function in formPricingCalculate
         const fieldSets = form.children;
         if (elementExists(fieldSets)) {
           for (let fieldset of fieldSets) {
@@ -42,6 +43,7 @@ export default function(e, form, button) {
         } else {
           console.error(`There are no fieldsets present in the selected form '${config.formId}'.`);
         }
+        // until here
       }
     } else {
       console.error(`parent ${parentIsFieldset} isn't a fieldset`);
