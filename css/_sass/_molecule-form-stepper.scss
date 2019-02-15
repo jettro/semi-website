@@ -27,7 +27,7 @@
 
 .form-stepper-table__column {
   padding: 0;
-  margin: 0;
+  margin: 0 $scale--1 0 0;
   flex-direction: column;
   align-items: flex-end; // right align the prices
   display: flex;
@@ -44,6 +44,13 @@
   border-bottom: 1px solid $color-black;
   flex-direction: column;
   display: flex;
+
+  // All cells of extended info are a price
+  .form-stepper-table__cell {
+    &:before {
+      content: '€';
+    }
+  }
 }
 
 
@@ -55,9 +62,7 @@
   align-items: flex-start;
 }
 
-.form-stepper-table__colunm  {
-
-}
+.form-stepper-table__columm  {}
 
 // table
 .form-stepper-table {

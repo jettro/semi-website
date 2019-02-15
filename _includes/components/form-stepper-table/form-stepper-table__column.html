@@ -9,7 +9,12 @@
         {% assign title = '&nbsp' %}
     {% endif %}
     <span class="form-stepper-table__cell form-stepper-table__column-title">{{ title }}</span>
-    <div class="form-stepper-table__extended-info flex-align-left">
+    {% if include.columnAlignment == 'left' %}
+        {% assign alignmentClass = 'flex-align-left' %}
+    {% else if include.columnAlignment == 'right' %}
+        {% assign alignmentClass = 'flex-align-right' %}
+    {% endif %}
+    <div class="form-stepper-table__extended-info {{alignmentClass}}">
         {% for cell in include.columnCells %}
             {% assign iteration = forloop.index0 %}
             {% assign label = include.columnLabels[iteration] %}
