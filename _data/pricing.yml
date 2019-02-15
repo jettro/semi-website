@@ -1,3 +1,7 @@
+#
+# yml files are indent sensitive
+# so when editting this file always re-check the page manually
+#
 table:
     - labels: # make sure the amount of labels are the same as the number of cells
       - addingData
@@ -13,15 +17,15 @@ table:
         typeButton: false
         title:
         cells:
-          - Adding Data
-          - Updating Data
-          - Requesting Data
-          - Understanding the local graph
-          - Adding to the network
-          - Getting from the network
-          - Understanding the network
-          - Querying the network
-          - Knowledge Services
+        - Adding Data
+        - Updating Data
+        - Requesting Data
+        - Understanding the local graph
+        - Adding to the network
+        - Getting from the network
+        - Understanding the network
+        - Querying the network
+        - Knowledge Services
         total:
         - label: variableCostPerMonth
           value: Variable cost per month
@@ -29,27 +33,79 @@ table:
         typeButton: true
         title: Master-Data
         cells:
-          - 1500
-          - 5000
-          - 5000
-          - 20
-          - 150
-          - 500
-          - 20
-          - 10
-          - none
+        - 1500
+        - 5000
+        - 5000
+        - 20
+        - 150
+        - 500
+        - 20
+        - 10
+        - none
         total:
-          - label: variableCostPerMonth
-            value: t.b.d. # JS calculates this based on values above
+        - label: variableCostPerMonth # required
+          value: t.b.d. # JS calculates this based on values above
     - column:
         typeButton: true
         title: Reporting
+        cells:
+        - none
+        - 10
+        - 10
+        - 20
+        - none
+        - 10
+        - 20
+        - 50
+        - none
+        total:
+        - label: variableCostPerMonth # required
+          value: t.b.d. # JS calculates this based on values above
     - column:
         typeButton: true
         title: Big Data
+        cells:
+        - 2500
+        - 500
+        - 1
+        - 20
+        - 2
+        - 1
+        - 20
+        - 1
+        - none
+        total:
+        - label: variableCostPerMonth # required
+          value: t.b.d. # JS calculates this based on values above
     - column:
         typeButton: true
         title: IoT
+        cells:
+        - 10
+        - none
+        - none
+        - 2
+        - 10
+        - 20
+        - 2
+        - 500
+        - none
+        total:
+        - label: variableCostPerMonth # required
+          value: t.b.d. # JS calculates this based on values above
     - column:
         typeButton: true
         title: Process (Ad-Hoc)
+        cells:
+        - none
+        - none
+        - 10
+        - 20
+        - none
+        - 10
+        - 20
+        - 50
+        - none
+        total:
+        - label: variableCostPerMonth # required
+          value: t.b.d. # JS calculates this based on values above
