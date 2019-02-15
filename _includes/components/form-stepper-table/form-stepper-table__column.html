@@ -23,7 +23,7 @@
         {% endfor %}
     </div>
     {% if include.columnTotal %}
-        <span class="form-stepper-table__cell" aria-label="{{ include.columnTotal[0].label }}">{{ include.columnTotal[0].value }}</span>
+        <span class="form-stepper-table__cell pricing-total" aria-label="{{ include.columnTotal[0].label }}">{{ include.columnTotal[0].value }}</span>
     {% endif %}
 {% endcapture %}
 

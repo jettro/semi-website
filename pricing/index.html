@@ -10,7 +10,7 @@ alternatePageScript: pricingPage.bundle.js
         <h1>Weaviate pricing</h1>
         <p>To be able to provide you with a performace that matches your needs we're going to ask you a couple of questions? Based on your answers we will recommend a setup and show you an approximate price for your estimated usage.</p>
         <form id="js-form-pricing" class="form-stepper">
-            <fieldset class="form-stepper__step" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
+            <fieldset id="use-case" class="form-stepper__step" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
                 <legend>
                     <h2 id="label-use-case">Use case description</h2>
                 </legend>
@@ -106,7 +106,7 @@ alternatePageScript: pricingPage.bundle.js
                 </button>
             </fieldset>
 
-            <fieldset class="form-stepper__step" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+            <fieldset class="form-stepper__step" data-step="external-network-nodes" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                 <legend>
                     <h2 id="label-network-nodes-question">External Network Nodes?</h2>
                 </legend>
@@ -118,9 +118,9 @@ alternatePageScript: pricingPage.bundle.js
                 </button>
             </fieldset>
 
-            <fieldset class="form-stepper__step" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+            <fieldset class="form-stepper__step" data-step="network-nodes" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                 <legend>
-                    <h2 id="label-network-nodes">External Network Nodes</h2>
+                    <h2 id="label-network-nodes">Network Nodes</h2>
                 </legend>
                 <p>Which Network Nodes would you like to use?</p>
                 <button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">

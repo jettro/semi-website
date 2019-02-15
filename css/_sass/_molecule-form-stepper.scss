@@ -40,9 +40,12 @@
   background-color: $color-gray-5;
 }
 
-.price:before {
-  content: '€';
-  padding-right: .5rem;
+.price,
+.pricing-total {
+  &:before {
+    content: '€';
+    padding-right: .5rem;
+  }
 }
 
 .flex-align-right {
