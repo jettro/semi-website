@@ -1,3 +1,4 @@
+
 /**
  * getParameterByName
  * @desc get the query param by name
@@ -31,9 +32,6 @@ const queryString = getParameterByName('search');
 const loadResults = i => {
   const [searchBox] = document.getElementsByClassName('searchBox');
   const articleSectionName = 'ol';
-  const GoogleApiKey = 'AIzaSyCV4SC6uTz7bzYu1TmM_3iq2smlvbJOVLg';
-  const GoogleSearchId = '008702682383656025817:4lkjxykfngo';
-
   const noResultsElementClassName = 'jsNoSearchResults';
   const searchReturnsForbiddenClassName = 'js-search-google-403';
   const [searchReturnsForbiddenElement] = document.getElementsByClassName(
@@ -93,7 +91,7 @@ const loadResults = i => {
   // open the URL
   xhttp.open(
     'GET',
-    `https://www.googleapis.com/customsearch/v1?key=${GoogleApiKey}&cx= ${GoogleSearchId}&q=${i}`,
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}&cx=${process.env.GOOGLE_ENGINE}&q=${i}`,
     true,
   );
   // send the request
