@@ -1,3 +1,4 @@
+import utils from '../utilities/utils';
 
 /**
  * getParameterByName
@@ -25,85 +26,101 @@ const getParameterByName = name => {
 const queryString = getParameterByName('search');
 
 /**
+ * @desc set title and URL
+ * @param el
+ * @param title
+ * @param link
+ */
+const setResultLink = function(el, title, link) {
+  el.getElementsByClassName('title')[0].innerHTML = `<a href="${link}" target="_self">${title}</a>`;
+};
+
+/**
+ * @desc set snippet in innerHTML
+ * @param el
+ * @param snippet
+ */
+const setResultSnippet = function(el, snippet) {
+  el.getElementsByClassName('resultHTML')[0].innerHTML = snippet;
+};
+
+/**
+ *
+ * @param template
+ * @returns {*|Node|ActiveX.IXMLDOMNode}
+ */
+const makeResultContainer = function(template) {
+  const clone = template.cloneNode(true);
+  clone.style.display = 'block';
+  return clone;
+};
+
+/**
+ * @desc event handler for XMLHttpRequest changes
+ */
+const showResults = function() {
+  console.log(this);
+
+  const [searchResultTemplateElement] = document.getElementsByClassName('search-result');
+  const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
+  const [searchReturnsForbiddenElement] = document.getElementsByClassName('js-search-google-403');
+  const resultListContainerElement = document.getElementsByTagName('ol')[0];
+
+  const httpStatusOk = this.status === 200;
+  const httpStatusForbidden = this.status === 403;
+  const requestReadyStateDone = this.readyState === 4;
+
+  const requestDone = httpStatusOk && requestReadyStateDone;
+
+  if (requestDone) {
+    const { items } = JSON.parse(this.responseText);
+    const hasResults = typeof items !== 'undefined';
+    if (hasResults) {
+      if (utils.elementExists(noResultsElement)) {
+        noResultsElement.style.display = 'none';
+      }
+      items.forEach(item => {
+        const clone = makeResultContainer(searchResultTemplateElement);
+        setResultLink(clone, item.htmlTitle, item.link);
+        setResultSnippet(clone, item.htmlSnippet);
+        resultListContainerElement.appendChild(clone);
+      });
+    } else if (utils.elementExists(noResultsElement) && noResultsElement.style.display === 'none') {
+      noResultsElement.style.display = 'block';
+    }
+  } else if (httpStatusForbidden) {
+    if (searchReturnsForbiddenElement) {
+      if (utils.elementExists(noResultsElement)) {
+        noResultsElement.style.display = 'none';
+      }
+      searchReturnsForbiddenElement.style.display = 'block';
+    }
+  }
+};
+
+/**
  * loadResults
  * @desc Load the results via Google API
  * @param i
  */
 const loadResults = i => {
-  const [searchBox] = document.getElementsByClassName('searchBox');
-  const articleSectionName = 'ol';
-  const noResultsElementClassName = 'jsNoSearchResults';
-  const searchReturnsForbiddenClassName = 'js-search-google-403';
-  const [searchReturnsForbiddenElement] = document.getElementsByClassName(
-    searchReturnsForbiddenClassName,
-  );
-  const [noResultsElement] = document.getElementsByClassName(noResultsElementClassName);
-
   const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = onreadystatechange;
-
-  function onreadystatechange() {
-    // if status = 4 or 200 exec.
-    if (this.readyState === 4 && this.status === 200) {
-      // declare newbox and the result
-      let newBox;
-      // load JSON
-      const { items } = JSON.parse(this.responseText);
-      const hasResults = typeof items !== 'undefined';
-
-      // when results are present
-      if (hasResults) {
-        // if the no results  element exists and if it has the display property set to '', hide it
-        if (noResultsElement) {
-          noResultsElement.style.display = 'none';
-        }
-        // loop over items
-        items.forEach(element => {
-          // clone the searchbox;
-          newBox = searchBox.cloneNode(true);
-          // remove display = none
-          newBox.style.display = 'block';
-          // Set the title with URL
-          newBox.getElementsByClassName('title')[0].innerHTML = `<a href="${
-            element.link
-          }" target="_self">${element.htmlTitle}</a>`;
-          // set the inner HTML snippet
-          newBox.getElementsByClassName('resultHTML')[0].innerHTML = element.htmlSnippet;
-          // append the box to the article
-          document.getElementsByTagName(articleSectionName)[0].appendChild(newBox);
-        });
-        // when no results are present show the 'no results' div
-      } else if (noResultsElement && noResultsElement.style.display === 'none') {
-        noResultsElement.style.display = 'block';
-      }
-      // when the request sends a forbidden response, for example on non-authorized URLS
-    } else if (this.status === 403) {
-      if (searchReturnsForbiddenElement) {
-        // if the no results  element exists and if it has the display property set to '', hide it
-        if (noResultsElement) {
-          noResultsElement.style.display = 'none';
-        }
-        searchReturnsForbiddenElement.style.display = 'block';
-      }
-    }
-  }
-
-  // open the URL
+  xhttp.onreadystatechange = showResults;
   xhttp.open(
     'GET',
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}&cx=${process.env.GOOGLE_ENGINE}&q=${i}`,
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}&cx=${
+      process.env.GOOGLE_ENGINE
+    }&q=${i}`,
     true,
   );
-  // send the request
   xhttp.send();
 };
 
 export default function() {
   if (queryString !== null && queryString !== '') {
     loadResults(queryString);
-    // if there is a searchbox present, add the query to the searchbox
     const searchBox = document.getElementById('search-knowledgebase');
-    if (searchBox.length !== -1) {
+    if (utils.elementExists(searchBox)) {
       searchBox.value = decodeURIComponent(`${queryString}`.replace(/\+/g, '%20'));
     }
   }

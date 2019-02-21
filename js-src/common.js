@@ -1,4 +1,3 @@
-
 // modules
 import cookie from './modules/cookie';
 import mailChimp from './modules/mailChimp';
