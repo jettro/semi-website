@@ -59,8 +59,6 @@ const makeResultContainer = function(template) {
  * @desc event handler for XMLHttpRequest changes
  */
 const showResults = function() {
-  console.log(this);
-
   const [searchResultTemplateElement] = document.getElementsByClassName('search-result');
   const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
   const [searchReturnsForbiddenElement] = document.getElementsByClassName('js-search-google-403');
