@@ -108,7 +108,8 @@ const loadResults = query => {
     'GET',
     `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}
          &cx=${process.env.GOOGLE_ENGINE}
-         &q=${query}`,
+         &q=${query}
+         &hl=en`,
     true,
   );
   xhttp.send();
