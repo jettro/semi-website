@@ -106,10 +106,10 @@ const loadResults = query => {
   xhttp.onreadystatechange = showResults;
   xhttp.open(
     'GET',
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}
-         &cx=${process.env.GOOGLE_ENGINE}
-         &q=${query}
-         &hl=en`,
+    `https://www.googleapis.com/customsearch/v1` +
+      `?key=${process.env.GOOGLE_API_KEY}` +
+      `&cx=${process.env.GOOGLE_ENGINE}` +
+      `&q=${query}&hl=en`,
     true,
   );
   xhttp.send();
