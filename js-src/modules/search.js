@@ -99,16 +99,16 @@ const showResults = function() {
 /**
  * loadResults
  * @desc Load the results via Google API
- * @param i
+ * @param query {string} | the query to seach for
  */
-const loadResults = i => {
+const loadResults = query => {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = showResults;
   xhttp.open(
     'GET',
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}&cx=${
-      process.env.GOOGLE_ENGINE
-    }&q=${i}`,
+    `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_API_KEY}
+         &cx=${process.env.GOOGLE_ENGINE}
+         &q=${query}`,
     true,
   );
   xhttp.send();
