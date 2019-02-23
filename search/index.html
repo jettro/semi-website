@@ -12,7 +12,7 @@ title: SeMI, decentralized knowledge network
 		</section>
 
 		<section>
-			<h1>Search results</h1>
+			<h1>Search results <span class="number-of-results"></span></h1>
 			<div class="noSearch" style="display:none">Please add a query to the url: <code>url/?query=knowledge</code></div>
 			<div class="jsNoSearchResults">
 				<p>Nothing found, please search for something else.</p>
@@ -25,8 +25,9 @@ title: SeMI, decentralized knowledge network
 		<!-- searchbox will be copied to show content-->
 		<ol>
 			<li class="search-result" style="display: none">
-				<h2 class="title"></h2>
-				<p class="resultHTML">Result</p>
+				<h2 class="search-result__title"></h2>
+                <span class="search-result__url"></span>
+				<p class="search-result__snippet">Result</p>
 			</li>
 		</ol>
 	</div>

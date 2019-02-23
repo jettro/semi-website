@@ -1,0 +1,39 @@
+
+@import 'var-color';
+
+.search-result {
+  display: flex;
+  flex-direction: column;
+}
+
+h2.search-result__title {
+  font-family: $typeface-body;
+  font-size: 1.35rem;
+}
+
+.search-result__url a {
+  font-size: 1rem;
+  color: $color-network-accent;
+  text-decoration: none;
+  border: none;
+}
+
+.number-of-results {
+  color: $color-gray-3;
+}
+
+.page--search {
+  h1 {
+    margin-bottom: 1em;
+  }
+}
+
+.searchBox {
+  margin: 0 0 1.5em;
+}
+.resultHTML {
+  color: $color-gray-2;
+  b {
+    @extend strong;
+  }
+}
