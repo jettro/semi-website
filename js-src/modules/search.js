@@ -31,8 +31,13 @@ const queryString = getParameterByName('search');
  * @param title
  * @param link
  */
-const setResultLink = function(el, title, link) {
-  el.getElementsByClassName('title')[0].innerHTML = `<a href="${link}" target="_self">${title}</a>`;
+const setResultHead = function(el, title, link, formattedUrl) {
+  el.getElementsByClassName(
+    'search-result__title',
+  )[0].innerHTML = `<a href="${link}" target="_self">${title}</a>`;
+  el.getElementsByClassName(
+    'search-result__url',
+  )[0].innerHTML = `<a href="${link}" target="_self">${formattedUrl}</a>`;
 };
 
 /**
@@ -41,7 +46,7 @@ const setResultLink = function(el, title, link) {
  * @param snippet
  */
 const setResultSnippet = function(el, snippet) {
-  el.getElementsByClassName('resultHTML')[0].innerHTML = snippet;
+  el.getElementsByClassName('search-result__snippet')[0].innerHTML = snippet;
 };
 
 /**
@@ -51,7 +56,7 @@ const setResultSnippet = function(el, snippet) {
  */
 const makeResultContainer = function(template) {
   const clone = template.cloneNode(true);
-  clone.style.display = 'block';
+  clone.style.display = 'flex';
   return clone;
 };
 
@@ -62,7 +67,8 @@ const showResults = function() {
   const [searchResultTemplateElement] = document.getElementsByClassName('search-result');
   const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
   const [searchReturnsForbiddenElement] = document.getElementsByClassName('js-search-google-403');
-  const resultListContainerElement = document.getElementsByTagName('ol')[0];
+  const [resultListContainerElement] = document.getElementsByTagName('ol');
+  const [amountOfResultsElement] = document.getElementsByClassName('number-of-results');
 
   const httpStatusOk = this.status === 200;
   const httpStatusForbidden = this.status === 403;
@@ -71,7 +77,8 @@ const showResults = function() {
   const requestDone = httpStatusOk && requestReadyStateDone;
 
   if (requestDone) {
-    const { items } = JSON.parse(this.responseText);
+    const { items, searchInformation } = JSON.parse(this.responseText);
+
     const hasResults = typeof items !== 'undefined';
     if (hasResults) {
       if (utils.elementExists(noResultsElement)) {
@@ -79,19 +86,23 @@ const showResults = function() {
       }
       items.forEach(item => {
         const clone = makeResultContainer(searchResultTemplateElement);
-        setResultLink(clone, item.htmlTitle, item.link);
+        setResultHead(clone, item.htmlTitle, item.link, item.htmlFormattedUrl);
         setResultSnippet(clone, item.htmlSnippet);
         resultListContainerElement.appendChild(clone);
       });
+      if (utils.elementExists(amountOfResultsElement)) {
+        console.log(amountOfResultsElement);
+        amountOfResultsElement.innerHTML = `(${searchInformation.totalResults})`;
+      }
     } else if (utils.elementExists(noResultsElement) && noResultsElement.style.display === 'none') {
-      noResultsElement.style.display = 'block';
+      noResultsElement.style.display = 'flex';
     }
   } else if (httpStatusForbidden) {
     if (searchReturnsForbiddenElement) {
       if (utils.elementExists(noResultsElement)) {
         noResultsElement.style.display = 'none';
       }
-      searchReturnsForbiddenElement.style.display = 'block';
+      searchReturnsForbiddenElement.style.display = 'flex';
     }
   }
 };
