@@ -1,18 +1,14 @@
 import utils from '../utilities/utils';
 
+// TODO: refactor this const into functions
 const [resultListContainerElement] = document.getElementsByClassName('search-result-list');
-
-/**
- * queryString
- * @type {*}
- */
-const queryString = utils.getParameterByName('search');
 
 /**
  * @desc set title and URL
  * @param el
  * @param title
  * @param link
+ * @param formattedUrl
  */
 const setResultHead = function(el, title, link, formattedUrl) {
   el.getElementsByClassName(
@@ -44,60 +40,59 @@ const makeResultContainer = function(template) {
 };
 
 /**
- * @desc event handler for XMLHttpRequest changes
+ *
+ * @param response
  */
-const showResults = function() {
+const generateSearchResultsList = function(response) {
   const [searchResultTemplateElement] = document.getElementsByClassName('search-result');
-  const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
-  const [searchReturnsForbiddenElement] = document.getElementsByClassName('js-search-google-403');
-  const [amountOfResultsElement] = document.getElementsByClassName('number-of-results');
+  const { items } = response;
 
-  const httpStatusOk = this.status === 200;
-  const httpStatusForbidden = this.status === 403;
-  const requestReadyStateDone = this.readyState === 4;
-
-  const requestDone = httpStatusOk && requestReadyStateDone;
-
-  if (requestDone) {
-    const { items, searchInformation } = JSON.parse(this.responseText);
-    const hasResults = typeof items !== 'undefined';
-    if (hasResults) {
-      if (utils.elementExists(noResultsElement)) {
-        noResultsElement.style.display = 'none';
-      }
-      if (utils.elementExists(amountOfResultsElement)) {
-        amountOfResultsElement.innerHTML = `(${searchInformation.totalResults})`;
-      }
-      items.forEach(item => {
-        const clone = makeResultContainer(searchResultTemplateElement);
-        setResultHead(clone, item.htmlTitle, item.link, item.htmlFormattedUrl);
-        setResultSnippet(clone, item.htmlSnippet);
-        resultListContainerElement.appendChild(clone);
-      });
-    } else if (utils.elementExists(noResultsElement) && noResultsElement.style.display === 'none') {
-      noResultsElement.style.display = 'flex';
-    }
-  } else if (httpStatusForbidden) {
-    if (searchReturnsForbiddenElement) {
-      if (utils.elementExists(noResultsElement)) {
-        noResultsElement.style.display = 'none';
-      }
-      searchReturnsForbiddenElement.style.display = 'flex';
-    }
+  const hasResults = typeof items !== 'undefined';
+  if (hasResults) {
+    items.forEach(item => {
+      const clone = makeResultContainer(searchResultTemplateElement);
+      setResultHead(clone, item.htmlTitle, item.link, item.htmlFormattedUrl);
+      setResultSnippet(clone, item.htmlSnippet);
+      resultListContainerElement.appendChild(clone);
+    });
   }
 };
 
 /**
- * @desc show pagination, add index to next and previous button
+ *
  */
-const pagination = function() {
+const hideNoResultsInfo = function() {
+  const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
+  if (utils.elementExists(noResultsElement)) {
+    noResultsElement.style.display = 'none';
+  }
+};
+
+/**
+ *
+ * @param response
+ */
+const showNumberOfResults = function(response) {
+  const totalResults = response.searchInformation.totalResults;
+  const [amountOfResultsElement] = document.getElementsByClassName('number-of-results');
+  if (utils.elementExists(amountOfResultsElement)) {
+    amountOfResultsElement.innerHTML = `(${totalResults})`;
+  }
+};
+
+
+/**
+ * @desc show pagination, add index to next and previous button
+ * @param response
+ */
+const pagination = function(response) {
   const nextButtonClassName = 'pagination__button-next';
   const previousButtonClassName = 'pagination__button-previous';
   const [pagination] = document.getElementsByClassName('pagination');
   const [nextButton] = document.getElementsByClassName(nextButtonClassName);
   const [previousButton] = document.getElementsByClassName(previousButtonClassName);
 
-  const queries = JSON.parse(this.responseText).queries;
+  const queries = response.queries;
   const nextPage = queries.nextPage;
   const previousPage = queries.previousPage;
 
@@ -114,24 +109,43 @@ const pagination = function() {
 };
 
 /**
- * loadResults
- * @desc Load the results via Google API
- * @param query {string} | the query to seach for
+ *
+ * @param query
  */
-const loadResults = (query, startIndex) => {
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = showResults;
-  xhr.addEventListener("load", pagination);
-  const method = 'GET',
-        url = `https://www.googleapis.com/customsearch/v1` +
-              `?key=${process.env.GOOGLE_API_KEY}` +
-              `&cx=${process.env.GOOGLE_ENGINE}` +
-              `&q=${query}&hl=en&start=${startIndex}`;
-  xhr.open(method, url, true);
-  xhr.send();
+const showUpdateSearchbox = function(query) {
+  const searchBox = document.getElementById('search-knowledgebase');
+  if (utils.elementExists(searchBox)) {
+    searchBox.value = decodeURIComponent(`${query}`.replace(/\+/g, '%20'));
+  }
+};
+
+/**
+ *
+ * @param url
+ * @returns {Promise<any>}
+ */
+const getJSONResults = function(url) {
+  return new Promise(function(resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = handleResponse;
+    xhr.onerror = function(error) { reject(error); };
+    xhr.send();
+    function handleResponse() {
+      if (this.readyState === this.DONE) {
+        if (this.status === 200) {
+          resolve(JSON.parse(this.responseText));
+        } else {
+          reject(this.statusText);
+        }
+      }
+    }
+  });
 };
 
 export default function() {
+
+  const queryString = utils.getParameterByName('search');
 
   // on page load
   if (queryString !== null && queryString !== '') {
@@ -139,13 +153,23 @@ export default function() {
     const urlParamIndex = window.location.hash.substring(1);
     const startIndex = urlParamIndex !== '' ? urlParamIndex : 1;
 
-    loadResults(queryString, startIndex);
+    const ajaxPromise = getJSONResults(
+      `https://www.googleapis.com/customsearch/v1` +
+      `?key=${process.env.GOOGLE_API_KEY}` +
+      `&cx=${process.env.GOOGLE_ENGINE}` +
+      `&q=${queryString}&hl=en&start=${startIndex}`);
 
-    const searchBox = document.getElementById('search-knowledgebase');
-    if (utils.elementExists(searchBox)) {
-      searchBox.value = decodeURIComponent(`${queryString}`.replace(/\+/g, '%20'));
-    }
+    ajaxPromise.then(function(response) {
+                 hideNoResultsInfo();
+                 showNumberOfResults(response);
+                 generateSearchResultsList(response);
+                 pagination(response);
+                 showUpdateSearchbox(queryString);
+               })
+               .catch(function(e){ console.info(e); });
   }
+
+  // when you click on a next or previous button it should change
 
   // when the hash is changed
   // fade out the existing content
@@ -154,4 +178,29 @@ export default function() {
   // window.onhashchange = function() {
   //   console.log('this hash is changed!');
   // }
-}
+};
+
+
+
+//   const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
+//   const [searchReturnsForbiddenElement] = document.getElementsByClassName('js-search-google-403');
+//
+//   const httpStatusOk = this.status === 200;
+//   const httpStatusForbidden = this.status === 403;
+//   const requestReadyStateDone = this.readyState === 4;
+//
+//   const requestDone = httpStatusOk && requestReadyStateDone;
+//
+//   if (requestDone) {
+//
+//   } else if (utils.elementExists(noResultsElement) && noResultsElement.style.display === 'none') {
+//     noResultsElement.style.display = 'flex';
+//   }
+// } else if (httpStatusForbidden) {
+//   if (searchReturnsForbiddenElement) {
+//     if (utils.elementExists(noResultsElement)) {
+//       noResultsElement.style.display = 'none';
+//     }
+//     searchReturnsForbiddenElement.style.display = 'flex';
+//   }
+// }
