@@ -1,0 +1,12 @@
+
+@import 'var-scale';
+
+.pagination {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.pagination__button {
+  padding: 0 $space-inner-small;
+}

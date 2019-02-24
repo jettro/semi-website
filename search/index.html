@@ -21,14 +21,21 @@ title: SeMI, decentralized knowledge network
 				<p>Currently there is a problem loading the google script. Please come back later.</p>
 			</div>
 		</section>
-
 		<!-- searchbox will be copied to show content-->
-		<ol>
+		<ul class="search-result-list list-ui">
 			<li class="search-result" style="display: none">
 				<h2 class="search-result__title"></h2>
                 <span class="search-result__url"></span>
 				<p class="search-result__snippet">Result</p>
 			</li>
-		</ol>
+		</ul>
+		<ul class="pagination list-ui" style="display:none;">
+			<li><button class="pagination__button pagination__button-previous" style="display:none;">&laquo; Previous page</button></li>
+			<!--<li><button class="pagination__button">1</button></li>-->
+			<!--<li><button class="pagination__button">2</button></li>-->
+			<!--<li><button class="pagination__button">3</button></li>-->
+			<!--<li><button class="pagination__button">4</button></li>-->
+			<li><button class="pagination__button pagination__button-next">Next page &raquo;</button></li>
+		</ul>
 	</div>
 </article>

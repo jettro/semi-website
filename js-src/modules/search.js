@@ -1,29 +1,12 @@
 import utils from '../utilities/utils';
 
-/**
- * getParameterByName
- * @desc get the query param by name
- * @param name
- * @returns {*}
- */
-const getParameterByName = name => {
-  const cleanName = name.replace(/[[\]]/g, '\\$&');
-  const regex = new RegExp(`[?&]${cleanName}(=([^&#]*)|&|#|$)`);
-  const results = regex.exec(window.location.href);
-  if (!results) {
-    return null;
-  }
-  if (!results[2]) {
-    return '';
-  }
-  return decodeURIComponent(results[2].replace('/+/g', ' '));
-};
+const [resultListContainerElement] = document.getElementsByClassName('search-result-list');
 
 /**
  * queryString
  * @type {*}
  */
-const queryString = getParameterByName('search');
+const queryString = utils.getParameterByName('search');
 
 /**
  * @desc set title and URL
@@ -67,7 +50,6 @@ const showResults = function() {
   const [searchResultTemplateElement] = document.getElementsByClassName('search-result');
   const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
   const [searchReturnsForbiddenElement] = document.getElementsByClassName('js-search-google-403');
-  const [resultListContainerElement] = document.getElementsByTagName('ol');
   const [amountOfResultsElement] = document.getElementsByClassName('number-of-results');
 
   const httpStatusOk = this.status === 200;
@@ -78,11 +60,13 @@ const showResults = function() {
 
   if (requestDone) {
     const { items, searchInformation } = JSON.parse(this.responseText);
-
     const hasResults = typeof items !== 'undefined';
     if (hasResults) {
       if (utils.elementExists(noResultsElement)) {
         noResultsElement.style.display = 'none';
+      }
+      if (utils.elementExists(amountOfResultsElement)) {
+        amountOfResultsElement.innerHTML = `(${searchInformation.totalResults})`;
       }
       items.forEach(item => {
         const clone = makeResultContainer(searchResultTemplateElement);
@@ -90,10 +74,6 @@ const showResults = function() {
         setResultSnippet(clone, item.htmlSnippet);
         resultListContainerElement.appendChild(clone);
       });
-      if (utils.elementExists(amountOfResultsElement)) {
-        console.log(amountOfResultsElement);
-        amountOfResultsElement.innerHTML = `(${searchInformation.totalResults})`;
-      }
     } else if (utils.elementExists(noResultsElement) && noResultsElement.style.display === 'none') {
       noResultsElement.style.display = 'flex';
     }
@@ -108,30 +88,70 @@ const showResults = function() {
 };
 
 /**
+ * @desc show pagination, add index to next and previous button
+ */
+const pagination = function() {
+  const nextButtonClassName = 'pagination__button-next';
+  const previousButtonClassName = 'pagination__button-previous';
+  const [pagination] = document.getElementsByClassName('pagination');
+  const [nextButton] = document.getElementsByClassName(nextButtonClassName);
+  const [previousButton] = document.getElementsByClassName(previousButtonClassName);
+
+  const queries = JSON.parse(this.responseText).queries;
+  const nextPage = queries.nextPage;
+  const previousPage = queries.previousPage;
+
+  if (pagination) {
+    pagination.style.display = 'flex';
+    if (nextPage) {
+      nextButton.dataset.goToPageIndex = nextPage[0].startIndex;
+    }
+    if (previousPage) {
+      previousButton.style.display = 'flex';
+      previousButton.dataset.goToPageIndex = previousPage[0].startIndex;
+    }
+  }
+};
+
+/**
  * loadResults
  * @desc Load the results via Google API
  * @param query {string} | the query to seach for
  */
-const loadResults = query => {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = showResults;
-  xhttp.open(
-    'GET',
-    `https://www.googleapis.com/customsearch/v1` +
-      `?key=${process.env.GOOGLE_API_KEY}` +
-      `&cx=${process.env.GOOGLE_ENGINE}` +
-      `&q=${query}&hl=en`,
-    true,
-  );
-  xhttp.send();
+const loadResults = (query, startIndex) => {
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = showResults;
+  xhr.addEventListener("load", pagination);
+  const method = 'GET',
+        url = `https://www.googleapis.com/customsearch/v1` +
+              `?key=${process.env.GOOGLE_API_KEY}` +
+              `&cx=${process.env.GOOGLE_ENGINE}` +
+              `&q=${query}&hl=en&start=${startIndex}`;
+  xhr.open(method, url, true);
+  xhr.send();
 };
 
 export default function() {
+
+  // on page load
   if (queryString !== null && queryString !== '') {
-    loadResults(queryString);
+
+    const urlParamIndex = window.location.hash.substring(1);
+    const startIndex = urlParamIndex !== '' ? urlParamIndex : 1;
+
+    loadResults(queryString, startIndex);
+
     const searchBox = document.getElementById('search-knowledgebase');
     if (utils.elementExists(searchBox)) {
       searchBox.value = decodeURIComponent(`${queryString}`.replace(/\+/g, '%20'));
     }
   }
+
+  // when the hash is changed
+  // fade out the existing content
+  // fade in new content
+  // window.dispatchEvent(new HashChangeEvent('hashchange'));
+  // window.onhashchange = function() {
+  //   console.log('this hash is changed!');
+  // }
 }

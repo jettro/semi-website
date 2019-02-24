@@ -37,3 +37,15 @@ h2.search-result__title {
     @extend strong;
   }
 }
+
+.search-result-list {
+  transition: opacity 3s ease-in-out;
+}
+
+.search-result-list--fade-out {
+  opacity: 0;
+}
+
+.search-result-list--fade-in {
+  opacity: 1;
+}
