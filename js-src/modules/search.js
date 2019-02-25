@@ -4,6 +4,7 @@ import utils from '../utilities/utils';
 const [resultListContainerElement] = document.getElementsByClassName('search-result-list');
 const [searchResultTemplateElement] = document.getElementsByClassName('search-result');
 const [pagination] = document.getElementsByClassName('pagination');
+const [paginationSearchMeta] = document.getElementsByClassName('pagination-search-meta');
 const nextButtonClassName = 'pagination__button-next';
 const previousButtonClassName = 'pagination__button-previous';
 
@@ -37,7 +38,7 @@ const setResultSnippet = function(el, snippet) {
  * @param template
  * @returns {*|Node|ActiveX.IXMLDOMNode}
  */
-const makeResultContainer = function(template) {
+const makeResultListItem = function(template) {
   const clone = template.cloneNode(true);
   clone.style.display = 'flex';
   return clone;
@@ -66,7 +67,7 @@ const hideNoResultsInfo = function() {
  * @param response
  */
 const showNumberOfResults = function(response) {
-  const totalResults = response.searchInformation.totalResults;
+  const totalResults = response.searchInformation.formattedTotalResults;
   const [amountOfResultsElement] = document.getElementsByClassName('number-of-results');
   if (utils.elementExists(amountOfResultsElement)) {
     amountOfResultsElement.innerHTML = `(${totalResults})`;
@@ -84,7 +85,7 @@ const searchResultsListItems = function(response) {
   if (hasResults) {
     const myMap = new Map();
     items.forEach((item, i) => {
-      const clone = makeResultContainer(searchResultTemplateElement);
+      const clone = makeResultListItem(searchResultTemplateElement);
       setResultHead(clone, item.htmlTitle, item.link, item.htmlFormattedUrl);
       setResultSnippet(clone, item.htmlSnippet);
       myMap.set(i, clone);
@@ -99,7 +100,7 @@ const searchResultsListItems = function(response) {
  */
 const generateResults = function(response) {
   const searchResultListItems = searchResultsListItems(response);
-  searchResultListItems.forEach((item) => {
+  searchResultListItems.forEach(item => {
     resultListContainerElement.appendChild(item);
   });
 };
@@ -114,7 +115,7 @@ const generatePagination = function(response) {
   const queries = response.queries;
   const nextPage = queries.nextPage;
   const previousPage = queries.previousPage;
-  if (pagination) {
+  if (utils.elementExists(pagination)) {
     pagination.style.display = 'flex';
     if (nextPage) {
       nextButton.style.display = 'flex';
@@ -128,6 +129,15 @@ const generatePagination = function(response) {
     } else {
       previousButton.style.display = 'none';
     }
+  }
+  if (utils.elementExists(paginationSearchMeta)) {
+    const [countContainer] = paginationSearchMeta.getElementsByClassName('search-meta--count');
+    const [countTotal] = paginationSearchMeta.getElementsByClassName('search-meta--total');
+    const queryInfo = response.queries.request[0];
+    const startNumber = queryInfo.startIndex;
+    const endNumber = queryInfo.count;
+    countContainer.innerHTML = startNumber;
+    countTotal.innerHTML = startNumber + endNumber - 1;
   }
 };
 
@@ -152,7 +162,9 @@ const getJSONResults = function(url) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onreadystatechange = handleResponse;
-    xhr.onerror = function(error) { reject(error); };
+    xhr.onerror = function(error) {
+      reject(error);
+    };
     xhr.send();
     function handleResponse() {
       if (this.readyState === this.DONE) {
@@ -167,61 +179,74 @@ const getJSONResults = function(url) {
 };
 
 export default function() {
-
   // initially on pageload populate page using XHR
   const queryString = utils.getParameterByName('search');
   if (queryString !== null && queryString !== '') {
-
     const urlParamIndex = window.location.hash.substring(1);
     const startIndex = urlParamIndex !== '' ? urlParamIndex : 1;
 
     const searchResultsPromise = getJSONResults(
       `https://www.googleapis.com/customsearch/v1` +
-      `?key=${process.env.GOOGLE_API_KEY}` +
-      `&cx=${process.env.GOOGLE_ENGINE}` +
-      `&q=${queryString}&hl=en&start=${startIndex}`);
+        `?key=${process.env.GOOGLE_API_KEY}` +
+        `&cx=${process.env.GOOGLE_ENGINE}` +
+        `&q=${queryString}&hl=en&start=${startIndex}`,
+    );
 
-    searchResultsPromise.then(function(response) {
-       hideNoResultsInfo();
-       showNumberOfResults(response);
-       generateResults(response);
-       resultListContainerElement.classList.add('search-result-list--fade-in');
-       generatePagination(response);
-       showUpdatedSearchbox(queryString);
-     })
-     .catch(function(e){
-       console.info(e);
-     });
+    searchResultsPromise
+      .then(function(response) {
+        const zeroItems = typeof response.items === 'undefined';
+        if (zeroItems) {
+          return;
+        }
+        hideNoResultsInfo();
+        showNumberOfResults(response);
+        generateResults(response);
+        resultListContainerElement.classList.add('search-result-list--fade-in');
+        generatePagination(response);
+        showUpdatedSearchbox(queryString);
+      })
+      .catch(function(e) {
+        console.info(e);
+      });
   }
 
   // when pagination is clicked re-generate using XHR
   if (utils.elementExists(pagination)) {
-    pagination.addEventListener('click', function(e) {
-      if (e.target.classList.contains(nextButtonClassName) || e.target.classList.contains(previousButtonClassName)) {
-        const newStartIndex = e.target.dataset.goToPageIndex;
-        const newSearchResultsPromise = getJSONResults(
-          `https://www.googleapis.com/customsearch/v1` +
-          `?key=${process.env.GOOGLE_API_KEY}` +
-          `&cx=${process.env.GOOGLE_ENGINE}` +
-          `&q=${queryString}&hl=en&start=${newStartIndex}`);
+    pagination.addEventListener(
+      'click',
+      function(e) {
+        if (
+          e.target.classList.contains(nextButtonClassName) ||
+          e.target.classList.contains(previousButtonClassName)
+        ) {
+          const newStartIndex = e.target.dataset.goToPageIndex;
+          const newSearchResultsPromise = getJSONResults(
+            `https://www.googleapis.com/customsearch/v1` +
+              `?key=${process.env.GOOGLE_API_KEY}` +
+              `&cx=${process.env.GOOGLE_ENGINE}` +
+              `&q=${queryString}&hl=en&start=${newStartIndex}`,
+          );
 
-        resultListContainerElement.classList.remove('search-result-list--fade-in');
+          resultListContainerElement.classList.remove('search-result-list--fade-in');
 
-        newSearchResultsPromise.then(function(response) {
-          removeSearchResultsListItems();
-          // timeout for animation to finish
-          setTimeout(function(){
-            generateResults(response);
-            resultListContainerElement.classList.add('search-result-list--fade-in');
-            generatePagination(response);
-          }, 250);
+          newSearchResultsPromise
+            .then(function(response) {
+              removeSearchResultsListItems();
+              // timeout for animation to finish
+              setTimeout(function() {
+                generateResults(response);
+                resultListContainerElement.classList.add('search-result-list--fade-in');
+                generatePagination(response);
+              }, 250);
 
-          window.location.hash = newStartIndex;
-        })
-        .catch(function(e){
-          console.info(e);
-        });
-      }
-    }, true)
+              window.location.hash = newStartIndex;
+            })
+            .catch(function(e) {
+              console.info(e);
+            });
+        }
+      },
+      true,
+    );
   }
-};
+}

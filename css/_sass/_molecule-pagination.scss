@@ -3,10 +3,23 @@
 
 .pagination {
   list-style-type: none;
-  display: flex;
-  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: flex;
+    flex: 1 0;
+  }
 }
 
-.pagination__button {
-  padding: 0 $space-inner-small;
+.pagination-search-meta p {
+  width: 100%;
+  text-align: center;
 }
+
+.pagination__button-next {
+  margin-left: auto;
+}
+
+// sdfsd
