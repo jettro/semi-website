@@ -3,6 +3,7 @@ import utils from '../utilities/utils';
 // TODO: refactor this const into functions or config
 const [resultListContainerElement] = document.getElementsByClassName('search-result-list');
 const [searchResultTemplateElement] = document.getElementsByClassName('search-result');
+const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
 const [pagination] = document.getElementsByClassName('pagination');
 const [paginationSearchMeta] = document.getElementsByClassName('pagination-search-meta');
 const nextButtonClassName = 'pagination__button-next';
@@ -53,16 +54,6 @@ const removeSearchResultsListItems = function() {
 };
 
 /**
- * @desc Hide markup containing no results info
- */
-const hideNoResultsInfo = function() {
-  const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
-  if (utils.elementExists(noResultsElement)) {
-    noResultsElement.style.display = 'none';
-  }
-};
-
-/**
  *
  * @param response
  */
@@ -72,6 +63,15 @@ const showNumberOfResults = function(response) {
   if (utils.elementExists(amountOfResultsElement)) {
     amountOfResultsElement.innerHTML = `(${totalResults})`;
   }
+};
+
+/**
+ *
+ * @param terms
+ * @returns {string}
+ */
+const createNoResultMessage = function(terms) {
+  return `<p>No results found for query <strong>'${terms}'</strong>. Please search for something else.</p>`;
 };
 
 /**
@@ -182,6 +182,9 @@ export default function() {
   // initially on pageload populate page using XHR
   const queryString = utils.getParameterByName('search');
   if (queryString !== null && queryString !== '') {
+    if (utils.elementExists(noResultsElement)) {
+      noResultsElement.style.display = 'none';
+    }
     const urlParamIndex = window.location.hash.substring(1);
     const startIndex = urlParamIndex !== '' ? urlParamIndex : 1;
 
@@ -196,9 +199,13 @@ export default function() {
       .then(function(response) {
         const zeroItems = typeof response.items === 'undefined';
         if (zeroItems) {
+          if (utils.elementExists(noResultsElement)) {
+            const { searchTerms } = response.queries.request[0];
+            noResultsElement.innerHTML = createNoResultMessage(searchTerms);
+            noResultsElement.style.display = 'flex';
+          }
           return;
         }
-        hideNoResultsInfo();
         showNumberOfResults(response);
         generateResults(response);
         resultListContainerElement.classList.add('search-result-list--fade-in');
