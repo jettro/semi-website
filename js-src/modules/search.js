@@ -1,4 +1,5 @@
-import utils from '../utilities/utils';
+import utils from '../utilities/common';
+import getJSONResults from '../utilities/getJsonResults';
 
 // TODO: refactor this const into functions or config
 const [resultListContainerElement] = document.getElementsByClassName('search-result-list');
@@ -150,32 +151,6 @@ const showUpdatedSearchbox = function(query) {
   if (utils.elementExists(searchBox)) {
     searchBox.value = decodeURIComponent(`${query}`.replace(/\+/g, '%20'));
   }
-};
-
-/**
- *
- * @param url
- * @returns {Promise<any>}
- */
-const getJSONResults = function(url) {
-  return new Promise(function(resolve, reject) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = handleResponse;
-    xhr.onerror = function(error) {
-      reject(error);
-    };
-    xhr.send();
-    function handleResponse() {
-      if (this.readyState === this.DONE) {
-        if (this.status === 200) {
-          resolve(JSON.parse(this.responseText));
-        } else {
-          reject(this.statusText);
-        }
-      }
-    }
-  });
 };
 
 export default function() {
