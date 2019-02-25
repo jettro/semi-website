@@ -1,7 +1,6 @@
 import utils from '../utilities/general';
 import getJSONResults from '../utilities/getJsonResults';
 
-// TODO: refactor this const into functions or config
 const [resultListContainerElement] = document.getElementsByClassName('search-result-list');
 const [searchResultTemplateElement] = document.getElementsByClassName('search-result');
 const [noResultsElement] = document.getElementsByClassName('jsNoSearchResults');
@@ -12,10 +11,10 @@ const previousButtonClassName = 'pagination__button-previous';
 
 /**
  * @desc set title and URL
- * @param el
- * @param title
- * @param link
- * @param formattedUrl
+ * @param el {*|Node|ActiveX.IXMLDOMNode} the element to set it on
+ * @param title {string} the title to set as title
+ * @param link {string} the link to set in the link
+ * @param formattedUrl {string} a formatted url to set in the link
  */
 const setResultHead = function(el, title, link, formattedUrl) {
   el.getElementsByClassName(
@@ -28,16 +27,16 @@ const setResultHead = function(el, title, link, formattedUrl) {
 
 /**
  * @desc set snippet in innerHTML
- * @param el
- * @param snippet
+ * @param el {*|Node|ActiveX.IXMLDOMNode} the element to add the snippet to
+ * @param snippet {string} the snippet to replace the template's search result innerHTML with
  */
 const setResultSnippet = function(el, snippet) {
   el.getElementsByClassName('search-result__snippet')[0].innerHTML = snippet;
 };
 
 /**
- *
- * @param template
+ * @desc clone (hidden) template element (list-item) for re-use in new search results
+ * @param template {object}
  * @returns {*|Node|ActiveX.IXMLDOMNode}
  */
 const makeResultListItem = function(template) {
@@ -47,7 +46,7 @@ const makeResultListItem = function(template) {
 };
 
 /**
- * @desc remove all list items except the first since that's the template
+ * @desc Removes all list items except the first since that's the template.
  */
 const removeSearchResultsListItems = function() {
   const results = resultListContainerElement.getElementsByClassName('search-result');
@@ -55,8 +54,8 @@ const removeSearchResultsListItems = function() {
 };
 
 /**
- *
- * @param response
+ * @desc Show the number of total results.
+ * @param response {Object} the response out of the XML HttpRequest
  */
 const showNumberOfResults = function(response) {
   const totalResults = response.searchInformation.formattedTotalResults;
@@ -67,8 +66,7 @@ const showNumberOfResults = function(response) {
 };
 
 /**
- *
- * @param terms
+ * @param terms {string} search term that was used
  * @returns {string}
  */
 const createNoResultMessage = function(terms) {
@@ -76,7 +74,6 @@ const createNoResultMessage = function(terms) {
 };
 
 /**
- *
  * @param response
  * @returns {*}
  */
@@ -96,8 +93,8 @@ const searchResultsListItems = function(response) {
 };
 
 /**
- *
- * @param response
+ * @desc Generates the results and appends them to the resultListContainer
+ * @param response {Object} the response out of the XML HttpRequest
  */
 const generateResults = function(response) {
   const searchResultListItems = searchResultsListItems(response);
@@ -107,8 +104,8 @@ const generateResults = function(response) {
 };
 
 /**
- * @desc show pagination, add index to next and previous button
- * @param response
+ * @desc Generates the pagination, and adds the index to next and previous button.
+ * @param response {Object} the response out of the XML HttpRequest
  */
 const generatePagination = function(response) {
   const [nextButton] = document.getElementsByClassName(nextButtonClassName);
@@ -143,8 +140,8 @@ const generatePagination = function(response) {
 };
 
 /**
- *
- * @param query
+ * @desc Add the (decoded) query in the input field of the search field
+ * @param query {object} the query
  */
 const showUpdatedSearchbox = function(query) {
   const searchBox = document.getElementById('search-knowledgebase');

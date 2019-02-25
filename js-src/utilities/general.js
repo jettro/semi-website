@@ -1,6 +1,6 @@
 /**
- * @desc
- * @param element
+ * @desc use to check if an element exists
+ * @param element {*|Node|ActiveX.IXMLDOMNode} the element to check existence of
  * @returns {boolean}
  */
 function elementExists(element) {
@@ -10,7 +10,7 @@ function elementExists(element) {
 /**
  * getParameterByName
  * @desc get the query param by name
- * @param name
+ * @param name {string} the name of the parameter to get
  * @returns {*}
  */
 const getParameterByName = name => {
