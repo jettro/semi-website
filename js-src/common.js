@@ -2,7 +2,6 @@
 import cookie from './modules/cookie';
 import mailChimp from './modules/mailChimp';
 import video from './modules/video';
-import search from './modules/search';
 import toggle from './modules/toggle';
 import tagmanager from './modules/tagmanager';
 import tableOfContents from './modules/tableOfContents';
@@ -23,11 +22,6 @@ mailChimp();
  */
 // TODO: limit the loading of video script to only the homepage
 video('js-video-homepage');
-
-/**
- * Search
- */
-search();
 
 /**
  * Make elements on the page collapse

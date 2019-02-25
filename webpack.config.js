@@ -23,6 +23,7 @@ module.exports = {
   entry: {
     main: './js-src/main.js',
     formPage: './js-src/page-forms.js',
+    searchResultsPage: './js-src/page-search.js',
   },
   output: {
     path: path.resolve(__dirname, 'js'),
