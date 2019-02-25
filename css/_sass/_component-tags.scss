@@ -1,0 +1,13 @@
+@import '_var-color';
+@import '_var-borders';
+@import '_var-scale';
+
+.tag {
+  background-color: $color-network-accent;
+  border-radius: $border-radius-roud-square;
+  color: $color-white;
+  display: inline-block;
+  float: left;
+  font-size: 14px;
+  padding: .4rem .825rem;
+}
