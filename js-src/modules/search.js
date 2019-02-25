@@ -1,4 +1,4 @@
-import utils from '../utilities/common';
+import utils from '../utilities/general';
 import getJSONResults from '../utilities/getJsonResults';
 
 // TODO: refactor this const into functions or config
