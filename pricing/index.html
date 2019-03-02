@@ -2,7 +2,6 @@
 layout: layout-default
 title: SeMI, pricing
 mainClass: wrapper--wide
-alternatePageScript: pricingPage.bundle.js
 ---
 
 <div class="layout">
@@ -26,7 +25,7 @@ alternatePageScript: pricingPage.bundle.js
                         {% endif %}
                         {% if entry.column %}
                             {% include
-                                components/form-stepper-table/form-stepper-table__column.html
+                                components/pricing/form-stepper-table__column.html
                                 columnTypeButton=entry.column.typeButton
                                 columnAlignment=entry.column.cellAlignment
                                 columnTitle=entry.column.title
@@ -143,29 +142,5 @@ alternatePageScript: pricingPage.bundle.js
             </fieldset>
         </form>
     </div>
-    <aside class="layout__sidebar receipt">
-        <strong class="receipt__title">Summary</strong>
-        <dl>
-            <dt>Variable cost per month</dt>
-            <dd>€ 0,00</dd>
-            <dt>Hosting Adjustment</dt>
-            <dd>€ 0,00</dd>
-            <dt>Optimization Adjustment</dt>
-            <dd>€ 0,00</dd>
-            <dt># of clusters Adjustment</dt>
-            <dd>€ 0,00</dd>
-            <dt>Variable cost per month</dt>
-            <dd>€ 0,00</dd>
-        </dl>
-
-        <strong class="receipt__title">Totals</strong>
-        <dl>
-            <dt>Total estimated usage costs</dt>
-            <dd>€ 0,00</dd>
-            <dt>One-Time setup costs</dt>
-            <dd>€ 0,00</dd>
-            <dt>Fixed monthly recurring costs</dt>
-            <dd>€ 0,00</dd>
-        </dl>
-    </aside>
+    {% include components/pricing/molecule-receipt.html %}
 </div>

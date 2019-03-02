@@ -1,4 +1,4 @@
-import { elementExists } from '../helpers/helpers';
+import { elementExists } from '../../helpers/helpers';
 
 /**
  *

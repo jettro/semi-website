@@ -98,6 +98,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 
 /***/ }),
 
+/***/ "./js-src/helpers/helpers.js":
+/*!***********************************!*\
+  !*** ./js-src/helpers/helpers.js ***!
+  \***********************************/
+/*! exports provided: elementExists, selectParentElementOfType, assignButtonElement */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"elementExists\", function() { return elementExists; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"selectParentElementOfType\", function() { return selectParentElementOfType; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"assignButtonElement\", function() { return assignButtonElement; });\n/**\n * \n * @param element\n * @returns {boolean}\n */\nfunction elementExists(element) {\n  return typeof element != 'undefined' && element != null;\n}\n/**\n *\n * @param event\n * @param type\n * @returns {boolean}\n */\n\nfunction selectParentElementOfType(event, type) {\n  const target = event.target.closest(type);\n\n  if (elementExists(target)) {\n    if (target.tagName === type) {\n      return true;\n    }\n  }\n\n  return false;\n}\n/**\n *\n * @param event\n * @param targetParentIsButton\n * @param targetIsButton\n * @returns {*}\n */\n\nfunction assignButtonElement(event, targetParentIsButton, targetIsButton) {\n  if (targetParentIsButton) {\n    return event.target.closest('button');\n  } else if (targetIsButton) {\n    return event.target;\n  }\n}\n\n//# sourceURL=webpack:///./js-src/helpers/helpers.js?");
+
+/***/ }),
+
 /***/ "./js-src/main.js":
 /*!************************!*\
   !*** ./js-src/main.js ***!
@@ -106,7 +118,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ \"./js-src/common.js\");\n\n\n//# sourceURL=webpack:///./js-src/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ \"./js-src/common.js\");\n/* harmony import */ var _helpers_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/helpers */ \"./js-src/helpers/helpers.js\");\n\n\nconst $script = __webpack_require__(/*! scriptjs */ \"./node_modules/scriptjs/dist/script.js\");\n\n\n\nconst pricingConfig = __webpack_require__(/*! ./modules/pricing/pricingConfig */ \"./js-src/modules/pricing/pricingConfig.js\").default;\n/**\n * Only load the calculator when the calculator form is present.\n */\n\n\nif (Object(_helpers_helpers__WEBPACK_IMPORTED_MODULE_1__[\"elementExists\"])(document.getElementById(pricingConfig.formId))) {\n  $script('/js/bundles/lib/calculator.bundle.js', function () {\n    calculator.initCalculatorOnLoad();\n  });\n}\n\n//# sourceURL=webpack:///./js-src/main.js?");
 
 /***/ }),
 
@@ -131,6 +143,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/**\n * setCookie\n * @param 
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\n/**\n * hide the button based on form elements (Nodelist)\n * @param formElements\n */\n\nconst hideButton = formElements => {\n  for (let i = 0; i < formElements.length; i++) {\n    if (formElements[i].getAttribute('type') === 'submit') {\n      const element = formElements[i];\n      element.style.display = 'none';\n    }\n  }\n};\n/**\n * Send the data\n * @param postData\n * @param callback\n */\n\n\nconst sendData = (postData, callback) => {\n  jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({\n    type: 'POST',\n    url: 'https://us-central1-semi-186012.cloudfunctions.net/mailchimp',\n    data: postData,\n    dataType: 'json',\n    cache: false,\n\n    success(response) {\n      // eslint-disable-next-line\n      console.log(response);\n    }\n\n  }).done(() => {\n    callback();\n  });\n};\n/**\n *\n * @returns {string}\n */\n\n\nconst returnTo = () => {\n  const {\n    protocol\n  } = location;\n  const slashes = protocol.concat('//');\n  return slashes.concat(`${window.location.hostname}:${window.location.port}`);\n};\n/**\n * Get the value based on name\n * @param name\n * @returns {*}\n */\n\n\nconst getVal = name => {\n  const elVal = document.getElementsByName(name);\n\n  if (elVal.length === 0) {\n    return null;\n  }\n\n  return elVal[0].value;\n};\n/**\n * handleForm\n * @param e\n * @param formElements\n * @param formTitle\n */\n\n\nconst handleForm = (e, formElements, formTitle) => {\n  e.preventDefault();\n  hideButton(formElements);\n  const formFields = {\n    EMAIL: getVal('EMAIL'),\n    NAME: getVal('NAME'),\n    PRODUCT: getVal('PRODUCT'),\n    MESSAGE: getVal('MESSAGE'),\n    TYPE: formTitle,\n    RETURN: returnTo\n  };\n  sendData(formFields, () => {\n    // sad but true, timeout to guarantee a success\n    setTimeout(() => {\n      window.location.href = `/thank-you/?response-type=${formTitle}&product=${getVal('PRODUCT')}`;\n    }, 1250);\n  });\n};\n/**\n *\n * @constructor\n */\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\n  const form = document.getElementById('js-mailchimp');\n\n  if (typeof form !== 'undefined' && form !== null) {\n    const formTitle = form.dataset.title;\n    const formElements = form.elements;\n    form.addEventListener('submit', e => {\n      handleForm(e, formElements, formTitle);\n    }, false);\n  }\n});\n\n//# sourceURL=webpack:///./js-src/modules/mailChimp.js?");
+
+/***/ }),
+
+/***/ "./js-src/modules/pricing/pricingConfig.js":
+/*!*************************************************!*\
+  !*** ./js-src/modules/pricing/pricingConfig.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * configuration object\n * @type {{formId: string}}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  'formId': 'js-form-pricing'\n});\n\n//# sourceURL=webpack:///./js-src/modules/pricing/pricingConfig.js?");
 
 /***/ }),
 
