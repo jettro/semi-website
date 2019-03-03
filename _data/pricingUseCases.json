@@ -147,11 +147,11 @@
       }
     }
   ],
-  "hostingProviders": {
-    "Oracle Cloud": "1",
-    "Google Cloud": ".9",
-    "AWS": ".9",
-    "Azure": "1",
-    "Other": "1.1"
-  }
+  "hostingProviders": [
+    {"Oracle Cloud": "1"},
+    {"Google Cloud": ".9"},
+    {"AWS": ".9"},
+    {"Azure": "1"},
+    {"Other": "1.1"}
+  ]
 }

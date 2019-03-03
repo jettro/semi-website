@@ -10,5 +10,7 @@ export default {
   'pricingInfoTableContainerClassName': 'table-row-container',
   'pricingRowTemplateClassName': 'template-table-pricing-row',
   'pricingOptimizationContainerId': 'container-pricing-optimization-button',
-  'pricingOptimizationTemplateId': 'template-pricing-optimization-button'
+  'pricingOptimizationTemplateId': 'template-pricing-optimization-button',
+  'pricingPlatformContainerId' : 'container-pricing-platform-button',
+  'pricingPlatformTemplateId' : 'template-pricing-platform-button'
 };

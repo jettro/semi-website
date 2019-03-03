@@ -47,11 +47,11 @@ body:not(:-moz-handler-blocked) fieldset {
 }
 
 // TODO: move this to separate file
-.pricing-optimization-button--hidden {
+.pricing-hosting-button--hide {
   display: none;
 }
 
-.pricing-optimization-button--visible {
+.pricing-hosting-button--show {
   display: flex;
 }
 
