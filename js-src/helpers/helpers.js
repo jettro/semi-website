@@ -26,3 +26,16 @@ export function localizeNumber(n) {
   const numberLanguage = 'nl';
   return Number(n).toLocaleString(numberLanguage);
 }
+
+/**
+ * @desc can be used to fire event only once
+ * @param target
+ * @param type
+ * @param listener
+ */
+export function addEventListenerOnce(target, type, listener) {
+  target.addEventListener(type, function fn() {
+    target.removeEventListener(type, fn);
+    listener.apply(this, arguments);
+  });
+}

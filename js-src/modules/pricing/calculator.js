@@ -1,11 +1,9 @@
-
 import formPricingRadioButtons from './formPricingRadioButtons';
 import showUseCasePricing from './showUseCasePricing';
-import { elementExists } from '../../helpers/helpers';
+import { elementExists, addEventListenerOnce } from '../../helpers/helpers';
 import selectClickedElementByType from './selectClickedElementByType';
-// import { formPricingInit, formPricingCalculate } from './formPricingCalculate';
-
 import pricingConfig from './pricingConfig';
+// import { formPricingInit, formPricingCalculate } from './formPricingCalculate';
 
 (function(factory) {
 
@@ -33,35 +31,50 @@ import pricingConfig from './pricingConfig';
 }(function(calculator) {
   function initCalculatorOnLoad() {
     const formPricing = document.getElementById(pricingConfig.formId);
+
     if (elementExists(formPricing)) {
 
-      // TODO: restate the init
-      // initial setting of receipt
-      // formPricingInit(formPricing);
-
-      formPricing.addEventListener('click', e => {
-        e.preventDefault();
-        formPricingRadioButtons(e, formPricing, function() {
-          const button = selectClickedElementByType(e, 'BUTTON');
-          if(elementExists(button)) {
-            const useCaseKey = button.dataset.useCase;
-            const useCaseKeyExists = useCaseKey !== '';
-            if(useCaseKeyExists) {
-              showUseCasePricing(
-                useCaseKey,
-                pricingConfig.pricingInfoContainerId,
-                function() {
-                  console.log('could show the next one');
+      /** choice: usecases */
+      const handleUseCases = function() {
+        return new Promise((resolve, reject) => {
+          formPricing.addEventListener('click', e => {
+            e.preventDefault();
+            /** ... */
+            formPricingRadioButtons(e, formPricing, function() {
+              const button = selectClickedElementByType(e, 'BUTTON');
+              if (elementExists(button)) {
+                const useCaseKey = button.dataset.useCase;
+                const useCaseKeyExists = useCaseKey !== '';
+                if (useCaseKeyExists) {
+                  showUseCasePricing(
+                    useCaseKey,
+                    pricingConfig.pricingInfoContainerId
+                  );
                 }
-              );
-            }
-          }
+              }
+            });
+          });
+          addEventListenerOnce(formPricing, "click", function() {
+            resolve();
+          });
         });
+      };
 
-        // TODO refactor two functions:
-        // formPricingCalculate(e, formPricing);
-        // TODO: add form handler
-      }, false);
+      /** choice: hosting */
+      const handleHosting = function() {
+        return new Promise((resolve, reject) => {
+          console.log('now the hosting can be done');
+          resolve();
+        });
+      };
+
+      /** execute the choices */
+      handleUseCases().then(handleHosting)
+
+      // TODO refactor two functions:
+      // formPricingCalculate(e, formPricing);
+      // TODO: add form handler
+
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);
     }
