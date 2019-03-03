@@ -22,6 +22,39 @@
   }
 }
 
+// TODO: move this fieldset reset to form scss
+
+legend {
+  padding: 0;
+  display: table;
+  float: left;
+  margin: 0;
+  width: 100%;
+
+  + * {
+    clear: both;
+  }
+}
+
+fieldset {
+  border: 0;
+  padding: 0.01em 0 0 0;
+  margin: 0;
+  min-width: 0;
+}
+body:not(:-moz-handler-blocked) fieldset {
+  display: table-cell;
+}
+
+// TODO: move this to separate file
+.pricing-optimization-button--hidden {
+  display: none;
+}
+
+.pricing-optimization-button--visible {
+  display: flex;
+}
+
 // TODO: move this to separate file
 .list-buttons-radio {
   display: flex;

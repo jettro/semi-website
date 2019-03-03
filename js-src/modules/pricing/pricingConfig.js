@@ -9,4 +9,6 @@ export default {
   'panelsClassName': 'panel-collapse',
   'pricingInfoTableContainerClassName': 'table-row-container',
   'pricingRowTemplateClassName': 'template-table-pricing-row',
+  'pricingOptimizationContainerId': 'container-pricing-optimization-button',
+  'pricingOptimizationTemplateId': 'template-pricing-optimization-button'
 };

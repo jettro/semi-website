@@ -19,12 +19,16 @@
   }
 }
 
+.form-stepper-bottom-margin {
+  margin-bottom: 4rem;
+}
+
 .form-stepper__step--hidden {
   display: none;
 }
 
 .form-stepper__step--show {
-  display: flex;
+  display: table-cell;
 }
 
 .form-stepper__step--child {

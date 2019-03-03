@@ -1,16 +1,10 @@
-import { elementExists, nextSibling } from '../../helpers/helpers';
+import { elementExists } from '../../helpers/helpers';
 import pricingConfig from './pricingConfig';
 import handleChoiceUseCases from './handleChoiceUseCases';
 import handleChoiceHosting from './handleChoiceHosting';
 import getChoiceFieldset from './getChoiceFieldset';
 
 // import { formPricingInit, formPricingCalculate } from './formPricingCalculate';
-
-const showNextChoice = function(target) {
-  const nextChoice = nextSibling(target);
-  nextChoice.classList.remove('form-stepper__step--hidden');
-  nextChoice.classList.add('form-stepper__step--show');
-};
 
 (function(factory) {
 
@@ -59,7 +53,7 @@ const showNextChoice = function(target) {
       }).then();
 
       /** second fieldset, hosting preference */
-      handleChoiceHosting(fieldsetHostingPreference, fieldSets).then(function(resolve) {
+      handleChoiceHosting(fieldsetUseCase, fieldsetHostingPreference, fieldSets).then(function(resolve) {
 
       });
 

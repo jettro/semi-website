@@ -20,7 +20,7 @@ mainClass: wrapper--wide
         <!-- TODO: remove inline styling -->
         <div class="layout__content" style="padding-right:2em">
             <form id="js-form-pricing" class="form-stepper">
-                <fieldset id="use-case" class="form-stepper__step" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
+                <fieldset id="use-case" class="form-stepper__step form-stepper-bottom-margin" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
                     <legend>
                         <h2 id="label-use-case">Use case selection</h2>
                         <p>What are you using Weaviate for? Select the use case that best describes your situation.</p>
@@ -88,29 +88,21 @@ mainClass: wrapper--wide
                     </ul>
                 </fieldset>
 
-                <fieldset class="form-stepper__step form-stepper__step--hidden form-stepper__step--child" data-step="hosting-optimisation" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                <fieldset class="form-stepper__step form-stepper__step--hidden form-stepper-bottom-margin form-stepper__step--child" data-step="hosting-optimisation" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                     <legend>
                         <h2 id="label-optimized">Optimized for</h2>
                     </legend>
-                    <ul class="list-ui list-buttons-radio">
-                        <li>
-                            <button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">
-                                <span class="ui-button__title">Size</span>
+                    <ul class="list-ui list-buttons-radio" id="container-pricing-optimization-button">
+                        <li id="template-pricing-optimization-button" class="pricing-optimization-button--hidden">
+                            <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__title"></span>
                             </button>
                         </li>
-                        <li>
-                            <button class="ui-button" type="button" role="radio" data-subject="">
-                                <span class="ui-button__title">Balance</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="ui-button" type="button" role="radio" data-subject="">
-                                <span class="ui-button__title">Speed</span>
-                            </button>
-                        </li>
+                    </ul>
+
                 </fieldset>
 
-                <fieldset class="form-stepper__step form-stepper__step--hidden form-stepper__step--child" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                <fieldset class="form-stepper__step form-stepper__step--hidden form-stepper-bottom-margin form-stepper__step--child" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                     <legend>
                         <h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>
                     </legend>
