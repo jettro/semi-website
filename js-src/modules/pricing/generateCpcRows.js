@@ -1,6 +1,6 @@
 
 import setFeatureCellText from './setFeatureCellText';
-import createPricingRowClone from './createPricingRowClone';
+import createCloneFromTemplate from './createCloneFromTemplate';
 
 /**
  * @desc generate all the rows
@@ -16,11 +16,13 @@ export default function(template, labels, data, containerNode) {
     /** Set all the data in the rows */
     labels.forEach((label, i) => {
       /** clone the template for each label */
-      const clone = createPricingRowClone(template);
+      const clone = createCloneFromTemplate(template);
       setFeatureCellText(clone, labels[i].title, 'feature-label');
       setFeatureCellText(clone, labels[i].desc, 'feature-description');
       setFeatureCellText(clone, data[i].cpc, 'feature-cpc');
       setFeatureCellText(clone, data[i].average, 'feature-average');
+      clone.classList.remove('template-table-pricing-row--hidden');
+      clone.classList.add('template-table-pricing-row--visible');
       rowsMap.set(i, clone);
     });
     /** Append all the rows to the row-container */

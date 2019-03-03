@@ -95,6 +95,7 @@
       "RP": {
         "title": "Reporting",
         "desc": "A supporting tool that allows us to request daily/monthly or weekly reports replacing manual work",
+        "infoLabel": "Reporting use case estimated consumption",
         "consumptions":
         [
           { "cpc": "0,025", "average":  "100.000" },

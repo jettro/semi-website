@@ -1,10 +1,29 @@
-// pricing table is shown based on use-case
-.js-show-pricing-use-case {
+@import 'var-borders';
+@import 'var-scale';
+
+.template-pricing-use-case--hidden,
+.template-table-pricing-row--hidden {
   display: none;
 }
 
-.pricing-use-case {
+.template-pricing-use-case--show {
+  display: flex;
+}
+
+.template-table-pricing-row--visible {
+  display: table-row;
+}
+
+// TODO: move to panel collapse component file
+.panel-collapse {
   flex-direction: column;
+  border: $border-2;
+  padding: $scale-0;
+}
+
+.panel-collapse__head {
+  border-bottom: $border-2;
+  margin-bottom: $scale-0;
 }
 
 .price,

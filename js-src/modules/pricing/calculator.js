@@ -48,7 +48,13 @@ import pricingConfig from './pricingConfig';
             const useCaseKey = button.dataset.useCase;
             const useCaseKeyExists = useCaseKey !== '';
             if(useCaseKeyExists) {
-              showUseCasePricing(e, useCaseKey, pricingConfig.pricingInfoTemplateId, pricingConfig.pricingRowTemplateId);
+              showUseCasePricing(
+                useCaseKey,
+                pricingConfig.pricingInfoContainerId,
+                pricingConfig.pricingInfoTemplateId,
+                pricingConfig.pricingInfoTableContainerClassName,
+                pricingConfig.pricingRowTemplateClassName
+              );
             }
           }
         });

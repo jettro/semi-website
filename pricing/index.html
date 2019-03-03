@@ -29,31 +29,34 @@ mainClass: wrapper--wide
                     {% endfor %}
                 </ul>
 
-                <div class="pricing-use-case js-show-pricing-use-case" id="template-pricing-use-case">
-                    <!-- panel collapse here -->
-                    <p class="use-case-panel-label"></p>
-                    <div class="pricing__info">
-                        <p class="use-case-panel-description"></p>
+                <div id="container-pricing-use-case">
+                    <div class="panel-collapse template-pricing-use-case--hidden" id="template-pricing-use-case">
+                        <div class="panel-collapse__head">
+                            <p class="use-case-panel-label"></p>
+                        </div>
+                        <div class="pricing__info">
+                            <p class="use-case-panel-description"></p>
+                        </div>
+                        <table class="table-pricing table-zebra">
+                            <thead>
+                                <tr class="table-pricing__row">
+                                    <td class="table-pricing__column"><strong>Feature</strong></td>
+                                    <td class="table-pricing__column"><strong>Cost per call</strong></td>
+                                    <td class="table-pricing__column"><strong>Avg. nr. of API calls</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody class="table-row-container">
+                                <tr class="table-pricing__row template-table-pricing-row template-table-pricing-row--hidden">
+                                    <td class="table-pricing__column">
+                                        <p class="feature-label"></p>
+                                        <p class="feature-description"></p>
+                                    </td>
+                                    <td class="table-pricing__column feature-cpc price"></td>
+                                    <td class="table-pricing__column feature-average"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <table class="table-pricing">
-                        <thead>
-                            <tr class="table-pricing__row">
-                                <td class="table-pricing__column"><strong>Feature</strong></td>
-                                <td class="table-pricing__column"><strong>Cost per call</strong></td>
-                                <td class="table-pricing__column"><strong>Avg. nr. of API calls</strong></td>
-                            </tr>
-                        </thead>
-                        <tbody class="table-row-container">
-                            <tr class="table-pricing__row" id="template-table-pricing-row">
-                                <td class="table-pricing__column">
-                                    <p class="feature-label"></p>
-                                    <p class="feature-description"></p>
-                                </td>
-                                <td class="table-pricing__column feature-cpc price"></td>
-                                <td class="table-pricing__column feature-average"></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </fieldset>
 
