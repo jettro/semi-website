@@ -37,7 +37,7 @@ export default function(
     cloneInfoTemplate.classList.add('template-pricing-use-case--show');
 
     thisInfoChildElements.forEach(childNode => {
-      setUseCaseInfo(childNode, 'use-case-panel-label', thisUseCaseData.infoLabel);
+      setUseCaseInfo(childNode, 'use-case-panel-label', thisUseCaseData.panelLabel);
       setUseCaseInfo(childNode, 'use-case-panel-description', thisUseCaseData.desc);
     });
 
