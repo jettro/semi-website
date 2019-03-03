@@ -39,3 +39,15 @@ export function addEventListenerOnce(target, type, listener) {
     listener.apply(this, arguments);
   });
 }
+
+/**
+ * @desc returns the next sibling of HTMLElement
+ * @param element {HTMLElement} The element of which the sibling should be found
+ * @returns {*} the next sibling
+ */
+export function nextSibling(element) {
+  do {
+    element = element.nextSibling;
+  } while (element && element.nodeType !== 1);
+  return element;
+}

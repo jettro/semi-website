@@ -1,26 +1,47 @@
-import formPricingRadioButtons from './formPricingRadioButtons';
-import showUseCasePricing from './showUseCasePricing';
-import { elementExists, addEventListenerOnce } from '../../helpers/helpers';
-import selectClickedElementByType from './selectClickedElementByType';
+import { elementExists, nextSibling } from '../../helpers/helpers';
 import pricingConfig from './pricingConfig';
+import handleChoiceUseCases from './handleChoiceUseCases';
+import handleChoiceHosting from './handleChoiceHosting';
+
 // import { formPricingInit, formPricingCalculate } from './formPricingCalculate';
+
+/**
+ * @desc gets fieldset based on data attribute (step)
+ * @param fieldSets
+ * @param step
+ */
+const getChoiceFieldset = function(fieldSets, step) {
+  for (let fieldSet of fieldSets) {
+    if(fieldSet.dataset.step === step) return fieldSet;
+  }
+};
+
+const showNextChoice = function(target) {
+  const nextChoice = nextSibling(target);
+  nextChoice.classList.remove('form-stepper__step--hidden');
+  nextChoice.classList.add('form-stepper__step--show');
+};
 
 (function(factory) {
 
-  // Find the global object for export to both the browser and web workers.
+  /** Find the global object for export to both the browser and web workers. */
   var globalObject = typeof window === 'object' && window ||
     typeof self === 'object' && self;
 
-  // Setup calculator.js for different environments. First is Node.js or
-  // CommonJS.
+  /**
+   *  Setup calculator.js for different environments.
+   *  First is Node.js or CommonJS.
+   */
   if(typeof exports !== 'undefined') {
     factory(exports);
   } else if(globalObject) {
-    // Export calculator globally even when using AMD for cases when this script
-    // is loaded with others that may still expect a global calculator.
+    /**
+     * Export calculator globally even when using AMD for cases when this script
+     * is loaded with others that may still expect a global calculator.
+     */
     globalObject.calculator = factory({});
 
-    // Finally register the global calculator with AMD.
+    /** Finally register the global calculator with AMD. */
     if(typeof define === 'function' && define.amd) {
       define([], function() {
         return globalObject.calculator;
@@ -34,53 +55,19 @@ import pricingConfig from './pricingConfig';
 
     if (elementExists(formPricing)) {
 
-      /** choice: usecases */
-      const handleUseCases = function() {
-        return new Promise((resolve, reject) => {
-          formPricing.addEventListener('click', e => {
-            e.preventDefault();
-            /** ... */
-            formPricingRadioButtons(e, formPricing, function() {
-              const button = selectClickedElementByType(e, 'BUTTON');
-              if (elementExists(button)) {
-                const useCaseKey = button.dataset.useCase;
-                const useCaseKeyExists = useCaseKey !== '';
-                if (useCaseKeyExists) {
-                  showUseCasePricing(
-                    useCaseKey,
-                    pricingConfig.pricingInfoContainerId
-                  );
-                }
-              }
-            });
-          });
-          addEventListenerOnce(formPricing, "click", function() {
-            resolve();
-          });
-        });
-      };
-
-      /** choice: hosting */
-      const handleHosting = function() {
-        return new Promise((resolve, reject) => {
-          console.log('now the hosting can be done');
-          resolve();
-        });
-      };
+      const fieldSets = formPricing.getElementsByTagName('FIELDSET');
+      const useCaseFieldset = getChoiceFieldset(fieldSets, 'use-case');
 
       /** execute the choices */
-      handleUseCases().then(handleHosting)
-
-      // TODO refactor two functions:
-      // formPricingCalculate(e, formPricing);
-      // TODO: add form handler
-
+      handleChoiceUseCases(useCaseFieldset, function() {
+        showNextChoice(useCaseFieldset);
+      }).then(handleChoiceHosting);
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);
     }
   }
 
-  /* interface definition */
+  /** interface definition */
   calculator.initCalculatorOnLoad = initCalculatorOnLoad;
 
   return calculator;

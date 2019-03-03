@@ -70,17 +70,23 @@ mainClass: wrapper--wide
                     </div>
                 </fieldset>
 
-                <!--<fieldset class="form-stepper__step" data-step="hosting-preference" data-target="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference">-->
-                    <!--<legend>-->
-                        <!--<h2 id="label-hosting-preference">Would you like SeMI to host data on your behalf?</h2>-->
-                    <!--</legend>-->
-                    <!--<button class="ui-button ui-button&#45;&#45;active" type="button" role="radio" data-target-show="false" data-subject="" aria-checked="true">-->
-                        <!--<span class="ui-button__title">Yes</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-target-show="true" data-subject="" aria-checked="false">-->
-                        <!--<span class="ui-button__title">No</span>-->
-                    <!--</button>-->
-                <!--</fieldset>-->
+                <fieldset class="form-stepper__step form-stepper__step--hidden" data-step="hosting-preference" data-target="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference">
+                    <legend>
+                        <h2 id="label-hosting-preference">Would you like SeMI to host data on your behalf?</h2>
+                    </legend>
+                    <ul class="list-ui list-buttons-radio">
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-target-show="false" data-subject="" aria-checked="false">
+                                <span class="ui-button__title">Yes</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-target-show="true" data-subject="" aria-checked="false">
+                                <span class="ui-button__title">No</span>
+                            </button>
+                        </li>
+                    </ul>
+                </fieldset>
 
                 <!--<fieldset class="form-stepper__step form-stepper__step&#45;&#45;optional" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform" aria-hidden="true">-->
                     <!--<legend>-->

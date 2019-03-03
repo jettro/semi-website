@@ -19,6 +19,14 @@
   }
 }
 
+.form-stepper__step--hidden {
+  display: none;
+}
+
+.form-stepper__step--show {
+  display: flex;
+}
+
 .form-stepper__step--optional {
   background-color: $color-gray-6;
   padding: $scale-1;
