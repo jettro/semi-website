@@ -154,7 +154,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jque
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/**\n * configuration object\n * @type {{formId: string}}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  'formId': 'js-form-pricing',\n  'pricingInfoTemplateId': 'template-pricing-use-case',\n  'pricingInfoContainerId': 'container-pricing-use-case',\n  'pricingInfoTableContainerClassName': 'table-row-container',\n  'pricingRowTemplateClassName': 'template-table-pricing-row'\n});\n\n//# sourceURL=webpack:///./js-src/modules/pricing/pricingConfig.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * configuration object\n * @type {{formId: string}}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  'formId': 'js-form-pricing',\n  'pricingInfoTemplateId': 'template-pricing-use-case',\n  'pricingInfoContainerId': 'container-pricing-use-case',\n  'panelsClassName': 'panel-collapse',\n  'pricingInfoTableContainerClassName': 'table-row-container',\n  'pricingRowTemplateClassName': 'template-table-pricing-row'\n});\n\n//# sourceURL=webpack:///./js-src/modules/pricing/pricingConfig.js?");
 
 /***/ }),
 

@@ -51,9 +51,7 @@ import pricingConfig from './pricingConfig';
               showUseCasePricing(
                 useCaseKey,
                 pricingConfig.pricingInfoContainerId,
-                pricingConfig.pricingInfoTemplateId,
-                pricingConfig.pricingInfoTableContainerClassName,
-                pricingConfig.pricingRowTemplateClassName
+                pricingConfig.pricingInfoTemplateId
               );
             }
           }

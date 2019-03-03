@@ -1,72 +1,82 @@
 import { elementExists } from '../../helpers/helpers';
-import generateCpcRows from './generateCpcRows';
-import setUseCaseInfo from './setUseCaseInfo';
-import createCloneFromTemplate from './createCloneFromTemplate';
+import generateUseCaseTable from './generateUseCaseTable';
+import pricingConfig from './pricingConfig';
 
-const useCaseData = require('../../../_data/pricingUseCases');
+/**
+ *
+ * @param panels {object} the panels that exist on the page
+ * @param currentUseCaseKey {string} use case key to test if the element already exists
+ * @returns {boolean} returns true if the element doesn't exist
+ */
+const panelDoesNotExist = function(panels, currentUseCaseKey) {
+  const panelsMap = new Map();
+  Array.from(panels).forEach((panel, i) => {
+    const panelUseCaseKey = panel.dataset.useCase;
+    panelsMap.set(i, panelUseCaseKey === currentUseCaseKey);
+  });
+  for (let [k, v] of panelsMap) {
+    if (v === true) {
+      return false;
+    }
+  }
+  return true;
+};
+
+/**
+ * @desc toggle the existing panels based on use-case key
+ * @param panels {object} the panels that exist on the page
+ * @param currentUseCaseKey {string} The current use case key to compare
+ */
+const toggleUseCasePanels = function(panels, currentUseCaseKey) {
+  const showPanelClass = 'template-pricing-use-case--show';
+  const hidePanelClass = 'template-pricing-use-case--hidden';
+
+  if (typeof currentUseCaseKey === 'undefined') {
+    console.info(`The use case key hasn't been defined.`);
+  }
+
+  Array.from(panels).forEach(panel => {
+    const notAUseCasePanel = typeof panel.dataset.useCase === 'undefined';
+    const currentPanel = panel.dataset.useCase === currentUseCaseKey;
+    const notCurrentPanel = panel.dataset.useCase !== currentUseCaseKey;
+    if (notAUseCasePanel) {
+      return;
+    }
+    if (currentPanel) {
+      panel.classList.add(showPanelClass);
+      panel.classList.remove(hidePanelClass);
+    }
+    if (notCurrentPanel) {
+      panel.classList.add(hidePanelClass);
+      panel.classList.remove(showPanelClass);
+    }
+  });
+};
 
 /**
  * @desc This shows the use case pricing information block
  * @param useCaseKey {string} A key to identify the correct values in the pricingUseCases.json (JSON) file
  * @param pricingInfoContainerId {string} The container for all the pricing info blocks
- * @param pricingInfoTemplateId {string} The template for the pricing information block
  * @param useCaseKey {string} Use case key is used to retrieve data from ./_data/pricingUseCases.json
- * @param pricingInfoTableContainerClassName {string} The container of the pricing information table
- * @param pricingRowTemplateClassName {string} The template for each pricing information table row
  */
-export default function(
-  useCaseKey,
-  pricingInfoContainerId,
-  pricingInfoTemplateId,
-  pricingInfoTableContainerClassName,
-  pricingRowTemplateClassName,
-) {
-  const useCaseLabels = useCaseData.cpcLabels;
-  const thisUseCaseData = useCaseData.useCases[0][useCaseKey];
-  const consumptions = thisUseCaseData.consumptions;
-  const infoTemplateElement = document.getElementById(pricingInfoTemplateId);
+export default function(useCaseKey, pricingInfoContainerId) {
+  const pricingUseCaseContainer = document.getElementById(pricingInfoContainerId);
+  if (elementExists(pricingUseCaseContainer)) {
+    const panels = pricingUseCaseContainer.getElementsByClassName(pricingConfig.panelsClassName);
 
-  if (elementExists(infoTemplateElement)) {
-    const cloneInfoContainer = document.getElementById('container-pricing-use-case');
-    const cloneInfoTemplate = createCloneFromTemplate(infoTemplateElement);
+    /** hide the other panels if it's not the use-case that's clicked */
+    toggleUseCasePanels(panels, useCaseKey);
 
-    const thisInfoChildElements = cloneInfoTemplate.querySelectorAll('*');
-
-    // append the clone it on the right location
-    cloneInfoContainer.appendChild(cloneInfoTemplate);
-
-    // show/hide the template
-    // TODO: add logic so only one template is shown,
-    //       and the other that was shown remains in the DOM
-    cloneInfoTemplate.classList.remove('template-pricing-use-case--hidden');
-    cloneInfoTemplate.classList.add('template-pricing-use-case--show');
-
-    thisInfoChildElements.forEach(childNode => {
-      setUseCaseInfo(childNode, 'use-case-panel-label', thisUseCaseData.infoLabel);
-      setUseCaseInfo(childNode, 'use-case-panel-description', thisUseCaseData.desc);
-    });
-
-    // TODO: improvement: target the template and container element not by classname but by other
-    //                    method. ID would be logical, but since each use-case info block will have
-    //                    an instance of this, ID isn't possible since only one may exist. Perhaps
-    //                    a data attribute? (research info for this)
-    const [rowTemplateElement] = cloneInfoTemplate.getElementsByClassName(
-      pricingRowTemplateClassName,
-    );
-    const [tableRowContainer] = cloneInfoTemplate.getElementsByClassName(
-      pricingInfoTableContainerClassName,
-    );
-
-    if (elementExists(tableRowContainer)) {
-      generateCpcRows(rowTemplateElement, useCaseLabels, consumptions, tableRowContainer);
-    } else {
-      console.info(
-        `No container for the row elements is present. (rowContainer: ${tableRowContainer})`,
+    if (panelDoesNotExist(panels, useCaseKey)) {
+      /** the panel doesn't exist, create it */
+      generateUseCaseTable(
+        useCaseKey,
+        pricingConfig.pricingInfoTableContainerClassName,
+        pricingConfig.pricingRowTemplateClassName,
+        pricingConfig.pricingInfoTemplateId,
       );
     }
   } else {
-    console.info(
-      `Pricing container with classname ${pricingContainerClassName} does not exist. Please check the markup.`,
-    );
+    console.info(`There is no pricing info container with the id ${pricingUseCaseContaine}`);
   }
 }

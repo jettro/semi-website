@@ -6,6 +6,7 @@ export default {
   'formId': 'js-form-pricing',
   'pricingInfoTemplateId': 'template-pricing-use-case',
   'pricingInfoContainerId': 'container-pricing-use-case',
+  'panelsClassName': 'panel-collapse',
   'pricingInfoTableContainerClassName': 'table-row-container',
-  'pricingRowTemplateClassName': 'template-table-pricing-row'
+  'pricingRowTemplateClassName': 'template-table-pricing-row',
 };
