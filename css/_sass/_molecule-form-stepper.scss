@@ -6,7 +6,7 @@
 }
 
 .form-stepper__step {
-  flex-direction: row;
+  flex-direction: column;
 
   &[aria-hidden="true"] {
     display: none;
@@ -15,6 +15,7 @@
 
   legend {
     display: flex;
+    flex-direction: column;
   }
 }
 

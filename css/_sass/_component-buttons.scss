@@ -5,6 +5,7 @@
 // TODO: move this to separate file
 .list-buttons-radio {
   display: flex;
+  margin-bottom: 1rem;
   li:not(:first-child) {
     margin-left: .5rem;
   }

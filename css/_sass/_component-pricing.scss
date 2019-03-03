@@ -14,6 +14,16 @@
   display: table-row;
 }
 
+.price,
+.pricing-total {
+  &:before {
+    content: '€';
+    padding-right: .5rem;
+  }
+}
+
+
+
 // TODO: move to panel collapse component file
 .panel-collapse {
   flex-direction: column;
@@ -24,13 +34,4 @@
 .panel-collapse__head {
   border-bottom: $border-2;
   margin-bottom: $scale-0;
-}
-
-.price,
-.pricing-total {
-  &:before {
-    content: '€';
-    padding-right: .5rem;
-  }
-
 }

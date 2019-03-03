@@ -1,19 +1,24 @@
 <aside class="layout__sidebar receipt">
-    <strong class="receipt__title">Summary</strong>
+    <div class="card__title">
+        <strong class="receipt__title">Price Summary</strong>
+    </div>
     <dl>
-        <dt>Variable monthly cost</dt>
-        <dd class="price" id="monthlyTotal">0,00</dd>
-        <dt>Hosting Adjustment</dt>
-        <dd>€ 0,00</dd>
-        <dt>Optimization Adjustment</dt>
-        <dd>€ 0,00</dd>
-        <dt># of clusters Adjustment</dt>
-        <dd>€ 0,00</dd>
-        <dt>Recurring cost per month (fixed)</dt>
-        <dd>€ 0,00</dd>
-        <dt><strong>Total estimated usage costs</strong></dt>
-        <dd><strong>€ 0,00</strong></dd>
-        <dt>One time setup fee</dt>
-        <dd>€ 0,00</dd>
+        <dt class="receipt__entry-inactive receipt__use-case">Variable monthly cost</dt>
+        <dd class="receipt__entry-inactive receipt__use-case price" id="monthlyTotal">0,00</dd>
+        <dt class="receipt__entry-inactive">Hosting Adjustment</dt>
+        <dd class="receipt__entry-inactive price">0,00</dd>
+        <dt class="receipt__entry-inactive">Optimization Adjustment</dt>
+        <dd class="receipt__entry-inactive price">0,00</dd>
+        <dt class="receipt__entry-inactive"># of clusters Adjustment</dt>
+        <dd class="receipt__entry-inactive price">0,00</dd>
+        <dt class="receipt__entry-inactive">Recurring cost per month (fixed)</dt>
+        <dd class="receipt__entry-inactive price">0,00</dd>
+        <dt class="receipt__entry-inactive receipt__total"><strong>Estimated p/m</strong></dt>
+        <dd class="receipt__entry-inactive receipt__total price"><strong>0,00</strong></dd>
+        <dt class="receipt__entry-inactive">One time setup fee</dt>
+        <dd class="receipt__entry-inactive price">0,00</dd>
     </dl>
+    <!-- TODO: make class with not-a-button styling -->
+    <!--<button>Get a detailed pricing report</button>-->
+    <a class="button" href="#">Schedule a call</a>
 </aside>

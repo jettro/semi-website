@@ -1,9 +1,10 @@
 @import 'var-scale';
+@import 'var-borders';
 
 .receipt {
-  .receipt__title {
-    font-size: 1.5rem;
-  }
+  border: $border-2;
+  padding: $space-inner-x-large;
+
   dl {
     align-items: stretch;
     display: flex;
@@ -11,10 +12,28 @@
     flex-wrap: wrap;
     margin-bottom: $scale-1;
   }
+  dt:not(.receipt__total),
+  dd:not(.receipt__total) {
+    font-size: 1em;
+    font-weight: $font-weight-default;
+  }
   dt {
-    flex-basis: 60%;
+    flex-basis: 70%;
   }
   dd {
-    flex-basis: 40%;
+    flex-basis: 30%;
   }
+}
+
+.receipt__entry-inactive:not(.receipt__total) {
+  color: $color-gray-5;
+}
+
+.receipt__title {
+  font-size: 1.3em;
+}
+
+.receipt__total {
+  font-size: 1.125em;
+  margin-top: 2rem;
 }

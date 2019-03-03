@@ -4,164 +4,175 @@ title: SeMI, pricing
 mainClass: wrapper--wide
 ---
 
-<div class="layout">
-    <div class="layout__content">
-        <h1>Weaviate pricing</h1>
-        <p>To be able to provide you with a performace that matches your needs we're going to ask you a couple of questions? Based on your answers we will recommend a setup and show you an approximate price for your estimated usage.</p>
-        <form id="js-form-pricing" class="form-stepper">
-
-
-            <fieldset id="use-case" class="form-stepper__step" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
-                <legend>
-                    <h2 id="label-use-case">Use case description</h2>
-                </legend>
-
-                <ul class="list-ui list-buttons-radio">
-                    {% comment %}Note: To edit this, look for the file './_data/pricingUseCases.json'{% endcomment %}
-                    {% for useCase in site.data.pricingUseCases.useCases[0] %}
-                        {% assign useCaseKey = useCase[0] %}
-                        <li>
-                            <button class="ui-button" type="button" role="radio" aria-checked="false" data-use-case="{{useCaseKey}}">
-                                <span class="ui-button__title">{{useCase[1].title}}</span>
-                                <span class="ui-button__desc">{{useCase[1].shortDesc}}</span>
-                            </button>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-                <div id="container-pricing-use-case">
-                    <div class="panel-collapse template-pricing-use-case--hidden" id="template-pricing-use-case">
-                        <div class="panel-collapse__head">
-                            <p class="use-case-panel-label"></p>
-                        </div>
-                        <div class="pricing__info">
-                            <p class="use-case-panel-description"></p>
-                        </div>
-                        <table class="table-pricing table-zebra">
-                            <thead>
-                                <tr class="table-pricing__row">
-                                    <td class="table-pricing__column"><strong>Feature</strong></td>
-                                    <td class="table-pricing__column"><strong>Cost per call</strong></td>
-                                    <td class="table-pricing__column"><strong>Avg. nr. of API calls</strong></td>
-                                </tr>
-                            </thead>
-                            <tbody class="table-row-container">
-                                <tr class="table-pricing__row template-table-pricing-row template-table-pricing-row--hidden">
-                                    <td class="table-pricing__column">
-                                        <p class="feature-label"></p>
-                                        <p class="feature-description"></p>
-                                    </td>
-                                    <td class="table-pricing__column feature-cpc price"></td>
-                                    <td class="table-pricing__column feature-average"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!--<fieldset class="form-stepper__step" data-step="hosting-preference" data-target="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference">-->
-                <!--<legend>-->
-                    <!--<h2 id="label-hosting-preference">Would you like SeMI to host data on your behalf?</h2>-->
-                <!--</legend>-->
-                <!--<button class="ui-button ui-button&#45;&#45;active" type="button" role="radio" data-target-show="false" data-subject="" aria-checked="true">-->
-                    <!--<span class="ui-button__title">Yes</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-target-show="true" data-subject="" aria-checked="false">-->
-                    <!--<span class="ui-button__title">No</span>-->
-                <!--</button>-->
-            <!--</fieldset>-->
-
-            <!--<fieldset class="form-stepper__step form-stepper__step&#45;&#45;optional" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform" aria-hidden="true">-->
-                <!--<legend>-->
-                    <!--<h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>-->
-                <!--</legend>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
-                    <!--<span class="ui-button__title">Oracle cloud</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
-                    <!--<span class="ui-button__title">Google cloud</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
-                    <!--<span class="ui-button__title">AWS</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
-                    <!--<span class="ui-button__title">Azure</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
-                    <!--<span class="ui-button__title">Other</span>-->
-                <!--</button>-->
-            <!--</fieldset>-->
-
-            <!--<fieldset class="form-stepper__step" data-step="optimization" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
-                <!--<legend>-->
-                    <!--<h2 id="label-optimized">Optimized for</h2>-->
-                <!--</legend>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
-                    <!--<span class="ui-button__title">Size</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                    <!--<span class="ui-button__title">Balance</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                    <!--<span class="ui-button__title">Speed</span>-->
-                <!--</button>-->
-            <!--</fieldset>-->
-
-            <!--<fieldset class="form-stepper__step" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
-                <!--<legend>-->
-                    <!--<h2 id="label-clusters">Required number of clusters</h2>-->
-                <!--</legend>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
-                    <!--<span class="ui-button__title">1</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                    <!--<span class="ui-button__title">2</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                    <!--<span class="ui-button__title">3</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                    <!--<span class="ui-button__title">4</span>-->
-                <!--</button>-->
-            <!--</fieldset>-->
-
-            <!--<fieldset class="form-stepper__step" data-step="external-network-nodes" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
-                <!--<legend>-->
-                    <!--<h2 id="label-network-nodes-question">External Network Nodes?</h2>-->
-                <!--</legend>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                    <!--<span class="ui-button__title">Yes</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
-                    <!--<span class="ui-button__title">No</span>-->
-                <!--</button>-->
-            <!--</fieldset>-->
-
-            <!--<fieldset class="form-stepper__step" data-step="network-nodes" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
-                <!--<legend>-->
-                    <!--<h2 id="label-network-nodes">Network Nodes</h2>-->
-                <!--</legend>-->
-                <!--<p>Which Network Nodes would you like to use?</p>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
-                    <!--<span class="ui-button__title">Common Knowledge</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                    <!--<span class="ui-button__title">Places</span>-->
-                <!--</button>-->
-                <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                    <!--<span class="ui-button__title">Emotions</span>-->
-                <!--</button>-->
-            <!--</fieldset>-->
-
-            <!--<fieldset class="form-stepper__step" data-step="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference-input">-->
-                <!--<legend>-->
-                    <!--<h2 id="label-additional-info">Additional information</h2>-->
-                <!--</legend>-->
-                <!--<label id="label-hosting-preference-input" for="input-user-preference">Do you have any preference regarding the hosting provider SeMI uses?</label>-->
-                <!--<input id="input-user-preference" type="text" placeholder="Text" />-->
-            <!--</fieldset>-->
-        </form>
+<article>
+    <div class="page--background__first">
+        <div class="container">
+            <div class="wrapper">
+                {% include organism-product-top.html
+                    title="Pricing Calculator"
+                    intro="To be able to provide you with a performace that matches your needs we're going to ask you a couple of questions? Based on your answers we will recommend a setup and show you an approximate price for your estimated usage."
+                %}
+            </div>
+        </div>
     </div>
-    {% include components/pricing/molecule-receipt.html %}
-</div>
+
+    <div class="layout layout--height-uneven">
+        <!-- TODO: remove inline styling -->
+        <div class="layout__content" style="padding-right:2em">
+            <form id="js-form-pricing" class="form-stepper">
+                <fieldset id="use-case" class="form-stepper__step" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
+                    <legend>
+                        <h2 id="label-use-case">Use case selection</h2>
+                        <p>What are you using Weaviate for? Select the use case that best describes your situation.</p>
+                    </legend>
+
+                    <ul class="list-ui list-buttons-radio">
+                        {% comment %}Note: To edit this, look for the file './_data/pricingUseCases.json'{% endcomment %}
+                        {% for useCase in site.data.pricingUseCases.useCases[0] %}
+                            {% assign useCaseKey = useCase[0] %}
+                            <li>
+                                <button class="ui-button" type="button" role="radio" aria-checked="false" data-use-case="{{useCaseKey}}">
+                                    <span class="ui-button__title">{{useCase[1].title}}</span>
+                                    <span class="ui-button__desc">{{useCase[1].shortDesc}}</span>
+                                </button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div id="container-pricing-use-case">
+                        <div class="panel-collapse template-pricing-use-case--hidden" id="template-pricing-use-case">
+                            <div class="panel-collapse__head">
+                                <p class="use-case-panel-label"></p>
+                            </div>
+                            <div class="pricing__info">
+                                <p class="use-case-panel-description"></p>
+                            </div>
+                            <table class="table-pricing table-zebra">
+                                <thead>
+                                    <tr class="table-pricing__row">
+                                        <td class="table-pricing__column"><strong>Feature</strong></td>
+                                        <td class="table-pricing__column"><strong>Cost per call</strong></td>
+                                        <td class="table-pricing__column"><strong>Avg. nr. of API calls</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-row-container">
+                                    <tr class="table-pricing__row template-table-pricing-row template-table-pricing-row--hidden">
+                                        <td class="table-pricing__column">
+                                            <p class="feature-label"></p>
+                                            <p class="feature-description"></p>
+                                        </td>
+                                        <td class="table-pricing__column feature-cpc price"></td>
+                                        <td class="table-pricing__column feature-average"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!--<fieldset class="form-stepper__step" data-step="hosting-preference" data-target="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference">-->
+                    <!--<legend>-->
+                        <!--<h2 id="label-hosting-preference">Would you like SeMI to host data on your behalf?</h2>-->
+                    <!--</legend>-->
+                    <!--<button class="ui-button ui-button&#45;&#45;active" type="button" role="radio" data-target-show="false" data-subject="" aria-checked="true">-->
+                        <!--<span class="ui-button__title">Yes</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-target-show="true" data-subject="" aria-checked="false">-->
+                        <!--<span class="ui-button__title">No</span>-->
+                    <!--</button>-->
+                <!--</fieldset>-->
+
+                <!--<fieldset class="form-stepper__step form-stepper__step&#45;&#45;optional" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform" aria-hidden="true">-->
+                    <!--<legend>-->
+                        <!--<h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>-->
+                    <!--</legend>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
+                        <!--<span class="ui-button__title">Oracle cloud</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
+                        <!--<span class="ui-button__title">Google cloud</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
+                        <!--<span class="ui-button__title">AWS</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
+                        <!--<span class="ui-button__title">Azure</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
+                        <!--<span class="ui-button__title">Other</span>-->
+                    <!--</button>-->
+                <!--</fieldset>-->
+
+                <!--<fieldset class="form-stepper__step" data-step="optimization" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
+                    <!--<legend>-->
+                        <!--<h2 id="label-optimized">Optimized for</h2>-->
+                    <!--</legend>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
+                        <!--<span class="ui-button__title">Size</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
+                        <!--<span class="ui-button__title">Balance</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
+                        <!--<span class="ui-button__title">Speed</span>-->
+                    <!--</button>-->
+                <!--</fieldset>-->
+
+                <!--<fieldset class="form-stepper__step" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
+                    <!--<legend>-->
+                        <!--<h2 id="label-clusters">Required number of clusters</h2>-->
+                    <!--</legend>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
+                        <!--<span class="ui-button__title">1</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
+                        <!--<span class="ui-button__title">2</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
+                        <!--<span class="ui-button__title">3</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
+                        <!--<span class="ui-button__title">4</span>-->
+                    <!--</button>-->
+                <!--</fieldset>-->
+
+                <!--<fieldset class="form-stepper__step" data-step="external-network-nodes" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
+                    <!--<legend>-->
+                        <!--<h2 id="label-network-nodes-question">External Network Nodes?</h2>-->
+                    <!--</legend>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
+                        <!--<span class="ui-button__title">Yes</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
+                        <!--<span class="ui-button__title">No</span>-->
+                    <!--</button>-->
+                <!--</fieldset>-->
+
+                <!--<fieldset class="form-stepper__step" data-step="network-nodes" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
+                    <!--<legend>-->
+                        <!--<h2 id="label-network-nodes">Network Nodes</h2>-->
+                    <!--</legend>-->
+                    <!--<p>Which Network Nodes would you like to use?</p>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
+                        <!--<span class="ui-button__title">Common Knowledge</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
+                        <!--<span class="ui-button__title">Places</span>-->
+                    <!--</button>-->
+                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
+                        <!--<span class="ui-button__title">Emotions</span>-->
+                    <!--</button>-->
+                <!--</fieldset>-->
+
+                <!--<fieldset class="form-stepper__step" data-step="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference-input">-->
+                    <!--<legend>-->
+                        <!--<h2 id="label-additional-info">Additional information</h2>-->
+                    <!--</legend>-->
+                    <!--<label id="label-hosting-preference-input" for="input-user-preference">Do you have any preference regarding the hosting provider SeMI uses?</label>-->
+                    <!--<input id="input-user-preference" type="text" placeholder="Text" />-->
+                <!--</fieldset>-->
+            </form>
+        </div>
+        {% include components/pricing/molecule-receipt.html %}
+    </div>
+</article>

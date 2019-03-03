@@ -92,6 +92,6 @@ export default function(useCaseKey, pricingInfoContainerId) {
     }
 
   } else {
-    console.info(`There is no pricing info container with the id ${pricingUseCaseContaine}`);
+    console.info(`There is no pricing info container with the id ${pricingUseCaseContainer}`);
   }
 }
