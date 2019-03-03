@@ -1,0 +1,113 @@
+{
+  "cpcLabels": [
+    {
+      "title": "Adding Data",
+      "desc": "Everything related to adding data. This also allows for scale or speed of the knowledge graph.",
+      "api": "weaviate.local.query"
+    },
+    {
+      "title": "Updating data",
+      "desc": "info here...",
+      "api": ""
+    },
+    {
+      "title": "Requesting data",
+      "desc": "info here...",
+      "api": ""
+    },
+    {
+      "title": "Understanding the local graph",
+      "desc": "info here...",
+      "api": ""
+    },
+    {
+      "title": "Adding to the network",
+      "desc": "info here...",
+      "api": ""
+    },
+    {
+      "title": "Getting from the network",
+      "desc": "info here...",
+      "api": ""
+    },
+    {
+      "title": "Understanding the network",
+      "desc": "info here...",
+      "api": ""
+    },
+    {
+      "title": "Querying the network",
+      "desc": "info here...",
+      "api": ""
+    },
+    {
+      "title": "Knowledge services",
+      "desc": "info here...",
+      "api": ""
+    }
+  ],
+  "useCases": [
+    {
+      "MD": {
+        "title": "Master Data",
+        "desc": "Based on your use-case we have provided you with recommendations for your setup and a specific pricing that best suits your needs.",
+        "shortDesc": "Enrich merge and find data relating to master data",
+        "infoLabel": "Master Data use case estimated consumption",
+        "consumptions": [
+          {
+            "cpc": "0,015",
+            "average": "100.000"
+          },
+          {
+            "cpc": "0,015",
+            "average": "200.000"
+          },
+          {
+            "cpc": "0,015",
+            "average": "300.000"
+          },
+          {
+            "cpc": "0,015",
+            "average": "400.000"
+          },
+          {
+            "cpc": "0,015",
+            "average": "500.000"
+          },
+          {
+            "cpc": "0,015",
+            "average": "600.000"
+          },
+          {
+            "cpc": "0,015",
+            "average": "700.000"
+          },
+          {
+            "cpc": "0,015",
+            "average": "800.000"
+          },
+          {
+            "cpc": "0,015",
+            "average": "900.000"
+          }
+        ]
+      },
+      "RP": {
+        "title": "Reporting",
+        "desc": "A supporting tool that allows us to request daily/monthly or weekly reports replacing manual work",
+        "consumptions":
+        [
+          { "cpc": "0,025", "average":  "100.000" },
+          { "cpc": "0,025", "average":  "200.000" },
+          { "cpc": "0,025", "average":  "300.000" },
+          { "cpc": "0,025", "average":  "400.000" },
+          { "cpc": "0,025", "average":  "500.000" },
+          { "cpc": "0,025", "average":  "600.000" },
+          { "cpc": "0,025", "average":  "700.000" },
+          { "cpc": "0,025", "average":  "800.000" },
+          { "cpc": "0,025", "average":  "900.000" }
+        ]
+      }
+    }
+  ]
+}

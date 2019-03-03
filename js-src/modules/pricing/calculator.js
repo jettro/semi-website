@@ -1,6 +1,10 @@
+
 import formPricingRadioButtons from './formPricingRadioButtons';
-import { formPricingInit, formPricingCalculate } from './formPricingCalculate';
+import showUseCasePricing from './showUseCasePricing';
 import { elementExists } from '../../helpers/helpers';
+import selectClickedElementByType from './selectClickedElementByType';
+// import { formPricingInit, formPricingCalculate } from './formPricingCalculate';
+
 import pricingConfig from './pricingConfig';
 
 (function(factory) {
@@ -27,21 +31,31 @@ import pricingConfig from './pricingConfig';
   }
 
 }(function(calculator) {
-
-  console.log('inside calculator');
-
   function initCalculatorOnLoad() {
-
     const formPricing = document.getElementById(pricingConfig.formId);
-
     if (elementExists(formPricing)) {
+
+      // TODO: restate the init
       // initial setting of receipt
-      formPricingInit(formPricing);
+      // formPricingInit(formPricing);
       // form interactions
       formPricing.addEventListener('click', e => {
         e.preventDefault();
-        formPricingRadioButtons(e, formPricing);
-        formPricingCalculate(e, formPricing);
+
+        formPricingRadioButtons(e, formPricing, function() {
+          const button = selectClickedElementByType(e, 'BUTTON');
+          if(elementExists(button)) {
+            const useCaseKey = button.dataset.useCase;
+            const useCaseKeyExists = useCaseKey !== '';
+            if(useCaseKeyExists) {
+              showUseCasePricing(e, useCaseKey, pricingConfig.pricingInfoTemplateId, pricingConfig.pricingRowTemplateId);
+            }
+          }
+        });
+
+        // TODO refactor two functions:
+
+        // formPricingCalculate(e, formPricing);
         // TODO: add form handler
       }, false);
     } else {

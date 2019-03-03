@@ -1,16 +1,14 @@
-
-import { elementExists, selectParentElementOfType, assignButtonElement } from '../../helpers/helpers';
+import { elementExists } from '../../helpers/helpers';
 import formPricingToggleFieldset from './formPricingToggleFieldset';
+import selectClickedElementByType from './selectClickedElementByType';
 
 /**
  * @desc Field section radio buttons interaction
  * @param e
  * @param form
  */
-export default function(e, form) {
-  const targetParentIsButton = selectParentElementOfType(e, 'BUTTON');
-  const targetIsButton = e.target.tagName === 'BUTTON';
-  const clickedButton = assignButtonElement(e, targetParentIsButton, targetIsButton);
+export default function(e, form, callback) {
+  const clickedButton = selectClickedElementByType(e, 'BUTTON');
 
   /**
    *
@@ -47,4 +45,6 @@ export default function(e, form) {
       formPricingToggleFieldset(e, form, clickedButton);
     }
   }
+
+  callback();
 }

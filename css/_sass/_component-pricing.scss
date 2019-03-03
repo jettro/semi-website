@@ -1,0 +1,17 @@
+// pricing table is shown based on use-case
+.js-show-pricing-use-case {
+  display: none;
+}
+
+.pricing-use-case {
+  flex-direction: column;
+}
+
+.price,
+.pricing-total {
+  &:before {
+    content: '€';
+    padding-right: .5rem;
+  }
+
+}

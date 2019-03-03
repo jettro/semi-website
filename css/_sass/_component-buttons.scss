@@ -2,12 +2,25 @@
 @import 'var-color';
 @import 'var-borders';
 
+// TODO: move this to separate file
+.list-buttons-radio {
+  display: flex;
+  li:not(:first-child) {
+    margin-left: .5rem;
+  }
+  .ui-button {
+    align-items: center;
+  }
+}
+
 .ui-button {
   appearance: none;
   background-color: $color-white;
   border-width: $border-width-2;
   border-style: solid;
   border-color: $color-black;
+  display: flex;
+  flex-direction: column;
 
   &.ui-button:not([disabled]):not(.ui-button--active):hover {
     background-color: $color-semi-accent-tint--3;
@@ -29,4 +42,14 @@
   &:not(.form-stepper-table__column) {
     padding: $space-inner-small $space-inner-medium;
   }
+}
+
+.ui-button__title {
+  text-align: center;
+}
+
+.ui-button__desc {
+  text-align: center;
+  font-size: .75em;
+  max-width: 150px;
 }
