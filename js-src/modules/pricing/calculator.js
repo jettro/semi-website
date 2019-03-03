@@ -50,8 +50,7 @@ import pricingConfig from './pricingConfig';
             if(useCaseKeyExists) {
               showUseCasePricing(
                 useCaseKey,
-                pricingConfig.pricingInfoContainerId,
-                pricingConfig.pricingInfoTemplateId
+                pricingConfig.pricingInfoContainerId
               );
             }
           }

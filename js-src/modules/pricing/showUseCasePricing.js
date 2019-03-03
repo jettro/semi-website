@@ -1,6 +1,8 @@
 import { elementExists } from '../../helpers/helpers';
 import generateUseCaseTable from './generateUseCaseTable';
 import pricingConfig from './pricingConfig';
+import { setVariableMonthlyCost } from './pricingReceipt';
+import calcTotalCostUseCases from './calcTotalCostUseCases';
 
 /**
  *
@@ -27,7 +29,7 @@ const panelDoesNotExist = function(panels, currentUseCaseKey) {
  * @param panels {object} the panels that exist on the page
  * @param currentUseCaseKey {string} The current use case key to compare
  */
-const toggleUseCasePanels = function(panels, currentUseCaseKey) {
+const toggleUseCasePanels = function(panels, currentUseCaseKey, callback) {
   const showPanelClass = 'template-pricing-use-case--show';
   const hidePanelClass = 'template-pricing-use-case--hidden';
 
@@ -44,6 +46,7 @@ const toggleUseCasePanels = function(panels, currentUseCaseKey) {
     if (currentPanel) {
       panel.classList.add(showPanelClass);
       panel.classList.remove(hidePanelClass);
+      callback(panel);
     }
     if (notCurrentPanel) {
       panel.classList.add(hidePanelClass);
@@ -61,10 +64,14 @@ const toggleUseCasePanels = function(panels, currentUseCaseKey) {
 export default function(useCaseKey, pricingInfoContainerId) {
   const pricingUseCaseContainer = document.getElementById(pricingInfoContainerId);
   if (elementExists(pricingUseCaseContainer)) {
+    let doCalculationOn;
     const panels = pricingUseCaseContainer.getElementsByClassName(pricingConfig.panelsClassName);
 
     /** hide the other panels if it's not the use-case that's clicked */
-    toggleUseCasePanels(panels, useCaseKey);
+    toggleUseCasePanels(panels, useCaseKey, function(panelContainer) {
+      const tableRowContainer = panelContainer.getElementsByClassName('table-row-container');
+      [doCalculationOn] = tableRowContainer;
+    });
 
     if (panelDoesNotExist(panels, useCaseKey)) {
       /** the panel doesn't exist, create it */
@@ -73,8 +80,17 @@ export default function(useCaseKey, pricingInfoContainerId) {
         pricingConfig.pricingInfoTableContainerClassName,
         pricingConfig.pricingRowTemplateClassName,
         pricingConfig.pricingInfoTemplateId,
+        function(tableRowContainer) {
+          doCalculationOn = tableRowContainer;
+        }
       );
     }
+
+    if (doCalculationOn) {
+      // TODO: maybe add pricingReceipt.setVariableMonthlyCost() as scoped function
+      setVariableMonthlyCost(calcTotalCostUseCases(doCalculationOn));
+    }
+
   } else {
     console.info(`There is no pricing info container with the id ${pricingUseCaseContaine}`);
   }

@@ -1,24 +1,9 @@
-import { elementExists, isNumber } from '../../helpers/helpers';
+import { elementExists } from '../../helpers/helpers';
 import createCloneFromTemplate from './createCloneFromTemplate';
 import setUseCaseInfo from './setUseCaseInfo';
 import generateCpcRows from './generateCpcRows';
-import { setVariableMonthlyCost } from './pricingReceipt';
 
 const useCaseData = require('../../../_data/pricingUseCases');
-
-function totalCostUseCase(tableRowContainer) {
-  // use case table
-  // set total cost for use case variable monthly cost
-  const tableRows = tableRowContainer.getElementsByClassName('table-pricing__row');
-  let useCaseTotal = 0;
-  for (let row of tableRows) {
-    if (typeof row.dataset.subTotal !== 'undefined' && isNumber(row.dataset.subTotal)) {
-      const useCaseSubTotal = row.dataset.subTotal;
-      useCaseTotal += parseInt(useCaseSubTotal);
-    }
-  }
-  return useCaseTotal;
-}
 
 /**
  * @param useCaseKey {string} A key to identify the correct values in the pricingUseCases.json (JSON) file
@@ -31,6 +16,7 @@ export default function(
   pricingInfoTableContainerClassName,
   pricingRowTemplateClassName,
   pricingInfoTemplateId,
+  callback
 ) {
   const infoTemplateElement = document.getElementById(pricingInfoTemplateId);
 
@@ -69,13 +55,13 @@ export default function(
 
     if (elementExists(tableRowContainer)) {
       generateCpcRows(rowTemplateElement, useCaseLabels, consumptions, tableRowContainer);
-      // TODO: maybe add pricingReceipt.setVariableMonthlyCost() as scoped function
-      setVariableMonthlyCost(totalCostUseCase(tableRowContainer));
+      callback(tableRowContainer);
     } else {
       console.info(
         `No container for the row elements is present. (rowContainer: ${tableRowContainer})`,
       );
     }
+
   } else {
     console.info(
       `Pricing container with classname ${pricingContainerClassName} does not exist. Please check the markup.`,
