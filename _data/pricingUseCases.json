@@ -3,47 +3,47 @@
     {
       "title": "Adding Data",
       "desc": "Everything related to adding data. This also allows for scale or speed of the knowledge graph.",
-      "api": "weaviate.local.query"
+      "api": "weaviate.graph.add"
     },
     {
       "title": "Updating data",
       "desc": "info here...",
-      "api": ""
+      "api": "weaviate.graph.manipulate"
     },
     {
       "title": "Requesting data",
       "desc": "info here...",
-      "api": ""
+      "api": "weaviate.graph.get"
     },
     {
       "title": "Understanding the local graph",
       "desc": "info here...",
-      "api": ""
+      "api": "weaviate.graph.meta"
     },
     {
       "title": "Adding to the network",
       "desc": "info here...",
-      "api": ""
+      "api": "weaviate.network.add"
     },
     {
       "title": "Getting from the network",
       "desc": "info here...",
-      "api": ""
+      "api": "weaviate.network.get"
     },
     {
       "title": "Understanding the network",
       "desc": "info here...",
-      "api": ""
+      "api": "weaviate.network.meta"
     },
     {
       "title": "Querying the network",
       "desc": "info here...",
-      "api": ""
+      "api": "weaviate.network.query"
     },
     {
       "title": "Knowledge services",
       "desc": "info here...",
-      "api": ""
+      "api": "weaviate.graph.service"
     }
   ],
   "useCases": [
