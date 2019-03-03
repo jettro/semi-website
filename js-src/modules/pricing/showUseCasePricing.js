@@ -34,7 +34,6 @@ const toggleUseCasePanels = function(panels, currentUseCaseKey) {
   if (typeof currentUseCaseKey === 'undefined') {
     console.info(`The use case key hasn't been defined.`);
   }
-
   Array.from(panels).forEach(panel => {
     const notAUseCasePanel = typeof panel.dataset.useCase === 'undefined';
     const currentPanel = panel.dataset.useCase === currentUseCaseKey;

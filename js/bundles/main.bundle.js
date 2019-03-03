@@ -102,11 +102,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 /*!***********************************!*\
   !*** ./js-src/helpers/helpers.js ***!
   \***********************************/
-/*! exports provided: elementExists */
+/*! exports provided: elementExists, isNumber, localizeNumber */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"elementExists\", function() { return elementExists; });\n/**\n * @desc simple helper to test if an eleement exists\n * @param element {HTMLElement} The element to check\n * @returns {boolean} whether the element exists in local DOM\n */\nfunction elementExists(element) {\n  return typeof element != 'undefined' && element != null;\n}\n\n//# sourceURL=webpack:///./js-src/helpers/helpers.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"elementExists\", function() { return elementExists; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isNumber\", function() { return isNumber; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"localizeNumber\", function() { return localizeNumber; });\n/**\n * @desc simple helper to test if an eleement exists\n * @param element {HTMLElement} The element to check\n * @returns {boolean} whether the element exists in local DOM\n */\nfunction elementExists(element) {\n  return typeof element != 'undefined' && element != null;\n}\n/**\n * @desc parses number with comma decimal separator\n * @param n {number}\n * @returns {boolean}\n */\n\nfunction isNumber(n) {\n  'use strict';\n\n  n = n.replace(/\\./g, '').replace(',', '.');\n  return !isNaN(parseFloat(n)) && isFinite(n);\n}\n/**\n * @desc localize the number to the language of choice\n * @param n {number} the number to localize\n */\n\nfunction localizeNumber(n) {\n  const numberLanguage = 'nl';\n  return Number(n).toLocaleString(numberLanguage);\n}\n\n//# sourceURL=webpack:///./js-src/helpers/helpers.js?");
 
 /***/ }),
 

@@ -1,6 +1,8 @@
 
-import setFeatureCellText from './setFeatureCellText';
+import { localizeNumber } from '../../helpers/helpers';
 import createCloneFromTemplate from './createCloneFromTemplate';
+import setFeatureCellText from './setFeatureCellText';
+import setFeatureSubTotal from './setFeatureSubTotal';
 
 /**
  * @desc generate all the rows
@@ -15,12 +17,15 @@ export default function(template, labels, data, containerNode) {
     const rowsMap = new Map();
     /** Set all the data in the rows */
     labels.forEach((label, i) => {
+      const cpcConverted = localizeNumber(data[i].cpc);
+      const avgConverted = localizeNumber(data[i].average);
       /** clone the template for each label */
       const clone = createCloneFromTemplate(template);
       setFeatureCellText(clone, labels[i].title, 'feature-label');
       setFeatureCellText(clone, labels[i].desc, 'feature-description');
-      setFeatureCellText(clone, data[i].cpc, 'feature-cpc');
-      setFeatureCellText(clone, data[i].average, 'feature-average');
+      setFeatureCellText(clone, cpcConverted, 'feature-cpc');
+      setFeatureCellText(clone, avgConverted, 'feature-average');
+      setFeatureSubTotal(clone, data[i].cpc, data[i].average);
       clone.classList.remove('template-table-pricing-row--hidden');
       clone.classList.add('template-table-pricing-row--visible');
       rowsMap.set(i, clone);

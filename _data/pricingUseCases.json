@@ -55,40 +55,40 @@
         "desc": "Based on your use-case we have provided you with recommendations for your setup and a specific pricing that best suits your needs.",
         "consumptions": [
           {
-            "cpc": "0,015",
-            "average": "100.000"
+            "cpc": "0.015",
+            "average": "100000"
           },
           {
-            "cpc": "0,015",
-            "average": "200.000"
+            "cpc": "0.015",
+            "average": "200000"
           },
           {
-            "cpc": "0,015",
-            "average": "300.000"
+            "cpc": "0.015",
+            "average": "300000"
           },
           {
-            "cpc": "0,015",
-            "average": "400.000"
+            "cpc": "0.015",
+            "average": "400000"
           },
           {
-            "cpc": "0,015",
-            "average": "500.000"
+            "cpc": "0.015",
+            "average": "500000"
           },
           {
-            "cpc": "0,015",
-            "average": "600.000"
+            "cpc": "0.015",
+            "average": "600000"
           },
           {
-            "cpc": "0,015",
-            "average": "700.000"
+            "cpc": "0.015",
+            "average": "700000"
           },
           {
-            "cpc": "0,015",
-            "average": "800.000"
+            "cpc": "0.015",
+            "average": "800000"
           },
           {
-            "cpc": "0,015",
-            "average": "900.000"
+            "cpc": "0.015",
+            "average": "900000"
           }
         ]
       },
@@ -98,15 +98,15 @@
         "desc": "A supporting tool that allows us to request daily/monthly or weekly reports replacing manual work",
         "consumptions":
         [
-          { "cpc": "0,025", "average":  "100.000" },
-          { "cpc": "0,025", "average":  "200.000" },
-          { "cpc": "0,025", "average":  "300.000" },
-          { "cpc": "0,025", "average":  "400.000" },
-          { "cpc": "0,025", "average":  "500.000" },
-          { "cpc": "0,025", "average":  "600.000" },
-          { "cpc": "0,025", "average":  "700.000" },
-          { "cpc": "0,025", "average":  "800.000" },
-          { "cpc": "0,025", "average":  "900.000" }
+          { "cpc": "0.025", "average":  "100000" },
+          { "cpc": "0.025", "average":  "200000" },
+          { "cpc": "0.025", "average":  "300000" },
+          { "cpc": "0.025", "average":  "400000" },
+          { "cpc": "0.025", "average":  "500000" },
+          { "cpc": "0.025", "average":  "600000" },
+          { "cpc": "0.025", "average":  "700000" },
+          { "cpc": "0.025", "average":  "800000" },
+          { "cpc": "0.025", "average":  "900000" }
         ]
       },
       "BD": {
@@ -116,15 +116,15 @@
         "desc": "This is a longer decription",
         "consumptions":
         [
-          { "cpc": "0,035", "average":  "100.000" },
-          { "cpc": "0,035", "average":  "200.000" },
-          { "cpc": "0,035", "average":  "300.000" },
-          { "cpc": "0,035", "average":  "400.000" },
-          { "cpc": "0,035", "average":  "500.000" },
-          { "cpc": "0,035", "average":  "600.000" },
-          { "cpc": "0,035", "average":  "700.000" },
-          { "cpc": "0,035", "average":  "800.000" },
-          { "cpc": "0,035", "average":  "900.000" }
+          { "cpc": "0.035", "average":  "100000" },
+          { "cpc": "0.035", "average":  "200000" },
+          { "cpc": "0.035", "average":  "300000" },
+          { "cpc": "0.035", "average":  "400000" },
+          { "cpc": "0.035", "average":  "500000" },
+          { "cpc": "0.035", "average":  "600000" },
+          { "cpc": "0.035", "average":  "700000" },
+          { "cpc": "0.035", "average":  "800000" },
+          { "cpc": "0.035", "average":  "900000" }
         ]
       }
     }
