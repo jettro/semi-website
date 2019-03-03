@@ -38,10 +38,9 @@ import pricingConfig from './pricingConfig';
       // TODO: restate the init
       // initial setting of receipt
       // formPricingInit(formPricing);
-      // form interactions
+
       formPricing.addEventListener('click', e => {
         e.preventDefault();
-
         formPricingRadioButtons(e, formPricing, function() {
           const button = selectClickedElementByType(e, 'BUTTON');
           if(elementExists(button)) {
@@ -50,14 +49,16 @@ import pricingConfig from './pricingConfig';
             if(useCaseKeyExists) {
               showUseCasePricing(
                 useCaseKey,
-                pricingConfig.pricingInfoContainerId
+                pricingConfig.pricingInfoContainerId,
+                function() {
+                  console.log('could show the next one');
+                }
               );
             }
           }
         });
 
         // TODO refactor two functions:
-
         // formPricingCalculate(e, formPricing);
         // TODO: add form handler
       }, false);

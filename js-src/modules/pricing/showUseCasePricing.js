@@ -90,7 +90,6 @@ export default function(useCaseKey, pricingInfoContainerId) {
       // TODO: maybe add pricingReceipt.setVariableMonthlyCost() as scoped function
       setVariableMonthlyCost(calcTotalCostUseCases(doCalculationOn));
     }
-
   } else {
     console.info(`There is no pricing info container with the id ${pricingUseCaseContainer}`);
   }
