@@ -70,59 +70,78 @@ mainClass: wrapper--wide
                     </div>
                 </fieldset>
 
-                <fieldset class="form-stepper__step form-stepper__step--hidden" data-step="hosting-preference" data-target="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference">
+                <fieldset class="form-stepper__step form-stepper__step--hidden" data-step="hosting-preference" role="radiogroup" aria-labelledby="label-hosting-preference">
                     <legend>
                         <h2 id="label-hosting-preference">Would you like SeMI to host data on your behalf?</h2>
                     </legend>
                     <ul class="list-ui list-buttons-radio">
                         <li>
-                            <button class="ui-button" type="button" role="radio" data-target-show="false" data-subject="" aria-checked="false">
+                            <button class="ui-button" type="button" role="radio" data-target-show-fieldset="hosting-optimisation" aria-checked="false">
                                 <span class="ui-button__title">Yes</span>
                             </button>
                         </li>
                         <li>
-                            <button class="ui-button" type="button" role="radio" data-target-show="true" data-subject="" aria-checked="false">
+                            <button class="ui-button" type="button" role="radio" data-target-show-fieldset="hosting-preference-platform" aria-checked="false">
                                 <span class="ui-button__title">No</span>
                             </button>
                         </li>
                     </ul>
                 </fieldset>
 
-                <!--<fieldset class="form-stepper__step form-stepper__step&#45;&#45;optional" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform" aria-hidden="true">-->
-                    <!--<legend>-->
-                        <!--<h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>-->
-                    <!--</legend>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
-                        <!--<span class="ui-button__title">Oracle cloud</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
-                        <!--<span class="ui-button__title">Google cloud</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
-                        <!--<span class="ui-button__title">AWS</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
-                        <!--<span class="ui-button__title">Azure</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">-->
-                        <!--<span class="ui-button__title">Other</span>-->
-                    <!--</button>-->
-                <!--</fieldset>-->
+                <fieldset class="form-stepper__step form-stepper__step--hidden form-stepper__step--child" data-step="hosting-optimisation" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                    <legend>
+                        <h2 id="label-optimized">Optimized for</h2>
+                    </legend>
+                    <ul class="list-ui list-buttons-radio">
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">
+                                <span class="ui-button__title">Size</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-subject="">
+                                <span class="ui-button__title">Balance</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-subject="">
+                                <span class="ui-button__title">Speed</span>
+                            </button>
+                        </li>
+                </fieldset>
 
-                <!--<fieldset class="form-stepper__step" data-step="optimization" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
-                    <!--<legend>-->
-                        <!--<h2 id="label-optimized">Optimized for</h2>-->
-                    <!--</legend>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
-                        <!--<span class="ui-button__title">Size</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                        <!--<span class="ui-button__title">Balance</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                        <!--<span class="ui-button__title">Speed</span>-->
-                    <!--</button>-->
-                <!--</fieldset>-->
+                <fieldset class="form-stepper__step form-stepper__step--hidden form-stepper__step--child" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                    <legend>
+                        <h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>
+                    </legend>
+                    <ul class="list-ui list-buttons-radio">
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">
+                                <span class="ui-button__title">Oracle cloud</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">
+                                <span class="ui-button__title">Google cloud</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">
+                                <span class="ui-button__title">AWS</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">
+                                <span class="ui-button__title">Azure</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="ui-button" type="button" role="radio" data-subject="" aria-checked="false">
+                                <span class="ui-button__title">Other</span>
+                            </button>
+                        </li>
+                    </ul>
+                </fieldset>
 
                 <!--<fieldset class="form-stepper__step" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
                     <!--<legend>-->

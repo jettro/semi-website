@@ -2,18 +2,6 @@
 @import 'var-color';
 @import 'var-borders';
 
-// TODO: move this to separate file
-.list-buttons-radio {
-  display: flex;
-  margin-bottom: 1rem;
-  li:not(:first-child) {
-    margin-left: .5rem;
-  }
-  .ui-button {
-    align-items: center;
-  }
-}
-
 .ui-button {
   appearance: none;
   background-color: $color-white;

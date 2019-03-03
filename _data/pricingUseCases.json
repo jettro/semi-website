@@ -53,6 +53,7 @@
         "shortDesc": "Enrich merge and find data relating to master data",
         "panelLabel": "Master Data use case estimated consumption",
         "desc": "Based on your use-case we have provided you with recommendations for your setup and a specific pricing that best suits your needs.",
+        "hostingCostWeaviate": "0",
         "consumptions": [
           {
             "cpc": "0.015",
@@ -96,6 +97,7 @@
         "title": "Reporting",
         "panelLabel": "Reporting use case estimated consumption",
         "desc": "A supporting tool that allows us to request daily/monthly or weekly reports replacing manual work",
+        "hostingCostWeaviate": "120",
         "consumptions":
         [
           { "cpc": "0.025", "average":  "100000" },
@@ -114,6 +116,7 @@
         "shortDesc": "Enrich, merge and find data relating to master data.",
         "panelLabel": "Big Data Use Case estimated consumption",
         "desc": "This is a longer decription",
+        "hostingCostWeaviate": "3044",
         "consumptions":
         [
           { "cpc": "0.035", "average":  "100000" },

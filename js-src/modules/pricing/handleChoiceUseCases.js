@@ -17,6 +17,7 @@ export default function(target, callback) {
     target.addEventListener('click', e => {
       e.preventDefault();
 
+      /** Logic for the radio buttons*/
       formPricingRadioButtons(e, target, function() {
         const button = selectClickedElementByType(e, 'BUTTON');
         if (elementExists(button)) {
@@ -31,8 +32,13 @@ export default function(target, callback) {
         }
       });
     });
+    /** resolve the promise and do a callback once! */
     addEventListenerOnce(target, "click", function() {
-      callback();
+      const button = selectClickedElementByType(event, 'BUTTON');
+      /** only do callback when the element clicked on is a button */
+      if (elementExists(button)) {
+        callback();
+      }
       resolve();
     });
   });

@@ -2,19 +2,9 @@ import { elementExists, nextSibling } from '../../helpers/helpers';
 import pricingConfig from './pricingConfig';
 import handleChoiceUseCases from './handleChoiceUseCases';
 import handleChoiceHosting from './handleChoiceHosting';
+import getChoiceFieldset from './getChoiceFieldset';
 
 // import { formPricingInit, formPricingCalculate } from './formPricingCalculate';
-
-/**
- * @desc gets fieldset based on data attribute (step)
- * @param fieldSets
- * @param step
- */
-const getChoiceFieldset = function(fieldSets, step) {
-  for (let fieldSet of fieldSets) {
-    if(fieldSet.dataset.step === step) return fieldSet;
-  }
-};
 
 const showNextChoice = function(target) {
   const nextChoice = nextSibling(target);
@@ -56,12 +46,23 @@ const showNextChoice = function(target) {
     if (elementExists(formPricing)) {
 
       const fieldSets = formPricing.getElementsByTagName('FIELDSET');
-      const useCaseFieldset = getChoiceFieldset(fieldSets, 'use-case');
+      const fieldsetUseCase = getChoiceFieldset(fieldSets, 'use-case');
+      const fieldsetHostingPreference = getChoiceFieldset(fieldSets, 'hosting-preference');
 
       /** execute the choices */
-      handleChoiceUseCases(useCaseFieldset, function() {
-        showNextChoice(useCaseFieldset);
-      }).then(handleChoiceHosting);
+
+      /** first fieldset, use cases */
+      handleChoiceUseCases(fieldsetUseCase, function() {
+        const nextFieldset = getChoiceFieldset(fieldSets, 'hosting-preference');
+        nextFieldset.classList.remove('form-stepper__step--hide');
+        nextFieldset.classList.add('form-stepper__step--show');
+      }).then();
+
+      /** second fieldset, hosting preference */
+      handleChoiceHosting(fieldsetHostingPreference, fieldSets).then(function(resolve) {
+
+      });
+
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);
     }

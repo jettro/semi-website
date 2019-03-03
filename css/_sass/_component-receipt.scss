@@ -1,9 +1,18 @@
 @import 'var-scale';
 @import 'var-borders';
 
+// TODO: refactor stickyness for IE and EDGE <15
+.stickyness {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 2em;
+}
+
 .receipt {
   border: $border-2;
   padding: $space-inner-x-large;
+  margin-bottom: 2em;
+  @extend .stickyness;
 
   dl {
     align-items: stretch;
