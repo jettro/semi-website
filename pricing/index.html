@@ -104,6 +104,7 @@ mainClass: wrapper--wide
                 <fieldset class="form-stepper__step form-stepper__step--hide form-stepper-bottom-margin form-stepper__step--child" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                     <legend>
                         <h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>
+                        <p>What would you optimize your Weaviate for?</p>
                     </legend>
                     <ul class="list-ui list-buttons-radio" id="container-pricing-platform-button">
                         <li id="template-pricing-platform-button" class="pricing-hosting-button--hide">
@@ -116,7 +117,8 @@ mainClass: wrapper--wide
 
                 <fieldset class="form-stepper__step form-stepper__step--hide" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                     <legend>
-                        <h2 id="label-clusters">Required number of clusters</h2>
+                        <h2 id="label-clusters">Clusters</h2>
+                        <p>Number of clusters</p>
                     </legend>
                     <ul class="list-ui list-buttons-radio" id="container-pricing-cluster-button">
                         <li id="template-pricing-cluster-button" class="pricing-hosting-button--hide">
@@ -130,6 +132,7 @@ mainClass: wrapper--wide
                 <fieldset class="form-stepper__step form-stepper__step--hide" data-step="contextionaries" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                     <legend>
                         <h2 id="label-contextionary">Training the contextionary</h2>
+                        <p>The way you set up the contextionary will depend on the diversity of the data, updating of the data and the type of industry (jargon) you operate in. Knowing this, how will you train the contextionary?</p>
                     </legend>
                     <ul class="list-ui list-buttons-radio" id="container-pricing-contextionary-button">
                         <li id="template-pricing-contextionary-button" class="pricing-hosting-button--hide">
@@ -140,21 +143,19 @@ mainClass: wrapper--wide
                     </ul>
                 </fieldset>
 
-                <!--<fieldset class="form-stepper__step" data-step="network-nodes" role="radiogroup" aria-labelledby="label-hosting-preference-platform">-->
-                    <!--<legend>-->
-                        <!--<h2 id="label-network-nodes">Network Nodes</h2>-->
-                    <!--</legend>-->
-                    <!--<p>Which Network Nodes would you like to use?</p>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="" aria-checked="true">-->
-                        <!--<span class="ui-button__title">Common Knowledge</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                        <!--<span class="ui-button__title">Places</span>-->
-                    <!--</button>-->
-                    <!--<button class="ui-button" type="button" role="radio" data-subject="">-->
-                        <!--<span class="ui-button__title">Emotions</span>-->
-                    <!--</button>-->
-                <!--</fieldset>-->
+                <fieldset class="form-stepper__step form-stepper__step--hide" data-step="weaviates" role="radiogroup" aria-labelledby="label-weaviates">
+                    <legend>
+                        <h2 id="label-weaviates">Number of Weaviates</h2>
+                        <p>How many Weaviates (1 single dataset = 1 weaviate) will you be requiring?</p>
+                    </legend>
+                    <ul class="list-ui list-buttons-radio" id="container-pricing-weaviate-button">
+                        <li id="template-pricing-weaviate-button" class="pricing-hosting-button--hide">
+                            <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__title"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </fieldset>
 
                 <!--<fieldset class="form-stepper__step" data-step="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference-input">-->
                     <!--<legend>-->

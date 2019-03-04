@@ -93,6 +93,7 @@
           }
         ],
         "optimization": [
+          {"percentage": true },
           {"size": "75"},
           {"overall":  "100"},
           {"speed": "110"}
@@ -116,6 +117,7 @@
           { "cpc": "0.025", "average":  "900000" }
         ],
         "optimization": [
+          {"percentage": true },
           {"size": "100"},
           {"overall":  "100"},
           {"speed": "75"}
@@ -140,6 +142,7 @@
           { "cpc": "0.035", "average":  "900000" }
         ],
         "optimization": [
+          {"percentage": true },
           {"size": "75"},
           {"overall":  "100"},
           {"speed": "100"}
@@ -148,6 +151,7 @@
     }
   ],
   "hostingProviders": [
+    {"percentage": true },
     {"Oracle Cloud": "100"},
     {"Google Cloud": "90"},
     {"AWS": "90"},
@@ -155,14 +159,23 @@
     {"Other": "110"}
   ],
   "clusters": [
+    {"percentage": true },
     {"1":  "100"},
     {"2":  "110"},
     {"3":  "120"},
     {"4":  "130"}
   ],
   "contextionaries": [
+    {"percentage": true },
     {"Open data":  "100"},
     {"One-off (custom)":  "100"},
     {"Constant training (custom)":  "100"}
+  ],
+  "weaviates": [
+    {"percentage": false },
+    {"1 weaviate": "20"},
+    {"1 weaviate": "30"},
+    {"1 weaviate": "40"},
+    {"1 weaviate": "50"}
   ]
 }

@@ -14,6 +14,11 @@ import setFeatureCellText from './setFeatureCellText';
 export default function(options, template) {
   const optionsButtonMap = new Map();
   options.forEach((option, i) => {
+    /** remove precentage from options since that doesn't have to be a button */
+    if (option.hasOwnProperty('percentage')) {
+      return;
+    }
+    /** otherwise create the option */
     const clone = createCloneFromTemplate(template);
     const label = Object.keys(option)[0];
     const value = parseFloat(Object.values(option)[0]).toFixed(2);

@@ -68,10 +68,12 @@ import handleChoiceContextionaries from './handleChoiceContextionaries';
         nextFieldset.classList.add('form-stepper__step--show');
       }).then();
 
-      /** fourth fieldset, type of network nodes */
+      /** fourth fieldset, type of network nodes (contextionaries) */
       handleChoiceContextionaries(fieldsetContextionaries, function() {
         console.log('the next one can be shown');
       }).then();
+
+      /** fifth fieldset, required number of weaviates */
 
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);
