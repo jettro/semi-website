@@ -173,9 +173,9 @@
   ],
   "weaviates": [
     {"percentage": false },
-    {"1 weaviate": "20"},
-    {"1 weaviate": "30"},
-    {"1 weaviate": "40"},
-    {"1 weaviate": "50"}
+    {"1 weaviate": "500"},
+    {"2 weaviates": "1000"},
+    {"3 weaviates": "1500"},
+    {"4 weaviates": "2000"}
   ]
 }

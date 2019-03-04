@@ -5,6 +5,7 @@ import handleChoiceUseCases from './handleChoiceUseCases';
 import handleChoiceHosting from './handleChoiceHosting';
 import handleChoiceClusters from './handleChoiceClusters';
 import handleChoiceContextionaries from './handleChoiceContextionaries';
+import handleChoiceWeaviates from './handleChoiceWeaviates';
 
 (function(factory) {
 
@@ -44,6 +45,7 @@ import handleChoiceContextionaries from './handleChoiceContextionaries';
       const fieldsetHostingPreference = getChoiceFieldset(fieldSets, 'hosting-preference');
       const fieldsetClusters = getChoiceFieldset(fieldSets, 'clusters');
       const fieldsetContextionaries = getChoiceFieldset(fieldSets, 'contextionaries');
+      const fieldsetWeaviates = getChoiceFieldset(fieldSets, 'weaviates');
 
       /** execute the choices */
 
@@ -70,10 +72,15 @@ import handleChoiceContextionaries from './handleChoiceContextionaries';
 
       /** fourth fieldset, type of network nodes (contextionaries) */
       handleChoiceContextionaries(fieldsetContextionaries, function() {
-        console.log('the next one can be shown');
+        const nextFieldset = getChoiceFieldset(fieldSets, 'weaviates');
+        nextFieldset.classList.remove('form-stepper__step--hide');
+        nextFieldset.classList.add('form-stepper__step--show');
       }).then();
 
       /** fifth fieldset, required number of weaviates */
+      handleChoiceWeaviates(fieldsetWeaviates, function() {
+        console.log('the next one can be shown');
+      });
 
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);

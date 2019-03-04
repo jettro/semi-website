@@ -13,6 +13,13 @@ import setFeatureCellText from './setFeatureCellText';
  */
 export default function(options, template) {
   const optionsButtonMap = new Map();
+  let optionDataSet = '';
+  if (options[0]['percentage'] === false) {
+    optionDataSet = 'subTotal';
+  } else {
+    optionDataSet = 'multiplier';
+  }
+
   options.forEach((option, i) => {
     /** remove precentage from options since that doesn't have to be a button */
     if (option.hasOwnProperty('percentage')) {
@@ -25,7 +32,7 @@ export default function(options, template) {
     setFeatureCellText(clone, label, 'ui-button__title');
     clone.classList.remove('pricing-hosting-button--hide');
     clone.classList.add('pricing-hosting-button--show');
-    clone.dataset.multiplier = value;
+    clone.dataset[optionDataSet] = value;
     optionsButtonMap.set(i, clone);
   });
   return optionsButtonMap;

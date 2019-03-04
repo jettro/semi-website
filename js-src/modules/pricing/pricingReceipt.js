@@ -66,4 +66,20 @@ function setHostingCluster(multiplier, useCasePrice) {
   }
 }
 
-export { setVariableMonthlyCost, setHostingAdjustment, setHostingCluster};
+/**
+ * @desc Add the weaviates price to the receipt
+ *       note: The number of Weaviates is a static price, so no multiply calculation needed.
+ * @param price {string}
+ */
+function setWeaviatesPrice(price) {
+  /** append to receipt */
+  const clusterAdjustmentElement = document.getElementById(pricingConfig.receipt.weaviateId);
+  clusterAdjustmentElement.innerHTML = price;
+  /** make the subtotal active */
+  const receiptEntriesUseCase = document.getElementsByClassName('receipt__recurring');
+  for (let entry of receiptEntriesUseCase) {
+    entry.classList.remove('receipt__entry-inactive');
+  }
+}
+
+export { setVariableMonthlyCost, setHostingAdjustment, setHostingCluster, setWeaviatesPrice};

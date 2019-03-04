@@ -17,9 +17,12 @@ export default {
   'pricingClusterTemplateId': 'template-pricing-cluster-button',
   'pricingContextionaryContainerId': 'container-pricing-contextionary-button',
   'pricingContextionaryTemplateId': 'template-pricing-contextionary-button',
+  'pricingWeaviateContainerId': 'container-pricing-weaviate-button',
+  'pricingWeaviateTemplateId': 'template-pricing-weaviate-button',
   'receipt': {
     'montlyTotalId': 'price-monthly-total',
     'hostingAdjustmentId': 'price-hosting',
-    'clustersId': 'price-cluster'
+    'clustersId': 'price-cluster',
+    'weaviateId': 'price-recurring'
   }
 };
