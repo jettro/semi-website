@@ -23,7 +23,7 @@ export function isNumber(n) {
  * @param n {number} the number to localize
  * @returns {string}
  */
-export function localizeNumberToString(n) {
+export function localizeNumber(n) {
   const numberLanguage = 'nl';
   return Number(n).toLocaleString(numberLanguage);
 }

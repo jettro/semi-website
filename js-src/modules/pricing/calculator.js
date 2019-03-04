@@ -7,7 +7,7 @@ import handleChoiceClusters from './handleChoiceClusters';
 import handleChoiceContextionaries from './handleChoiceContextionaries';
 import handleChoiceWeaviates from './handleChoiceWeaviates';
 import handleChoiceNetworkNodes from './handleChoiceNetworkNodes';
-import { setFixedCostPrice } from './pricingReceipt';
+import { setFixedCostPrice, setTotal } from './pricingReceipt';
 
 (function(factory) {
 
@@ -49,6 +49,8 @@ import { setFixedCostPrice } from './pricingReceipt';
       const fieldsetContextionaries = getChoiceFieldset(fieldSets, 'contextionaries');
       const fieldsetWeaviates = getChoiceFieldset(fieldSets, 'weaviates');
       const fieldsetNetworkNodes = getChoiceFieldset(fieldSets, 'network-nodes');
+      let weaviatePrice = '0';
+      let nodeNetworksPrice = '0';
 
       /** execute the choices */
 
@@ -81,13 +83,9 @@ import { setFixedCostPrice } from './pricingReceipt';
         nextFieldset.classList.add('form-stepper__step--show');
       });
 
-      let weaviatePrice = '0';
-      let nodeNetworksPrice = '0';
-
       /** fifth fieldset, required number of weaviates */
-      handleChoiceWeaviates(fieldsetWeaviates, function(price) {
+      handleChoiceWeaviates(fieldsetWeaviates, function(weaviatePrice) {
         /** each time a weaviate button is clicked, recalculate the fixed price */
-        weaviatePrice = price;
         setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
       }, function() {
         const nextFieldset = getChoiceFieldset(fieldSets, 'network-nodes');

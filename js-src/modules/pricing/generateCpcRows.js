@@ -1,5 +1,5 @@
 
-import { localizeNumberToString } from '../../helpers/helpers';
+import { localizeNumber } from '../../helpers/helpers';
 import createCloneFromTemplate from './createCloneFromTemplate';
 import setFeatureCellText from './setFeatureCellText';
 import setFeatureSubTotal from './setFeatureSubTotal';
@@ -17,8 +17,8 @@ export default function(template, labels, data, containerNode) {
     const rowsMap = new Map();
     /** Set all the data in the rows */
     labels.forEach((label, i) => {
-      const cpcConverted = localizeNumberToString(data[i].cpc);
-      const avgConverted = localizeNumberToString(data[i].average);
+      const cpcConverted = localizeNumber(data[i].cpc);
+      const avgConverted = localizeNumber(data[i].average);
       /** clone the template for each label */
       const clone = createCloneFromTemplate(template);
       setFeatureCellText(clone, labels[i].title, 'feature-label');

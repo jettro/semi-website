@@ -105,6 +105,7 @@ export default function(useCaseFieldset, target, fieldSets) {
                 const template = document.getElementById(pricingConfig.pricingOptimizationTemplateId);
                 const key = getUseCaseKey(useCaseButtons);
                 const data = pricingUseCaseData.useCases[0][key];
+
                 loadOptions(target, template, container, data,  'optimization', isFirstTimeFlag, function() {
                   resolve();
                   isFirstTimeFlag = false;

@@ -160,10 +160,10 @@
   ],
   "clusters": [
     {"percentage": true },
-    {"1":  "100"},
-    {"2":  "110"},
-    {"3":  "120"},
-    {"4":  "130"}
+    {"1 cluster":  "100"},
+    {"2 clusters":  "110"},
+    {"3 clusters":  "120"},
+    {"4 clusters":  "130"}
   ],
   "contextionaries": [
     {"percentage": true },
@@ -182,6 +182,7 @@
     {"percentage": false},
     {"Common Knowledge": "1000"},
     {"Places": "2000"},
-    {"Emotions": "3000"}
+    {"Emotions": "3000"},
+    {"None": "0"}
   ]
 }

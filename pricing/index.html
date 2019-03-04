@@ -32,6 +32,7 @@ mainClass: wrapper--wide
                             {% assign useCaseKey = useCase[0] %}
                             <li>
                                 <button class="ui-button" type="button" role="radio" aria-checked="false" data-use-case="{{useCaseKey}}">
+                                    <span class="ui-button__radio-icon"></span>
                                     <span class="ui-button__title">{{useCase[1].title}}</span>
                                     <span class="ui-button__desc">{{useCase[1].shortDesc}}</span>
                                 </button>
@@ -72,16 +73,19 @@ mainClass: wrapper--wide
 
                 <fieldset class="form-stepper__step form-stepper__step--hide" data-step="hosting-preference" role="radiogroup" aria-labelledby="label-hosting-preference">
                     <legend>
-                        <h2 id="label-hosting-preference">Would you like SeMI to host data on your behalf?</h2>
+                        <h2 id="label-hosting-preference">Hosting and Optimization</h2>
+                        <p>Would you like SeMI to host data in your behalf?</p>
                     </legend>
                     <ul class="list-ui list-buttons-radio">
                         <li>
                             <button class="ui-button" type="button" role="radio" data-target-show-fieldset="hosting-optimisation" aria-checked="false">
+                                <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title">Yes</span>
                             </button>
                         </li>
                         <li>
                             <button class="ui-button" type="button" role="radio" data-target-show-fieldset="hosting-preference-platform" aria-checked="false">
+                                <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title">No</span>
                             </button>
                         </li>
@@ -90,11 +94,13 @@ mainClass: wrapper--wide
 
                 <fieldset class="form-stepper__step form-stepper__step--hide form-stepper-bottom-margin form-stepper__step--child" data-step="hosting-optimisation" role="radiogroup" aria-labelledby="label-optimized">
                     <legend>
-                        <h2 id="label-optimized">Optimized for</h2>
+                        <h2 id="label-optimized">Optimization preferences</h2>
+                        <p>What would you optimize your Weaviate for?</p>
                     </legend>
                     <ul class="list-ui list-buttons-radio" id="container-pricing-optimization-button">
                         <li id="template-pricing-optimization-button" class="pricing-hosting-button--hide">
                             <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title"></span>
                             </button>
                         </li>
@@ -109,6 +115,7 @@ mainClass: wrapper--wide
                     <ul class="list-ui list-buttons-radio" id="container-pricing-platform-button">
                         <li id="template-pricing-platform-button" class="pricing-hosting-button--hide">
                             <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title"></span>
                             </button>
                         </li>
@@ -123,6 +130,7 @@ mainClass: wrapper--wide
                     <ul class="list-ui list-buttons-radio" id="container-pricing-cluster-button">
                         <li id="template-pricing-cluster-button" class="pricing-hosting-button--hide">
                             <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title"></span>
                             </button>
                         </li>
@@ -137,6 +145,7 @@ mainClass: wrapper--wide
                     <ul class="list-ui list-buttons-radio" id="container-pricing-contextionary-button">
                         <li id="template-pricing-contextionary-button" class="pricing-hosting-button--hide">
                             <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title"></span>
                             </button>
                         </li>
@@ -151,6 +160,7 @@ mainClass: wrapper--wide
                     <ul class="list-ui list-buttons-radio" id="container-pricing-weaviate-button">
                         <li id="template-pricing-weaviate-button" class="pricing-hosting-button--hide">
                             <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title"></span>
                             </button>
                         </li>
@@ -159,12 +169,13 @@ mainClass: wrapper--wide
 
                 <fieldset class="form-stepper__step form-stepper__step--hide" data-step="network-nodes" role="radiogroup" aria-labelledby="label-network-nodes">
                     <legend>
-                        <h2 id="label-network-nodes">Number of Network Nodes</h2>
+                        <h2 id="label-network-nodes">Network Nodes</h2>
                         <p>Will you be making use of any of the pre-filled network nodes?</p>
                     </legend>
                     <ul class="list-ui list-buttons-radio" id="container-pricing-notwork-nodes-button">
                         <li id="template-pricing-network-nodes-button" class="pricing-hosting-button--hide">
                             <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title"></span>
                             </button>
                         </li>

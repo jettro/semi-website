@@ -30,7 +30,6 @@ export default function(target, getWeaviatePrice, executeOnce) {
         }
       }
     });
-    return '12345';
   });
 
   /** resolve the promise and do a callback once! */

@@ -10,6 +10,8 @@
   border-color: $color-black;
   display: flex;
   flex-direction: column;
+  min-width: 120px;
+  min-height: 88px;
 
   &.ui-button:not([disabled]):not(.ui-button--active):hover {
     background-color: $color-semi-accent-tint--3;
@@ -20,6 +22,21 @@
     color: $color-white;
     background-color: $color-semi-accent;
     border-color: $color-semi-accent;
+
+    .ui-button__radio-icon {
+      border-color: $color-white;
+
+      &:before {
+        $size: .75rem;
+        content: "";
+        background: $color-white;
+        border-radius: $size;
+        display: inline-block;
+        margin: 2px 0 0 2px;
+        height: $size;
+        width: $size;
+      }
+    }
   }
 
   &[disabled] {
@@ -31,6 +48,15 @@
   &:not(.form-stepper-table__column) {
     padding: $space-inner-small $space-inner-medium;
   }
+}
+
+.ui-button__radio-icon  {
+  border: 2px solid $color-black;
+  border-radius: 1rem;
+  display: flex;
+  height: 1.25rem;
+  margin-top: .5rem;
+  width: 1.25rem;
 }
 
 .ui-button__title {

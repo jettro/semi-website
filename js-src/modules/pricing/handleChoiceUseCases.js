@@ -10,7 +10,7 @@ import pricingConfig from './pricingConfig';
  * @param target {HTMLElement} the target this choice applies to
  * @param callback {fn} a function to execute only once, once this function is done
  */
-export default function(target, callback) {
+export default function(target, executeOnce) {
   target.addEventListener('click', e => {
     e.preventDefault();
 
@@ -34,7 +34,7 @@ export default function(target, callback) {
     const button = selectClickedElementByType(event, 'BUTTON');
     /** only do callback when the element clicked on is a button */
     if (elementExists(button)) {
-      callback();
+      executeOnce();
     }
   });
 }

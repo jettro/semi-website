@@ -10,7 +10,7 @@ function sum(arr) {
   return arr.reduce(add);
 }
 
-function calculateTotal(elementsContainingPrices) {
+function reCalculateTotal(elementsContainingPrices) {
   let prices = [];
   for (let price of elementsContainingPrices) {
     const priceNumber = parseInt(price.innerText);
@@ -39,7 +39,7 @@ export function formPricingInit (form) {
           // only calculate prices if it's a button
           if (column.classList.contains('ui-button')) {
             const columnPriceElements = column.getElementsByClassName(config.elementClassToCountBy);
-            const total = calculateTotal(columnPriceElements);
+            const total = reCalculateTotal(columnPriceElements);
             const totalContainer = column.getElementsByClassName(config.elementClassTotalPrice);
             if (totalContainer.length === 1) {
               totalContainer[0].innerText = total;

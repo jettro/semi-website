@@ -1,4 +1,4 @@
-import { localizeNumberToString, localizeStringToNumber } from '../../helpers/helpers';
+import { localizeNumber, localizeStringToNumber } from '../../helpers/helpers';
 import pricingConfig from './pricingConfig';
 
 /**
@@ -8,7 +8,7 @@ import pricingConfig from './pricingConfig';
 function setVariableMonthlyCost(subTotal) {
   /** append to receipt */
   const monthlyTotalElement = document.getElementById(pricingConfig.receipt.montlyTotalId);
-  monthlyTotalElement.innerHTML = localizeNumberToString(subTotal);
+  monthlyTotalElement.innerHTML = localizeNumber(subTotal);
   /** make the subtotal active */
   const receiptEntriesUseCase = document.getElementsByClassName('receipt__use-case');
   for (let entry of receiptEntriesUseCase) {
@@ -29,7 +29,7 @@ function calculateDifference(multiplier, priceStr) {
   const priceBeforeFormatted = localizeStringToNumber(priceBefore);
   const sum = parseInt((multiplier / 100) * priceBeforeFormatted);
   const difference = sum - priceBeforeFormatted;
-  return localizeNumberToString(difference);
+  return localizeNumber(difference);
 }
 
 /**
@@ -40,13 +40,17 @@ function calculateDifference(multiplier, priceStr) {
 function setHostingAdjustment(multiplier, useCasePrice) {
   const price = calculateDifference(multiplier, useCasePrice.textContent);
   /** append to receipt */
-  const hostingAdjustmentElement = document.getElementById(pricingConfig.receipt.hostingAdjustmentId);
+  const hostingAdjustmentElement = document.getElementById(
+    pricingConfig.receipt.hostingAdjustmentId,
+  );
   hostingAdjustmentElement.innerHTML = price;
   /** make the subtotal active */
   const receiptEntriesUseCase = document.getElementsByClassName('receipt__hosting');
   for (let entry of receiptEntriesUseCase) {
     entry.classList.remove('receipt__entry-inactive');
   }
+  /** recalculate the total */
+  reCalculateTotal();
 }
 
 /**
@@ -64,6 +68,8 @@ function setHostingCluster(multiplier, useCasePrice) {
   for (let entry of receiptEntriesUseCase) {
     entry.classList.remove('receipt__entry-inactive');
   }
+  /** recalculate the total */
+  reCalculateTotal();
 }
 
 /**
@@ -74,14 +80,41 @@ function setHostingCluster(multiplier, useCasePrice) {
  */
 function setFixedCostPrice(weaviatesPrice, networkNodesPrice) {
   /** append to receipt */
-  const clusterAdjustmentElement = document.getElementById(pricingConfig.receipt.weaviateId);
+  const weaviateAdjustmentElement = document.getElementById(pricingConfig.receipt.weaviateId);
   /** Note: assumes the prices have no decimals! */
-  clusterAdjustmentElement.innerHTML = Number(weaviatesPrice) + Number(networkNodesPrice);
+  weaviateAdjustmentElement.innerHTML = Number(weaviatesPrice) + Number(networkNodesPrice);
   /** make the subtotal active */
   const receiptEntriesUseCase = document.getElementsByClassName('receipt__recurring');
   for (let entry of receiptEntriesUseCase) {
     entry.classList.remove('receipt__entry-inactive');
   }
+  /** recalculate the total */
+  reCalculateTotal();
 }
 
-export { setVariableMonthlyCost, setHostingAdjustment, setHostingCluster, setFixedCostPrice};
+function setTotal(totalPrice) {
+  /** append to receipt */
+  const totalElement = document.getElementById(pricingConfig.receipt.totalId);
+  totalElement.innerHTML = totalPrice;
+}
+
+function reCalculateTotal() {
+  const monthlyTotalElement = document.getElementById(pricingConfig.receipt.montlyTotalId);
+  const clusterAdjustmentElement = document.getElementById(pricingConfig.receipt.clustersId);
+  const WeaviateAdjustmentElement = document.getElementById(pricingConfig.receipt.weaviateId);
+  const hostingAdjustmentElement = document.getElementById(pricingConfig.receipt.hostingAdjustmentId);
+  const monthlyTotal = localizeStringToNumber(monthlyTotalElement.textContent);
+  const clusterTotal = localizeStringToNumber(clusterAdjustmentElement.textContent);
+  const weaviateTotal = localizeStringToNumber(WeaviateAdjustmentElement.textContent);
+  const hostingTotal = localizeStringToNumber(hostingAdjustmentElement.textContent);
+  const total = (monthlyTotal + clusterTotal + weaviateTotal + hostingTotal);
+  setTotal(localizeNumber(total));
+}
+
+export {
+  setVariableMonthlyCost,
+  setHostingAdjustment,
+  setHostingCluster,
+  setFixedCostPrice,
+  reCalculateTotal
+};

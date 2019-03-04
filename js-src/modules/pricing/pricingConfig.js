@@ -25,6 +25,7 @@ export default {
     'montlyTotalId': 'price-monthly-total',
     'hostingAdjustmentId': 'price-hosting',
     'clustersId': 'price-cluster',
-    'weaviateId': 'price-recurring'
+    'weaviateId': 'price-recurring',
+    'totalId': 'price-total'
   }
 };

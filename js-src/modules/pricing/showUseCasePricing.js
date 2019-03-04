@@ -1,7 +1,7 @@
-import { elementExists } from '../../helpers/helpers';
+import { elementExists, localizeNumber } from '../../helpers/helpers';
 import generateUseCaseTable from './generateUseCaseTable';
 import pricingConfig from './pricingConfig';
-import { setVariableMonthlyCost } from './pricingReceipt';
+import { setVariableMonthlyCost, reCalculateTotal } from './pricingReceipt';
 import calcTotalCostUseCases from './calcTotalCostUseCases';
 
 /**
@@ -87,7 +87,10 @@ export default function(useCaseKey, pricingInfoContainerId) {
 
     if (doCalculationOn) {
       // TODO: maybe add pricingReceipt.setVariableMonthlyCost() as scoped function
-      setVariableMonthlyCost(calcTotalCostUseCases(doCalculationOn));
+      const total = calcTotalCostUseCases(doCalculationOn);
+      setVariableMonthlyCost(total);
+      /** recalculate the total */
+      reCalculateTotal();
     }
   } else {
     console.info(`There is no pricing info container with the id ${pricingUseCaseContainer}`);
