@@ -32,6 +32,7 @@ export default function(target, callback) {
         }
       });
     });
+
     /** resolve the promise and do a callback once! */
     addEventListenerOnce(target, "click", function() {
       const button = selectClickedElementByType(event, 'BUTTON');

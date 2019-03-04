@@ -5,10 +5,10 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
 import pricingConfig from './pricingConfig';
 import formPricingRadioButtons from './formPricingRadioButtons';
 import selectClickedElementByType from './selectClickedElementByType';
-import { elementExists } from '../../helpers/helpers';
+import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
 import { setHostingCluster } from './pricingReceipt';
 
-export default function(target) {
+export default function(target, callback) {
 
   return new Promise((resolve, reject) => {
     const container = document.getElementById(pricingConfig.pricingClusterContainerId);
@@ -36,6 +36,16 @@ export default function(target) {
           }
         }
       });
+    });
+
+    /** resolve the promise and do a callback once! */
+    addEventListenerOnce(target, "click", function() {
+      const button = selectClickedElementByType(event, 'BUTTON');
+      /** only do callback when the element clicked on is a button */
+      if (elementExists(button)) {
+        callback();
+      }
+      resolve();
     });
 
   });

@@ -15,6 +15,8 @@ export default {
   'pricingPlatformTemplateId': 'template-pricing-platform-button',
   'pricingClusterContainerId': 'container-pricing-cluster-button',
   'pricingClusterTemplateId': 'template-pricing-cluster-button',
+  'pricingContextionaryContainerId': 'container-pricing-contextionary-button',
+  'pricingContextionaryTemplateId': 'template-pricing-contextionary-button',
   'receipt': {
     'montlyTotalId': 'price-monthly-total',
     'hostingAdjustmentId': 'price-hosting',

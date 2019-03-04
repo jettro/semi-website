@@ -56,11 +56,6 @@ function setHostingAdjustment(multiplier, useCasePrice) {
  */
 function setHostingCluster(multiplier, useCasePrice) {
   const price = calculateDifference(multiplier, useCasePrice.textContent);
-
-  console.log(multiplier);
-  console.log(useCasePrice);
-  console.log(price);
-
   /** append to receipt */
   const clusterAdjustmentElement = document.getElementById(pricingConfig.receipt.clustersId);
   clusterAdjustmentElement.innerHTML = price;

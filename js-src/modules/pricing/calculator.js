@@ -4,6 +4,7 @@ import getChoiceFieldset from './getChoiceFieldset';
 import handleChoiceUseCases from './handleChoiceUseCases';
 import handleChoiceHosting from './handleChoiceHosting';
 import handleChoiceClusters from './handleChoiceClusters';
+import handleChoiceContextionaries from './handleChoiceContextionaries';
 
 (function(factory) {
 
@@ -42,6 +43,7 @@ import handleChoiceClusters from './handleChoiceClusters';
       const fieldsetUseCase = getChoiceFieldset(fieldSets, 'use-case');
       const fieldsetHostingPreference = getChoiceFieldset(fieldSets, 'hosting-preference');
       const fieldsetClusters = getChoiceFieldset(fieldSets, 'clusters');
+      const fieldsetContextionaries = getChoiceFieldset(fieldSets, 'contextionaries');
 
       /** execute the choices */
 
@@ -60,9 +62,16 @@ import handleChoiceClusters from './handleChoiceClusters';
       });
 
       /** third fieldset, number of clusters */
-      handleChoiceClusters(fieldsetClusters).then(function() {
+      handleChoiceClusters(fieldsetClusters, function() {
+        const nextFieldset = getChoiceFieldset(fieldSets, 'contextionaries');
+        nextFieldset.classList.remove('form-stepper__step--hide');
+        nextFieldset.classList.add('form-stepper__step--show');
+      }).then();
+
+      /** fourth fieldset, type of network nodes */
+      handleChoiceContextionaries(fieldsetContextionaries, function() {
         console.log('the next one can be shown');
-      });
+      }).then();
 
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);

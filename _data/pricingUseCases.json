@@ -159,5 +159,10 @@
     {"2":  "110"},
     {"3":  "120"},
     {"4":  "130"}
+  ],
+  "contextionaries": [
+    {"Open data":  "100"},
+    {"One-off (custom)":  "100"},
+    {"Constant training (custom)":  "100"}
   ]
 }
