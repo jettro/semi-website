@@ -69,8 +69,7 @@ export default function(useCaseKey, pricingInfoContainerId) {
 
     /** hide the other panels if it's not the use-case that's clicked */
     toggleUseCasePanels(panels, useCaseKey, function(panelContainer) {
-      const tableRowContainer = panelContainer.getElementsByClassName('table-row-container');
-      [doCalculationOn] = tableRowContainer;
+      [doCalculationOn] = panelContainer.getElementsByClassName('table-row-container');
     });
 
     if (panelDoesNotExist(panels, useCaseKey)) {
@@ -82,7 +81,7 @@ export default function(useCaseKey, pricingInfoContainerId) {
         pricingConfig.pricingInfoTemplateId,
         function(tableRowContainer) {
           doCalculationOn = tableRowContainer;
-        }
+        },
       );
     }
 

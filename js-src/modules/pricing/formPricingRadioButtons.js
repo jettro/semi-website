@@ -6,6 +6,7 @@ import selectClickedElementByType from './selectClickedElementByType';
  * @desc Field section radio buttons interaction
  * @param e
  * @param form
+ * @param callback
  */
 export default function(e, form, callback) {
   const clickedButton = selectClickedElementByType(e, 'BUTTON');

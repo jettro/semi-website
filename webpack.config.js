@@ -20,7 +20,7 @@ const mainConfig = Object.assign({}, {
         },
       },
     ],
-  },
+  }
 });
 
 const modulesConfig = Object.assign({}, {
@@ -41,7 +41,7 @@ const modulesConfig = Object.assign({}, {
         },
       },
     ],
-  },
+  }
 });
 
 module.exports = [

@@ -2,6 +2,7 @@ import selectClickedElementByType from './selectClickedElementByType';
 import { elementExists } from '../../helpers/helpers';
 import getChoiceFieldset from './getChoiceFieldset';
 import formPricingRadioButtons from './formPricingRadioButtons';
+import { setHostingAdjustment } from './pricingReceipt';
 
 import pricingUseCaseData from '../../../_data/pricingUseCases';
 import createCloneFromTemplate from './createCloneFromTemplate';
@@ -34,17 +35,37 @@ function loadOptions(template, container, data, type) {
   const optionsButtonMap = new Map();
   options.forEach((option, i) => {
     const clone = createCloneFromTemplate(template);
-    const costPrice = parseFloat(Object.values(option)[0]).toFixed(2);
+    const multiplier = parseFloat(Object.values(option)[0]).toFixed(2);
     const label = Object.keys(option)[0];
     setFeatureCellText(clone, label, 'ui-button__title');
     clone.classList.remove('pricing-hosting-button--hide');
     clone.classList.add('pricing-hosting-button--show');
-    clone.dataset.subTotal = costPrice;
+    clone.dataset.multiplier = multiplier;
     optionsButtonMap.set(i, clone);
   });
   /** Append all the cost buttons to the cost container */
   optionsButtonMap.forEach(item => {
     container.appendChild(item);
+  });
+
+  /** options are loaded, add click handling */
+  container.addEventListener('click', e => {
+    e.preventDefault();
+    formPricingRadioButtons(e, container, function() {
+      const button = selectClickedElementByType(e, 'BUTTON');
+      /** get the total price from the receipt */
+      const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
+      if (elementExists(button)) {
+        /** target parent element, since data set needs to be set on parent li rather than button */
+        const multiplier = button.parentElement.dataset.multiplier;
+        const multiplierExists = multiplier !== '';
+        if(multiplierExists) {
+          setHostingAdjustment(multiplier, totalUseCasePrice);
+        } else {
+          console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
+        }
+      }
+    });
   });
 }
 
@@ -69,7 +90,7 @@ export default function(useCaseFieldset, target, fieldSets) {
             const showClass = 'form-stepper__step--show';
 
             // TODO: refactor this and make more DRY
-            /** Hosting is provided by Weaviate */
+            /** Hosting is provided by Weaviate (option = Yes) */
             if (buttonData === optionStep1) {
               /** hide/show correct optional fieldset */
               const optionalFieldsetToShow = getChoiceFieldset(fieldSets, optionStep1);
@@ -91,7 +112,7 @@ export default function(useCaseFieldset, target, fieldSets) {
               }
             }
             if (buttonData === optionStep2) {
-              /** hide/show correct optional fieldset */
+              /** hide/show correct optional fieldset (option = No) */
               const optionalFieldsetToShow = getChoiceFieldset(fieldSets, optionStep2);
               const optionalFieldsetToHide = getChoiceFieldset(fieldSets, optionStep1);
               optionalFieldsetToHide.classList.remove(showClass);
@@ -111,6 +132,7 @@ export default function(useCaseFieldset, target, fieldSets) {
           }
         }
       });
+
     });
   });
 }

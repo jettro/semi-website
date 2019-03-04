@@ -12,5 +12,9 @@ export default {
   'pricingOptimizationContainerId': 'container-pricing-optimization-button',
   'pricingOptimizationTemplateId': 'template-pricing-optimization-button',
   'pricingPlatformContainerId' : 'container-pricing-platform-button',
-  'pricingPlatformTemplateId' : 'template-pricing-platform-button'
+  'pricingPlatformTemplateId' : 'template-pricing-platform-button',
+  'receipt': {
+    'montlyTotalId': 'price-monthly-total',
+    'hostingAdjustmentId': 'price-hosting-adjustment'
+  }
 };

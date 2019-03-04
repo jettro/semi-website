@@ -93,9 +93,9 @@
           }
         ],
         "optimization": [
-          {"size": ".75"},
-          {"overall":  "1"},
-          {"speed": "1"}
+          {"size": "75"},
+          {"overall":  "100"},
+          {"speed": "110"}
         ]
       },
       "RP": {
@@ -116,9 +116,9 @@
           { "cpc": "0.025", "average":  "900000" }
         ],
         "optimization": [
-          {"size": "1"},
-          {"overall":  "1"},
-          {"speed": ".75"}
+          {"size": "100"},
+          {"overall":  "100"},
+          {"speed": "75"}
         ]
       },
       "BD": {
@@ -140,18 +140,18 @@
           { "cpc": "0.035", "average":  "900000" }
         ],
         "optimization": [
-          {"size": ".75"},
-          {"overall":  "1"},
-          {"speed": "1"}
+          {"size": "75"},
+          {"overall":  "100"},
+          {"speed": "100"}
         ]
       }
     }
   ],
   "hostingProviders": [
-    {"Oracle Cloud": "1"},
-    {"Google Cloud": ".9"},
-    {"AWS": ".9"},
-    {"Azure": "1"},
-    {"Other": "1.1"}
+    {"Oracle Cloud": "100"},
+    {"Google Cloud": "90"},
+    {"AWS": "90"},
+    {"Azure": "100"},
+    {"Other": "110"}
   ]
 }
