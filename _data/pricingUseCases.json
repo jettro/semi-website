@@ -177,5 +177,11 @@
     {"2 weaviates": "1000"},
     {"3 weaviates": "1500"},
     {"4 weaviates": "2000"}
+  ],
+  "networkNodes": [
+    {"percentage": false},
+    {"Common Knowledge": "1000"},
+    {"Places": "1000"},
+    {"Emotions": "1000"}
   ]
 }

@@ -25,6 +25,7 @@ export default function(options, template) {
     if (option.hasOwnProperty('percentage')) {
       return;
     }
+
     /** otherwise create the option */
     const clone = createCloneFromTemplate(template);
     const label = Object.keys(option)[0];

@@ -157,13 +157,20 @@ mainClass: wrapper--wide
                     </ul>
                 </fieldset>
 
-                <!--<fieldset class="form-stepper__step" data-step="hosting-preference-input" role="radiogroup" aria-labelledby="label-hosting-preference-input">-->
-                    <!--<legend>-->
-                        <!--<h2 id="label-additional-info">Additional information</h2>-->
-                    <!--</legend>-->
-                    <!--<label id="label-hosting-preference-input" for="input-user-preference">Do you have any preference regarding the hosting provider SeMI uses?</label>-->
-                    <!--<input id="input-user-preference" type="text" placeholder="Text" />-->
-                <!--</fieldset>-->
+                <fieldset class="form-stepper__step form-stepper__step--hide" data-step="network-nodes" role="radiogroup" aria-labelledby="label-network-nodes">
+                    <legend>
+                        <h2 id="label-network-nodes">Number of Network Nodes</h2>
+                        <p>Will you be making use of any of the pre-filled network nodes?</p>
+                    </legend>
+                    <ul class="list-ui list-buttons-radio" id="container-pricing-notwork-nodes-button">
+                        <li id="template-pricing-network-nodes-button" class="pricing-hosting-button--hide">
+                            <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                <span class="ui-button__title"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </fieldset>
+
             </form>
         </div>
         {% include components/pricing/molecule-receipt.html %}

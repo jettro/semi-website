@@ -1,34 +1,40 @@
 
 import createOptionButtons from './createOptionButtons';
-
-import pricingUseCaseData from '../../../_data/pricingUseCases';
 import pricingConfig from './pricingConfig';
+import pricingUseCaseData from '../../../_data/pricingUseCases';
 import formPricingRadioButtons from './formPricingRadioButtons';
-import selectClickedElementByType from './selectClickedElementByType';
 import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
-import { setHostingCluster } from './pricingReceipt';
+import selectClickedElementByType from './selectClickedElementByType';
+import { setFixedCostPrice } from './pricingReceipt';
 
-export default function(target, callback) {
-  const container = document.getElementById(pricingConfig.pricingClusterContainerId);
-  const template = document.getElementById(pricingConfig.pricingClusterTemplateId);
-  const options = pricingUseCaseData.clusters;
+/**
+ *
+ * @param target
+ * @param weaviatesPrice
+ * @param callback
+ * @returns {Promise<any>}
+ */
+export default function(target, weaviatesPrice, callback) {
+
+  const container = document.getElementById(pricingConfig.pricingNetworkNodesContainerId);
+  const template = document.getElementById(pricingConfig.pricingNetworkNodesTemplateId);
+  const options = pricingUseCaseData.networkNodes;
 
   /** Append all the cost buttons to the cluster container */
   createOptionButtons(options, template).forEach(item => {
     container.appendChild(item);
   });
 
+  console.log('inside handleChoiceNetworkNodes: ', weaviatesPrice);
+
   target.addEventListener('click', e => {
     formPricingRadioButtons(e, target, function() {
       const button = selectClickedElementByType(e, 'BUTTON');
-      /** get the total price from the receipt */
-      const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
       if (elementExists(button)) {
         /** target parent element, since data set needs to be set on parent li rather than button */
-        const multiplier = button.parentElement.dataset.multiplier;
-        const multiplierExists = multiplier !== '';
-        if(multiplierExists) {
-          setHostingCluster(multiplier, totalUseCasePrice);
+        const price = button.parentElement.dataset.subTotal;
+        if(price) {
+          setFixedCostPrice(weaviatesPrice, price);
         } else {
           console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
         }
@@ -44,4 +50,6 @@ export default function(target, callback) {
       callback();
     }
   });
+
+  return new Promise((resolve, reject) => {});
 }

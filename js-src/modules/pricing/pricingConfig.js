@@ -19,6 +19,8 @@ export default {
   'pricingContextionaryTemplateId': 'template-pricing-contextionary-button',
   'pricingWeaviateContainerId': 'container-pricing-weaviate-button',
   'pricingWeaviateTemplateId': 'template-pricing-weaviate-button',
+  'pricingNetworkNodesContainerId': 'container-pricing-notwork-nodes-button',
+  'pricingNetworkNodesTemplateId': 'template-pricing-network-nodes-button',
   'receipt': {
     'montlyTotalId': 'price-monthly-total',
     'hostingAdjustmentId': 'price-hosting',

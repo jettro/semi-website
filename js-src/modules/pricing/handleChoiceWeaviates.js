@@ -1,4 +1,3 @@
-
 import createOptionButtons from './createOptionButtons';
 import pricingConfig from './pricingConfig';
 import pricingUseCaseData from '../../../_data/pricingUseCases';
@@ -9,39 +8,39 @@ import { setWeaviatesPrice } from './pricingReceipt';
 
 export default function(target, callback) {
 
-  return new Promise((resolve, reject) => {
-    const container = document.getElementById(pricingConfig.pricingWeaviateContainerId);
-    const template = document.getElementById(pricingConfig.pricingWeaviateTemplateId);
-    const options = pricingUseCaseData.weaviates;
+  const container = document.getElementById(pricingConfig.pricingWeaviateContainerId);
+  const template = document.getElementById(pricingConfig.pricingWeaviateTemplateId);
+  const options = pricingUseCaseData.weaviates;
 
-    /** Append all the cost buttons to the cluster container */
-    createOptionButtons(options, template).forEach(item => {
-      container.appendChild(item);
-    });
+  /** Append all the cost buttons to the cluster container */
+  createOptionButtons(options, template).forEach(item => {
+    container.appendChild(item);
+  });
 
-    target.addEventListener('click', e => {
-      formPricingRadioButtons(e, target, function() {
-        const button = selectClickedElementByType(e, 'BUTTON');
-        if (elementExists(button)) {
-          /** target parent element, since data set needs to be set on parent li rather than button */
-          const price = button.parentElement.dataset.subTotal;
-          if(price) {
-            setWeaviatesPrice(price);
-          } else {
-            console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
-          }
-        }
-      });
-    });
-
-    /** resolve the promise and do a callback once! */
-    addEventListenerOnce(target, "click", function() {
-      const button = selectClickedElementByType(event, 'BUTTON');
-      /** only do callback when the element clicked on is a button */
+  target.addEventListener('click', e => {
+    formPricingRadioButtons(e, target, function() {
+      const button = selectClickedElementByType(e, 'BUTTON');
       if (elementExists(button)) {
-        callback();
+        /** target parent element, since data set needs to be set on parent li rather than button */
+        const weaviatePrice = button.parentElement.dataset.subTotal;
+        if(weaviatePrice) {
+          console.log('this is what we need: ', weaviatePrice);
+        } else {
+          console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
+        }
       }
-      resolve();
     });
   });
+
+  /** resolve the promise and do a callback once! */
+  addEventListenerOnce(target, "click", function() {
+    const button = selectClickedElementByType(event, 'BUTTON');
+    /** only do callback when the element clicked on is a button */
+    if (elementExists(button)) {
+      callback();
+    }
+  });
+
+  // TODO this should return something...
+  return new Promise((resolve, reject) => {});
 }

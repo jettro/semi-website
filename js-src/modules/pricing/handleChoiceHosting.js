@@ -70,6 +70,7 @@ function loadOptions(target, template, container, data, type, isFirstTime, callb
  */
 export default function(useCaseFieldset, target, fieldSets) {
   return new Promise((resolve, reject) => {
+    /** used to execute the event listener for showing content only one time */
     let isFirstTimeFlag = true;
     target.addEventListener('click', e => {
       e.preventDefault();

@@ -9,38 +9,32 @@ import pricingConfig from './pricingConfig';
  *
  * @param target {HTMLElement} the target this choice applies to
  * @param callback {fn} a function to execute only once, once this function is done
- * @returns {Promise<any>}
  */
 export default function(target, callback) {
+  target.addEventListener('click', e => {
+    e.preventDefault();
 
-  return new Promise((resolve, reject) => {
-    target.addEventListener('click', e => {
-      e.preventDefault();
-
-      /** Logic for the radio buttons*/
-      formPricingRadioButtons(e, target, function() {
-        const button = selectClickedElementByType(e, 'BUTTON');
-        if (elementExists(button)) {
-          const useCaseKey = button.dataset.useCase;
-          const useCaseKeyExists = useCaseKey !== '';
-          if (useCaseKeyExists) {
-            showUseCasePricing(
-              useCaseKey,
-              pricingConfig.pricingInfoContainerId
-            );
-          }
-        }
-      });
-    });
-
-    /** resolve the promise and do a callback once! */
-    addEventListenerOnce(target, "click", function() {
-      const button = selectClickedElementByType(event, 'BUTTON');
-      /** only do callback when the element clicked on is a button */
+    /** Logic for the radio buttons*/
+    formPricingRadioButtons(e, target, function() {
+      const button = selectClickedElementByType(e, 'BUTTON');
       if (elementExists(button)) {
-        callback();
+        const useCaseKey = button.dataset.useCase;
+        const useCaseKeyExists = useCaseKey !== '';
+        if (useCaseKeyExists) {
+          showUseCasePricing(
+            useCaseKey,
+            pricingConfig.pricingInfoContainerId
+          );
+        }
       }
-      resolve();
     });
+  });
+  /** do a callback once! */
+  addEventListenerOnce(target, "click", function() {
+    const button = selectClickedElementByType(event, 'BUTTON');
+    /** only do callback when the element clicked on is a button */
+    if (elementExists(button)) {
+      callback();
+    }
   });
 }
