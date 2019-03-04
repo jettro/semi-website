@@ -28,7 +28,7 @@ function calculateDifference(multiplier, priceStr) {
   const priceBefore = priceStr;
   const priceBeforeFormatted = localizeStringToNumber(priceBefore);
   const sum = parseInt((multiplier / 100) * priceBeforeFormatted);
-  const difference = priceBeforeFormatted - sum;
+  const difference = sum - priceBeforeFormatted;
   return localizeNumberToString(difference);
 }
 
@@ -38,9 +38,10 @@ function calculateDifference(multiplier, priceStr) {
  * @param useCasePrice {HTMLElement}
  */
 function setHostingAdjustment(multiplier, useCasePrice) {
+  const price = calculateDifference(multiplier, useCasePrice.textContent);
   /** append to receipt */
   const hostingAdjustmentElement = document.getElementById(pricingConfig.receipt.hostingAdjustmentId);
-  hostingAdjustmentElement.innerHTML = calculateDifference(multiplier, useCasePrice.textContent);
+  hostingAdjustmentElement.innerHTML = price;
   /** make the subtotal active */
   const receiptEntriesUseCase = document.getElementsByClassName('receipt__hosting');
   for (let entry of receiptEntriesUseCase) {
@@ -54,11 +55,17 @@ function setHostingAdjustment(multiplier, useCasePrice) {
  * @param useCasePrice {HTMLElement}
  */
 function setHostingCluster(multiplier, useCasePrice) {
+  const price = calculateDifference(multiplier, useCasePrice.textContent);
+
+  console.log(multiplier);
+  console.log(useCasePrice);
+  console.log(price);
+
   /** append to receipt */
-  const hostingAdjustmentElement = document.getElementById(pricingConfig.receipt.hostingAdjustmentId);
-  hostingAdjustmentElement.innerHTML = calculateDifference(multiplier, useCasePrice.textContent);
+  const clusterAdjustmentElement = document.getElementById(pricingConfig.receipt.clustersId);
+  clusterAdjustmentElement.innerHTML = price;
   /** make the subtotal active */
-  const receiptEntriesUseCase = document.getElementsByClassName('receipt__cluster');
+  const receiptEntriesUseCase = document.getElementsByClassName('receipt__clusters');
   for (let entry of receiptEntriesUseCase) {
     entry.classList.remove('receipt__entry-inactive');
   }

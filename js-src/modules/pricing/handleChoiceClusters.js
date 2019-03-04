@@ -24,7 +24,7 @@ export default function(target) {
       formPricingRadioButtons(e, target, function() {
         const button = selectClickedElementByType(e, 'BUTTON');
         /** get the total price from the receipt */
-        const totalUseCasePrice = document.getElementById(pricingConfig.receipt.clustersId);
+        const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
         if (elementExists(button)) {
           /** target parent element, since data set needs to be set on parent li rather than button */
           const multiplier = button.parentElement.dataset.multiplier;
