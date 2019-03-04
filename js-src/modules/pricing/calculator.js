@@ -1,10 +1,9 @@
 import { elementExists } from '../../helpers/helpers';
 import pricingConfig from './pricingConfig';
+import getChoiceFieldset from './getChoiceFieldset';
 import handleChoiceUseCases from './handleChoiceUseCases';
 import handleChoiceHosting from './handleChoiceHosting';
-import getChoiceFieldset from './getChoiceFieldset';
-
-// import { formPricingInit, formPricingCalculate } from './formPricingCalculate';
+import handleChoiceClusters from './handleChoiceClusters';
 
 (function(factory) {
 
@@ -42,6 +41,7 @@ import getChoiceFieldset from './getChoiceFieldset';
       const fieldSets = formPricing.getElementsByTagName('FIELDSET');
       const fieldsetUseCase = getChoiceFieldset(fieldSets, 'use-case');
       const fieldsetHostingPreference = getChoiceFieldset(fieldSets, 'hosting-preference');
+      const fieldsetClusters = getChoiceFieldset(fieldSets, 'clusters');
 
       /** execute the choices */
 
@@ -53,8 +53,15 @@ import getChoiceFieldset from './getChoiceFieldset';
       }).then();
 
       /** second fieldset, hosting preference */
-      handleChoiceHosting(fieldsetUseCase, fieldsetHostingPreference, fieldSets).then(function(resolve) {
+      handleChoiceHosting(fieldsetUseCase, fieldsetHostingPreference, fieldSets).then(function() {
+        const nextFieldset = getChoiceFieldset(fieldSets, 'clusters');
+        nextFieldset.classList.remove('form-stepper__step--hide');
+        nextFieldset.classList.add('form-stepper__step--show');
+      });
 
+      /** third fieldset, number of clusters */
+      handleChoiceClusters(fieldsetClusters).then(function() {
+        console.log('the next one can be shown');
       });
 
     } else {

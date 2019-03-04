@@ -1,14 +1,12 @@
 import selectClickedElementByType from './selectClickedElementByType';
-import { elementExists } from '../../helpers/helpers';
+import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
 import getChoiceFieldset from './getChoiceFieldset';
 import formPricingRadioButtons from './formPricingRadioButtons';
 import { setHostingAdjustment } from './pricingReceipt';
+import createOptionButtons from './createOptionButtons';
 
 import pricingUseCaseData from '../../../_data/pricingUseCases';
-import createCloneFromTemplate from './createCloneFromTemplate';
-
 import pricingConfig from './pricingConfig';
-import setFeatureCellText from './setFeatureCellText';
 
 /**
  *
@@ -25,29 +23,19 @@ function getUseCaseKey(elements) {
 
 /**
  *
+ * @param target {Object}
  * @param template {HTMLElement}
  * @param container {HTMLElement}
  * @param data {object}
  * @param type {string}
+ * @param callback {}
  */
-function loadOptions(template, container, data, type) {
+function loadOptions(target, template, container, data, type, isFirstTime, callback) {
   const options = data[type];
-  const optionsButtonMap = new Map();
-  options.forEach((option, i) => {
-    const clone = createCloneFromTemplate(template);
-    const multiplier = parseFloat(Object.values(option)[0]).toFixed(2);
-    const label = Object.keys(option)[0];
-    setFeatureCellText(clone, label, 'ui-button__title');
-    clone.classList.remove('pricing-hosting-button--hide');
-    clone.classList.add('pricing-hosting-button--show');
-    clone.dataset.multiplier = multiplier;
-    optionsButtonMap.set(i, clone);
-  });
   /** Append all the cost buttons to the cost container */
-  optionsButtonMap.forEach(item => {
+  createOptionButtons(options, template).forEach(item => {
     container.appendChild(item);
   });
-
   /** options are loaded, add click handling */
   container.addEventListener('click', e => {
     e.preventDefault();
@@ -67,6 +55,13 @@ function loadOptions(template, container, data, type) {
       }
     });
   });
+
+  /** only set event listener when it's the first time this is called */
+  if(isFirstTime) {
+    addEventListenerOnce(container, "click", function() {
+      callback(container);
+    });
+  }
 }
 
 /**
@@ -75,6 +70,7 @@ function loadOptions(template, container, data, type) {
  */
 export default function(useCaseFieldset, target, fieldSets) {
   return new Promise((resolve, reject) => {
+    let isFirstTimeFlag = true;
     target.addEventListener('click', e => {
       e.preventDefault();
 
@@ -108,7 +104,10 @@ export default function(useCaseFieldset, target, fieldSets) {
                 const template = document.getElementById(pricingConfig.pricingOptimizationTemplateId);
                 const key = getUseCaseKey(useCaseButtons);
                 const data = pricingUseCaseData.useCases[0][key];
-                loadOptions(template, container, data, 'optimization');
+                loadOptions(target, template, container, data,  'optimization', isFirstTimeFlag, function() {
+                  resolve();
+                  isFirstTimeFlag = false;
+                });
               }
             }
             if (buttonData === optionStep2) {
@@ -126,13 +125,16 @@ export default function(useCaseFieldset, target, fieldSets) {
                 const container = document.getElementById(pricingConfig.pricingPlatformContainerId);
                 const template = document.getElementById(pricingConfig.pricingPlatformTemplateId);
                 const data = pricingUseCaseData;
-                loadOptions(template, container, data, 'hostingProviders');
+                loadOptions(target, template, container, data, 'hostingProviders', isFirstTimeFlag, function() {
+                  resolve();
+                  isFirstTimeFlag = false;
+                });
               }
             }
           }
         }
       });
-
     });
+
   });
 }

@@ -11,10 +11,13 @@ export default {
   'pricingRowTemplateClassName': 'template-table-pricing-row',
   'pricingOptimizationContainerId': 'container-pricing-optimization-button',
   'pricingOptimizationTemplateId': 'template-pricing-optimization-button',
-  'pricingPlatformContainerId' : 'container-pricing-platform-button',
-  'pricingPlatformTemplateId' : 'template-pricing-platform-button',
+  'pricingPlatformContainerId': 'container-pricing-platform-button',
+  'pricingPlatformTemplateId': 'template-pricing-platform-button',
+  'pricingClusterContainerId': 'container-pricing-cluster-button',
+  'pricingClusterTemplateId': 'template-pricing-cluster-button',
   'receipt': {
     'montlyTotalId': 'price-monthly-total',
-    'hostingAdjustmentId': 'price-hosting-adjustment'
+    'hostingAdjustmentId': 'price-hosting',
+    'clustersId': 'price-cluster'
   }
 };
