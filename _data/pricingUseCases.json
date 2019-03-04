@@ -181,7 +181,7 @@
   "networkNodes": [
     {"percentage": false},
     {"Common Knowledge": "1000"},
-    {"Places": "1000"},
-    {"Emotions": "1000"}
+    {"Places": "2000"},
+    {"Emotions": "3000"}
   ]
 }

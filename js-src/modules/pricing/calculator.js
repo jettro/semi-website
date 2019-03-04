@@ -7,6 +7,7 @@ import handleChoiceClusters from './handleChoiceClusters';
 import handleChoiceContextionaries from './handleChoiceContextionaries';
 import handleChoiceWeaviates from './handleChoiceWeaviates';
 import handleChoiceNetworkNodes from './handleChoiceNetworkNodes';
+import { setFixedCostPrice } from './pricingReceipt';
 
 (function(factory) {
 
@@ -80,20 +81,27 @@ import handleChoiceNetworkNodes from './handleChoiceNetworkNodes';
         nextFieldset.classList.add('form-stepper__step--show');
       });
 
+      let weaviatePrice = '0';
+      let nodeNetworksPrice = '0';
+
       /** fifth fieldset, required number of weaviates */
-      handleChoiceWeaviates(fieldsetWeaviates, function() {
+      handleChoiceWeaviates(fieldsetWeaviates, function(price) {
+        /** each time a weaviate button is clicked, recalculate the fixed price */
+        weaviatePrice = price;
+        setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
+      }, function() {
         const nextFieldset = getChoiceFieldset(fieldSets, 'network-nodes');
         nextFieldset.classList.remove('form-stepper__step--hide');
         nextFieldset.classList.add('form-stepper__step--show');
-      }).then(function(resolve) {
-        console.log('resolve: ', resolve);
-        // const weaviatesPrice = resolve.weaviatesPrice;
-        // console.log('inside calculator: ', weaviatesPrice);
       });
 
-      handleChoiceNetworkNodes(fieldsetNetworkNodes, '00000000', function() {
+      /** sixt fieldset, the desired network nodes */
+      handleChoiceNetworkNodes(fieldsetNetworkNodes, function(price) {
+        nodeNetworksPrice = price;
+        setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
+      }, function() {
         console.log('the next one can be shown');
-      }).then();
+      });
 
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);

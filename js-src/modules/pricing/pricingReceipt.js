@@ -69,13 +69,14 @@ function setHostingCluster(multiplier, useCasePrice) {
 /**
  * @desc Add the sub total price of monthly fixed costs
  *       note: The number of Weaviates is a static price, so no multiply calculation needed.
- * @param weaviatesPrice {string}
- * @param networkNodesPrice {string}
+ * @param weaviatesPrice {string} the price as defined by the selected weaviates option
+ * @param networkNodesPrice {string} the price as defined by the selected network nodes option
  */
 function setFixedCostPrice(weaviatesPrice, networkNodesPrice) {
   /** append to receipt */
   const clusterAdjustmentElement = document.getElementById(pricingConfig.receipt.weaviateId);
-  clusterAdjustmentElement.innerHTML = weaviatesPrice + networkNodesPrice;
+  /** Note: assumes the prices have no decimals! */
+  clusterAdjustmentElement.innerHTML = Number(weaviatesPrice) + Number(networkNodesPrice);
   /** make the subtotal active */
   const receiptEntriesUseCase = document.getElementsByClassName('receipt__recurring');
   for (let entry of receiptEntriesUseCase) {

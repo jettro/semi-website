@@ -10,11 +10,10 @@ import { setFixedCostPrice } from './pricingReceipt';
 /**
  *
  * @param target
- * @param weaviatesPrice
  * @param callback
  * @returns {Promise<any>}
  */
-export default function(target, weaviatesPrice, callback) {
+export default function(target, getNodeNetworksPrice, executeOnce) {
 
   const container = document.getElementById(pricingConfig.pricingNetworkNodesContainerId);
   const template = document.getElementById(pricingConfig.pricingNetworkNodesTemplateId);
@@ -25,16 +24,14 @@ export default function(target, weaviatesPrice, callback) {
     container.appendChild(item);
   });
 
-  console.log('inside handleChoiceNetworkNodes: ', weaviatesPrice);
-
   target.addEventListener('click', e => {
     formPricingRadioButtons(e, target, function() {
       const button = selectClickedElementByType(e, 'BUTTON');
       if (elementExists(button)) {
         /** target parent element, since data set needs to be set on parent li rather than button */
-        const price = button.parentElement.dataset.subTotal;
-        if(price) {
-          setFixedCostPrice(weaviatesPrice, price);
+        const nodeNetworksPrice = button.parentElement.dataset.subTotal;
+        if(nodeNetworksPrice) {
+          getNodeNetworksPrice(nodeNetworksPrice);
         } else {
           console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
         }
@@ -47,9 +44,7 @@ export default function(target, weaviatesPrice, callback) {
     const button = selectClickedElementByType(event, 'BUTTON');
     /** only do callback when the element clicked on is a button */
     if (elementExists(button)) {
-      callback();
+      executeOnce();
     }
   });
-
-  return new Promise((resolve, reject) => {});
 }

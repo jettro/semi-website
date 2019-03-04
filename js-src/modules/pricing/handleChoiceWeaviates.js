@@ -6,7 +6,7 @@ import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
 import selectClickedElementByType from './selectClickedElementByType';
 import { setWeaviatesPrice } from './pricingReceipt';
 
-export default function(target, callback) {
+export default function(target, getWeaviatePrice, executeOnce) {
 
   const container = document.getElementById(pricingConfig.pricingWeaviateContainerId);
   const template = document.getElementById(pricingConfig.pricingWeaviateTemplateId);
@@ -24,12 +24,13 @@ export default function(target, callback) {
         /** target parent element, since data set needs to be set on parent li rather than button */
         const weaviatePrice = button.parentElement.dataset.subTotal;
         if(weaviatePrice) {
-          console.log('this is what we need: ', weaviatePrice);
+          getWeaviatePrice(weaviatePrice);
         } else {
           console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
         }
       }
     });
+    return '12345';
   });
 
   /** resolve the promise and do a callback once! */
@@ -37,10 +38,8 @@ export default function(target, callback) {
     const button = selectClickedElementByType(event, 'BUTTON');
     /** only do callback when the element clicked on is a button */
     if (elementExists(button)) {
-      callback();
+      executeOnce();
     }
   });
 
-  // TODO this should return something...
-  return new Promise((resolve, reject) => {});
 }
