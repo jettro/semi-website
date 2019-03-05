@@ -78,13 +78,13 @@ mainClass: wrapper--wide
                     </legend>
                     <ul class="list-ui list-buttons-radio">
                         <li>
-                            <button class="ui-button" type="button" role="radio" data-target-show-fieldset="hosting-optimisation" aria-checked="false">
+                            <button class="ui-button" type="button" role="radio" data-target-show-options="hosting-by-semi" aria-checked="false">
                                 <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title">Yes</span>
                             </button>
                         </li>
                         <li>
-                            <button class="ui-button" type="button" role="radio" data-target-show-fieldset="hosting-preference-platform" aria-checked="false">
+                            <button class="ui-button" type="button" role="radio" data-target-show-options="hosting-by-customer" aria-checked="false">
                                 <span class="ui-button__radio-icon"></span>
                                 <span class="ui-button__title">No</span>
                             </button>
@@ -92,35 +92,41 @@ mainClass: wrapper--wide
                     </ul>
                 </fieldset>
 
-                <fieldset class="form-stepper__step form-stepper__step--hide form-stepper-bottom-margin form-stepper__step--child" data-step="hosting-optimisation" role="radiogroup" aria-labelledby="label-optimized">
-                    <legend>
-                        <h2 id="label-optimized">Optimization preferences</h2>
-                        <p>What would you optimize your Weaviate for?</p>
-                    </legend>
-                    <ul class="list-ui list-buttons-radio" id="container-pricing-optimization-button">
-                        <li id="template-pricing-optimization-button" class="pricing-hosting-button--hide">
-                            <button class="ui-button" type="button" role="radio" aria-checked="false">
-                                <span class="ui-button__radio-icon"></span>
-                                <span class="ui-button__title"></span>
-                            </button>
-                        </li>
-                    </ul>
-                </fieldset>
+                <div id="hosting-by-semi" class="form-stepper__optional form-stepper__step--hide">
+                    <fieldset class="form-stepper__step form-stepper__step--hide form-stepper__step--child" data-step="hosting-semi-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
+                        <legend>
+                            <h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>
+                            <p>What would you optimize your Weaviate for?</p>
+                        </legend>
+                        <ul class="list-ui list-buttons-radio" id="container-pricing-platform-button">
+                            <li id="template-pricing-platform-button" class="pricing-hosting-button--hide">
+                                <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                    <span class="ui-button__radio-icon"></span>
+                                    <span class="ui-button__title"></span>
+                                </button>
+                            </li>
+                        </ul>
+                    </fieldset>
 
-                <fieldset class="form-stepper__step form-stepper__step--hide form-stepper-bottom-margin form-stepper__step--child" data-step="hosting-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
-                    <legend>
-                        <h2 id="label-hosting-preference-platform">On what platform will you be hosting the Weaviate?</h2>
-                        <p>What would you optimize your Weaviate for?</p>
-                    </legend>
-                    <ul class="list-ui list-buttons-radio" id="container-pricing-platform-button">
-                        <li id="template-pricing-platform-button" class="pricing-hosting-button--hide">
-                            <button class="ui-button" type="button" role="radio" aria-checked="false">
-                                <span class="ui-button__radio-icon"></span>
-                                <span class="ui-button__title"></span>
-                            </button>
-                        </li>
-                    </ul>
-                </fieldset>
+                    <fieldset class="form-stepper__step form-stepper__step--hide form-stepper__step--child" data-step="hosting-semi-optimisation" role="radiogroup" aria-labelledby="label-optimized">
+                        <legend>
+                            <h2 id="label-optimized">Optimization preferences</h2>
+                            <p>What would you optimize your Weaviate for?</p>
+                        </legend>
+                        <ul class="list-ui list-buttons-radio" id="container-pricing-optimization-button">
+                            <li id="template-pricing-optimization-button" class="pricing-hosting-button--hide">
+                                <button class="ui-button" type="button" role="radio" aria-checked="false">
+                                    <span class="ui-button__radio-icon"></span>
+                                    <span class="ui-button__title"></span>
+                                </button>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+
+                <div id="hosting-by-customer" class="form-stepper__optional form-stepper__step--hide">
+                    <p>Customer will host itself</p>
+                </div>
 
                 <fieldset class="form-stepper__step form-stepper__step--hide" data-step="clusters" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                     <legend>

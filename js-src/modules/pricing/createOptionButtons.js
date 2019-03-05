@@ -13,20 +13,21 @@ import setFeatureCellText from './setFeatureCellText';
  */
 export default function(options, template) {
   const optionsButtonMap = new Map();
-  let optionDataSet = '';
-  if (options[0]['percentage'] === false) {
-    optionDataSet = 'subTotal';
-  } else {
-    optionDataSet = 'multiplier';
+
+  /** be default the values are multiplied by the percentage stated in the option */
+  let optionDataSet = 'multiplier';
+
+  /** but if this property is set to false by a config, use a static value instead */
+  if (options[0].hasOwnProperty('config')) {
+    /** when the value is'nt a percentage, use static calculation instead */
+    if (options[0]['config']['percentage'] === false) {
+      optionDataSet = 'subTotal';
+    }
+    /** then remove the config since it's not an option */
+    delete options[0]['config'];
   }
 
   options.forEach((option, i) => {
-    /** remove precentage from options since that doesn't have to be a button */
-    if (option.hasOwnProperty('percentage')) {
-      return;
-    }
-
-    /** otherwise create the option */
     const clone = createCloneFromTemplate(template);
     const label = Object.keys(option)[0];
     const value = parseFloat(Object.values(option)[0]).toFixed(2);
