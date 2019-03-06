@@ -43,7 +43,7 @@ function loadOptions(template, container, options, loadOnce = false, callback = 
 
   /** Append all the cost buttons to the cost container */
   createOptionButtons(options, template).forEach(item => {
-    if(elementExists(template)) {
+    if (elementExists(template)) {
       container.appendChild(item);
     } else {
       console.info(`The template '${template}' to create the option by is not found.`);
@@ -62,7 +62,8 @@ function loadOptions(template, container, options, loadOnce = false, callback = 
         const multiplier = button.parentElement.dataset.multiplier;
         const multiplierExists = multiplier !== '';
         if (multiplierExists) {
-          setHostingAdjustment(multiplier, totalUseCasePrice);
+          console.log(`set hosting adjustment is ${totalUseCasePrice.textContent} and ${multiplier}`);
+          setHostingAdjustment(totalUseCasePrice.textContent, multiplier);
         } else {
           console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
         }
@@ -126,25 +127,30 @@ export default function(useCaseFieldset, target, fieldSets) {
         if (elementExists(button)) {
           const buttonData = button.dataset.targetShowOptions;
           if (buttonData) {
-            /** Option 'yes' is show the hosting by semi options */
+            /** Settings for option 'Yes' */
             const hostingBySemiOptionsId = 'hosting-by-semi';
             const showHostingBySemi = buttonData === hostingBySemiOptionsId;
             const hostingBySemiOptionsElement = document.getElementById(hostingBySemiOptionsId);
-            if (!elementExists(hostingBySemiOptionsElement)) {
-              console.info(
-                `No optional element has been found with the id ${hostingBySemiOptionsId}`,
-              );
-              return;
-            }
-            /** Option 'no' is show the hosting by customer options */
+            /** Settings for option 'No' */
             const hostingByCustomerOptionsId = 'hosting-by-customer';
             const showHostingByCustomer = buttonData === hostingByCustomerOptionsId;
             const hostingByCustomerOptionsElement = document.getElementById(
               hostingByCustomerOptionsId,
             );
-            if (!elementExists(hostingByCustomerOptionsElement)) {
+
+            const optionsHostingBySemi = hostingBySemiOptionsElement.getElementsByClassName('pricing-hosting-button--show');
+            const optionsHostingBySemiExist = optionsHostingBySemi.length > 0;
+            const optionsHostingByCustomer = hostingByCustomerOptionsElement.getElementsByClassName('pricing-hosting-button--show');
+            const optionsHostingByCustomerExist = optionsHostingByCustomer.length > 0
+
+            const reOpenedThisChoice = optionsHostingBySemiExist && optionsHostingByCustomerExist;
+
+            /**
+             * Option 'Yes'
+             */
+            if (!elementExists(hostingBySemiOptionsElement)) {
               console.info(
-                `No optional element has been found with the id ${hostingByCustomerOptionsId}`,
+                `No optional element has been found with the id ${hostingBySemiOptionsId}`,
               );
               return;
             }
@@ -152,47 +158,116 @@ export default function(useCaseFieldset, target, fieldSets) {
             if (showHostingBySemi) {
               const optionStep1 = 'hosting-semi-preference-platform';
               const optionStep2 = 'hosting-semi-optimisation';
-              const optionsSubStep1Element = getChoiceFieldset(fieldSets, optionStep1);
-              const optionsSubStep2Element = getChoiceFieldset(fieldSets, optionStep2);
+              const optionsSubStep1FieldsetElement = getChoiceFieldset(fieldSets, optionStep1);
+              const optionsSubStep2FieldsetElement = getChoiceFieldset(fieldSets, optionStep2);
               const optionsStep1DontExist =
-                optionsSubStep1Element.getElementsByClassName('pricing-hosting-button--show')
-                  .length === 0;
+                optionsSubStep1FieldsetElement.getElementsByClassName(
+                  'pricing-hosting-button--show',
+                ).length === 0;
               const optionsStep2DontExist =
-                optionsSubStep2Element.getElementsByClassName('pricing-hosting-button--show')
-                  .length === 0;
+                optionsSubStep2FieldsetElement.getElementsByClassName(
+                  'pricing-hosting-button--show',
+                ).length === 0;
+
+              /** re-set the hosting adjustment */
+              setHostingAdjustment('0');
 
               /** toggle the step itself */
               toggleOptionalStep(hostingByCustomerOptionsElement, hostingBySemiOptionsElement);
 
               /** then show the substeps of this fieldset */
-              showElement(optionsSubStep1Element);
-              showElement(optionsSubStep2Element);
+              showElement(optionsSubStep1FieldsetElement);
+              showElement(optionsSubStep2FieldsetElement);
 
+              /** Load the fieldset options for choosing hosting platform by SeMI */
               if (optionsStep1DontExist) {
                 // TODO: maybe don't use document.getElement by id, but the current fieldset as Node's parent
                 const container = document.getElementById(pricingConfig.pricingPlatformContainerId);
                 const template = document.getElementById(pricingConfig.pricingPlatformTemplateId);
-                const data = pricingUseCaseData.hostingProviders;
+                const data = pricingUseCaseData.hostingProvidersBySemi;
                 /** load options for weaviate hosting platforms */
                 loadOptions(template, container, data);
               }
 
+              /** Load the fieldset options for optimization preferences */
               if (optionsStep2DontExist) {
                 // TODO: maybe don't use document.getElement by id, but the current fieldset as Node's parent
-                const container = document.getElementById(pricingConfig.pricingOptimizationContainerId);
+                const container = document.getElementById(
+                  pricingConfig.pricingOptimizationContainerId,
+                );
                 const template = document.getElementById(
                   pricingConfig.pricingOptimizationTemplateId,
                 );
                 const useCaseButtons = useCaseFieldset.getElementsByTagName('BUTTON');
                 const key = getUseCaseKey(useCaseButtons);
                 const data = pricingUseCaseData.useCases[0][key]['optimization'];
-                /** load options for optimzation preference */
+                /** load options for optimization preference */
                 loadOptions(template, container, data);
               }
             }
 
+            /**
+             * Option 'No'
+             */
+            if (!elementExists(hostingByCustomerOptionsElement)) {
+              console.info(
+                `No optional element has been found with the id ${hostingByCustomerOptionsId}`,
+              );
+              return;
+            }
+
             if (showHostingByCustomer) {
+              const optionsSubStepFieldsetElement = getChoiceFieldset(
+                fieldSets,
+                'hosting-customer-platform',
+              );
+              const optionsStepDontExist =
+                optionsSubStepFieldsetElement.getElementsByClassName('pricing-hosting-button--show')
+                  .length === 0;
+
+              /** re-set the hosting adjustment */
+              setHostingAdjustment('0');
+
+              /** toggle the step itself */
               toggleOptionalStep(hostingBySemiOptionsElement, hostingByCustomerOptionsElement);
+
+              /** then show the substeps of this fieldset */
+              showElement(optionsSubStepFieldsetElement);
+
+              /** Load the fieldset options for choosing hosting platform by customer */
+              if (optionsStepDontExist) {
+                // TODO: maybe don't use document.getElement by id, but the current fieldset as Node's parent
+                const container = document.getElementById(
+                  pricingConfig.pricingCustomerPlatformContainerId,
+                );
+                const template = document.getElementById(
+                  pricingConfig.pricingCustomerPlatformTemplateId,
+                );
+                // const useCaseButtons = useCaseFieldset.getElementsByTagName('BUTTON');
+                // const key = getUseCaseKey(useCaseButtons);
+                const data = pricingUseCaseData.hostingProvidersByCustomer;
+                /** load options for optimization preference */
+                loadOptions(template, container, data);
+              }
+            }
+
+            /** when it's te second time this choice is opened */
+            if (reOpenedThisChoice) {
+              /** remove active class of options */
+              for (let option of optionsHostingBySemi) {
+                const [optionButton] = option.getElementsByTagName('BUTTON');
+                const activeClass = 'ui-button--active';
+                if (elementExists(optionButton) && optionButton.classList.contains(activeClass)) {
+                  optionButton.classList.remove(activeClass);
+                }
+              }
+              for (let option of optionsHostingByCustomer) {
+                const [optionButton] = option.getElementsByTagName('BUTTON');
+                const activeClass = 'ui-button--active';
+                if (elementExists(optionButton) && optionButton.classList.contains(activeClass)) {
+                  optionButton.classList.remove(activeClass);
+                }
+              }
             }
           }
 

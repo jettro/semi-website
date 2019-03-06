@@ -7,6 +7,7 @@
 
 .form-stepper__step {
   flex-direction: column;
+  width: 100%;
 
   &[aria-hidden="true"] {
     display: none;
@@ -28,11 +29,12 @@
 }
 
 .form-stepper__step--show {
-  display: table-cell;
+  display: flex;
 }
 
 .form-stepper__optional {
   background-color: $color-gray-6;
+  flex-direction: column;
   padding: $scale-1;
 }
 

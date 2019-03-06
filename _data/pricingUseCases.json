@@ -156,12 +156,17 @@
       }
     }
   ],
-  "hostingProviders": [
+  "hostingProvidersBySemi": [
     {"Oracle Cloud": "100"},
     {"Google Cloud": "90"},
     {"AWS": "90"},
-    {"Azure": "100"},
-    {"Other": "110"}
+    {"Azure": "100"}
+  ],
+  "hostingProvidersByCustomer": [
+    {"Oracle Cloud": "100"},
+    {"Google Cloud": "90"},
+    {"AWS": "90"},
+    {"Azure": "100"}
   ],
   "clusters": [
     {"1 cluster":  "100"},

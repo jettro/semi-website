@@ -34,15 +34,16 @@ function calculateDifference(multiplier, priceStr) {
 
 /**
  *
- * @param multiplier {string}
- * @param useCasePrice {HTMLElement}
+ * @param subTotal {string}
+ * @param multiplier {string=undefined}
  */
-function setHostingAdjustment(multiplier, useCasePrice) {
-  const price = calculateDifference(multiplier, useCasePrice.textContent);
-  /** append to receipt */
+function setHostingAdjustment(subTotal, multiplier = 'undefined') {
+  /** if no multiplier is set, just assign subTotal as price directly */
+  const price = multiplier !== 'undefined' ? calculateDifference(multiplier, subTotal) : subTotal;
   const hostingAdjustmentElement = document.getElementById(
     pricingConfig.receipt.hostingAdjustmentId,
   );
+  /** append to receipt */
   hostingAdjustmentElement.innerHTML = price;
   /** make the subtotal active */
   const receiptEntriesUseCase = document.getElementsByClassName('receipt__hosting');
@@ -102,12 +103,14 @@ function reCalculateTotal() {
   const monthlyTotalElement = document.getElementById(pricingConfig.receipt.montlyTotalId);
   const clusterAdjustmentElement = document.getElementById(pricingConfig.receipt.clustersId);
   const WeaviateAdjustmentElement = document.getElementById(pricingConfig.receipt.weaviateId);
-  const hostingAdjustmentElement = document.getElementById(pricingConfig.receipt.hostingAdjustmentId);
+  const hostingAdjustmentElement = document.getElementById(
+    pricingConfig.receipt.hostingAdjustmentId,
+  );
   const monthlyTotal = localizeStringToNumber(monthlyTotalElement.textContent);
   const clusterTotal = localizeStringToNumber(clusterAdjustmentElement.textContent);
   const weaviateTotal = localizeStringToNumber(WeaviateAdjustmentElement.textContent);
   const hostingTotal = localizeStringToNumber(hostingAdjustmentElement.textContent);
-  const total = (monthlyTotal + clusterTotal + weaviateTotal + hostingTotal);
+  const total = monthlyTotal + clusterTotal + weaviateTotal + hostingTotal;
   setTotal(localizeNumber(total));
 }
 
@@ -116,5 +119,5 @@ export {
   setHostingAdjustment,
   setHostingCluster,
   setFixedCostPrice,
-  reCalculateTotal
+  reCalculateTotal,
 };

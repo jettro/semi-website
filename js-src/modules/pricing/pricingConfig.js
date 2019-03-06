@@ -11,6 +11,8 @@ export default {
   'pricingRowTemplateClassName': 'template-table-pricing-row',
   'pricingPlatformContainerId': 'container-pricing-platform-button',
   'pricingPlatformTemplateId': 'template-pricing-platform-button',
+  'pricingCustomerPlatformContainerId': 'container-pricing-customer-button',
+  'pricingCustomerPlatformTemplateId': 'template-pricing-customer-button',
   'pricingOptimizationContainerId': 'container-pricing-optimization-button',
   'pricingOptimizationTemplateId': 'template-pricing-optimization-button',
   'pricingClusterContainerId': 'container-pricing-cluster-button',
