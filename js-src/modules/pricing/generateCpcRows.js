@@ -40,8 +40,5 @@ export default function(template, labels, data, containerNode) {
     rowsMap.forEach(item => {
       containerNode.appendChild(item);
     });
-    // setTimeout(function(){
-    //   PubSub.unsubscribe( testSubscription );
-    // }, 0);
   }
 }

@@ -6,7 +6,6 @@ import cookie from './modules/cookie';
 import mailChimp from './modules/mailChimp';
 import video from './modules/video';
 import search from './modules/search';
-import toggle from './modules/toggle';
 import tagmanager from './modules/tagmanager';
 import tableOfContents from './modules/tableOfContents';
 import collapse from './modules/collapse';
@@ -37,11 +36,6 @@ video('js-video-homepage');
 search();
 
 /**
- * Make elements on the page collapse
- */
-toggle('data-toggle');
-
-/**
  * Initialize the tagmanager
  */
 tagmanager('GTM-K6DMN8N');
@@ -62,7 +56,7 @@ if(inputFields.length >= 0) {
 }
 
 /**
- * add collapse functionality
+ * add collapse functionality (replaced toggle())
  */
 collapse();
 

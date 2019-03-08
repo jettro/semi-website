@@ -34,6 +34,7 @@ export default function(
     /** show the correct clone based on use-case key */
     cloneInfoTemplate.dataset.useCase = useCaseKey;
 
+    /** show the table panel */
     cloneInfoTemplate.classList.remove('template-pricing-use-case--hidden');
     cloneInfoTemplate.classList.add('template-pricing-use-case--show');
 

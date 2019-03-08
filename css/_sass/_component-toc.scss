@@ -28,8 +28,8 @@
         counter-reset: li;
         list-style: none;
         li {
-        	counter-increment: li;
-        	display: flex;
+            counter-increment: li;
+            display: flex;
             list-style-image: none !important;
             &:before {
                 @include transition-out;

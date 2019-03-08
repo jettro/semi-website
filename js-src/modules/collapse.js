@@ -1,10 +1,25 @@
 /**
  * map the commands to the classList methods
  */
+import selectClickedElementByType from './pricing/selectClickedElementByType';
+import { getClosest } from '../helpers/helpers';
+
 const fnmap = {
   'toggle': 'toggle',
   'show': 'add',
   'hide': 'remove'
+};
+
+/**
+ * @desc set the aria-expanded based on display of element
+ * @param element {HTMLElement}
+ */
+const toggleAriaVisibility = element => {
+  if (element.style.display === 'block') {
+    element.setAttribute('aria-expanded', 'false');
+  } else {
+    element.setAttribute('aria-expanded', 'true');
+  }
 };
 
 const collapse = (selector, cmd) => {
@@ -14,7 +29,7 @@ const collapse = (selector, cmd) => {
   });
 };
 
-const toggle = (target) => {
+const singleCollapse = (target) => {
   target.classList.toggle('show');
 };
 
@@ -27,7 +42,10 @@ function addCollapseTriggers() {
   const querySelector = '[data-toggle="collapse"]';
   const triggers = Array.from(document.querySelectorAll(querySelector));
   window.addEventListener('click', (event) => {
-    const element = event.target;
+    const clickedElement = event.target;
+    const dataTarget = 'collapse';
+    const element = (clickedElement.dataset.target !== dataTarget) ? getClosest(clickedElement, `[data-target=${dataTarget}]`) : clickedElement;
+
     /**  Listen for click events, but only on the triggers */
     if (triggers.includes(element)) {
       const selector = element.getAttribute('data-target');
@@ -35,12 +53,13 @@ function addCollapseTriggers() {
       const children = element.parentNode.children;
       const hasChildElements = typeof children !== 'undefined';
       /** toggle class on trigger element */
-      toggle(element, 'toggle');
+      singleCollapse(element, 'toggle');
       if (hasChildElements) {
         for (let child of children) {
           /** toggle class on target element */
           if(child.classList.contains(selector)) {
-            toggle(child, 'toggle');
+            singleCollapse(child, 'toggle');
+            toggleAriaVisibility(child);
           }
         }
       }

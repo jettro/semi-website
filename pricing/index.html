@@ -41,39 +41,42 @@ mainClass: wrapper--wide
                     </ul>
 
                     <div id="container-pricing-use-case">
-                        <div class="panel-collapse template-pricing-use-case--hidden" id="template-pricing-use-case">
-                            <div class="panel-collapse__head">
-                                <p class="use-case-panel-label"></p>
+                        <div class="panel-collapse template-pricing-use-case--hidden"
+                             id="template-pricing-use-case">
+                            <div class="panel-collapse__head"
+                                 data-toggle="collapse"
+                                 data-target="collapse">
+                                <h3 class="use-case-panel-label"></h3>
                             </div>
-                            <div class="pricing__info">
-                                <p class="use-case-panel-description"></p>
+                            <div class="panel-collapse__body collapse" aria-expanded="false">
+                                <div class="pricing__info">
+                                    <p class="use-case-panel-description"></p>
+                                </div>
+                                <table class="table-pricing table-zebra">
+                                    <thead>
+                                        <tr class="table-pricing__row">
+                                            <td class="table-pricing__column"><strong>Feature</strong></td>
+                                            <td class="table-pricing__column"><strong>Cost per call</strong></td>
+                                            <td class="table-pricing__column"><strong>Estimated nr. of API calls</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-row-container">
+                                        <tr class="table-pricing__row template-table-pricing-row template-table-pricing-row--hidden">
+                                            <td class="table-pricing__column">
+                                                <button class="button--link feature-label"
+                                                        data-toggle="collapse"
+                                                        data-target="collapse">
+                                                </button>
+                                                <div class="collapse" aria-expanded="false">
+                                                    <p class="feature-description"></p>
+                                                </div>
+                                            </td>
+                                            <td class="table-pricing__column feature-cpc price"></td>
+                                            <td class="table-pricing__column feature-average"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <table class="table-pricing table-zebra">
-                                <thead>
-                                    <tr class="table-pricing__row">
-                                        <td class="table-pricing__column"><strong>Feature</strong></td>
-                                        <td class="table-pricing__column"><strong>Cost per call</strong></td>
-                                        <td class="table-pricing__column"><strong>Estimated nr. of API calls</strong></td>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-row-container">
-                                    <tr class="table-pricing__row template-table-pricing-row template-table-pricing-row--hidden">
-                                        <td class="table-pricing__column">
-                                            <!--<p class="feature-label"></p>-->
-                                            <!--<p class="feature-description"></p>-->
-                                            <button class="button--link feature-label"
-                                                    data-toggle="collapse"
-                                                    data-target="collapse">
-                                            </button>
-                                            <div class="block collapse">
-                                                <p class="feature-description" style="height:100%;"></p>
-                                            </div>
-                                        </td>
-                                        <td class="table-pricing__column feature-cpc price"></td>
-                                        <td class="table-pricing__column feature-average"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </fieldset>

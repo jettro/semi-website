@@ -1,3 +1,4 @@
+@import 'var-typography.scss';
 @import 'var-borders';
 @import 'var-scale';
 
@@ -74,10 +75,45 @@ body:not(:-moz-handler-blocked) fieldset {
 .panel-collapse {
   flex-direction: column;
   border: $border-2;
-  padding: $scale-0;
 }
 
 .panel-collapse__head {
-  border-bottom: $border-2;
-  margin-bottom: $scale-0;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: $scale-0;
+  &:hover {
+    cursor: pointer;
+    background-color: $color-semi-accent-tint--5;
+  }
+  &.show {
+    background-color: $color-semi-accent-tint--2;
+  }
+  &:after {
+    content: "−";
+    font-family: $typeface-sans;
+    font-weight: bold;
+    display: inline-block;
+  }
+  h3 {
+    font-size: $font-size-small;
+    font-family: $typeface-sans;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+}
+
+.panel-collapse__body.show {
+  padding: $scale-0;
+}
+
+// TODO: move to separate file
+
+.feature-label {
+  font-size: $font-size-ui;
+}
+.feature-description {
+  margin-top: 1rem;
+  font-size: $font-size-small;
 }
