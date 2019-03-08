@@ -4,6 +4,8 @@ import createCloneFromTemplate from './createCloneFromTemplate';
 import setFeatureCellText from './setFeatureCellText';
 import setFeatureSubTotal from './setFeatureSubTotal';
 
+import PubSub from 'pubsub-js';
+
 /**
  * @desc generate all the rows
  * @param template {HTMLElement} template to use for the clone for each row
@@ -13,6 +15,7 @@ import setFeatureSubTotal from './setFeatureSubTotal';
  */
 export default function(template, labels, data, containerNode) {
   const hasLabels = typeof labels !== 'undefined';
+
   if(hasLabels) {
     const rowsMap = new Map();
     /** Set all the data in the rows */
@@ -30,9 +33,15 @@ export default function(template, labels, data, containerNode) {
       clone.classList.add('template-table-pricing-row--visible');
       rowsMap.set(i, clone);
     });
+
+    PubSub.publish('generatedCpcRows');
+
     /** Append all the rows to the row-container */
     rowsMap.forEach(item => {
       containerNode.appendChild(item);
     });
+    // setTimeout(function(){
+    //   PubSub.unsubscribe( testSubscription );
+    // }, 0);
   }
 }

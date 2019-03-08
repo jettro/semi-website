@@ -9,6 +9,7 @@ import search from './modules/search';
 import toggle from './modules/toggle';
 import tagmanager from './modules/tagmanager';
 import tableOfContents from './modules/tableOfContents';
+import collapse from './modules/collapse';
 
 // utilities
 import inputTypeRangeExists from './utilities/inputTypeRangeExists';
@@ -59,6 +60,11 @@ if(inputFields.length >= 0) {
     $script('/js/lib/multirange/multirange.js');
   }
 }
+
+/**
+ * add collapse functionality
+ */
+collapse();
 
 /**
  * asynchronous load pingdom in the page

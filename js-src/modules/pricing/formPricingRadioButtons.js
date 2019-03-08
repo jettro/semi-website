@@ -25,14 +25,20 @@ export default function(e, form, callback) {
   }
 
   if (elementExists(clickedButton)) {
-    const isRadioButton = clickedButton.attributes.role.value === 'radio';
+    const isRadioButton = clickedButton.hasAttribute('role') && clickedButton.attributes.role.value === 'radio';
+
+    /** don't continue if this is a radio button */
+    if (!isRadioButton) {
+      return false;
+    }
+
     const isInactiveButton = clickedButton.getAttribute('aria-checked') !== true;
     const isDisabledButton = clickedButton.disabled;
     const isToggleButton = typeof(clickedButton.dataset.targetShow) !== 'undefined';
     const isButtonInTable = clickedButton.classList.contains('form-stepper-table__column');
 
     if (isDisabledButton) {
-      return; // don't do anything if button is disabled
+      return false; // don't do anything if button is disabled
     }
 
     if (isRadioButton && isInactiveButton || isButtonInTable) {

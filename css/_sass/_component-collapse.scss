@@ -1,0 +1,54 @@
+
+@import 'var-typography';
+
+// apply border-box to all the elements to ensure padding and border are included in the browser’s calculation for heigh
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+.icon-arrow-right {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid $color-almostblack;
+}
+
+.icon-arrow-bottom {
+  border-top: 6px solid $color-almostblack;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+}
+
+button[data-toggle="collapse"] {
+  &:before {
+    content: "";
+    width: 0;
+    height: 0;
+    margin-right: .5rem;
+    display: inline-block;
+  }
+  &:not([class*="show"]):before {
+    @extend .icon-arrow-right;
+  }
+  &.show {
+    font-weight: $font-weight-bold;
+    &:before {
+      @extend .icon-arrow-bottom;
+    }
+  }
+  &:hover {
+    @include transition-in;
+    box-shadow: 0 2px 0 $color-support;
+  }
+}
+
+.collapse {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s cubic-bezier(0, 1, 0, 1);
+  &.show {
+    max-height: 99em;
+    transition: max-height .5s ease-in-out;
+  }
+}

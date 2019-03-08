@@ -2,21 +2,21 @@
 @import 'mixins-breakpoints';
 
 label, button, [type='submit'] {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 label {
-	margin-bottom: .5em;
-	&:hover, &:focus, &:active {
-    	~ [type='email'], ~ [type='number'], ~ [type='password'], ~ [type='search'], ~ [type='tel'], ~ [type='text'], ~ [type='url'], ~ textarea {
-        	@include transition-in;
-        	border-bottom: 3px solid $color-semi-accent;
-    	}
-	}
+    margin-bottom: .5em;
+    &:hover, &:focus, &:active {
+        ~ [type='email'], ~ [type='number'], ~ [type='password'], ~ [type='search'], ~ [type='tel'], ~ [type='text'], ~ [type='url'], ~ textarea {
+            @include transition-in;
+            border-bottom: 3px solid $color-semi-accent;
+        }
+    }
 }
 
 article form {
-	margin: 1em 0;
+    margin: 1em 0;
 }
 
 fieldset {
@@ -33,34 +33,34 @@ fieldset {
 }
 
 [type='email'], [type='number'], [type='password'], [type='search'], [type='tel'], [type='text'], [type='url'], select, textarea {
-	@include transition-out;
-	background: $color-white;
-	border: 3px solid transparent;
-	border-bottom-color: $color-semi;
-	border-bottom: 3px solid $color-semi;
-	border-top-left-radius: $scale-1;
-	border-top-right-radius: $scale-1;
-	color: $color-black;
-	font-family: $typeface-body;
-	padding: .5em 1em;
-	width: 100%;
-	&:hover, &:focus, &:active {
-		@include transition-in;
-	}
-	&:focus, &:active {
-    	@include transition-in;
-		border: 3px solid $color-semi-accent;
-		border-radius: $scale-1;
-		border-bottom-left-radius: 0;
-		outline: none;
-	}
-	&:valid {
-    	//border-bottom: 3px solid $color-success;
-	}
-	&:invalid {
-    	background: $color-warning-bg;
-    	border: 3px solid $color-warning;
-	}
+    @include transition-out;
+    background: $color-white;
+    border: 3px solid transparent;
+    border-bottom-color: $color-semi;
+    border-bottom: 3px solid $color-semi;
+    border-top-left-radius: $scale-1;
+    border-top-right-radius: $scale-1;
+    color: $color-black;
+    font-family: $typeface-body;
+    padding: .5em 1em;
+    width: 100%;
+    &:hover, &:focus, &:active {
+        @include transition-in;
+    }
+    &:focus, &:active {
+        @include transition-in;
+        border: 3px solid $color-semi-accent;
+        border-radius: $scale-1;
+        border-bottom-left-radius: 0;
+        outline: none;
+    }
+    &:valid {
+        //border-bottom: 3px solid $color-success;
+    }
+    &:invalid {
+        background: $color-warning-bg;
+        border: 3px solid $color-warning;
+    }
 }
 
 [type='number'] {
@@ -86,9 +86,9 @@ fieldset {
     cursor: pointer;
     margin-top: -.45em;
     &:hover, &:focus, &:active {
-		@include transition-in;
+        @include transition-in;
         background: $color-semi-accent;
-	}
+    }
 }
 [type=range]::-webkit-slider-runnable-track { // Webkit/Blink
     background: $color-gray-5;
@@ -108,9 +108,9 @@ fieldset {
     border: 0;
     cursor: pointer;
     &:hover, &:focus, &:active {
-		@include transition-in;
+        @include transition-in;
         background: $color-semi-accent;
-	}
+    }
 }
 [type=range]::-moz-range-track { // Gecko
     background: $color-gray-5;
@@ -126,9 +126,9 @@ fieldset {
     background: $color-semi;
     cursor: pointer;
     &:hover, &:focus, &:active {
-		@include transition-in;
+        @include transition-in;
         background: $color-semi-accent;
-	}
+    }
 }
 [type=range]::-ms-track { // IE/Edge
     background: transparent; 
@@ -153,39 +153,39 @@ fieldset {
 
 // Lea Verou's Multirange (https://leaverou.github.io/multirange/)
 @supports (--css: variables) {
-	[type=range].multirange {
-		display: inline-block;
-		margin: .5em 0 0;
-		padding: .25em;
-		vertical-align: top;
-		width: auto;
-	}
-	[type=range].multirange.original {
-		position: absolute;
-	}
-	[type=range].multirange.original::-webkit-slider-thumb {
-		position: relative;
-		z-index: 2;
-	}
-	[type=range].multirange.original::-moz-range-thumb {
-		transform: scale(1); /* FF doesn't apply position it seems */
-		z-index: 1;
-	}
-	[type=range].multirange::-moz-range-track {
-		border-color: transparent; /* needed to switch FF to "styleable" control */
-	}
-	[type=range].multirange.ghost {
-		position: relative;
-		background: var(--track-background);
-		--track-background: linear-gradient(to right, transparent var(--low), var(--range-color) 0, var(--range-color) var(--high), transparent 0) no-repeat 0 45% / 100% 40%;
-		--range-color: #ff5fa0;
-	}
-	[type=range].multirange.ghost::-webkit-slider-runnable-track {
-		background: var(--track-background);
-	}
-	[type=range].multirange.ghost::-moz-range-track {
-		background: var(--track-background);
-	}
+    [type=range].multirange {
+        display: inline-block;
+        margin: .5em 0 0;
+        padding: .25em;
+        vertical-align: top;
+        width: auto;
+    }
+    [type=range].multirange.original {
+        position: absolute;
+    }
+    [type=range].multirange.original::-webkit-slider-thumb {
+        position: relative;
+        z-index: 2;
+    }
+    [type=range].multirange.original::-moz-range-thumb {
+        transform: scale(1); /* FF doesn't apply position it seems */
+        z-index: 1;
+    }
+    [type=range].multirange::-moz-range-track {
+        border-color: transparent; /* needed to switch FF to "styleable" control */
+    }
+    [type=range].multirange.ghost {
+        position: relative;
+        background: var(--track-background);
+        --track-background: linear-gradient(to right, transparent var(--low), var(--range-color) 0, var(--range-color) var(--high), transparent 0) no-repeat 0 45% / 100% 40%;
+        --range-color: #ff5fa0;
+    }
+    [type=range].multirange.ghost::-webkit-slider-runnable-track {
+        background: var(--track-background);
+    }
+    [type=range].multirange.ghost::-moz-range-track {
+        background: var(--track-background);
+    }
 }
 
 
@@ -211,25 +211,30 @@ fieldset {
     opacity: 1;
 }
 
-.button, .button--small, button:not(.ui-button):not(.form-stepper-table__column), [type='button']:not(.ui-button):not(.form-stepper-table__column), [type='reset'], [type='submit'] {
-	@include transition-out;
-	background: $color-semi;
-	border: 0 !important;
-	border-radius: $border-radius-1;
-	color: $color-white;
-	display: inline-block;
-	font-family: $typeface-body;
-	font-size: 1rem;
-	padding: $scale-0 $scale-2;
-	text-align: center;
-	&:hover, &:focus, &:active {
-		@include transition-in;
-		border-radius: $border-radius-2;
-		outline: none;
-	}
-	&:focus, &:active {
-		background: $color-semi-accent;
-	}
+.button,
+.button--small,
+button:not(.ui-button):not(.form-stepper-table__column):not(.button--link),
+[type='button']:not(.ui-button):not(.form-stepper-table__column),
+[type='reset'],
+[type='submit'] {
+    @include transition-out;
+    background: $color-semi;
+    border: 0 !important;
+    border-radius: $border-radius-1;
+    color: $color-white;
+    display: inline-block;
+    font-family: $typeface-body;
+    font-size: 1rem;
+    padding: $scale-0 $scale-2;
+    text-align: center;
+    &:hover, &:focus, &:active {
+        @include transition-in;
+        border-radius: $border-radius-2;
+        outline: none;
+    }
+    &:focus, &:active {
+        background: $color-semi-accent;
+    }
 }
 
 .button:not(.button--small):not(.button-ui) {
@@ -244,10 +249,10 @@ fieldset {
 .button--cta {
     background: $color-support;
     //color: $color-black;
-	&:hover, &:focus, &:active {
-		background: $color-black;
-		color: $color-white
-	}
+    &:hover, &:focus, &:active {
+        background: $color-black;
+        color: $color-white
+    }
 }
 
 .button--cta-inverted {
@@ -260,8 +265,8 @@ fieldset {
 
 .button--small {
     border-radius: $border-radius-1-sm;
-	padding: .5em 1em;
-	font-size: 1rem;
+    padding: .5em 1em;
+    font-size: 1rem;
     white-space: nowrap;
     &:hover, &:focus, &:active {
         border-bottom: 0;
@@ -269,20 +274,21 @@ fieldset {
     }
 }
 
-.button--email {
-    &:before {
-        background: url('/img/icon-email.svg');
-        content: '';
-        display: inline-block;
-        height: .75em;
-        margin-right: .5em;
-        vertical-align: baseline;
-        width: .75em;
-    }
+.button--email:before {
+    background: url('/img/icon-email.svg');
+    content: '';
+    display: inline-block;
+    height: .75em;
+    margin-right: .5em;
+    vertical-align: baseline;
+    width: .75em;
 }
 
+
 .button--link {
-    appearance: hyperlink;
+    appearance: none;
+    border: none;
+    background-color: transparent;
 }
 
 textarea {
@@ -291,10 +297,10 @@ textarea {
 }
 
 [type='email'] {
-	~ [type='submit'] {
-		border-bottom: 3px solid $color-semi;
-		border-bottom-left-radius: 0;
-	}
+    ~ [type='submit'] {
+        border-bottom: 3px solid $color-semi;
+        border-bottom-left-radius: 0;
+    }
 }
 
 select {
@@ -322,29 +328,29 @@ select[multiple] {
 }
 
 .section-support {
-	[type='email'], [type='number'], [type='password'], [type='search'], [type='tel'], [type='text'], [type='url'], textarea {
-		border-bottom: 3px solid $color-interactive;		
-		&:focus, &:active {
-			border-color: $color-semi-accent;
-		}
-	}
-	button, [type='reset'], [type='submit'] {
-		background: $color-interactive;
-		&:focus, &:active {
-			background: $color-semi-accent;
-			outline: none;
-		}
-	}
-	[type='email'] {
-		~ [type='submit'] {
-			border-bottom: 3px solid $color-interactive;
-			border-bottom-left-radius: 0;
-			&:focus, &:active {
-			    border-bottom: 3px solid $color-semi-accent;
-				outline: none;
-			}
-		}
-	}
+    [type='email'], [type='number'], [type='password'], [type='search'], [type='tel'], [type='text'], [type='url'], textarea {
+        border-bottom: 3px solid $color-interactive;
+        &:focus, &:active {
+            border-color: $color-semi-accent;
+        }
+    }
+    button, [type='reset'], [type='submit'] {
+        background: $color-interactive;
+        &:focus, &:active {
+            background: $color-semi-accent;
+            outline: none;
+        }
+    }
+    [type='email'] {
+        ~ [type='submit'] {
+            border-bottom: 3px solid $color-interactive;
+            border-bottom-left-radius: 0;
+            &:focus, &:active {
+                border-bottom: 3px solid $color-semi-accent;
+                outline: none;
+            }
+        }
+    }
 }
 
 .button-center-container {

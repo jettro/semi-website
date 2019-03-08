@@ -4,9 +4,11 @@ import getChoiceFieldset from './getChoiceFieldset';
 import formPricingRadioButtons from './formPricingRadioButtons';
 import { setHostingAdjustment } from './pricingReceipt';
 import createOptionButtons from './createOptionButtons';
+import { addCollapseTriggers } from '../collapse';
 
 import pricingUseCaseData from '../../../_data/pricingUseCases';
 import pricingConfig from './pricingConfig';
+import PubSub from 'pubsub-js';
 
 const hideClass = 'form-stepper__step--hide';
 const showClass = 'form-stepper__step--show';
@@ -33,6 +35,7 @@ function getUseCaseKey(elements) {
  * @param callback {callback} The callback to run
  */
 function loadOptions(template, container, options, loadOnce = false, callback = undefined) {
+
   /** Skip creating the options if the data provided isn't an object containing an array with options */
   if (Object.prototype.toString.call(options) !== '[object Array]') {
     console.info(
@@ -116,6 +119,12 @@ function showElement(elementToShow) {
  * @returns {Promise<any>}
  */
 export default function(useCaseFieldset, target, fieldSets) {
+
+  PubSub.subscribe('generatedCpcRows', function() {
+    /** Add collapse triggers async to newly created DOM elements */
+    addCollapseTriggers();
+  });
+
   return new Promise((resolve, reject) => {
     /** used to execute the event listener for showing content only one time */
     let isFirstTimeFlag = true;
