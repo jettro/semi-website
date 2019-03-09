@@ -7,7 +7,7 @@ import handleChoiceClusters from './handleChoiceClusters';
 import handleChoiceContextionaries from './handleChoiceContextionaries';
 import handleChoiceWeaviates from './handleChoiceWeaviates';
 import handleChoiceNetworkNodes from './handleChoiceNetworkNodes';
-import { setFixedCostPrice, setTotal } from './pricingReceipt';
+import { setFixedCostPrice } from './pricingReceipt';
 
 (function(factory) {
 
@@ -62,12 +62,11 @@ import { setFixedCostPrice, setTotal } from './pricingReceipt';
       });
 
       /** second fieldset, hosting preference */
-      handleChoiceHosting(fieldsetUseCase, fieldsetHostingPreference, fieldSets)
-        .then(function() {
-          const nextFieldset = getChoiceFieldset(fieldSets, 'clusters');
-          nextFieldset.classList.remove('form-stepper__step--hide');
-          nextFieldset.classList.add('form-stepper__step--show');
-        });
+      handleChoiceHosting(fieldsetUseCase, fieldsetHostingPreference, fieldSets, function() {
+        const nextFieldset = getChoiceFieldset(fieldSets, 'clusters');
+        nextFieldset.classList.remove('form-stepper__step--hide');
+        nextFieldset.classList.add('form-stepper__step--show');
+      });
 
       /** third fieldset, number of clusters */
       handleChoiceClusters(fieldsetClusters, function() {

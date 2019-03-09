@@ -120,4 +120,5 @@ export {
   setHostingCluster,
   setFixedCostPrice,
   reCalculateTotal,
+  setTotal
 };
