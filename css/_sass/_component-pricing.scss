@@ -84,16 +84,21 @@ body:not(:-moz-handler-blocked) fieldset {
   padding: $scale-0;
   &:hover {
     cursor: pointer;
-    background-color: $color-semi-accent-tint--5;
-  }
-  &.show {
-    background-color: $color-semi-accent-tint--2;
+    background-color: $color-gray-6;
   }
   &:after {
-    content: "−";
     font-family: $typeface-sans;
     font-weight: bold;
     display: inline-block;
+  }
+  &.show {
+    background-color: $color-gray-7;
+    &:after {
+      content: "−";
+    }
+  }
+  &:not([class*="show"]):after {
+    content: "+";
   }
   h3 {
     font-size: $font-size-small;
