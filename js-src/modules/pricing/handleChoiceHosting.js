@@ -276,16 +276,9 @@ export default function(useCaseFieldset, target, fieldSets, showNextChoiceHandle
             /** only show next choice handler when radio button clicked is of: */
             if (step === 'hosting-semi-optimisation' || step === 'hosting-customer-platform') {
               showNextChoiceHandler();
-              // /** only set event listener when it's the first time this is called */
-              // addEventListenerOnce(container, 'click', function() {
-              //   //
-              // });
             }
-
           });
-
         }
-
       }
     });
   });

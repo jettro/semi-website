@@ -2,15 +2,15 @@ import createOptionButtons from './createOptionButtons';
 import pricingConfig from './pricingConfig';
 import pricingUseCaseData from '../../../_data/pricingUseCases';
 import formPricingRadioButtons from './formPricingRadioButtons';
-import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
+import { addEventListenerOnce, elementExists, removeObjectByKeyFromArray } from '../../helpers/helpers';
 import selectClickedElementByType from './selectClickedElementByType';
-import { setWeaviatesPrice } from './pricingReceipt';
 
-export default function(target, getWeaviatePrice, executeOnce) {
+
+export default function(target, getWeaviatePrice, showNextChoiceHandler) {
 
   const container = document.getElementById(pricingConfig.pricingWeaviateContainerId);
   const template = document.getElementById(pricingConfig.pricingWeaviateTemplateId);
-  const options = pricingUseCaseData.weaviates;
+  const options = removeObjectByKeyFromArray(pricingUseCaseData.weaviates, "config");
 
   /** Append all the cost buttons to the cluster container */
   createOptionButtons(options, template).forEach(item => {
@@ -37,7 +37,7 @@ export default function(target, getWeaviatePrice, executeOnce) {
     const button = selectClickedElementByType(event, 'BUTTON');
     /** only do callback when the element clicked on is a button */
     if (elementExists(button)) {
-      executeOnce();
+      showNextChoiceHandler();
     }
   });
 

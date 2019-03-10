@@ -3,21 +3,21 @@ import createOptionButtons from './createOptionButtons';
 import pricingConfig from './pricingConfig';
 import pricingUseCaseData from '../../../_data/pricingUseCases';
 import formPricingRadioButtons from './formPricingRadioButtons';
-import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
+import { addEventListenerOnce, elementExists, removeObjectByKeyFromArray } from '../../helpers/helpers';
 import selectClickedElementByType from './selectClickedElementByType';
 import { setFixedCostPrice } from './pricingReceipt';
 
 /**
  *
  * @param target
- * @param callback
- * @returns {Promise<any>}
+ * @param getNodeNetworksPrice
+ * @param executeOnce
  */
 export default function(target, getNodeNetworksPrice, executeOnce) {
 
   const container = document.getElementById(pricingConfig.pricingNetworkNodesContainerId);
   const template = document.getElementById(pricingConfig.pricingNetworkNodesTemplateId);
-  const options = pricingUseCaseData.networkNodes;
+  const options = removeObjectByKeyFromArray(pricingUseCaseData.networkNodes, "config");
 
   /** Append all the cost buttons to the cluster container */
   createOptionButtons(options, template).forEach(item => {

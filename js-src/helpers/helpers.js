@@ -97,3 +97,21 @@ export function getClosest(element, selector) {
     }
     return null;
 }
+
+/**
+ * @desc removes an object by key from a [object Array]
+ * @param array {Array} the array to remove the config object from
+ * @param objectKey {String} a string which defines the  key to remove from [object Array]
+ * @returns {Array} an array in which the
+ */
+export function removeObjectByKeyFromArray(array, objectKey) {
+  let options = [];
+  for (let option of Object.values(array)) {
+    const [key] = Object.keys(option);
+    /** don't include config as option option */
+    if (key !== objectKey) {
+      options.push(option);
+    }
+  }
+  return options;
+}
