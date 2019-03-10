@@ -1,7 +1,6 @@
 /**
  * map the commands to the classList methods
  */
-import selectClickedElementByType from './pricing/selectClickedElementByType';
 import { getClosest } from '../helpers/helpers';
 
 const fnmap = {

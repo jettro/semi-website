@@ -153,6 +153,87 @@
           {"overall":  "100"},
           {"speed": "100"}
         ]
+      },
+      "Test2": {
+        "title": "Test 2",
+        "shortDesc": "...",
+        "panelLabel": "...",
+        "desc": "...",
+        "hostingCostWeaviate": "1000",
+        "consumptions":
+        [
+          { "cpc": "0.045", "average":  "100000" },
+          { "cpc": "0.045", "average":  "200000" },
+          { "cpc": "0.045", "average":  "300000" },
+          { "cpc": "0.045", "average":  "400000" },
+          { "cpc": "0.045", "average":  "500000" },
+          { "cpc": "0.045", "average":  "600000" },
+          { "cpc": "0.045", "average":  "700000" },
+          { "cpc": "0.045", "average":  "800000" },
+          { "cpc": "0.045", "average":  "900000" }
+        ],
+        "optimization": [
+          {
+            "size": "75",
+            "default": true
+          },
+          {"overall":  "100"},
+          {"speed": "100"}
+        ]
+      },
+      "Test3": {
+        "title": "Test 3",
+        "shortDesc": "...",
+        "panelLabel": "...",
+        "desc": "...",
+        "hostingCostWeaviate": "1000",
+        "consumptions":
+        [
+          { "cpc": "0.055", "average":  "100000" },
+          { "cpc": "0.055", "average":  "200000" },
+          { "cpc": "0.055", "average":  "300000" },
+          { "cpc": "0.055", "average":  "400000" },
+          { "cpc": "0.055", "average":  "500000" },
+          { "cpc": "0.055", "average":  "600000" },
+          { "cpc": "0.055", "average":  "700000" },
+          { "cpc": "0.055", "average":  "800000" },
+          { "cpc": "0.055", "average":  "900000" }
+        ],
+        "optimization": [
+          {
+            "size": "75",
+            "default": true
+          },
+          {"overall":  "100"},
+          {"speed": "100"}
+        ]
+      },
+      "Test4": {
+        "title": "Test 4",
+        "shortDesc": "...",
+        "panelLabel": "...",
+        "desc": "...",
+        "hostingCostWeaviate": "1000",
+        "consumptions":
+        [
+          { "cpc": "0.065", "average":  "100000" },
+          { "cpc": "0.065", "average":  "200000" },
+          { "cpc": "0.065", "average":  "300000" },
+          { "cpc": "0.065", "average":  "400000" },
+          { "cpc": "0.065", "average":  "500000" },
+          { "cpc": "0.065", "average":  "600000" },
+          { "cpc": "0.065", "average":  "700000" },
+          { "cpc": "0.065", "average":  "800000" },
+          { "cpc": "0.065", "average":  "900000" }
+        ],
+        "optimization": [
+          {
+            "size": "75",
+            "default": true
+          },
+          {"overall":  "100"},
+          {"speed": "100"}
+        ]
       }
     }
   ],

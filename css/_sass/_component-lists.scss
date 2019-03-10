@@ -12,54 +12,54 @@
 }
 
 .list-bullet {
-	li {
+    li {
       list-style: none;
-		&:before {
+        &:before {
           @include bullet($color-semi);
         }
-		ul li {
+        ul li {
           &:before {
             @include bullet($color-support);
           }
-		}
-	}
+        }
+    }
 }
 li.list-bullet--disabled {
     list-style-image: url(/img/bullet--disabled.svg);
 }
 
 .list-ui {
-	li {
-		list-style: none !important;
-	}
+    li {
+        list-style: none !important;
+    }
 }
 
 .list-ui-hor {
-	li {
-		display: inline-block;
-		&:not(:last-of-type) {
-			margin-right: $scale-1;
-		}
-	}
+    li {
+        display: inline-block;
+        &:not(:last-of-type) {
+            margin-right: $scale-1;
+        }
+    }
 }
 
 .article {
     li {
-    	list-style-position: outside;
-		margin-left: -.25em;
-		padding-left: .25em;
-		ul {
-    		margin-top: .5em;
-		    li {		
-    		    list-style-image: url(/img/bullet-nested.svg);
+        list-style-position: outside;
+        margin-left: -.25em;
+        padding-left: .25em;
+        ul {
+            margin-top: .5em;
+            li {
+                list-style-image: url(/img/bullet-nested.svg);
                 margin-left: 1em;
             }
-		}
+        }
     }
-	ul li {
-		list-style: none;
-		list-style-image: url(/img/bullet.svg);
-	}
+    ul li {
+        list-style: none;
+        list-style-image: url(/img/bullet.svg);
+    }
     table {
         margin-bottom: 2em;
     }
@@ -67,14 +67,14 @@ li.list-bullet--disabled {
         margin-left: 1em;
     }
     ol, .list-ordered {
-    	counter-reset: li;
-    	list-style: none;
-    	> li {
-        	counter-increment: li; 
-        	list-style-image: none !important;
+        counter-reset: li;
+        list-style: none;
+        > li {
+            counter-increment: li;
+            list-style-image: none !important;
             &:before {
                 color: $color-semi;
-            	content: counter(li);
+                content: counter(li);
                 display: inline-block;
                 font-weight: 700;
                 margin: 0 .5em 0 -1.5em;

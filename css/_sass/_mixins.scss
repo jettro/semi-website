@@ -3,24 +3,23 @@ $transition-speed-out: .256s;
 $transition-easing-in: ease-out;
 $transition-easing-out: ease-out;
 
-
 @mixin transition-in {
-	transition: background $transition-speed-in $transition-easing-in,
-				border-color $transition-speed-in $transition-easing-in,
-				border-radius $transition-speed-in $transition-easing-in,
-				color $transition-speed-in $transition-easing-in,
-				opacity $transition-speed-in $transition-easing-in,
-				outline $transition-speed-in $transition-easing-in,
-				transform $transition-speed-in $transition-easing-in;
+    transition: background $transition-speed-in $transition-easing-in,
+                border-color $transition-speed-in $transition-easing-in,
+                border-radius $transition-speed-in $transition-easing-in,
+                color $transition-speed-in $transition-easing-in,
+                opacity $transition-speed-in $transition-easing-in,
+                outline $transition-speed-in $transition-easing-in,
+                transform $transition-speed-in $transition-easing-in;
 }
 @mixin transition-out {
-	transition: background $transition-speed-out $transition-easing-out,
-				border-color $transition-speed-out $transition-easing-out,
-				border-radius $transition-speed-out $transition-easing-out,
-				color $transition-speed-out $transition-easing-out,
-				opacity $transition-speed-out $transition-easing-out,
-				outline $transition-speed-out $transition-easing-out,
-				transform $transition-speed-out $transition-easing-out;
+    transition: background $transition-speed-out $transition-easing-out,
+                border-color $transition-speed-out $transition-easing-out,
+                border-radius $transition-speed-out $transition-easing-out,
+                color $transition-speed-out $transition-easing-out,
+                opacity $transition-speed-out $transition-easing-out,
+                outline $transition-speed-out $transition-easing-out,
+                transform $transition-speed-out $transition-easing-out;
 }
 
 @mixin visually-hidden {
@@ -31,14 +30,24 @@ $transition-easing-out: ease-out;
 }
 
 @mixin focus-inset {
-	@include transition-in;
-	box-shadow: 0 0 0 2px $color-semi-accent inset;
-	outline: none;
+    @include transition-in;
+    box-shadow: 0 0 0 2px $color-semi-accent inset;
+    outline: none;
 }
 
 @mixin background-opacity($color, $opacity: .5) {
     background: $color; //  Fallback to solid color
     background: rgba($color, $opacity);
+}
+
+@mixin shade-paper() {
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2),
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12);
+}
+
+@mixin shade-drawer() {
+  box-shadow: 0 -.5em .5em -.5em rgba(0, 0, 0, 0.2);
 }
 
 @function data-uri-color($color) {

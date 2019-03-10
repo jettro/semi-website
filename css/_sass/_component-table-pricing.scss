@@ -1,4 +1,18 @@
 
+@include breakpoint(largeUp) {
+  .table-pricing {
+    width: 100%;
+  }
+  .table-pricing__row {
+    td:first-child {
+      width: 60%;
+    }
+    td:not(:first-child) {
+      text-align: right;
+    }
+  }
+}
+
 #template-table-pricing-row {
   display: none;
 }

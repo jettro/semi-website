@@ -5,7 +5,6 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
 import formPricingRadioButtons from './formPricingRadioButtons';
 import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
 import selectClickedElementByType from './selectClickedElementByType';
-import { setFixedCostPrice } from './pricingReceipt';
 
 /**
  *

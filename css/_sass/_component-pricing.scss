@@ -58,16 +58,24 @@ body:not(:-moz-handler-blocked) fieldset {
 
 // TODO: move this to separate file
 .list-buttons-radio {
-  display: flex;
-  margin-bottom: 1rem;
+  display: grid;
+  margin-bottom: .5rem;
 
-  li:not(:first-child) {
-    margin-left: .5rem;
-  }
   .ui-button {
     align-items: center;
     display: flex;
     height: 100%;
+    width: 100%;
+  }
+
+  @include breakpoint(toLarge) {
+    grid-auto-flow: row;
+  }
+
+  @include breakpoint(largeUp) {
+    grid-auto-flow: dense;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
@@ -121,4 +129,11 @@ body:not(:-moz-handler-blocked) fieldset {
 .feature-description {
   margin-top: 1rem;
   font-size: $font-size-small;
+}
+
+@include breakpoint(toLarge) {
+  $sticky-receipt-height: 160px; // approximately size of the sticky receipt
+  .page--calculator {
+    padding-bottom: $sticky-receipt-height;
+  }
 }

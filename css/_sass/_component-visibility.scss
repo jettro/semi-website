@@ -1,0 +1,14 @@
+
+@import 'mixins-breakpoints';
+
+@include breakpoint(toLarge) {
+  .hidden-sm {
+    display: none;
+  }
+}
+
+@include breakpoint(largeUp) {
+  .hidden-l-up {
+    display: none;
+  }
+}
