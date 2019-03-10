@@ -2,6 +2,24 @@ import createCloneFromTemplate from './createCloneFromTemplate';
 import setFeatureCellText from './setFeatureCellText';
 
 /**
+ * @desc removes an object by key from a [object Array]
+ * @param object {Object} the array to remove the config object from
+ * @param objectKey {String} a string which defines the  key to remove from [object Array]
+ * @returns {Array} an array in which the
+ */
+export function removeObjectByKeyFromArray(object, objectKey) {
+  let options = [];
+  for (let option of Object.values(object)) {
+    const [key] = Object.keys(option);
+    /** don't include config as option option */
+    if (key !== objectKey) {
+      options.push(option);
+    }
+  }
+  return options;
+}
+
+/**
  * @desc creates a map of buttons containing HTMLElement buttons based on template
  *       Note: the buttons have a multiplier data attribute to be picked up by calculations
  * @param options {object} The options that the buttons have to be generated for
@@ -23,9 +41,10 @@ export default function(options, template) {
     if (options[0]['config']['percentage'] === false) {
       optionDataSet = 'subTotal';
     }
-    /** then remove the config since it's not an option */
-    delete options[0]['config'];
   }
+
+  /** if config object exists remove it since it's not an option */
+  options = removeObjectByKeyFromArray(options, 'config');
 
   options.forEach((option, i) => {
     const clone = createCloneFromTemplate(template);
