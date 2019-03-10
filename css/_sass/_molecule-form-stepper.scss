@@ -8,6 +8,7 @@
 .form-stepper__step {
   flex-direction: column;
   width: 100%;
+  margin-bottom: 1rem;
 
   &[aria-hidden="true"] {
     display: none;
@@ -36,6 +37,7 @@
   background-color: $color-gray-6;
   flex-direction: column;
   padding: $scale-1;
+  margin-bottom: 2rem;
 }
 
 .flex-align-right {
