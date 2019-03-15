@@ -3,8 +3,8 @@
 // however, some styles might be subtracted from this specific console page styling
 // to create  a general pattern.
 
-@import 'var-typography';
-@import 'mixins';
+@import '../variables/var-typography';
+@import '../mixins/mixins';
 
 .page--console {
   .header-main .nav-main-console {

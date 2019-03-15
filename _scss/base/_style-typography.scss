@@ -1,3 +1,5 @@
+@import '../variables/var-typography';
+
 body {
     color: $color-black;
     font-family: $typeface-body;
@@ -6,8 +8,6 @@ body {
     font-variant-ligatures: common-ligatures;
     line-height: $line-height;
 }
-
-@import 'var-typography';
 
 h1, h2, h3, h4, h5, h6 {
     color: $color-almostblack-tint--1;
