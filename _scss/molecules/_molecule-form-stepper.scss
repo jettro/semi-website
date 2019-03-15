@@ -1,5 +1,5 @@
-@import 'var-color';
-@import 'var-scale';
+@import '../variables/var-color';
+@import '../variables/var-scale';
 
 .form-stepper {
   flex-direction: column;

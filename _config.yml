@@ -18,6 +18,8 @@ exclude:
     - js-src
     - node_modules
     - webpack.config.js
+    - _scss
+    - .idea/
 plugins:
     - jekyll-redirect-from
 whitelist:
