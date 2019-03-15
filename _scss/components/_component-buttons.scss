@@ -1,7 +1,7 @@
-@import 'var-scale';
-@import 'var-color';
-@import 'var-borders';
-@import 'mixins-buttons';
+@import '../variables/var-scale';
+@import '../variables/var-color';
+@import '../variables/var-borders';
+@import '../mixins/mixins-buttons';
 
 .button,
 .button--small,

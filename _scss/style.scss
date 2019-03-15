@@ -33,10 +33,12 @@
 @import './components/component-article-overview';
 @import './components/component-backgrounds';
 @import './components/component-breadcrumb';
+@import './components/component-buttons';
 @import './components/component-callout';
 @import './components/component-card-author';
 @import './components/component-cards';
 @import './components/component-code';
+@import './components/component-collapse';
 @import './components/component-footer';
 @import './components/component-headers';
 @import './components/component-hero';
@@ -50,16 +52,20 @@
 @import './components/component-meta';
 @import './components/component-nav-main';
 @import './components/component-notify';
+@import './components/component-pricing';
 @import './components/component-quotes';
+@import './components/component-receipt';
 @import './components/component-search-meta';
 @import './components/component-sections';
 @import './components/component-select-menu';
 @import './components/component-spacing';
 @import './components/component-site-header';
 @import './components/component-table';
+@import './components/component-table-pricing';
 @import './components/component-tags';
 @import './components/component-titles';
 @import './components/component-toc';
+@import './components/component-visibility';
 
 // Templates
 @import './base/content';

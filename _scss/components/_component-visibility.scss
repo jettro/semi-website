@@ -1,5 +1,5 @@
 
-@import 'mixins-breakpoints';
+@import '../mixins/mixins-breakpoints';
 
 @include breakpoint(toLarge) {
   .hidden-sm {

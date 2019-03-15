@@ -1,6 +1,6 @@
 
-@import 'var-typography';
-@import 'var-color';
+@import '../variables/var-typography';
+@import '../variables/var-color';
 
 // apply border-box to all the elements to ensure padding and border are included in the browser’s calculation for heigh
 ::after,

@@ -1,6 +1,6 @@
-@import 'var-typography.scss';
-@import 'var-borders';
-@import 'var-scale';
+@import '../variables/var-typography.scss';
+@import '../variables/var-borders';
+@import '../variables/var-scale';
 
 .template-pricing-use-case--hidden,
 .template-table-pricing-row--hidden {

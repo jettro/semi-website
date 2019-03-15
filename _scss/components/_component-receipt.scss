@@ -1,8 +1,8 @@
-@import 'var-scale';
-@import 'var-borders';
-@import 'mixins-breakpoints';
-@import 'mixins-buttons';
-@import 'mixins';
+@import '../variables/var-scale';
+@import '../variables/var-borders';
+@import '../mixins/mixins-breakpoints';
+@import '../mixins/mixins-buttons';
+@import '../mixins/mixins';
 
 // TODO: refactor stickyness for IE and EDGE <15
 @mixin stickyness {
