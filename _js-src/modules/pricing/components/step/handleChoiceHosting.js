@@ -1,13 +1,13 @@
-import selectClickedElementByType from './selectClickedElementByType';
-import { getClosest, elementExists } from '../../helpers/helpers';
-import getChoiceFieldset from './getChoiceFieldset';
-import formPricingRadioButtons from './formPricingRadioButtons';
-import { setHostingAdjustment } from './pricingReceipt';
-import createOptionButtons from './createOptionButtons';
-import { addCollapseTriggers } from '../collapse';
+import selectClickedElementByType from '../../common/selectClickedElementByType';
+import { getClosest, elementExists } from '../../../../helpers/helpers';
+import getChoiceFieldset from '../../common/getChoiceFieldset';
+import formPricingRadioButtons from '../../common/formPricingRadioButtons';
+import { setHostingAdjustment } from '../receipt/pricingReceipt';
+import createOptionButtons from '../../common/createOptionButtons';
+import { addCollapseTriggers } from '../../../collapse';
 
-import pricingUseCaseData from '../../../_data/pricingUseCases';
-import pricingConfig from './pricingConfig';
+import pricingUseCaseData from '../../../../../_data/pricingUseCases';
+import pricingConfig from '../../pricingConfig';
 import PubSub from 'pubsub-js';
 
 const hideClass = 'form-stepper__step--hide';

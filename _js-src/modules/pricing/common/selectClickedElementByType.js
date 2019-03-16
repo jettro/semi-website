@@ -1,5 +1,12 @@
-import assignClickedElement from './assignClickedElement';
 import selectParentElementByType from './selectParentElementByType';
+
+const assignClickedElement = function(e, type, targetParentIsClicked, targetIsClicked) {
+  if (targetParentIsClicked) {
+    return e.target.closest(type);
+  } else if (targetIsClicked) {
+    return e.target;
+  }
+};
 
 /**
  * @desc button is block level element, so it can also contain another element inside,

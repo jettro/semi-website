@@ -1,8 +1,26 @@
-import { elementExists, localizeNumber } from '../../helpers/helpers';
-import generateUseCaseTable from './generateUseCaseTable';
-import pricingConfig from './pricingConfig';
-import { setVariableMonthlyCost, reCalculateTotal } from './pricingReceipt';
-import calcTotalCostUseCases from './calcTotalCostUseCases';
+import { elementExists, addEventListenerOnce, isNumber } from '../../../../helpers/helpers';
+import formPricingRadioButtons from '../../common/formPricingRadioButtons';
+import selectClickedElementByType from '../../common/selectClickedElementByType';
+import pricingConfig from '../../pricingConfig';
+import generateUseCaseTable from '../table/generateUseCaseTable';
+import { reCalculateTotal, setVariableMonthlyCost } from '../receipt/pricingReceipt';
+
+/**
+ * @desc calculates the total cost of the use-cases
+ * @param containerElement {HTMLElement} The element containing all the pricing rows
+ * @returns {number} the calculated total number
+ */
+const calcTotalCostUseCases =  function(containerElement) {
+  const tableRows = containerElement.getElementsByClassName('table-pricing__row');
+  let useCaseTotal = 0;
+  for (let row of tableRows) {
+    if (typeof row.dataset.subTotal !== 'undefined' && isNumber(row.dataset.subTotal)) {
+      const useCaseSubTotal = row.dataset.subTotal;
+      useCaseTotal += parseInt(useCaseSubTotal);
+    }
+  }
+  return useCaseTotal;
+};
 
 /**
  *
@@ -61,7 +79,7 @@ const toggleUseCasePanels = function(panels, currentUseCaseKey, callback) {
  * @param pricingInfoContainerId {string} The container for all the pricing info blocks
  * @param useCaseKey {string} Use case key is used to retrieve data from ./_data/pricingUseCases.json
  */
-export default function(useCaseKey, pricingInfoContainerId) {
+const showUseCasePricing = function(useCaseKey, pricingInfoContainerId) {
   const pricingUseCaseContainer = document.getElementById(pricingInfoContainerId);
   if (elementExists(pricingUseCaseContainer)) {
     let doCalculationOn;
@@ -95,4 +113,38 @@ export default function(useCaseKey, pricingInfoContainerId) {
   } else {
     console.info(`There is no pricing info container with the id ${pricingUseCaseContainer}`);
   }
+};
+
+/**
+ *
+ * @param target {HTMLElement} the target this choice applies to
+ * @param showNextChoiceHandler
+ */
+export default function(target, showNextChoiceHandler = undefined) {
+  target.addEventListener('click', e => {
+    e.preventDefault();
+
+    /** Logic for the radio buttons*/
+    formPricingRadioButtons(e, target, function() {
+      const button = selectClickedElementByType(e, 'BUTTON');
+      if (elementExists(button)) {
+        const useCaseKey = button.dataset.useCase;
+        const useCaseKeyExists = useCaseKey !== '';
+        if (useCaseKeyExists) {
+          showUseCasePricing(
+            useCaseKey,
+            pricingConfig.pricingInfoContainerId
+          );
+        }
+      }
+    });
+  });
+  /** do a callback once! */
+  addEventListenerOnce(target, "click", function() {
+    const button = selectClickedElementByType(event, 'BUTTON');
+    /** only do callback when the element clicked on is a button */
+    if (elementExists(button)) {
+      showNextChoiceHandler();
+    }
+  });
 }

@@ -1,10 +1,10 @@
 
-import createOptionButtons from './createOptionButtons';
-import pricingConfig from './pricingConfig';
-import pricingUseCaseData from '../../../_data/pricingUseCases';
-import formPricingRadioButtons from './formPricingRadioButtons';
-import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
-import selectClickedElementByType from './selectClickedElementByType';
+import createOptionButtons from '../../common/createOptionButtons';
+import pricingConfig from '../../pricingConfig';
+import pricingUseCaseData from '../../../../../_data/pricingUseCases';
+import formPricingRadioButtons from '../../common/formPricingRadioButtons';
+import { addEventListenerOnce, elementExists } from '../../../../helpers/helpers';
+import selectClickedElementByType from '../../common/selectClickedElementByType';
 
 export default function(target, callback) {
 

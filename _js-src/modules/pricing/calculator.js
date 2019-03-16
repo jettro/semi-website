@@ -1,13 +1,13 @@
 import { elementExists } from '../../helpers/helpers';
 import pricingConfig from './pricingConfig';
-import getChoiceFieldset from './getChoiceFieldset';
-import handleChoiceUseCases from './handleChoiceUseCases';
-import handleChoiceHosting from './handleChoiceHosting';
-import handleChoiceClusters from './handleChoiceClusters';
-import handleChoiceContextionaries from './handleChoiceContextionaries';
-import handleChoiceWeaviates from './handleChoiceWeaviates';
-import handleChoiceNetworkNodes from './handleChoiceNetworkNodes';
-import { setFixedCostPrice } from './pricingReceipt';
+import getChoiceFieldset from './common/getChoiceFieldset';
+import handleChoiceUseCases from './components/step/handleChoiceUseCases';
+import handleChoiceHosting from './components/step/handleChoiceHosting';
+import handleChoiceClusters from './components/step/handleChoiceClusters';
+import handleChoiceContextionaries from './components/step/handleChoiceContextionaries';
+import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
+import handleChoiceNetworkNodes from './components/step/handleChoiceNetworkNodes';
+import { setFixedCostPrice } from './components/receipt/pricingReceipt';
 
 (function(factory) {
 

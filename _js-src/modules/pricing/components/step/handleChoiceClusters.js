@@ -1,12 +1,12 @@
 
-import createOptionButtons from './createOptionButtons';
+import createOptionButtons from '../../common/createOptionButtons';
 
-import pricingUseCaseData from '../../../_data/pricingUseCases';
-import pricingConfig from './pricingConfig';
-import formPricingRadioButtons from './formPricingRadioButtons';
-import selectClickedElementByType from './selectClickedElementByType';
-import { addEventListenerOnce, elementExists } from '../../helpers/helpers';
-import { setHostingCluster } from './pricingReceipt';
+import pricingUseCaseData from '../../../../../_data/pricingUseCases';
+import pricingConfig from '../../pricingConfig';
+import formPricingRadioButtons from '../../common/formPricingRadioButtons';
+import selectClickedElementByType from '../../common/selectClickedElementByType';
+import { addEventListenerOnce, elementExists } from '../../../../helpers/helpers';
+import { setHostingCluster } from '../receipt/pricingReceipt';
 
 export default function(target, callback) {
   const container = document.getElementById(pricingConfig.pricingClusterContainerId);

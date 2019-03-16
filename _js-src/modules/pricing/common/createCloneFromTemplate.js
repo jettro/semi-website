@@ -1,5 +1,5 @@
 
-import { elementExists } from '../../helpers/helpers';
+import { elementExists } from '../../../helpers/helpers';
 
 /**
  * @desc clones element and removes the id (!) that was used to target it by to prevent duplicate ID's in HTML.
