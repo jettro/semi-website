@@ -68,37 +68,37 @@ import { setFixedCostPrice } from './components/receipt/pricingReceipt';
         nextFieldset.classList.add('form-stepper__step--show');
       });
 
-      /** third fieldset, number of clusters */
-      handleChoiceClusters(fieldsetClusters, function() {
-        const nextFieldset = getChoiceFieldset(fieldSets, 'contextionaries');
-        nextFieldset.classList.remove('form-stepper__step--hide');
-        nextFieldset.classList.add('form-stepper__step--show');
-      });
-
-      /** fourth fieldset, type of network nodes (contextionaries) */
-      handleChoiceContextionaries(fieldsetContextionaries, function() {
-        const nextFieldset = getChoiceFieldset(fieldSets, 'weaviates');
-        nextFieldset.classList.remove('form-stepper__step--hide');
-        nextFieldset.classList.add('form-stepper__step--show');
-      });
-
-      /** fifth fieldset, required number of weaviates */
-      handleChoiceWeaviates(fieldsetWeaviates, function(weaviatePrice) {
-        /** each time a weaviate button is clicked, recalculate the fixed price */
-        setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
-      }, function() {
-        const nextFieldset = getChoiceFieldset(fieldSets, 'network-nodes');
-        nextFieldset.classList.remove('form-stepper__step--hide');
-        nextFieldset.classList.add('form-stepper__step--show');
-      });
-
-      /** sixt fieldset, the desired network nodes */
-      handleChoiceNetworkNodes(fieldsetNetworkNodes, function(price) {
-        nodeNetworksPrice = price;
-        setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
-      }, function() {
-        console.log('the next one can be shown');
-      });
+      // /** third fieldset, number of clusters */
+      // handleChoiceClusters(fieldsetClusters, function() {
+      //   const nextFieldset = getChoiceFieldset(fieldSets, 'contextionaries');
+      //   nextFieldset.classList.remove('form-stepper__step--hide');
+      //   nextFieldset.classList.add('form-stepper__step--show');
+      // });
+      //
+      // /** fourth fieldset, type of network nodes (contextionaries) */
+      // handleChoiceContextionaries(fieldsetContextionaries, function() {
+      //   const nextFieldset = getChoiceFieldset(fieldSets, 'weaviates');
+      //   nextFieldset.classList.remove('form-stepper__step--hide');
+      //   nextFieldset.classList.add('form-stepper__step--show');
+      // });
+      //
+      // /** fifth fieldset, required number of weaviates */
+      // handleChoiceWeaviates(fieldsetWeaviates, function(weaviatePrice) {
+      //   /** each time a weaviate button is clicked, recalculate the fixed price */
+      //   setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
+      // }, function() {
+      //   const nextFieldset = getChoiceFieldset(fieldSets, 'network-nodes');
+      //   nextFieldset.classList.remove('form-stepper__step--hide');
+      //   nextFieldset.classList.add('form-stepper__step--show');
+      // });
+      //
+      // /** sixt fieldset, the desired network nodes */
+      // handleChoiceNetworkNodes(fieldsetNetworkNodes, function(price) {
+      //   nodeNetworksPrice = price;
+      //   setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
+      // }, function() {
+      //   console.log('the next one can be shown');
+      // });
 
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);

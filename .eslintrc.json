@@ -11,5 +11,22 @@
     "ecmaVersion": 2017,
     "impliedStrict": true,
     "sourceType": "module"
+  },
+  "plugins": [
+    "sort-class-members"
+  ],
+  "rules": {
+    "sort-class-members/sort-class-members": [2, {
+      "order": [
+        "[static-properties]",
+        "[static-methods]",
+        "[properties]",
+        "[conventional-private-properties]",
+        "constructor",
+        "[methods]",
+        "[conventional-private-methods]"
+      ],
+      "accessorPairPositioning": "getThenSet"
+    }]
   }
 }

@@ -1,5 +1,5 @@
 
-import createOptionButtons from '../../common/createOptionButtons';
+import createListItems from '../../common/createListItems';
 
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
@@ -14,7 +14,7 @@ export default function(target, callback) {
   const options = pricingUseCaseData.clusters;
 
   /** Append all the cost buttons to the cluster container */
-  createOptionButtons(options, template).forEach(item => {
+  createListItems(options, template).forEach(item => {
     container.appendChild(item);
   });
 

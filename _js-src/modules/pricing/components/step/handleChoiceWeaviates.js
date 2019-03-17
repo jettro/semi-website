@@ -1,4 +1,4 @@
-import createOptionButtons from '../../common/createOptionButtons';
+import createListItems from '../../common/createListItems';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import formPricingRadioButtons from '../../common/formPricingRadioButtons';
@@ -18,7 +18,7 @@ export default function(target, getWeaviatePrice, showNextChoiceHandler) {
   const options = pricingUseCaseData.weaviates;
 
   /** Append all the cost buttons to the cluster container */
-  createOptionButtons(options, template).forEach(item => {
+  createListItems(options, template).forEach(item => {
     container.appendChild(item);
   });
 

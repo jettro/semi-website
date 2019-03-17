@@ -261,14 +261,14 @@
     {"Constant training (custom)":  "100"}
   ],
   "weaviates": [
-    {"config": { "percentage": false }},
+    {"config": { "fixed": true }},
     {"1 weaviate": "500"},
     {"2 weaviates": "1000"},
     {"3 weaviates": "1500"},
     {"4 weaviates": "2000"}
   ],
   "networkNodes": [
-    {"config": { "percentage": false }},
+    {"config": { "fixed": true }},
     {"Common Knowledge": "1000"},
     {"Places": "2000"},
     {"Emotions": "3000"},

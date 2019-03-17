@@ -3,8 +3,10 @@ import { getClosest, elementExists } from '../../../../helpers/helpers';
 import getChoiceFieldset from '../../common/getChoiceFieldset';
 import formPricingRadioButtons from '../../common/formPricingRadioButtons';
 import { setHostingAdjustment } from '../receipt/pricingReceipt';
-import createOptionButtons from '../../common/createOptionButtons';
+import createListItems from '../../common/createListItems';
 import { addCollapseTriggers } from '../../../collapse';
+
+import ListOptions from '../list-options/ListOptions';
 
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
@@ -34,7 +36,7 @@ function getUseCaseKey(elements) {
  * @param loadOnce {Boolean} This should only resolve if it's the first time the options are created
  * @param callback {callback} The callback to run
  */
-function loadOptions(template, container, options, loadOnce = false, callback = undefined) {
+function loadOptions(container, options, loadOnce = false, callback = undefined) {
 
   /** Skip creating the options if the data provided isn't an object containing an array with options */
   if (Object.prototype.toString.call(options) !== '[object Array]') {
@@ -44,14 +46,12 @@ function loadOptions(template, container, options, loadOnce = false, callback = 
     return;
   }
 
-  /** Append all the cost buttons to the cost container */
-  createOptionButtons(options, template).forEach(item => {
-    if (elementExists(template)) {
-      container.appendChild(item);
-    } else {
-      console.info(`The template '${template}' to create the option by is not found.`);
-    }
-  });
+  const listOptionsElement = new ListOptions(createListItems(options)).render();
+  const listOptionsString = new ListOptions(createListItems(options)).create();
+
+  // TODO: create tests for these
+  console.log(`listOptions should be a list {HTMLElement} list with all options: ${typeof(listOptionsElement)}`, listOptionsElement);
+  console.log(`listOptions should be a list {string} with all options: ${typeof(listOptionsString)}`, listOptionsString);
 
   /** options are loaded, add click handling */
   container.addEventListener('click', e => {
@@ -121,7 +121,6 @@ export default function(useCaseFieldset, target, fieldSets, showNextChoiceHandle
   });
 
   /** used to execute the event listener for showing content only one time */
-  let isFirstTimeFlag = true;
   target.addEventListener('click', e => {
     e.preventDefault();
 
@@ -186,10 +185,9 @@ export default function(useCaseFieldset, target, fieldSets, showNextChoiceHandle
             if (optionsStep1DoesntExist) {
               // TODO: maybe don't use document.getElement by id, but the current fieldset as Node's parent
               const container = document.getElementById(pricingConfig.pricingPlatformContainerId);
-              const template = document.getElementById(pricingConfig.pricingPlatformTemplateId);
               const data = pricingUseCaseData.hostingProvidersBySemi;
               /** load options for weaviate hosting platforms */
-              loadOptions(template, container, data);
+              loadOptions(container, data);
             }
 
             /** Load the fieldset options for optimization preferences */
@@ -205,7 +203,7 @@ export default function(useCaseFieldset, target, fieldSets, showNextChoiceHandle
               const key = getUseCaseKey(useCaseButtons);
               const data = pricingUseCaseData.useCases[0][key]['optimization'];
               /** load options for optimization preference */
-              loadOptions(template, container, data);
+              loadOptions(container, data);
             }
 
           }
@@ -249,7 +247,7 @@ export default function(useCaseFieldset, target, fieldSets, showNextChoiceHandle
               );
               const data = pricingUseCaseData.hostingProvidersByCustomer;
               /** load options for optimization preference */
-              loadOptions(template, container, data);
+              loadOptions(container, data);
             }
           }
 
