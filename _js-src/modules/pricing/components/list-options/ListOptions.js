@@ -42,6 +42,12 @@ export default class ListOptions {
   }
 
   [_addListItems](node) {
+    if (typeof(this._children) === 'undefined') {
+      throw new Error('No child elements are provided. A list must have child list items.');
+    }
+    if (Object.prototype.toString.call(this._children) !== '[object Map]') {
+      throw new Error('The parameter "children" is not a map [object Map]".');
+    }
     this._children.forEach((child) => {
       node.insertAdjacentElement('beforeend', child);
     });

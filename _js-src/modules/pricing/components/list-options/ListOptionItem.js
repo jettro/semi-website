@@ -31,12 +31,12 @@ export default class listOptionItem {
   }
 
   /**
-   * @param optionDataSet {string}
-   * @param value {string}
+   * @param {string} [value=undefined] the value the list item should get
+   * @param {string} [valueType=undefined] the type of value the list item should get
    */
-  constructor(value = undefined, optionDataSet) {
+  constructor(value = undefined, valueType = undefined) {
     this._value = value;
-    this._optionDataSet = optionDataSet;
+    this._valueType = valueType;
     /** constructs the html element from html template literal (string) */
     this._html = htmlToElement(listOptionItem.htmlString());
   }
@@ -75,8 +75,14 @@ export default class listOptionItem {
    */
   [_createValue]() {
     if (typeof(this._value) !== 'undefined') {
+      if (Object.prototype.toString.call(this._value) !== '[object String]') {
+        throw new Error('The parameter "value" is not a string [object String]".');
+      }
+      if (this._valueType !== 'undefined' && Object.prototype.toString.call(this._valueType) !== '[object String]') {
+        throw new Error('The parameter "valueType" is not a string [object String]".');
+      }
       const listItem = this._html;
-      listItem.dataset[this._optionDataSet] = this._value;
+      listItem.dataset[this._valueType] = this._value;
     }
     return this._html;
   }
