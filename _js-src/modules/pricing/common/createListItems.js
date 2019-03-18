@@ -1,5 +1,9 @@
 import ButtonRadio from '../components/button-radio/ButtonRadio';
 import listOptionItem from '../components/list-option-item/ListOptionItem';
+import pricingConfig from '../pricingConfig';
+import { elementExists, getClosest } from '../../../helpers/helpers';
+import { setHostingAdjustment } from '../components/receipt/pricingReceipt';
+import PubSub from 'pubsub-js';
 
 /**
  * @desc removes an object by key from a [object Array]
@@ -41,6 +45,29 @@ export default function(options) {
 
     const listItemOption = new listOptionItem(value, dataset).render();
     const buttonRadioOption = new ButtonRadio(title).render();
+
+    /** get the total price from the receipt */
+    const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
+
+    buttonRadioOption.addEventListener('button-radio-clicked', function (e) {
+      e.preventDefault();
+
+      // TODO: optional remove dataset from the parent li, but set it on the button instead
+
+      /** target parent element, since data set needs to be set on parent li rather than button */
+      const multiplier = e.currentTarget.parentElement.dataset.multiplier;
+      const multiplierExists = multiplier !== '';
+      if (multiplierExists) {
+        setHostingAdjustment(totalUseCasePrice.textContent, multiplier);
+      } else {
+        console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
+      }
+
+      const parentFieldset = getClosest(e.target, 'fieldset');
+      PubSub.publish('hostingChoiceMade', parentFieldset.dataset.step);
+
+    }, false);
+
 
     let template = document.createElement('template');
     template.insertAdjacentElement('beforeend', listItemOption);

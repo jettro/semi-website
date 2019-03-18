@@ -54,24 +54,7 @@ function loadOptions(container, options, loadOnce = false, callback = undefined)
   /** options are loaded, add click handling */
   container.addEventListener('click', e => {
     e.preventDefault();
-    formPricingRadioButtons(e, container, function() {
-      const button = selectClickedElementByType(e, 'BUTTON');
-      /** get the total price from the receipt */
-      const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
-      if (elementExists(button)) {
-        /** target parent element, since data set needs to be set on parent li rather than button */
-        const multiplier = button.parentElement.dataset.multiplier;
-        const multiplierExists = multiplier !== '';
-        if (multiplierExists) {
-          setHostingAdjustment(totalUseCasePrice.textContent, multiplier);
-        } else {
-          console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
-        }
-
-        const parentFieldset = getClosest(e.target, 'fieldset');
-        PubSub.publish('hostingChoiceMade', parentFieldset.dataset.step);
-      }
-    });
+    formPricingRadioButtons(e, container);
   });
 }
 
