@@ -108,9 +108,8 @@ mainClass: wrapper--wide
                             <h2 id="label-hosting-preference-platform">Hosting Platform</h2>
                             <p>Do you have a platform preference regargin the hosting?</p>
                         </legend>
-                        <ul class="list-ui list-buttons-radio" id="container-pricing-platform-button">
-                            <!-- JS adds list items -->
-                        </ul>
+                        <!-- JS adds list with list items -->
+                        <div id="container-pricing-platform"></div>
                     </fieldset>
 
                     <fieldset class="form-stepper__step form-stepper__step--hide form-stepper__step--child" data-step="hosting-semi-optimisation" role="radiogroup" aria-labelledby="label-optimized">
@@ -118,14 +117,8 @@ mainClass: wrapper--wide
                             <h2 id="label-optimized">Optimization preferences</h2>
                             <p>What would you want your Weaviate to be optimized for?</p>
                         </legend>
-                        <ul class="list-ui list-buttons-radio" id="container-pricing-optimization-button">
-                            <li id="template-pricing-optimization-button" class="pricing-hosting-button--hide">
-                                <button class="ui-button" type="button" role="radio" aria-checked="false">
-                                    <span class="ui-button__radio-icon"></span>
-                                    <span class="ui-button__title"></span>
-                                </button>
-                            </li>
-                        </ul>
+                        <!-- JS adds list with list items -->
+                        <div id="container-pricing-optimization"></div>
                     </fieldset>
                 </div>
 
@@ -135,14 +128,8 @@ mainClass: wrapper--wide
                             <h2 id="label-customer-platform">Hosting Platform</h2>
                             <p>To pre-empt any potential challenges with your deployment, could you indicate what platform(s) you will be hosting the weaviate(s)?</p>
                         </legend>
-                        <ul class="list-ui list-buttons-radio" id="container-pricing-customer-button">
-                            <li id="template-pricing-customer-button" class="pricing-hosting-button--hide">
-                                <button class="ui-button" type="button" role="radio" aria-checked="false">
-                                    <span class="ui-button__radio-icon"></span>
-                                    <span class="ui-button__title"></span>
-                                </button>
-                            </li>
-                        </ul>
+                        <!-- JS adds list with list items -->
+                        <div id="container-pricing-customer"></div>
                         <label for="hostingByCustomerOtherPlatform">Other:</label>
                         <input type="text" id="hostingByCustomerOtherPlatform" name="hostingByCustomerOtherPlatform">
                     </fieldset>

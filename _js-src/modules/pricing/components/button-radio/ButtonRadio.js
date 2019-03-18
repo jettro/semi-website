@@ -46,14 +46,6 @@ export default class ButtonRadio {
   }
 
   /**
-   * use this if you need to use the element as a string
-   * @returns {String} returns the element as a string
-   */
-  create() {
-    return this.init().outerHTML;
-  }
-
-  /**
    * @returns {Element}
    */
   [_createTitle]() {

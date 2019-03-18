@@ -1,25 +1,6 @@
 import { htmlToElement } from '../../../../helpers/helpers';
 
 const _createValue = Symbol('createValue');
-const _filterOptions = Symbol('filterOptions');
-
-/**
- * @desc removes an object by key from a [object Array]
- * @param object {Object} the array to remove the config object from
- * @param objectKey {String} a string which defines the  key to remove from [object Array]
- * @returns {Array} an array in which the
- */
-export function removeObjectByKeyFromArray(object, objectKey) {
-  let options = [];
-  for (let option of Object.values(object)) {
-    const [key] = Object.keys(option);
-    /** don't include config as option option */
-    if (key !== objectKey) {
-      options.push(option);
-    }
-  }
-  return options;
-}
 
 export default class listOptionItem {
 
@@ -55,19 +36,6 @@ export default class listOptionItem {
    */
   render() {
     return this.init();
-  }
-
-  /**
-   * use this if you need to use the element as a string
-   * @returns {String}
-   */
-  create() {
-    return this.init().outerHTML;
-  }
-
-  [_filterOptions](options) {
-    /** if config object exists remove it since it's not an option */
-    return removeObjectByKeyFromArray(options, 'config');
   }
 
   /**

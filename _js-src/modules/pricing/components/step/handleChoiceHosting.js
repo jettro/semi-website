@@ -47,11 +47,9 @@ function loadOptions(container, options, loadOnce = false, callback = undefined)
   }
 
   const listOptionsElement = new ListOptions(createListItems(options)).render();
-  const listOptionsString = new ListOptions(createListItems(options)).create();
 
-  // TODO: create tests for these
-  console.log(`listOptions should be a list {HTMLElement} list with all options: ${typeof(listOptionsElement)}`, listOptionsElement);
-  console.log(`listOptions should be a list {string} with all options: ${typeof(listOptionsString)}`, listOptionsString);
+  /** insert list with buttons to container */
+  container.insertAdjacentElement('beforeend', listOptionsElement);
 
   /** options are loaded, add click handling */
   container.addEventListener('click', e => {

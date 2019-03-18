@@ -22,17 +22,8 @@ describe('ButtonRadio...', function() {
     expect(mockRadioButton.render()).to.be.a('HTMLButtonElement');
   });
 
-  it(`method .create() should return a string`, function() {
-    expect(mockRadioButton.create()).to.be.a('string');
-  });
-
-  it(`when instance is created using method .create(), the title should be set`, function() {
-    const createdRadioButton = mockRadioButton.create();
-    expect(createdRadioButton).to.contain(global.title);
-  });
-
 });
 
 describe.skip('ButtonRadio skipped...', function() {
-  it(`method .render() should also have the title`, function() {});
+  it(`method .render() should have the title`, function() {});
 });

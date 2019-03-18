@@ -1,5 +1,23 @@
 import ButtonRadio from '../components/button-radio/ButtonRadio';
-import listOptionItem from '../components/list-options/listOptionItem';
+import listOptionItem from '../components/list-option-item/ListOptionItem';
+
+/**
+ * @desc removes an object by key from a [object Array]
+ * @param object {Object} the array to remove the config object from
+ * @param objectKey {String} a string which defines the  key to remove from [object Array]
+ * @returns {Array} an array in which the
+ */
+export function removeObjectByKeyFromArray(object, objectKey) {
+  let options = [];
+  for (let option of Object.values(object)) {
+    const [key] = Object.keys(option);
+    /** don't include config as option option */
+    if (key !== objectKey) {
+      options.push(option);
+    }
+  }
+  return options;
+}
 
 /**
  * @desc creates a map of buttons containing HTMLElement buttons based on template
@@ -17,17 +35,17 @@ export default function(options) {
   const isFixedPrice = (hasConfig) ? options[0]['config']['fixed'] === true : '';
   const dataset = (isFixedPrice) ? 'subTotal' : 'multiplier';
 
-  options.forEach((option, i) => {
+  removeObjectByKeyFromArray(options, 'config').forEach((option, i) => {
     const title = Object.keys(option)[0];
     const value = parseFloat(Object.values(option)[0]).toFixed(2);
 
-    const listItemOption = new listOptionItem(value, dataset).create();
-    const buttonRadioOption = new ButtonRadio(title).create();
+    const listItemOption = new listOptionItem(value, dataset).render();
+    const buttonRadioOption = new ButtonRadio(title).render();
 
     let template = document.createElement('template');
-    template.insertAdjacentHTML('beforeend', listItemOption);
+    template.insertAdjacentElement('beforeend', listItemOption);
     let [li] = template.getElementsByTagName('LI');
-    li.insertAdjacentHTML('beforeend', buttonRadioOption);
+    li.insertAdjacentElement('beforeend', buttonRadioOption);
 
     optionsListItemButtonMap.set(i, li);
   });

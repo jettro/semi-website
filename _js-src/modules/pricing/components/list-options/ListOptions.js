@@ -33,14 +33,6 @@ export default class ListOptions {
     return this.init();
   }
 
-  /**
-   * use this if you need to use the element as a string
-   * @returns {String}
-   */
-  create() {
-    return this.init().outerHTML;
-  }
-
   [_addListItems](node) {
     if (typeof(this._children) === 'undefined') {
       throw new Error('No child elements are provided. A list must have child list items.');
