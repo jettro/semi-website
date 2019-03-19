@@ -60,7 +60,7 @@ const formPricingToggleFieldset = function(e, form, button) {
  * @param form {HTMLElement}
  * @param callback
  */
-export default function(e, form, callback) {
+export default function(e, form, callback = undefined) {
   const clickedButton = selectClickedElementByType(e, 'BUTTON');
 
   /**
@@ -105,5 +105,7 @@ export default function(e, form, callback) {
     }
   }
 
-  callback();
+  if (callback) {
+    callback();
+  }
 }
