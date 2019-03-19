@@ -1,9 +1,10 @@
-import ButtonRadio from '../components/button-radio/ButtonRadio';
 import listOptionItem from '../components/list-option-item/ListOptionItem';
 import pricingConfig from '../pricingConfig';
-import { elementExists, getClosest } from '../../../helpers/helpers';
+import { getClosest } from '../../../helpers/helpers';
 import { setHostingAdjustment } from '../components/receipt/pricingReceipt';
 import PubSub from 'pubsub-js';
+
+import { ButtonRadioModel, ButtonRadioController, ButtonRadioView } from '../components/button-radio';
 
 /**
  * @desc removes an object by key from a [object Array]
@@ -44,7 +45,11 @@ export default function(options) {
     const value = parseFloat(Object.values(option)[0]).toFixed(2);
 
     const listItemOption = new listOptionItem(value, dataset).render();
-    const buttonRadioOption = new ButtonRadio(title).render();
+
+
+    const model = new ButtonRadioModel(title);
+    const controller = new ButtonRadioController(model);
+    const buttonRadioOption = new ButtonRadioView(controller).render();
 
     /** get the total price from the receipt */
     const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
