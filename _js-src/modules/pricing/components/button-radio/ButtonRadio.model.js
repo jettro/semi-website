@@ -1,16 +1,9 @@
 
 export default class ButtonRadioModel {
 
-  static validate(data) {
-    if (!data.title) {
-      return 'A title is required in the model.';
-    } else {
-      return data.title;
-    }
-  }
-
-  constructor(title) {
-    this.title = ButtonRadioModel.validate({title});
+  constructor(title, useCaseKey = undefined) {
+    this._title = title;
+    this._useCaseKey = useCaseKey;
     this.description = "a description";
   }
 
@@ -18,7 +11,12 @@ export default class ButtonRadioModel {
    * @desc gets the model title
    * @returns {*}
    */
-  get modelTitle(){
-    return this.title;
+  get title(){
+    return this._title;
   };
+
+  get useCaseKey() {
+    if (this._useCaseKey !== undefined)
+      return this._useCaseKey;
+  }
 }

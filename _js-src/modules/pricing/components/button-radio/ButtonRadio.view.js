@@ -33,18 +33,20 @@ export default class ButtonRadioView {
   constructor(controller) {
     this.controller = ButtonRadioView.initialize(controller);
     this.html = htmlToElement(ButtonRadioView.htmlString());
-    this.titleElement = this.html.getElementsByClassName('ui-button__title')[0];
-    this.titleElement.innerText = this.controller.getTitle();
     this.buttonElement = this.html;
     this.buttonElement.addEventListener('click', this.controller);
+    this.titleElement = this.html.getElementsByClassName('ui-button__title')[0];
+    this.titleElement.innerText = this.controller.title;
     PubSub.subscribe('buttonClicked', (msg, button) => { this.toggleStates(msg, button) });
   }
 
   toggleStates(msg, button) {
     if (button === this.buttonElement) {
       this.html.classList.add("ui-button--active");
+      this.html.setAttribute('aria-checked', 'true');
     } else {
       this.html.classList.remove("ui-button--active");
+      this.html.setAttribute('aria-checked', 'false');
     }
   }
 
@@ -53,6 +55,8 @@ export default class ButtonRadioView {
    * @returns {Element} the radio button
    */
   render() {
+    if (this.controller.useCaseKey !== undefined)
+      this.html.dataset.useCase = this.controller.useCaseKey;
     return this.html;
   }
 }

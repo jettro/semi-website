@@ -46,7 +46,7 @@ export default function(options) {
 
     const listItemOption = new listOptionItem('0', 'multiplier').render();
 
-    const buttonModel = new ButtonRadioModel(option.title),
+    const buttonModel = new ButtonRadioModel(option.title, option.useCaseKey),
           buttonController = new ButtonRadioController(buttonModel),
           buttonView = new ButtonRadioView(buttonController);
 

@@ -16,10 +16,13 @@ export default class ButtonRadioController {
     this.model = model;
   }
 
-  getTitle() {
-    return this.model.modelTitle;
+  get title() {
+    return this.model.title;
   };
 
+  get useCaseKey() {
+    return this.model.useCaseKey;
+  }
 
   /**
    * @desc interface for the eventlistener

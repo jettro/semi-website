@@ -88,11 +88,13 @@ export default function(target, showNextChoiceHandler = undefined) {
 
   const data = pricingUseCaseData.useCases;
   const options = data.map((o) => {
+    const useCaseKey = Object.getOwnPropertyNames(o)[0];
     const title = Object.values(o)[0].title;
-    if (!title) {
-      throw new Error('You must provide a title.');
-    }
-    return { title: title };
+    if (!useCaseKey)
+      throw new Error('You must provide a use case key in the data.');
+    if (!title)
+      throw new Error('You must provide a title in the  data.');
+    return { title: title, useCaseKey: useCaseKey };
   });
 
   if (elementExists(container)) {
