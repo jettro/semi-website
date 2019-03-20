@@ -3,6 +3,15 @@ import PubSub from 'pubsub-js';
 
 export default class ButtonRadioController {
 
+  /**
+   * @desc Changes the model
+   * @param target
+   */
+  static clickHandler(target) {
+    const button = getClosest(target, 'BUTTON');
+    PubSub.publish('buttonClicked', button);
+  }
+
   constructor(model) {
     this.model = model;
   }
@@ -11,14 +20,6 @@ export default class ButtonRadioController {
     return this.model.modelTitle;
   };
 
-  /**
-   * @desc Changes the model
-   * @param target
-   */
-  clickHandler(target) {
-    const button = getClosest(target, 'BUTTON');
-    PubSub.publish('buttonClicked', button);
-  }
 
   /**
    * @desc interface for the eventlistener
@@ -28,7 +29,7 @@ export default class ButtonRadioController {
     e.stopPropagation();
     switch(e.type){
       case "click":
-        this.clickHandler(e.target);
+        ButtonRadioController.clickHandler(e.target);
         break;
       default:
         console.log(e.target);
