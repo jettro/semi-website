@@ -28,59 +28,48 @@ mainClass: wrapper--wide
                     <!-- JS adds list with list items -->
                     <div id="container-pricing-use-case"></div>
 
-                    <!--<ul class="list-ui list-buttons-radio">-->
-                        <!--{% comment %}Note: To edit this, look for the file './_data/pricingUseCases.json'{% endcomment %}-->
-                        <!--{% for useCase in site.data.pricingUseCases.useCases[0] %}-->
-                            <!--{% assign useCaseKey = useCase[0] %}-->
-                            <!--<li>-->
-                                <!--<button class="ui-button" type="button" role="radio" aria-checked="false" data-use-case="{{useCaseKey}}">-->
-                                    <!--<span class="ui-button__radio-icon"></span>-->
-                                    <!--<span class="ui-button__title">{{useCase[1].title}}</span>-->
-                                    <!--<span class="ui-button__desc">{{useCase[1].shortDesc}}</span>-->
-                                <!--</button>-->
-                            <!--</li>-->
-                        <!--{% endfor %}-->
-                    <!--</ul>-->
+                    <!-- JS adds table -->
+                    <div id="table-container"></div>
 
-                    <div id="">
-                        <div class="panel-collapse template-pricing-use-case--hidden"
-                             id="template-pricing-use-case">
-                            <div class="panel-collapse__head"
-                                 data-toggle="collapse"
-                                 data-target="collapse">
-                                <h3 class="use-case-panel-label"></h3>
-                            </div>
-                            <div class="panel-collapse__body collapse" aria-expanded="false">
-                                <div class="pricing__info">
-                                    <p class="use-case-panel-description"></p>
-                                </div>
-                                <table class="table-pricing table-zebra">
-                                    <thead>
-                                        <tr class="table-pricing__row">
-                                            <td class="table-pricing__column"><strong>Feature</strong></td>
-                                            <td class="table-pricing__column"><strong>Cost per call</strong></td>
-                                            <td class="table-pricing__column"><strong>Estimated nr. of API calls</strong></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-row-container">
-                                        <tr class="table-pricing__row template-table-pricing-row template-table-pricing-row--hidden">
-                                            <td class="table-pricing__column">
-                                                <button class="button--link feature-label"
-                                                        data-toggle="collapse"
-                                                        data-target="collapse">
-                                                </button>
-                                                <div class="collapse" aria-expanded="false">
-                                                    <p class="feature-description"></p>
-                                                </div>
-                                            </td>
-                                            <td class="table-pricing__column feature-cpc price"></td>
-                                            <td class="table-pricing__column feature-average"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div id="">-->
+                        <!--<div class="panel-collapse template-pricing-use-case&#45;&#45;hidden"-->
+                             <!--id="template-pricing-use-case">-->
+                            <!--<div class="panel-collapse__head"-->
+                                 <!--data-toggle="collapse"-->
+                                 <!--data-target="collapse">-->
+                                <!--<h3 class="use-case-panel-label"></h3>-->
+                            <!--</div>-->
+                            <!--<div class="panel-collapse__body collapse" aria-expanded="false">-->
+                                <!--<div class="pricing__info">-->
+                                    <!--<p class="use-case-panel-description"></p>-->
+                                <!--</div>-->
+                                    <!--<table class="table-pricing table-zebra">-->
+                                        <!--<thead>-->
+                                            <!--<tr class="table-pricing__row">-->
+                                                <!--<td class="table-pricing__column"><strong>Feature</strong></td>-->
+                                                <!--<td class="table-pricing__column"><strong>Cost per call</strong></td>-->
+                                                <!--<td class="table-pricing__column"><strong>Estimated nr. of API calls</strong></td>-->
+                                            <!--</tr>-->
+                                        <!--</thead>-->
+                                        <!--<tbody class="table-row-container">-->
+                                            <!--<tr class="table-pricing__row template-table-pricing-row template-table-pricing-row&#45;&#45;hidden">-->
+                                                <!--<td class="table-pricing__column">-->
+                                                    <!--<button class="button&#45;&#45;link feature-label"-->
+                                                            <!--data-toggle="collapse"-->
+                                                            <!--data-target="collapse">-->
+                                                    <!--</button>-->
+                                                    <!--<div class="collapse" aria-expanded="false">-->
+                                                        <!--<p class="feature-description"></p>-->
+                                                    <!--</div>-->
+                                                <!--</td>-->
+                                                <!--<td class="table-pricing__column feature-cpc price"></td>-->
+                                                <!--<td class="table-pricing__column feature-average"></td>-->
+                                            <!--</tr>-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </fieldset>
 
                 <fieldset class="form-stepper__step form-stepper__step--hide" data-step="hosting-preference" role="radiogroup" aria-labelledby="label-hosting-preference">

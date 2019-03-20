@@ -50,6 +50,13 @@ export default function(options) {
           buttonController = new ButtonRadioController(buttonModel),
           buttonView = new ButtonRadioView(buttonController);
 
+    let template = document.createElement('template');
+    template.insertAdjacentElement('beforeend', listItemOption);
+    let [li] = template.getElementsByTagName('LI');
+    li.insertAdjacentElement('beforeend', buttonView.render());
+
+    optionsListItemButtonMap.set(i, li);
+
     /** get the total price from the receipt */
     // const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
 
@@ -72,12 +79,7 @@ export default function(options) {
     //
     // }, false);
 
-    let template = document.createElement('template');
-    template.insertAdjacentElement('beforeend', listItemOption);
-    let [li] = template.getElementsByTagName('LI');
-    li.insertAdjacentElement('beforeend', buttonView.render());
 
-    optionsListItemButtonMap.set(i, li);
   });
 
   return optionsListItemButtonMap;

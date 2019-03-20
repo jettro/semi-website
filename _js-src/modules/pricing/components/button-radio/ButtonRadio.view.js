@@ -11,7 +11,7 @@ export default class ButtonRadioView {
    */
   static initialize(controller) {
     if (!controller) {
-      throw new Error('You must provide a ButtonRadioModel.');
+      throw new Error('You must provide a ButtonRadioController.');
     }
     return controller;
   }

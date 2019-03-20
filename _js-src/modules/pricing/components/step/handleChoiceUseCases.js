@@ -8,6 +8,15 @@ import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
 import { ListOptions } from '../list-options';
 
+import { setVariableMonthlyCost, reCalculateTotal } from '../../components/receipt/pricingReceipt';
+
+import { TableController, TableModel, TableView } from '../table/table';
+import { TableHeadController, TableHeadModel, TableHeadView } from '../table/table-head';
+import { TableBodyController, TableBodyModel, TableBodyView } from '../table/table-body';
+import { TableRowController, TableRowModel, TableRowView } from '../table/table-row';
+
+const merge = require('lodash.merge');
+
 // /**
 //  * @desc calculates the total cost of the use-cases
 //  * @param containerElement {HTMLElement} The element containing all the pricing rows
@@ -104,55 +113,83 @@ export default function(target, showNextChoiceHandler = undefined) {
     /** insert list with buttons to container */
     container.insertAdjacentElement('beforeend', listOptionsElement);
 
-    // let doCalculationOn;
-    // const panels = container.getElementsByClassName(pricingConfig.panelsClassName);
-    // /** hide the other panels if it's not the use-case that's clicked */
-    // toggleUseCasePanels(panels, useCaseKey, function(panelContainer) {
-    //   [doCalculationOn] = panelContainer.getElementsByClassName('table-row-container');
-    // });
-    //
-    // if (panelDoesNotExist(panels, useCaseKey)) {
-    //   /** the panel doesn't exist, create it */
-    //   generateUseCaseTable(
-    //     useCaseKey,
-    //     pricingConfig.pricingInfoTableContainerClassName,
-    //     pricingConfig.pricingRowTemplateClassName,
-    //     pricingConfig.pricingInfoTemplateId,
-    //     function(tableRowContainer) {
-    //       doCalculationOn = tableRowContainer;
-    //     },
-    //   );
-    // }
-    //
-    // if (doCalculationOn) {
-    //   // TODO: maybe add pricingReceipt.setVariableMonthlyCost() as scoped function
-    //   const total = calcTotalCostUseCases(doCalculationOn);
-    //   setVariableMonthlyCost(total);
-    //   /** recalculate the total */
-    //   reCalculateTotal();
-    // }
+    /** when a button is clicked, show the table */
+    PubSub.subscribe('buttonClicked', (msg, button) => {
+
+      const tableModel = new TableModel(),
+        tableController = new TableController(tableModel),
+        tableView = new TableView(tableController);
+
+      const tableHeadModel = new TableHeadModel(),
+        tableHeadController = new TableHeadController(tableHeadModel),
+        tableHeadView = new TableHeadView(tableHeadController);
+
+      const tableBodyModel = new TableBodyModel(),
+        tableBodyController = new TableBodyController(tableBodyModel),
+        tableBodyView = new TableBodyView(tableBodyController);
+
+      const filterUseCase = Object.assign({}, ...pricingUseCaseData.useCases);
+      const pricingUseCase = filterUseCase[button.dataset.useCase];
+
+      const useCaseLabels = pricingUseCaseData.cpcLabels;
+      const consumptions = pricingUseCase.consumptions;
+
+      const tableContainer = document.getElementById('table-container');
+      tableContainer.insertAdjacentElement('beforeend', tableView.render());
+      const [table] = tableContainer.getElementsByTagName('TABLE');
+      table.insertAdjacentElement('beforeend', tableHeadView.render());
+      table.insertAdjacentElement('beforeend', tableBodyView.render());
+      const [tableBody] = tableContainer.getElementsByTagName('TBODY');
+
+      const rowOptions = merge(useCaseLabels, consumptions);
+      rowOptions.forEach((option) => {
+        const tableRowModel = new TableRowModel(option.title, option.desc, option.cpc, option.average),
+          tableRowController = new TableRowController(tableRowModel),
+          tableRowView = new TableRowView(tableRowController);
+
+        tableBody.insertAdjacentElement('beforeend', tableRowView.render());
+      });
+
+
+
+
+      // TODO: ...
+
+      // button.dataset.useCase
+      // setVariableMonthlyCost();
+
+      // let doCalculationOn;
+      // const panels = container.getElementsByClassName(pricingConfig.panelsClassName);
+      // /** hide the other panels if it's not the use-case that's clicked */
+      // toggleUseCasePanels(panels, useCaseKey, function(panelContainer) {
+      //   [doCalculationOn] = panelContainer.getElementsByClassName('table-row-container');
+      // });
+      //
+      // if (panelDoesNotExist(panels, useCaseKey)) {
+      //   /** the panel doesn't exist, create it */
+      //   generateUseCaseTable(
+      //     useCaseKey,
+      //     pricingConfig.pricingInfoTableContainerClassName,
+      //     pricingConfig.pricingRowTemplateClassName,
+      //     pricingConfig.pricingInfoTemplateId,
+      //     function(tableRowContainer) {
+      //       doCalculationOn = tableRowContainer;
+      //     },
+      //   );
+      // }
+      //
+      // if (doCalculationOn) {
+      //   // TODO: maybe add pricingReceipt.setVariableMonthlyCost() as scoped function
+      //   const total = calcTotalCostUseCases(doCalculationOn);
+      //   setVariableMonthlyCost(total);
+      //   /** recalculate the total */
+      //   reCalculateTotal();
+      // }
+
+      showNextChoiceHandler();
+    });
 
   } else {
     console.info(`There is no pricing info container with the id ${container}`);
   }
-
-  // target.addEventListener('click', e => {
-  //   e.preventDefault();
-  //
-  //   /** Logic for the radio buttons*/
-  //   formPricingRadioButtons(e, target, function() {
-  //     const button = selectClickedElementByType(e, 'BUTTON');
-  //     if (elementExists(button)) {
-  //       const useCaseKey = button.dataset.useCase;
-  //       const useCaseKeyExists = useCaseKey !== '';
-  //       if (useCaseKeyExists) {
-  //         showUseCasePricing(useCaseKey);
-  //       }
-  //     }
-  //   });
-  // });
-
-  PubSub.subscribe('buttonClicked', () => {
-    showNextChoiceHandler();
-  });
 }

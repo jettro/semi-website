@@ -19,6 +19,7 @@
     "file-loader": "^3.0.1",
     "html-minifier": "^3.5.20",
     "jsdom": "^14.0.0",
+    "lodash.merge": "^4.6.1",
     "mini-css-extract-plugin": "^0.5.0",
     "mocha": "^6.0.2",
     "node-sass": "^4.11.0",
