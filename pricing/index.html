@@ -20,27 +20,29 @@ mainClass: wrapper--wide
     <div class="layout layout-app layout--height-uneven">
         <div class="layout__content container">
             <form id="js-form-pricing" class="form-stepper">
-                <fieldset id="use-case" class="form-stepper__step form-stepper-bottom-margin" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
+                <fieldset class="form-stepper__step form-stepper-bottom-margin" data-step="use-case" role="radiogroup" aria-labelledby="label-use-case">
                     <legend>
                         <h2 id="label-use-case">Use case selection</h2>
                         <p>What are you using Weaviate for? Select the use case that best describes your situation.</p>
                     </legend>
+                    <!-- JS adds list with list items -->
+                    <div id="container-pricing-use-case"></div>
 
-                    <ul class="list-ui list-buttons-radio">
-                        {% comment %}Note: To edit this, look for the file './_data/pricingUseCases.json'{% endcomment %}
-                        {% for useCase in site.data.pricingUseCases.useCases[0] %}
-                            {% assign useCaseKey = useCase[0] %}
-                            <li>
-                                <button class="ui-button" type="button" role="radio" aria-checked="false" data-use-case="{{useCaseKey}}">
-                                    <span class="ui-button__radio-icon"></span>
-                                    <span class="ui-button__title">{{useCase[1].title}}</span>
-                                    <span class="ui-button__desc">{{useCase[1].shortDesc}}</span>
-                                </button>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    <!--<ul class="list-ui list-buttons-radio">-->
+                        <!--{% comment %}Note: To edit this, look for the file './_data/pricingUseCases.json'{% endcomment %}-->
+                        <!--{% for useCase in site.data.pricingUseCases.useCases[0] %}-->
+                            <!--{% assign useCaseKey = useCase[0] %}-->
+                            <!--<li>-->
+                                <!--<button class="ui-button" type="button" role="radio" aria-checked="false" data-use-case="{{useCaseKey}}">-->
+                                    <!--<span class="ui-button__radio-icon"></span>-->
+                                    <!--<span class="ui-button__title">{{useCase[1].title}}</span>-->
+                                    <!--<span class="ui-button__desc">{{useCase[1].shortDesc}}</span>-->
+                                <!--</button>-->
+                            <!--</li>-->
+                        <!--{% endfor %}-->
+                    <!--</ul>-->
 
-                    <div id="container-pricing-use-case">
+                    <div id="">
                         <div class="panel-collapse template-pricing-use-case--hidden"
                              id="template-pricing-use-case">
                             <div class="panel-collapse__head"
@@ -106,7 +108,7 @@ mainClass: wrapper--wide
                     <fieldset class="form-stepper__step form-stepper__step--hide form-stepper__step--child" data-step="hosting-semi-preference-platform" role="radiogroup" aria-labelledby="label-hosting-preference-platform">
                         <legend>
                             <h2 id="label-hosting-preference-platform">Hosting Platform</h2>
-                            <p>Do you have a platform preference regargin the hosting?</p>
+                            <p>Do you have a platform preference regarding the hosting?</p>
                         </legend>
                         <!-- JS adds list with list items -->
                         <div id="container-pricing-platform"></div>

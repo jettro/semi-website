@@ -10,11 +10,10 @@ import { setHostingCluster } from '../receipt/pricingReceipt';
 
 export default function(target, callback) {
   const container = document.getElementById(pricingConfig.pricingClusterContainerId);
-  const template = document.getElementById(pricingConfig.pricingClusterTemplateId);
   const options = pricingUseCaseData.clusters;
 
   /** Append all the cost buttons to the cluster container */
-  createListItems(options, template).forEach(item => {
+  createListItems(options).forEach(item => {
     container.appendChild(item);
   });
 

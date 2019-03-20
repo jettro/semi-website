@@ -5,12 +5,11 @@
 export default {
   'formId': 'js-form-pricing',
   'panelsClassName': 'panel-collapse',
+  'pricingInfoContainerId': 'container-pricing-use-case',
   'pricingOptimizationContainerId': 'container-pricing-optimization',
   'pricingPlatformContainerId': 'container-pricing-platform',
   'pricingCustomerPlatformContainerId': 'container-pricing-customer',
   '':'',
-  'pricingInfoContainerId': 'container-pricing-use-case',
-  'pricingInfoTemplateId': 'template-pricing-use-case',
   'pricingInfoTableContainerClassName': 'table-row-container',
   'pricingRowTemplateClassName': 'template-table-pricing-row',
   'pricingClusterContainerId': 'container-pricing-cluster-button',

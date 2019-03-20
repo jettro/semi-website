@@ -36,48 +36,46 @@ export function removeObjectByKeyFromArray(object, objectKey) {
 export default function(options) {
   const optionsListItemButtonMap = new Map();
 
-  const hasConfig = options[0].hasOwnProperty('config');
-  const isFixedPrice = (hasConfig) ? options[0]['config']['fixed'] === true : '';
-  const dataset = (isFixedPrice) ? 'subTotal' : 'multiplier';
+  // const hasConfig = options[0].hasOwnProperty('config');
+  // const isFixedPrice = (hasConfig) ? options[0]['config']['fixed'] === true : '';
+  // const dataset = (isFixedPrice) ? 'subTotal' : 'multiplier';
 
   removeObjectByKeyFromArray(options, 'config').forEach((option, i) => {
-    const title = Object.keys(option)[0];
-    const value = parseFloat(Object.values(option)[0]).toFixed(2);
 
-    const listItemOption = new listOptionItem(value, dataset).render();
+    // const value = parseFloat(Object.values(option)[0]).toFixed(2);
 
+    const listItemOption = new listOptionItem('0', 'multiplier').render();
 
-    const model = new ButtonRadioModel(title);
-    const controller = new ButtonRadioController(model);
-    const buttonRadioOption = new ButtonRadioView(controller).render();
+    const buttonModel = new ButtonRadioModel(option.title),
+          buttonController = new ButtonRadioController(buttonModel),
+          buttonView = new ButtonRadioView(buttonController);
 
     /** get the total price from the receipt */
-    const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
+    // const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
 
-    buttonRadioOption.addEventListener('button-radio-clicked', function (e) {
-      e.preventDefault();
-
-      // TODO: optional remove dataset from the parent li, but set it on the button instead
-
-      /** target parent element, since data set needs to be set on parent li rather than button */
-      const multiplier = e.currentTarget.parentElement.dataset.multiplier;
-      const multiplierExists = multiplier !== '';
-      if (multiplierExists) {
-        setHostingAdjustment(totalUseCasePrice.textContent, multiplier);
-      } else {
-        console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
-      }
-
-      const parentFieldset = getClosest(e.target, 'fieldset');
-      PubSub.publish('hostingChoiceMade', parentFieldset.dataset.step);
-
-    }, false);
-
+    // buttonRadioOption.addEventListener('button-radio-clicked', function (e) {
+    //   e.preventDefault();
+    //
+    //   // TODO: optional remove dataset from the parent li, but set it on the button instead
+    //
+    //   /** target parent element, since data set needs to be set on parent li rather than button */
+    //   const multiplier = e.currentTarget.parentElement.dataset.multiplier;
+    //   const multiplierExists = multiplier !== '';
+    //   if (multiplierExists) {
+    //     setHostingAdjustment(totalUseCasePrice.textContent, multiplier);
+    //   } else {
+    //     console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
+    //   }
+    //
+    //   const parentFieldset = getClosest(e.target, 'fieldset');
+    //   PubSub.publish('hostingChoiceMade', parentFieldset.dataset.step);
+    //
+    // }, false);
 
     let template = document.createElement('template');
     template.insertAdjacentElement('beforeend', listItemOption);
     let [li] = template.getElementsByTagName('LI');
-    li.insertAdjacentElement('beforeend', buttonRadioOption);
+    li.insertAdjacentElement('beforeend', buttonView.render());
 
     optionsListItemButtonMap.set(i, li);
   });

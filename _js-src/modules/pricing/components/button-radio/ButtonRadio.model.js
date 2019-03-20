@@ -13,4 +13,12 @@ export default class ButtonRadioModel {
     this.title = ButtonRadioModel.validate({title});
     this.description = "a description";
   }
+
+  /**
+   * @desc gets the model title
+   * @returns {*}
+   */
+  get modelTitle(){
+    return this.title;
+  };
 }

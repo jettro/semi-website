@@ -1,3 +1,5 @@
+import { getClosest } from '../../../../helpers/helpers';
+import PubSub from 'pubsub-js';
 
 export default class ButtonRadioController {
 
@@ -5,22 +7,18 @@ export default class ButtonRadioController {
     this.model = model;
   }
 
+  getTitle() {
+    return this.model.modelTitle;
+  };
+
   /**
    * @desc Changes the model
    * @param target
    */
-  clickHandler(target){
-    this.model.title = 'World';
-    target.innerText = this.getModelTitle();
+  clickHandler(target) {
+    const button = getClosest(target, 'BUTTON');
+    PubSub.publish('buttonClicked', button);
   }
-
-  /**
-   * @desc gets the model title
-   * @returns {*}
-   */
-  getModelTitle(){
-    return this.model.title;
-  };
 
   /**
    * @desc interface for the eventlistener

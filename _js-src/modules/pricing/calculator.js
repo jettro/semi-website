@@ -49,6 +49,8 @@ import { setFixedCostPrice } from './components/receipt/pricingReceipt';
       const fieldsetContextionaries = getChoiceFieldset(fieldSets, 'contextionaries');
       const fieldsetWeaviates = getChoiceFieldset(fieldSets, 'weaviates');
       const fieldsetNetworkNodes = getChoiceFieldset(fieldSets, 'network-nodes');
+      const fieldsetShowClass = 'form-stepper__step--show';
+      const fieldsetHideClass = 'form-stepper__step--hide';
       let weaviatePrice = '0';
       let nodeNetworksPrice = '0';
 
@@ -57,8 +59,10 @@ import { setFixedCostPrice } from './components/receipt/pricingReceipt';
       /** first fieldset, use cases */
       handleChoiceUseCases(fieldsetUseCase, function() {
         const nextFieldset = getChoiceFieldset(fieldSets, 'hosting-preference');
-        nextFieldset.classList.remove('form-stepper__step--hide');
-        nextFieldset.classList.add('form-stepper__step--show');
+        if (nextFieldset.classList.contains(fieldsetHideClass)) {
+          nextFieldset.classList.remove(fieldsetHideClass);
+          nextFieldset.classList.add(fieldsetShowClass);
+        }
       });
 
       /** second fieldset, hosting preference */

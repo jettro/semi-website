@@ -1,5 +1,7 @@
 import { htmlToElement } from '../../../../helpers/helpers';
 
+import PubSub from 'pubsub-js';
+
 export default class ButtonRadioView {
 
   /**
@@ -9,7 +11,7 @@ export default class ButtonRadioView {
    */
   static initialize(controller) {
     if (!controller) {
-      throw new Error('You must provide a ButtonRadioController.');
+      throw new Error('You must provide a ButtonRadioModel.');
     }
     return controller;
   }
@@ -32,6 +34,18 @@ export default class ButtonRadioView {
     this.controller = ButtonRadioView.initialize(controller);
     this.html = htmlToElement(ButtonRadioView.htmlString());
     this.titleElement = this.html.getElementsByClassName('ui-button__title')[0];
+    this.titleElement.innerText = this.controller.getTitle();
+    this.buttonElement = this.html;
+    this.buttonElement.addEventListener('click', this.controller);
+    PubSub.subscribe('buttonClicked', (msg, button) => { this.toggleStates(msg, button) });
+  }
+
+  toggleStates(msg, button) {
+    if (button === this.buttonElement) {
+      this.html.classList.add("ui-button--active");
+    } else {
+      this.html.classList.remove("ui-button--active");
+    }
   }
 
   /**
@@ -39,8 +53,6 @@ export default class ButtonRadioView {
    * @returns {Element} the radio button
    */
   render() {
-    this.titleElement.innerText = this.controller.getModelTitle();
-    this.titleElement.addEventListener('click', this.controller);
     return this.html;
   }
 }
