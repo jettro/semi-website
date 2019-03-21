@@ -56,36 +56,31 @@ const merge = require('lodash.merge');
 //   return true;
 // };
 //
-// /**
-//  * @desc toggle the existing panels based on use-case key
-//  * @param panels {object} the panels that exist on the page
-//  * @param currentUseCaseKey {string} The current use case key to compare
-//  */
-// const toggleUseCasePanels = function(panels, currentUseCaseKey, callback) {
-//   const showPanelClass = 'template-pricing-use-case--show';
-//   const hidePanelClass = 'template-pricing-use-case--hidden';
-//
-//   if (typeof currentUseCaseKey === 'undefined') {
-//     console.info(`The use case key hasn't been defined.`);
-//   }
-//   Array.from(panels).forEach(panel => {
-//     const notAUseCasePanel = typeof panel.dataset.useCase === 'undefined';
-//     const currentPanel = panel.dataset.useCase === currentUseCaseKey;
-//     const notCurrentPanel = panel.dataset.useCase !== currentUseCaseKey;
-//     if (notAUseCasePanel) {
-//       return;
-//     }
-//     if (currentPanel) {
-//       panel.classList.add(showPanelClass);
-//       panel.classList.remove(hidePanelClass);
-//       callback(panel);
-//     }
-//     if (notCurrentPanel) {
-//       panel.classList.add(hidePanelClass);
-//       panel.classList.remove(showPanelClass);
-//     }
-//   });
-// };
+
+
+/**
+ * @desc toggle the existing panels based on use-case key
+ * @param panels {object} the panels that exist on the page
+ * @param currentUseCaseKey {string} The current use case key to compare
+ */
+const toggleUseCasePanels = function(panels, currentUseCaseKey) {
+  const showPanelClass = 'template-pricing-use-case--show';
+  const hidePanelClass = 'template-pricing-use-case--hidden';
+  if (typeof currentUseCaseKey === 'undefined') {
+    console.info(`The use case key hasn't been defined.`);
+  }
+  Array.from(panels).forEach(panel => {
+    const currentPanel = panel.dataset.useCase === currentUseCaseKey;
+    const notCurrentPanel = panel.dataset.useCase !== currentUseCaseKey;
+    if (currentPanel) {
+      panel.classList.add(showPanelClass);
+      panel.classList.remove(hidePanelClass);
+    } else if (notCurrentPanel) {
+      panel.classList.add(hidePanelClass);
+      panel.classList.remove(showPanelClass);
+    }
+  });
+};
 
 
 /**
@@ -94,9 +89,8 @@ const merge = require('lodash.merge');
  * @param showNextChoiceHandler
  */
 export default function(target, showNextChoiceHandler = undefined) {
-
+  let existingPanelKeys = [];
   const container = document.getElementById(pricingConfig.pricingInfoContainerId);
-
   const data = pricingUseCaseData.useCases;
   const options = data.map((o) => {
     const useCaseKey = Object.getOwnPropertyNames(o)[0];
@@ -115,57 +109,74 @@ export default function(target, showNextChoiceHandler = undefined) {
     /** insert list with buttons to container */
     container.insertAdjacentElement('beforeend', listOptionsElement);
 
-    /** when a button is clicked, show the table */
+    /** when a radio button in the list is clicked, show the table in an expansion panel */
     PubSub.subscribe('buttonClicked', (msg, button) => {
 
       const flattenedUseCaseData = Object.assign({}, ...data);
       const singleUseCase = flattenedUseCaseData[button.dataset.useCase];
 
-      const useCaseLabels = pricingUseCaseData.cpcLabels;
-      const consumptions = singleUseCase.consumptions;
+      /**
+       * Toggle the panels
+       */
+      const panels = document.getElementsByClassName('panel-collapse');
+      toggleUseCasePanels(panels, button.dataset.useCase);
 
-      const tableModel = new TableModel(),
-            tableController = new TableController(tableModel),
-            tableView = new TableView(tableController);
+      const panelAlreadyExists = existingPanelKeys.includes(button.dataset.useCase);
+      if (!panelAlreadyExists) {
+        /**
+         * When the expansion panel with table does not exist, create it
+         */
+        existingPanelKeys.push(button.dataset.useCase);
 
-      const tableHeadModel = new TableHeadModel(),
-            tableHeadController = new TableHeadController(tableHeadModel),
-            tableHeadView = new TableHeadView(tableHeadController);
+        const useCaseLabels = pricingUseCaseData.cpcLabels;
+        const consumptions = singleUseCase.consumptions;
 
-      const tableBodyModel = new TableBodyModel(),
-            tableBodyController = new TableBodyController(tableBodyModel),
-            tableBodyView = new TableBodyView(tableBodyController);
+        const tableModel = new TableModel(),
+          tableController = new TableController(tableModel),
+          tableView = new TableView(tableController);
 
-      const expansionPanelHeadModel = new ExpansionPanelHeadModel(singleUseCase.panelLabel),
-            expansionPanelHeadController = new ExpansionPanelHeadController(expansionPanelHeadModel),
-            expansionPanelHeadView = new ExpansionPanelHeadView(expansionPanelHeadController);
+        const tableHeadModel = new TableHeadModel(),
+          tableHeadController = new TableHeadController(tableHeadModel),
+          tableHeadView = new TableHeadView(tableHeadController);
 
-      const expansionPanelBodyModel = new ExpansionPanelBodyModel(),
-            expansionPanelBodyController = new ExpansionPanelBodyController(expansionPanelBodyModel),
-             expansionPanelBodyView = new ExpansionPanelBodyView(expansionPanelBodyController);
+        const tableBodyModel = new TableBodyModel(),
+          tableBodyController = new TableBodyController(tableBodyModel),
+          tableBodyView = new TableBodyView(tableBodyController);
 
-      const expansionContainer = document.getElementById('panel-collapse');
-      expansionContainer.insertAdjacentElement('beforeend', expansionPanelHeadView.render());
-      expansionContainer.insertAdjacentElement('beforeend', expansionPanelBodyView.render());
-      const [collapseBodyElement] = document.getElementsByClassName('panel-collapse__body');
+        const expansionPanelHeadModel = new ExpansionPanelHeadModel(singleUseCase.panelLabel),
+          expansionPanelHeadController = new ExpansionPanelHeadController(expansionPanelHeadModel),
+          expansionPanelHeadView = new ExpansionPanelHeadView(expansionPanelHeadController);
 
-      collapseBodyElement.insertAdjacentElement('beforeend', tableView.render());
-      const [table] = collapseBodyElement.getElementsByTagName('TABLE');
-      table.insertAdjacentElement('beforeend', tableHeadView.render());
-      table.insertAdjacentElement('beforeend', tableBodyView.render());
-      const [tableBody] = collapseBodyElement.getElementsByTagName('TBODY');
+        const expansionPanelBodyModel = new ExpansionPanelBodyModel(),
+          expansionPanelBodyController = new ExpansionPanelBodyController(expansionPanelBodyModel),
+          expansionPanelBodyView = new ExpansionPanelBodyView(expansionPanelBodyController);
 
-      const useCaseConsumptions = merge(useCaseLabels, consumptions);
+        const expansionPanelContainer = document.getElementById('panel-collapse-container');
+        const expansionPanel = document.createElement('DIV');
+        expansionPanel.classList.add('panel-collapse');
+        expansionPanel.dataset.useCase = button.dataset.useCase;
+        expansionPanelContainer.insertAdjacentElement('beforeend', expansionPanel);
+        expansionPanel.insertAdjacentElement('beforeend', expansionPanelHeadView.render());
+        expansionPanel.insertAdjacentElement('beforeend', expansionPanelBodyView.render());
 
-      /** create a row for each consumption in a use case and add it in the body */
-      useCaseConsumptions.forEach((option) => {
-        const tableRowModel = new TableRowModel(option.title, option.desc, option.cpc, option.average),
-              tableRowController = new TableRowController(tableRowModel),
-              tableRowView = new TableRowView(tableRowController);
+        const collapseBodyElement = expansionPanel.querySelector('.panel-collapse__body');
+        collapseBodyElement.insertAdjacentElement('beforeend', tableView.render());
+        const [table] = collapseBodyElement.getElementsByTagName('TABLE');
+        table.insertAdjacentElement('beforeend', tableHeadView.render());
+        table.insertAdjacentElement('beforeend', tableBodyView.render());
+        const [tableBody] = collapseBodyElement.getElementsByTagName('TBODY');
 
-        tableBody.insertAdjacentElement('beforeend', tableRowView.render());
-      });
+        const useCaseConsumptions = merge(useCaseLabels, consumptions);
 
+        /** create a row for each consumption in a use case and add it in the body */
+        useCaseConsumptions.forEach((option) => {
+          const tableRowModel = new TableRowModel(option.title, option.desc, option.cpc, option.average),
+            tableRowController = new TableRowController(tableRowModel),
+            tableRowView = new TableRowView(tableRowController);
+
+          tableBody.insertAdjacentElement('beforeend', tableRowView.render());
+        });
+      }
 
 
       // TODO: ...
