@@ -118,7 +118,7 @@ export default function(target, showNextChoiceHandler = undefined) {
     /** when a button is clicked, show the table */
     PubSub.subscribe('buttonClicked', (msg, button) => {
 
-      const flattenedUseCaseData = Object.assign({}, ...pricingUseCaseData.useCases);
+      const flattenedUseCaseData = Object.assign({}, ...data);
       const singleUseCase = flattenedUseCaseData[button.dataset.useCase];
 
       const useCaseLabels = pricingUseCaseData.cpcLabels;
@@ -149,7 +149,6 @@ export default function(target, showNextChoiceHandler = undefined) {
       expansionContainer.insertAdjacentElement('beforeend', expansionPanelBodyView.render());
       const [collapseBodyElement] = document.getElementsByClassName('panel-collapse__body');
 
-      // const tableContainer = document.getElementById('table-container');
       collapseBodyElement.insertAdjacentElement('beforeend', tableView.render());
       const [table] = collapseBodyElement.getElementsByTagName('TABLE');
       table.insertAdjacentElement('beforeend', tableHeadView.render());
