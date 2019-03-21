@@ -18,7 +18,7 @@ export default class TableRowView {
    * @returns {string} the button html element as a string
    */
   static htmlString() {
-    return `<tr class="table-pricing__row template-table-pricing-row">
+    return `<tr class="table-pricing__row">
                <td class="table-pricing__column">
                    <button class="button--link feature-label"
                            data-toggle="collapse"
@@ -40,11 +40,12 @@ export default class TableRowView {
     this.controller = TableRowView.initialize(controller);
     this.html = htmlToElement(TableRowView.htmlString());
     this.tableRow = this.html;
+    this.tableRow.dataset.subTotal = this.controller.subTotal;
     this.tableRowcells = this.html.getElementsByTagName('TD');
     this.tableRowcells[0].getElementsByTagName('BUTTON')[0].innerText = this.controller.tableRowCel1ButtonText;
     this.tableRowcells[0].getElementsByClassName('feature-description')[0].innerText = this.controller.tableRowCel1Description;
-    this.tableRowcells[1].innerText = this.controller.tableRowCel2;
-    this.tableRowcells[2].innerText = this.controller.tableRowCel3;
+    this.tableRowcells[1].innerText = this.controller.cpc;
+    this.tableRowcells[2].innerText = this.controller.averageCalls;
   }
 
   /**

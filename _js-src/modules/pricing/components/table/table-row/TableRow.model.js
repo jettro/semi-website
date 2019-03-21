@@ -1,11 +1,18 @@
 
 export default class TableRowModel {
 
-  constructor(cel1buttonText, cel1description, cel2content, cel3content) {
+  static calculateSubTotal(cpc, averageCalls) {
+    const cpcDigits = 3;
+    const callsDigits = 2;
+    return parseFloat(cpc).toFixed(cpcDigits) * parseFloat(averageCalls).toFixed(callsDigits);
+  };
+
+  constructor(cel1buttonText, cel1description, cpc, averageCalls) {
     this._tableRowCel1ButtonText = cel1buttonText;
     this._tableRowCel1Description = cel1description;
-    this._tableRowCel2 = cel2content;
-    this._tableRowCel3 = cel3content;
+    this._cpc = cpc;
+    this._averageCalls = averageCalls;
+    this._tableRowSubTotal = TableRowModel.calculateSubTotal(this._cpc, this._averageCalls);
   }
 
   get tableRowCel1ButtonText(){
@@ -16,11 +23,15 @@ export default class TableRowModel {
     return this._tableRowCel1Description;
   };
 
-  get tableRowCel2(){
-    return this._tableRowCel2;
+  get cpc(){
+    return this._cpc;
   };
 
-  get tableRowCel3(){
-    return this._tableRowCel3;
+  get averageCalls(){
+    return this._averageCalls;
   };
+
+  get subTotal(){
+    return this._tableRowSubTotal;
+  }
 }

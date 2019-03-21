@@ -13,10 +13,15 @@ export default class TableRowController {
     return this.model.tableRowCel1Description;
   }
 
-  get tableRowCel2() {
-    return this.model.tableRowCel2;
+  get cpc() {
+    return this.model.cpc;
   }
-  get tableRowCel3() {
-    return this.model.tableRowCel3;
+
+  get averageCalls() {
+    return this.model.averageCalls;
+  }
+
+  get subTotal() {
+    return this.model.subTotal;
   }
 }

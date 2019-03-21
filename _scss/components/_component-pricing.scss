@@ -2,17 +2,13 @@
 @import '../variables/var-borders';
 @import '../variables/var-scale';
 
-.template-pricing-use-case--hidden,
-.template-table-pricing-row--hidden {
+.panel-pricing-use-case--hidden,
+.table-pricing-row--hidden {
   display: none;
 }
 
-.template-pricing-use-case--show {
+.pricing-use-case--show {
   display: flex;
-}
-
-.template-table-pricing-row--visible {
-  display: table-row;
 }
 
 .price,

@@ -2,7 +2,7 @@ import selectClickedElementByType from '../../common/selectClickedElementByType'
 import { getClosest, elementExists } from '../../../../helpers/helpers';
 import getChoiceFieldset from '../../common/getChoiceFieldset';
 import formPricingRadioButtons from '../../common/formPricingRadioButtons';
-import { setHostingAdjustment } from '../receipt/pricingReceipt';
+import { setHostingAdjustment } from '../receipt/pricingReceiptFunctions';
 import createListItems from '../../common/createListItems';
 import { addCollapseTriggers } from '../../../collapse';
 

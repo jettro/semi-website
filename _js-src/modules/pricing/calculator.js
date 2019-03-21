@@ -7,7 +7,7 @@ import handleChoiceClusters from './components/step/handleChoiceClusters';
 import handleChoiceContextionaries from './components/step/handleChoiceContextionaries';
 import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
 import handleChoiceNetworkNodes from './components/step/handleChoiceNetworkNodes';
-import { setFixedCostPrice } from './components/receipt/pricingReceipt';
+import { setFixedCostPrice } from './components/receipt/pricingReceiptFunctions';
 
 (function(factory) {
 

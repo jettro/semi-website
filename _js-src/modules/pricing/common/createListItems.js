@@ -1,7 +1,7 @@
 import listOptionItem from '../components/list-option-item/ListOptionItem';
 import pricingConfig from '../pricingConfig';
 import { getClosest } from '../../../helpers/helpers';
-import { setHostingAdjustment } from '../components/receipt/pricingReceipt';
+import { setHostingAdjustment } from '../components/receipt/pricingReceiptFunctions';
 import PubSub from 'pubsub-js';
 
 import { ButtonRadioModel, ButtonRadioController, ButtonRadioView } from '../components/button-radio';

@@ -6,7 +6,7 @@ import pricingConfig from '../../pricingConfig';
 import formPricingRadioButtons from '../../common/formPricingRadioButtons';
 import selectClickedElementByType from '../../common/selectClickedElementByType';
 import { addEventListenerOnce, elementExists } from '../../../../helpers/helpers';
-import { setHostingCluster } from '../receipt/pricingReceipt';
+import { setHostingCluster } from '../receipt/pricingReceiptFunctions';
 
 export default function(target, callback) {
   const container = document.getElementById(pricingConfig.pricingClusterContainerId);

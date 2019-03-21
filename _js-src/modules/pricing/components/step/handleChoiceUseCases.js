@@ -1,14 +1,11 @@
-import { addEventListenerOnce, elementExists } from '../../../../helpers/helpers';
-import selectClickedElementByType from '../../common/selectClickedElementByType';
-import createListItems from '../../common/createListItems';
-
 import PubSub from 'pubsub-js';
 
+import { isNumber, elementExists } from '../../../../helpers/helpers';
+import { setVariableMonthlyCost, reCalculateTotal } from '../../components/receipt/pricingReceiptFunctions';
+import createListItems from '../../common/createListItems';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
 import { ListOptions } from '../list-options';
-
-import { setVariableMonthlyCost, reCalculateTotal } from '../../components/receipt/pricingReceipt';
 
 import { TableController, TableModel, TableView } from '../table/table';
 import { TableHeadController, TableHeadModel, TableHeadView } from '../table/table-head';
@@ -19,44 +16,25 @@ import { ExpansionPanelBodyController, ExpansionPanelBodyModel, ExpansionPanelBo
 
 const merge = require('lodash.merge');
 
-// /**
-//  * @desc calculates the total cost of the use-cases
-//  * @param containerElement {HTMLElement} The element containing all the pricing rows
-//  * @returns {number} the calculated total number
-//  */
-// const calcTotalCostUseCases =  function(containerElement) {
-//   const tableRows = containerElement.getElementsByClassName('table-pricing__row');
-//   let useCaseTotal = 0;
-//   for (let row of tableRows) {
-//     if (typeof row.dataset.subTotal !== 'undefined' && isNumber(row.dataset.subTotal)) {
-//       const useCaseSubTotal = row.dataset.subTotal;
-//       useCaseTotal += parseInt(useCaseSubTotal);
-//     }
-//   }
-//   return useCaseTotal;
-// };
-//
-// /**
-//  *
-//  * @param panels {object} the panels that exist on the page
-//  * @param currentUseCaseKey {string} use case key to test if the element already exists
-//  * @returns {boolean} returns true if the element doesn't exist
-//  */
-// const panelDoesNotExist = function(panels, currentUseCaseKey) {
-//   const panelsMap = new Map();
-//   Array.from(panels).forEach((panel, i) => {
-//     const panelUseCaseKey = panel.dataset.useCase;
-//     panelsMap.set(i, panelUseCaseKey === currentUseCaseKey);
-//   });
-//   for (let [k, v] of panelsMap) {
-//     if (v === true) {
-//       return false;
-//     }
-//   }
-//   return true;
-// };
-//
+const showPanelClass = 'panel-pricing-use-case--show';
+const hidePanelClass = 'panel-pricing-use-case--hidden';
 
+/**
+ * @desc calculates the total cost of the use-cases
+ * @param containerElement {HTMLElement} The element containing all the pricing rows
+ * @returns {number} the calculated total number
+ */
+const calcTotalCostUseCases =  function(table) {
+  const tableRows = table.getElementsByClassName('table-pricing__row');
+  let useCaseTotal = 0;
+  for (let row of tableRows) {
+    if (typeof row.dataset.subTotal !== 'undefined' && isNumber(row.dataset.subTotal)) {
+      const useCaseSubTotal = row.dataset.subTotal;
+      useCaseTotal += parseInt(useCaseSubTotal);
+    }
+  }
+  return useCaseTotal;
+};
 
 /**
  * @desc toggle the existing panels based on use-case key
@@ -64,8 +42,6 @@ const merge = require('lodash.merge');
  * @param currentUseCaseKey {string} The current use case key to compare
  */
 const toggleUseCasePanels = function(panels, currentUseCaseKey) {
-  const showPanelClass = 'template-pricing-use-case--show';
-  const hidePanelClass = 'template-pricing-use-case--hidden';
   if (typeof currentUseCaseKey === 'undefined') {
     console.info(`The use case key hasn't been defined.`);
   }
@@ -82,6 +58,21 @@ const toggleUseCasePanels = function(panels, currentUseCaseKey) {
   });
 };
 
+/**
+ * @desc gets the visible table based on the the hidden class being abscent from the template
+ * @param panels
+ * @returns {*}
+ */
+const getVisibleTable = function(panels) {
+  let result = [];
+  Array.from(panels).forEach(panel => {
+    if (!panel.classList.contains(hidePanelClass)) {
+      result = panel;
+    }
+  });
+  const [table] = result.getElementsByTagName('TABLE');
+  return table;
+};
 
 /**
  *
@@ -109,24 +100,25 @@ export default function(target, showNextChoiceHandler = undefined) {
     /** insert list with buttons to container */
     container.insertAdjacentElement('beforeend', listOptionsElement);
 
+    const panels = document.getElementsByClassName('panel-collapse');
+
     /** when a radio button in the list is clicked, show the table in an expansion panel */
     PubSub.subscribe('buttonClicked', (msg, button) => {
-
+      const currentUseCase = button.dataset.useCase;
       const flattenedUseCaseData = Object.assign({}, ...data);
-      const singleUseCase = flattenedUseCaseData[button.dataset.useCase];
+      const singleUseCase = flattenedUseCaseData[currentUseCase];
 
       /**
        * Toggle the panels
        */
-      const panels = document.getElementsByClassName('panel-collapse');
-      toggleUseCasePanels(panels, button.dataset.useCase);
+      toggleUseCasePanels(panels, currentUseCase);
 
-      const panelAlreadyExists = existingPanelKeys.includes(button.dataset.useCase);
+      const panelAlreadyExists = existingPanelKeys.includes(currentUseCase);
       if (!panelAlreadyExists) {
         /**
          * When the expansion panel with table does not exist, create it
          */
-        existingPanelKeys.push(button.dataset.useCase);
+        existingPanelKeys.push(currentUseCase);
 
         const useCaseLabels = pricingUseCaseData.cpcLabels;
         const consumptions = singleUseCase.consumptions;
@@ -154,7 +146,7 @@ export default function(target, showNextChoiceHandler = undefined) {
         const expansionPanelContainer = document.getElementById('panel-collapse-container');
         const expansionPanel = document.createElement('DIV');
         expansionPanel.classList.add('panel-collapse');
-        expansionPanel.dataset.useCase = button.dataset.useCase;
+        expansionPanel.dataset.useCase = currentUseCase;
         expansionPanelContainer.insertAdjacentElement('beforeend', expansionPanel);
         expansionPanel.insertAdjacentElement('beforeend', expansionPanelHeadView.render());
         expansionPanel.insertAdjacentElement('beforeend', expansionPanelBodyView.render());
@@ -178,39 +170,11 @@ export default function(target, showNextChoiceHandler = undefined) {
         });
       }
 
-
-      // TODO: ...
-
-      // button.dataset.useCase
-      // setVariableMonthlyCost();
-
-      // let doCalculationOn;
-      // const panels = container.getElementsByClassName(pricingConfig.panelsClassName);
-      // /** hide the other panels if it's not the use-case that's clicked */
-      // toggleUseCasePanels(panels, useCaseKey, function(panelContainer) {
-      //   [doCalculationOn] = panelContainer.getElementsByClassName('table-row-container');
-      // });
-      //
-      // if (panelDoesNotExist(panels, useCaseKey)) {
-      //   /** the panel doesn't exist, create it */
-      //   generateUseCaseTable(
-      //     useCaseKey,
-      //     pricingConfig.pricingInfoTableContainerClassName,
-      //     pricingConfig.pricingRowTemplateClassName,
-      //     pricingConfig.pricingInfoTemplateId,
-      //     function(tableRowContainer) {
-      //       doCalculationOn = tableRowContainer;
-      //     },
-      //   );
-      // }
-      //
-      // if (doCalculationOn) {
-      //   // TODO: maybe add pricingReceipt.setVariableMonthlyCost() as scoped function
-      //   const total = calcTotalCostUseCases(doCalculationOn);
-      //   setVariableMonthlyCost(total);
-      //   /** recalculate the total */
-      //   reCalculateTotal();
-      // }
+      /** calculate the costs of visible table */
+      const total = calcTotalCostUseCases(getVisibleTable(panels));
+      setVariableMonthlyCost(total);
+      /** recalculate the total */
+      reCalculateTotal();
 
       showNextChoiceHandler();
     });
