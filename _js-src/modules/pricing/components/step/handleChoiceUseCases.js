@@ -14,6 +14,8 @@ import { TableController, TableModel, TableView } from '../table/table';
 import { TableHeadController, TableHeadModel, TableHeadView } from '../table/table-head';
 import { TableBodyController, TableBodyModel, TableBodyView } from '../table/table-body';
 import { TableRowController, TableRowModel, TableRowView } from '../table/table-row';
+import { ExpansionPanelHeadController, ExpansionPanelHeadModel, ExpansionPanelHeadView } from '../expansion-panel/expansion-panel-head';
+import { ExpansionPanelBodyController, ExpansionPanelBodyModel, ExpansionPanelBodyView } from '../expansion-panel/expansion-panel-body';
 
 const merge = require('lodash.merge');
 
@@ -116,40 +118,54 @@ export default function(target, showNextChoiceHandler = undefined) {
     /** when a button is clicked, show the table */
     PubSub.subscribe('buttonClicked', (msg, button) => {
 
-      const tableModel = new TableModel(),
-        tableController = new TableController(tableModel),
-        tableView = new TableView(tableController);
-
-      const tableHeadModel = new TableHeadModel(),
-        tableHeadController = new TableHeadController(tableHeadModel),
-        tableHeadView = new TableHeadView(tableHeadController);
-
-      const tableBodyModel = new TableBodyModel(),
-        tableBodyController = new TableBodyController(tableBodyModel),
-        tableBodyView = new TableBodyView(tableBodyController);
-
-      const filterUseCase = Object.assign({}, ...pricingUseCaseData.useCases);
-      const pricingUseCase = filterUseCase[button.dataset.useCase];
+      const flattenedUseCaseData = Object.assign({}, ...pricingUseCaseData.useCases);
+      const singleUseCase = flattenedUseCaseData[button.dataset.useCase];
 
       const useCaseLabels = pricingUseCaseData.cpcLabels;
-      const consumptions = pricingUseCase.consumptions;
+      const consumptions = singleUseCase.consumptions;
 
-      const tableContainer = document.getElementById('table-container');
-      tableContainer.insertAdjacentElement('beforeend', tableView.render());
-      const [table] = tableContainer.getElementsByTagName('TABLE');
+      const tableModel = new TableModel(),
+            tableController = new TableController(tableModel),
+            tableView = new TableView(tableController);
+
+      const tableHeadModel = new TableHeadModel(),
+            tableHeadController = new TableHeadController(tableHeadModel),
+            tableHeadView = new TableHeadView(tableHeadController);
+
+      const tableBodyModel = new TableBodyModel(),
+            tableBodyController = new TableBodyController(tableBodyModel),
+            tableBodyView = new TableBodyView(tableBodyController);
+
+      const expansionPanelHeadModel = new ExpansionPanelHeadModel(singleUseCase.panelLabel),
+            expansionPanelHeadController = new ExpansionPanelHeadController(expansionPanelHeadModel),
+            expansionPanelHeadView = new ExpansionPanelHeadView(expansionPanelHeadController);
+
+      const expansionPanelBodyModel = new ExpansionPanelBodyModel(),
+            expansionPanelBodyController = new ExpansionPanelBodyController(expansionPanelBodyModel),
+             expansionPanelBodyView = new ExpansionPanelBodyView(expansionPanelBodyController);
+
+      const expansionContainer = document.getElementById('panel-collapse');
+      expansionContainer.insertAdjacentElement('beforeend', expansionPanelHeadView.render());
+      expansionContainer.insertAdjacentElement('beforeend', expansionPanelBodyView.render());
+      const [collapseBodyElement] = document.getElementsByClassName('panel-collapse__body');
+
+      // const tableContainer = document.getElementById('table-container');
+      collapseBodyElement.insertAdjacentElement('beforeend', tableView.render());
+      const [table] = collapseBodyElement.getElementsByTagName('TABLE');
       table.insertAdjacentElement('beforeend', tableHeadView.render());
       table.insertAdjacentElement('beforeend', tableBodyView.render());
-      const [tableBody] = tableContainer.getElementsByTagName('TBODY');
+      const [tableBody] = collapseBodyElement.getElementsByTagName('TBODY');
 
-      const rowOptions = merge(useCaseLabels, consumptions);
-      rowOptions.forEach((option) => {
+      const useCaseConsumptions = merge(useCaseLabels, consumptions);
+
+      /** create a row for each consumption in a use case and add it in the body */
+      useCaseConsumptions.forEach((option) => {
         const tableRowModel = new TableRowModel(option.title, option.desc, option.cpc, option.average),
-          tableRowController = new TableRowController(tableRowModel),
-          tableRowView = new TableRowView(tableRowController);
+              tableRowController = new TableRowController(tableRowModel),
+              tableRowView = new TableRowView(tableRowController);
 
         tableBody.insertAdjacentElement('beforeend', tableRowView.render());
       });
-
 
 
 

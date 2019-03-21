@@ -79,48 +79,6 @@ body:not(:-moz-handler-blocked) fieldset {
   }
 }
 
-// TODO: move to 'panel collapse' component file
-.panel-collapse {
-  flex-direction: column;
-  border: $border-2;
-}
-
-.panel-collapse__head {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  padding: $scale-0;
-  &:hover {
-    cursor: pointer;
-    background-color: $color-gray-6;
-  }
-  &:after {
-    font-family: $typeface-sans;
-    font-weight: bold;
-    display: inline-block;
-  }
-  &.show {
-    background-color: $color-gray-7;
-    &:after {
-      content: "−";
-    }
-  }
-  &:not([class*="show"]):after {
-    content: "+";
-  }
-  h3 {
-    font-size: $font-size-small;
-    font-family: $typeface-sans;
-    font-weight: $font-weight-bold;
-    text-transform: uppercase;
-    margin-bottom: 0;
-  }
-}
-
-.panel-collapse__body.show {
-  padding: $scale-0;
-}
-
 // TODO: move to separate file
 
 .feature-label {
