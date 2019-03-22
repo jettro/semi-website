@@ -32,22 +32,24 @@ export default class CollapseTriggerView {
     this.collapseTrigger = this.html;
     this.collapseTrigger.addEventListener('click', this.controller);
     this.html.innerText = this.controller.label;
-    PubSub.subscribe('collapseTriggerClicked', (msg, collapseTrigger) => { this.toggleStates(msg, collapseTrigger) });
+    PubSub.subscribe('collapseTriggerClicked', (msg, collapseTrigger) => {
+      this.toggleStates(msg, collapseTrigger);
+    });
   }
 
   toggleStates(msg, collapseTrigger) {
-    // TODO: this is triggered 9 times, when clicked once... target more specifically
-    console.log('this is clicked!');
-    if (collapseTrigger === this.collapseTrigger) {
+    const [collapseTriggerButton] = collapseTrigger.getElementsByTagName('button');
+    if (collapseTriggerButton === this.collapseTrigger) {
       this.html.classList.toggle("show");
     }
   }
 
   /**
-   * Use this if you need to render the element
-   * @returns {Element} the expansion panel header
+   * @desc renders into the target node provided
+   * @param targetNode {Element} the target node provided
    */
-  render() {
-    return this.html;
+  renderInto(targetNode) {
+    if(!targetNode) return;
+    targetNode.insertAdjacentElement('beforeend', this.html);
   }
 }

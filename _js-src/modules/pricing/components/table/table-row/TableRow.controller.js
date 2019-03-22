@@ -5,14 +5,6 @@ export default class TableRowController {
     this.model = model;
   }
 
-  get tableRowCel1ButtonText() {
-    return this.model.tableRowCel1ButtonText;
-  }
-
-  get tableRowCel1Description() {
-    return this.model.tableRowCel1Description;
-  }
-
   get cpc() {
     return this.model.cpc;
   }
@@ -23,5 +15,9 @@ export default class TableRowController {
 
   get subTotal() {
     return this.model.subTotal;
+  }
+
+  get childComponent() {
+    return this.model.childComponent;
   }
 }

@@ -1,8 +1,5 @@
 import { htmlToElement } from '../../../../../helpers/helpers';
 
-import { CollapseBodyModel, CollapseBodyController, CollapseBodyView } from '../../collapse/collapse-body';
-import { CollapseTriggerModel, CollapseTriggerController, CollapseTriggerView } from '../../collapse/collapse-trigger';
-
 export default class TableRowView {
 
   /**
@@ -22,10 +19,7 @@ export default class TableRowView {
    */
   static htmlString() {
     return `<tr class="table-pricing__row">
-               <td class="table-pricing__column">
-                   <template class="collapseTrigger"></template>
-                   <template class="collapseBody"></template>
-               </td>
+               <td class="table-pricing__column"></td>
                <td class="table-pricing__column feature-cpc price"></td>
                <td class="table-pricing__column feature-average"></td>
            </tr>`;
@@ -36,20 +30,13 @@ export default class TableRowView {
    */
   constructor(controller) {
     this.controller = TableRowView.initialize(controller);
-    const collapseTriggerModel = new CollapseTriggerModel(this.controller.tableRowCel1ButtonText),
-      collapseTriggerController = new CollapseTriggerController(collapseTriggerModel),
-      collapseTriggerView = new CollapseTriggerView(collapseTriggerController);
-    const collapseBodyModel = new CollapseBodyModel(this.controller.tableRowCel1Description),
-      collapseBodyController = new CollapseBodyController(collapseBodyModel),
-      collapseBodyView = new CollapseBodyView(collapseBodyController);
     this.html = htmlToElement(TableRowView.htmlString());
     this.tableRow = this.html;
     this.tableRow.dataset.subTotal = this.controller.subTotal;
-    this.tableRowcells = this.html.getElementsByTagName('TD');
-    this.tableRowcells[1].innerText = this.controller.cpc;
-    this.tableRowcells[2].innerText = this.controller.averageCalls;
-    this.tableRowcells[0].insertAdjacentElement('beforeend', collapseTriggerView.render());
-    this.tableRowcells[0].insertAdjacentElement('beforeend', collapseBodyView.render());
+    this.tableRowCells = this.html.getElementsByTagName('TD');
+    this.tableRowCells[0].insertAdjacentElement('beforeend', this.controller.childComponent);
+    this.tableRowCells[1].innerText = this.controller.cpc;
+    this.tableRowCells[2].innerText = this.controller.averageCalls;
   }
 
   /**

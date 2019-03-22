@@ -1,3 +1,9 @@
-export { default as CollapseBodyModel } from './CollapseBody.model';
-export { default as CollapseBodyController } from './CollapseBody.controller';
-export { default as CollapseBodyView } from './CollapseBody.view';
+import CollapseBodyModel from './CollapseBody.model';
+import CollapseBodyController from './CollapseBody.controller';
+import CollapseBodyView from './CollapseBody.view';
+
+export default function collapseBodyComponent(desc) {
+  const collapseBodyModel = new CollapseBodyModel(desc),
+    collapseBodyController = new CollapseBodyController(collapseBodyModel);
+    return new CollapseBodyView(collapseBodyController);
+}

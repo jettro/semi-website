@@ -7,31 +7,38 @@ export default class TableRowModel {
     return parseFloat(cpc).toFixed(cpcDigits) * parseFloat(averageCalls).toFixed(callsDigits);
   };
 
-  constructor(cel1buttonText, cel1description, cpc, averageCalls) {
-    this._tableRowCel1ButtonText = cel1buttonText;
-    this._tableRowCel1Description = cel1description;
-    this._cpc = cpc;
-    this._averageCalls = averageCalls;
+  constructor(data, childComponent) {
+    this._cpc = data.cpc;
+    this._averageCalls = data.averageCalls;
     this._tableRowSubTotal = TableRowModel.calculateSubTotal(this._cpc, this._averageCalls);
+    this._childComponent = childComponent;
   }
 
-  get tableRowCel1ButtonText(){
-    return this._tableRowCel1ButtonText;
-  };
-
-  get tableRowCel1Description(){
-    return this._tableRowCel1Description;
-  };
-
+  /**
+   * @returns {string}
+   */
   get cpc(){
     return this._cpc;
   };
 
+  /**
+   * @returns {string}
+   */
   get averageCalls(){
     return this._averageCalls;
   };
 
+  /**
+   * @returns {string}
+   */
   get subTotal(){
     return this._tableRowSubTotal;
+  }
+
+  /**
+   * @returns {Element}
+   */
+  get childComponent() {
+    return this._childComponent;
   }
 }

@@ -1,3 +1,9 @@
-export { default as CollapseTriggerModel } from './CollapseTrigger.model';
-export { default as CollapseTriggerController } from './CollapseTrigger.controller';
-export { default as CollapseTriggerView } from './CollapseTrigger.view';
+import CollapseTriggerModel from './CollapseTrigger.model';
+import CollapseTriggerController from './CollapseTrigger.controller';
+import CollapseTriggerView from './CollapseTrigger.view';
+
+export default function collapseTriggerComponent(label) {
+  const collapseTriggerModel = new CollapseTriggerModel(label),
+    collapseTriggerController = new CollapseTriggerController(collapseTriggerModel);
+  return new CollapseTriggerView(collapseTriggerController);
+}

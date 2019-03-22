@@ -8,8 +8,7 @@ export default class CollapseTriggerController {
    * @param target
    */
   static clickHandler(target) {
-    // TODO: not sure if DIV is the right target, or if it will search for something outside the panel head also...
-    const collapseTrigger = getClosest(target, 'DIV');
+    const collapseTrigger = getClosest(target, 'div');
     PubSub.publish('collapseTriggerClicked', collapseTrigger);
   }
 

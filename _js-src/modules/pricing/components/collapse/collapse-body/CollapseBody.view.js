@@ -34,13 +34,15 @@ export default class CollapseBodyView {
     this.collapseBody = this.html;
     this.labelElement = this.html.getElementsByClassName('feature-description')[0];
     this.labelElement.innerText = this.controller.description;
-    PubSub.subscribe('collapseTriggerClicked', (msg, collapseTrigger) => { this.toggleStates(msg, collapseTrigger) });
+    PubSub.subscribe('collapseTriggerClicked', (msg, collapseTrigger) => {
+      this.toggleStates(msg, collapseTrigger);
+    });
   }
 
   toggleStates(msg, collapseTrigger) {
     const [sibling] = this.collapseBody.parentNode.getElementsByClassName('collapse');
-
-    if (collapseTrigger === sibling) {
+    const [collapseBody] = collapseTrigger.getElementsByClassName('collapse');
+    if (collapseBody === sibling) {
       this.html.classList.toggle("show");
       /** toggle attribute */
       const attrExpanded = this.html.getAttribute("aria-expanded");
@@ -55,10 +57,11 @@ export default class CollapseBodyView {
   }
 
   /**
-   * Use this if you need to render the element
-   * @returns {Element} the expansion panel header
+   * @desc renders into the target node provided
+   * @param targetNode {Element} the target node provided
    */
-  render() {
-    return this.html;
+  renderInto(targetNode) {
+    if(!targetNode) return;
+    targetNode.insertAdjacentElement('beforeend', this.html);
   }
 }

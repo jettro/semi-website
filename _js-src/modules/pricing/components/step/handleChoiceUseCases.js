@@ -15,6 +15,8 @@ import tableComponent from '../table/table';
 import tableHeadComponent from '../table/table-head';
 import tableBodyComponent from '../table/table-body';
 import tableRowComponent from '../table/table-row';
+import collapseBodyComponent from '../collapse/collapse-body';
+import collapseTriggerComponent from '../collapse/collapse-trigger';
 
 const showPanelClass = 'panel-pricing-use-case--show';
 const hidePanelClass = 'panel-pricing-use-case--hidden';
@@ -175,7 +177,17 @@ export default function(target, showNextChoiceHandler = undefined) {
 
         /** create a row for each consumption in a use case and add it in the body */
         useCaseConsumptions.forEach((option) => {
-          tableRowComponent(option.title, option.desc, option.cpc, option.average).renderInto(tableBody);
+          const data = {
+            title: option.title,
+            desc: option.desc,
+            cpc: option.cpc,
+            average: option.average
+          };
+
+          const template = document.createElement('div');
+          collapseTriggerComponent(data.title).renderInto(template);
+          collapseBodyComponent(data.desc).renderInto(template);
+          tableRowComponent(data, template).renderInto(tableBody);
         });
       }
 
