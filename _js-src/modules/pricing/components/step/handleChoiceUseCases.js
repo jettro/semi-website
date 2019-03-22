@@ -184,10 +184,10 @@ export default function(target, showNextChoiceHandler = undefined) {
             average: option.average
           };
 
-          const template = document.createElement('div');
-          collapseTriggerComponent(data.title).renderInto(template);
-          collapseBodyComponent(data.desc).renderInto(template);
-          tableRowComponent(data, template).renderInto(tableBody);
+          const collapseElement = document.createElement('div');
+          collapseTriggerComponent(data.title).renderInto(collapseElement);
+          collapseBodyComponent(data.desc).renderInto(collapseElement);
+          tableRowComponent(data, collapseElement).renderInto(tableBody);
         });
       }
 
