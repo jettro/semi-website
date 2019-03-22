@@ -1,3 +1,9 @@
-export { default as TableModel } from './Table.model';
-export { default as TableController } from './Table.controller';
-export { default as TableView } from './Table.view';
+import TableModel from './Table.model';
+import TableController from './Table.controller';
+import TableView from './Table.view';
+
+export default function tableComponent() {
+  const tableModel = new TableModel(),
+    tableController = new TableController(tableModel);
+  return new TableView(tableController);
+}

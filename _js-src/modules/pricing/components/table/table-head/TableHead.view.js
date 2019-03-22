@@ -33,7 +33,6 @@ export default class TableHeadView {
   constructor(controller) {
     this.controller = TableHeadView.initialize(controller);
     this.html = htmlToElement(TableHeadView.htmlString());
-    this.tableHead = this.html;
     this.tableHeadcells = this.html.getElementsByTagName('TD');
     this.tableHeadcells[0].childNodes[0].innerText = this.controller.tableHeadCel1;
     this.tableHeadcells[1].childNodes[0].innerText = this.controller.tableHeadCel2;
@@ -41,10 +40,11 @@ export default class TableHeadView {
   }
 
   /**
-   * Use this if you need to render the element
-   * @returns {Element} the table
+   * @desc renders into the target node provided
+   * @param targetNode {Element} the target node provided
    */
-  render() {
-    return this.tableHead;
+  renderInto(targetNode) {
+    if(!targetNode) return;
+    targetNode.insertAdjacentElement('beforeend', this.html);
   }
 }

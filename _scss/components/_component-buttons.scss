@@ -6,7 +6,6 @@
 .button,
 .button--small,
 button:not(.ui-button):not(.form-stepper-table__column):not(.button--link),
-[type='button']:not(.ui-button):not(.form-stepper-table__column),
 [type='reset'],
 [type='submit'] {
   @include transition-out;

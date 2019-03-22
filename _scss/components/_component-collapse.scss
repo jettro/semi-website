@@ -20,7 +20,7 @@
   border-left: 6px solid transparent;
 }
 
-button[data-toggle="collapse"] {
+.button-collapse {
   &:before {
     content: "";
     width: 0;

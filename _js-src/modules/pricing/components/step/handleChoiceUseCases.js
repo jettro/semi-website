@@ -1,27 +1,27 @@
 import PubSub from 'pubsub-js';
+const merge = require('lodash.merge');
 
 import { isNumber, elementExists } from '../../../../helpers/helpers';
 import { setVariableMonthlyCost, reCalculateTotal } from '../../components/receipt/pricingReceiptFunctions';
-import createListItems from '../../common/createListItems';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
-import { ListOptions } from '../list-options';
 
-import { TableController, TableModel, TableView } from '../table/table';
-import { TableHeadController, TableHeadModel, TableHeadView } from '../table/table-head';
-import { TableBodyController, TableBodyModel, TableBodyView } from '../table/table-body';
-import { TableRowController, TableRowModel, TableRowView } from '../table/table-row';
-import { ExpansionPanelHeadController, ExpansionPanelHeadModel, ExpansionPanelHeadView } from '../expansion-panel/expansion-panel-head';
-import { ExpansionPanelBodyController, ExpansionPanelBodyModel, ExpansionPanelBodyView } from '../expansion-panel/expansion-panel-body';
-
-const merge = require('lodash.merge');
+import listOptionsComponent from '../list-options/list'
+import listOptionItemComponent from '../list-options/list-option-item';
+import buttonRadioComponent from '../button-radio';
+import expansionPanelHeadComponent from '../expansion-panel/expansion-panel-head';
+import expansionPanelBodyComponent from '../expansion-panel/expansion-panel-body';
+import tableComponent from '../table/table';
+import tableHeadComponent from '../table/table-head';
+import tableBodyComponent from '../table/table-body';
+import tableRowComponent from '../table/table-row';
 
 const showPanelClass = 'panel-pricing-use-case--show';
 const hidePanelClass = 'panel-pricing-use-case--hidden';
 
 /**
  * @desc calculates the total cost of the use-cases
- * @param containerElement {HTMLElement} The element containing all the pricing rows
+ * @param table {HTMLElement} The element containing all the pricing rows
  * @returns {number} the calculated total number
  */
 const calcTotalCostUseCases =  function(table) {
@@ -75,6 +75,24 @@ const getVisibleTable = function(panels) {
 };
 
 /**
+ * @desc removes an object by key from a [object Array]
+ * @param object {Object} the array to remove the config object from
+ * @param objectKey {String} a string which defines the  key to remove from [object Array]
+ * @returns {Array} an array in which the
+ */
+export function removeObjectByKeyFromArray(object, objectKey) {
+  let options = [];
+  for (let option of Object.values(object)) {
+    const [key] = Object.keys(option);
+    /** don't include config as option option */
+    if (key !== objectKey) {
+      options.push(option);
+    }
+  }
+  return options;
+}
+
+/**
  *
  * @param target {HTMLElement} the target this choice applies to
  * @param showNextChoiceHandler
@@ -95,10 +113,22 @@ export default function(target, showNextChoiceHandler = undefined) {
 
   if (elementExists(container)) {
 
-    const listOptionsElement = new ListOptions(createListItems(options)).render();
+    /** create list options */
+    const optionsListItemButtonMap = new Map();
+    removeObjectByKeyFromArray(options, 'config').forEach((option, i) => {
 
-    /** insert list with buttons to container */
-    container.insertAdjacentElement('beforeend', listOptionsElement);
+      /** create list item template so the button can be asserted inside */
+      let template = document.createElement('template');
+      listOptionItemComponent('0', 'multiplier').renderInto(template);
+
+      /** use list item template to assert button radio into */
+      let [li] = template.getElementsByTagName('LI');
+      buttonRadioComponent(option.title, option.useCaseKey).renderInto(li);
+      optionsListItemButtonMap.set(i, li);
+    });
+
+    /** insert optionsListItemButtonMap containing map with HTML elements into container */
+    listOptionsComponent(optionsListItemButtonMap).renderInto(container);
 
     const panels = document.getElementsByClassName('panel-collapse');
 
@@ -123,50 +153,29 @@ export default function(target, showNextChoiceHandler = undefined) {
         const useCaseLabels = pricingUseCaseData.cpcLabels;
         const consumptions = singleUseCase.consumptions;
 
-        const tableModel = new TableModel(),
-          tableController = new TableController(tableModel),
-          tableView = new TableView(tableController);
-
-        const tableHeadModel = new TableHeadModel(),
-          tableHeadController = new TableHeadController(tableHeadModel),
-          tableHeadView = new TableHeadView(tableHeadController);
-
-        const tableBodyModel = new TableBodyModel(),
-          tableBodyController = new TableBodyController(tableBodyModel),
-          tableBodyView = new TableBodyView(tableBodyController);
-
-        const expansionPanelHeadModel = new ExpansionPanelHeadModel(singleUseCase.panelLabel),
-          expansionPanelHeadController = new ExpansionPanelHeadController(expansionPanelHeadModel),
-          expansionPanelHeadView = new ExpansionPanelHeadView(expansionPanelHeadController);
-
-        const expansionPanelBodyModel = new ExpansionPanelBodyModel(),
-          expansionPanelBodyController = new ExpansionPanelBodyController(expansionPanelBodyModel),
-          expansionPanelBodyView = new ExpansionPanelBodyView(expansionPanelBodyController);
-
         const expansionPanelContainer = document.getElementById('panel-collapse-container');
         const expansionPanel = document.createElement('DIV');
         expansionPanel.classList.add('panel-collapse');
         expansionPanel.dataset.useCase = currentUseCase;
         expansionPanelContainer.insertAdjacentElement('beforeend', expansionPanel);
-        expansionPanel.insertAdjacentElement('beforeend', expansionPanelHeadView.render());
-        expansionPanel.insertAdjacentElement('beforeend', expansionPanelBodyView.render());
+
+        expansionPanelHeadComponent(singleUseCase.panelLabel).renderInto(expansionPanel);
+        expansionPanelBodyComponent().renderInto(expansionPanel);
 
         const collapseBodyElement = expansionPanel.querySelector('.panel-collapse__body');
-        collapseBodyElement.insertAdjacentElement('beforeend', tableView.render());
-        const [table] = collapseBodyElement.getElementsByTagName('TABLE');
-        table.insertAdjacentElement('beforeend', tableHeadView.render());
-        table.insertAdjacentElement('beforeend', tableBodyView.render());
-        const [tableBody] = collapseBodyElement.getElementsByTagName('TBODY');
 
+        tableComponent().renderInto(collapseBodyElement);
+
+        const [table] = collapseBodyElement.getElementsByTagName('TABLE');
+        tableHeadComponent().renderInto(table);
+        tableBodyComponent().renderInto(table);
+
+        const [tableBody] = collapseBodyElement.getElementsByTagName('TBODY');
         const useCaseConsumptions = merge(useCaseLabels, consumptions);
 
         /** create a row for each consumption in a use case and add it in the body */
         useCaseConsumptions.forEach((option) => {
-          const tableRowModel = new TableRowModel(option.title, option.desc, option.cpc, option.average),
-            tableRowController = new TableRowController(tableRowModel),
-            tableRowView = new TableRowView(tableRowController);
-
-          tableBody.insertAdjacentElement('beforeend', tableRowView.render());
+          tableRowComponent(option.title, option.desc, option.cpc, option.average).renderInto(tableBody);
         });
       }
 
@@ -176,6 +185,7 @@ export default function(target, showNextChoiceHandler = undefined) {
       /** recalculate the total */
       reCalculateTotal();
 
+      /** show the next step */
       showNextChoiceHandler();
     });
 

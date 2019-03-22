@@ -51,10 +51,11 @@ export default class ExpansionPanelBodyView {
   }
 
   /**
-   * Use this if you need to render the element
-   * @returns {Element} the expansion panel body
+   * @desc renders into the target node provided
+   * @param targetNode {HTMLElement} the target node provided
    */
-  render() {
-    return this.html;
+  renderInto(targetNode) {
+    if(!targetNode) return;
+    targetNode.insertAdjacentElement('beforeend', this.html);
   }
 }

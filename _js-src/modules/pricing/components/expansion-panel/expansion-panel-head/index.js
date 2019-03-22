@@ -1,3 +1,9 @@
-export { default as ExpansionPanelHeadModel } from './ExpansionPanelHead.model';
-export { default as ExpansionPanelHeadController } from './ExpansionPanelHead.controller';
-export { default as ExpansionPanelHeadView } from './ExpansionPanelHead.view';
+import ExpansionPanelHeadModel from './ExpansionPanelHead.model';
+import ExpansionPanelHeadController from './ExpansionPanelHead.controller';
+import ExpansionPanelHeadView from './ExpansionPanelHead.view';
+
+export default function expansionPanelHeadComponent(title) {
+  const expansionPanelHeadModel = new ExpansionPanelHeadModel(title),
+    expansionPanelHeadController = new ExpansionPanelHeadController(expansionPanelHeadModel);
+  return new ExpansionPanelHeadView(expansionPanelHeadController);
+};

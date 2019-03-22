@@ -1,3 +1,9 @@
-export { default as TableBodyModel } from './TableBody.model';
-export { default as TableBodyController } from './TableBody.controller';
-export { default as TableBodyView } from './TableBody.view';
+import TableBodyModel from './TableBody.model';
+import TableBodyController from './TableBody.controller';
+import TableBodyView from './TableBody.view';
+
+export default function tableBodyComponent() {
+  const tableBodyModel = new TableBodyModel(),
+    tableBodyController = new TableBodyController(tableBodyModel);
+  return new TableBodyView(tableBodyController);
+}

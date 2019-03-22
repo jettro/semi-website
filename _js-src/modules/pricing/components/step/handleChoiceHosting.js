@@ -6,7 +6,7 @@ import { setHostingAdjustment } from '../receipt/pricingReceiptFunctions';
 import createListItems from '../../common/createListItems';
 import { addCollapseTriggers } from '../../../collapse';
 
-import ListOptions from '../list-options/ListOptions';
+// import ListOptions from '../list-options/list/ListOptions';
 
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';

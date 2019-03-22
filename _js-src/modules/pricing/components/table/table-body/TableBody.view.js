@@ -26,14 +26,15 @@ export default class TableBodyView {
    */
   constructor(controller) {
     this.controller = TableBodyView.initialize(controller);
-    this.tableBody = htmlToElement(TableBodyView.htmlString());
+    this.html = htmlToElement(TableBodyView.htmlString());
   }
 
   /**
-   * Use this if you need to render the element
-   * @returns {Element} the table
+   * @desc renders into the target node provided
+   * @param targetNode {Element} the target node provided
    */
-  render() {
-    return this.tableBody;
+  renderInto(targetNode) {
+    if(!targetNode) return;
+    targetNode.insertAdjacentElement('beforeend', this.html);
   }
 }

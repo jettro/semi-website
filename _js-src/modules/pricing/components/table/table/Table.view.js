@@ -29,18 +29,14 @@ export default class TableView {
     this.controller = TableView.initialize(controller);
     this.html = htmlToElement(TableView.htmlString());
     this.table = this.html;
-    // PubSub.subscribe('buttonClicked', () => { this.showThisTable() });
   }
 
   /**
-   * Use this if you need to render the element
-   * @returns {Element} the table
+   * @desc renders into the target node provided
+   * @param targetNode {Element} the target node provided
    */
-  render() {
-    return this.html;
-  }
-
-  showThisTable() {
-    console.log('yes this is working!');
+  renderInto(targetNode) {
+    if(!targetNode) return;
+    targetNode.insertAdjacentElement('beforeend', this.html);
   }
 }

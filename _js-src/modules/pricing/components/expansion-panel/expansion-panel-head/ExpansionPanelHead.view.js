@@ -48,7 +48,8 @@ export default class ExpansionPanelHeadView {
    * Use this if you need to render the element
    * @returns {Element} the expansion panel header
    */
-  render() {
-    return this.html;
+  renderInto(targetNode) {
+    if(!targetNode) return;
+    targetNode.insertAdjacentElement('beforeend', this.html);
   }
 }

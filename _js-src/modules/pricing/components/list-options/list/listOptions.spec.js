@@ -4,7 +4,7 @@ const { assert, expect } = require('chai');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-import ListOptions from './ListOptions';
+import ListOptionsComponent from './';
 
 describe('ListOptions...', function() {
   beforeEach(function() {
@@ -14,11 +14,11 @@ describe('ListOptions...', function() {
   });
 
   it(`should be a class constructor [object Function]`, function() {
-    expect(Object.prototype.toString.call(ListOptions)).to.equal('[object Function]');
+    expect(Object.prototype.toString.call(ListOptionsComponent)).to.equal('[object Function]');
   });
 
   it(`should throw specific error if no children are passed in as arguments`, function() {
-    assert.throws(() => new ListOptions().init(), Error, "No child elements are provided. A list must have child list items.");
+    assert.throws(() => new ListOptionsComponent().init(), Error, "No child elements are provided. A list must have child list items.");
   });
 
   it(`should throw specific error if wrong types are passed in as arguments`, function() {

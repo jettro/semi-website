@@ -51,12 +51,13 @@ export default class ButtonRadioView {
   }
 
   /**
-   * Use this if you need to render the element
-   * @returns {Element} the radio button
+   * @desc renders into the target node provided
+   * @param targetNode {Element} the target node provided
    */
-  render() {
+  renderInto(targetNode) {
+    if(!targetNode) return;
     if (this.controller.useCaseKey !== undefined)
       this.html.dataset.useCase = this.controller.useCaseKey;
-    return this.html;
+    targetNode.insertAdjacentElement('beforeend', this.html);
   }
 }
