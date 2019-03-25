@@ -7,9 +7,10 @@ export default class ButtonRadioController {
    * @desc Changes the model
    * @param target
    */
-  static clickHandler(target) {
-    const button = getClosest(target, 'BUTTON');
-    PubSub.publish('buttonClicked', button);
+  static clickHandler(e) {
+    const button = getClosest(e.target, 'BUTTON');
+    const container = getClosest(e.target, 'DIV');
+    PubSub.publish('buttonClicked', {"button": button, "container": container});
   }
 
   constructor(model) {
@@ -32,7 +33,7 @@ export default class ButtonRadioController {
     e.stopPropagation();
     switch(e.type){
       case "click":
-        ButtonRadioController.clickHandler(e.target);
+        ButtonRadioController.clickHandler(e);
         break;
       default:
         console.log(e.target);

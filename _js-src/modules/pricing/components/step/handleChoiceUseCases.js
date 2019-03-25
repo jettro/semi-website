@@ -102,14 +102,14 @@ export function removeObjectByKeyFromArray(object, objectKey) {
 export default function(target, showNextChoiceHandler = undefined) {
   let existingPanelKeys = [];
   const container = document.getElementById(pricingConfig.pricingInfoContainerId);
-  const data = pricingUseCaseData.useCases;
-  const options = data.map((o) => {
+  const useCaseData = pricingUseCaseData.useCases;
+  const options = useCaseData.map((o) => {
     const useCaseKey = Object.getOwnPropertyNames(o)[0];
     const title = Object.values(o)[0].title;
     if (!useCaseKey)
       throw new Error('You must provide a use case key in the data.');
     if (!title)
-      throw new Error('You must provide a title in the  data.');
+      throw new Error('You must provide a title in the data.');
     return { title: title, useCaseKey: useCaseKey };
   });
 
@@ -135,9 +135,9 @@ export default function(target, showNextChoiceHandler = undefined) {
     const panels = document.getElementsByClassName('panel-collapse');
 
     /** when a radio button in the list is clicked, show the table in an expansion panel */
-    PubSub.subscribe('buttonClicked', (msg, button) => {
-      const currentUseCase = button.dataset.useCase;
-      const flattenedUseCaseData = Object.assign({}, ...data);
+    PubSub.subscribe('buttonClicked', (msg, pubSubData) => {
+      const currentUseCase = pubSubData.button.dataset.useCase;
+      const flattenedUseCaseData = Object.assign({}, ...useCaseData);
       const singleUseCase = flattenedUseCaseData[currentUseCase];
 
       /**

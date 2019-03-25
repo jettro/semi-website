@@ -37,16 +37,24 @@ export default class ButtonRadioView {
     this.buttonElement.addEventListener('click', this.controller);
     this.titleElement = this.html.getElementsByClassName('ui-button__title')[0];
     this.titleElement.innerText = this.controller.title;
-    PubSub.subscribe('buttonClicked', (msg, button) => { this.toggleStates(msg, button) });
+    this.siblings = [];
+    PubSub.subscribe('buttonClicked', (msg, data) => { this.toggleStates(msg, data) });
   }
 
-  toggleStates(msg, button) {
-    if (button === this.buttonElement) {
+  toggleStates(msg, data) {
+    if (data.button === this.buttonElement) {
+      /** remove active state from all buttons in the same section */
+      const [listItems] = data.container.getElementsByTagName('ul');
+      const siblingButtons = listItems.getElementsByTagName('button');
+
+      Object.keys(siblingButtons).forEach(key => {
+        siblingButtons[key].classList.remove("ui-button--active");
+        siblingButtons[key].setAttribute('aria-checked', 'false');
+      });
+
+      /** then add the active state tot this specific button */
       this.html.classList.add("ui-button--active");
       this.html.setAttribute('aria-checked', 'true');
-    } else {
-      this.html.classList.remove("ui-button--active");
-      this.html.setAttribute('aria-checked', 'false');
     }
   }
 
