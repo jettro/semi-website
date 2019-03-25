@@ -61,7 +61,7 @@ const toggleUseCasePanels = function(panels, currentUseCaseKey) {
 };
 
 /**
- * @desc gets the visible table based on the the hidden class being abscent from the template
+ * @desc gets the visible table based on the the hidden class being absent from the template
  * @param panels
  * @returns {*}
  */
@@ -121,7 +121,7 @@ export default function(target, showNextChoiceHandler = undefined) {
 
       /** create list item template so the button can be asserted inside */
       let template = document.createElement('template');
-      listOptionItemComponent('0', 'multiplier').renderInto(template);
+      listOptionItemComponent(undefined, 'multiplier').renderInto(template);
 
       /** use list item template to assert button radio into */
       let [li] = template.getElementsByTagName('LI');

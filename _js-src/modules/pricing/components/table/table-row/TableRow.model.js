@@ -9,7 +9,7 @@ export default class TableRowModel {
 
   constructor(data, childComponent) {
     this._cpc = data.cpc;
-    this._averageCalls = data.averageCalls;
+    this._averageCalls = data.average;
     this._tableRowSubTotal = TableRowModel.calculateSubTotal(this._cpc, this._averageCalls);
     this._childComponent = childComponent;
   }
