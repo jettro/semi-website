@@ -17,6 +17,7 @@ import tableBodyComponent from '../table/table-body';
 import tableRowComponent from '../table/table-row';
 import collapseBodyComponent from '../collapse/collapse-body';
 import collapseTriggerComponent from '../collapse/collapse-trigger';
+import createListItems from '../../common/createListItems';
 
 const showPanelClass = 'panel-pricing-use-case--show';
 const hidePanelClass = 'panel-pricing-use-case--hidden';
@@ -115,22 +116,7 @@ export default function(target, showNextChoiceHandler = undefined) {
 
   if (elementExists(container)) {
 
-    /** create list options */
-    const optionsListItemButtonMap = new Map();
-    removeObjectByKeyFromArray(options, 'config').forEach((option, i) => {
-
-      /** create list item template so the button can be asserted inside */
-      let template = document.createElement('template');
-      listOptionItemComponent(undefined, 'multiplier').renderInto(template);
-
-      /** use list item template to assert button radio into */
-      let [li] = template.getElementsByTagName('LI');
-      buttonRadioComponent(option.title, option.useCaseKey, 'useCases').renderInto(li);
-      optionsListItemButtonMap.set(i, li);
-    });
-
-    /** insert optionsListItemButtonMap containing map with HTML elements into container */
-    listOptionsComponent(optionsListItemButtonMap).renderInto(container);
+    createListItems(options, container, 'useCases');
 
     const panels = document.getElementsByClassName('panel-collapse');
 

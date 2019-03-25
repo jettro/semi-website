@@ -1,3 +1,32 @@
+import { removeObjectByKeyFromArray } from '../components/step/handleChoiceUseCases';
+import listOptionItemComponent from '../components/list-options/list-option-item';
+import buttonRadioComponent from '../components/button-radio';
+import listOptionsComponent from '../components/list-options/list';
+
+/**
+ * @desc creates a list with list items and buttons inside,
+ *       filters a config option (can be made more generic)
+ * @param options {Object} The object in which the options are
+ * @param container {HTMLElement} The element the list should be asserted to
+ * @param scope {string} The scope of the pubsub
+ * @type {Map<any, any>}
+ */
+export default function(options, container, scope) {
+  const listItemButtonMap = new Map();
+  removeObjectByKeyFromArray(options, 'config').forEach((option, i) => {
+    /** create list item template so the button can be asserted inside */
+    let template = document.createElement('template');
+    listOptionItemComponent().renderInto(template);
+    /** use list item template to assert button radio into */
+    let [li] = template.getElementsByTagName('LI');
+    buttonRadioComponent(option.title, option.useCaseKey, scope, option.showOption).renderInto(li);
+    listItemButtonMap.set(i, li);
+  });
+  /** insert optionsListItemButtonMap containing map with HTML elements into container */
+  listOptionsComponent(listItemButtonMap).renderInto(container);
+}
+
+
 // import listOptionItem from '../components/list-options/list-option-item/ListOptionItem';
 // import pricingConfig from '../pricingConfig';
 // import { getClosest } from '../../../helpers/helpers';

@@ -1,9 +1,10 @@
 
 export default class ButtonRadioModel {
 
-  constructor(title, useCaseKey = undefined) {
+  constructor(title, useCaseKey = undefined, showTarget = undefined) {
     this._title = title;
     this._useCaseKey = useCaseKey;
+    this._showTarget = showTarget;
     this.description = "a description";
   }
 
@@ -15,8 +16,19 @@ export default class ButtonRadioModel {
     return this._title;
   };
 
+  /**
+   * @returns {string} [useCaseKey = undefined]
+   */
   get useCaseKey() {
-    if (this._useCaseKey !== undefined)
+    if (typeof(this._useCaseKey) !== "undefined")
       return this._useCaseKey;
+  }
+
+  /**
+   * @returns {string} [showTarget=undefined]
+   */
+  get showTarget() {
+    if (typeof(this._showTarget) !== "undefined")
+      return this._showTarget;
   }
 }

@@ -80,14 +80,14 @@ const showClass = 'form-stepper__step--show';
 //   elementToHide.classList.add(hideClass);
 // }
 //
-// /**
-//  * @desc hide the element
-//  * @param elementToShow {HTMLElement}
-//  */
-// function showElement(elementToShow) {
-//   elementToShow.classList.remove(hideClass);
-//   elementToShow.classList.add(showClass);
-// }
+/**
+ * @desc hide the element
+ * @param elementToShow {HTMLElement}
+ */
+function showElement(elementToShow) {
+  elementToShow.classList.remove(hideClass);
+  elementToShow.classList.add(showClass);
+}
 
 /**
  *
@@ -105,28 +105,52 @@ export default function(useCaseFieldset, target, fieldSets, showNextChoiceHandle
   });
 
   const options = [
-    {"title": "Yes"},
-    {"title": "No"}
+    { "title": "Yes", "showOption": "hosting-by-semi" },
+    { "title": "No", "showOption": "hosting-by-customer" }
   ];
 
-  /** create list options */
-  const hostingOptionsListItemButtonMap = new Map();
-  removeObjectByKeyFromArray(options, 'config').forEach((option, i) => {
-
-    /** create list item template so the button can be asserted inside */
-    let template = document.createElement('template');
-    listOptionItemComponent().renderInto(template);
-
-    /** use list item template to assert button radio into */
-    let [li] = template.getElementsByTagName('LI');
-    buttonRadioComponent(option.title).renderInto(li);
-    hostingOptionsListItemButtonMap.set(i, li);
-  });
-
-  /** insert optionsListItemButtonMap containing map with HTML elements into container */
   const container = document.getElementById('container-hosting-choice');
-  listOptionsComponent(hostingOptionsListItemButtonMap).renderInto(container);
+  createListItems(options, container, 'hostingOptions');
 
+  PubSub.subscribe('buttonClicked.hostingOptions', (msg, pubSubData) => {
+
+    const optionYesId = 'hosting-by-semi';
+    const hostingBySemiElement = document.getElementById(optionYesId);
+    const optionNoId = 'hosting-by-customer';
+    const hostingByCustomer = document.getElementById(optionNoId);
+
+    /** option Yes clicked */
+    if (pubSubData.button.dataset.targetShowOptions === optionYesId) {
+
+      /** */
+      const optionStep1 = 'hosting-semi-preference-platform';
+      const optionStep2 = 'hosting-semi-optimisation';
+      const optionsSubStep1FieldsetElement = getChoiceFieldset(fieldSets, optionStep1);
+      const optionsSubStep2FieldsetElement = getChoiceFieldset(fieldSets, optionStep2);
+      const optionsStep1DoesNotExist =
+        optionsSubStep1FieldsetElement.getElementsByClassName(
+          'pricing-hosting-button--show',
+        ).length === 0;
+      const optionsStep2DoesNotExist =
+        optionsSubStep2FieldsetElement.getElementsByClassName(
+          'pricing-hosting-button--show',
+        ).length === 0;
+
+      /** show options for option 1 */
+      showElement(hostingBySemiElement);
+
+      /** create new */
+      if (optionsStep1DoesNotExist) {
+        console.log('it does not exist yet, please create :)');
+        const container = document.getElementById(pricingConfig.pricingPlatformContainerId);
+        const step1Options = pricingUseCaseData.hostingProvidersBySemi;
+        createListItems(step1Options, container, 'hostingBySemi');
+
+        showElement(optionsSubStep1FieldsetElement);
+      }
+    }
+
+  });
 
   // /** used to execute the event listener for showing content only one time */
   // target.addEventListener('click', e => {

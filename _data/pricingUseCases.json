@@ -165,22 +165,22 @@
     }
   ],
   "hostingProvidersBySemi": [
-    {"Oracle Cloud": "100"},
-    {"Google Cloud": "90"},
-    {"AWS": "90"},
-    {"Azure": "100"}
+    {"title": "Oracle Cloud", "value": "100"},
+    {"title": "Google Cloud", "value": "90"},
+    {"title": "AWS", "value": "90"},
+    {"title": "Azure", "value": "100"}
   ],
   "hostingProvidersByCustomer": [
-    {"Oracle Cloud": "100"},
-    {"Google Cloud": "90"},
-    {"AWS": "90"},
-    {"Azure": "100"}
+    {"title": "Oracle Cloud", "value": "100"},
+    {"title": "Google Cloud", "value": "90"},
+    {"title": "AWS", "value": "90"},
+    {"title": "Azure", "value": "100"}
   ],
   "clusters": [
-    {"1 cluster":  "100"},
-    {"2 clusters":  "110"},
-    {"3 clusters":  "120"},
-    {"4 clusters":  "130"}
+    {"title": "1 cluster", "value": "100"},
+    {"title": "2 clusters", "value": "110"},
+    {"title": "3 clusters", "value": "120"},
+    {"title": "4 clusters", "value": "130"}
   ],
   "contextionaries": [
     {"Open data":  "100"},
@@ -189,16 +189,16 @@
   ],
   "weaviates": [
     {"config": { "fixed": true }},
-    {"1 weaviate": "500"},
-    {"2 weaviates": "1000"},
-    {"3 weaviates": "1500"},
-    {"4 weaviates": "2000"}
+    {"title": "1 weaviate", "value": "500"},
+    {"title": "2 weaviates", "value": "1000"},
+    {"title": "3 weaviates", "value": "1500"},
+    {"title": "4 weaviates", "value": "2000"}
   ],
   "networkNodes": [
     {"config": { "fixed": true }},
-    {"Common Knowledge": "1000"},
-    {"Places": "2000"},
-    {"Emotions": "3000"},
-    {"None": "0"}
+    {"title": "Common Knowledge", "value": "1000"},
+    {"title": "Places", "value": "2000"},
+    {"title": "Emotions", "value": "3000"},
+    {"title": "None", "value": "0"}
   ]
 }

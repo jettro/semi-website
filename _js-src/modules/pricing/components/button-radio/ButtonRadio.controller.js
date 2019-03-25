@@ -30,6 +30,10 @@ export default class ButtonRadioController {
     return this.model.useCaseKey;
   }
 
+  get showTarget() {
+    return this.model.showTarget;
+  }
+
   /**
    * @desc interface for the eventlistener
    * @param e

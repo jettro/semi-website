@@ -37,8 +37,10 @@ export default class ButtonRadioView {
     this.buttonElement.addEventListener('click', this.controller);
     this.titleElement = this.html.getElementsByClassName('ui-button__title')[0];
     this.titleElement.innerText = this.controller.title;
-    this.siblings = [];
     PubSub.subscribe('buttonClicked.default', (msg, data) => { this.toggleStates(msg, data) });
+    if (typeof(this.controller.showTarget) !== 'undefined') {
+      this.buttonElement.dataset.targetShowOptions = this.controller.showTarget;
+    }
   }
 
   toggleStates(msg, data) {
@@ -68,4 +70,7 @@ export default class ButtonRadioView {
       this.html.dataset.useCase = this.controller.useCaseKey;
     targetNode.insertAdjacentElement('beforeend', this.html);
   }
+
+
+  // targetShowOptions
 }
