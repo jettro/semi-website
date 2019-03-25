@@ -38,7 +38,7 @@ export default class ButtonRadioView {
     this.titleElement = this.html.getElementsByClassName('ui-button__title')[0];
     this.titleElement.innerText = this.controller.title;
     this.siblings = [];
-    PubSub.subscribe('buttonClicked', (msg, data) => { this.toggleStates(msg, data) });
+    PubSub.subscribe('buttonClicked.default', (msg, data) => { this.toggleStates(msg, data) });
   }
 
   toggleStates(msg, data) {

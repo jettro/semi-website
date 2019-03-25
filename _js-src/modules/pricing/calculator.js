@@ -65,12 +65,12 @@ import { setFixedCostPrice } from './components/receipt/pricingReceiptFunctions'
         }
       });
 
-      // /** second fieldset, hosting preference */
-      // handleChoiceHosting(fieldsetUseCase, fieldsetHostingPreference, fieldSets, function() {
-      //   const nextFieldset = getChoiceFieldset(fieldSets, 'clusters');
-      //   nextFieldset.classList.remove('form-stepper__step--hide');
-      //   nextFieldset.classList.add('form-stepper__step--show');
-      // });
+      /** second fieldset, hosting preference */
+      handleChoiceHosting(fieldsetUseCase, fieldsetHostingPreference, fieldSets, function() {
+        const nextFieldset = getChoiceFieldset(fieldSets, 'clusters');
+        nextFieldset.classList.remove('form-stepper__step--hide');
+        nextFieldset.classList.add('form-stepper__step--show');
+      });
 
       // /** third fieldset, number of clusters */
       // handleChoiceClusters(fieldsetClusters, function() {

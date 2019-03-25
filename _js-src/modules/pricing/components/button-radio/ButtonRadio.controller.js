@@ -7,14 +7,19 @@ export default class ButtonRadioController {
    * @desc Changes the model
    * @param target
    */
-  static clickHandler(e) {
+  static clickHandler(e, scope) {
     const button = getClosest(e.target, 'BUTTON');
     const container = getClosest(e.target, 'DIV');
-    PubSub.publish('buttonClicked', {"button": button, "container": container});
+    PubSub.publish('buttonClicked.default', {"button": button, "container": container});
+
+    if (typeof(scope) !== 'undefined') {
+      PubSub.publish(`buttonClicked.${scope}`, { "button": button });
+    }
   }
 
-  constructor(model) {
+  constructor(model, scopedPubSub = undefined) {
     this.model = model;
+    this.scope = scopedPubSub;
   }
 
   get title() {
@@ -33,7 +38,7 @@ export default class ButtonRadioController {
     e.stopPropagation();
     switch(e.type){
       case "click":
-        ButtonRadioController.clickHandler(e);
+        ButtonRadioController.clickHandler(e, this.scope);
         break;
       default:
         console.log(e.target);

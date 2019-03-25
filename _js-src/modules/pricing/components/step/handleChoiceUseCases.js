@@ -125,7 +125,7 @@ export default function(target, showNextChoiceHandler = undefined) {
 
       /** use list item template to assert button radio into */
       let [li] = template.getElementsByTagName('LI');
-      buttonRadioComponent(option.title, option.useCaseKey).renderInto(li);
+      buttonRadioComponent(option.title, option.useCaseKey, 'useCases').renderInto(li);
       optionsListItemButtonMap.set(i, li);
     });
 
@@ -135,7 +135,7 @@ export default function(target, showNextChoiceHandler = undefined) {
     const panels = document.getElementsByClassName('panel-collapse');
 
     /** when a radio button in the list is clicked, show the table in an expansion panel */
-    PubSub.subscribe('buttonClicked', (msg, pubSubData) => {
+    PubSub.subscribe('buttonClicked.useCases', (msg, pubSubData) => {
       const currentUseCase = pubSubData.button.dataset.useCase;
       const flattenedUseCaseData = Object.assign({}, ...useCaseData);
       const singleUseCase = flattenedUseCaseData[currentUseCase];
