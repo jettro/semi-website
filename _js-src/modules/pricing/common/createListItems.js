@@ -9,10 +9,10 @@ import listOptionsComponent from '../components/list-options/list';
  * @param options {Object} The object in which the options are
  * @param container {HTMLElement} The element the list should be asserted to
  * @param listData {object}{attr: "", value: ""} [listData="undefined"] ...
- * @param scope {string} The scope of the pubsub
+ * @param topicScope {string} The topic scope of the pubsub (created aside the usual topic of the component)
  * @type {Map<any, any>}
  */
-export default function(options, container, listData = undefined, scope) {
+export default function(options, container, listData = undefined, topicScope) {
   const listItemButtonMap = new Map();
   removeObjectByKeyFromArray(options, 'config').forEach((option, i) => {
     /** create list item template so the button can be asserted inside */
@@ -21,7 +21,7 @@ export default function(options, container, listData = undefined, scope) {
     /** use list item template to assert button radio into */
     let [li] = template.getElementsByTagName('LI');
     const isDefault = (typeof option.default !== 'undefined') ? option.default : false;
-    buttonRadioComponent(option.title, option.useCaseKey, isDefault, scope, option.showTarget).renderInto(li);
+    buttonRadioComponent(option.title, option.useCaseKey, isDefault, topicScope, option.showTarget).renderInto(li);
     listItemButtonMap.set(i, li);
   });
 

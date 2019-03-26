@@ -175,8 +175,8 @@ export default function(target, useCases, showNextChoiceHandler = undefined) {
       /** recalculate the total */
       reCalculateTotal();
 
-      /** show the next step */
-      showNextChoiceHandler();
+      /** show the next fieldset */
+      if (typeof(showNextChoiceHandler) === typeof(Function)) showNextChoiceHandler();
     });
 
   } else {

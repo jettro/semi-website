@@ -72,15 +72,17 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
       /** second fieldset, hosting preference */
       handleChoiceHosting(fieldsetUseCase, flattenedUseCaseData, fieldsetHostingPreference, fieldSets, function() {
         const nextFieldset = getChoiceFieldset(fieldSets, 'clusters');
-        nextFieldset.classList.remove(pricingConfig.hideClass);
-        nextFieldset.classList.add(pricingConfig.showClass);
+        if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
+          nextFieldset.classList.remove(pricingConfig.hideClass);
+          nextFieldset.classList.add(pricingConfig.showClass);
+        }
       });
 
       // /** third fieldset, number of clusters */
       // handleChoiceClusters(fieldsetClusters, function() {
-      //   const nextFieldset = getChoiceFieldset(fieldSets, 'contextionaries');
-      //   nextFieldset.classList.remove('form-stepper__step--hide');
-      //   nextFieldset.classList.add('form-stepper__step--show');
+      //   // const nextFieldset = getChoiceFieldset(fieldSets, 'contextionaries');
+      //   // nextFieldset.classList.remove('form-stepper__step--hide');
+      //   // nextFieldset.classList.add('form-stepper__step--show');
       // });
       //
       // /** fourth fieldset, type of network nodes (contextionaries) */
@@ -108,9 +110,11 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
       //   console.log('the next one can be shown');
       // });
 
+
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);
     }
+
   }
 
   /** interface definition */

@@ -33,9 +33,8 @@ function calculateDifference(multiplier, priceStr) {
 }
 
 /**
- *
- * @param subTotal {string}
- * @param multiplier {string=undefined}
+ * @param subTotal {string} the subtotal to add
+ * @param multiplier {string=undefined} the amount to multiply it by
  */
 function setHostingAdjustment(subTotal, multiplier = 'undefined') {
   /** if no multiplier is set, just assign subTotal as price directly */
