@@ -127,7 +127,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
     /** option Yes clicked */
     if (pubSubData.button.dataset.targetShowOptions === optionYesId) {
 
-      if (choiceMade.includes('choiceYesOptions1')) { choiceYesOptionsExist = true; }
+      if (choiceMade.includes('choiceYesOptions')) { choiceYesOptionsExist = true; }
 
       /** show optional fieldset for options 1 & 2 */
       hideElement(hostingByCustomer);
@@ -137,9 +137,9 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
 
       /** only if they don't exist, create options for step 1 */
       if (!choiceYesOptionsExist) {
-        const container = document.getElementById(pricingConfig.pricingCustomerOption1Id);
+        const container = document.getElementById(pricingConfig.pricingSemiOption1Id);
         const options = pricingUseCaseData.hostingProvidersBySemi;
-        choiceMade.push('choiceYesOptions1');
+        choiceMade.push('choiceYesOptions');
         createListItems(options, container, undefined, 'hostingBySemiOption1');
       }
     }
@@ -153,11 +153,19 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
     /** option No clicked */
     if (pubSubData.button.dataset.targetShowOptions === optionNoId) {
 
+      if (choiceMade.includes('choiceNoOptions')) { choiceNoOptionsExist = true; }
+
       hideElement(hostingBySemiElement);
       showElement(hostingByCustomer);
 
-      // TODO: add the 'No' options
-
+      if (!choiceNoOptionsExist) {
+        // TODO: add the 'No' options
+        const container = document.getElementById(pricingConfig.pricingOptimizationCustomerContainerId);
+        const options = pricingUseCaseData.hostingProvidersByCustomer;
+        choiceMade.push('choiceNoOptions');
+        console.log('nope!');
+        createListItems(options, container, undefined, 'hostingByCustomer');
+      }
     }
 
   });
@@ -169,7 +177,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
     const useCaseKey = data.button.dataset.useCase;
     const theseOptionsExist = existingOptions.has(data.button);
     const options = useCases[useCaseKey]['optimization'];
-    const container = document.getElementById(pricingConfig.pricingCustomerOption2Id);
+    const container = document.getElementById(pricingConfig.pricingSemiOption2Id);
     const lists = container.getElementsByTagName('ul');
     const listIdentifier = "useCase";
 
