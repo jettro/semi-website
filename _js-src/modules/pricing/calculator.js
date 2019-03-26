@@ -8,6 +8,7 @@ import handleChoiceContextionaries from './components/step/handleChoiceContextio
 import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
 import handleChoiceNetworkNodes from './components/step/handleChoiceNetworkNodes';
 import { setFixedCostPrice } from './components/receipt/pricingReceiptFunctions';
+import pricingUseCaseData from '../../../_data/pricingUseCases';
 
 (function(factory) {
 
@@ -54,22 +55,25 @@ import { setFixedCostPrice } from './components/receipt/pricingReceiptFunctions'
       let weaviatePrice = '0';
       let nodeNetworksPrice = '0';
 
+      const useCaseData = pricingUseCaseData.useCases;
+      const flattenedUseCaseData = Object.assign({}, ...useCaseData);
+
       /** execute the choices */
 
       /** first fieldset, use cases */
-      handleChoiceUseCases(fieldsetUseCase, function() {
+      handleChoiceUseCases(fieldsetUseCase, flattenedUseCaseData, function() {
         const nextFieldset = getChoiceFieldset(fieldSets, 'hosting-preference');
-        if (nextFieldset.classList.contains(fieldsetHideClass)) {
-          nextFieldset.classList.remove(fieldsetHideClass);
-          nextFieldset.classList.add(fieldsetShowClass);
+        if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
+          nextFieldset.classList.remove(pricingConfig.hideClass);
+          nextFieldset.classList.add(pricingConfig.showClass);
         }
       });
 
       /** second fieldset, hosting preference */
-      handleChoiceHosting(fieldsetUseCase, fieldsetHostingPreference, fieldSets, function() {
+      handleChoiceHosting(fieldsetUseCase, flattenedUseCaseData, fieldsetHostingPreference, fieldSets, function() {
         const nextFieldset = getChoiceFieldset(fieldSets, 'clusters');
-        nextFieldset.classList.remove('form-stepper__step--hide');
-        nextFieldset.classList.add('form-stepper__step--show');
+        nextFieldset.classList.remove(pricingConfig.hideClass);
+        nextFieldset.classList.add(pricingConfig.showClass);
       });
 
       // /** third fieldset, number of clusters */

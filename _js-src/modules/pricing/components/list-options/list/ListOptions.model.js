@@ -17,8 +17,9 @@ export default class ListOptionsModel {
   /**
    * @param {HTMLElement} [children] the value the list item should get
    */
-  constructor(children) {
+  constructor(children, dataAttr) {
     this._children = ListOptionsModel.validateChildren(children);
+    this._dataAttr = dataAttr;
   }
 
   /**
@@ -29,4 +30,10 @@ export default class ListOptionsModel {
     if (this._children !== undefined)
       return this._children;
   };
+
+
+  get dataAttr() {
+    if (this._dataAttr !== undefined)
+      return this._dataAttr;
+  }
 }

@@ -5,15 +5,18 @@ export default class ButtonRadioController {
 
   /**
    * @desc Changes the model
-   * @param target
+   * @param e {event}
+   * @param scope {string} The scope which can be used to identify specific pubsub event
    */
   static clickHandler(e, scope) {
-    const button = getClosest(e.target, 'BUTTON');
-    const container = getClosest(e.target, 'DIV');
-    PubSub.publish('buttonClicked.default', {"button": button, "container": container});
-
+    const data = {
+      "button": getClosest(e.target, 'BUTTON'),
+      "container": getClosest(e.target, 'DIV'),
+      "radioList": getClosest(e.target, 'UL')
+    };
+    PubSub.publish('buttonClicked.default', data);
     if (typeof(scope) !== 'undefined') {
-      PubSub.publish(`buttonClicked.${scope}`, { "button": button });
+      PubSub.publish(`buttonClicked.${scope}`, data);
     }
   }
 

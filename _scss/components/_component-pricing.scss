@@ -2,11 +2,6 @@
 @import '../variables/var-borders';
 @import '../variables/var-scale';
 
-.panel-pricing-use-case--hidden,
-.table-pricing-row--hidden {
-  display: none;
-}
-
 .pricing-use-case--show {
   display: flex;
 }

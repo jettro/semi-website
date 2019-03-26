@@ -1,0 +1,9 @@
+@import '../mixins/mixins';
+
+.component--hide {
+  display: none;
+}
+
+.component--show {
+  display: flex;
+}

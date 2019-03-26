@@ -68,6 +68,8 @@
 @import './components/component-titles';
 @import './components/component-toc';
 @import './components/component-visibility';
+// add this last so it's able to override other styling
+@import './components/component-modifiers';
 
 // Templates
 @import './base/content';

@@ -23,7 +23,7 @@
       content: "−";
     }
   }
-  &:not([class*="show"]):after {
+  &:not([class*="panel-collapse__head--panel-shown"]):after {
     content: "+";
   }
   h3 {
@@ -35,6 +35,6 @@
   }
 }
 
-.panel-collapse__body.show {
+.panel-collapse__body.component--show {
   padding: $scale-0;
 }

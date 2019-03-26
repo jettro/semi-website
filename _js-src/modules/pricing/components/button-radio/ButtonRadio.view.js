@@ -46,12 +46,11 @@ export default class ButtonRadioView {
   toggleStates(msg, data) {
     if (data.button === this.buttonElement) {
       /** remove active state from all buttons in the same section */
-      const [listItems] = data.container.getElementsByTagName('ul');
-      const siblingButtons = listItems.getElementsByTagName('button');
-
-      Object.keys(siblingButtons).forEach(key => {
-        siblingButtons[key].classList.remove("ui-button--active");
-        siblingButtons[key].setAttribute('aria-checked', 'false');
+      const listItems = data.radioList.getElementsByTagName('li');
+      Object.keys(listItems).forEach(key => {
+        const button = listItems[key].querySelector('[role="radio"]');
+        button.classList.remove("ui-button--active");
+        button.setAttribute('aria-checked', 'false');
       });
 
       /** then add the active state tot this specific button */
@@ -70,7 +69,4 @@ export default class ButtonRadioView {
       this.html.dataset.useCase = this.controller.useCaseKey;
     targetNode.insertAdjacentElement('beforeend', this.html);
   }
-
-
-  // targetShowOptions
 }

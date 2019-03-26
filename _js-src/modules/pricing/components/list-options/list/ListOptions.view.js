@@ -16,6 +16,7 @@ export default class ListOptionsView {
     this._children = this.controller.children;
     /** constructs the html element from html template literal (string) */
     this._html = htmlToElement(ListOptionsView.htmlString());
+    this._dataAttr = this.controller.dataAttr;
   }
 
   /**
@@ -23,6 +24,8 @@ export default class ListOptionsView {
    * @returns {HTMLUListElement} A list
    */
   init(){
+    if (this._dataAttr !== undefined)
+      this._html.dataset[this._dataAttr.attr] = this._dataAttr.value;
     return this[_addListItems](this._html);
   }
 

@@ -15,9 +15,6 @@ import listOptionsComponent from '../list-options/list';
 import listOptionItemComponent from '../list-options/list-option-item';
 import { removeObjectByKeyFromArray } from './handleChoiceUseCases';
 
-const hideClass = 'form-stepper__step--hide';
-const showClass = 'form-stepper__step--show';
-
 // /**
 //  *
 //  * @param elements {}
@@ -70,23 +67,23 @@ const showClass = 'form-stepper__step--show';
 //   hideElement(elementToHide);
 //   showElement(elementToShow);
 // }
-//
-// /**
-//  * @desc show the element
-//  * @param elementToHide {HTMLElement}
-//  */
-// function hideElement(elementToHide) {
-//   elementToHide.classList.remove(showClass);
-//   elementToHide.classList.add(hideClass);
-// }
-//
+
+/**
+ * @desc show the element
+ * @param elementToHide {HTMLElement}
+ */
+function hideElement(elementToHide) {
+  elementToHide.classList.remove(pricingConfig.showClass);
+  elementToHide.classList.add(pricingConfig.hideClass);
+}
+
 /**
  * @desc hide the element
  * @param elementToShow {HTMLElement}
  */
 function showElement(elementToShow) {
-  elementToShow.classList.remove(hideClass);
-  elementToShow.classList.add(showClass);
+  elementToShow.classList.remove(pricingConfig.hideClass);
+  elementToShow.classList.add(pricingConfig.showClass);
 }
 
 /**
@@ -97,7 +94,10 @@ function showElement(elementToShow) {
  * @param fieldSets {Object} The sub-fieldsets
  * @param showNextChoiceHandler {fn=null} callback function to execute only once, once all actions  in this handler are done
  */
-export default function(useCaseFieldset, target, fieldSets, showNextChoiceHandler = undefined) {
+export default function(useCaseFieldset, useCases, target, fieldSets, showNextChoiceHandler = undefined) {
+  let choiceMade = [];
+  let choiceYesOptionsExist = false;
+  let choiceNoOptionsExist = false;
 
   PubSub.subscribe('generatedCpcRows', function() {
     /** Add collapse triggers async to newly created DOM elements */
@@ -110,44 +110,85 @@ export default function(useCaseFieldset, target, fieldSets, showNextChoiceHandle
   ];
 
   const container = document.getElementById('container-hosting-choice');
-  createListItems(options, container, 'hostingOptions');
+  createListItems(options, container, undefined, 'hostingChoice');
 
-  PubSub.subscribe('buttonClicked.hostingOptions', (msg, pubSubData) => {
+  PubSub.subscribe('buttonClicked.hostingChoice', (msg, pubSubData) => {
 
     const optionYesId = 'hosting-by-semi';
     const hostingBySemiElement = document.getElementById(optionYesId);
     const optionNoId = 'hosting-by-customer';
     const hostingByCustomer = document.getElementById(optionNoId);
 
+    const optionStep1 = 'hosting-semi-preference-platform';
+    const optionStep2 = 'hosting-semi-optimisation';
+    const optionsSubStep1FieldsetElement = getChoiceFieldset(fieldSets, optionStep1);
+    const optionsSubStep2FieldsetElement = getChoiceFieldset(fieldSets, optionStep2);
+
     /** option Yes clicked */
     if (pubSubData.button.dataset.targetShowOptions === optionYesId) {
 
-      /** */
-      const optionStep1 = 'hosting-semi-preference-platform';
-      const optionStep2 = 'hosting-semi-optimisation';
-      const optionsSubStep1FieldsetElement = getChoiceFieldset(fieldSets, optionStep1);
-      const optionsSubStep2FieldsetElement = getChoiceFieldset(fieldSets, optionStep2);
-      const optionsStep1DoesNotExist =
-        optionsSubStep1FieldsetElement.getElementsByClassName(
-          'pricing-hosting-button--show',
-        ).length === 0;
-      const optionsStep2DoesNotExist =
-        optionsSubStep2FieldsetElement.getElementsByClassName(
-          'pricing-hosting-button--show',
-        ).length === 0;
+      if (choiceMade.includes('choiceYesOptions1')) { choiceYesOptionsExist = true; }
 
-      /** show options for option 1 */
+      /** show optional fieldset for options 1 & 2 */
+      hideElement(hostingByCustomer);
       showElement(hostingBySemiElement);
 
-      /** create new */
-      if (optionsStep1DoesNotExist) {
-        console.log('it does not exist yet, please create :)');
-        const container = document.getElementById(pricingConfig.pricingPlatformContainerId);
-        const step1Options = pricingUseCaseData.hostingProvidersBySemi;
-        createListItems(step1Options, container, 'hostingBySemi');
+      showElement(optionsSubStep1FieldsetElement);
 
-        showElement(optionsSubStep1FieldsetElement);
+      /** only if they don't exist, create options for step 1 */
+      if (!choiceYesOptionsExist) {
+        const container = document.getElementById(pricingConfig.pricingCustomerOption1Id);
+        const options = pricingUseCaseData.hostingProvidersBySemi;
+        choiceMade.push('choiceYesOptions1');
+        createListItems(options, container, undefined, 'hostingBySemiOption1');
       }
+    }
+
+    /** show next options */
+    PubSub.subscribe('buttonClicked.hostingBySemiOption1', (msg, pubSubData) => {
+      showElement(optionsSubStep2FieldsetElement);
+    });
+
+
+    /** option No clicked */
+    if (pubSubData.button.dataset.targetShowOptions === optionNoId) {
+
+      hideElement(hostingBySemiElement);
+      showElement(hostingByCustomer);
+
+      // TODO: add the 'No' options
+
+    }
+
+  });
+
+  let existingOptions = new Set();
+
+  /** the optimization is based on each use-case */
+  PubSub.subscribe('buttonClicked.useCases', (msg, data) => {
+    const useCaseKey = data.button.dataset.useCase;
+    const theseOptionsExist = existingOptions.has(data.button);
+    const options = useCases[useCaseKey]['optimization'];
+    const container = document.getElementById(pricingConfig.pricingCustomerOption2Id);
+    const lists = container.getElementsByTagName('ul');
+    const listIdentifier = "useCase";
+
+    /** show list based on use case button clicked */
+    Object.keys(lists).forEach(key => {
+      const list = lists[key];
+      if (list.dataset[listIdentifier] === useCaseKey) {
+        list.classList.remove(pricingConfig.hideClass);
+      } else {
+        list.classList.add(pricingConfig.hideClass);
+      }
+    });
+
+    if (!theseOptionsExist) {
+      /** create new list (and assign data attribute for the used use-case key) */
+      const listData = { attr: listIdentifier, value: useCaseKey };
+      createListItems(options, container, listData, 'hostingBySemiOption2');
+      /** add this button to the set of existing options */
+      existingOptions.add(data.button);
     }
 
   });

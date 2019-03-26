@@ -8,4 +8,8 @@ export default class ListOptionsController {
   get children() {
     return this._model.children;
   };
+
+  get dataAttr() {
+    return this._model.dataAttr;
+  }
 }

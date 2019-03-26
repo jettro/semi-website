@@ -25,14 +25,6 @@
   margin-bottom: 4rem;
 }
 
-.form-stepper__step--hide {
-  display: none;
-}
-
-.form-stepper__step--show {
-  display: flex;
-}
-
 .form-stepper__optional {
   background-color: $color-gray-6;
   flex-direction: column;

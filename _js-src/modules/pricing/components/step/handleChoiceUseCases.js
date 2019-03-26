@@ -6,9 +6,6 @@ import { setVariableMonthlyCost, reCalculateTotal } from '../../components/recei
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
 
-import listOptionsComponent from '../list-options/list'
-import listOptionItemComponent from '../list-options/list-option-item';
-import buttonRadioComponent from '../button-radio';
 import expansionPanelHeadComponent from '../expansion-panel/expansion-panel-head';
 import expansionPanelBodyComponent from '../expansion-panel/expansion-panel-body';
 import tableComponent from '../table/table';
@@ -18,9 +15,6 @@ import tableRowComponent from '../table/table-row';
 import collapseBodyComponent from '../collapse/collapse-body';
 import collapseTriggerComponent from '../collapse/collapse-trigger';
 import createListItems from '../../common/createListItems';
-
-const showPanelClass = 'panel-pricing-use-case--show';
-const hidePanelClass = 'panel-pricing-use-case--hidden';
 
 /**
  * @desc calculates the total cost of the use-cases
@@ -52,11 +46,11 @@ const toggleUseCasePanels = function(panels, currentUseCaseKey) {
     const currentPanel = panel.dataset.useCase === currentUseCaseKey;
     const notCurrentPanel = panel.dataset.useCase !== currentUseCaseKey;
     if (currentPanel) {
-      panel.classList.add(showPanelClass);
-      panel.classList.remove(hidePanelClass);
+      panel.classList.add(pricingConfig.showClass);
+      panel.classList.remove(pricingConfig.hideClass);
     } else if (notCurrentPanel) {
-      panel.classList.add(hidePanelClass);
-      panel.classList.remove(showPanelClass);
+      panel.classList.add(pricingConfig.hideClass);
+      panel.classList.remove(pricingConfig.showClass);
     }
   });
 };
@@ -69,7 +63,7 @@ const toggleUseCasePanels = function(panels, currentUseCaseKey) {
 const getVisibleTable = function(panels) {
   let result = [];
   Array.from(panels).forEach(panel => {
-    if (!panel.classList.contains(hidePanelClass)) {
+    if (!panel.classList.contains(pricingConfig.hideClass)) {
       result = panel;
     }
   });
@@ -100,31 +94,29 @@ export function removeObjectByKeyFromArray(object, objectKey) {
  * @param target {HTMLElement} the target this choice applies to
  * @param showNextChoiceHandler
  */
-export default function(target, showNextChoiceHandler = undefined) {
+export default function(target, useCases, showNextChoiceHandler = undefined) {
   let existingPanelKeys = [];
   const container = document.getElementById(pricingConfig.pricingInfoContainerId);
-  const useCaseData = pricingUseCaseData.useCases;
-  const options = useCaseData.map((o) => {
-    const useCaseKey = Object.getOwnPropertyNames(o)[0];
-    const title = Object.values(o)[0].title;
-    if (!useCaseKey)
-      throw new Error('You must provide a use case key in the data.');
-    if (!title)
-      throw new Error('You must provide a title in the data.');
-    return { title: title, useCaseKey: useCaseKey };
-  });
 
   if (elementExists(container)) {
 
-    createListItems(options, container, 'useCases');
+    let options = [];
+    Object.keys(useCases).forEach(key => {
+      const useCase = useCases[key];
+      options.push({
+        title: useCase.title,
+        useCaseKey: key
+      });
+    });
+
+    createListItems(options, container, undefined,'useCases');
 
     const panels = document.getElementsByClassName('panel-collapse');
 
     /** when a radio button in the list is clicked, show the table in an expansion panel */
     PubSub.subscribe('buttonClicked.useCases', (msg, pubSubData) => {
       const currentUseCase = pubSubData.button.dataset.useCase;
-      const flattenedUseCaseData = Object.assign({}, ...useCaseData);
-      const singleUseCase = flattenedUseCaseData[currentUseCase];
+      const singleUseCase = useCases[currentUseCase];
 
       /**
        * Toggle the panels
@@ -169,7 +161,6 @@ export default function(target, showNextChoiceHandler = undefined) {
             cpc: option.cpc,
             average: option.average
           };
-
           const collapseElement = document.createElement('div');
           collapseTriggerComponent(data.title).renderInto(collapseElement);
           collapseBodyComponent(data.desc).renderInto(collapseElement);
@@ -180,6 +171,7 @@ export default function(target, showNextChoiceHandler = undefined) {
       /** calculate the costs of visible table */
       const total = calcTotalCostUseCases(getVisibleTable(panels));
       setVariableMonthlyCost(total);
+
       /** recalculate the total */
       reCalculateTotal();
 

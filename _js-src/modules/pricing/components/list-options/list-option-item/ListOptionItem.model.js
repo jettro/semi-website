@@ -3,9 +3,9 @@ export default class ListOptionItemModel {
 
   /**
    * @param {string} [value=undefined] the value the list item should get
-   * @param {string} [valueType=undefined] the value the list item should get
+   * @param {string} [valueType=multiply] the value the list item should get
    */
-  constructor(value = undefined, valueType = undefined) {
+  constructor(value = undefined, valueType = 'multiplier') {
     this._value = value;
     this._valueType = valueType;
   }
@@ -24,7 +24,6 @@ export default class ListOptionItemModel {
    * @returns {string}
    */
   get valueType() {
-    if (this._valueType !== undefined)
       return this._valueType;
   }
 }
