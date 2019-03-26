@@ -85,13 +85,13 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
         nextFieldset.classList.add(pricingConfig.showClass);
       });
 
-      // /** fourth fieldset, type of network nodes (contextionaries) */
-      // handleChoiceContextionaries(fieldsetContextionaries, function() {
-      //   const nextFieldset = getChoiceFieldset(fieldSets, 'weaviates');
-      //   nextFieldset.classList.remove('form-stepper__step--hide');
-      //   nextFieldset.classList.add('form-stepper__step--show');
-      // });
-      //
+      /** fourth fieldset, type of network nodes (contextionaries) */
+      handleChoiceContextionaries(fieldsetContextionaries, function() {
+        const nextFieldset = getChoiceFieldset(fieldSets, 'weaviates');
+        nextFieldset.classList.remove(pricingConfig.hideClass);
+        nextFieldset.classList.add(pricingConfig.showClass);
+      });
+
       // /** fifth fieldset, required number of weaviates */
       // handleChoiceWeaviates(fieldsetWeaviates, function(weaviatePrice) {
       //   /** each time a weaviate button is clicked, recalculate the fixed price */

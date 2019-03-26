@@ -200,9 +200,9 @@
     {"title": "4 clusters", "value": "130"}
   ],
   "contextionaries": [
-    {"Open data":  "100"},
-    {"One-off (custom)":  "100"},
-    {"Constant training (custom)":  "100"}
+    {"title": "Open data", "value": "100"},
+    {"title": "One-off (custom)", "value":  "100"},
+    {"title": "Constant training (custom)", "value":  "100"}
   ],
   "weaviates": [
     {"config": { "fixed": true }},
