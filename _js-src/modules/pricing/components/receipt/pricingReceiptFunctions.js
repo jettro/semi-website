@@ -55,11 +55,11 @@ function setHostingAdjustment(subTotal, multiplier = 'undefined') {
 
 /**
  *
- * @param multiplier {string}
- * @param useCasePrice {HTMLElement}
+ * @param multiplier {string} the mutliplier to multiply the amount by
+ * @param useCasePrice {string} the total use case price
  */
 function setHostingCluster(multiplier, useCasePrice) {
-  const price = calculateDifference(multiplier, useCasePrice.textContent);
+  const price = calculateDifference(multiplier, useCasePrice);
   /** append to receipt */
   const clusterAdjustmentElement = document.getElementById(pricingConfig.receipt.clustersId);
   clusterAdjustmentElement.innerHTML = price;

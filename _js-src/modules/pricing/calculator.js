@@ -78,13 +78,13 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
         }
       });
 
-      // /** third fieldset, number of clusters */
-      // handleChoiceClusters(fieldsetClusters, function() {
-      //   // const nextFieldset = getChoiceFieldset(fieldSets, 'contextionaries');
-      //   // nextFieldset.classList.remove('form-stepper__step--hide');
-      //   // nextFieldset.classList.add('form-stepper__step--show');
-      // });
-      //
+      /** third fieldset, number of clusters */
+      handleChoiceClusters(fieldsetClusters, function() {
+        const nextFieldset = getChoiceFieldset(fieldSets, 'contextionaries');
+        nextFieldset.classList.remove(pricingConfig.hideClass);
+        nextFieldset.classList.add(pricingConfig.showClass);
+      });
+
       // /** fourth fieldset, type of network nodes (contextionaries) */
       // handleChoiceContextionaries(fieldsetContextionaries, function() {
       //   const nextFieldset = getChoiceFieldset(fieldSets, 'weaviates');

@@ -156,7 +156,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
   /** hosting by customer influences the hosting costs */
   PubSub.subscribe('buttonClicked.hosting.hostingByCustomer', (msg, data) => {
     const li = getClosest(data.button, 'li');
-    const useCaseSubTotal = document.getElementById('price-monthly-total').innerHTML;
+    const useCaseSubTotal = document.getElementById(pricingConfig.receipt.montlyTotalId).innerHTML;
     setHostingAdjustment(useCaseSubTotal, li.dataset.multiplier);
     /** show the next fieldset */
     if (typeof(showNextChoiceHandler) === typeof(Function)) showNextChoiceHandler();

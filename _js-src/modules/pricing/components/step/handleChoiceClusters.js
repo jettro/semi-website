@@ -1,46 +1,19 @@
 
+import PubSub from 'pubsub-js';
 import createListItems from '../../common/createListItems';
-
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
-// import formPricingRadioButtons from '../../common/formPricingRadioButtons';
-import selectClickedElementByType from '../../common/selectClickedElementByType';
-import { addEventListenerOnce, elementExists } from '../../../../helpers/helpers';
+import { getClosest } from '../../../../helpers/helpers';
 import { setHostingCluster } from '../receipt/pricingReceiptFunctions';
 
-export default function(target, callback) {
+export default function(target, showNextChoiceHandler = undefined) {
   const container = document.getElementById(pricingConfig.pricingClusterContainerId);
   const options = pricingUseCaseData.clusters;
-
-  /** Append all the cost buttons to the cluster container */
-  createListItems(options).forEach(item => {
-    container.appendChild(item);
-  });
-
-  target.addEventListener('click', e => {
-    formPricingRadioButtons(e, target, function() {
-      const button = selectClickedElementByType(e, 'BUTTON');
-      /** get the total price from the receipt */
-      const totalUseCasePrice = document.getElementById(pricingConfig.receipt.montlyTotalId);
-      if (elementExists(button)) {
-        /** target parent element, since data set needs to be set on parent li rather than button */
-        const multiplier = button.parentElement.dataset.multiplier;
-        const multiplierExists = multiplier !== '';
-        if(multiplierExists) {
-          setHostingCluster(multiplier, totalUseCasePrice);
-        } else {
-          console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
-        }
-      }
-    });
-  });
-
-  /** resolve the promise and do a callback once! */
-  addEventListenerOnce(target, "click", function() {
-    const button = selectClickedElementByType(event, 'BUTTON');
-    /** only do callback when the element clicked on is a button */
-    if (elementExists(button)) {
-      callback();
-    }
+  createListItems(options, container, undefined, 'clusters');
+  PubSub.subscribe('buttonClicked.clusters', (msg, data) => {
+    const li = getClosest(data.button, 'li');
+    const useCaseSubTotal = document.getElementById(pricingConfig.receipt.montlyTotalId).innerHTML;
+    setHostingCluster(li.dataset.multiplier, useCaseSubTotal);
+    if (typeof (showNextChoiceHandler) === typeof (Function)) showNextChoiceHandler();
   });
 }
