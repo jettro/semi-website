@@ -31,16 +31,41 @@ export default class ButtonRadioView {
    * @param controller
    */
   constructor(controller) {
+    this.self = this;
     this.controller = ButtonRadioView.initialize(controller);
     this.html = htmlToElement(ButtonRadioView.htmlString());
     this.buttonElement = this.html;
     this.buttonElement.addEventListener('click', this.controller);
     this.titleElement = this.html.getElementsByClassName('ui-button__title')[0];
     this.titleElement.innerText = this.controller.title;
-    PubSub.subscribe('buttonClicked.default', (msg, data) => { this.toggleStates(msg, data) });
     if (typeof(this.controller.showTarget) !== 'undefined') {
-      this.buttonElement.dataset.targetShowOptions = this.controller.showTarget;
+      this.setDataTarget();
     }
+    if (this.controller.isDefault === true) {
+      this.setDefaultState();
+    }
+    PubSub.subscribe('buttonClicked.default', (msg, data) => {
+      this.toggleStates(msg, data)
+    });
+  }
+
+  removeActiveState(button) {
+    button.classList.remove("ui-button--active");
+    button.setAttribute('aria-checked', 'false');
+  }
+
+  setActiveState() {
+    this.html.classList.add("ui-button--active");
+    this.html.setAttribute('aria-checked', 'true');
+  }
+
+  setDefaultState() {
+    this.self.setActiveState();
+    this.html.classList.add("ui-button--default");
+  }
+
+  setDataTarget() {
+    this.buttonElement.dataset.targetShow = this.controller.showTarget;
   }
 
   toggleStates(msg, data) {
@@ -49,13 +74,10 @@ export default class ButtonRadioView {
       const listItems = data.radioList.getElementsByTagName('li');
       Object.keys(listItems).forEach(key => {
         const button = listItems[key].querySelector('[role="radio"]');
-        button.classList.remove("ui-button--active");
-        button.setAttribute('aria-checked', 'false');
+        this.self.removeActiveState(button);
       });
-
       /** then add the active state tot this specific button */
-      this.html.classList.add("ui-button--active");
-      this.html.setAttribute('aria-checked', 'true');
+      this.self.setActiveState();
     }
   }
 

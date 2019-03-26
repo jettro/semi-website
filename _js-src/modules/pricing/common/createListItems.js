@@ -20,7 +20,8 @@ export default function(options, container, listData = undefined, scope) {
     listOptionItemComponent(option.value, option.valueType).renderInto(template);
     /** use list item template to assert button radio into */
     let [li] = template.getElementsByTagName('LI');
-    buttonRadioComponent(option.title, option.useCaseKey, scope, option.showOption).renderInto(li);
+    const isDefault = (typeof option.default !== 'undefined') ? option.default : false;
+    buttonRadioComponent(option.title, option.useCaseKey, isDefault, scope, option.showTarget).renderInto(li);
     listItemButtonMap.set(i, li);
   });
 

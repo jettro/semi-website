@@ -92,32 +92,6 @@ button:not(.ui-button):not(.form-stepper-table__column):not(.button--link),
   min-height: 88px;
   appearance: none;
 
-  &.ui-button:not([disabled]):not(.ui-button--active):hover {
-    background-color: $color-semi-accent-tint--3;
-    border-color: $color-semi-accent;
-  }
-
-  &.ui-button--active {
-    color: $color-white;
-    background-color: $color-semi-accent;
-    border-color: $color-semi-accent;
-
-    .ui-button__radio-icon {
-      border-color: $color-white;
-
-      &:before {
-        $size: .75rem;
-        content: "";
-        background: $color-white;
-        border-radius: $size;
-        display: inline-block;
-        margin: 2px 0 0 2px;
-        height: $size;
-        width: $size;
-      }
-    }
-  }
-
   &[disabled] {
     color: $color-gray-4;
     cursor: not-allowed;
@@ -129,6 +103,30 @@ button:not(.ui-button):not(.form-stepper-table__column):not(.button--link),
   }
 }
 
+.ui-button:not([disabled]):not(.ui-button--active):hover {
+  background-color: $color-semi-accent-tint--3;
+  border-color: $color-semi-accent;
+}
+
+.ui-button--active,
+.ui-button--active.ui-button--default {
+  color: $color-white;
+  background-color: $color-semi-accent;
+  border-color: $color-semi-accent;
+
+  .ui-button__radio-icon {
+    border-color: $color-white;
+
+    &:before {
+      content: "";
+    }
+  }
+}
+
+.ui-button--default {
+  border: 2px dashed $color-almostblack;
+}
+
 .ui-button__radio-icon  {
   border: 2px solid $color-black;
   border-radius: 1rem;
@@ -136,6 +134,16 @@ button:not(.ui-button):not(.form-stepper-table__column):not(.button--link),
   height: 1.25rem;
   margin-top: .5rem;
   width: 1.25rem;
+
+  &:before {
+    $size: .75rem;
+    background: $color-white;
+    border-radius: $size;
+    display: inline-block;
+    margin: 2px 0 0 2px;
+    height: $size;
+    width: $size;
+  }
 }
 
 .ui-button__title {

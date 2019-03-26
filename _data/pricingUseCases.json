@@ -94,16 +94,16 @@
         ],
         "optimization": [
           {
-            "title": "size",
+            "title": "Size (recommended)",
             "value": "75",
             "default": true
           },
           {
-            "title": "overall",
+            "title": "Overall",
             "value": "100"
           },
           {
-            "title": "speed",
+            "title": "Speed",
             "value": "110"
           }
         ]
@@ -129,16 +129,16 @@
         ],
         "optimization": [
           {
-            "title": "size",
+            "title": "Size",
             "value": "100"
           },
           {
-            "title": "overall",
+            "title": "Overall (recommended)",
             "value": "100",
             "default": true
           },
           {
-            "title": "speed",
+            "title": "Speed",
             "value ": "75"
           }
         ]
@@ -165,16 +165,16 @@
         ],
         "optimization": [
           {
-            "title": "size",
+            "title": "Size (recommended)",
             "value": "75",
             "default": true
           },
           {
-            "title": "overall",
+            "title": "Overall",
             "value": "100"
           },
           {
-            "title": "speed",
+            "title": "Speed",
             "value ": "100"
           }
         ]

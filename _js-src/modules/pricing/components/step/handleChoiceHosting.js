@@ -105,8 +105,8 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
   });
 
   const options = [
-    { "title": "Yes", "showOption": "hosting-by-semi" },
-    { "title": "No", "showOption": "hosting-by-customer" }
+    { "title": "Yes", "showTarget": "hosting-by-semi" },
+    { "title": "No", "showTarget": "hosting-by-customer" }
   ];
 
   const container = document.getElementById('container-hosting-choice');
@@ -125,7 +125,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
     const optionsSubStep2FieldsetElement = getChoiceFieldset(fieldSets, optionStep2);
 
     /** option Yes clicked */
-    if (pubSubData.button.dataset.targetShowOptions === optionYesId) {
+    if (pubSubData.button.dataset.targetShow === optionYesId) {
 
       if (choiceMade.includes('choiceYesOptions')) { choiceYesOptionsExist = true; }
 
@@ -151,7 +151,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
 
 
     /** option No clicked */
-    if (pubSubData.button.dataset.targetShowOptions === optionNoId) {
+    if (pubSubData.button.dataset.targetShow === optionNoId) {
 
       if (choiceMade.includes('choiceNoOptions')) { choiceNoOptionsExist = true; }
 
@@ -208,7 +208,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
   //   formPricingRadioButtons(e, target, function() {
   //     const button = selectClickedElementByType(e, 'BUTTON');
   //     if (elementExists(button)) {
-  //       const buttonData = button.dataset.targetShowOptions;
+  //       const buttonData = button.dataset.targetShow;
   //       if (buttonData) {
   //         /** Settings for option 'Yes' */
   //         const hostingBySemiOptionsId = 'hosting-by-semi';
