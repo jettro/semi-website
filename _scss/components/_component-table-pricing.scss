@@ -1,6 +1,7 @@
 
 @include breakpoint(largeUp) {
   .table-pricing {
+    padding: 2rem;
     width: 100%;
   }
   .table-pricing__row {

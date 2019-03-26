@@ -92,24 +92,17 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
         nextFieldset.classList.add(pricingConfig.showClass);
       });
 
-      // /** fifth fieldset, required number of weaviates */
-      // handleChoiceWeaviates(fieldsetWeaviates, function(weaviatePrice) {
-      //   /** each time a weaviate button is clicked, recalculate the fixed price */
-      //   setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
-      // }, function() {
-      //   const nextFieldset = getChoiceFieldset(fieldSets, 'network-nodes');
-      //   nextFieldset.classList.remove('form-stepper__step--hide');
-      //   nextFieldset.classList.add('form-stepper__step--show');
-      // });
-      //
-      // /** sixt fieldset, the desired network nodes */
-      // handleChoiceNetworkNodes(fieldsetNetworkNodes, function(price) {
-      //   nodeNetworksPrice = price;
-      //   setFixedCostPrice(weaviatePrice, nodeNetworksPrice);
-      // }, function() {
-      //   console.log('the next one can be shown');
-      // });
+      /** fifth fieldset, required number of weaviates */
+      handleChoiceWeaviates(fieldsetWeaviates, function() {
+        const nextFieldset = getChoiceFieldset(fieldSets, 'network-nodes');
+        nextFieldset.classList.remove(pricingConfig.hideClass);
+        nextFieldset.classList.add(pricingConfig.showClass);
+      });
 
+      /** sixt fieldset, the desired network nodes */
+      handleChoiceNetworkNodes(fieldsetNetworkNodes, function() {
+        console.log('the final receipt can be shown');
+      });
 
     } else {
       console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);

@@ -12,6 +12,8 @@ export default {
   'pricingSemiOption2Id': 'container-pricing-optimization',
   'pricingClusterContainerId': 'container-pricing-cluster',
   'pricingContextionaryContainerId': 'container-pricing-contextionary',
+  'pricingWeaviateContainerId': 'container-pricing-weaviate',
+  'pricingNetworkNodesContainerId': 'container-pricing-notwork-nodes',
   'showClass': 'component--show',
   'hideClass': 'component--hide',
   'receipt': {
@@ -26,8 +28,6 @@ export default {
   'pricingRowTemplateClassName': 'template-table-pricing-row',
   'pricingClusterTemplateId': 'template-pricing-cluster-button',
   'pricingContextionaryTemplateId': 'template-pricing-contextionary-button',
-  'pricingWeaviateContainerId': 'container-pricing-weaviate-button',
   'pricingWeaviateTemplateId': 'template-pricing-weaviate-button',
-  'pricingNetworkNodesContainerId': 'container-pricing-notwork-nodes-button',
   'pricingNetworkNodesTemplateId': 'template-pricing-network-nodes-button'
 };

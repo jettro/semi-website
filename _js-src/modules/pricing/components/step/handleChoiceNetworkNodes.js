@@ -1,49 +1,43 @@
-
+import PubSub from 'pubsub-js';
 import createListItems from '../../common/createListItems';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
-// import formPricingRadioButtons from '../../common/formPricingRadioButtons';
-import { addEventListenerOnce, elementExists } from '../../../../helpers/helpers';
-import selectClickedElementByType from '../../common/selectClickedElementByType';
+import { getClosest } from '../../../../helpers/helpers';
+import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
 
 /**
  *
- * @param target
- * @param getNodeNetworksPrice
- * @param executeOnce
+ * @param target {}
+ * @param showNextChoiceHandler {function}
  */
-export default function(target, getNodeNetworksPrice, executeOnce) {
-
+export default function(target, showNextChoiceHandler = undefined) {
   const container = document.getElementById(pricingConfig.pricingNetworkNodesContainerId);
-  const template = document.getElementById(pricingConfig.pricingNetworkNodesTemplateId);
   const options = pricingUseCaseData.networkNodes;
 
-  /** Append all the cost buttons to the cluster container */
-  createListItems(options, template).forEach(item => {
-    container.appendChild(item);
-  });
-
-  target.addEventListener('click', e => {
-    formPricingRadioButtons(e, target, function() {
-      const button = selectClickedElementByType(e, 'BUTTON');
-      if (elementExists(button)) {
-        /** target parent element, since data set needs to be set on parent li rather than button */
-        const nodeNetworksPrice = button.parentElement.dataset.subTotal;
-        if(nodeNetworksPrice) {
-          getNodeNetworksPrice(nodeNetworksPrice);
-        } else {
-          console.info(`The multiplier isn't set on the data attribute of the hosting button.`);
-        }
-      }
-    });
-  });
-
-  /** resolve the promise and do a callback once! */
-  addEventListenerOnce(target, "click", function() {
-    const button = selectClickedElementByType(event, 'BUTTON');
-    /** only do callback when the element clicked on is a button */
-    if (elementExists(button)) {
-      executeOnce();
+  let type = '';
+  options.map(option => {
+    if (option.config) {
+      if (option.config.fixed) type = 'fixed';
+    } else {
+      Object.assign(option, {'valueType': type});
     }
+  });
+
+  createListItems(options, container, undefined, 'networkNodes');
+
+  let nodeNetworksPrice = '0';
+  let numberOfWeaviatesPrice = '0';
+
+  PubSub.subscribe('buttonClicked.weaviates', (msg, data) => {
+    const li = getClosest(data.button, 'li');
+    let numberOfWeaviatesPrice = li.dataset.fixed;
+    setFixedCostPrice(numberOfWeaviatesPrice, nodeNetworksPrice);
+  });
+
+  PubSub.subscribe('buttonClicked.networkNodes', (msg, data) => {
+    const li = getClosest(data.button, 'li');
+    nodeNetworksPrice = li.dataset.fixed;
+    setFixedCostPrice(numberOfWeaviatesPrice, nodeNetworksPrice);
+    if (typeof (showNextChoiceHandler) === typeof (Function)) showNextChoiceHandler();
   });
 }
