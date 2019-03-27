@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-const elementExists = require('./helpers').elementExists;
+const elementExists = require('./elementExists').default;
 
 describe('elementExists...', function() {
   beforeEach(function() {

@@ -3,7 +3,7 @@ import PubSub from 'pubsub-js';
 import createListItems from '../../common/createListItems';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
-import { getClosest } from '../../../../helpers/helpers';
+import getClosest from '../../../../utilities/getClosest';
 import { setHostingCluster } from '../receipt/pricingReceiptFunctions';
 
 export default function(target, showNextChoiceHandler = undefined) {

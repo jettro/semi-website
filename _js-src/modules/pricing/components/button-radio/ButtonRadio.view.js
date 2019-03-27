@@ -1,4 +1,4 @@
-import { htmlToElement } from '../../../../helpers/helpers';
+import htmlToElement from '../../../../utilities/htmlToElement';
 
 import PubSub from 'pubsub-js';
 

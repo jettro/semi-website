@@ -2,7 +2,7 @@ import PubSub from 'pubsub-js';
 import createListItems from '../../common/createListItems';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
-import { getClosest } from '../../../../helpers/helpers';
+import getClosest from '../../../../utilities/getClosest';
 import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
 
 /**

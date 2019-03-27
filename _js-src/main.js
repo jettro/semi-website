@@ -2,7 +2,7 @@ import './common';
 
 const $script = require('scriptjs');
 
-import { elementExists } from './helpers/helpers';
+import elementExists from './utilities/elementExists';
 const pricingConfig = require('./modules/pricing/pricingConfig').default;
 
 /**

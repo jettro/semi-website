@@ -1,4 +1,4 @@
-import { elementExists } from '../../../helpers/helpers';
+import elementExists from '../../../utilities/elementExists';
 
 /**
  * @desc check whether the type of element is directly selectable return true (= not a parent)

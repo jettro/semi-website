@@ -1,4 +1,4 @@
-import { elementExists } from '../../helpers/helpers';
+import elementExists from '../../utilities/elementExists';
 import pricingConfig from './pricingConfig';
 import getChoiceFieldset from './common/getChoiceFieldset';
 import handleChoiceUseCases from './components/step/handleChoiceUseCases';

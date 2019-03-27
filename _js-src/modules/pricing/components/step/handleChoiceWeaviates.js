@@ -3,7 +3,7 @@ import createListItems from '../../common/createListItems';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
-import { getClosest } from '../../../../helpers/helpers';
+import getClosest from '../../../../utilities/getClosest';
 
 /**
  * @param target

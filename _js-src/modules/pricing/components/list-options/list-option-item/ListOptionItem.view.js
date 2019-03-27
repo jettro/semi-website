@@ -1,4 +1,4 @@
-import { htmlToElement } from '../../../../../helpers/helpers';
+import htmlToElement from '../../../../../utilities/htmlToElement';
 
 const _createValue = Symbol('createValue');
 

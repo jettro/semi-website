@@ -1,5 +1,6 @@
-import { localizeNumber, localizeStringToNumber } from '../../../../helpers/helpers';
 import pricingConfig from '../../pricingConfig';
+import localizeNumber from '../../../../utilities/localizeNumber';
+import localizeStringToNumber from '../../../../utilities/localizeStringToNumber';
 
 /**
  * @desc set subTotal for 'variable monthly cost'

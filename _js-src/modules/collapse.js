@@ -1,7 +1,7 @@
 /**
  * map the commands to the classList methods
  */
-import { getClosest } from '../helpers/helpers';
+import getClosest from '../utilities/getClosest';
 
 const fnmap = {
   'toggle': 'toggle',

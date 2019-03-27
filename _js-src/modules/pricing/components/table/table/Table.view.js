@@ -1,5 +1,4 @@
-import { htmlToElement } from '../../../../../helpers/helpers';
-import PubSub from 'pubsub-js';
+import htmlToElement from '../../../../../utilities/htmlToElement';
 
 export default class TableView {
 

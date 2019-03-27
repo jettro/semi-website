@@ -1,4 +1,4 @@
-import { getClosest } from '../../../../helpers/helpers';
+import getClosest from '../../../../utilities/getClosest';
 import getChoiceFieldset from '../../common/getChoiceFieldset';
 import { setHostingAdjustment } from '../receipt/pricingReceiptFunctions';
 import createListItems from '../../common/createListItems';

@@ -1,4 +1,4 @@
-import { getClosest } from '../../../../helpers/helpers';
+import getClosest from '../../../../utilities/getClosest';
 import PubSub from 'pubsub-js';
 
 export default class ButtonRadioController {
