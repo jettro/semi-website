@@ -1,7 +1,7 @@
 import PubSub from 'pubsub-js';
 const merge = require('lodash.merge');
 
-import isNumber from '../../../../utilities/isNumber';
+import isNumber from '../../../../typeChecking/isNumber';
 import elementExists from '../../../../utilities/elementExists';
 import { setVariableMonthlyCost, reCalculateTotal } from '../../components/receipt/pricingReceiptFunctions';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';

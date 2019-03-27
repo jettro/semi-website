@@ -3,7 +3,7 @@ import localizeNumber from '../../../../utilities/localizeNumber';
 import localizeStringToNumber from '../../../../utilities/localizeStringToNumber';
 
 /**
- * @desc set subTotal for 'variable monthly cost'
+ * @desc {Number} set subTotal for 'variable monthly cost'
  * @param subTotal
  */
 function setVariableMonthlyCost(subTotal) {

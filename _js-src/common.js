@@ -12,7 +12,7 @@ import tableOfContents from './modules/tableOfContents';
 import collapse from './modules/collapse';
 
 // utilities
-import inputTypeRangeExists from './utilities/inputTypeRangeExists';
+import inputExistsOfType from './utilities/inputExistsOfType';
 
 /**
  * Cookie handler (based on cookie bar ID)
@@ -51,7 +51,7 @@ tableOfContents('toc');
  */
 const inputFields = document.getElementsByTagName('INPUT');
 if(inputFields.length >= 0) {
-  if(inputTypeRangeExists(inputFields, 'range')) {
+  if(inputExistsOfType(inputFields, 'range')) {
     $script('/js/lib/multirange/multirange.js');
   }
 }

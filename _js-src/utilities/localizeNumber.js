@@ -1,10 +1,11 @@
-
 /**
- * @desc localize the number to the language of choice
- * @param n {number} the number to localize
- * @returns {string}
+ * @desc Returns a nice format of the number
+ * @param number {Number} the number to localize
+ * @param languageCode {String} localization language
+ *        (see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation)
+ * @returns {String}
  */
-export default function(n) {
-  const numberLanguage = 'nl';
-  return Number(n).toLocaleString(numberLanguage);
+export default function(number, languageCode = 'nl') {
+  const converted = Number(number).toLocaleString(languageCode);
+  return converted;
 }

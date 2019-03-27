@@ -34,6 +34,7 @@ script:
 - set -e
 - npm run prettier
 - npm run eslint
+- npm run test
 - npm run webpack
 - |
   if [ "${TRAVIS_BRANCH}" = "master" ]; then

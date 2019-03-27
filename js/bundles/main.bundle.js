@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/cookie */ \"./_js-src/modules/cookie.js\");\n/* harmony import */ var _modules_mailChimp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/mailChimp */ \"./_js-src/modules/mailChimp.js\");\n/* harmony import */ var _modules_video__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/video */ \"./_js-src/modules/video.js\");\n/* harmony import */ var _modules_search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/search */ \"./_js-src/modules/search.js\");\n/* harmony import */ var _modules_tagmanager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/tagmanager */ \"./_js-src/modules/tagmanager.js\");\n/* harmony import */ var _modules_tableOfContents__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tableOfContents */ \"./_js-src/modules/tableOfContents.js\");\n/* harmony import */ var _modules_collapse__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/collapse */ \"./_js-src/modules/collapse.js\");\n/* harmony import */ var _utilities_inputTypeRangeExists__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utilities/inputTypeRangeExists */ \"./_js-src/utilities/inputTypeRangeExists.js\");\n\n\nconst $script = __webpack_require__(/*! scriptjs */ \"./node_modules/scriptjs/dist/script.js\"); // modules\n\n\n\n\n\n\n\n\n // utilities\n\n\n/**\n * Cookie handler (based on cookie bar ID)\n */\n\nObject(_modules_cookie__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('cookie-notification');\n/**\n * Send form submission data to mailchimp\n */\n// TODO: only load this init on contact/index and workshop/index\n\nObject(_modules_mailChimp__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n/**\n * Play the video on the homepage\n */\n// TODO: limit the loading of video script to only the homepage\n\nObject(_modules_video__WEBPACK_IMPORTED_MODULE_2__[\"default\"])('js-video-homepage');\n/**\n * Search\n */\n\nObject(_modules_search__WEBPACK_IMPORTED_MODULE_3__[\"default\"])();\n/**\n * Initialize the tagmanager\n */\n\nObject(_modules_tagmanager__WEBPACK_IMPORTED_MODULE_4__[\"default\"])('GTM-K6DMN8N');\n/**\n * Initialize  the table of contents\n */\n\nObject(_modules_tableOfContents__WEBPACK_IMPORTED_MODULE_5__[\"default\"])('toc');\n/**\n * asynchronous load of multirange script when a input type of type range exists on the page\n */\n\nconst inputFields = document.getElementsByTagName('INPUT');\n\nif (inputFields.length >= 0) {\n  if (Object(_utilities_inputTypeRangeExists__WEBPACK_IMPORTED_MODULE_7__[\"default\"])(inputFields, 'range')) {\n    $script('/js/lib/multirange/multirange.js');\n  }\n}\n/**\n * add collapse functionality (replaced toggle())\n */\n\n\nObject(_modules_collapse__WEBPACK_IMPORTED_MODULE_6__[\"default\"])();\n/**\n * asynchronous load pingdom in the page\n */\n\n$script('//rum-static.pingdom.net/pa-5b22f622a42dbb00070002a5.js');\n\n//# sourceURL=webpack:///./_js-src/common.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/cookie */ \"./_js-src/modules/cookie.js\");\n/* harmony import */ var _modules_mailChimp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/mailChimp */ \"./_js-src/modules/mailChimp.js\");\n/* harmony import */ var _modules_video__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/video */ \"./_js-src/modules/video.js\");\n/* harmony import */ var _modules_search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/search */ \"./_js-src/modules/search.js\");\n/* harmony import */ var _modules_tagmanager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/tagmanager */ \"./_js-src/modules/tagmanager.js\");\n/* harmony import */ var _modules_tableOfContents__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tableOfContents */ \"./_js-src/modules/tableOfContents.js\");\n/* harmony import */ var _modules_collapse__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/collapse */ \"./_js-src/modules/collapse.js\");\n/* harmony import */ var _utilities_inputExistsOfType__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utilities/inputExistsOfType */ \"./_js-src/utilities/inputExistsOfType.js\");\n\n\nconst $script = __webpack_require__(/*! scriptjs */ \"./node_modules/scriptjs/dist/script.js\"); // modules\n\n\n\n\n\n\n\n\n // utilities\n\n\n/**\n * Cookie handler (based on cookie bar ID)\n */\n\nObject(_modules_cookie__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('cookie-notification');\n/**\n * Send form submission data to mailchimp\n */\n// TODO: only load this init on contact/index and workshop/index\n\nObject(_modules_mailChimp__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n/**\n * Play the video on the homepage\n */\n// TODO: limit the loading of video script to only the homepage\n\nObject(_modules_video__WEBPACK_IMPORTED_MODULE_2__[\"default\"])('js-video-homepage');\n/**\n * Search\n */\n\nObject(_modules_search__WEBPACK_IMPORTED_MODULE_3__[\"default\"])();\n/**\n * Initialize the tagmanager\n */\n\nObject(_modules_tagmanager__WEBPACK_IMPORTED_MODULE_4__[\"default\"])('GTM-K6DMN8N');\n/**\n * Initialize  the table of contents\n */\n\nObject(_modules_tableOfContents__WEBPACK_IMPORTED_MODULE_5__[\"default\"])('toc');\n/**\n * asynchronous load of multirange script when a input type of type range exists on the page\n */\n\nconst inputFields = document.getElementsByTagName('INPUT');\n\nif (inputFields.length >= 0) {\n  if (Object(_utilities_inputExistsOfType__WEBPACK_IMPORTED_MODULE_7__[\"default\"])(inputFields, 'range')) {\n    $script('/js/lib/multirange/multirange.js');\n  }\n}\n/**\n * add collapse functionality (replaced toggle())\n */\n\n\nObject(_modules_collapse__WEBPACK_IMPORTED_MODULE_6__[\"default\"])();\n/**\n * asynchronous load pingdom in the page\n */\n\n$script('//rum-static.pingdom.net/pa-5b22f622a42dbb00070002a5.js');\n\n//# sourceURL=webpack:///./_js-src/common.js?");
 
 /***/ }),
 
@@ -206,6 +206,54 @@ eval("__webpack_require__.r(__webpack_exports__);\n/**\n * start playing the sel
 
 /***/ }),
 
+/***/ "./_js-src/typeChecking/isElement.js":
+/*!*******************************************!*\
+  !*** ./_js-src/typeChecking/isElement.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc test to see if value is of type Element\n * @param entry {*}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (entry) {\n  const isTypeElement = entry instanceof Element;\n  return isTypeElement;\n});\n\n//# sourceURL=webpack:///./_js-src/typeChecking/isElement.js?");
+
+/***/ }),
+
+/***/ "./_js-src/typeChecking/isHTMLCollection.js":
+/*!**************************************************!*\
+  !*** ./_js-src/typeChecking/isHTMLCollection.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc test to see if value is HTMLCollection\n * @param entry {*}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (entry) {\n  const isTypeHTMLCollection = entry instanceof HTMLCollection;\n  return isTypeHTMLCollection;\n});\n\n//# sourceURL=webpack:///./_js-src/typeChecking/isHTMLCollection.js?");
+
+/***/ }),
+
+/***/ "./_js-src/typeChecking/isNodeList.js":
+/*!********************************************!*\
+  !*** ./_js-src/typeChecking/isNodeList.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc test to see if value is nodeList\n * @param entry {*}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (entry) {\n  const isTypeNodeList = Object.prototype.toString.call(entry) === '[object NodeList]';\n  return isTypeNodeList;\n});\n\n//# sourceURL=webpack:///./_js-src/typeChecking/isNodeList.js?");
+
+/***/ }),
+
+/***/ "./_js-src/typeChecking/isString.js":
+/*!******************************************!*\
+  !*** ./_js-src/typeChecking/isString.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc test to see if value is a string\n * @param entry {*}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (entry) {\n  const isTypeString = typeof entry === 'string' || entry instanceof String;\n  return isTypeString;\n});\n\n//# sourceURL=webpack:///./_js-src/typeChecking/isString.js?");
+
+/***/ }),
+
 /***/ "./_js-src/utilities/elementExists.js":
 /*!********************************************!*\
   !*** ./_js-src/utilities/elementExists.js ***!
@@ -226,19 +274,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc simple helper t
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc Gets closest element by type\n * @param element {object} The element that's clicked (usually event.target)\n * @param selector\n * @returns {*}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (element, selector) {\n  // Element.matches() polyfill\n  if (!Element.prototype.matches) {\n    Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector || function (s) {\n      var matches = (this.document || this.ownerDocument).querySelectorAll(s),\n          i = matches.length;\n\n      while (--i >= 0 && matches.item(i) !== this) {}\n\n      return i > -1;\n    };\n  } // Get the closest matching element\n\n\n  for (; element && element !== document; element = element.parentNode) {\n    if (element.matches(selector)) return element;\n  }\n\n  return null;\n});\n\n//# sourceURL=webpack:///./_js-src/utilities/getClosest.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst isString = __webpack_require__(/*! ../typeChecking/isString */ \"./_js-src/typeChecking/isString.js\").default;\n\nconst isElement = __webpack_require__(/*! ../typeChecking/isElement */ \"./_js-src/typeChecking/isElement.js\").default;\n/**\n * @desc Gets closest element by type by traversing up the DOM structure\n * @param element {object} The element which to find another element close to\n * @param selector {string} The selector of the closest element\n * @returns {*}\n */\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (element, selector) {\n  /** type checking */\n  if (!isElement(element)) throw new TypeError(`element is not of the correct type, expected Element`);\n  if (!isString(selector)) throw new TypeError(`entry is not of the correct type, expected String`);\n  /** Element.matches() polyfill */\n\n  if (!Element.prototype.matches) {\n    Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector || function (s) {\n      var matches = (this.document || this.ownerDocument).querySelectorAll(s),\n          i = matches.length;\n\n      while (--i >= 0 && matches.item(i) !== this) {}\n\n      return i > -1;\n    };\n  } // Get the closest matching element\n\n\n  for (; element && element !== document; element = element.parentNode) {\n    if (element.matches(selector)) return element;\n  }\n\n  return null;\n});\n\n//# sourceURL=webpack:///./_js-src/utilities/getClosest.js?");
 
 /***/ }),
 
-/***/ "./_js-src/utilities/inputTypeRangeExists.js":
-/*!***************************************************!*\
-  !*** ./_js-src/utilities/inputTypeRangeExists.js ***!
-  \***************************************************/
+/***/ "./_js-src/utilities/inputExistsOfType.js":
+/*!************************************************!*\
+  !*** ./_js-src/utilities/inputExistsOfType.js ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc check of at least one type of element exists\n * @param type {object} A list of html input fields\n * @param fields {string} The type of element that should exist\n * @returns {boolean} if an element of a certain type exists\n */\nconst inputTypeRangeExists = function (fields, type) {\n  let rangeFields = 0;\n  Object.entries(fields).forEach(([key, field]) => {\n    if (field.type === type) {\n      rangeFields++;\n    }\n  });\n  return rangeFields >= 1;\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (inputTypeRangeExists);\n\n//# sourceURL=webpack:///./_js-src/utilities/inputTypeRangeExists.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst isString = __webpack_require__(/*! ../typeChecking/isString */ \"./_js-src/typeChecking/isString.js\").default;\n\nconst isElement = __webpack_require__(/*! ../typeChecking/isElement */ \"./_js-src/typeChecking/isElement.js\").default;\n\nconst isNodeList = __webpack_require__(/*! ../typeChecking/isNodeList */ \"./_js-src/typeChecking/isNodeList.js\").default;\n\nconst isHTMLCollection = __webpack_require__(/*! ../typeChecking/isHTMLCollection */ \"./_js-src/typeChecking/isHTMLCollection.js\").default;\n/**\n * @desc Check if an input field or multiple input fields in a given collection\n *       (Element or HTMLCollection) have a certain type.\n * @param entries {NodeList || HTMLCollection || HTMLCollectionOf} The type of element that should exist\n * @param attribute {string} A list of html input fields\n * @returns {boolean} if an element of a certain type exists\n */\n\n\nconst inputExistsOfType = function (entries, attribute) {\n  /** type checking */\n  if (isElement(entries)) throw new TypeError(`entry should be a NodeList or HTMLCollection`);\n  if (!isNodeList(entries) && !isHTMLCollection(entries)) throw new TypeError(`entry is not of the correct type, expected nodeList or HTMLCollection`);\n  if (!isString(attribute)) throw new TypeError(`type is not of the correct type, expected String`);\n  let rangeCollection = 0;\n  Object.entries(entries).forEach(([key, item]) => {\n    if (item.type === attribute) {\n      rangeCollection++;\n    }\n  });\n  return rangeCollection >= 1;\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (inputExistsOfType);\n\n//# sourceURL=webpack:///./_js-src/utilities/inputExistsOfType.js?");
 
 /***/ }),
 

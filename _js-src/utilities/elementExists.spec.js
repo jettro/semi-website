@@ -2,7 +2,7 @@ import { describe } from 'mocha';
 const expect = require('chai').expect;
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
-
+const isFunction = require('../typeChecking/isFunction').default;
 const elementExists = require('./elementExists').default;
 
 describe('elementExists...', function() {
@@ -11,7 +11,7 @@ describe('elementExists...', function() {
     global.window = window;
   });
   it(`should be a function [object Function]`, function() {
-    expect(Object.prototype.toString.call(elementExists)).to.equal('[object Function]');
+    expect(isFunction(elementExists)).to.equal(true);
   });
   it(`should return 'false' if the function is called without function arguments`, function() {
     expect(elementExists()).to.equal(false);

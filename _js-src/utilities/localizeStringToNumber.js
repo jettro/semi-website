@@ -1,6 +1,6 @@
-
+/** TODO: replace this function with a more solid one (and combine with ./localizeNumber.js instead) */
 /**
- * @desc localizes the string to number depending on the language of choice
+ * @desc localizes the string to number, and replaces the points with commas
  * @param n {number} the number to localize
  * @returns {number}
  */
