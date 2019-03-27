@@ -849,7 +849,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @param html {String} 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc Returns a nice format of the number\n * @param number {Number} the number to localize\n * @param languageCode {String} localization language\n *        (see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation)\n * @returns {String}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (number, languageCode = 'nl') {\n  const converted = Number(number).toLocaleString(languageCode);\n  return converted;\n});\n\n//# sourceURL=webpack:///./_js-src/utilities/localizeNumber.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @desc Returns a nice format of the number\n * @param number {Number} the number to localize\n * @param languageCode {String} localization language\n *        (see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation)\n * @returns {String}\n */\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (number, languageCode = 'nl') {\n  return Number(number).toLocaleString(languageCode);\n});\n\n//# sourceURL=webpack:///./_js-src/utilities/localizeNumber.js?");
 
 /***/ }),
 

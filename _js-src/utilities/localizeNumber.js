@@ -6,6 +6,5 @@
  * @returns {String}
  */
 export default function(number, languageCode = 'nl') {
-  const converted = Number(number).toLocaleString(languageCode);
-  return converted;
+  return Number(number).toLocaleString(languageCode);
 }
