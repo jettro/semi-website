@@ -189,8 +189,8 @@
   ],
   "hostingProvidersByCustomer": [
     {"title": "Oracle Cloud", "value": "100"},
-    {"title": "Google Cloud", "value": "90"},
-    {"title": "AWS", "value": "90"},
+    {"title": "Google Cloud", "value": "100"},
+    {"title": "AWS", "value": "100"},
     {"title": "Azure", "value": "100"}
   ],
   "clusters": [
