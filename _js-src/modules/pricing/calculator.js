@@ -1,28 +1,25 @@
 import elementExists from '../../utilities/elementExists';
-import pricingConfig from './pricingConfig';
 import getChoiceFieldset from './common/getChoiceFieldset';
-import handleChoiceUseCases from './components/step/handleChoiceUseCases';
-import handleChoiceHosting from './components/step/handleChoiceHosting';
 import handleChoiceClusters from './components/step/handleChoiceClusters';
 import handleChoiceContextionaries from './components/step/handleChoiceContextionaries';
-import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
+import handleChoiceHosting from './components/step/handleChoiceHosting';
 import handleChoiceNetworkNodes from './components/step/handleChoiceNetworkNodes';
-import { setFixedCostPrice } from './components/receipt/pricingReceiptFunctions';
+import handleChoiceUseCases from './components/step/handleChoiceUseCases';
+import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
+import pricingConfig from './pricingConfig';
 import pricingUseCaseData from '../../../_data/pricingUseCases';
 
 (function(factory) {
-
   /** Find the global object for export to both the browser and web workers. */
-  var globalObject = typeof window === 'object' && window ||
-    typeof self === 'object' && self;
+  const globalObject = (typeof window === 'object' && window) || (typeof self === 'object' && self);
 
   /**
    *  Setup calculator.js for different environments.
    *  First is Node.js or CommonJS.
    */
-  if(typeof exports !== 'undefined') {
+  if (typeof exports !== 'undefined') {
     factory(exports);
-  } else if(globalObject) {
+  } else if (globalObject) {
     /**
      * Export calculator globally even when using AMD for cases when this script
      * is loaded with others that may still expect a global calculator.
@@ -30,88 +27,90 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
     globalObject.calculator = factory({});
 
     /** Finally register the global calculator with AMD. */
-    if(typeof define === 'function' && define.amd) {
+    if (typeof define === 'function' && define.amd) {
       define([], function() {
         return globalObject.calculator;
       });
     }
   }
-
-}(function(calculator) {
+})(function(calculator) {
   function initCalculatorOnLoad() {
+    /** @type {HTMLElement!} */
     const formPricing = document.getElementById(pricingConfig.formId);
 
     if (elementExists(formPricing)) {
-
+      /** @type {HTMLCollectionOf!} */
       const fieldSets = formPricing.getElementsByTagName('FIELDSET');
+      /** @type {HTMLElement!} */
       const fieldsetUseCase = getChoiceFieldset(fieldSets, 'use-case');
+      /** @type {HTMLElement!} */
       const fieldsetHostingPreference = getChoiceFieldset(fieldSets, 'hosting-preference');
+      /** @type {HTMLElement!} */
       const fieldsetClusters = getChoiceFieldset(fieldSets, 'clusters');
+      /** @type {HTMLElement!} */
       const fieldsetContextionaries = getChoiceFieldset(fieldSets, 'contextionaries');
+      /** @type {HTMLElement!} */
       const fieldsetWeaviates = getChoiceFieldset(fieldSets, 'weaviates');
+      /** @type {HTMLElement!} */
       const fieldsetNetworkNodes = getChoiceFieldset(fieldSets, 'network-nodes');
-      const fieldsetShowClass = 'form-stepper__step--show';
-      const fieldsetHideClass = 'form-stepper__step--hide';
-      let weaviatePrice = '0';
-      let nodeNetworksPrice = '0';
 
+      /** @type {Array} */
       const useCaseData = pricingUseCaseData.useCases;
+      /** @type {Object<string, any>!} */
       const flattenedUseCaseData = Object.assign({}, ...useCaseData);
 
-      /** execute the choices */
-
-      /** first fieldset, use cases */
       handleChoiceUseCases(fieldsetUseCase, flattenedUseCaseData, function() {
-        const nextFieldset = getChoiceFieldset(fieldSets, 'hosting-preference');
+        const nextFieldset = fieldsetHostingPreference;
         if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
           nextFieldset.classList.remove(pricingConfig.hideClass);
           nextFieldset.classList.add(pricingConfig.showClass);
         }
       });
 
-      /** second fieldset, hosting preference */
-      handleChoiceHosting(fieldsetUseCase, flattenedUseCaseData, fieldsetHostingPreference, fieldSets, function() {
-        const nextFieldset = getChoiceFieldset(fieldSets, 'clusters');
-        if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
-          nextFieldset.classList.remove(pricingConfig.hideClass);
-          nextFieldset.classList.add(pricingConfig.showClass);
-        }
-      });
+      handleChoiceHosting(
+        fieldsetUseCase,
+        flattenedUseCaseData,
+        fieldsetHostingPreference,
+        fieldSets,
+        function() {
+          const nextFieldset = fieldsetClusters;
+          if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
+            nextFieldset.classList.remove(pricingConfig.hideClass);
+            nextFieldset.classList.add(pricingConfig.showClass);
+          }
+        },
+      );
 
-      /** third fieldset, number of clusters */
       handleChoiceClusters(fieldsetClusters, function() {
-        const nextFieldset = getChoiceFieldset(fieldSets, 'contextionaries');
+        const nextFieldset = fieldsetContextionaries;
         nextFieldset.classList.remove(pricingConfig.hideClass);
         nextFieldset.classList.add(pricingConfig.showClass);
       });
 
-      /** fourth fieldset, type of network nodes (contextionaries) */
       handleChoiceContextionaries(fieldsetContextionaries, function() {
-        const nextFieldset = getChoiceFieldset(fieldSets, 'weaviates');
+        const nextFieldset = fieldsetWeaviates;
         nextFieldset.classList.remove(pricingConfig.hideClass);
         nextFieldset.classList.add(pricingConfig.showClass);
       });
 
-      /** fifth fieldset, required number of weaviates */
       handleChoiceWeaviates(fieldsetWeaviates, function() {
-        const nextFieldset = getChoiceFieldset(fieldSets, 'network-nodes');
+        const nextFieldset = fieldsetNetworkNodes;
         nextFieldset.classList.remove(pricingConfig.hideClass);
         nextFieldset.classList.add(pricingConfig.showClass);
       });
 
-      /** sixt fieldset, the desired network nodes */
       handleChoiceNetworkNodes(fieldsetNetworkNodes, function() {
         console.log('the final receipt can be shown');
       });
-
     } else {
-      console.error(`No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`);
+      console.error(
+        `No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`,
+      );
     }
-
   }
 
   /** interface definition */
   calculator.initCalculatorOnLoad = initCalculatorOnLoad;
 
   return calculator;
-}));
+});
