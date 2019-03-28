@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 const _addListItems = Symbol('addListItems');
 
@@ -15,7 +15,7 @@ export default class ListOptionsView {
     this.controller = controller;
     this._children = this.controller.children;
     /** constructs the html element from html template literal (string) */
-    this._html = htmlToElement(ListOptionsView.htmlString());
+    this._html = stringToHTMLCollection(ListOptionsView.htmlString())[0];
     this._dataAttr = this.controller.dataAttr;
   }
 

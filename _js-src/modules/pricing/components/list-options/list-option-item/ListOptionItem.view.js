@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 const _createValue = Symbol('createValue');
 
@@ -28,7 +28,7 @@ export default class ListOptionItemView {
    */
   constructor(controller) {
     this._controller = ListOptionItemView.initialize(controller);
-    this._html = htmlToElement(ListOptionItemView.htmlString());
+    this._html = stringToHTMLCollection(ListOptionItemView.htmlString())[0];
     this._value = this._controller.value;
     this._valueType = this._controller.valueType;
   }

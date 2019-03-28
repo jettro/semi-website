@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 import PubSub from 'pubsub-js';
 
@@ -30,26 +30,25 @@ export default class ExpansionPanelHeadView {
    */
   constructor(controller) {
     this.controller = ExpansionPanelHeadView.initialize(controller);
-    this.html = htmlToElement(ExpansionPanelHeadView.htmlString());
-    this.expansionPanelHead = this.html;
+    this.expansionPanelHead = stringToHTMLCollection(ExpansionPanelHeadView.htmlString())[0];
     this.expansionPanelHead.addEventListener('click', this.controller);
-    this.titleElement = this.html.getElementsByClassName('use-case-panel-label')[0];
+    this.titleElement = this.expansionPanelHead.getElementsByClassName('use-case-panel-label')[0];
     this.titleElement.innerText = this.controller.title;
     PubSub.subscribe('expansionPanelHeadClicked', (msg, expansionPanelHead) => { this.toggleStates(msg, expansionPanelHead) });
   }
 
   toggleStates(msg, expansionPanelHead) {
     if (expansionPanelHead === this.expansionPanelHead) {
-      this.html.classList.toggle("panel-collapse__head--panel-shown");
+      this.expansionPanelHead.classList.toggle("panel-collapse__head--panel-shown");
     }
   }
 
   /**
    * Use this if you need to render the element
-   * @returns {Element} the expansion panel header
+   * @param targetNode {Element} the expansion panel header
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.html);
+    targetNode.insertAdjacentElement('beforeend', this.expansionPanelHead);
   }
 }

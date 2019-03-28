@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 export default class TableView {
 
@@ -26,8 +26,7 @@ export default class TableView {
    */
   constructor(controller) {
     this.controller = TableView.initialize(controller);
-    this.html = htmlToElement(TableView.htmlString());
-    this.table = this.html;
+    this.table = stringToHTMLCollection(TableView.htmlString())[0];
   }
 
   /**
@@ -36,6 +35,6 @@ export default class TableView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.html);
+    targetNode.insertAdjacentElement('beforeend', this.table);
   }
 }

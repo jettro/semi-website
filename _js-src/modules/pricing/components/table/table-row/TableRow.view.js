@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 export default class TableRowView {
 
@@ -30,10 +30,9 @@ export default class TableRowView {
    */
   constructor(controller) {
     this.controller = TableRowView.initialize(controller);
-    this.html = htmlToElement(TableRowView.htmlString());
-    this.tableRow = this.html;
+    this.tableRow = stringToHTMLCollection(TableRowView.htmlString())[0];
     this.tableRow.dataset.subTotal = this.controller.subTotal;
-    this.tableRowCells = this.html.getElementsByTagName('TD');
+    this.tableRowCells = this.tableRow.getElementsByTagName('TD');
     this.tableRowCells[0].insertAdjacentElement('beforeend', this.controller.childComponent);
     this.tableRowCells[1].innerText = this.controller.cpc;
     this.tableRowCells[2].innerText = this.controller.averageCalls;
@@ -45,6 +44,6 @@ export default class TableRowView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.html);
+    targetNode.insertAdjacentElement('beforeend', this.tableRow);
   }
 }

@@ -8,6 +8,9 @@ import handleChoiceUseCases from './components/step/handleChoiceUseCases';
 import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
 import pricingConfig from './pricingConfig';
 import pricingUseCaseData from '../../../_data/pricingUseCases';
+import receiptComponent from './components/receipt/receipt';
+import listOptionItemComponent from './components/list-options/list-option-item';
+import receiptSummaryComponent from './components/receipt/receipt-summary';
 
 (function(factory) {
   /** Find the global object for export to both the browser and web workers. */
@@ -37,76 +40,82 @@ import pricingUseCaseData from '../../../_data/pricingUseCases';
   function initCalculatorOnLoad() {
     /** @type {HTMLElement!} */
     const formPricing = document.getElementById(pricingConfig.formId);
+    /** @type {HTMLElement!} */
+    const receiptSidebar = document.getElementById(pricingConfig.receiptId);
 
-    if (elementExists(formPricing)) {
-      /** @type {HTMLCollectionOf!} */
-      const fieldSets = formPricing.getElementsByTagName('FIELDSET');
-      /** @type {HTMLElement!} */
-      const fieldsetUseCase = getChoiceFieldset(fieldSets, 'use-case');
-      /** @type {HTMLElement!} */
-      const fieldsetHostingPreference = getChoiceFieldset(fieldSets, 'hosting-preference');
-      /** @type {HTMLElement!} */
-      const fieldsetClusters = getChoiceFieldset(fieldSets, 'clusters');
-      /** @type {HTMLElement!} */
-      const fieldsetContextionaries = getChoiceFieldset(fieldSets, 'contextionaries');
-      /** @type {HTMLElement!} */
-      const fieldsetWeaviates = getChoiceFieldset(fieldSets, 'weaviates');
-      /** @type {HTMLElement!} */
-      const fieldsetNetworkNodes = getChoiceFieldset(fieldSets, 'network-nodes');
+    if (!elementExists(formPricing))
+      console.error(`No form container element present. Are you sure the form with id '${pricingConfig.formId}' exists?`);
 
-      /** @type {Array} */
-      const useCaseData = pricingUseCaseData.useCases;
-      /** @type {Object<string, any>!} */
-      const flattenedUseCaseData = Object.assign({}, ...useCaseData);
+    if (!elementExists(receiptSidebar))
+      console.error(`No sidebar container element present. Are you sure the form with id '${pricingConfig.receiptId}' exists?`);
 
-      handleChoiceUseCases(fieldsetUseCase, flattenedUseCaseData, function() {
-        const nextFieldset = fieldsetHostingPreference;
+    /** @type {HTMLCollectionOf!} */
+    const fieldSets = formPricing.getElementsByTagName('FIELDSET');
+    /** @type {HTMLElement!} */
+    const fieldsetUseCase = getChoiceFieldset(fieldSets, 'use-case');
+    /** @type {HTMLElement!} */
+    const fieldsetHostingPreference = getChoiceFieldset(fieldSets, 'hosting-preference');
+    /** @type {HTMLElement!} */
+    const fieldsetClusters = getChoiceFieldset(fieldSets, 'clusters');
+    /** @type {HTMLElement!} */
+    const fieldsetContextionaries = getChoiceFieldset(fieldSets, 'contextionaries');
+    /** @type {HTMLElement!} */
+    const fieldsetWeaviates = getChoiceFieldset(fieldSets, 'weaviates');
+    /** @type {HTMLElement!} */
+    const fieldsetNetworkNodes = getChoiceFieldset(fieldSets, 'network-nodes');
+
+    /** @type {Array} */
+    const useCaseData = pricingUseCaseData.useCases;
+    /** @type {Object<string, any>!} */
+    const flattenedUseCaseData = Object.assign({}, ...useCaseData);
+
+    handleChoiceUseCases(fieldsetUseCase, flattenedUseCaseData, function() {
+      const nextFieldset = fieldsetHostingPreference;
+      if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
+        nextFieldset.classList.remove(pricingConfig.hideClass);
+        nextFieldset.classList.add(pricingConfig.showClass);
+      }
+    });
+
+    handleChoiceHosting(
+      fieldsetUseCase,
+      flattenedUseCaseData,
+      fieldsetHostingPreference,
+      fieldSets,
+      function() {
+        const nextFieldset = fieldsetClusters;
         if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
           nextFieldset.classList.remove(pricingConfig.hideClass);
           nextFieldset.classList.add(pricingConfig.showClass);
         }
-      });
+      },
+    );
 
-      handleChoiceHosting(
-        fieldsetUseCase,
-        flattenedUseCaseData,
-        fieldsetHostingPreference,
-        fieldSets,
-        function() {
-          const nextFieldset = fieldsetClusters;
-          if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
-            nextFieldset.classList.remove(pricingConfig.hideClass);
-            nextFieldset.classList.add(pricingConfig.showClass);
-          }
-        },
-      );
+    handleChoiceClusters(fieldsetClusters, function() {
+      const nextFieldset = fieldsetContextionaries;
+      nextFieldset.classList.remove(pricingConfig.hideClass);
+      nextFieldset.classList.add(pricingConfig.showClass);
+    });
 
-      handleChoiceClusters(fieldsetClusters, function() {
-        const nextFieldset = fieldsetContextionaries;
-        nextFieldset.classList.remove(pricingConfig.hideClass);
-        nextFieldset.classList.add(pricingConfig.showClass);
-      });
+    handleChoiceContextionaries(fieldsetContextionaries, function() {
+      const nextFieldset = fieldsetWeaviates;
+      nextFieldset.classList.remove(pricingConfig.hideClass);
+      nextFieldset.classList.add(pricingConfig.showClass);
+    });
 
-      handleChoiceContextionaries(fieldsetContextionaries, function() {
-        const nextFieldset = fieldsetWeaviates;
-        nextFieldset.classList.remove(pricingConfig.hideClass);
-        nextFieldset.classList.add(pricingConfig.showClass);
-      });
+    handleChoiceWeaviates(fieldsetWeaviates, function() {
+      const nextFieldset = fieldsetNetworkNodes;
+      nextFieldset.classList.remove(pricingConfig.hideClass);
+      nextFieldset.classList.add(pricingConfig.showClass);
+    });
 
-      handleChoiceWeaviates(fieldsetWeaviates, function() {
-        const nextFieldset = fieldsetNetworkNodes;
-        nextFieldset.classList.remove(pricingConfig.hideClass);
-        nextFieldset.classList.add(pricingConfig.showClass);
-      });
+    handleChoiceNetworkNodes(fieldsetNetworkNodes, function() {
+      console.log('the final receipt can be shown');
+    });
 
-      handleChoiceNetworkNodes(fieldsetNetworkNodes, function() {
-        console.log('the final receipt can be shown');
-      });
-    } else {
-      console.error(
-        `No form present. Are you sure the form with id '${pricingConfig.formId}' exists?`,
-      );
-    }
+
+    receiptComponent().createInto(receiptSidebar);
+
   }
 
   /** interface definition */

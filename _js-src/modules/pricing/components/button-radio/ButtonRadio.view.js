@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../utilities/stringToHTMLCollection';
 
 import PubSub from 'pubsub-js';
 
@@ -33,10 +33,9 @@ export default class ButtonRadioView {
   constructor(controller) {
     this.self = this;
     this.controller = ButtonRadioView.initialize(controller);
-    this.html = htmlToElement(ButtonRadioView.htmlString());
-    this.buttonElement = this.html;
+    this.buttonElement = stringToHTMLCollection(ButtonRadioView.htmlString())[0];
     this.buttonElement.addEventListener('click', this.controller);
-    this.titleElement = this.html.getElementsByClassName('ui-button__title')[0];
+    this.titleElement = this.buttonElement.getElementsByClassName('ui-button__title')[0];
     this.titleElement.innerText = this.controller.title;
     if (typeof(this.controller.showTarget) !== 'undefined') {
       this.setDataTarget();
@@ -55,13 +54,13 @@ export default class ButtonRadioView {
   }
 
   setActiveState() {
-    this.html.classList.add("ui-button--active");
-    this.html.setAttribute('aria-checked', 'true');
+    this.buttonElement.classList.add("ui-button--active");
+    this.buttonElement.setAttribute('aria-checked', 'true');
   }
 
   setDefaultState() {
     this.self.setActiveState();
-    this.html.classList.add("ui-button--default");
+    this.buttonElement.classList.add("ui-button--default");
   }
 
   setDataTarget() {
@@ -88,7 +87,7 @@ export default class ButtonRadioView {
   renderInto(targetNode) {
     if(!targetNode) return;
     if (this.controller.useCaseKey !== undefined)
-      this.html.dataset.useCase = this.controller.useCaseKey;
-    targetNode.insertAdjacentElement('beforeend', this.html);
+      this.buttonElement.dataset.useCase = this.controller.useCaseKey;
+    targetNode.insertAdjacentElement('beforeend', this.buttonElement);
   }
 }

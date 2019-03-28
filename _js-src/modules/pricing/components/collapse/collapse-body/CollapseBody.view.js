@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 import PubSub from 'pubsub-js';
 
@@ -30,9 +30,8 @@ export default class CollapseBodyView {
    */
   constructor(controller) {
     this.controller = CollapseBodyView.initialize(controller);
-    this.html = htmlToElement(CollapseBodyView.htmlString());
-    this.collapseBody = this.html;
-    this.labelElement = this.html.getElementsByClassName('feature-description')[0];
+    this.collapseBody = stringToHTMLCollection(CollapseBodyView.htmlString())[0];
+    this.labelElement = this.collapseBody.getElementsByClassName('feature-description')[0];
     this.labelElement.innerText = this.controller.description;
     PubSub.subscribe('collapseTriggerClicked', (msg, collapseTrigger) => {
       this.toggleStates(msg, collapseTrigger);
@@ -43,14 +42,14 @@ export default class CollapseBodyView {
     const [sibling] = this.collapseBody.parentNode.getElementsByClassName('collapse');
     const [collapseBody] = collapseTrigger.getElementsByClassName('collapse');
     if (collapseBody === sibling) {
-      this.html.classList.toggle("show");
+      this.collapseBody.classList.toggle("show");
       /** toggle attribute */
-      const attrExpanded = this.html.getAttribute("aria-expanded");
+      const attrExpanded = this.collapseBody.getAttribute("aria-expanded");
       if (attrExpanded !== null) {
         if (attrExpanded === 'false') {
-          this.html.setAttribute("aria-expanded", true);
+          this.collapseBody.setAttribute("aria-expanded", true);
         } else if (attrExpanded === 'true') {
-          this.html.setAttribute("aria-expanded", false);
+          this.collapseBody.setAttribute("aria-expanded", false);
         }
       }
     }
@@ -62,6 +61,6 @@ export default class CollapseBodyView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.html);
+    targetNode.insertAdjacentElement('beforeend', this.collapseBody);
   }
 }

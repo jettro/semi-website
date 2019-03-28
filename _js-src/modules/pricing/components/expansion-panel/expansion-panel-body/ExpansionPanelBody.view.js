@@ -1,9 +1,8 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 import PubSub from 'pubsub-js';
 
 export default class ExpansionPanelBodyView {
-
   /**
    * @desc Test for basic necessary functionality
    * @param controller
@@ -28,23 +27,24 @@ export default class ExpansionPanelBodyView {
    */
   constructor(controller) {
     this.controller = ExpansionPanelBodyView.initialize(controller);
-    this.html = htmlToElement(ExpansionPanelBodyView.htmlString());
-    this.expansionBody = this.html;
-    PubSub.subscribe('expansionPanelHeadClicked', (msg, expansionPanelHead) => { this.toggleStates(msg, expansionPanelHead) });
+    this.expansionBody = stringToHTMLCollection(ExpansionPanelBodyView.htmlString())[0];
+    PubSub.subscribe('expansionPanelHeadClicked', (msg, expansionPanelHead) => {
+      this.toggleStates(msg, expansionPanelHead);
+    });
   }
 
   toggleStates(msg, expansionPanelHead) {
     const [sibling] = this.expansionBody.parentNode.getElementsByClassName('panel-collapse__head');
 
     if (expansionPanelHead === sibling) {
-      this.html.classList.toggle("show");
+      this.expansionBody.classList.toggle('show');
       /** toggle attribute */
-      const attrExpanded = this.html.getAttribute("aria-expanded");
+      const attrExpanded = this.expansionBody.getAttribute('aria-expanded');
       if (attrExpanded !== null) {
         if (attrExpanded === 'false') {
-          this.html.setAttribute("aria-expanded", true);
+          this.expansionBody.setAttribute('aria-expanded', true);
         } else if (attrExpanded === 'true') {
-          this.html.setAttribute("aria-expanded", false);
+          this.expansionBody.setAttribute('aria-expanded', false);
         }
       }
     }
@@ -55,7 +55,7 @@ export default class ExpansionPanelBodyView {
    * @param targetNode {HTMLElement} the target node provided
    */
   renderInto(targetNode) {
-    if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.html);
+    if (!targetNode) return;
+    targetNode.insertAdjacentElement('beforeend', this.expansionBody);
   }
 }

@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 export default class TableHeadView {
 
@@ -32,8 +32,8 @@ export default class TableHeadView {
    */
   constructor(controller) {
     this.controller = TableHeadView.initialize(controller);
-    this.html = htmlToElement(TableHeadView.htmlString());
-    this.tableHeadcells = this.html.getElementsByTagName('TD');
+    this.tableHead = stringToHTMLCollection(TableHeadView.htmlString())[0];
+    this.tableHeadcells = this.tableHead.getElementsByTagName('TD');
     this.tableHeadcells[0].childNodes[0].innerText = this.controller.tableHeadCel1;
     this.tableHeadcells[1].childNodes[0].innerText = this.controller.tableHeadCel2;
     this.tableHeadcells[2].childNodes[0].innerText = this.controller.tableHeadCel3;
@@ -45,6 +45,6 @@ export default class TableHeadView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.html);
+    targetNode.insertAdjacentElement('beforeend', this.tableHead);
   }
 }

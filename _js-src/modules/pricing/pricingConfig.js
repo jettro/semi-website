@@ -4,6 +4,7 @@
  */
 export default {
   'formId': 'js-form-pricing',
+  'receiptId': 'container-receipt-sidebar',
   'panelsClassName': 'panel-collapse',
   'pricingInfoContainerId': 'container-pricing-use-case',
   'pricingOptimizationContainerId': 'container-pricing-optimization',

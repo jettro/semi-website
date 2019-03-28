@@ -1,4 +1,20 @@
-<aside class="layout__sidebar receipt">
+
+export default class ReceiptSummaryView {
+
+  /**
+   * @desc Test for basic necessary functionality
+   * @param controller
+   * @returns {*}
+   */
+  static initialize(controller) {
+    if (!controller) {
+      throw new Error('You must provide a ButtonRadioController.');
+    }
+    return controller;
+  }
+
+  static htmlString() {
+    return `
     <div class="card__title hidden-sm">
         <strong class="receipt__title">Price Summary</strong>
     </div>
@@ -14,14 +30,23 @@
             <dt class="receipt__entry-inactive receipt__recurring">Recurring cost per month (fixed)</dt>
             <dd class="receipt__entry-inactive receipt__recurring price" id="price-recurring">0,00</dd>
         </dl>
-    </div>
-    <dl class="receipt--reverse-sm-3 receipt__totals">
-        <dt class="receipt__total"><strong>Estimated p/m</strong></dt>
-        <dd class="receipt__total price" id="price-total"><strong>0,00</strong></dd>
-        <dt class="receipt__one-time-setup">One time setup fee</dt>
-        <dd class="receipt__one-time-setup price" id="price-one-time-setup">1.000</dd>
-    </dl>
-    <!-- TODO: make class with not-a-button styling -->
-    <!--<button>Get a detailed pricing report</button>-->
-    <a class="button button-receipt" href="#">Schedule a call</a>
-</aside>
+    </div>`;
+  }
+
+  /**
+   * @param controller
+   */
+  constructor(controller) {
+    this.controller = ReceiptSummaryView.initialize(controller);
+    this.receiptSummary = ReceiptSummaryView.htmlString();
+  }
+
+  /**
+   * @desc renders into the target node provided
+   * @param targetNode {Element} the target node provided
+   */
+  renderInto(targetNode) {
+    if(!targetNode) return;
+    targetNode.insertAdjacentHTML('beforeend', this.receiptSummary);
+  }
+};

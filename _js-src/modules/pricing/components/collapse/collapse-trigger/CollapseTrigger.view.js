@@ -1,4 +1,4 @@
-import htmlToElement from '../../../../../utilities/htmlToElement';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 import PubSub from 'pubsub-js';
 
@@ -28,10 +28,9 @@ export default class CollapseTriggerView {
    */
   constructor(controller) {
     this.controller = CollapseTriggerView.initialize(controller);
-    this.html = htmlToElement(CollapseTriggerView.htmlString());
-    this.collapseTrigger = this.html;
+    this.collapseTrigger = stringToHTMLCollection(CollapseTriggerView.htmlString())[0];
+    this.collapseTrigger.innerText = this.controller.label;
     this.collapseTrigger.addEventListener('click', this.controller);
-    this.html.innerText = this.controller.label;
     PubSub.subscribe('collapseTriggerClicked', (msg, collapseTrigger) => {
       this.toggleStates(msg, collapseTrigger);
     });
@@ -40,7 +39,7 @@ export default class CollapseTriggerView {
   toggleStates(msg, collapseTrigger) {
     const [collapseTriggerButton] = collapseTrigger.getElementsByTagName('button');
     if (collapseTriggerButton === this.collapseTrigger) {
-      this.html.classList.toggle("show");
+      this.collapseTrigger.classList.toggle("show");
     }
   }
 
@@ -50,6 +49,6 @@ export default class CollapseTriggerView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.html);
+    targetNode.insertAdjacentElement('beforeend', this.collapseTrigger);
   }
 }
