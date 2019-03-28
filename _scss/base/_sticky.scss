@@ -1,0 +1,11 @@
+
+// TODO: refactor stickyness for IE and EDGE <15
+@mixin stickyness {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 2em;
+}
+
+.sticky {
+  @include stickyness;
+}

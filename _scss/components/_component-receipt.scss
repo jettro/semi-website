@@ -4,13 +4,6 @@
 @import '../mixins/mixins-buttons';
 @import '../mixins/mixins';
 
-// TODO: refactor stickyness for IE and EDGE <15
-@mixin stickyness {
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 2em;
-}
-
 .receipt {
   background-color: $color-white;
   width: 100%;
@@ -66,7 +59,6 @@
     border: $border-2;
     margin-bottom: 2em;
     padding: $space-inner-x-large;
-    @include stickyness;
 
     dt:not(.receipt__total),
     dd:not(.receipt__total) {
