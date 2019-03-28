@@ -6,9 +6,9 @@ const isHTMLCollection = require('../typeChecking/isHTMLCollection').default;
 /**
  * @desc Check if an input field or multiple input fields in a given collection
  *       (Element or HTMLCollection) have a certain type.
- * @param entries {NodeList || HTMLCollection || HTMLCollectionOf} The type of element that should exist
- * @param attribute {string} A list of html input fields
- * @returns {boolean} if an element of a certain type exists
+ * @param entries {(NodeList | HTMLCollection | HTMLCollectionOf)} The type of element that should exist
+ * @param attribute {String} A list of html input fields
+ * @returns {Boolean} If an element of a certain type exists
  */
 const inputExistsOfType = function(entries, attribute) {
 

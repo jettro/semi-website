@@ -1,7 +1,7 @@
 
 /**
- * @param html {String} representing a single HTML element
- * @return {Element}
+ * @param html {String} Representing a single HTML element
+ * @return {Element} The newly created element
  */
 export default function(html) {
   const template = document.createElement('template');

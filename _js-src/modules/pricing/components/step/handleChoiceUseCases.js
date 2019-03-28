@@ -36,7 +36,7 @@ const calcTotalCostUseCases =  function(table) {
 
 /**
  * @desc toggle the existing panels based on use-case key
- * @param panels {object} the panels that exist on the page
+ * @param panels {Object<string, any>} the panels that exist on the page
  * @param currentUseCaseKey {string} The current use case key to compare
  */
 const toggleUseCasePanels = function(panels, currentUseCaseKey) {
@@ -74,7 +74,7 @@ const getVisibleTable = function(panels) {
 
 /**
  * @desc removes an object by key from a [object Array]
- * @param object {Object} the array to remove the config object from
+ * @param object {Object<string, any>} the array to remove the config object from
  * @param objectKey {String} a string which defines the  key to remove from [object Array]
  * @returns {Array} an array in which the
  */
@@ -91,8 +91,8 @@ export function removeObjectByKeyFromArray(object, objectKey) {
 }
 
 /**
- *
  * @param target {HTMLElement} the target this choice applies to
+ * @param useCases {Object<string, any>}
  * @param showNextChoiceHandler
  */
 export default function(target, useCases, showNextChoiceHandler = undefined) {
