@@ -1,7 +1,24 @@
-import { removeObjectByKeyFromArray } from '../components/step/handleChoiceUseCases';
 import listOptionItemComponent from '../components/list-options/list-option-item';
 import buttonRadioComponent from '../components/button-radio';
 import listOptionsComponent from '../components/list-options/list';
+
+/**
+ * @desc Removes an object by key from an Array
+ * @param object {Object<string, any>} the array to remove the config object from
+ * @param objectKey {String} a string which defines the  key to remove from the Array
+ * @returns {?Array} New array where the defined object is removed from
+ */
+export function removeObjectByKeyFromArray(object, objectKey) {
+  /** @type {Array!} */
+  let options = [];
+  for (let option of Object.values(object)) {
+    const [key] = Object.keys(option);
+    if (key !== objectKey) {
+      options.push(option);
+    }
+  }
+  return options;
+}
 
 /**
  * @desc creates a list with list items and buttons inside,
@@ -14,6 +31,7 @@ import listOptionsComponent from '../components/list-options/list';
  */
 export default function(options, container, listData = undefined, topicScope) {
   const listItemButtonMap = new Map();
+  /** Removes 'config' from list of options */
   removeObjectByKeyFromArray(options, 'config').forEach((option, i) => {
     /** create list item template so the button can be asserted inside */
     let template = document.createElement('template');
@@ -32,5 +50,4 @@ export default function(options, container, listData = undefined, topicScope) {
   } else {
     listOptionsComponent(listItemButtonMap).renderInto(container);
   }
-
 }
