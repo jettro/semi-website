@@ -5,7 +5,7 @@ const isElement = require('../typeChecking/isElement').default;
  * @desc Gets closest element by type by traversing up the DOM structure
  * @param element {Object<string, any>} The element which to find another element close to
  * @param selector {String} The selector of the closest element
- * @returns {(Object<string, any>|null)}
+ * @returns {?Object<string, any>}
  */
 export default function(element, selector) {
 
