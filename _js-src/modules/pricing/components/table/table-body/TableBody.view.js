@@ -1,4 +1,6 @@
+import tableRowComponent from '../table-row';
 import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
+import CollapseComponent from '../../collapse/collapse';
 
 export default class TableBodyView {
 
@@ -27,6 +29,13 @@ export default class TableBodyView {
   constructor(controller) {
     this.controller = TableBodyView.initialize(controller);
     this.tableBody = stringToHTMLCollection(TableBodyView.htmlString())[0];
+
+    Object.entries(this.controller.rows).forEach(([key, row]) => {
+      const collapseElement = CollapseComponent(row.title, row.desc).create();
+      // TODO: Start by a refactor into custom element maybe?
+      // console.log(collapseElement);
+      tableRowComponent(row, collapseElement).renderInto(this.tableBody);
+    });
   }
 
   /**

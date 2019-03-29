@@ -143,30 +143,8 @@ export default function(target, useCases, showNextChoiceHandler = undefined) {
       });
 
       const [currentCollapseBody] = currentPanel[1].getElementsByClassName('panel-collapse__body');
-
-      tableComponent().renderInto(currentCollapseBody);
-
-      const [table] = currentPanel[1].getElementsByTagName('TABLE');
-      tableHeadComponent().renderInto(table);
-      tableBodyComponent().renderInto(table);
-
-      const [tableBody] = currentPanel[1].getElementsByTagName('TBODY');
       const useCaseConsumptions = merge(useCaseLabels, consumptions);
-
-      /** create a row for each consumption in a use case and add it in the body */
-      useCaseConsumptions.forEach(option => {
-        const data = {
-          title: option.title,
-          desc: option.desc,
-          cpc: option.cpc,
-          average: option.average,
-        };
-        const collapseElement = document.createElement('div');
-        collapseTriggerComponent(data.title).renderInto(collapseElement);
-        collapseBodyComponent(data.desc).renderInto(collapseElement);
-        tableRowComponent(data, collapseElement).renderInto(tableBody);
-      });
-
+      tableComponent(useCaseConsumptions).renderInto(currentCollapseBody);
     }
 
     // /** calculate the costs of visible table */

@@ -1,8 +1,9 @@
-import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
-import tableHeadComponent from '../table-head';
-import tableBodyComponent from '../table-body';
+import collapseTriggerComponent from '../collapse-trigger';
+import collapseBodyComponent from '../collapse-body';
 
-export default class TableView {
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
+
+export default class CollapseView {
 
   /**
    * @desc Test for basic necessary functionality
@@ -11,7 +12,7 @@ export default class TableView {
    */
   static initialize(controller) {
     if (!controller) {
-      throw new Error('You must provide a TableController.');
+      throw new Error('You must provide a TableBodyController.');
     }
     return controller;
   }
@@ -20,17 +21,21 @@ export default class TableView {
    * @returns {string} the button html element as a string
    */
   static htmlString() {
-    return `<table class="table-pricing table-zebra"></table>`;
+    return `<div></div>`;
   }
 
   /**
    * @param controller
    */
   constructor(controller) {
-    this.controller = TableView.initialize(controller);
-    this.table = stringToHTMLCollection(TableView.htmlString())[0];
-    tableHeadComponent().renderInto(this.table);
-    tableBodyComponent(this.controller.rows).renderInto(this.table);
+    this.controller = controller;
+    this.collapse = stringToHTMLCollection(CollapseView.htmlString())[0];
+    collapseTriggerComponent(this.controller.title).renderInto(this.collapse);
+    collapseBodyComponent(this.controller.description).renderInto(this.collapse);
+  }
+
+  create() {
+    return this.collapse;
   }
 
   /**
@@ -39,6 +44,6 @@ export default class TableView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.table);
+    targetNode.insertAdjacentElement('beforeend', this.tableBody);
   }
 }
