@@ -13,6 +13,7 @@ import isNumber from '../../../../typeChecking/isNumber';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
 import { reCalculateTotal, setVariableMonthlyCost } from '../../components/receipt/pricingReceiptFunctions';
+import expansionPanelComponent from '../expansion-panel/expansion-panel';
 
 const merge = require('lodash.merge');
 
@@ -94,7 +95,7 @@ export default function(target, useCases, showNextChoiceHandler = undefined) {
   /** @type {Array!} */
   let existingPanelKeys = [];
   /** @type {HTMLCollectionOf!} */
-  const panels = document.getElementsByClassName('panel-collapse');
+  const expansionPanels = document.getElementsByClassName('panel-collapse');
 
   /** @type {Array!} */
   let options = [];
@@ -115,8 +116,8 @@ export default function(target, useCases, showNextChoiceHandler = undefined) {
     /** @type {Object<string, any>} */
     const singleUseCase = useCases[currentUseCase];
 
-    /** Toggle the panels */
-    toggleUseCasePanels(panels, currentUseCase);
+    /** Toggle the panels if they exist */
+    toggleUseCasePanels(expansionPanels, currentUseCase);
 
     /** @type {Boolean!} */
     const panelAlreadyExists = existingPanelKeys.includes(currentUseCase);
@@ -129,23 +130,27 @@ export default function(target, useCases, showNextChoiceHandler = undefined) {
       const consumptions = singleUseCase.consumptions;
 
       const expansionPanelContainer = document.getElementById('panel-collapse-container');
-      const expansionPanel = document.createElement('DIV');
-      expansionPanel.classList.add('panel-collapse');
-      expansionPanel.dataset.useCase = currentUseCase;
-      expansionPanelContainer.insertAdjacentElement('beforeend', expansionPanel);
+      const data = {
+        currentUseCase: currentUseCase,
+        panelLabel: singleUseCase.panelLabel
+      };
+      expansionPanelComponent(data).renderInto(expansionPanelContainer);
 
-      expansionPanelHeadComponent(singleUseCase.panelLabel).renderInto(expansionPanel);
-      expansionPanelBodyComponent().renderInto(expansionPanel);
+      const existingPanels = Object.entries(document.getElementsByClassName('panel-collapse'));
+      /** get current panel to assert table into */
+      const [currentPanel] = existingPanels.filter(entry => {
+        return (entry[1].dataset.useCase === currentUseCase);
+      });
 
-      const collapseBodyElement = expansionPanel.querySelector('.panel-collapse__body');
+      const [currentCollapseBody] = currentPanel[1].getElementsByClassName('panel-collapse__body');
 
-      tableComponent().renderInto(collapseBodyElement);
+      tableComponent().renderInto(currentCollapseBody);
 
-      const [table] = collapseBodyElement.getElementsByTagName('TABLE');
+      const [table] = currentPanel[1].getElementsByTagName('TABLE');
       tableHeadComponent().renderInto(table);
       tableBodyComponent().renderInto(table);
 
-      const [tableBody] = collapseBodyElement.getElementsByTagName('TBODY');
+      const [tableBody] = currentPanel[1].getElementsByTagName('TBODY');
       const useCaseConsumptions = merge(useCaseLabels, consumptions);
 
       /** create a row for each consumption in a use case and add it in the body */
@@ -161,10 +166,11 @@ export default function(target, useCases, showNextChoiceHandler = undefined) {
         collapseBodyComponent(data.desc).renderInto(collapseElement);
         tableRowComponent(data, collapseElement).renderInto(tableBody);
       });
+
     }
 
-    /** calculate the costs of visible table */
-    const total = calcTotalCostUseCases(getVisibleTable(panels));
+    // /** calculate the costs of visible table */
+    const total = calcTotalCostUseCases(getVisibleTable(expansionPanels));
     setVariableMonthlyCost(total);
 
     /** recalculate the total */
