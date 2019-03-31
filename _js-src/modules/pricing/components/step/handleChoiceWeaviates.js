@@ -1,8 +1,8 @@
 import PubSub from 'pubsub-js';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
-import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
 import getClosest from '../../../../utilities/getClosest';
+import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
 import listOptionsComponent from '../list-options/list-options';
 
 /**
@@ -17,7 +17,7 @@ export default function(showNextChoiceHandler = undefined) {
     if (option.config) {
       if (option.config.fixed) type = 'fixed';
     } else {
-      Object.assign(option, {'valueType': type});
+      Object.assign(option, { valueType: type });
     }
   });
 
@@ -26,6 +26,6 @@ export default function(showNextChoiceHandler = undefined) {
   PubSub.subscribe('buttonClicked.weaviates', (msg, data) => {
     const li = getClosest(data.button, 'li');
     setFixedCostPrice(li.dataset.fixed, '0');
-    if (typeof (showNextChoiceHandler) === typeof (Function)) showNextChoiceHandler();
+    if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 }

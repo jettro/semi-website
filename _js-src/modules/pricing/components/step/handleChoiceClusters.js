@@ -1,7 +1,6 @@
-
 import PubSub from 'pubsub-js';
-import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
+import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import getClosest from '../../../../utilities/getClosest';
 import { setHostingCluster } from '../receipt/pricingReceiptFunctions';
 import listOptionsComponent from '../list-options/list-options';
@@ -17,6 +16,6 @@ export default function(showNextChoiceHandler = undefined) {
     const li = getClosest(data.button, 'li');
     const useCaseSubTotal = document.getElementById(pricingConfig.receipt.montlyTotalId).innerHTML;
     setHostingCluster(li.dataset.multiplier, useCaseSubTotal);
-    if (typeof (showNextChoiceHandler) === typeof (Function)) showNextChoiceHandler();
+    if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 }

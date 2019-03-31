@@ -1,12 +1,11 @@
-import getClosest from '../../../../utilities/getClosest';
-import getChoiceFieldset from '../../common/getChoiceFieldset';
-import { setHostingAdjustment } from '../receipt/pricingReceiptFunctions';
 import { addCollapseTriggers } from '../../../collapse';
-
-import pricingUseCaseData from '../../../../../_data/pricingUseCases';
-import pricingConfig from '../../pricingConfig';
-import PubSub from 'pubsub-js';
+import getChoiceFieldset from '../../common/getChoiceFieldset';
+import getClosest from '../../../../utilities/getClosest';
 import listOptionsComponent from '../list-options/list-options';
+import pricingConfig from '../../pricingConfig';
+import pricingUseCaseData from '../../../../../_data/pricingUseCases';
+import PubSub from 'pubsub-js';
+import { setHostingAdjustment } from '../receipt/pricingReceiptFunctions';
 
 /**
  * @desc show the element
@@ -88,7 +87,9 @@ export default function(
         const container = document.getElementById(pricingConfig.pricingSemiOption1Id);
         const options = pricingUseCaseData.hostingProvidersBySemi;
         choiceMade.push('choiceYesOptions');
-        listOptionsComponent(options, { pubSubScope: 'hosting.hostingBySemi.option1' }).renderInto(container);
+        listOptionsComponent(options, { pubSubScope: 'hosting.hostingBySemi.option1' }).renderInto(
+          container,
+        );
       }
     }
 
@@ -114,7 +115,9 @@ export default function(
         );
         const options = pricingUseCaseData.hostingProvidersByCustomer;
         choiceMade.push('choiceNoOptions');
-        listOptionsComponent(options, { pubSubScope: 'hosting.hostingByCustomer' }).renderInto(container);
+        listOptionsComponent(options, { pubSubScope: 'hosting.hostingByCustomer' }).renderInto(
+          container,
+        );
       }
     }
   });
@@ -143,7 +146,9 @@ export default function(
 
     if (!theseOptionsExist) {
       /** create new list (and assign data attribute for the used use-case key) */
-      listOptionsComponent(options, { pubSubScope: 'hosting.hostingBySemi.option2'}).renderInto(container);
+      listOptionsComponent(options, { pubSubScope: 'hosting.hostingBySemi.option2' }).renderInto(
+        container,
+      );
 
       /** add this button to the set of existing options */
       existingOptions.add(data.button);

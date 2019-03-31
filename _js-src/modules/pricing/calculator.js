@@ -42,10 +42,18 @@ import receiptComponent from './components/receipt/receipt';
     const receiptSidebar = document.getElementById(pricingConfig.receiptId);
 
     if (!elementExists(formPricing))
-      console.error(`No form container element present. Are you sure the form with id '${pricingConfig.formId}' exists?`);
+      console.error(
+        `No form container element present. Are you sure the form with id '${
+          pricingConfig.formId
+        }' exists?`,
+      );
 
     if (!elementExists(receiptSidebar))
-      console.error(`No sidebar container element present. Are you sure the form with id '${pricingConfig.receiptId}' exists?`);
+      console.error(
+        `No sidebar container element present. Are you sure the form with id '${
+          pricingConfig.receiptId
+        }' exists?`,
+      );
 
     /** @type {HTMLCollectionOf!} */
     const fieldSets = formPricing.getElementsByTagName('FIELDSET');
@@ -67,7 +75,7 @@ import receiptComponent from './components/receipt/receipt';
     /** @type {Object<string, any>!} */
     const flattenedUseCaseData = Object.assign({}, ...useCaseData);
 
-    handleChoiceUseCases( flattenedUseCaseData, function() {
+    handleChoiceUseCases(flattenedUseCaseData, function() {
       const nextFieldset = fieldsetHostingPreference;
       if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
         nextFieldset.classList.remove(pricingConfig.hideClass);
@@ -115,11 +123,10 @@ import receiptComponent from './components/receipt/receipt';
       variableMonthlyCost: '0,00',
       hostingOptimization: '0,00',
       clusters: '0,00',
-      recurring: '0,00'
+      recurring: '0,00',
     };
 
     receiptComponent(initialPricingState).createInto(receiptSidebar);
-
   }
 
   /** interface definition */

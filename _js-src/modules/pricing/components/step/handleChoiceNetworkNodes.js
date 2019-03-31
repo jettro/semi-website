@@ -17,7 +17,7 @@ export default function(showNextChoiceHandler = undefined) {
     if (option.config) {
       if (option.config.fixed) type = 'fixed';
     } else {
-      Object.assign(option, {'valueType': type});
+      Object.assign(option, { valueType: type });
     }
   });
 
@@ -37,6 +37,6 @@ export default function(showNextChoiceHandler = undefined) {
     nodeNetworksPrice = li.dataset.fixed;
     setFixedCostPrice(numberOfWeaviatesPrice, nodeNetworksPrice);
     /** show the next fieldset */
-    if (typeof (showNextChoiceHandler) === typeof Function) showNextChoiceHandler();
+    if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 }

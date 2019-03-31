@@ -1,12 +1,15 @@
 import elementExists from '../../../../utilities/elementExists';
-import PubSub from 'pubsub-js';
-import tableComponent from '../table/table';
+import expansionPanelComponent from '../expansion-panel/expansion-panel';
 import isNumber from '../../../../typeChecking/isNumber';
+import listOptionsComponent from '../list-options/list-options';
+import PubSub from 'pubsub-js';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
-import { reCalculateTotal, setVariableMonthlyCost } from '../../components/receipt/pricingReceiptFunctions';
-import expansionPanelComponent from '../expansion-panel/expansion-panel';
-import listOptionsComponent from '../list-options/list-options';
+import {
+  reCalculateTotal,
+  setVariableMonthlyCost,
+} from '../../components/receipt/pricingReceiptFunctions';
+import tableComponent from '../table/table';
 
 const merge = require('lodash.merge');
 
@@ -126,14 +129,14 @@ export default function(useCases, showNextChoiceHandler = undefined) {
       const expansionPanelContainer = document.getElementById('panel-collapse-container');
       const data = {
         currentUseCase: currentUseCase,
-        panelLabel: singleUseCase.panelLabel
+        panelLabel: singleUseCase.panelLabel,
       };
       expansionPanelComponent(data).renderInto(expansionPanelContainer);
 
       const existingPanels = Object.entries(document.getElementsByClassName('panel-collapse'));
       /** get current panel to assert table into */
       const [currentPanel] = existingPanels.filter(entry => {
-        return (entry[1].dataset.useCase === currentUseCase);
+        return entry[1].dataset.useCase === currentUseCase;
       });
 
       const [currentCollapseBody] = currentPanel[1].getElementsByClassName('panel-collapse__body');
@@ -149,7 +152,6 @@ export default function(useCases, showNextChoiceHandler = undefined) {
     reCalculateTotal();
 
     /** show the next fieldset */
-    if (typeof showNextChoiceHandler === typeof Function)
-      showNextChoiceHandler();
+    if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 }
