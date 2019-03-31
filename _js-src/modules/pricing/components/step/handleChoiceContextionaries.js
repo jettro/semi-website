@@ -1,13 +1,13 @@
 
 import PubSub from 'pubsub-js';
-import createListItems from '../../common/createListItems';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
+import listOptionsComponent from '../list-options/list-options';
 
 export default function(target, showNextChoiceHandler) {
   const container = document.getElementById(pricingConfig.pricingContextionaryContainerId);
   const options = pricingUseCaseData.contextionaries;
-  createListItems(options, container, undefined, 'contextionaries');
+  listOptionsComponent(options, { pubSubScope: 'contextionaries' }).renderInto(container);
   PubSub.subscribe('buttonClicked.contextionaries', (msg, data) => {
     if (typeof (showNextChoiceHandler) === typeof (Function)) showNextChoiceHandler();
   });

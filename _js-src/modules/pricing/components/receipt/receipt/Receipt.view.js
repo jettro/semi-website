@@ -29,7 +29,7 @@ export default class ReceiptView {
     this.controller = ReceiptView.initialize(controller);
     this.receipt = stringToHTMLCollection(ReceiptView.htmlString())[0];
 
-    receiptSummaryComponent().renderInto(this.receipt);
+    receiptSummaryComponent(this.controller.pricingState).renderInto(this.receipt);
     receiptTotalsComponent().renderInto(this.receipt);
     receiptActionComponent().renderInto(this.receipt);
   }

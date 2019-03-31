@@ -1,16 +1,14 @@
 import PubSub from 'pubsub-js';
-import createListItems from '../../common/createListItems';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import getClosest from '../../../../utilities/getClosest';
 import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
+import listOptionsComponent from '../list-options/list-options';
 
 /**
- *
- * @param target {}
  * @param showNextChoiceHandler {function}
  */
-export default function(target, showNextChoiceHandler = undefined) {
+export default function(showNextChoiceHandler = undefined) {
   const container = document.getElementById(pricingConfig.pricingNetworkNodesContainerId);
   const options = pricingUseCaseData.networkNodes;
 
@@ -23,7 +21,7 @@ export default function(target, showNextChoiceHandler = undefined) {
     }
   });
 
-  createListItems(options, container, undefined, 'networkNodes');
+  listOptionsComponent(options, { pubSubScope: 'networkNodes' }).renderInto(container);
 
   let nodeNetworksPrice = '0';
   let numberOfWeaviatesPrice = '0';
@@ -38,6 +36,7 @@ export default function(target, showNextChoiceHandler = undefined) {
     const li = getClosest(data.button, 'li');
     nodeNetworksPrice = li.dataset.fixed;
     setFixedCostPrice(numberOfWeaviatesPrice, nodeNetworksPrice);
-    if (typeof (showNextChoiceHandler) === typeof (Function)) showNextChoiceHandler();
+    /** show the next fieldset */
+    if (typeof (showNextChoiceHandler) === typeof Function) showNextChoiceHandler();
   });
 }

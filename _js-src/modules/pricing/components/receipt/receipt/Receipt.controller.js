@@ -1,4 +1,10 @@
 
 export default class ReceiptController {
-  constructor() {}
+  constructor(model) {
+    this.model = model;
+  }
+
+  get pricingState() {
+    return this.model.pricingState;
+  };
 };

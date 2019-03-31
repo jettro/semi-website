@@ -5,11 +5,11 @@ export default class ListOptionsController {
     this._model = model;
   }
 
-  get children() {
-    return this._model.children;
+  get options() {
+    return this._model.options;
   };
 
-  get dataAttr() {
-    return this._model.dataAttr;
+  get buttonData() {
+    return this._model.buttonData;
   }
 }

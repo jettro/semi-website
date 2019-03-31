@@ -191,7 +191,8 @@
     {"title": "Oracle Cloud", "value": "100"},
     {"title": "Google Cloud", "value": "100"},
     {"title": "AWS", "value": "100"},
-    {"title": "Azure", "value": "100"}
+    {"title": "Azure", "value": "100"},
+    {"title": "Other", "value": "100"}
   ],
   "clusters": [
     {"title": "1 cluster", "value": "100"},

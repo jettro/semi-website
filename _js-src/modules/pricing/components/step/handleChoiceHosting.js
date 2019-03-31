@@ -1,13 +1,12 @@
 import getClosest from '../../../../utilities/getClosest';
 import getChoiceFieldset from '../../common/getChoiceFieldset';
 import { setHostingAdjustment } from '../receipt/pricingReceiptFunctions';
-import createListItems from '../../common/createListItems';
 import { addCollapseTriggers } from '../../../collapse';
 
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
 import PubSub from 'pubsub-js';
-
+import listOptionsComponent from '../list-options/list-options';
 
 /**
  * @desc show the element
@@ -34,9 +33,15 @@ function showElement(elementToShow) {
  * @param useCases {Object} the use cases
  * @param target {Object} The target fieldset
  * @param fieldSets {Object} The sub-fieldsets
- * @param showNextChoiceHandler {fn=null} callback function to execute only once, once all actions  in this handler are done
+ * @param showNextChoiceHandler {function()=undefined} callback function to execute only once, once all actions  in this handler are done
  */
-export default function(useCaseFieldset, useCases, target, fieldSets, showNextChoiceHandler = undefined) {
+export default function(
+  useCaseFieldset,
+  useCases,
+  target,
+  fieldSets,
+  showNextChoiceHandler = undefined,
+) {
   let choiceMade = [];
   let choiceYesOptionsExist = false;
   let choiceNoOptionsExist = false;
@@ -47,15 +52,14 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
   });
 
   const options = [
-    { "title": "Yes", "showTarget": "hosting-by-semi" },
-    { "title": "No", "showTarget": "hosting-by-customer" }
+    { title: 'Yes', showTarget: 'hosting-by-semi' },
+    { title: 'No', showTarget: 'hosting-by-customer' },
   ];
 
   const container = document.getElementById('container-hosting-choice');
-  createListItems(options, container, undefined, 'hosting');
+  listOptionsComponent(options, { pubSubScope: 'hosting' }).renderInto(container);
 
   PubSub.subscribe('buttonClicked.hosting', (msg, pubSubData) => {
-
     const optionYesId = 'hosting-by-semi';
     const hostingBySemiElement = document.getElementById(optionYesId);
     const optionNoId = 'hosting-by-customer';
@@ -68,8 +72,9 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
 
     /** option Yes clicked */
     if (pubSubData.button.dataset.targetShow === optionYesId) {
-
-      if (choiceMade.includes('choiceYesOptions')) { choiceYesOptionsExist = true; }
+      if (choiceMade.includes('choiceYesOptions')) {
+        choiceYesOptionsExist = true;
+      }
 
       /** show optional fieldset for options 1 & 2 */
       hideElement(hostingByCustomer);
@@ -83,7 +88,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
         const container = document.getElementById(pricingConfig.pricingSemiOption1Id);
         const options = pricingUseCaseData.hostingProvidersBySemi;
         choiceMade.push('choiceYesOptions');
-        createListItems(options, container, undefined, 'hosting.hostingBySemi.option1');
+        listOptionsComponent(options, { pubSubScope: 'hosting.hostingBySemi.option1' }).renderInto(container);
       }
     }
 
@@ -92,11 +97,11 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
       showElement(optionsSubStep2FieldsetElement);
     });
 
-
     /** option No clicked */
     if (pubSubData.button.dataset.targetShow === optionNoId) {
-
-      if (choiceMade.includes('choiceNoOptions')) { choiceNoOptionsExist = true; }
+      if (choiceMade.includes('choiceNoOptions')) {
+        choiceNoOptionsExist = true;
+      }
 
       hideElement(hostingBySemiElement);
       showElement(hostingByCustomer);
@@ -104,13 +109,14 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
       setHostingAdjustment('0');
 
       if (!choiceNoOptionsExist) {
-        const container = document.getElementById(pricingConfig.pricingOptimizationCustomerContainerId);
+        const container = document.getElementById(
+          pricingConfig.pricingOptimizationCustomerContainerId,
+        );
         const options = pricingUseCaseData.hostingProvidersByCustomer;
         choiceMade.push('choiceNoOptions');
-        createListItems(options, container, undefined, 'hosting.hostingByCustomer');
+        listOptionsComponent(options, { pubSubScope: 'hosting.hostingByCustomer' }).renderInto(container);
       }
     }
-
   });
 
   let existingOptions = new Set();
@@ -122,7 +128,8 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
     const options = useCases[useCaseKey]['optimization'];
     const container = document.getElementById(pricingConfig.pricingSemiOption2Id);
     const lists = container.getElementsByTagName('ul');
-    const listIdentifier = "useCase";
+
+    // const listIdentifier = 'useCase';
 
     /** show list based on use case button clicked */
     Object.keys(lists).forEach(key => {
@@ -136,12 +143,11 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
 
     if (!theseOptionsExist) {
       /** create new list (and assign data attribute for the used use-case key) */
-      const listData = { attr: listIdentifier, value: useCaseKey };
-      createListItems(options, container, listData, 'hosting.hostingBySemi.option2');
+      listOptionsComponent(options, { pubSubScope: 'hosting.hostingBySemi.option2'}).renderInto(container);
+
       /** add this button to the set of existing options */
       existingOptions.add(data.button);
     }
-
   });
 
   /** hosting by semi option 1 influences the hosting costs */
@@ -150,7 +156,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
     const useCaseSubTotal = document.getElementById('price-monthly-total').innerHTML;
     setHostingAdjustment(useCaseSubTotal, li.dataset.multiplier);
     /** show the next fieldset */
-    if (typeof(showNextChoiceHandler) === typeof(Function)) showNextChoiceHandler();
+    if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 
   /** hosting by customer influences the hosting costs */
@@ -159,7 +165,7 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
     const useCaseSubTotal = document.getElementById(pricingConfig.receipt.montlyTotalId).innerHTML;
     setHostingAdjustment(useCaseSubTotal, li.dataset.multiplier);
     /** show the next fieldset */
-    if (typeof(showNextChoiceHandler) === typeof(Function)) showNextChoiceHandler();
+    if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 
   /** the optimization preference adjusts the variable monthly cost */
@@ -170,6 +176,5 @@ export default function(useCaseFieldset, useCases, target, fieldSets, showNextCh
     console.log('this is a TODO item');
     const li = getClosest(data.button, 'li');
     console.log(li.dataset.multiplier);
-
   });
 }

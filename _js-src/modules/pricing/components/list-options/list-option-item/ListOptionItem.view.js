@@ -28,9 +28,10 @@ export default class ListOptionItemView {
    */
   constructor(controller) {
     this._controller = ListOptionItemView.initialize(controller);
-    this._html = stringToHTMLCollection(ListOptionItemView.htmlString())[0];
+    this._listItemOption = stringToHTMLCollection(ListOptionItemView.htmlString())[0];
     this._value = this._controller.value;
     this._valueType = this._controller.valueType;
+    this._listItemOption.insertAdjacentElement('beforeend', this._controller.innerChildElement);
   }
 
   /**
@@ -38,7 +39,7 @@ export default class ListOptionItemView {
    */
   init() {
     this[_createValue](this._value);
-    return this._html;
+    return this._listItemOption;
   }
 
   /**
@@ -55,9 +56,9 @@ export default class ListOptionItemView {
    */
   [_createValue]() {
     if (typeof(this._value) !== 'undefined') {
-      const listItem = this._html;
+      const listItem = this._listItemOption;
       listItem.dataset[this._valueType] = this._value;
     }
-    return this._html;
+    return this._listItemOption;
   }
 }

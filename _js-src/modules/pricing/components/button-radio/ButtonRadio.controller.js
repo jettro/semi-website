@@ -20,9 +20,9 @@ export default class ButtonRadioController {
     }
   }
 
-  constructor(model, isDefault, scopedPubSub = undefined) {
+  constructor(model, isDefault) {
     this.model = model;
-    this.scope = scopedPubSub;
+    this.scope = this.model.scope;
     this.isDefault = isDefault;
   }
 

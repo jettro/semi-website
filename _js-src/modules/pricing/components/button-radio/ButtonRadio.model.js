@@ -1,11 +1,12 @@
 
 export default class ButtonRadioModel {
 
-  constructor(title, useCaseKey = undefined, showTarget = undefined) {
+  constructor(title, useCaseKey = undefined, showTarget = undefined, scopedPubSub = undefined) {
     this._title = title;
     this._useCaseKey = useCaseKey;
     this._showTarget = showTarget;
-    this.description = "a description";
+    this._scopedPubSub = scopedPubSub;
+    this.description = "a description inside buttonRadio.model.js";
   }
 
   /**
@@ -30,5 +31,9 @@ export default class ButtonRadioModel {
   get showTarget() {
     if (typeof(this._showTarget) !== "undefined")
       return this._showTarget;
+  }
+
+  get scope() {
+    return this._scopedPubSub;
   }
 }

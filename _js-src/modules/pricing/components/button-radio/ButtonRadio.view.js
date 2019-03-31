@@ -37,6 +37,10 @@ export default class ButtonRadioView {
     this.buttonElement.addEventListener('click', this.controller);
     this.titleElement = this.buttonElement.getElementsByClassName('ui-button__title')[0];
     this.titleElement.innerText = this.controller.title;
+
+    if (typeof(this.controller.useCaseKey) !== 'undefined') {
+      this.setUseCaseKey();
+    }
     if (typeof(this.controller.showTarget) !== 'undefined') {
       this.setDataTarget();
     }
@@ -51,6 +55,10 @@ export default class ButtonRadioView {
   removeActiveState(button) {
     button.classList.remove("ui-button--active");
     button.setAttribute('aria-checked', 'false');
+  }
+
+  setUseCaseKey() {
+    this.buttonElement.dataset.useCase = this.controller.useCaseKey;
   }
 
   setActiveState() {
@@ -78,6 +86,14 @@ export default class ButtonRadioView {
       /** then add the active state tot this specific button */
       this.self.setActiveState();
     }
+  }
+
+  /**
+   * @description creates an element to reuse in other element
+   * @returns {Element | *}
+   */
+  create() {
+    return this.buttonElement;
   }
 
   /**

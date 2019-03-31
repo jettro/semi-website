@@ -12,4 +12,8 @@ export default class ListOptionItemController {
   get valueType() {
     return this._model.valueType;
   }
+
+  get innerChildElement() {
+    return this._model.innerChildElement;
+  }
 }

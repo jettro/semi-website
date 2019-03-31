@@ -1,24 +1,8 @@
 import listOptionItemComponent from '../components/list-options/list-option-item';
 import buttonRadioComponent from '../components/button-radio';
-import listOptionsComponent from '../components/list-options/list';
+import listOptionsComponent from '../components/list-options/list-options';
+import removeObjectByKeyFromArray from './removeObjectByKeyFromArray';
 
-/**
- * @desc Removes an object by key from an Array
- * @param object {Object<string, any>} the array to remove the config object from
- * @param objectKey {String} a string which defines the  key to remove from the Array
- * @returns {?Array} New array where the defined object is removed from
- */
-export function removeObjectByKeyFromArray(object, objectKey) {
-  /** @type {Array!} */
-  let options = [];
-  for (let option of Object.values(object)) {
-    const [key] = Object.keys(option);
-    if (key !== objectKey) {
-      options.push(option);
-    }
-  }
-  return options;
-}
 
 /**
  * @desc creates a list with list items and buttons inside,
@@ -43,7 +27,7 @@ export default function(options, container, listData = undefined, topicScope) {
     listItemButtonMap.set(i, li);
   });
 
-  /** add data attribute to newly created list */
+  /** if the data attribute is present add a data attribute to newly created list */
   if (listData !== undefined && listData !== '') {
     /** insert optionsListItemButtonMap containing map with HTML elements into container */
     listOptionsComponent(listItemButtonMap, listData).renderInto(container);

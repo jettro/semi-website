@@ -34,6 +34,10 @@ export default class CollapseView {
     collapseBodyComponent(this.controller.description).renderInto(this.collapse);
   }
 
+  /**
+   * @description creates an element to reuse in other element
+   * @returns {Element | *}
+   */
   create() {
     return this.collapse;
   }

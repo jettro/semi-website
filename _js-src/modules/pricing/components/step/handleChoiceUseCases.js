@@ -1,4 +1,3 @@
-import createListItems from '../../common/createListItems';
 import elementExists from '../../../../utilities/elementExists';
 import PubSub from 'pubsub-js';
 import tableComponent from '../table/table';
@@ -7,6 +6,7 @@ import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
 import { reCalculateTotal, setVariableMonthlyCost } from '../../components/receipt/pricingReceiptFunctions';
 import expansionPanelComponent from '../expansion-panel/expansion-panel';
+import listOptionsComponent from '../list-options/list-options';
 
 const merge = require('lodash.merge');
 
@@ -71,11 +71,10 @@ const getVisibleTable = function(panels) {
 };
 
 /**
- * @param target {HTMLElement} the target this choice applies to
  * @param useCases {Object<string, any>}
  * @param showNextChoiceHandler {Function} callback function which is used to show next choice
  */
-export default function(target, useCases, showNextChoiceHandler = undefined) {
+export default function(useCases, showNextChoiceHandler = undefined) {
   /** @type {HTMLElement!} */
   const container = document.getElementById(pricingConfig.pricingInfoContainerId);
 
@@ -99,8 +98,10 @@ export default function(target, useCases, showNextChoiceHandler = undefined) {
       useCaseKey: key,
     });
   });
-
-  createListItems(options, container, undefined, 'useCases');
+  /**
+   * Create the list with radio buttons
+   */
+  listOptionsComponent(options, { pubSubScope: 'useCases' }).renderInto(container);
 
   /** when a radio button in the list is clicked, show the table in an expansion panel */
   PubSub.subscribe('buttonClicked.useCases', (msg, pubSubData) => {

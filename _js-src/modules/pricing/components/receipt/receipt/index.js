@@ -5,8 +5,8 @@ import ReceiptView from './Receipt.view';
 /**
  * @desc the receipt component
  */
-export default function receiptComponent() {
-  const receiptModel = new ReceiptModel(),
+export default function receiptComponent(pricingState) {
+  const receiptModel = new ReceiptModel(pricingState),
     receiptController = new ReceiptController(receiptModel);
   return new ReceiptView(receiptController);
 };

@@ -1,9 +1,9 @@
-import ListOptionModel from './ListOptionItem.model';
-import ListOptionController from './ListOptionItem.controller';
-import ListOptionView from './ListOptionItem.view';
+import ListOptionItemModel from './ListOptionItem.model';
+import ListOptionItemController from './ListOptionItem.controller';
+import ListOptionItemView from './ListOptionItem.view';
 
-export default function listOptionComponent(value, valueType) {
-  const listOptionModel = new ListOptionModel(value, valueType),
-    listOptionController = new ListOptionController(listOptionModel);
-  return new ListOptionView(listOptionController);
+export default function listOptionItemComponent(option, innerChildElement = undefined) {
+  const listOptionModel = new ListOptionItemModel(option, innerChildElement),
+    listOptionController = new ListOptionItemController(listOptionModel);
+  return new ListOptionItemView(listOptionController);
 };

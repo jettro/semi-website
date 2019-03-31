@@ -1,15 +1,14 @@
 import PubSub from 'pubsub-js';
-import createListItems from '../../common/createListItems';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
 import getClosest from '../../../../utilities/getClosest';
+import listOptionsComponent from '../list-options/list-options';
 
 /**
- * @param target
- * @param showNextChoiceHandler {function}
+ * @param showNextChoiceHandler {function()=undefined} callback function to execute only once, once all actions  in this handler are done
  */
-export default function(target, showNextChoiceHandler = undefined) {
+export default function(showNextChoiceHandler = undefined) {
   const container = document.getElementById(pricingConfig.pricingWeaviateContainerId);
   const options = pricingUseCaseData.weaviates;
 
@@ -22,7 +21,7 @@ export default function(target, showNextChoiceHandler = undefined) {
     }
   });
 
-  createListItems(options, container, undefined, 'weaviates');
+  listOptionsComponent(options, { pubSubScope: 'weaviates' }).renderInto(container);
 
   PubSub.subscribe('buttonClicked.weaviates', (msg, data) => {
     const li = getClosest(data.button, 'li');

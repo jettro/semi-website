@@ -2,12 +2,13 @@
 export default class ListOptionItemModel {
 
   /**
-   * @param {string} [value=undefined] the value the list item should get
-   * @param {string} [valueType=multiply] the value the list item should get
+   * @param {string} [option] the list item option
+   * @param innerChildElement {Element?} Option to render a component inside the list-item
    */
-  constructor(value = undefined, valueType = 'multiplier') {
-    this._value = value;
-    this._valueType = valueType;
+  constructor(option, innerChildElement = undefined) {
+    this._value = option.value;
+    this._valueType = option.valueType || 'multiplier';
+    this._innerChildElement = innerChildElement;
   }
 
   /**
@@ -25,5 +26,9 @@ export default class ListOptionItemModel {
    */
   get valueType() {
       return this._valueType;
+  }
+
+  get innerChildElement() {
+    return this._innerChildElement;
   }
 }

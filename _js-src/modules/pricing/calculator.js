@@ -9,8 +9,6 @@ import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
 import pricingConfig from './pricingConfig';
 import pricingUseCaseData from '../../../_data/pricingUseCases';
 import receiptComponent from './components/receipt/receipt';
-import listOptionItemComponent from './components/list-options/list-option-item';
-import receiptSummaryComponent from './components/receipt/receipt-summary';
 
 (function(factory) {
   /** Find the global object for export to both the browser and web workers. */
@@ -69,7 +67,7 @@ import receiptSummaryComponent from './components/receipt/receipt-summary';
     /** @type {Object<string, any>!} */
     const flattenedUseCaseData = Object.assign({}, ...useCaseData);
 
-    handleChoiceUseCases(fieldsetUseCase, flattenedUseCaseData, function() {
+    handleChoiceUseCases( flattenedUseCaseData, function() {
       const nextFieldset = fieldsetHostingPreference;
       if (nextFieldset.classList.contains(pricingConfig.hideClass)) {
         nextFieldset.classList.remove(pricingConfig.hideClass);
@@ -91,7 +89,7 @@ import receiptSummaryComponent from './components/receipt/receipt-summary';
       },
     );
 
-    handleChoiceClusters(fieldsetClusters, function() {
+    handleChoiceClusters(function() {
       const nextFieldset = fieldsetContextionaries;
       nextFieldset.classList.remove(pricingConfig.hideClass);
       nextFieldset.classList.add(pricingConfig.showClass);
@@ -103,18 +101,24 @@ import receiptSummaryComponent from './components/receipt/receipt-summary';
       nextFieldset.classList.add(pricingConfig.showClass);
     });
 
-    handleChoiceWeaviates(fieldsetWeaviates, function() {
+    handleChoiceWeaviates(function() {
       const nextFieldset = fieldsetNetworkNodes;
       nextFieldset.classList.remove(pricingConfig.hideClass);
       nextFieldset.classList.add(pricingConfig.showClass);
     });
 
-    handleChoiceNetworkNodes(fieldsetNetworkNodes, function() {
+    handleChoiceNetworkNodes(function() {
       console.log('the final receipt can be shown');
     });
 
+    const initialPricingState = {
+      variableMonthlyCost: '0,00',
+      hostingOptimization: '0,00',
+      clusters: '0,00',
+      recurring: '0,00'
+    };
 
-    receiptComponent().createInto(receiptSidebar);
+    receiptComponent(initialPricingState).createInto(receiptSidebar);
 
   }
 

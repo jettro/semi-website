@@ -1,15 +1,18 @@
 
 import PubSub from 'pubsub-js';
-import createListItems from '../../common/createListItems';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
 import getClosest from '../../../../utilities/getClosest';
 import { setHostingCluster } from '../receipt/pricingReceiptFunctions';
+import listOptionsComponent from '../list-options/list-options';
 
-export default function(target, showNextChoiceHandler = undefined) {
+/**
+ * @param showNextChoiceHandler {function()=undefined} callback function to execute only once, once all actions  in this handler are done
+ */
+export default function(showNextChoiceHandler = undefined) {
   const container = document.getElementById(pricingConfig.pricingClusterContainerId);
   const options = pricingUseCaseData.clusters;
-  createListItems(options, container, undefined, 'clusters');
+  listOptionsComponent(options, { pubSubScope: 'clusters' }).renderInto(container);
   PubSub.subscribe('buttonClicked.clusters', (msg, data) => {
     const li = getClosest(data.button, 'li');
     const useCaseSubTotal = document.getElementById(pricingConfig.receipt.montlyTotalId).innerHTML;
