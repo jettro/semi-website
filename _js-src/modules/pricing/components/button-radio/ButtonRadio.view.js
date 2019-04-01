@@ -9,6 +9,11 @@ const _setUseCaseKey = Symbol('setUseCaseKey');
 const _setValue = Symbol('createValue');
 const _toggleStates = Symbol('toggleStates');
 
+const config = {
+  classNameActive: "ui-button--active",
+  classNameDefault: "ui-button--default"
+};
+
 export default class ButtonRadioView {
 
   /**
@@ -57,10 +62,10 @@ export default class ButtonRadioView {
       this[_setDefaultState]();
     }
     if (typeof(this.controller.useCaseKey) !== 'undefined') {
-      this[_setUseCaseKey]();
+      this[_setUseCaseKey](this.controller.useCaseKey);
     }
     if (typeof(this.controller.showTarget) !== 'undefined') {
-      this[_setDataTarget]();
+      this[_setDataTarget](this.controller.showTarget);
     }
     if (typeof(this.controller.value) !== 'undefined') {
       this[_setValue](this.value);
@@ -86,28 +91,28 @@ export default class ButtonRadioView {
     targetNode.insertAdjacentElement('beforeend', this.buttonElement);
   }
 
-  [_setUseCaseKey]() {
+  [_setUseCaseKey](key) {
     if (this.controller.useCaseKey !== undefined)
-      this.buttonElement.dataset.useCase = this.controller.useCaseKey;
+      this.buttonElement.dataset.useCase = key;
   }
 
-  [_setActiveState]() {
-    this.buttonElement.classList.add("ui-button--active");
-    this.buttonElement.setAttribute('aria-checked', 'true');
+  [_setDataTarget](target) {
+    if (this.controller.showTarget !== undefined)
+      this.buttonElement.dataset.targetShow = target;
   }
 
   [_setDefaultState]() {
     this.self[_setActiveState]();
-    this.buttonElement.classList.add("ui-button--default");
+    this.buttonElement.classList.add(config.classNameDefault);
   }
 
-  [_setDataTarget]() {
-    if (this.controller.showTarget !== undefined)
-      this.buttonElement.dataset.targetShow = this.controller.showTarget;
+  [_setActiveState]() {
+    this.buttonElement.classList.add(config.classNameActive);
+    this.buttonElement.setAttribute('aria-checked', 'true');
   }
 
   [_removeActiveState](button) {
-    button.classList.remove("ui-button--active");
+    button.classList.remove(config.classNameActive);
     button.setAttribute('aria-checked', 'false');
   }
 
