@@ -36,14 +36,11 @@ export default class ListOptionsView {
 
   [_addListItem](option) {
     const pubSubScope = (typeof this.controller.buttonData !== 'undefined') ? this.controller.buttonData.pubSubScope : undefined;
-    /** show showTarget is only on optional options (Yes or no question) */
-    const showTarget =  (typeof option.showTarget !== 'undefined') ? option.showTarget : undefined;
-    const optionIsDefault = (typeof option.default !== 'undefined') ? option.default : undefined;
 
     /** create button */
-    const buttonRadio = buttonRadioComponent(option.title, option.useCaseKey, optionIsDefault, pubSubScope, showTarget).create();
+    const buttonRadio = buttonRadioComponent(option, pubSubScope).create();
 
     /** create list option */
-    listOptionItemComponent(option, buttonRadio).renderInto(this._list);
+    listOptionItemComponent(buttonRadio).renderInto(this._list);
   }
 }

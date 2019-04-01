@@ -1,7 +1,5 @@
 import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
-const _createValue = Symbol('createValue');
-
 export default class ListOptionItemView {
 
   /**
@@ -29,17 +27,7 @@ export default class ListOptionItemView {
   constructor(controller) {
     this._controller = ListOptionItemView.initialize(controller);
     this._listItemOption = stringToHTMLCollection(ListOptionItemView.htmlString())[0];
-    this._value = this._controller.value;
-    this._valueType = this._controller.valueType;
     this._listItemOption.insertAdjacentElement('beforeend', this._controller.innerChildElement);
-  }
-
-  /**
-   * @returns {Element} the list item with value (optional)
-   */
-  init() {
-    this[_createValue](this._value);
-    return this._listItemOption;
   }
 
   /**
@@ -48,17 +36,8 @@ export default class ListOptionItemView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this.init());
+    targetNode.insertAdjacentElement('beforeend', this._listItemOption);
   }
 
-  /**
-   * @returns {Element}
-   */
-  [_createValue]() {
-    if (typeof(this._value) !== 'undefined') {
-      const listItem = this._listItemOption;
-      listItem.dataset[this._valueType] = this._value;
-    }
-    return this._listItemOption;
-  }
+
 }

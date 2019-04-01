@@ -1,6 +1,13 @@
+import PubSub from 'pubsub-js';
 import stringToHTMLCollection from '../../../../utilities/stringToHTMLCollection';
 
-import PubSub from 'pubsub-js';
+const _removeActiveState = Symbol('removeActiveState');
+const _setActiveState = Symbol('setActiveState');
+const _setDataTarget = Symbol('setDataTarget');
+const _setDefaultState = Symbol('setDefaultState');
+const _setUseCaseKey = Symbol('setUseCaseKey');
+const _setValue = Symbol('createValue');
+const _toggleStates = Symbol('toggleStates');
 
 export default class ButtonRadioView {
 
@@ -37,54 +44,26 @@ export default class ButtonRadioView {
     this.buttonElement.addEventListener('click', this.controller);
     this.titleElement = this.buttonElement.getElementsByClassName('ui-button__title')[0];
     this.titleElement.innerText = this.controller.title;
+    this.value = this.controller.value;
+    this.valueType = this.controller.valueType;
 
-    if (typeof(this.controller.useCaseKey) !== 'undefined') {
-      this.setUseCaseKey();
-    }
-    if (typeof(this.controller.showTarget) !== 'undefined') {
-      this.setDataTarget();
-    }
-    if (this.controller.isDefault === true) {
-      this.setDefaultState();
-    }
     PubSub.subscribe('buttonClicked.default', (msg, data) => {
-      this.toggleStates(msg, data)
+      this[_toggleStates](msg, data);
     });
   }
 
-  removeActiveState(button) {
-    button.classList.remove("ui-button--active");
-    button.setAttribute('aria-checked', 'false');
-  }
-
-  setUseCaseKey() {
-    this.buttonElement.dataset.useCase = this.controller.useCaseKey;
-  }
-
-  setActiveState() {
-    this.buttonElement.classList.add("ui-button--active");
-    this.buttonElement.setAttribute('aria-checked', 'true');
-  }
-
-  setDefaultState() {
-    this.self.setActiveState();
-    this.buttonElement.classList.add("ui-button--default");
-  }
-
-  setDataTarget() {
-    this.buttonElement.dataset.targetShow = this.controller.showTarget;
-  }
-
-  toggleStates(msg, data) {
-    if (data.button === this.buttonElement) {
-      /** remove active state from all buttons in the same section */
-      const listItems = data.radioList.getElementsByTagName('li');
-      Object.keys(listItems).forEach(key => {
-        const button = listItems[key].querySelector('[role="radio"]');
-        this.self.removeActiveState(button);
-      });
-      /** then add the active state tot this specific button */
-      this.self.setActiveState();
+  init() {
+    if (this.controller.isDefault === true) {
+      this[_setDefaultState]();
+    }
+    if (typeof(this.controller.useCaseKey) !== 'undefined') {
+      this[_setUseCaseKey]();
+    }
+    if (typeof(this.controller.showTarget) !== 'undefined') {
+      this[_setDataTarget]();
+    }
+    if (typeof(this.controller.value) !== 'undefined') {
+      this[_setValue](this.value);
     }
   }
 
@@ -93,6 +72,7 @@ export default class ButtonRadioView {
    * @returns {Element | *}
    */
   create() {
+    this.init();
     return this.buttonElement;
   }
 
@@ -102,8 +82,51 @@ export default class ButtonRadioView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
+    this.init();
+    targetNode.insertAdjacentElement('beforeend', this.buttonElement);
+  }
+
+  [_setUseCaseKey]() {
     if (this.controller.useCaseKey !== undefined)
       this.buttonElement.dataset.useCase = this.controller.useCaseKey;
-    targetNode.insertAdjacentElement('beforeend', this.buttonElement);
+  }
+
+  [_setActiveState]() {
+    this.buttonElement.classList.add("ui-button--active");
+    this.buttonElement.setAttribute('aria-checked', 'true');
+  }
+
+  [_setDefaultState]() {
+    this.self[_setActiveState]();
+    this.buttonElement.classList.add("ui-button--default");
+  }
+
+  [_setDataTarget]() {
+    if (this.controller.showTarget !== undefined)
+      this.buttonElement.dataset.targetShow = this.controller.showTarget;
+  }
+
+  [_removeActiveState](button) {
+    button.classList.remove("ui-button--active");
+    button.setAttribute('aria-checked', 'false');
+  }
+
+  [_toggleStates](msg, data) {
+    if (data.button === this.buttonElement) {
+      /** remove active state from all buttons in the same section */
+      const listItems = data.radioList.getElementsByTagName('li');
+      Object.keys(listItems).forEach(key => {
+        const button = listItems[key].querySelector('[role="radio"]');
+        this.self[_removeActiveState](button);
+      });
+      /** then add the active state tot this specific button */
+      this.self[_setActiveState]();
+    }
+  }
+
+  [_setValue]() {
+    if (typeof(this.value) !== 'undefined') {
+      this.buttonElement.dataset[this.valueType] = this.value;
+    }
   }
 }

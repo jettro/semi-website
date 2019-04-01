@@ -1,6 +1,5 @@
 import { addCollapseTriggers } from '../../../collapse';
 import getChoiceFieldset from '../../common/getChoiceFieldset';
-import getClosest from '../../../../utilities/getClosest';
 import listOptionsComponent from '../list-options/list-options';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
@@ -157,18 +156,16 @@ export default function(
 
   /** hosting by semi option 1 influences the hosting costs */
   PubSub.subscribe('buttonClicked.hosting.hostingBySemi.option1', (msg, data) => {
-    const li = getClosest(data.button, 'li');
     const useCaseSubTotal = document.getElementById('price-monthly-total').innerHTML;
-    setHostingAdjustment(useCaseSubTotal, li.dataset.multiplier);
+    setHostingAdjustment(useCaseSubTotal, data.button.dataset.multiplier);
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 
   /** hosting by customer influences the hosting costs */
   PubSub.subscribe('buttonClicked.hosting.hostingByCustomer', (msg, data) => {
-    const li = getClosest(data.button, 'li');
     const useCaseSubTotal = document.getElementById(pricingConfig.receipt.montlyTotalId).innerHTML;
-    setHostingAdjustment(useCaseSubTotal, li.dataset.multiplier);
+    setHostingAdjustment(useCaseSubTotal, data.button.dataset.multiplier);
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
@@ -179,7 +176,6 @@ export default function(
     //       is this relative to the variable monthly cost,
     //       or is it relative to the hosting optimization?
     console.log('this is a TODO item');
-    const li = getClosest(data.button, 'li');
-    console.log(li.dataset.multiplier);
+    console.log(data.button.dataset.multiplier);
   });
 }

@@ -20,10 +20,9 @@ export default class ButtonRadioController {
     }
   }
 
-  constructor(model, isDefault) {
+  constructor(model) {
     this.model = model;
     this.scope = this.model.scope;
-    this.isDefault = isDefault;
   }
 
   get title() {
@@ -34,8 +33,20 @@ export default class ButtonRadioController {
     return this.model.useCaseKey;
   }
 
+  get value() {
+    return this.model.value;
+  };
+
+  get valueType() {
+    return this.model.valueType;
+  }
+
   get showTarget() {
     return this.model.showTarget;
+  }
+
+  get isDefault() {
+    return this.model.isDefault;
   }
 
   /**
