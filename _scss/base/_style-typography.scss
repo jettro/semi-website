@@ -43,11 +43,13 @@ p, li {
     margin: 0 0 1rem;
     max-width: 32em;
 }
+
 p.intro {
-    font-family: $typeface-brand;
-    font-size: 1.2rem;
-    font-style: italic;
-    max-width: 32em;
+	font-family: $typeface-brand;
+	font-size: 1.2rem;
+	font-style: italic;
+    margin: 0 0 1rem;
+	max-width: $body-max-paragraph-width;
 }
 
 em {
@@ -166,6 +168,7 @@ blockquote {
     margin-left: 2em;
     color: $color-gray-2;
     position: relative;
+    max-width: $body-max-paragraph-width-wide;
     &:before {
         color: $color-semi;
         content: '\201c';

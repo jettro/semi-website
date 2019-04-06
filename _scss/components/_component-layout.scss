@@ -29,11 +29,17 @@
 
   .layout__content {
     flex: 7;
-    padding-right:2em; // gutter
+    padding-right: 2em; // gutter
   }
 
   .layout__sidebar {
     flex: 3;
+  }
+
+  .layout--vertical-center {
+    .layout__column {
+      align-self: center;
+    }
   }
 }
 

@@ -5,8 +5,12 @@ $typeface-sans: 'Alegreya Sans', sans-serif;
 
 $line-height: 1.55;
 
+$body-max-paragraph-width: 32em;
+$body-max-paragraph-width-wide: 36em;
+
 $font-weight-default: 400;
 $font-weight-bold: 500;
 
-$font-size-ui: 1em;
+$font-size-body: 1.15rem;
+$font-size-ui: $font-size-body;
 $font-size-small: .875em;

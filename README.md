@@ -32,12 +32,12 @@ To build and start the **local development** website:
 $ npm run local
 ```
 
-This will run a webpack watch command, and jekyll will build and start a local development server. This allows you to edit jekyll, JS and SCSS and it will automatically recompile.
+This builds the latest version of the JS and CSS.
 
-To do a manual single build run:
+To edit CSS and/or JS, run webpack separately and let it watch for changes:
 
 ```bash
-$ npm run build
+$ npm run build:watch
 ```
 
 Run eslint and prettier to see code formatting errors
