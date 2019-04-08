@@ -1,5 +1,11 @@
 
 export default class ExpansionPanelBodyModel {
 
-  constructor() {}
+  constructor(innerContentElement) {
+    this.innerContentElement = innerContentElement;
+  }
+
+  get innerChildElement() {
+    return this.innerContentElement;
+  }
 }

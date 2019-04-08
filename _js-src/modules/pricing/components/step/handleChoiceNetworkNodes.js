@@ -1,7 +1,6 @@
 import PubSub from 'pubsub-js';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
-import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
 import listOptionsComponent from '../list-options/list-options';
 
 /**
@@ -22,17 +21,9 @@ export default function(showNextChoiceHandler = undefined) {
 
   listOptionsComponent(options, { pubSubScope: 'networkNodes' }).renderInto(container);
 
-  let nodeNetworksPrice = '0';
-  let numberOfWeaviatesPrice = '0';
-
-  PubSub.subscribe('buttonClicked.weaviates', (msg, data) => {
-    let numberOfWeaviatesPrice = data.button.dataset.fixed;
-    setFixedCostPrice(numberOfWeaviatesPrice, nodeNetworksPrice);
-  });
-
   PubSub.subscribe('buttonClicked.networkNodes', (msg, data) => {
-    nodeNetworksPrice = data.button.dataset.fixed;
-    setFixedCostPrice(numberOfWeaviatesPrice, nodeNetworksPrice);
+    PubSub.publish('recurring.networkNodes.buttonClicked', {fixed: data.button.dataset.fixed});
+
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });

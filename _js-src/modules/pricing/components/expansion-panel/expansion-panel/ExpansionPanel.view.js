@@ -30,7 +30,7 @@ export default class ExpansionPanelView {
     this.panelLabel = this.controller.panelLabel;
     this.expansionPanel.dataset.useCase = this.controller.currentUseCase;
     expansionPanelHeadComponent(this.panelLabel).renderInto(this.expansionPanel);
-    expansionPanelBodyComponent().renderInto(this.expansionPanel);
+    expansionPanelBodyComponent(this.controller.innerChildElement).renderInto(this.expansionPanel);
   };
 
   /**

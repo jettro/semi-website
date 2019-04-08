@@ -11,4 +11,8 @@ export default class ExpansionPanelController {
   get panelLabel() {
     return this.model.panelLabel;
   }
+
+  get innerChildElement() {
+    return this.model.innerChildElement;
+  }
 };

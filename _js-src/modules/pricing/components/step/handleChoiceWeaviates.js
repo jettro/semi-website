@@ -1,7 +1,6 @@
 import PubSub from 'pubsub-js';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
-import { setFixedCostPrice } from '../receipt/pricingReceiptFunctions';
 import listOptionsComponent from '../list-options/list-options';
 
 /**
@@ -23,7 +22,7 @@ export default function(showNextChoiceHandler = undefined) {
   listOptionsComponent(options, { pubSubScope: 'weaviates' }).renderInto(container);
 
   PubSub.subscribe('buttonClicked.weaviates', (msg, data) => {
-    setFixedCostPrice(data.button.dataset.fixed, '0');
+    PubSub.publish('recurring.weaviates.buttonClicked', {fixed: data.button.dataset.fixed});
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 }

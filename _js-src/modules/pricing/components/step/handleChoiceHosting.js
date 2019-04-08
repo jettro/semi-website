@@ -4,7 +4,6 @@ import listOptionsComponent from '../list-options/list-options';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import PubSub from 'pubsub-js';
-import { setHostingAdjustment } from '../receipt/pricingReceiptFunctions';
 
 /**
  * @desc show the element
@@ -78,8 +77,8 @@ export default function(
       hideElement(hostingByCustomer);
       showElement(hostingBySemiElement);
       showElement(optionsSubStep1FieldsetElement);
-      /** reset hosting adjustment */
-      setHostingAdjustment('0');
+
+      /** TODO: reset hosting adjustment */
 
       /** only if they don't exist, create options for step 1 */
       if (!choiceYesOptionsExist) {
@@ -103,10 +102,10 @@ export default function(
         choiceNoOptionsExist = true;
       }
 
+      /** TODO: reset hosting adjustment */
+
       hideElement(hostingBySemiElement);
       showElement(hostingByCustomer);
-      /** reset hosting adjustment */
-      setHostingAdjustment('0');
 
       if (!choiceNoOptionsExist) {
         const container = document.getElementById(
@@ -131,7 +130,7 @@ export default function(
     const container = document.getElementById(pricingConfig.pricingSemiOption2Id);
     const lists = container.getElementsByTagName('ul');
 
-    // const listIdentifier = 'useCase';
+    const listIdentifier = 'useCase';
 
     /** show list based on use case button clicked */
     Object.keys(lists).forEach(key => {
@@ -156,16 +155,16 @@ export default function(
 
   /** hosting by semi option 1 influences the hosting costs */
   PubSub.subscribe('buttonClicked.hosting.hostingBySemi.option1', (msg, data) => {
-    const useCaseSubTotal = document.getElementById('price-monthly-total').innerHTML;
-    setHostingAdjustment(useCaseSubTotal, data.button.dataset.multiplier);
+    /** publish data to use in the receipt */
+    PubSub.publish('hosting.hostingBySemi', { multiplier: data.button.dataset.multiplier });
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 
   /** hosting by customer influences the hosting costs */
   PubSub.subscribe('buttonClicked.hosting.hostingByCustomer', (msg, data) => {
-    const useCaseSubTotal = document.getElementById(pricingConfig.receipt.montlyTotalId).innerHTML;
-    setHostingAdjustment(useCaseSubTotal, data.button.dataset.multiplier);
+    /** publish data to use in the receipt */
+    PubSub.publish('hosting.hostingByCustomer', { multiplier: data.button.dataset.multiplier });
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });

@@ -1,3 +1,4 @@
+import localizeNumber from '../../../../../utilities/localizeNumber';
 
 export default class ReceiptSummaryModel {
 
@@ -10,6 +11,10 @@ export default class ReceiptSummaryModel {
 
   get variableMonthlyCost() {
     return this._variableMonthlyCost;
+  }
+
+  set variableMonthlyCost(subTotal) {
+    this._variableMonthlyCost = localizeNumber(subTotal);
   }
 
   get hostingOptimization() {

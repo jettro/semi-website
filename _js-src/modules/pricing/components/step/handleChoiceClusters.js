@@ -1,7 +1,6 @@
 import PubSub from 'pubsub-js';
 import pricingConfig from '../../pricingConfig';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
-import { setHostingCluster } from '../receipt/pricingReceiptFunctions';
 import listOptionsComponent from '../list-options/list-options';
 
 /**
@@ -12,8 +11,9 @@ export default function(showNextChoiceHandler = undefined) {
   const options = pricingUseCaseData.clusters;
   listOptionsComponent(options, { pubSubScope: 'clusters' }).renderInto(container);
   PubSub.subscribe('buttonClicked.clusters', (msg, data) => {
-    const useCaseSubTotal = document.getElementById(pricingConfig.receipt.montlyTotalId).innerHTML;
-    setHostingCluster(data.button.dataset.multiplier, useCaseSubTotal);
+    /** publish data to use in the receipt */
+    PubSub.publish('cluster.buttonClicked', {multiplier: data.button.dataset.multiplier});
+    /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 }

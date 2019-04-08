@@ -34,6 +34,14 @@ export default class TableView {
   }
 
   /**
+   * @description creates an element to reuse in other element
+   * @returns {Element | *}
+   */
+  create() {
+    return this.table;
+  }
+
+  /**
    * @desc renders into the target node provided
    * @param targetNode {Element} the target node provided
    */

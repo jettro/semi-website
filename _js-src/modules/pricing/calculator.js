@@ -8,6 +8,11 @@ import handleChoiceUseCases from './components/step/handleChoiceUseCases';
 import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
 import pricingConfig from './pricingConfig';
 import pricingUseCaseData from '../../../_data/pricingUseCases';
+
+import ReceiptModel from './components/receipt/receipt/Receipt.model';
+import ReceiptController from './components/receipt/receipt/Receipt.controller';
+import ReceiptView from './components/receipt/receipt/Receipt.view';
+
 import receiptComponent from './components/receipt/receipt';
 
 (function(factory) {
@@ -38,20 +43,11 @@ import receiptComponent from './components/receipt/receipt';
   function initCalculatorOnLoad() {
     /** @type {HTMLElement!} */
     const formPricing = document.getElementById(pricingConfig.formId);
-    /** @type {HTMLElement!} */
-    const receiptSidebar = document.getElementById(pricingConfig.receiptId);
 
     if (!elementExists(formPricing))
       console.error(
         `No form container element present. Are you sure the form with id '${
           pricingConfig.formId
-        }' exists?`,
-      );
-
-    if (!elementExists(receiptSidebar))
-      console.error(
-        `No sidebar container element present. Are you sure the form with id '${
-          pricingConfig.receiptId
         }' exists?`,
       );
 
@@ -119,14 +115,19 @@ import receiptComponent from './components/receipt/receipt';
       console.log('the final receipt can be shown');
     });
 
-    const initialPricingState = {
-      variableMonthlyCost: '0,00',
-      hostingOptimization: '0,00',
-      clusters: '0,00',
-      recurring: '0,00',
-    };
+    /** do caculations when events are fired */
+    /** @type {HTMLElement!} */
+    const receiptSidebar = document.getElementById(pricingConfig.receiptId);
 
-    receiptComponent(initialPricingState).createInto(receiptSidebar);
+    if (!elementExists(receiptSidebar))
+      console.error(
+        `No sidebar container element present. Are you sure the form with id '${
+          pricingConfig.receiptId
+          }' exists?`,
+      );
+
+    /** show te receipt */
+    receiptComponent().renderInto(receiptSidebar);
   }
 
   /** interface definition */

@@ -8,7 +8,6 @@ export default class ExpansionPanelHeadController {
    * @param target
    */
   static clickHandler(target) {
-    // TODO: not sure if DIV is the right target, or if it will search for something outside the panel head also...
     const expansionPanelHead = getClosest(target, 'DIV');
     PubSub.publish('expansionPanelHeadClicked', expansionPanelHead);
   }

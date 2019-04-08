@@ -1,15 +1,11 @@
 import elementExists from '../../../../utilities/elementExists';
 import expansionPanelComponent from '../expansion-panel/expansion-panel';
-import isNumber from '../../../../typeChecking/isNumber';
 import listOptionsComponent from '../list-options/list-options';
 import PubSub from 'pubsub-js';
 import pricingUseCaseData from '../../../../../_data/pricingUseCases';
 import pricingConfig from '../../pricingConfig';
-import {
-  reCalculateTotal,
-  setVariableMonthlyCost,
-} from '../../components/receipt/pricingReceiptFunctions';
 import tableComponent from '../table/table';
+import isNumber from '../../../../typeChecking/isNumber';
 
 const merge = require('lodash.merge');
 
@@ -23,6 +19,7 @@ const calcTotalCostUseCases = function(table) {
   const tableRows = table.getElementsByClassName('table-pricing__row');
   /** @type {Number!} */
   let useCaseTotal = 0;
+
   for (let row of tableRows) {
     if (typeof row.dataset.subTotal !== 'undefined' && isNumber(row.dataset.subTotal)) {
       const useCaseSubTotal = row.dataset.subTotal;
@@ -131,25 +128,21 @@ export default function(useCases, showNextChoiceHandler = undefined) {
         currentUseCase: currentUseCase,
         panelLabel: singleUseCase.panelLabel,
       };
-      expansionPanelComponent(data).renderInto(expansionPanelContainer);
 
-      const existingPanels = Object.entries(document.getElementsByClassName('panel-collapse'));
-      /** get current panel to assert table into */
-      const [currentPanel] = existingPanels.filter(entry => {
-        return entry[1].dataset.useCase === currentUseCase;
-      });
-
-      const [currentCollapseBody] = currentPanel[1].getElementsByClassName('panel-collapse__body');
       const useCaseConsumptions = merge(useCaseLabels, consumptions);
-      tableComponent(useCaseConsumptions).renderInto(currentCollapseBody);
+      const table = tableComponent(useCaseConsumptions).create();
+      expansionPanelComponent(data, table).renderInto(expansionPanelContainer);
     }
 
-    // /** calculate the costs of visible table */
-    const total = calcTotalCostUseCases(getVisibleTable(expansionPanels));
-    setVariableMonthlyCost(total);
+    /** publish visible panel for calculation */
+    const panelShownData = {
+      "visibleTable": getVisibleTable(expansionPanels)
+    };
 
-    /** recalculate the total */
-    reCalculateTotal();
+    /** @type number */
+    const subTotalUseCase = calcTotalCostUseCases(panelShownData.visibleTable);
+
+    PubSub.publish('useCases.panelShown.default', {subTotal: subTotalUseCase});
 
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();

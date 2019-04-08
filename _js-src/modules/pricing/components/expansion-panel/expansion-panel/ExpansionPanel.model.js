@@ -1,9 +1,10 @@
 
 export default class ExpansionPanel {
 
-  constructor(data) {
+  constructor(data, innerChildElement) {
     this._currentUseCase = data.currentUseCase;
     this._panelLabel = data.panelLabel;
+    this._innerChildElement = innerChildElement;
   }
 
   get currentUseCase() {
@@ -12,5 +13,9 @@ export default class ExpansionPanel {
 
   get panelLabel() {
     return this._panelLabel;
+  }
+
+  get innerChildElement() {
+    return this._innerChildElement;
   }
 };

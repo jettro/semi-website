@@ -28,6 +28,7 @@ export default class ExpansionPanelBodyView {
   constructor(controller) {
     this.controller = ExpansionPanelBodyView.initialize(controller);
     this.expansionBody = stringToHTMLCollection(ExpansionPanelBodyView.htmlString())[0];
+    this.expansionBody.insertAdjacentElement('beforeend', this.controller.innerChildElement);
     PubSub.subscribe('expansionPanelHeadClicked', (msg, expansionPanelHead) => {
       this.toggleStates(msg, expansionPanelHead);
     });
