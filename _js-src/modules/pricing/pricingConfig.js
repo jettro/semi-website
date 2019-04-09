@@ -18,10 +18,10 @@ export default {
   'showClass': 'component--show',
   'hideClass': 'component--hide',
   'receipt': {
-    'montlyTotalId': 'price-monthly-total',
-    'hostingAdjustmentId': 'price-hosting',
+    'monthlyTotalId': 'price-monthly-total',
+    'hostingId': 'price-hosting',
     'clustersId': 'price-cluster',
-    'weaviateId': 'price-recurring',
+    'recurringId': 'price-recurring',
     'totalId': 'price-total'
   },
   '':'',

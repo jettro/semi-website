@@ -1,8 +1,6 @@
 import receiptActionComponent from '../receipt-action';
 import receiptTotalsComponent from '../receipt-totals';
 import PubSub from 'pubsub-js';
-import localizeStringToNumber from '../../../../../utilities/localizeStringToNumber';
-import localizeNumber from '../../../../../utilities/localizeNumber';
 
 /** @type {{variableMonthlyCost: string, hostingOptimization: string, clusters: string, weaviates: string, networkNodes}} */
 const defaultPricing = {
@@ -18,13 +16,11 @@ const defaultPricing = {
  * @param multiplier {string} The amount to multiply the total by (number is percentage)
  *                            For example if multiplier = 100 then the returned value is 0
  * @param priceStr {string} the price as a string from the receipt
- * @returns {string}
+ * @returns {number}
  */
 function calculateDifference(multiplier, priceStr) {
-  const priceBeforeFormatted = localizeStringToNumber(priceStr);
-  const sum = parseInt((multiplier / 100) * priceBeforeFormatted);
-  const difference = sum - priceBeforeFormatted;
-  return localizeNumber(difference);
+  const sum = (multiplier / 100) * priceStr;
+  return sum - parseInt(priceStr);
 }
 
 export default class ReceiptController {
@@ -67,7 +63,7 @@ export default class ReceiptController {
       const useCaseSubTotal = this.model.variableMonthlyCost;
 
       if (updateEventType === 'useCase') {
-        this.model.variableMonthlyCost = localizeNumber(data.subTotal);
+        this.model.variableMonthlyCost = data.subTotal;
         this.model.notifyAll(updateEventType);
       }
 
@@ -93,18 +89,30 @@ export default class ReceiptController {
     };
   }
 
+  /**
+   * @returns {number}
+   */
   get variableMonthlyCost() {
-    return this.model.variableMonthlyCost;
+    return parseInt(this.model.variableMonthlyCost);
   }
 
+  /**
+   * @returns {number}
+   */
   get hostingOptimization() {
-    return this.model.hostingOptimization;
+    return parseInt(this.model.hostingOptimization);
   }
 
+  /**
+   * @returns {number}
+   */
   get clusters() {
-    return this.model.clusters;
+    return parseInt(this.model.clusters);
   }
 
+  /**
+   * @returns {number}
+   */
   get recurring() {
     return parseInt(this.model.weaviates, 10) + parseInt(this.model.networkNodes, 10);
   }

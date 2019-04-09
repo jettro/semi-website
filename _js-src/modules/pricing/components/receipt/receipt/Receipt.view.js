@@ -1,5 +1,6 @@
-import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
+import localizeNumber from '../../../../../utilities/localizeNumber';
 import pricingConfig from '../../../pricingConfig';
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 
 const _updateVariableMonthlyCost = Symbol('updateVariableMonthlyCost');
 const _updateHosting = Symbol('updateHosting');
@@ -7,6 +8,7 @@ const _updateClusters = Symbol('updateClusters');
 const _updateWeaviates = Symbol('networkWeaviates');
 const _updateNetworkNodes = Symbol('networkNodes');
 const _updateTotal = Symbol('updateTotal');
+const _updateContainer = Symbol('updateContainer');
 
 const inactiveClass = 'receipt__entry-inactive';
 
@@ -33,19 +35,19 @@ export default class ReceiptView {
             <dl class="receipt--reverse-sm-2 receipt__details">
                 <dt class="receipt__entry-inactive receipt__use-case">Variable monthly cost</dt>
                 <dd class="receipt__entry-inactive receipt__use-case price" id="price-monthly-total">${
-                  controller.model.variableMonthlyCost
+                  controller.variableMonthlyCost
                 }</dd>
                 <dt class="receipt__entry-inactive receipt__hosting">Hosting/optimization</dt>
                 <dd class="receipt__entry-inactive receipt__hosting price" id="price-hosting">${
-                  controller.model.hostingOptimization
+                  controller.hostingOptimization
                 }</dd>
                 <dt class="receipt__entry-inactive receipt__clusters"># of clusters</dt>
                 <dd class="receipt__entry-inactive receipt__clusters price" id="price-cluster">${
-                  controller.model.clusters
+                  controller.clusters
                 }</dd>
                 <dt class="receipt__entry-inactive receipt__recurring">Recurring cost per month (fixed)</dt>
                 <dd class="receipt__entry-inactive receipt__recurring price" id="price-recurring">${
-                  controller.model.recurring
+                  controller.recurring
                 }</dd>
             </dl>
         </div>
@@ -94,61 +96,79 @@ export default class ReceiptView {
     }
   }
 
+  /**
+   * @param container {object} the container to update
+   * @param value {string} the value to add to the receipt
+   */
+  [_updateContainer](container, value) {
+    container.previousElementSibling.classList.remove(inactiveClass);
+    container.classList.remove(inactiveClass);
+    container.innerHTML = localizeNumber(value);
+  }
+
+  /**
+   * @desc update the variable monthly cost
+   */
   [_updateVariableMonthlyCost]() {
     Object.entries(this.receiptPriceContainers).forEach(([key, container]) => {
-      if ('price-monthly-total' === container.id) {
+      if (pricingConfig.receipt.monthlyTotalId === container.id) {
         const variableMonthlyCost = this.controller.variableMonthlyCost;
-        container.previousElementSibling.classList.remove(inactiveClass);
-        container.classList.remove(inactiveClass);
-        container.innerHTML = variableMonthlyCost;
+        this[_updateContainer](container, variableMonthlyCost);
       }
     });
   }
 
+  /**
+   * @desc update the hosting cost
+   */
   [_updateHosting]() {
     Object.entries(this.receiptPriceContainers).forEach(([key, container]) => {
-      if ('price-hosting' === container.id) {
+      if (pricingConfig.receipt.hostingId === container.id) {
         const optimization = this.controller.hostingOptimization;
-        container.previousElementSibling.classList.remove(inactiveClass);
-        container.classList.remove(inactiveClass);
-        container.innerHTML = optimization;
+        this[_updateContainer](container, optimization);
       }
     });
   }
 
+  /**
+   * @desc update the cluster cost
+   */
   [_updateClusters]() {
     Object.entries(this.receiptPriceContainers).forEach(([key, container]) => {
-      if ('price-cluster' === container.id) {
+      if (pricingConfig.receipt.clustersId === container.id) {
         const clusters = this.controller.clusters;
-        container.previousElementSibling.classList.remove(inactiveClass);
-        container.classList.remove(inactiveClass);
-        container.innerHTML = clusters;
+        this[_updateContainer](container, clusters);
       }
     });
   }
 
+  /**
+   * @desc update the number of weaviates (part 1/2 of recurring cost)
+   */
   [_updateWeaviates]() {
     Object.entries(this.receiptPriceContainers).forEach(([key, container]) => {
-      if ('price-recurring' === container.id) {
+      if (pricingConfig.receipt.recurringId === container.id) {
         const recurring = this.controller.recurring;
-        container.previousElementSibling.classList.remove(inactiveClass);
-        container.classList.remove(inactiveClass);
-        container.innerHTML = recurring;
+        this[_updateContainer](container, recurring);
       }
     });
   }
 
+  /**
+   * @desc update the number of network nodes (part 2/2 of recurring cost)
+   */
   [_updateNetworkNodes]() {
     Object.entries(this.receiptPriceContainers).forEach(([key, container]) => {
-      if ('price-recurring' === container.id) {
+      if (pricingConfig.receipt.recurringId === container.id) {
         const recurring = this.controller.recurring;
-        container.previousElementSibling.classList.remove(inactiveClass);
-        container.classList.remove(inactiveClass);
-        container.innerHTML = recurring;
+        this[_updateContainer](container, recurring);
       }
     });
   }
 
+  /**
+   * @desc update the total of the receipt
+   */
   [_updateTotal]() {
     Object.entries(this.receiptPriceContainers).forEach(([key, container]) => {
       if ('price-total' === container.id) {
@@ -156,10 +176,8 @@ export default class ReceiptView {
         const optimization = this.controller.hostingOptimization;
         const clusters = this.controller.clusters;
         const recurring = this.controller.recurring;
-        // const total = variableMonthlyCost + optimization + clusters + recurring;
-        // console.log(total);
-        const total = 999;
-        container.innerHTML = total;
+        const total = variableMonthlyCost + optimization + clusters + recurring;
+        container.innerHTML = localizeNumber(total);
       }
     });
   }
