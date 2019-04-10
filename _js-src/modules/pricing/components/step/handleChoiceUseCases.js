@@ -89,14 +89,6 @@ export default function(useCases, showNextChoiceHandler = undefined) {
   /** @type {HTMLCollectionOf!} */
   const expansionPanels = document.getElementsByClassName('panel-collapse');
 
-
-  const exampleOptions = [
-    { title: "test" },
-    { title: "Another test" }
-  ];
-
-  listOptionsComponent(exampleOptions, undefined, {multi: true}).renderInto(container);
-
   /** @type {Array!} */
   let options = [];
   Object.keys(useCases).forEach(key => {
