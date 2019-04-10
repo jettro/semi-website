@@ -23,12 +23,5 @@ export default {
     'clustersId': 'price-cluster',
     'recurringId': 'price-recurring',
     'totalId': 'price-total'
-  },
-  '':'',
-  'pricingInfoTableContainerClassName': 'table-row-container',
-  'pricingRowTemplateClassName': 'template-table-pricing-row',
-  'pricingClusterTemplateId': 'template-pricing-cluster-button',
-  'pricingContextionaryTemplateId': 'template-pricing-contextionary-button',
-  'pricingWeaviateTemplateId': 'template-pricing-weaviate-button',
-  'pricingNetworkNodesTemplateId': 'template-pricing-network-nodes-button'
+  }
 };

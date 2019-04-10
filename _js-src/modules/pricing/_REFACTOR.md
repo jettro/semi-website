@@ -4,7 +4,7 @@
 - [x] Create MVC setup for buttons
 - [x] Create MVC setup for table
 - [x] Create MVC setup for collapse element
-- [ ] Create MVC setup for receipt
+- [x] Create MVC setup for receipt
 - [ ] Create MVC setup for steps
 - [ ] Create MVC setup for optional options
 - [ ] Create MVC setup for fieldsets
