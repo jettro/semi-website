@@ -130,12 +130,10 @@ export default function(
     const container = document.getElementById(pricingConfig.pricingSemiOption2Id);
     const lists = container.getElementsByTagName('ul');
 
-    const listIdentifier = 'useCase';
-
     /** show list based on use case button clicked */
-    Object.keys(lists).forEach(key => {
-      const list = lists[key];
-      if (list.dataset[listIdentifier] === useCaseKey) {
+    Object.entries(lists).forEach(([key, list]) => {
+
+      if (list.dataset.useCaseKey === useCaseKey) {
         list.classList.remove(pricingConfig.hideClass);
       } else {
         list.classList.add(pricingConfig.hideClass);
@@ -144,7 +142,7 @@ export default function(
 
     if (!theseOptionsExist) {
       /** create new list (and assign data attribute for the used use-case key) */
-      listOptionsComponent(options, { pubSubScope: 'hosting.hostingBySemi.option2' }).renderInto(
+      listOptionsComponent(options, { pubSubScope: 'hosting.hostingBySemi.option2' }, {useCaseKey: useCaseKey}).renderInto(
         container,
       );
 

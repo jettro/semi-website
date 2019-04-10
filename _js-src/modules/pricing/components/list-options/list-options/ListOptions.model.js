@@ -34,7 +34,7 @@ export default class ListOptionsModel {
 
   /**
    * @desc gets the model value
-   * @returns {string}
+   * @returns {array}
    */
   get options(){
     if (this._options !== undefined)

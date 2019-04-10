@@ -6,7 +6,7 @@ import ListOptionsView from './ListOptions.view';
  *
  * @param options {Array}
  * @param buttonData {object}
- * @param config {?{multi: boolean}}
+ * @param config {?{multi: boolean} || {useCaseKey: string}} Whether or not the items are radio buttons
  * @returns {ListOptionsView}
  */
 export default function listOptionComponent(options, buttonData, config = undefined) {

@@ -22,6 +22,13 @@ export default class ListOptionsView {
     this.controller.options.map(option => {
       this[_addListItem](option);
     });
+
+    this.init();
+  }
+
+  init() {
+    if (this.controller.config && typeof this.controller.config.useCaseKey != 'undefined')
+      this.list.dataset.useCaseKey = this.controller.config.useCaseKey;
   }
 
   /**
@@ -29,8 +36,6 @@ export default class ListOptionsView {
    * @param targetNode {HTMLElement} the target node provided
    */
   renderInto(targetNode) {
-    if (this._dataAttr !== undefined)
-      this.list.dataset[this._dataAttr.attr] = this._dataAttr.value;
     if(!targetNode) return;
     targetNode.insertAdjacentElement('beforeend', this.list);
   }
