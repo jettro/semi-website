@@ -12,7 +12,7 @@ export default function(showNextChoiceHandler = undefined) {
   listOptionsComponent(options, { pubSubScope: 'clusters' }).renderInto(container);
   PubSub.subscribe('buttonClicked.clusters', (msg, data) => {
     /** publish data to use in the receipt */
-    PubSub.publish('cluster.buttonClicked', {multiplier: data.button.dataset.multiplier});
+    PubSub.publish('cluster.buttonClicked', {multiplier: data.clickedButton.dataset.multiplier});
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });

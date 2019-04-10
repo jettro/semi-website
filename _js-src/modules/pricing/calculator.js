@@ -9,10 +9,6 @@ import handleChoiceWeaviates from './components/step/handleChoiceWeaviates';
 import pricingConfig from './pricingConfig';
 import pricingUseCaseData from '../../../_data/pricingUseCases';
 
-import ReceiptModel from './components/receipt/receipt/Receipt.model';
-import ReceiptController from './components/receipt/receipt/Receipt.controller';
-import ReceiptView from './components/receipt/receipt/Receipt.view';
-
 import receiptComponent from './components/receipt/receipt';
 
 (function(factory) {

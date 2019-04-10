@@ -1,7 +1,7 @@
-import getClosest from '../../../../utilities/getClosest';
+import getClosest from '../../../../../utilities/getClosest';
 import PubSub from 'pubsub-js';
 
-export default class ButtonRadioController {
+export default class ButtonController {
 
   /**
    * @desc Changes the model
@@ -9,10 +9,11 @@ export default class ButtonRadioController {
    * @param scope {string} The scope which can be used to identify specific pubsub event
    */
   static clickHandler(e, scope) {
+
     const data = {
-      "button": getClosest(e.target, 'BUTTON'),
-      "container": getClosest(e.target, 'DIV'),
-      "radioList": getClosest(e.target, 'UL')
+      "clickedButton": getClosest(e.target, 'BUTTON'),
+      "clickedButtonContainer": getClosest(e.target, 'DIV'),
+      // "clickedButtonRadioList": getClosest(e.target, 'UL')
     };
     PubSub.publish('buttonClicked.default', data);
     if (typeof(scope) !== 'undefined') {
@@ -23,6 +24,7 @@ export default class ButtonRadioController {
   constructor(model) {
     this.model = model;
     this.scope = this.model.scope;
+    this.active = false;
   }
 
   get title() {
@@ -57,7 +59,7 @@ export default class ButtonRadioController {
     e.stopPropagation();
     switch(e.type){
       case "click":
-        ButtonRadioController.clickHandler(e, this.scope);
+        ButtonController.clickHandler(e, this.scope);
         break;
       default:
         console.log(e.target);

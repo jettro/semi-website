@@ -22,7 +22,7 @@ export default function(showNextChoiceHandler = undefined) {
   listOptionsComponent(options, { pubSubScope: 'weaviates' }).renderInto(container);
 
   PubSub.subscribe('buttonClicked.weaviates', (msg, data) => {
-    PubSub.publish('recurring.weaviates.buttonClicked', {fixed: data.button.dataset.fixed});
+    PubSub.publish('recurring.weaviates.buttonClicked', {fixed: data.clickedButton.dataset.fixed});
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
 }

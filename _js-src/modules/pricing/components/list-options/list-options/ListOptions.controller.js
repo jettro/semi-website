@@ -1,8 +1,9 @@
 
 export default class ListOptionsController {
 
-  constructor(model) {
+  constructor(model, config) {
     this._model = model;
+    this._config = config;
   }
 
   get options() {
@@ -11,5 +12,9 @@ export default class ListOptionsController {
 
   get buttonData() {
     return this._model.buttonData;
+  }
+
+  get config() {
+    return this._config;
   }
 }

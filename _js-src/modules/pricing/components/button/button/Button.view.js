@@ -1,20 +1,17 @@
+import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollection';
 import PubSub from 'pubsub-js';
-import stringToHTMLCollection from '../../../../utilities/stringToHTMLCollection';
 
-const _removeActiveState = Symbol('removeActiveState');
-const _setActiveState = Symbol('setActiveState');
-const _setDataTarget = Symbol('setDataTarget');
-const _setDefaultState = Symbol('setDefaultState');
-const _setUseCaseKey = Symbol('setUseCaseKey');
-const _setValue = Symbol('createValue');
-const _toggleStates = Symbol('toggleStates');
+const _setDataTarget = Symbol('Sets the data target for the button');
+const _setDefaultState = Symbol('Sets the default case for the button');
+const _setUseCaseKey = Symbol('Sets the use case key for the button');
+const _setValue = Symbol('Sets the value for the button');
 
 const config = {
   classNameActive: "ui-button--active",
   classNameDefault: "ui-button--default"
 };
 
-export default class ButtonRadioView {
+export default class ButtonView {
 
   /**
    * @desc Test for basic necessary functionality
@@ -32,8 +29,7 @@ export default class ButtonRadioView {
    * @returns {string} the button html element as a string
    */
   static htmlString() {
-    return `<button class="ui-button" type="button" role="radio" aria-checked="false">
-                <span class="ui-button__radio-icon"></span>
+    return `<button class="ui-button" type="button" aria-checked="false">
                 <span class="ui-button__title"></span>
                 <span class="ui-button__description"></span>
             </button>`;
@@ -43,20 +39,56 @@ export default class ButtonRadioView {
    * @param controller
    */
   constructor(controller) {
-    this.self = this;
-    this.controller = ButtonRadioView.initialize(controller);
-    this.buttonElement = stringToHTMLCollection(ButtonRadioView.htmlString())[0];
+    this.controller = ButtonView.initialize(controller);
+    this.buttonElement = stringToHTMLCollection(ButtonView.htmlString())[0];
     this.buttonElement.addEventListener('click', this.controller);
     this.titleElement = this.buttonElement.getElementsByClassName('ui-button__title')[0];
     this.titleElement.innerText = this.controller.title;
     this.value = this.controller.value;
     this.valueType = this.controller.valueType;
 
-    PubSub.subscribe('buttonClicked.default', (msg, data) => {
-      this[_toggleStates](msg, data);
-    });
+    /** only allow toggle for ButtonView element itself, and not it's prototype inheritance */
+    if (this.constructor.name === 'ButtonView') {
+      PubSub.subscribe('buttonClicked.default', (msg, data) => {
+        if (this.buttonElement === data.clickedButton) {
+            this.toggleState();
+        }
+      });
+    }
   }
 
+  /**
+   *
+   */
+  removeActiveState() {
+    this.controller.active = false;
+    this.buttonElement.classList.remove(config.classNameActive);
+    this.buttonElement.setAttribute('aria-checked', 'false');
+  }
+
+  /**
+   *
+   */
+  setActiveState() {
+    this.controller.active = true;
+    this.buttonElement.classList.add(config.classNameActive);
+    this.buttonElement.setAttribute('aria-checked', 'true');
+  }
+
+  /**
+   *
+   */
+  toggleState() {
+    if (this.controller.active === true) {
+      this.removeActiveState();
+    } else {
+      this.setActiveState();
+    }
+  }
+
+  /**
+   *
+   */
   init() {
     if (this.controller.isDefault === true) {
       this[_setDefaultState]();
@@ -102,31 +134,8 @@ export default class ButtonRadioView {
   }
 
   [_setDefaultState]() {
-    this.self[_setActiveState]();
+    this.setActiveState();
     this.buttonElement.classList.add(config.classNameDefault);
-  }
-
-  [_setActiveState]() {
-    this.buttonElement.classList.add(config.classNameActive);
-    this.buttonElement.setAttribute('aria-checked', 'true');
-  }
-
-  [_removeActiveState](button) {
-    button.classList.remove(config.classNameActive);
-    button.setAttribute('aria-checked', 'false');
-  }
-
-  [_toggleStates](msg, data) {
-    if (data.button === this.buttonElement) {
-      /** remove active state from all buttons in the same section */
-      const listItems = data.radioList.getElementsByTagName('li');
-      Object.keys(listItems).forEach(key => {
-        const button = listItems[key].querySelector('[role="radio"]');
-        this.self[_removeActiveState](button);
-      });
-      /** then add the active state tot this specific button */
-      this.self[_setActiveState]();
-    }
   }
 
   [_setValue]() {

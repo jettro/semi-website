@@ -89,6 +89,14 @@ export default function(useCases, showNextChoiceHandler = undefined) {
   /** @type {HTMLCollectionOf!} */
   const expansionPanels = document.getElementsByClassName('panel-collapse');
 
+
+  const exampleOptions = [
+    { title: "test" },
+    { title: "Another test" }
+  ];
+
+  listOptionsComponent(exampleOptions, undefined, {multi: true}).renderInto(container);
+
   /** @type {Array!} */
   let options = [];
   Object.keys(useCases).forEach(key => {
@@ -106,7 +114,7 @@ export default function(useCases, showNextChoiceHandler = undefined) {
   /** when a radio button in the list is clicked, show the table in an expansion panel */
   PubSub.subscribe('buttonClicked.useCases', (msg, pubSubData) => {
     /** @type {String} */
-    const currentUseCase = pubSubData.button.dataset.useCase;
+    const currentUseCase = pubSubData.clickedButton.dataset.useCase;
     /** @type {Object<string, any>} */
     const singleUseCase = useCases[currentUseCase];
 

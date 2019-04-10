@@ -19,10 +19,10 @@ export default function(showNextChoiceHandler = undefined) {
     }
   });
 
-  listOptionsComponent(options, { pubSubScope: 'networkNodes' }).renderInto(container);
+  listOptionsComponent(options, { pubSubScope: 'networkNodes' }, {multi: true}).renderInto(container);
 
   PubSub.subscribe('buttonClicked.networkNodes', (msg, data) => {
-    PubSub.publish('recurring.networkNodes.buttonClicked', {fixed: data.button.dataset.fixed});
+    PubSub.publish('recurring.networkNodes.buttonClicked', {fixed: data.clickedButton.dataset.fixed}, );
 
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();

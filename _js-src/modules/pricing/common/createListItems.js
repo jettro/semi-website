@@ -1,5 +1,5 @@
 import listOptionItemComponent from '../components/list-options/list-option-item';
-import buttonRadioComponent from '../components/button-radio';
+import buttonRadioComponent from '../components/button/button-radio';
 import listOptionsComponent from '../components/list-options/list-options';
 import removeObjectByKeyFromArray from './removeObjectByKeyFromArray';
 

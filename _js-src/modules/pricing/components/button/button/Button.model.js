@@ -1,7 +1,7 @@
 
-export default class ButtonRadioModel {
+export default class ButtonModel {
 
-  constructor(option, scopedPubSub = undefined) {
+  constructor(option, scopedPubSub) {
     this._title = option.title;
     this.description = "a description inside buttonRadio.model.js";
     this._useCaseKey = option.useCaseKey;

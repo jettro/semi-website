@@ -26,8 +26,8 @@ export default class ListOptionItemView {
    */
   constructor(controller) {
     this._controller = ListOptionItemView.initialize(controller);
-    this._listItemOption = stringToHTMLCollection(ListOptionItemView.htmlString())[0];
-    this._listItemOption.insertAdjacentElement('beforeend', this._controller.innerChildElement);
+    this.listItemOption = stringToHTMLCollection(ListOptionItemView.htmlString())[0];
+    this.listItemOption.insertAdjacentElement('beforeend', this._controller.innerChildElement);
   }
 
   /**
@@ -36,7 +36,7 @@ export default class ListOptionItemView {
    */
   renderInto(targetNode) {
     if(!targetNode) return;
-    targetNode.insertAdjacentElement('beforeend', this._listItemOption);
+    targetNode.insertAdjacentElement('beforeend', this.listItemOption);
   }
 
 

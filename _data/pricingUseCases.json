@@ -217,6 +217,5 @@
     {"title": "Common Knowledge", "value": "1000"},
     {"title": "Places", "value": "2000"},
     {"title": "Emotions", "value": "3000"},
-    {"title": "None", "value": "0"}
   ]
 }

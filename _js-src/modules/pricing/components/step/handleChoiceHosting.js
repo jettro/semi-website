@@ -68,7 +68,7 @@ export default function(
     const optionsSubStep2FieldsetElement = getChoiceFieldset(fieldSets, optionStep2);
 
     /** option Yes clicked */
-    if (pubSubData.button.dataset.targetShow === optionYesId) {
+    if (pubSubData.clickedButton.dataset.targetShow === optionYesId) {
       if (choiceMade.includes('choiceYesOptions')) {
         choiceYesOptionsExist = true;
       }
@@ -97,7 +97,7 @@ export default function(
     });
 
     /** option No clicked */
-    if (pubSubData.button.dataset.targetShow === optionNoId) {
+    if (pubSubData.clickedButton.dataset.targetShow === optionNoId) {
       if (choiceMade.includes('choiceNoOptions')) {
         choiceNoOptionsExist = true;
       }
@@ -124,8 +124,8 @@ export default function(
 
   /** the optimization is based on each use-case */
   PubSub.subscribe('buttonClicked.useCases', (msg, data) => {
-    const useCaseKey = data.button.dataset.useCase;
-    const theseOptionsExist = existingOptions.has(data.button);
+    const useCaseKey = data.clickedButton.dataset.useCase;
+    const theseOptionsExist = existingOptions.has(data.clickedButton);
     const options = useCases[useCaseKey]['optimization'];
     const container = document.getElementById(pricingConfig.pricingSemiOption2Id);
     const lists = container.getElementsByTagName('ul');
@@ -149,14 +149,14 @@ export default function(
       );
 
       /** add this button to the set of existing options */
-      existingOptions.add(data.button);
+      existingOptions.add(data.clickedButton);
     }
   });
 
   /** hosting by semi option 1 influences the hosting costs */
   PubSub.subscribe('buttonClicked.hosting.hostingBySemi.option1', (msg, data) => {
     /** publish data to use in the receipt */
-    PubSub.publish('hosting.hostingBySemi', { multiplier: data.button.dataset.multiplier });
+    PubSub.publish('hosting.hostingBySemi', { multiplier: data.clickedButton.dataset.multiplier });
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
@@ -164,7 +164,7 @@ export default function(
   /** hosting by customer influences the hosting costs */
   PubSub.subscribe('buttonClicked.hosting.hostingByCustomer', (msg, data) => {
     /** publish data to use in the receipt */
-    PubSub.publish('hosting.hostingByCustomer', { multiplier: data.button.dataset.multiplier });
+    PubSub.publish('hosting.hostingByCustomer', { multiplier: data.clickedButton.dataset.multiplier });
     /** show the next fieldset */
     if (typeof showNextChoiceHandler === typeof Function) showNextChoiceHandler();
   });
@@ -175,6 +175,6 @@ export default function(
     //       is this relative to the variable monthly cost,
     //       or is it relative to the hosting optimization?
     console.log('this is a TODO item');
-    console.log(data.button.dataset.multiplier);
+    console.log(data.clickedButton.dataset.multiplier);
   });
 }
