@@ -1,71 +1,24 @@
 
 export default class ButtonModel {
 
-  constructor(option, scopedPubSub) {
-    this._title = option.title;
-    this.description = "a description inside buttonRadio.model.js";
-    this._useCaseKey = option.useCaseKey;
-    this._value = option.value;
-    this._valueType = option.valueType || 'multiplier';
-    this._scopedPubSub = scopedPubSub;
-    /** show showTarget is only on optional options (Yes or no question) */
-    this._showTarget = option.showTarget;
-
-    if (option.default) {
-      this._isDefault = option.default;
+  static isRequired(parameter) {
+    if(parameter === undefined) {
+      throw new Error(`Parameter is required.`);
     }
+    return parameter;
   }
 
   /**
-   * @desc gets the model title
-   * @returns {*}
+   * @param option {{title: string}, {useCaseKey: string}, {value: string}, {valueType: string}, {default: boolean}, {showTarget: string}}
+   * @param scopedPubSub {string} The scope which is used in the pubsub event
    */
-  get title(){
-    return this._title;
-  };
-
-  /**
-   * @returns {string} [useCaseKey = undefined]
-   */
-  get useCaseKey() {
-    if (typeof(this._useCaseKey) !== "undefined")
-      return this._useCaseKey;
-  }
-
-  /**
-   * @desc gets the model value
-   * @returns {string}
-   */
-  get value(){
-    if (this._value !== undefined)
-      return this._value;
-  };
-
-  /**
-   * @desc gets the model value type used to define calculation
-   * @returns {string}
-   */
-  get valueType() {
-    return this._valueType;
-  }
-
-  /**
-   * @returns {string} [showTarget=undefined]
-   */
-  get showTarget() {
-    if (typeof(this._showTarget) !== "undefined")
-      return this._showTarget;
-  }
-
-  /**
-   * @returns {string} [isDefault=undefined]
-   */
-  get isDefault() {
-    if (typeof(this._isDefault) !== "undefined")
-      return this._isDefault;
-  }
-
-  get scope() {
-    return this._scopedPubSub;
+  constructor(option, scopedPubSub) {
+    this.title = ButtonModel.isRequired(option.title);
+    this.isDefault = option.default; /** states that the button is active by default */
+    this.showTarget = option.showTarget;
+    this.useCaseKey = option.useCaseKey;
+    this.value = option.value;
+    this.valueType = option.valueType || 'multiplier';
+    this.scope = scopedPubSub;
   }
 }

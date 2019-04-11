@@ -9,11 +9,9 @@ export default class ButtonController {
    * @param scope {string} The scope which can be used to identify specific pubsub event
    */
   static clickHandler(e, scope) {
-
     const data = {
       "clickedButton": getClosest(e.target, 'BUTTON'),
-      "clickedButtonContainer": getClosest(e.target, 'DIV'),
-      // "clickedButtonRadioList": getClosest(e.target, 'UL')
+      "clickedButtonContainer": getClosest(e.target, 'DIV')
     };
     PubSub.publish('buttonClicked.default', data);
     if (typeof(scope) !== 'undefined') {
@@ -57,12 +55,10 @@ export default class ButtonController {
    */
   handleEvent(e){
     e.stopPropagation();
-    switch(e.type){
-      case "click":
-        ButtonController.clickHandler(e, this.scope);
-        break;
-      default:
-        console.log(e.target);
+    if (e.type === "click") {
+      ButtonController.clickHandler(e, this.scope);
+    } else {
+      console.log(e.target);
     }
   };
 
