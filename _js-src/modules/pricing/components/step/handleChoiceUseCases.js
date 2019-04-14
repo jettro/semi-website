@@ -107,6 +107,7 @@ export default function(useCases, showNextChoiceHandler = undefined) {
   PubSub.subscribe('buttonClicked.useCases', (msg, pubSubData) => {
     /** @type {String} */
     const currentUseCase = pubSubData.clickedButton.dataset.useCase;
+
     /** @type {Object<string, any>} */
     const singleUseCase = useCases[currentUseCase];
 

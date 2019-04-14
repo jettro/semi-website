@@ -1,0 +1,10 @@
+{
+  "title": "my test title",
+  "default": true,
+  "useCaseKey": "AB",
+  "value": 999,
+  "valueTypeDefault": "multiplier",
+  "valueType": "anything",
+  "showTarget":  "targetElementName",
+  "scopedPubSub": "someScope"
+}

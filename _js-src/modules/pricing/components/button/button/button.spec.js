@@ -3,41 +3,36 @@ const { expect } = require('chai');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
+const config = require('../config');
+
+const optionRequiredParams = require('../mockOptionRequiredParams');
+const optionAllParams = require('../mockOptionAllParams');
+
 import ButtonModel from './Button.model';
 import ButtonController from './Button.controller';
 import ButtonView from './Button.view';
 
 import buttonComponent from './';
 
-describe('Button...', function() {
-  beforeEach(function() {
-    global.dom = new JSDOM('<!doctype html><html lang="en"><div id="container"></div><body></body></html>');
-    global.document = dom.window.document;
-    global.title = 'my test title';
-    global.useCaseKey = 'AB';
-    global.value = 999;
-    global.valueTypeDefault = 'multiplier';
-    global.valueType = 'anything';
-    global.isDefault = true;
-    global.showTarget = 'targetElementName';
-    global.scopedPubSub = 'someScope';
+describe('component Button...', function() {
 
-    global.optionRequiredParams = { title: title };
+  let dom;
+  let mockButtonRequiredParams;
+  let mockButtonAllParams;
+
+  beforeEach(function() {
+    dom = new JSDOM(
+      '<!doctype html><html lang="en"><div id="container"></div><body></body></html>',
+    );
+    global.document = dom.window.document;
+
     const mockButtonModelRequiredParams = new ButtonModel(optionRequiredParams),
       mockButtonControllerRequiredParams = new ButtonController(mockButtonModelRequiredParams);
-    global.mockButtonRequiredParams = new ButtonView(mockButtonControllerRequiredParams);
+    mockButtonRequiredParams = new ButtonView(mockButtonControllerRequiredParams);
 
-    global.optionAllParams = {
-      title: title,
-      useCaseKey: useCaseKey,
-      value: value,
-      valueType: valueType,
-      default: isDefault,
-      showtarget: showTarget
-    };
     const mockButtonModelAllParams = new ButtonModel(optionAllParams),
       mockButtonControllerAllParams = new ButtonController(mockButtonModelAllParams);
-    global.mockButtonAllParams = new ButtonView(mockButtonControllerAllParams);
+    mockButtonAllParams = new ButtonView(mockButtonControllerAllParams);
   });
 
   it(`MVC should be class constructors [object Function]`, function() {
@@ -52,32 +47,32 @@ describe('Button...', function() {
   });
 
   it(`getters on controller should work`, function() {
-    expect(mockButtonAllParams.controller.title).to.equal(title);
-    expect(mockButtonAllParams.controller.useCaseKey).to.equal(useCaseKey);
-    expect(mockButtonAllParams.controller.value).to.equal(value);
-    expect(mockButtonAllParams.controller.valueType).to.equal(valueType);
-    expect(mockButtonAllParams.controller.isDefault).to.equal(isDefault);
+    expect(mockButtonAllParams.controller.title).to.equal(optionAllParams.title);
+    expect(mockButtonAllParams.controller.useCaseKey).to.equal(optionAllParams.useCaseKey);
+    expect(mockButtonAllParams.controller.value).to.equal(optionAllParams.value);
+    expect(mockButtonAllParams.controller.valueType).to.equal(optionAllParams.valueType);
+    expect(mockButtonAllParams.controller.isDefault).to.equal(optionAllParams.default);
+  });
+
+  it(`check default state on controller`, function() {
+    expect(mockButtonRequiredParams.controller.active).to.equal(false);
   });
 
   it(`method .setActiveState() should set the active state in the controller of the button`, function() {
-    expect(mockButtonRequiredParams.controller.active).to.equal(false);
-    mockButtonRequiredParams.setActiveState();
-    expect(mockButtonRequiredParams.controller.active).to.equal(true);
+    expect(mockButtonRequiredParams.buttonElement.classList.contains(config.classNameActive)).to.equal(false);
+    expect(mockButtonRequiredParams.buttonElement.getAttribute('aria-checked')).to.equal('false');
+    mockButtonRequiredParams.setActiveView();
+    expect(mockButtonRequiredParams.buttonElement.classList.contains(config.classNameActive)).to.equal(true);
+    expect(mockButtonRequiredParams.buttonElement.getAttribute('aria-checked')).to.equal('true');
   });
 
   it(`method .removeActiveState() should remove the active state in the controller of the button`, function() {
-    mockButtonRequiredParams.setActiveState();
-    expect(mockButtonRequiredParams.controller.active).to.equal(true);
-    mockButtonRequiredParams.removeActiveState();
-    expect(mockButtonRequiredParams.controller.active).to.equal(false);
-  });
-
-  it(`method .toggleState() should toggle the active state in the controller of the button`, function() {
-    expect(mockButtonRequiredParams.controller.active).to.equal(false);
-    mockButtonRequiredParams.toggleState();
-    expect(mockButtonRequiredParams.controller.active).to.equal(true);
-    mockButtonRequiredParams.toggleState();
-    expect(mockButtonRequiredParams.controller.active).to.equal(false);
+    mockButtonRequiredParams.setActiveView();
+    expect(mockButtonRequiredParams.buttonElement.classList.contains(config.classNameActive)).to.equal(true);
+    expect(mockButtonRequiredParams.buttonElement.getAttribute('aria-checked')).to.equal('true');
+    mockButtonRequiredParams.removeActiveView();
+    expect(mockButtonRequiredParams.buttonElement.classList.contains(config.classNameActive)).to.equal(false);
+    expect(mockButtonRequiredParams.buttonElement.getAttribute('aria-checked')).to.equal('false');
   });
 
   it(`method .create() should return a HTMLButtonElement`, function() {
@@ -85,54 +80,72 @@ describe('Button...', function() {
   });
 
   it(`method .create() should create a button with the defined title`, function() {
-    const button = buttonComponent({ title: title }).create();
+    const button = buttonComponent({ title: optionAllParams.title }).create();
     const [titleElement] = button.getElementsByClassName('ui-button__title');
-    expect(titleElement.innerText).to.equal(title);
+    expect(titleElement.innerText).to.equal(optionAllParams.title);
   });
 
   it(`method .create() should create a button which doesn't match predefined title`, function() {
     const button = buttonComponent({ title: 'this is some other title' }).create();
     const [titleElement] = button.getElementsByClassName('ui-button__title');
-    expect(titleElement.innerText).to.not.equal(title);
+    expect(titleElement.innerText).to.not.equal(optionAllParams.title);
   });
 
   it(`should throw error if no title is defined, title should be assigned via parameter`, function() {
     expect(() => buttonComponent().create()).to.throw();
-    const button = buttonComponent({ title: title }).create();
-    expect(button.getElementsByClassName('ui-button__title')[0].innerText).to.equal(title);
+    const button = buttonComponent({ title: optionAllParams.title }).create();
+    expect(button.getElementsByClassName('ui-button__title')[0].innerText).to.equal(
+      optionAllParams.title,
+    );
   });
 
   it(`usecaseKey should be assigned via parameter`, function() {
-    const button = buttonComponent({ title: title, useCaseKey: useCaseKey }).create();
-    expect(button.dataset.useCase).to.equal(useCaseKey);
+    const button = buttonComponent({
+      title: optionAllParams.title,
+      useCaseKey: optionAllParams.useCaseKey,
+    }).create();
+    expect(button.dataset.useCase).to.equal(optionAllParams.useCaseKey);
   });
 
   it(`value should be assigned via parameter, with a default valueType for the dataset`, function() {
-    const button = buttonComponent({ title: title, value: value }).create();
-    expect(parseInt(button.dataset.multiplier)).to.equal(value);
-    expect(Object.getOwnPropertyNames(button.dataset)[0]).to.equal(valueTypeDefault);
+    const button = buttonComponent({
+      title: optionAllParams.title,
+      value: optionAllParams.value,
+    }).create();
+    expect(parseInt(button.dataset.multiplier)).to.equal(optionAllParams.value);
+    expect(Object.getOwnPropertyNames(button.dataset)[0]).to.equal(
+      optionAllParams.valueTypeDefault,
+    );
   });
 
   it(`value should be assigned via parameter, valueType should be adjustable via parameter`, function() {
-    const button = buttonComponent({ title: title, value: value, valueType: valueType }).create();
-    expect(Object.getOwnPropertyNames(button.dataset)[0]).to.equal(valueType);
+    const button = buttonComponent({
+      title: optionAllParams.title,
+      value: optionAllParams.value,
+      valueType: optionAllParams.valueType,
+    }).create();
+    expect(Object.getOwnPropertyNames(button.dataset)[0]).to.equal(optionAllParams.valueType);
   });
 
   it(`default should be undefined, or defined via parameter`, function() {
-    const button1 = buttonComponent({ title: title });
+    const button1 = buttonComponent({ title: optionAllParams.title });
     expect(button1.controller.model.isDefault).to.equal(undefined);
-    const button2 = buttonComponent({ title: title, default: true });
+    const button2 = buttonComponent({ title: optionAllParams.title, default: true });
     expect(button2.controller.model.isDefault).to.equal(true);
   });
 
   it(`scope can be defined via parameter`, function() {
-    const button = buttonComponent({ title: title }, "test-scope");
-    expect(button.controller.scope).to.equal("test-scope");
+    const button = buttonComponent({ title: optionAllParams.title }, 'test-scope');
+    expect(button.controller.scope).to.equal('test-scope');
   });
 
   it(`method .renderInto() should insertAdjacentElement into target`, function() {
     const container = document.getElementById('container');
     mockButtonAllParams.renderInto(container);
     expect(container.getElementsByTagName('button')[0]).to.be.a('HTMLButtonElement');
+  });
+
+  describe.skip('click events on component', function() {
+    it(`pubsub event cannot be tested since it's not picked up in Node`, function() {});
   });
 });

@@ -3,22 +3,6 @@ import PubSub from 'pubsub-js';
 
 export default class ButtonController {
 
-  /**
-   * @desc Changes the model
-   * @param e {event}
-   * @param scope {string} The scope which can be used to identify specific pubsub event
-   */
-  static clickHandler(e, scope) {
-    const data = {
-      "clickedButton": getClosest(e.target, 'BUTTON'),
-      "clickedButtonContainer": getClosest(e.target, 'DIV')
-    };
-    PubSub.publish('buttonClicked.default', data);
-    if (typeof(scope) !== 'undefined') {
-      PubSub.publish(`buttonClicked.${scope}`, data);
-    }
-  }
-
   constructor(model) {
     this.model = model;
     this.scope = this.model.scope;
@@ -49,6 +33,30 @@ export default class ButtonController {
     return this.model.isDefault;
   }
 
+  set setActive(state) {
+    this.active = state;
+  }
+
+  /**
+   * @desc Changes the model
+   * @param e {event}
+   * @param scope {string} The scope which can be used to identify specific pubsub event
+   */
+  clickHandler(e, scope) {
+
+    this.setActive = !this.active;
+
+    const data = {
+      "clickedButton": getClosest(e.target, 'BUTTON'),
+      "clickedButtonContainer": getClosest(e.target, 'DIV')
+    };
+    PubSub.publish('buttonClicked.default', data);
+
+    if (typeof(scope) !== 'undefined') {
+      PubSub.publish(`buttonClicked.${scope}`, data);
+    }
+  }
+
   /**
    * @desc interface for the eventlistener
    * @param e
@@ -56,7 +64,7 @@ export default class ButtonController {
   handleEvent(e){
     e.stopPropagation();
     if (e.type === "click") {
-      ButtonController.clickHandler(e, this.scope);
+      this.clickHandler(e, this.scope);
     } else {
       console.log(e.target);
     }

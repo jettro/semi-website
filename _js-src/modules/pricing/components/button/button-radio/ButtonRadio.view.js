@@ -6,10 +6,7 @@ import stringToHTMLCollection from '../../../../../utilities/stringToHTMLCollect
 const _convertToRadio = Symbol('_convertToRadio: The method to convert a regular button to a radio button.');
 const _removeOtherActiveStates = Symbol('_removeOtherActiveStates: Only one radio button may be active at a time.');
 
-const config = {
-  classNameActive: "ui-button--active",
-  classNameDefault: "ui-button--default"
-};
+const config = require('../config');
 
 export default class ButtonRadioView extends ButtonView {
 
@@ -35,7 +32,7 @@ export default class ButtonRadioView extends ButtonView {
 
   constructor(controller) {
     super(controller);
-    this._radioIcon = stringToHTMLCollection(ButtonRadioView.htmlRadioIcon())[0];
+    this.radioIcon = stringToHTMLCollection(ButtonRadioView.htmlRadioIcon())[0];
     this[_convertToRadio]();
 
     PubSub.subscribe('buttonClicked.default', (msg, data) => {
@@ -57,7 +54,7 @@ export default class ButtonRadioView extends ButtonView {
    */
   [_convertToRadio]() {
     this.buttonElement.setAttribute('role', 'radio');
-    this.buttonElement.insertAdjacentElement('afterbegin', this._radioIcon);
+    this.buttonElement.insertAdjacentElement('afterbegin', this.radioIcon);
   }
 
   /**
