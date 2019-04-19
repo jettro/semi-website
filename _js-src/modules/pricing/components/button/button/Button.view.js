@@ -59,9 +59,6 @@ export default class ButtonView {
     if (this.constructor.name === 'ButtonView') {
       PubSub.subscribe('buttonClicked.default', (msg, data) => {
 
-        // TODO: here is the error
-        console.log('this should work, otherwise its not picked up');
-
         if (this.buttonElement === data.clickedButton) {
           if (this.controller.active === true) {
             this.setActiveView();

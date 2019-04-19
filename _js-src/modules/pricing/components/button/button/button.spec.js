@@ -146,6 +146,8 @@ describe('component Button...', function() {
   });
 
   describe.skip('click events on component', function() {
-    it(`pubsub event cannot be tested since it's not picked up in Node`, function() {});
+    it(`pubsub event cannot be tested since it's not picked up in Node`, function() {
+      // TODO: solution, implement https://sinonjs.org/releases/v7.3.1/spies/
+    });
   });
 });
