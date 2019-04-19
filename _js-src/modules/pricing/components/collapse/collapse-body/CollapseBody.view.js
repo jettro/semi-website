@@ -20,7 +20,7 @@ export default class CollapseBodyView {
    * @returns {string} the button html element as a string
    */
   static htmlString() {
-    return `<div class="collapse" aria-expanded="false">
+    return `<div class="collapse" aria-expanded="false" hidden>
                <p class="feature-description"></p>
            </div>`;
   }
@@ -33,27 +33,27 @@ export default class CollapseBodyView {
     this.collapseBody = stringToHTMLCollection(CollapseBodyView.htmlString())[0];
     this.labelElement = this.collapseBody.getElementsByClassName('feature-description')[0];
     this.labelElement.innerText = this.controller.description;
-    PubSub.subscribe('collapseTriggerClicked', (msg, collapseTrigger) => {
-      this.toggleStates(msg, collapseTrigger);
-    });
+    // PubSub.subscribe('collapseTriggerClicked', (msg, collapseTrigger) => {
+    //   this.toggleStates(msg, collapseTrigger);
+    // });
   }
 
-  toggleStates(msg, collapseTrigger) {
-    const [sibling] = this.collapseBody.parentNode.getElementsByClassName('collapse');
-    const [collapseBody] = collapseTrigger.getElementsByClassName('collapse');
-    if (collapseBody === sibling) {
-      this.collapseBody.classList.toggle("show");
-      /** toggle attribute */
-      const attrExpanded = this.collapseBody.getAttribute("aria-expanded");
-      if (attrExpanded !== null) {
-        if (attrExpanded === 'false') {
-          this.collapseBody.setAttribute("aria-expanded", true);
-        } else if (attrExpanded === 'true') {
-          this.collapseBody.setAttribute("aria-expanded", false);
-        }
-      }
-    }
-  }
+  // toggleStates(msg, collapseTrigger) {
+  //   const [sibling] = this.collapseBody.parentNode.getElementsByClassName('collapse');
+  //   const [collapseBody] = collapseTrigger.getElementsByClassName('collapse');
+  //   if (collapseBody === sibling) {
+  //     this.collapseBody.classList.toggle("show");
+  //     /** toggle attribute */
+  //     const attrExpanded = this.collapseBody.getAttribute("aria-expanded");
+  //     if (attrExpanded !== null) {
+  //       if (attrExpanded === 'false') {
+  //         this.collapseBody.setAttribute("aria-expanded", true);
+  //       } else if (attrExpanded === 'true') {
+  //         this.collapseBody.setAttribute("aria-expanded", false);
+  //       }
+  //     }
+  //   }
+  // }
 
   /**
    * @desc renders into the target node provided

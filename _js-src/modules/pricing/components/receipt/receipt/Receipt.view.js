@@ -29,8 +29,9 @@ export default class ReceiptView {
     return `<div class="receipt">
         <div class="card__title hidden-sm">
             <strong class="receipt__title">Price Summary</strong>
+            <a class="receipt__reset-form" href=".">Reset</a>
         </div>
-        <button class="receipt--reverse-sm-1 button--link hidden-l-up" data-toggle="collapse" data-target="collapse">Show subtotals</button>
+        <button class="receipt--reverse-sm-1 button--link hidden-l-up" data-toggle="collapse" data-target="collapse">Price Summary</button>
         <div class="collapse collapse-show-on-l-up">
             <dl class="receipt--reverse-sm-2 receipt__details">
                 <dt class="receipt__entry-inactive receipt__use-case">Variable monthly cost</dt>

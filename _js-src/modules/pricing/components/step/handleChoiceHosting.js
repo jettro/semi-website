@@ -1,4 +1,3 @@
-import { addCollapseTriggers } from '../../../collapse';
 import getChoiceFieldset from '../../common/getChoiceFieldset';
 import listOptionsComponent from '../list-options/list-options';
 import pricingConfig from '../../pricingConfig';
@@ -42,11 +41,6 @@ export default function(
   let choiceMade = [];
   let choiceYesOptionsExist = false;
   let choiceNoOptionsExist = false;
-
-  PubSub.subscribe('generatedCpcRows', function() {
-    /** Add collapse triggers async to newly created DOM elements */
-    addCollapseTriggers();
-  });
 
   const options = [
     { title: 'Yes', showTarget: 'hosting-by-semi' },

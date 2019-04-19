@@ -25,8 +25,6 @@ export default class CollapseTriggerController {
    * @param e
    */
   handleEvent(e){
-    e.stopPropagation();
-
     switch(e.type){
       case "click":
         CollapseTriggerController.clickHandler(e.target);

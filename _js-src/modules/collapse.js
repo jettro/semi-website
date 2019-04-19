@@ -1,35 +1,50 @@
+
 /**
  * map the commands to the classList methods
  */
 import getClosest from '../utilities/getClosest';
-
-const fnmap = {
-  'toggle': 'toggle',
-  'show': 'add',
-  'hide': 'remove'
-};
+import cssClasses from './collapse.config.js';
 
 /**
  * @desc set the aria-expanded based on display of element
- * @param element {HTMLElement}
+ * @param element {Element}
  */
-const toggleAriaVisibility = element => {
+const toggleVisibility = element => {
   if (element.style.display === 'block') {
-    element.setAttribute('aria-expanded', 'false');
+    element.setAttribute('hidden');
   } else {
-    element.setAttribute('aria-expanded', 'true');
+    element.removeAttribute('hidden');
   }
 };
 
-const collapse = (selector, cmd) => {
+/**
+ * @desc
+ * @param selector {string}
+ */
+const collapse = (selector) => {
   const targets = Array.from(document.querySelectorAll(selector));
   targets.forEach(target => {
-    target.classList[fnmap[cmd]]('show');
+    target.classList.add(cssClasses.target.hide);
   });
 };
 
-const singleCollapse = (target) => {
-  target.classList.toggle('show');
+/**
+ * @desc collapses the element
+ * @param target {Object} The element to toggle the class
+ *        note: Not element but Object, since event.target returns an object rather than element
+ *        https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+ * @param collapseType {{trigger}, {target}} the type of collapse element
+ */
+const singleCollapse = (target, collapseType) => {
+
+  /** when hidden show */
+  if (target.classList.contains(cssClasses[collapseType].show)) {
+    target.classList.remove(cssClasses[collapseType].show);
+    target.classList.add(cssClasses[collapseType].hide);
+  } else {
+    target.classList.remove(cssClasses[collapseType].hide);
+    target.classList.add(cssClasses[collapseType].show);
+  }
 };
 
 /**
@@ -37,36 +52,44 @@ const singleCollapse = (target) => {
  *       that have the data-toggle set to collapse
  *
  */
-function addCollapseTriggers() {
+export default function() {
   const querySelector = '[data-toggle="collapse"]';
-  const triggers = Array.from(document.querySelectorAll(querySelector));
-  window.addEventListener('click', (event) => {
-    const clickedElement = event.target;
-    const dataTarget = 'collapse';
-    const element = (clickedElement.dataset.target !== dataTarget) ? getClosest(clickedElement, `[data-target=${dataTarget}]`) : clickedElement;
 
-    /**  Listen for click events, but only on the triggers */
-    if (triggers.includes(element)) {
-      const selector = element.getAttribute('data-target');
-      /** toggle the collapse element by parent */
-      const children = element.parentNode.children;
-      const hasChildElements = typeof children !== 'undefined';
-      /** toggle class on trigger element */
-      singleCollapse(element, 'toggle');
-      if (hasChildElements) {
-        for (let child of children) {
-          /** toggle class on target element */
-          if(child.classList.contains(selector)) {
-            singleCollapse(child, 'toggle');
-            toggleAriaVisibility(child);
+  document.addEventListener(
+    'click',
+    event => {
+      const allTriggers = Array.from(document.querySelectorAll(querySelector));
+      const clickedElement = event.target;
+
+      const currentTrigger =
+        /** when the clicked element has no dataset, then it can't be the trigger */
+        clickedElement.dataset.target !== 'undefined'
+          ? clickedElement
+          : getClosest(clickedElement, `[data-target='collapse']`);
+
+      /**  Listen for click events, but only on the triggers */
+      if (allTriggers.includes(currentTrigger)) {
+        const selector = currentTrigger.getAttribute('data-target');
+        /** toggle the collapse element by parent */
+        const children = currentTrigger.parentNode.children;
+
+        /** toggle class on trigger element */
+        singleCollapse(currentTrigger, 'trigger');
+
+        if (typeof children !== 'undefined') {
+          for (let child of children) {
+            /** toggle class on target element */
+            if (child.classList.contains(selector)) {
+              singleCollapse(child, 'target');
+              toggleVisibility(child);
+            }
           }
         }
+
+        /** collapse all other elements */
+        collapse(selector);
       }
-      collapse(selector, 'toggle');
-    }
-  }, false);
+    },
+    false,
+  );
 }
-
-export default function() { addCollapseTriggers(); }
-
-export { addCollapseTriggers };

@@ -19,7 +19,7 @@ export default class ExpansionPanelBodyView {
    * @returns {string} the expansion panel body html element as a string
    */
   static htmlString() {
-    return `<div class="panel-collapse__body collapse hidden" aria-expanded="false"></div>`;
+    return `<div class="panel-collapse__body collapse" hidden aria-expanded="false"></div>`;
   }
 
   /**
@@ -39,6 +39,7 @@ export default class ExpansionPanelBodyView {
 
     if (expansionPanelHead === sibling) {
       this.expansionBody.classList.toggle('show');
+      this.expansionBody.hidden = this.expansionBody.hidden !== true;
       /** toggle attribute */
       const attrExpanded = this.expansionBody.getAttribute('aria-expanded');
       if (attrExpanded !== null) {

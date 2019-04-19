@@ -20,7 +20,7 @@
   border-left: 6px solid transparent;
 }
 
-.button-collapse {
+.collapse-style-icon {
   &:before {
     content: "";
     width: 0;
@@ -28,10 +28,10 @@
     margin-right: .5rem;
     display: inline-block;
   }
-  &:not([class*="show"]):before {
+  &:not([class*="target--showing"]):before {
     @extend .icon-arrow-right;
   }
-  &.show {
+  &.target--showing {
     font-weight: $font-weight-bold;
     &:before {
       @extend .icon-arrow-bottom;
@@ -43,14 +43,14 @@
   }
 }
 
-.collapse {
-  display: none;
+.collapse--hidden {
   max-height: 0;
   overflow: hidden;
   transition: max-height .5s cubic-bezier(0, 1, 0, 1);
-  &.show {
-    display: block;
-    max-height: 99em;
-    transition: max-height .5s ease-in-out;
-  }
+}
+
+.collapse--showing {
+  display: block;
+  max-height: 99em;
+  transition: max-height .5s ease-in-out;
 }

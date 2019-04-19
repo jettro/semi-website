@@ -559,3 +559,13 @@
 .style-sm-space-section-indicator {
   background-color: $color-helper-3;
 }
+
+.style-sm-collapse-examples {
+  button {
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+  }
+  .collapse-hidden {
+    margin-bottom: 1rem;
+  }
+}

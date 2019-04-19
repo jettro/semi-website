@@ -1,0 +1,59 @@
+---
+layout: service-manual
+title: SeMI, our style; our collapse component
+---
+<article class="style-sm container">
+    <div class="wrapper">
+        <h1>Collapse elements</h1>
+
+        <p>There are several methods to create a collapsable element.</p>
+
+        <section class="style-sm-section style-sm-collapse-examples">
+            <h2>Functionality</h2>
+
+            <h3>Single collapse</h3>
+            {% capture blockCollapse1 %}
+<button data-toggle="collapse" data-target="collapse">Click me</button>
+<div class="collapse collapse--hidden" hidden>This is some dummy content.</div>
+            {% endcapture %}
+            {{blockCollapse1}}
+            {% include molecule-codeblock.html content=blockCollapse1 %}
+
+            <p>For collapsible elements the class <code>"collapse--hidden"</code> is used in conjunction with the content attribute <code>hidden</code>. The reason for this is that this proves to have the widest support in screen reader/browser combinations. As tested by <a href="https://developer.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/">developer.paciellogroup.com</a></a></p>
+            <p>The attribute <code>data-toggle="collapse"</code> defines that it's an collapse element.</p>
+            <p>Defining is done via the <code>data-target="collapse"</code>. It will trigger an <em>unique</em> element, or multiple elements, with the corresponding class. In previous example <code>"collapse"</code>.</p>
+
+            <h3>Different types of triggers</h3>
+
+            <p>The trigger should always be applied to a block level element, and the target should follow directly after.</p>
+            {% capture blockCollapse3 %}
+<button data-toggle="collapse" data-target="collapse-2">Click me</button>
+<div class="collapse-2 collapse--hidden" hidden>This is some dummy content.</div>
+<button class="button--link collapse-style-icon" data-toggle="collapse" data-target="collapse-3">Click me</button>
+<div class="collapse-3 collapse--hidden" hidden>This is some dummy content.</div>
+            {% endcapture %}
+            {{blockCollapse3}}
+            {% include molecule-codeblock.html content=blockCollapse3 %}
+
+            <h3>One trigger to show multiple</h3>
+
+            <p>This also means that one single trigger can target multiple elements: </p>
+            {% capture blockCollapse2 %}
+<button data-toggle="collapse" data-target="collapse-multiple">Multiple targets</button>
+<div class="collapse-multiple collapse--hidden" hidden>This is some dummy content inside a collapse.</div>
+<p>This text is not affected by the collapse.</p>
+<div class="collapse-multiple collapse--hidden" hidden>This is some dummy content inside a collapse.</div>
+            {% endcapture %}
+            {{blockCollapse2}}
+            {% include molecule-codeblock.html content=blockCollapse2 %}
+
+            <!--h3>Nested collapse target</h3>-->
+            <!--div>-->
+                <!--div>-->
+                    <!--div class="collapse-multiple collapse&#45;&#45;hidden" hidden>Additional collapse content inside other divs which also folds open.</div>-->
+                <!--/div>-->
+            <!--/div>-->
+
+        </section>
+    </div>
+</article>
