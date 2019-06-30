@@ -17,8 +17,8 @@ title: Software Engineering: Development and Architecture at SeMI
     <ol class="style-sm-overview">
       <li><a href="#quality">Development Quality Standards</a></li>
       <li><a href="#cloud-native">Cloud-Native &amp; 12-factor</a></li>
-      <li><a href="#dev-ops">Dev vs. Ops vs. DevOps</a></li>
-      <li><a href="#licenses">Organizing &amp; managing our work</a></li>
+      <li><a href="#devops">Dev vs. Ops vs. DevOps</a></li>
+      <li><a href="#organizing">Organizing &amp; Managing our work</a></li>
     </ol>
 
     <h2 id="quality">Development Quality Standards</h2>
@@ -239,6 +239,123 @@ title: Software Engineering: Development and Architecture at SeMI
     <p>
       Operations is then simply a matter of multiplying the artifacts from our DevOps process for
       our clients.
+    </p>
+
+    <h4>Infra as Code</h4>
+    <p>
+      When we deploy for our clients or for ourselves, we always treat our
+      <a href="https://en.wikipedia.org/wiki/Infrastructure_as_code">Infrastcture as Code</a>. This
+      way, our infrastcture is easily scalable, disposable and reproducible. Especially managing a
+      large set of customer deployments, we can easily automate common tasks and processes in a safe
+      and reproducible way. We like to use Terraform to manage cloud infrastructure and Helm to
+      manage Kubernetes deployments. Using a GitOps approach, we commit changes into version control
+      and let a build pipeline execute them. We never manually configure infrastructure. This helps
+      us to change live environments with confidence, test environments before breaking production
+      and provides an audit log for free.
+    </p>
+
+    <h2 id="organizing">Organizing &amp; Managing our work</h2>
+
+    <h4>What Agile means for us</h4>
+    <p>
+      These days, "agile" has often become synomous with following a Scrum or Kanban routine. Many
+      organizations schedule a daily stand-up and bi-weekly cereomonies and think that makes them
+      agile. We believe in agility in the truest sense: This means, we have very small, but complete
+      features in tiny iterations. This way we can get feedback from real users very fast. How we
+      get there and what kind of rituals were involved is secondary. So don't be surprised if your
+      encountering way fewer meetings that you would in other companies - most of them agile in name
+      only.
+    </p>
+
+    <h4>Frequent Releases tagged with semantic versioning</h4>
+    <p>
+      We always aim to make releases as frequent as possible. Sometimes this leads to tiny releases
+      that have only a small noticable effect to the user. This is good. Those tiny changes really
+      add up over time and a product develops.
+      <a href="https://semver.org/">Semantic Versioning</a> helps conveying the severity of a change
+      at a glance. The high frequency of releases helps us to gather important feedback quickly.
+      Sometimes the feedback for a specific release immediately affects the following release.
+    </p>
+    <p>
+      There is no set frequency for releases. We release as soon as something is complete and
+      provides value to the user. To make sure we never lose this user focus, we aim to write
+      high-quality changelogs. This help users to see why they should upgrade and what happens if
+      they do so. It also helps us to think about what is release-worthy and what isn't. For some
+      examples on changelos check out the
+      <a href="https://github.com/semi-technologies/weaviate/releases">Weaviate Realeases Page</a>
+      or the
+      <a href="https://github.com/semi-technologies/weaviate-helm/releases">
+        Weaviate Helm Chart Releases Page
+      </a>
+      .
+    </p>
+
+    <h4>GitHub Issues to manage chunks of work</h4>
+    <p>
+      A large focus on our everyday work is on open-source work. Therefore using GitHub to manage
+      our work comes absolutely naturally. In fact, we love this approach so much, that we are also
+      using it, if we develop something that cannot be open-sourced.
+    </p>
+    <p>
+      A unit of work corresponds to a GitHub issue. This issue is the standard format that everyone
+      at SeMI understands. If features depend on one another, issues can easily be referenced from
+      other issues, commits or anything that accepts a hyperlink. When a unit of work should be
+      split up further to manage your daily routines, a simple task list inside the first post of an
+      issue is a great way to do this. However, everyone has their personal preferences. The
+      important thing is that finishing the overall unit of work can be indicated by closing the
+      GitHub issue.
+    </p>
+
+    <h4>Transperancy &amp; Progress Updates</h4>
+    <blockquote>
+      The first 90 percent of the code accounts for the first 90 percent of the development time.
+      The remaining 10 percent of the code accounts for the other 90 percent of the development time
+      (<a href="https://en.wikipedia.org/wiki/Ninety-ninety_rule">Source</a>)
+    </blockquote>
+    <p>
+      We know that estimations are hard. And we think it's nearly impossible to do an exact
+      estimation. But we believe every developer should make sure they are building the smallest
+      possible artifact to deliver. Additionally developers should be good at communicating progress
+      or potentials obstacles.
+    </p>
+    <p>
+      We think it makes a lot of sense - when picking up new work - to spend some time on breaking
+      it down into even smaller chunks of work. Simply ticking of those TODOs that were planned up
+      front are already a great status indicator. Nevertheless one of the greatest skills for a
+      developer to have is to be vocal when something doesn't go as planned. We are all in the same
+      boat and always willing to help if you are stuck somewhere.
+    </p>
+
+    <h4>Working with Git: Commting your work</h4>
+    <p>
+      We believe in the value of proper git commit messages. This means a commit message should
+      contain a reference to the issue that lead to the development. Additionally the message should
+      describe what you did in
+      <a href="https://stackoverflow.com/a/3580764">present, imperative tense</a>.
+    </p>
+    <p>
+      The body of a commit message is a great place to convey intent: Why are things they way the
+      are. What shold someone immediately know when they look at this commit a year from now? It can
+      sometimes be really helpful if you are looking at a specific piece of code and wondering why
+      things are the way the are. A simple <code>git blame</code> leads you to the original commit
+      message. If this message contains a short paragrahp that answers the why, it was a really good
+      commit message.
+    </p>
+    <h4>Git branching strategies</h4>
+    <p>
+      We are inspired by Cloud-Native and Continous Deployment process. Additionally, we like to
+      keep things simple. That's why we prefer
+      <a href="http://kean.github.io/post/trunk-based-development">trunk-based development</a> over
+      more complex git branching strategies.
+    </p>
+    <p>
+      Because of the open-source nature of many of our codebases and the potential for outside
+      contributions, we think Pull Requests are a great tool to submit your work to the trunk.
+      Whether a PR-based approach like this is still trunk-based development in its most literal
+      sense is debatable. However, for us the important thing is that there are no long-lived
+      branches. By keeping features small, we also keep the branches to base PRs off short-lived.
+      This prevents merge-hell, leads to frequent and confident releases and very short feedback
+      cycles.
     </p>
   </div>
 </article>
