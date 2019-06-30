@@ -1,6 +1,6 @@
 ---
 layout: service-manual
-title: Software Engineering: Development and Architecture at SeMI
+title: 'Software Engineering: Development and Architecture at SeMI'
 ---
 
 <article class="article container">
@@ -13,7 +13,7 @@ title: Software Engineering: Development and Architecture at SeMI
     </p>
 
     <h2>Index</h2>
-    <h4>An overview of topics covered in our playbook</h4>
+    <h3>An overview of topics covered in our playbook</h3>
     <ol class="style-sm-overview">
       <li><a href="#quality">Development Quality Standards</a></li>
       <li><a href="#cloud-native">Cloud-Native &amp; 12-factor</a></li>
@@ -22,14 +22,14 @@ title: Software Engineering: Development and Architecture at SeMI
     </ol>
 
     <h2 id="quality">Development Quality Standards</h2>
-    <h4>What can tests do for us?</h4>
+    <h3>What can tests do for us?</h3>
     <p>
       Some developers consider tests a waste of time. We believe in the opposite, as proper test
       coverage can actually save you a lot of time. So, how do tests save time? We like tests for
       three main capabilities:
     </p>
 
-    <ol class="style-sm-overview">
+    <ul>
       <li>
         <strong>Acceptance: Don't develop too much</strong><br />A green test can indicate that your
         feature is complete and you can stop development. It is also a contract that indicates the
@@ -47,7 +47,7 @@ title: Software Engineering: Development and Architecture at SeMI
         piece of mind a green test suite provides when refactoring, changing or extending an
         existing feature.
       </li>
-    </ol>
+    </ul>
 
     <p>
       Considering that extending an existing code base takes much more time, then simply writing
@@ -55,7 +55,7 @@ title: Software Engineering: Development and Architecture at SeMI
       countless hours.
     </p>
 
-    <h4>Test-Driven Development</h4>
+    <h3>Test-Driven Development</h3>
     <p>
       With Test-Driven Development (TDD), you write the test first and then start your actual
       development to make the tests pass. Once it's green, you are aren't allowed to add any more
@@ -73,7 +73,7 @@ title: Software Engineering: Development and Architecture at SeMI
       certainly help you get there, but we understand if you can't go 100% TDD from day one.
     </p>
 
-    <h4 id="test-pyramid">The Test Pyramid</h4>
+    <h3 id="test-pyramid">The Test Pyramid</h3>
     <p>
       The
       <a href="https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid">
@@ -83,7 +83,7 @@ title: Software Engineering: Development and Architecture at SeMI
       and easy, fast to write and execute tests are plentyful.
     </p>
 
-    <h4>Mockist vs Classical Testing</h4>
+    <h3>Mockist vs Classical Testing</h3>
     <p>
       A good rule of thumb is to always test the public interface of a method, function or class. We
       want our test to ensure the user-facing behavior, not to force a specific implmentation. In
@@ -97,18 +97,19 @@ title: Software Engineering: Development and Architecture at SeMI
       most things a healthy dose of pragmatism should help you choose.
     </p>
 
-    <h4>Clean Code</h4>
-    We believe
-    <a href="https://www.oreilly.com/library/view/clean-code/9780136083238/"
-      >Clean Code" by Robert C. Martin
-    </a>
-    is one of those books every developer should have have read at least once. It isn't necessarily
-    gospel, and not every single line of code written at SeMI might be considered Clean Code by
-    Uncle Bob's (not to be confused with our co-founder Bob) standards. But we have yet to meet a
-    developer who didn't write better code after reading the book.
+    <h3>Clean Code</h3>
+    <p>
+      We believe
+      <a href="https://www.oreilly.com/library/view/clean-code/9780136083238/"
+        >Clean Code" by Robert C. Martin
+      </a>
+      is one of those books every developer should have have read at least once. It isn't
+      necessarily gospel, and not every single line of code written at SeMI might be considered
+      Clean Code by Uncle Bob's (not to be confused with our co-founder Bob) standards. But we have
+      yet to meet a developer who didn't write better code after reading the book.
+    </p>
 
-    <h4>Application-level Architecture</h4>
-
+    <h3>Application-level Architecture</h3>
     <p>
       "Architecture" is one of those words that can have different meanings on different levels. And
       sometimes it is overused and carries no meaning whatsoever. Generally we are distinguishing
@@ -125,13 +126,13 @@ title: Software Engineering: Development and Architecture at SeMI
     </p>
 
     <h2 id="cloud-native">Cloud Native &amp; and 12-factor compatible applications</h2>
-    <h4>Development for the cloud</h4>
+    <h3>Development for the cloud</h3>
     <p>
       Many of the applcations we built, are intended to be highly resilient, highly scalable and
       continously updated. It is thus not surprising, that our developers keep a cloud-native
       mindset when starting to write the first lines of code.
     </p>
-    <h4>At SeMI we love Docker &amp; Kubernetes</h4>
+    <h3>At SeMI we love Docker &amp; Kubernetes</h3>
     <p>
       Docker and Kubernetes are the two tools to appear in the last decade that have changed the
       industry the most. Many are struggling, because the shift of mindset is so large for some. But
@@ -169,7 +170,7 @@ title: Software Engineering: Development and Architecture at SeMI
     </p>
     <p>This is why we love Docker &amp; Kubernetes at SeMI</p>
 
-    <h4 id="12-factor">A 12-factor mindset</h4>
+    <h3 id="12-factor">A 12-factor mindset</h3>
     <p>
       When an application is intended for the cloud, we have already established that we get a lot
       of - otherwise costly - features for free from Docker &amp; Kubernetes. However, there is a
@@ -192,14 +193,14 @@ title: Software Engineering: Development and Architecture at SeMI
     </p>
 
     <h2 id="devops">Dev vs. Ops vs. DevOps</h2>
-    <h4>You build, you run it</h4>
+    <h3>You build, you run it</h3>
     <p>
       We like the principle of "you build it, you run it". It takes a more complete approach to
       development, because it accepts that running an application is part of the development
       process. And debugging software that you wrote yourself in production is considerably easier
       than having someone else do it for you.
     </p>
-    <h4>Running a webshop vs. building an open-source product</h4>
+    <h3>Running a webshop vs. building an open-source product</h3>
     <p>
       However, we must also accept the fact, that at SeMI our development &amp; operations situation
       is sometimes a bit different from other companies. Let's say you were part of a company that
@@ -228,7 +229,7 @@ title: Software Engineering: Development and Architecture at SeMI
       DevOps principles as closely into our culture as possible:
     </p>
 
-    <h4>A DevOps middleground at SeMI</h4>
+    <h3>A DevOps middleground at SeMI</h3>
     <p>
       Even when it's impossible for every developer to know about every single deployment, it is
       still in the responsibility of our developers to keep the path to production as clear and as
@@ -241,7 +242,7 @@ title: Software Engineering: Development and Architecture at SeMI
       our clients.
     </p>
 
-    <h4>Infra as Code</h4>
+    <h3>Infra as Code</h3>
     <p>
       When we deploy for our clients or for ourselves, we always treat our
       <a href="https://en.wikipedia.org/wiki/Infrastructure_as_code">Infrastcture as Code</a>. This
@@ -256,7 +257,7 @@ title: Software Engineering: Development and Architecture at SeMI
 
     <h2 id="organizing">Organizing &amp; Managing our work</h2>
 
-    <h4>What Agile means for us</h4>
+    <h3>What Agile means for us</h3>
     <p>
       These days, "agile" has often become synomous with following a Scrum or Kanban routine. Many
       organizations schedule a daily stand-up and bi-weekly cereomonies and think that makes them
@@ -267,7 +268,7 @@ title: Software Engineering: Development and Architecture at SeMI
       only.
     </p>
 
-    <h4>Frequent Releases tagged with semantic versioning</h4>
+    <h3>Frequent Releases tagged with semantic versioning</h3>
     <p>
       We always aim to make releases as frequent as possible. Sometimes this leads to tiny releases
       that have only a small noticable effect to the user. This is good. Those tiny changes really
@@ -290,7 +291,7 @@ title: Software Engineering: Development and Architecture at SeMI
       .
     </p>
 
-    <h4>GitHub Issues to manage chunks of work</h4>
+    <h3>GitHub Issues to manage chunks of work</h3>
     <p>
       A large focus on our everyday work is on open-source work. Therefore using GitHub to manage
       our work comes absolutely naturally. In fact, we love this approach so much, that we are also
@@ -306,7 +307,7 @@ title: Software Engineering: Development and Architecture at SeMI
       GitHub issue.
     </p>
 
-    <h4>Transperancy &amp; Progress Updates</h4>
+    <h3>Transperancy &amp; Progress Updates</h3>
     <blockquote>
       The first 90 percent of the code accounts for the first 90 percent of the development time.
       The remaining 10 percent of the code accounts for the other 90 percent of the development time
@@ -326,7 +327,7 @@ title: Software Engineering: Development and Architecture at SeMI
       boat and always willing to help if you are stuck somewhere.
     </p>
 
-    <h4>Working with Git: Commting your work</h4>
+    <h3>Working with Git: Commting your work</h3>
     <p>
       We believe in the value of proper git commit messages. This means a commit message should
       contain a reference to the issue that lead to the development. Additionally the message should
@@ -341,7 +342,7 @@ title: Software Engineering: Development and Architecture at SeMI
       message. If this message contains a short paragrahp that answers the why, it was a really good
       commit message.
     </p>
-    <h4>Git branching strategies</h4>
+    <h3>Git branching strategies</h3>
     <p>
       We are inspired by Cloud-Native and Continous Deployment process. Additionally, we like to
       keep things simple. That's why we prefer
