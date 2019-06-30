@@ -1,0 +1,116 @@
+---
+layout: service-manual
+title: Software Engineering: Development and Architecture at SeMI
+---
+
+<article class="article container">
+  <div class="wrapper">
+    <h1>Software Engineering: Development &amp; Architecture at SeMI</h1>
+    <p>
+      Our paradigms for software development are a quality-first approach with a strong focus on
+      both user experience (UX) and development experience (DX). Most of the times we follow a
+      cloud-first approach, making sure our software is resilient and scalable.
+    </p>
+
+    <h2>Index</h2>
+    <h4>An overview of topics covered in our playbook</h4>
+    <ol class="style-sm-overview">
+      <li><a href="#quality">Development Quality Standards</a></li>
+      <li><a href="#cloud-native">Cloud-Native &amp; 12-factor</a></li>
+      <li><a href="#dev-ops">Dev vs. Ops vs. DevOps</a></li>
+      <li><a href="#licenses">Organizing &amp; managing our work</a></li>
+    </ol>
+
+    <h2 id="quality">Development Quality Standards</h2>
+    <h4>What can tests do for us?</h4>
+    <p>
+      Some developers consider test a waste of time. We believe in the opposite, as proper test
+      coverage can actually save you a lot of time. So, how do tests save time? We like tests for
+      three main capabilities:
+    </p>
+
+    <ol class="style-sm-overview">
+      <li>
+        <strong>Acceptance: Don't develop too much</strong><br />A green test can indicate that your
+        feature is complete and you can stop development. It is also a contract that indicates the
+        feature actually works as it should.
+      </li>
+      <li>
+        <strong>Prevent Regressions</strong><br />&quot;This can't be broken, I just fixed this, who
+        broke it again?&quot; Heard something like this before? We believe every bugfix should
+        introduce a new test. As long as this test stays green it's impossible to reintroduce the
+        bug accidentally.
+      </li>
+      <li>
+        <strong>Piece of mind refactoring</strong><br />
+        Let's face it: Requirements change and code is rarely perfect from the get-go. We love the
+        piece of mind a green test suite provides when refactoring, changing or extending an
+        existing feature.
+      </li>
+    </ol>
+
+    <h4>Test-Driven Development</h4>
+    <p>
+      With Test-Driven Development (TDD), you write the test first and then start your actual
+      development to make the tests pass. Once it's green, you are aren't allowed to add any more
+      logic to it. However, ("Red-Green-Refactor) now is a great time to safely refactor your code.
+      TDD is an amazing tool to help you achieve two goals: First of all, it makes sure you actually
+      write useful tests because you aren't allowed to write any code if it's not meant to make an
+      exisiting test green. Furthermore, you make sure that you write the minimal code needed to
+      achieve the feature. TDD therefore also prevents
+      <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">YAGNI situations</a>.
+    </p>
+
+    <p>
+      We want to be pragmatic though, we know that TDD can be quite daunting at first, especially
+      for new developers. We encourage everyone to aim to do TDD most of the timed and we will
+      certainly help you get there, but we understand if you can't go 100% TDD from day one.
+    </p>
+
+    <h4>The Test Pyramid</h4>
+    <p>
+      The
+      <a href="https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid">
+        test pyramid
+      </a>
+      is a great tool to make sure that tests which are expensive to write, run and extend are rare
+      and easy, fast to write and execute tests are plentyful.
+    </p>
+
+    <h4>Mockist vs Classical Testing</h4>
+    <p>
+      A good rule of thumb is to always test the public interface of a method, function or class. We
+      want our test to ensure the user-facing behavior, not to force a specific implmentation. In
+      the debate of
+      <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting">
+        Classic vs Mockist Tests
+      </a>
+      , we tend to sit on the classicists' side. We believe mocks (or stubs or similiar stand-ins)
+      are a great choice when a unit test would otherwise turn into a (much slower) integration
+      test, but we want to avoid testing (too many) internals or hiding logic thorugh mocks. As with
+      most things a healthy dose of pragmatism should help you choose.
+    </p>
+
+    <h4>Clean Code</h4>
+    <h4>Application Architecture</h4>
+
+    <h2 id="HR">Human Resources</h2>
+    <p>
+      At SeMI believe in the power of the team, UX and technology. If you want to join us, we want
+      to make it as easy as possible for you to prepare. The information on the pages below will
+      give you all the information you need. We are looking forward to welcoming you to our team!
+    </p>
+    <ol class="style-sm-overview">
+      <li><a href="hr-no-office.html">Working without an office</a></li>
+      w
+      <li><a href="hr-prepare.html">Preparing for your interview</a></li>
+    </ol>
+
+    <h2 id="software">Software Development &amp; Architecture</h2>
+    <p>
+      Our paradigms for software development are a quality-first approach with a strong focus on
+      both user experience (UX) and development experience (DX). See our full opinions on
+      <a href="software.html">Software Engineering</a>.
+    </p>
+  </div>
+</article>
