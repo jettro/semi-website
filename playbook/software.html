@@ -59,7 +59,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <p>
       With Test-Driven Development (TDD), you write the test first and then start your actual
       development to make the tests pass. Once it's green, you are aren't allowed to add any more
-      logic to it. However, ("Red-Green-Refactor) now is a great time to safely refactor your code.
+      logic to it. However, ("Red-Green-Refactor") now is a great time to safely refactor your code.
       TDD is an amazing tool to help you achieve two goals: First of all, it makes sure you actually
       write useful tests because you aren't allowed to write any code if it's not meant to make an
       exisiting test green. Furthermore, you make sure that you write the minimal code needed to
@@ -79,21 +79,23 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       <a href="https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid">
         test pyramid
       </a>
-      is a great tool to make sure that tests which are expensive to write, run and extend are rare
-      and easy, fast to write and execute tests are plentyful.
+      is a great tool to make sure that tests which are expensive to write, run and extend are rare.
+      Tests which are easy and fast to write and execute tests should be plentyful. Integration
+      tests help to safely cross application boundaries, such as a db connection. Contract tests
+      prevent breakage of unsuspecting consumers.
     </p>
 
     <h3>Mockist vs Classical Testing</h3>
     <p>
       A good rule of thumb is to always test the public interface of a method, function or class. We
-      want our test to ensure the user-facing behavior, not to force a specific implmentation. In
+      want our test to ensure the user-facing behavior, not to force a specific implementation. In
       the debate of
       <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting">
         Classic vs Mockist Tests
       </a>
       , we tend to sit on the classicists' side. We believe mocks (or stubs or similiar stand-ins)
       are a great choice when a unit test would otherwise turn into a (much slower) integration
-      test, but we want to avoid testing (too many) internals or hiding logic thorugh mocks. As with
+      test, but we want to avoid testing (too many) internals or hiding logic through mocks. As with
       most things a healthy dose of pragmatism should help you choose.
     </p>
 
@@ -101,7 +103,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <p>
       We believe
       <a href="https://www.oreilly.com/library/view/clean-code/9780136083238/"
-        >Clean Code" by Robert C. Martin
+        >"Clean Code" by Robert C. Martin
       </a>
       is one of those books every developer should have have read at least once. It isn't
       necessarily gospel, and not every single line of code written at SeMI might be considered
@@ -128,7 +130,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <h2 id="cloud-native">Cloud Native &amp; and 12-factor compatible applications</h2>
     <h3>Development for the cloud</h3>
     <p>
-      Many of the applcations we built, are intended to be highly resilient, highly scalable and
+      Many of the applcations we build are intended to be highly resilient, highly scalable and
       continously updated. It is thus not surprising, that our developers keep a cloud-native
       mindset when starting to write the first lines of code.
     </p>
@@ -143,7 +145,8 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       were local development took days to setup to get developers started. Gone are the days where a
       developer's machine needed to be precisly set up so it could run the applications. Docker
       offers the perfect balance of virtualization: Considerably faster, smaller and more
-      lightweight than a VM, but with all the isolation capabilites, we need every day.
+      lightweight than a VM, but with all the isolation capabilites we need for reproducible
+      development.
     </p>
     <p>
       In accordance with <a href="#12-factor">12-factor principles</a>, we don't ever compile our
@@ -168,7 +171,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       be very costly to implement otherwise: rolling updates, service discovery, (automatic) scaling
       for HA applications and so much more.
     </p>
-    <p>This is why we love Docker &amp; Kubernetes at SeMI</p>
+    <p>This is why we love Docker &amp; Kubernetes at SeMI.</p>
 
     <h3 id="12-factor">A 12-factor mindset</h3>
     <p>
