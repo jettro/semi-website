@@ -24,7 +24,7 @@ title: Software Engineering: Development and Architecture at SeMI
     <h2 id="quality">Development Quality Standards</h2>
     <h4>What can tests do for us?</h4>
     <p>
-      Some developers consider test a waste of time. We believe in the opposite, as proper test
+      Some developers consider tests a waste of time. We believe in the opposite, as proper test
       coverage can actually save you a lot of time. So, how do tests save time? We like tests for
       three main capabilities:
     </p>
@@ -49,6 +49,12 @@ title: Software Engineering: Development and Architecture at SeMI
       </li>
     </ol>
 
+    <p>
+      Considering that extending an existing code base takes much more time, then simply writing
+      something new from scratch, the three capabilities of tests above have already saved us
+      countless hours.
+    </p>
+
     <h4>Test-Driven Development</h4>
     <p>
       With Test-Driven Development (TDD), you write the test first and then start your actual
@@ -67,7 +73,7 @@ title: Software Engineering: Development and Architecture at SeMI
       certainly help you get there, but we understand if you can't go 100% TDD from day one.
     </p>
 
-    <h4>The Test Pyramid</h4>
+    <h4 id="test-pyramid">The Test Pyramid</h4>
     <p>
       The
       <a href="https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid">
@@ -92,25 +98,147 @@ title: Software Engineering: Development and Architecture at SeMI
     </p>
 
     <h4>Clean Code</h4>
-    <h4>Application Architecture</h4>
+    We believe
+    <a href="https://www.oreilly.com/library/view/clean-code/9780136083238/"
+      >Clean Code" by Robert C. Martin
+    </a>
+    is one of those books every developer should have have read at least once. It isn't necessarily
+    gospel, and not every single line of code written at SeMI might be considered Clean Code by
+    Uncle Bob's (not to be confused with our co-founder Bob) standards. But we have yet to meet a
+    developer who didn't write better code after reading the book.
 
-    <h2 id="HR">Human Resources</h2>
+    <h4>Application-level Architecture</h4>
+
     <p>
-      At SeMI believe in the power of the team, UX and technology. If you want to join us, we want
-      to make it as easy as possible for you to prepare. The information on the pages below will
-      give you all the information you need. We are looking forward to welcoming you to our team!
+      "Architecture" is one of those words that can have different meanings on different levels. And
+      sometimes it is overused and carries no meaning whatsoever. Generally we are distinguishing
+      between system-level architecture and application-level architecture. The latter mostly means
+      how a single application is strucured internally. This depends on every application and every
+      use case and it is important to us to keep the individual dev teams' autonomy. One application
+      stands out, though: Weaviate, as it has a very central role. There we chose to structure our
+      code in accordance with
+      <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">
+        Clean Architecture
+      </a>
+      , a set of guidelines that fits the requirements of Weaviate really well and helped clean up
+      the code base considerably.
     </p>
-    <ol class="style-sm-overview">
-      <li><a href="hr-no-office.html">Working without an office</a></li>
-      w
-      <li><a href="hr-prepare.html">Preparing for your interview</a></li>
-    </ol>
 
-    <h2 id="software">Software Development &amp; Architecture</h2>
+    <h2 id="cloud-native">Cloud Native &amp; and 12-factor compatible applications</h2>
+    <h4>Development for the cloud</h4>
     <p>
-      Our paradigms for software development are a quality-first approach with a strong focus on
-      both user experience (UX) and development experience (DX). See our full opinions on
-      <a href="software.html">Software Engineering</a>.
+      Many of the applcations we built, are intended to be highly resilient, highly scalable and
+      continously updated. It is thus not surprising, that our developers keep a cloud-native
+      mindset when starting to write the first lines of code.
+    </p>
+    <h4>At SeMI we love Docker &amp; Kubernetes</h4>
+    <p>
+      Docker and Kubernetes are the two tools to appear in the last decade that have changed the
+      industry the most. Many are struggling, because the shift of mindset is so large for some. But
+      at SeMI, we use both to make our lives easier.
+    </p>
+    <p>
+      <strong>Docker</strong> is a first-class citizen in our development process. Gone are the days
+      were local development took days to setup to get developers started. Gone are the days where a
+      developer's machine needed to be precisly set up so it could run the applications. Docker
+      offers the perfect balance of virtualization: Considerably faster, smaller and more
+      lightweight than a VM, but with all the isolation capabilites, we need every day.
+    </p>
+    <p>
+      In accordance with <a href="#12-factor">12-factor principles</a>, we don't ever compile our
+      application for a specific environment, there is just one appliation and environments are just
+      sets of configuration. Using Docker helps us achieve this.
+    </p>
+    <p>
+      With docker-compose we can run our entire application stack - even if it has the most obscure
+      backing dependencies - locally. And not just that, but it is very, very similar to an actual
+      production environment, too. Additionally, we can comfortably run
+      <a href="#test-pyramid">integration and end2end</a> tests with containerized backing
+      databases.
+    </p>
+    <p>
+      For our runtimes, we bet on <strong>Kubernetes</strong>, because we see Kubernetes as the
+      logical extension of Docker. Docker is really good for isolation and delievering
+      production-quality artifacts as a a result of our development process. But - even with
+      docker-compose - it lacks the capabilites to run application at actual production quality.
+    </p>
+    <p>
+      Kubernetes provides our runtime environments with many elements completely for free that would
+      be very costly to implement otherwise: rolling updates, service discovery, (automatic) scaling
+      for HA applications and so much more.
+    </p>
+    <p>This is why we love Docker &amp; Kubernetes at SeMI</p>
+
+    <h4 id="12-factor">A 12-factor mindset</h4>
+    <p>
+      When an application is intended for the cloud, we have already established that we get a lot
+      of - otherwise costly - features for free from Docker &amp; Kubernetes. However, there is a
+      cost: While you can technically dockerize and deploy any application, you lose out on most
+      benefits if your application does not take the specialities of the cloud environment into
+      consideration from the get-go. This is why all applications intended for scalable deployment -
+      such as Weaviate - must adhere to <a href="https://12factor.net/">12-factor principles</a>.
+    </p>
+    <p>
+      While all of them are important, we still want to focus on three in particular: Config (#3),
+      Processes (#6) and Disposability (#9). If you take these into account, you'll end up with a
+      stateless application which can automatically be scaled up and down on demand and is in no way
+      specific to a particular environment. And we think that's a pretty cool thing. And of course a
+      requirement to make use of what makes Kubernetes great.
+    </p>
+    <p>
+      Sound daunting? Don't worry! If building for the cloud is new to you, it can be a bit
+      overwhelming to take in 12 new guidelines at once. We know that feeling. Once you've joined
+      SeMI, we'll help you get there.
+    </p>
+
+    <h2 id="devops">Dev vs. Ops vs. DevOps</h2>
+    <h4>You build, you run it</h4>
+    <p>
+      We like the principle of "you build it, you run it". It takes a more complete approach to
+      development, because it accepts that running an application is part of the development
+      process. And debugging software that you wrote yourself in production is considerably easier
+      than having someone else do it for you.
+    </p>
+    <h4>Running a webshop vs. building an open-source product</h4>
+    <p>
+      However, we must also accept the fact, that at SeMI our development &amp; operations situation
+      is sometimes a bit different from other companies. Let's say you were part of a company that
+      runs an e-commerce solution, like an online web shop for buying groceries. Your team might own
+      one specific part of that solution, such as the search feature. As part of that team you would
+      own this feature end-to-end from development through testing &amp; QA all the way to
+      production. If the search for a shop is down, the business obviosuly loses money. So, a large
+      part of the development team's responsibility is to make sure the search stays available.
+      Since developers can't take care of that 24/7, an SRE-approach is often used to combine the
+      operations ownership that a DevOps strategy contains with 24/7 support capabilities.
+    </p>
+
+    <p>
+      At SeMI we believe in the exact same principles, but we must also accept that our situation is
+      a bit different: We don't build a service that is then scaled to a very large user base.
+      Instead we build an open-source product, that can then be idendepently deployed many times
+      over. For example, a customer might want to deploy Weaviate on premise. Another customer might
+      want us to host Weaviate for them. Someone using the free version of weaviate might simply
+      download a docker image and run it for themselves.
+    </p>
+
+    <p>
+      A pure "You build it, you run it" approach, is therefore impossible at SeMI. There could be
+      thousands of Weaviate instances deployed and not every developer might be aware of them. This
+      is why we need some sort of a "Dev" and "Ops" split. Nevertheless, we want to incorporate
+      DevOps principles as closely into our culture as possible:
+    </p>
+
+    <h4>A DevOps middleground at SeMI</h4>
+    <p>
+      Even when it's impossible for every developer to know about every single deployment, it is
+      still in the responsibility of our developers to keep the path to production as clear and as
+      fast as possible. Our releases are still continously deployed to a production-like
+      environment. Developers still need to think about how to mitigate breaking changes.
+      Development still only finishes when a feature is successfully deployed.
+    </p>
+    <p>
+      Operations is then simply a matter of multiplying the artifacts from our DevOps process for
+      our clients.
     </p>
   </div>
 </article>
