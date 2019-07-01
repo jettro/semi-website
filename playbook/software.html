@@ -7,7 +7,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
   <div class="wrapper">
     <h1>Software Engineering: Development &amp; Architecture at SeMI</h1>
     <p>
-      Our paradigms for software development is based on a <a href="https://stackoverflow.com/questions/2057045/pythons-os-makedirs-doesnt-understand-in-my-path" target=_blank">quality-first approach</a> with a strong focus on
+      Our paradigms for software development is based on a <a href="https://stackoverflow.com/questions/2057045/pythons-os-makedirs-doesnt-understand-in-my-path" target="_blank">quality-first approach</a> with a strong focus on
       user experience (UX) and development experience (DX). Most of the times we follow a
       cloud-first approach, making sure our software is resilient and scalable.
     </p>
@@ -61,7 +61,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       write useful tests because you aren't allowed to write any code if it's not meant to make an
       exisiting test green. Furthermore, you make sure that you write the minimal code needed to
       achieve the feature. TDD therefore also prevents
-      <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">YAGNI situations</a>.
+      <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it" target="_blank">YAGNI situations</a>.
     </p>
 
     <!-- <p>
@@ -73,7 +73,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <h3 id="test-pyramid">The Test Pyramid</h3>
     <p>
       The
-      <a href="https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid">
+      <a href="https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid" target="_blank">
         test pyramid
       </a>
       is a great tool to make sure that tests which are expensive to write, run and extend are rare.
@@ -87,7 +87,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       A good rule of thumb is to always test the public interface of a method, function or class. We
       want our test to ensure the user-facing behavior, not to force a specific implementation. In
       the debate of
-      <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting">
+      <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting" target="_blank">
         Classic vs Mockist Tests
       </a>
       , we tend to sit on the classicists' side. We believe mocks (or stubs or similiar stand-ins)
@@ -99,8 +99,8 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <h3>Clean Code</h3>
     <p>
       We believe in clean code as outlined in
-      <a href="https://www.oreilly.com/library/view/clean-code/9780136083238/"
-        >"Clean Code"
+      <a href="https://www.oreilly.com/library/view/clean-code/9780136083238/" target="_blank">
+        "Clean Code"
       </a>
     </p>
 
@@ -112,7 +112,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       use case and it is important to keep the individual dev teams' autonomy. One application
       stands out, though: Weaviate, as it has a very central role. There we chose to structure our
       code in accordance with
-      <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">
+      <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank">
         Clean Architecture
       </a>
       , a set of guidelines that fits the requirements of Weaviate really well and helped clean up
@@ -172,7 +172,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       cost: While you can technically dockerize and deploy any application, you lose out on most
       benefits if your application does not take the specialities of the cloud environment into
       consideration from the get-go. This is why all applications intended for scalable deployment -
-      such as Weaviate - must adhere to <a href="https://12factor.net/">12-factor principles</a>.
+      such as Weaviate - must adhere to <a href="https://12factor.net/" target="_blank">12-factor principles</a>.
     </p>
     <p>
       While all of them are important, we still want to focus on three in particular: Config (#3),
@@ -247,7 +247,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <h3>Infra as Code</h3>
     <p>
       When we deploy for our clients or for ourselves, we always treat our
-      <a href="https://en.wikipedia.org/wiki/Infrastructure_as_code">Infrastcture as Code</a>. This
+      <a href="https://en.wikipedia.org/wiki/Infrastructure_as_code" target="_blank">Infrastcture as Code</a>. This
       way, our infrastcture is easily scalable, disposable and reproducible. Especially managing a
       large set of customer deployments, we can easily automate common tasks and processes in a safe
       and reproducible way. We like to use Terraform to manage cloud infrastructure and Helm to
@@ -275,7 +275,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       We always aim to make releases as frequent as possible. Sometimes this leads to tiny releases
       that have only a small noticable effect to the user. This is good. Those tiny changes really
       add up over time and a product develops.
-      <a href="https://semver.org/">Semantic Versioning</a> helps conveying the severity of a change
+      <a href="https://semver.org/" target="_blank">Semantic Versioning</a> helps conveying the severity of a change
       at a glance. The high frequency of releases helps us to gather important feedback quickly.
       Sometimes the feedback for a specific release immediately affects the following release.
     </p>
@@ -285,9 +285,9 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       high-quality changelogs. This help users to see why they should upgrade and what happens if
       they do so. It also helps us to think about what is release-worthy and what isn't. For some
       examples on changelos check out the
-      <a href="https://github.com/semi-technologies/weaviate/releases">Weaviate Realeases Page</a>
+      <a href="https://github.com/semi-technologies/weaviate/releases" target="_blank">Weaviate Realeases Page</a>
       or the
-      <a href="https://github.com/semi-technologies/weaviate-helm/releases">
+      <a href="https://github.com/semi-technologies/weaviate-helm/releases" target="_blank">
         Weaviate Helm Chart Releases Page
       </a>
       .
@@ -313,7 +313,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <blockquote>
       The first 90 percent of the code accounts for the first 90 percent of the development time.
       The remaining 10 percent of the code accounts for the other 90 percent of the development time
-      (<a href="https://en.wikipedia.org/wiki/Ninety-ninety_rule">Source</a>)
+      (<a href="https://en.wikipedia.org/wiki/Ninety-ninety_rule" target="_blank">Source</a>)
     </blockquote>
     <p>
       We know that estimations are hard. And we think it's nearly impossible to do an exact
@@ -334,7 +334,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       We believe in the value of proper git commit messages. This means a commit message should
       contain a reference to the issue that lead to the development. Additionally the message should
       describe what you did in
-      <a href="https://stackoverflow.com/a/3580764">present, imperative tense</a>.
+      <a href="https://stackoverflow.com/a/3580764" target="_blank">present, imperative tense</a>.
     </p>
     <p>
       The body of a commit message is a great place to convey intent: Why are things they way the
@@ -348,7 +348,7 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <p>
       We are inspired by Cloud-Native and Continous Deployment process. Additionally, we like to
       keep things simple. That's why we prefer
-      <a href="http://kean.github.io/post/trunk-based-development">trunk-based development</a> over
+      <a href="http://kean.github.io/post/trunk-based-development" target="_blank">trunk-based development</a> over
       more complex git branching strategies.
     </p>
     <p>
