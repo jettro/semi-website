@@ -24,9 +24,8 @@ title: 'Software Engineering: Development and Architecture at SeMI'
     <h2 id="quality">Development Quality Standards</h2>
     <h3>A Focus on Testing</h3>
     <p>
-      Some developers consider tests a waste of time. We believe in the opposite, as proper test
-      coverage can actually save you a lot of time. So, how do tests save time? We like tests for
-      three main capabilities:
+      At SeMI, we believe that testing is a powerful way to help us move forward faster while maintaining quality.
+      We like tests for three main capabilities;
     </p>
 
     <ul>
@@ -43,15 +42,14 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       </li>
       <li>
         <strong>Piece of mind when Refactoring</strong><br />
-        Let's face it: Requirements change and code is rarely perfect from the get-go. We love the
-        piece of mind a green test suite provides when refactoring, changing or extending an
-        existing feature.
+        In production software, requirements change and code is rarely perfect from the get-go.
+        A green test suite provides us with the confidence that a new or improved feature is done and that our users should not worry about problems introduced after updating the software.
       </li>
     </ul>
 
     <p>
-      Considering that extending an existing code base takes much more time than writing something
-      new from scratch, the three capabilities of tests above have already saved us countless hours.
+      Considering that extending an existing code base takes much more time than writing something new from scratch,
+      the three capabilities of tests above will save you hours of development hours over time.
     </p>
 
     <h3>Test-Driven Development</h3>
@@ -66,11 +64,11 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">YAGNI situations</a>.
     </p>
 
-    <p>
+    <!-- <p>
       We want to be pragmatic though, we know that TDD can be quite daunting at first, especially
       for new developers. We encourage everyone to aim to do TDD most of the timed and we will
       certainly help you get there, but we understand if you can't go 100% TDD from day one.
-    </p>
+    </p> -->
 
     <h3 id="test-pyramid">The Test Pyramid</h3>
     <p>
@@ -100,23 +98,18 @@ title: 'Software Engineering: Development and Architecture at SeMI'
 
     <h3>Clean Code</h3>
     <p>
-      We believe
+      We believe in clean code as outlined in
       <a href="https://www.oreilly.com/library/view/clean-code/9780136083238/"
-        >"Clean Code" by Robert C. Martin
+        >"Clean Code"
       </a>
-      is one of those books every developer should have have read at least once. It isn't
-      necessarily gospel, and not every single line of code written at SeMI might be considered
-      Clean Code by Uncle Bob's (not to be confused with our co-founder Bob) standards. But we have
-      yet to meet a developer who didn't write better code after reading the book.
     </p>
 
     <h3>Application-level Architecture</h3>
     <p>
-      "Architecture" is one of those words that can have different meanings on different levels. And
-      sometimes it is overused and carries no meaning whatsoever. Generally we are distinguishing
-      between system-level architecture and application-level architecture. The latter mostly means
-      how a single application is strucured internally. This depends on every application and every
-      use case and it is important to us to keep the individual dev teams' autonomy. One application
+      "Architecture" is one of those words that can have different meanings on different levels.
+      Within SeMI, we are distinguishing between system-level architecture and application-level architecture.
+      The latter mostly means "how a single application is strucured internally". This depends on every application and every
+      use case and it is important to keep the individual dev teams' autonomy. One application
       stands out, though: Weaviate, as it has a very central role. There we chose to structure our
       code in accordance with
       <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">
@@ -188,11 +181,11 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       specific to a particular environment. And we think that's a pretty cool thing. And of course a
       requirement to make use of what makes Kubernetes great.
     </p>
-    <p>
+    <!-- <p>
       Sound daunting? Don't worry! If building for the cloud is new to you, it can be a bit
       overwhelming to take in 12 new guidelines at once. We know that feeling. Once you've joined
       SeMI, we'll help you get there.
-    </p>
+    </p> -->
 
     <h2 id="devops">Dev vs. Ops vs. DevOps</h2>
     <h3>You build, you run it</h3>
@@ -202,8 +195,9 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       process. And debugging software that you wrote yourself in production is considerably easier
       than having someone else do it for you.
     </p>
-    <h3>Running a webshop vs. building an open-source product</h3>
-    <p>
+    <h3>The difference between a solution and an (open source) product</h3>
+    <!-- <h3>Running a webshop vs. building an open-source product</h3> -->
+    <!-- <p>
       However, we must also accept the fact, that at SeMI our development &amp; operations situation
       is sometimes a bit different from other companies. Let's say you were part of a company that
       runs an e-commerce solution, like an online web shop for buying groceries. Your team might own
@@ -213,12 +207,18 @@ title: 'Software Engineering: Development and Architecture at SeMI'
       part of the development team's responsibility is to make sure the search stays available.
       Since developers can't take care of that 24/7, an SRE-approach is often used to combine the
       operations ownership that a DevOps strategy contains with 24/7 support capabilities.
-    </p>
+    </p> -->
 
-    <p>
+    <!-- <p>
       At SeMI we believe in the exact same principles, but we must also accept that our situation is
       a bit different: We don't build a service that is then scaled to a very large user base.
       Instead we build an open-source product, that can then be idendepently deployed many times
+      over. For example, a customer might want to deploy Weaviate on premise. Another customer might
+      want us to host Weaviate for them. Someone using the free version of weaviate might simply
+      download a docker image and run it for themselves.
+    </p> -->
+    <p>
+      At SeMI, we don't build a one-off service but we build an open-source product, that can then be idendepently deployed many times
       over. For example, a customer might want to deploy Weaviate on premise. Another customer might
       want us to host Weaviate for them. Someone using the free version of weaviate might simply
       download a docker image and run it for themselves.
