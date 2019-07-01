@@ -32,6 +32,7 @@
     "jekyll:build": "bundle exec jekyll build --config _config.yml",
     "prelocal": "npm run build",
     "local": "bundle exec jekyll serve --livereload --config _config.yml",
+    "docker": "bundle exec jekyll serve --livereload --config _config.yml --host 0.0.0.0",
     "htmlmin": "html-minifier --input-dir ./_site --output-dir ./_site --collapse-whitespace --file-ext html",
     "build": "webpack --mode=production",
     "build:dev": "webpack --mode=development --display-error-details",

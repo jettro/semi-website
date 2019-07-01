@@ -1,0 +1,363 @@
+---
+layout: service-manual
+title: 'Software Engineering: Development and Architecture at SeMI'
+---
+
+<article class="article container">
+  <div class="wrapper">
+    <h1>Software Engineering: Development &amp; Architecture at SeMI</h1>
+    <p>
+      Our paradigms for software development is based on a <a href="https://stackoverflow.com/questions/2057045/pythons-os-makedirs-doesnt-understand-in-my-path" target="_blank">quality-first approach</a> with a strong focus on
+      user experience (UX) and development experience (DX). Most of the times we follow a
+      cloud-first approach, making sure our software is resilient and scalable.
+    </p>
+
+    <h2>Index</h2>
+    <h3>An overview of topics covered in our playbook</h3>
+    <ol class="style-sm-overview">
+      <li><a href="#quality">Development Quality Standards</a></li>
+      <li><a href="#cloud-native">Cloud-Native &amp; 12-factor</a></li>
+      <li><a href="#devops">Dev vs. Ops vs. DevOps</a></li>
+      <li><a href="#organizing">Organizing &amp; Managing our work</a></li>
+    </ol>
+
+    <h2 id="quality">Development Quality Standards</h2>
+    <h3>A Focus on Testing</h3>
+    <p>
+      At SeMI, we believe that testing is a powerful way to help us move forward faster while maintaining quality.
+      We like tests for three main capabilities;
+    </p>
+
+    <ul>
+      <li>
+        <strong>Acceptance: Don't develop too much</strong><br />A green test can indicate that your
+        feature is complete and you can stop development. It is also a contract that indicates the
+        feature actually works as it should.
+      </li>
+      <li>
+        <strong>Prevent Regressions</strong><br />&quot;This can't be broken, I just fixed this, who
+        broke it again?&quot; Heard something like this before? We believe every bugfix should
+        introduce a new test. As long as this test stays green it's impossible to reintroduce the
+        bug accidentally.
+      </li>
+      <li>
+        <strong>Piece of mind when Refactoring</strong><br />
+        In production software, requirements change and code is rarely perfect from the get-go.
+        A green test suite provides us with the confidence that a new or improved feature is done and that our users should not worry about problems introduced after updating the software.
+      </li>
+    </ul>
+
+    <p>
+      Considering that extending an existing code base takes much more time than writing something new from scratch,
+      the three capabilities of tests above will save you hours of development hours over time.
+    </p>
+
+    <h3>Test-Driven Development</h3>
+    <p>
+      With Test-Driven Development (TDD), you write the test first and then start your actual
+      development to make the tests pass. Once it's green, you are aren't allowed to add any more
+      logic to it. However, ("Red-Green-Refactor") now is a great time to safely refactor your code.
+      TDD is an amazing tool to help you achieve two goals: First of all, it makes sure you actually
+      write useful tests because you aren't allowed to write any code if it's not meant to make an
+      exisiting test green. Furthermore, you make sure that you write the minimal code needed to
+      achieve the feature. TDD therefore also prevents
+      <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it" target="_blank">YAGNI situations</a>.
+    </p>
+
+    <!-- <p>
+      We want to be pragmatic though, we know that TDD can be quite daunting at first, especially
+      for new developers. We encourage everyone to aim to do TDD most of the timed and we will
+      certainly help you get there, but we understand if you can't go 100% TDD from day one.
+    </p> -->
+
+    <h3 id="test-pyramid">The Test Pyramid</h3>
+    <p>
+      The
+      <a href="https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid" target="_blank">
+        test pyramid
+      </a>
+      is a great tool to make sure that tests which are expensive to write, run and extend are rare.
+      Tests which are easy and fast to write and execute tests should be plentyful. Integration
+      tests help to safely cross application boundaries, such as a db connection. Contract tests
+      prevent breakage of unsuspecting consumers.
+    </p>
+
+    <h3>Mockist vs Classical Testing</h3>
+    <p>
+      A good rule of thumb is to always test the public interface of a method, function or class. We
+      want our test to ensure the user-facing behavior, not to force a specific implementation. In
+      the debate of
+      <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting" target="_blank">
+        Classic vs Mockist Tests
+      </a>
+      , we tend to sit on the classicists' side. We believe mocks (or stubs or similiar stand-ins)
+      are a great choice when a unit test would otherwise turn into a (much slower) integration
+      test, but we want to avoid testing (too many) internals or hiding logic through mocks. As with
+      most things a healthy dose of pragmatism should help you choose.
+    </p>
+
+    <h3>Clean Code</h3>
+    <p>
+      Our coding style is strongly influenced by <a href="https://www.oreilly.com/library/view/clean-code/9780136083238/" target="_blank">Uncle Bob's Clean Code</a>,
+      a book we recommend for every developer to read.
+      We don't view the topics raised in the book as hard rules, but as helpful suggestions to clean up our code.
+    </p>
+
+    <h3>Application-level Architecture</h3>
+    <p>
+      "Architecture" is one of those words that can have different meanings on different levels.
+      Within SeMI, we are distinguishing between system-level architecture and application-level architecture.
+      The latter mostly means "how a single application is strucured internally". This depends on every application and every
+      use case and it is important to keep the individual dev teams' autonomy. One application
+      stands out, though: Weaviate, as it has a very central role. There we chose to structure our
+      code in accordance with
+      <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank">
+        Clean Architecture
+      </a>
+      , a set of guidelines that fits the requirements of Weaviate really well and helped clean up
+      the code base considerably.
+    </p>
+
+    <h2 id="cloud-native">Cloud Native &amp; and 12-factor compatible applications</h2>
+    <h3>Development for the cloud</h3>
+    <p>
+      Many of the applcations we build are intended to be highly resilient, highly scalable and
+      continously updated. It is thus not surprising, that our developers keep a cloud-native
+      mindset when starting to write the first lines of code.
+    </p>
+    <h3>At SeMI we love Docker &amp; Kubernetes</h3>
+    <p>
+      Docker and Kubernetes are the two tools to appear in the last decade that have changed the
+      industry the most. Many are struggling, because the shift of mindset is so large for some. But
+      at SeMI, we use both to make our lives easier.
+    </p>
+    <p>
+      <strong>Docker</strong> is a first-class citizen in our development process. Gone are the days
+      were local development took days to setup to get developers started. Gone are the days where a
+      developer's machine needed to be precisly set up so it could run the applications. Docker
+      offers the perfect balance of virtualization: Considerably faster, smaller and more
+      lightweight than a VM, but with all the isolation capabilites we need for reproducible
+      development.
+    </p>
+    <p>
+      In accordance with <a href="#12-factor">12-factor principles</a>, we don't ever compile our
+      application for a specific environment, there is just one appliation and environments are just
+      sets of configuration. Using Docker helps us achieve this.
+    </p>
+    <p>
+      With docker-compose we can run our entire application stack - even if it has the most obscure
+      backing dependencies - locally. And not just that, but it is very, very similar to an actual
+      production environment, too. Additionally, we can comfortably run
+      <a href="#test-pyramid">integration and end2end</a> tests with containerized backing
+      databases.
+    </p>
+    <p>
+      For our runtimes, we bet on <strong>Kubernetes</strong>, because we see Kubernetes as the
+      logical extension of Docker. Docker is really good for isolation and delievering
+      production-quality artifacts as a a result of our development process. But - even with
+      docker-compose - it lacks the capabilites to run application at actual production quality.
+    </p>
+    <p>
+      Kubernetes provides our runtime environments with many elements completely for free that would
+      be very costly to implement otherwise: rolling updates, service discovery, (automatic) scaling
+      for HA applications and so much more.
+    </p>
+    <p>This is why we love Docker &amp; Kubernetes at SeMI.</p>
+
+    <h3 id="12-factor">A 12-factor mindset</h3>
+    <p>
+      When an application is intended for the cloud, we have already established that we get a lot
+      of - otherwise costly - features for free from Docker &amp; Kubernetes. However, there is a
+      cost: While you can technically dockerize and deploy any application, you lose out on most
+      benefits if your application does not take the specialities of the cloud environment into
+      consideration from the get-go. This is why all applications intended for scalable deployment -
+      such as Weaviate - must adhere to <a href="https://12factor.net/" target="_blank">12-factor principles</a>.
+    </p>
+    <p>
+      While all of them are important, we still want to focus on three in particular: Config (#3),
+      Processes (#6) and Disposability (#9). If you take these into account, you'll end up with a
+      stateless application which can automatically be scaled up and down on demand and is in no way
+      specific to a particular environment. And we think that's a pretty cool thing. And of course a
+      requirement to make use of what makes Kubernetes great.
+    </p>
+    <!-- <p>
+      Sound daunting? Don't worry! If building for the cloud is new to you, it can be a bit
+      overwhelming to take in 12 new guidelines at once. We know that feeling. Once you've joined
+      SeMI, we'll help you get there.
+    </p> -->
+
+    <h2 id="devops">Dev vs. Ops vs. DevOps</h2>
+    <h3>You build, you run it</h3>
+    <p>
+      We like the principle of "you build it, you run it". It takes a more complete approach to
+      development, because it accepts that running an application is part of the development
+      process. And debugging software that you wrote yourself in production is considerably easier
+      than having someone else do it for you.
+    </p>
+    <h3>The difference between a solution and an (open source) product</h3>
+    <!-- <h3>Running a webshop vs. building an open-source product</h3> -->
+    <!-- <p>
+      However, we must also accept the fact, that at SeMI our development &amp; operations situation
+      is sometimes a bit different from other companies. Let's say you were part of a company that
+      runs an e-commerce solution, like an online web shop for buying groceries. Your team might own
+      one specific part of that solution, such as the search feature. As part of that team you would
+      own this feature end-to-end from development through testing &amp; QA all the way to
+      production. If the search for a shop is down, the business obviosuly loses money. So, a large
+      part of the development team's responsibility is to make sure the search stays available.
+      Since developers can't take care of that 24/7, an SRE-approach is often used to combine the
+      operations ownership that a DevOps strategy contains with 24/7 support capabilities.
+    </p> -->
+
+    <!-- <p>
+      At SeMI we believe in the exact same principles, but we must also accept that our situation is
+      a bit different: We don't build a service that is then scaled to a very large user base.
+      Instead we build an open-source product, that can then be idendepently deployed many times
+      over. For example, a customer might want to deploy Weaviate on premise. Another customer might
+      want us to host Weaviate for them. Someone using the free version of weaviate might simply
+      download a docker image and run it for themselves.
+    </p> -->
+    <p>
+      At SeMI, we don't build a one-off service but we build an open-source product, that can then be idendepently deployed many times
+      over. For example, a customer might want to deploy Weaviate on premise. Another customer might
+      want us to host Weaviate for them. Someone using the free version of weaviate might simply
+      download a docker image and run it for themselves.
+    </p>
+
+    <p>
+      A pure "You build it, you run it" approach, is therefore impossible at SeMI. There could be
+      thousands of Weaviate instances deployed and not every developer might be aware of them. This
+      is why we need some sort of a "Dev" and "Ops" split. Nevertheless, we want to incorporate
+      DevOps principles as closely into our culture as possible:
+    </p>
+
+    <h3>A DevOps middleground at SeMI</h3>
+    <p>
+      Even when it's impossible for every developer to know about every single deployment, it is
+      still in the responsibility of our developers to keep the path to production as clear and as
+      fast as possible. Our releases are still continously deployed to a production-like
+      environment. Developers still need to think about how to mitigate breaking changes.
+      Development still only finishes when a feature is successfully deployed.
+    </p>
+    <p>
+      Operations is then simply a matter of multiplying the artifacts from our DevOps process for
+      our clients.
+    </p>
+
+    <h3>Infra as Code</h3>
+    <p>
+      When we deploy for our clients or for ourselves, we always treat our
+      <a href="https://en.wikipedia.org/wiki/Infrastructure_as_code" target="_blank">Infrastcture as Code</a>. This
+      way, our infrastcture is easily scalable, disposable and reproducible. Especially managing a
+      large set of customer deployments, we can easily automate common tasks and processes in a safe
+      and reproducible way. We like to use Terraform to manage cloud infrastructure and Helm to
+      manage Kubernetes deployments. Using a GitOps approach, we commit changes into version control
+      and let a build pipeline execute them. We never manually configure infrastructure. This helps
+      us to change live environments with confidence, test environments before breaking production
+      and provides an audit log for free.
+    </p>
+
+    <h2 id="organizing">Organizing &amp; Managing our work</h2>
+
+    <h3>What Agile means for us</h3>
+    <p>
+      These days, "agile" has often become synomous with following a Scrum or Kanban routine. Many
+      organizations schedule a daily stand-up and bi-weekly ceremonies and think that makes them
+      agile. We believe in agility in the truest sense: This means, we have very small, but complete
+      features in tiny iterations. This way we can get feedback from real users very fast. How we
+      get there and what kind of rituals were involved is secondary. So don't be surprised if you're
+      encountering way fewer meetings than you would in other agile companies - most of them agile
+      in name only.
+    </p>
+
+    <h3>Frequent Releases tagged with Semantic Versioning</h3>
+    <p>
+      We always aim to make releases as frequent as possible. Sometimes this leads to tiny releases
+      that have only a small noticable effect to the user. This is good. Those tiny changes really
+      add up over time and a product develops.
+      <a href="https://semver.org/" target="_blank">Semantic Versioning</a> helps conveying the severity of a change
+      at a glance. The high frequency of releases helps us to gather important feedback quickly.
+      Sometimes the feedback for a specific release immediately affects the following release.
+    </p>
+    <p>
+      There is no set frequency for releases. We release as soon as something is complete and
+      provides value to the user. To make sure we never lose this user focus, we aim to write
+      high-quality changelogs. This help users to see why they should upgrade and what happens if
+      they do so. It also helps us to think about what is release-worthy and what isn't. For some
+      examples on changelos check out the
+      <a href="https://github.com/semi-technologies/weaviate/releases" target="_blank">Weaviate Realeases Page</a>
+      or the
+      <a href="https://github.com/semi-technologies/weaviate-helm/releases" target="_blank">
+        Weaviate Helm Chart Releases Page
+      </a>
+      .
+    </p>
+
+    <h3>GitHub Issues to manage chunks of work</h3>
+    <p>
+      A large focus on our everyday work is on open-source work. Therefore using GitHub to manage
+      our work comes absolutely naturally. In fact, we love this approach so much, that we are also
+      using it, if we develop something that cannot be open-sourced.
+    </p>
+    <p>
+      A unit of work corresponds to a GitHub issue. This issue is the standard format that everyone
+      at SeMI understands. If features depend on one another, issues can easily be referenced from
+      other issues, commits or anything that accepts a hyperlink. When a unit of work should be
+      split up further to manage your daily routines, a simple task list inside the first post of an
+      issue is a great way to do this. However, everyone has their personal preferences. The
+      important thing is that finishing the overall unit of work can be indicated by closing the
+      GitHub issue.
+    </p>
+
+    <h3>Transperancy &amp; Progress Updates</h3>
+    <blockquote>
+      The first 90 percent of the code accounts for the first 90 percent of the development time.
+      The remaining 10 percent of the code accounts for the other 90 percent of the development time
+      (<a href="https://en.wikipedia.org/wiki/Ninety-ninety_rule" target="_blank">Source</a>)
+    </blockquote>
+    <p>
+      We know that estimations are hard. And we think it's nearly impossible to do an exact
+      estimation. But we believe every developer should make sure they are building the smallest
+      possible artifact to deliver. Additionally developers should be good at communicating progress
+      or potentials obstacles.
+    </p>
+    <p>
+      We think it makes a lot of sense - when picking up new work - to spend some time on breaking
+      it down into even smaller chunks of work. Simply ticking of those TODOs that were planned up
+      front are already a great status indicator. Nevertheless one of the greatest skills for a
+      developer to have is to be vocal when something doesn't go as planned. We are all in the same
+      boat and always willing to help if you are stuck somewhere.
+    </p>
+
+    <h3>Working with Git: Commiting your work</h3>
+    <p>
+      We believe in the value of proper git commit messages. This means a commit message should
+      contain a reference to the issue that lead to the development. Additionally the message should
+      describe what you did in
+      <a href="https://stackoverflow.com/a/3580764" target="_blank">present, imperative tense</a>.
+    </p>
+    <p>
+      The body of a commit message is a great place to convey intent: Why are things they way the
+      are. What shold someone immediately know when they look at this commit a year from now? It can
+      sometimes be really helpful if you are looking at a specific piece of code and wondering why
+      things are the way the are. A simple <code>git blame</code> leads you to the original commit
+      message. If this message contains a short paragrahp that answers the why, it was a really good
+      commit message.
+    </p>
+    <h3>Git branching strategies</h3>
+    <p>
+      We are inspired by Cloud-Native and Continous Deployment process. Additionally, we like to
+      keep things simple. That's why we prefer
+      <a href="http://kean.github.io/post/trunk-based-development" target="_blank">trunk-based development</a> over
+      more complex git branching strategies.
+    </p>
+    <p>
+      Because of the open-source nature of many of our codebases and the potential for outside
+      contributions, we think Pull Requests are a great tool to submit your work to the trunk.
+      Whether a PR-based approach like this is still trunk-based development in its most literal
+      sense is debatable. However, for us the important thing is that there are no long-lived
+      branches. By keeping features small, we also keep the branches to base PRs off short-lived.
+      This prevents merge-hell, leads to frequent and confident releases and very short feedback
+      cycles.
+    </p>
+  </div>
+</article>
