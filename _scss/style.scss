@@ -41,7 +41,7 @@
 @import 'components/component-callout';
 @import 'components/component-card-author';
 @import 'components/component-cards';
-@import 'components/component-code';
+// @import 'components/component-code';
 @import 'components/component-footer';
 @import 'components/component-headers';
 @import 'components/component-hero';
@@ -71,6 +71,7 @@
 @import 'base/content';
 @import 'templates/template-article';
 @import 'templates/template-console';
+@import 'templates/template-guide';
 @import 'templates/template-home';
 @import 'templates/template-products';
 @import 'templates/template-products__semi-consulting';
@@ -80,3 +81,5 @@
 
 // IE 10+ bug fixes
 @import 'base/ie-bugfix';
+
+@import 'prism';

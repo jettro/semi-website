@@ -1,0 +1,19 @@
+<a class="show-toc" href="#" data-toggle="toc">Table of contents</a>
+<sidebar id="toc" class="guide-toc-container" aria-expanded="false" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <dl class="article-toc guide-toc">
+        <dd>
+            {% assign sorted_guides = site.guides | sort: 'product-order' | sort: 'menu-order' | group_by: 'product' %}
+            {% for guides in sorted_guides %}     
+                <h3>{{ guides.name }}</h3>
+                <ul class="list-ui guide-toc__list-pages">
+                    {% for item in guides.items  %}
+                    <li>
+                        <a href="{{item.url}}" class="{% if item.title == page.title %}current{% endif %}">{{item.title}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+            
+        </dd>
+    </dl>
+</sidebar>
