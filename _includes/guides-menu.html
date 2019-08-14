@@ -2,7 +2,7 @@
 <sidebar id="toc" class="guide-toc-container" aria-expanded="false" itemscope itemtype="http://schema.org/SiteNavigationElement">
     <dl class="article-toc guide-toc">
         <dd>
-            {% assign sorted_guides = site.guides | sort: 'product-order' | sort: 'menu-order' | group_by: 'product' %}
+            {% assign sorted_guides = site.guides | sort: 'menu-order' | group_by: 'product' %}
             {% for guides in sorted_guides %}     
                 <h3>{{ guides.name }}</h3>
                 <ul class="list-ui guide-toc__list-pages">
@@ -13,7 +13,6 @@
                     {% endfor %}
                 </ul>
             {% endfor %}
-            
         </dd>
     </dl>
 </sidebar>

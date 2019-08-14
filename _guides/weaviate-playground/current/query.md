@@ -7,7 +7,7 @@ description: At it's root, Weaviate
 tags: ['Business', 'Summary', 'Blog']
 video-link:
 video-caption:
-menu-order: 1
+menu-order: 3
 open-graph-type: article
 authorKey: bob
 pubdate: january 14, 2019
