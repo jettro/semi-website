@@ -3,15 +3,17 @@
     <dl class="article-toc guide-toc">
         <dd>
             {% assign sorted_guides = site.guides | sort: 'menu-order' | group_by: 'product' %}
-            {% for guides in sorted_guides %}     
-                <h3>{{ guides.name }}</h3>
-                <ul class="list-ui guide-toc__list-pages">
-                    {% for item in guides.items  %}
-                    <li>
-                        <a href="{{item.url}}" class="{% if item.title == page.title %}current{% endif %}">{{item.title}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
+            {% for guides in sorted_guides %}
+                {% if guides.name == page.product %}
+                    <h3>{{ guides.name }}</h3>
+                    <ul class="list-ui guide-toc__list-pages">
+                        {% for guide in guides.items  %}
+                        <li>
+                            <a href="{{guide.url}}" class="{% if guide.title == page.title %}current{% endif %}">{{guide.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             {% endfor %}
         </dd>
     </dl>

@@ -13,26 +13,34 @@ open-graph-type: article
 
 # Installation Guide
 
-There are four ways how you can run Weaviate;
+Weaviate is completely containerized, you can use Docker Compose, Kubernetes or Terraform.
 
-- [Development sandbox](#sandbox)
-- [Docker Compose development setup](#docker-compose)
-- [Kubernetes production setup](#kubernetes)
-- [Terraform production setup](#terraform)
+{% include badges.html %}
 
-Additionally you can;
+## Index
 
-- [Customize the Configuration file](#confuguration)
-- [OpenID Authentication](#openid-authentication)
-- [Miscellaneous Customizations](#miscellaneous-customizations)
+- [Video Guide](#video-guide)
+- [Basics](#basics)
+- [Weaviate Sandbox](#weaviate-sandbox)
+- [Docker Compose](#docker-compose)
+- [Kubernetes](#kubernetes)
+- [Terraform](#terraform)
+- [Weaviate Configuration](#weaviate-configuration-file)
+- [OpenID (OICD) Authentication](#openid-authentication)
 
-## General Information
+## Video Guide
+
+If you prefer video over text, you can use the video edition of this guide.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5bqpcIX2VDQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Basics
 
 - The main entrypoint for the Weaviate API is `/v1`.
-- Questions? Use [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) with the `weaviate` tag.
-- Issues? Create an issue on [Github](https://github.com/semi-technologies/weaviate/issues).
+- If your Weaviate is available over the internet or locally, you can use the [Weaviate Playground](http://playground.semi.technology) to interact with it.
+- All environments run out of the box.
 
-## Sandbox
+## Weaviate Sandbox
 
 Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal to quickly setup and test out Weaviate's capabilities. You can request sandboxes;
 
@@ -41,7 +49,7 @@ Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal
 
 ## Docker Compose
 
-For development purposes, you can run a Weaviate instance locally with [Docker Compose](https://docs.docker.com/compose/) as follows;
+You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/compose/) as follows;
 
 ```bash
 # Download the runtime files
@@ -194,14 +202,3 @@ authentication:
       # if your token issuer is unable to provide a correct audience claim
       skip_client_id_check: false
 ```
-
-#### How to use?
-
-1. Obtain a valid token from the token issuer you configured.
-
-1. Send this token along any REST request in Header like so: `Authorization:
-   Bearer <token>`. Make sure to replace `<token>` with your actual token.
-
-## Miscellaneous Customizations
-
-...
