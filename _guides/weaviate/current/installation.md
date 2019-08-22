@@ -37,7 +37,7 @@ If you prefer video over text, you can use the video edition of this guide.
 ## Basics
 
 - The main entrypoint for the Weaviate API is `/v1`.
-- If your Weaviate is available over the internet or locally, you can use the [Weaviate Playground](http://playground.semi.technology) to interact with it.
+- If your Weaviate is available over the internet or locally, you can use the [Weaviate Playground](/guides/weaviate-playground/current/) to interact with it.
 - All environments run out of the box.
 
 ## Weaviate Sandbox
@@ -45,7 +45,7 @@ If you prefer video over text, you can use the video edition of this guide.
 Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal to quickly setup and test out Weaviate's capabilities. You can request sandboxes;
 
 - [Through this web-form](#)
-- [Through the weaviate-cli](#)
+- [Through the weaviate-cli](/guides/weaviate-cli/current/sandbox-create/)
 
 ## Docker Compose
 
@@ -83,6 +83,8 @@ You can also download the files individually.
 ## Weaviate Configuration File
 
 Configuration customizations can be made in the [configuration YAML file](https://github.com/semi-technologies/weaviate/blob/master/docker-compose/runtime/config.yaml).
+
+_Note: in principle Weaviate runs out of the box and the configuration should only be changed in very customized situations._
 
 ## OpenID Authentication
 

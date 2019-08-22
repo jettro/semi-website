@@ -1,7 +1,7 @@
 ---
-bodyclass: ["page--products", " ", "page--products-index"]
+bodyclass: ["page--guides"]
 layout: layout-default
-title:  our products
+title: our products
 description: An overview of SeMI's products.
 ---
 
@@ -18,9 +18,9 @@ description: An overview of SeMI's products.
         <section class="wrapper--wide">
             <ul class="cards cards--load-fade-in">
                 {% capture carOneContent %}
-                    <div class="card__intro">
-                        <p>Learn how to work with the Weaviate knowledge graph.</p>
-                    </div>
+                <div class="card__intro">
+                    <p>Learn how to work with the Weaviate knowledge graph.</p>
+                </div>
                 {% endcapture %}
 
                 {% include components/card/card.html
@@ -34,9 +34,9 @@ description: An overview of SeMI's products.
                     content=carOneContent
                 %}
                 {% capture carTwoContent %}
-                    <div class="card__intro">
-                        <p>CLI tool to interact with individual Weaviates.</p>
-                    </div>
+                <div class="card__intro">
+                    <p>CLI tool to interact with individual Weaviates.</p>
+                </div>
                 {% endcapture %}
 
                 {% include components/card/card.html
@@ -52,9 +52,9 @@ description: An overview of SeMI's products.
                 %}
 
                 {% capture carThreeContent %}
-                    <div class="card__intro">
-                        <p>Graphical user interface (GUI) to interact with an individual Weaviate.</p>
-                    </div>
+                <div class="card__intro">
+                    <p>Graphical user interface (GUI) to interact with an individual Weaviate.</p>
+                </div>
                 {% endcapture %}
 
                 {% include components/card/card.html
