@@ -49,28 +49,27 @@ Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal
 
 ## Docker Compose
 
-You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/compose/) as follows;
+You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/compose/) as follows on Linux and MacOS;
 
 ```bash
-# Download the runtime files
-$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/master/tools/download-docker-compose-deps.sh | bash
+# Download the runtime files (depends on jq and basename)
+$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/tools/download-docker-compose-deps.sh "{{ site.weaviate_version }}" | bash
 # Run Docker compose
 $ docker-compose up
 ```
 
+You can also download the files manually if you have trouble with the above script.
+
+1. `$ mkdir weaviate && cd weaviate` 
+2. Download [the files located in this folder](https://github.com/semi-technologies/weaviate/blob/{{ site.weaviate_version }}/docker-compose/runtime).
+3. Run `docker-compose up` in the same location you've downloaded the files.
+
 The output of the above setup is quite verbose, you can also run the above command with Weaviate related logs only;
 
-```bash
-# Download the runtime files
-$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/master/tools/download-docker-compose-deps.sh | bash
+```
 # Run Docker compose with Weaviate logs only
 $ docker-compose up -d && docker-compose logs -f weaviate
 ```
-
-You can also download the files individually.
-
-1. Download [the file located in this folder](https://github.com/semi-technologies/weaviate/tree/master/docker-compose/runtime).
-2. Run `docker-compose up` in the same location you've downloaded the files.
 
 ## Kubernetes
 
