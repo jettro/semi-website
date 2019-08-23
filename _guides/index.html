@@ -1,0 +1,74 @@
+---
+bodyclass: ["page--guides"]
+layout: layout-default
+title: our products
+description: An overview of SeMI's products.
+---
+
+<article>
+    <div class="container background-hexagon">
+        <section class="layout layout--single section-page-intro">
+            <div class="section-standout__text--centered space-header-page">
+                <h1 class="title-page header--centered">Documentation &amp; Guides</h1>
+                <!--div class="section-standout__text--centered">
+                    <p>Weaviate comes in three versions, each has powerful open-source Weaviate knowledge graph software at its heart. Review them to see which one suits your use case best. <a href="mailto:contact@semi.technology">Contact us</a> if you need help with your decision</p>
+                </div-->
+            </div>
+        </section>
+        <section class="wrapper--wide">
+            <ul class="cards cards--load-fade-in">
+                {% capture carOneContent %}
+                <div class="card__intro">
+                    <p>Learn how to work with the Weaviate knowledge graph.</p>
+                </div>
+                {% endcapture %}
+
+                {% include components/card/card.html
+                    title="Weaviate"
+                    themeClass="card-white card--pilar card--theme-weaviate-oss"
+                    imgUrl="/img/logo-icon-weaviate-oss.svg"
+                    imgAlt="Weaviate Open Source logo"
+                    linkUrl='/guides/weaviate/current/'
+                    linkExternal=false
+                    ctaText="Documentation & Manuals"
+                    content=carOneContent
+                %}
+                {% capture carTwoContent %}
+                <div class="card__intro">
+                    <p>CLI tool to interact with individual Weaviates.</p>
+                </div>
+                {% endcapture %}
+
+                {% include components/card/card.html
+                    title="Weaviate CLI"
+                    themeClass="card-white card--pilar card--theme-weaviate-oss"
+                    inverted=false
+                    imgUrl="/img/logo-icon-weaviate-enterprise.svg"
+                    imgAlt="Weaviate CLI logo"
+                    linkUrl='/guides/weaviate-cli/current/'
+                    linkExternal=false
+                    ctaText="Documentation & Manuals"
+                    content=carTwoContent
+                %}
+
+                {% capture carThreeContent %}
+                <div class="card__intro">
+                    <p>Graphical user interface (GUI) to interact with an individual Weaviate.</p>
+                </div>
+                {% endcapture %}
+
+                {% include components/card/card.html
+                    title="Weaviate Playground"
+                    themeClass="card-white card--pilar card--theme-weaviate-oss"
+                    inverted=false
+                    imgUrl="/img/logo-solution-engineering-logomark-color.svg"
+                    imgAlt="Weaviate Playground"
+                    linkUrl='/guides/weaviate-playground/current/'
+                    linkExternal=false
+                    ctaText="Documentation & Manuals"
+                    content=carThreeContent
+                %}
+            </ul>
+        </section>
+    </div>
+</article>

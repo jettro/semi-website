@@ -4,9 +4,12 @@ kramdown:
     parse_block_html: false
 rdiscount extensions: [smart]
 collections:
-    blog:
+    articles:
         output: true
-        permalink: /blog/:path
+        permalink: /articles/:path
+    guides:
+        output: true
+        permalink: /guides/:path
     use_cases:
         output: true
         permalink: /use-cases/:path

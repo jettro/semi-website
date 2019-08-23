@@ -10,9 +10,13 @@ import toggle from './modules/toggle';
 import tagmanager from './modules/tagmanager';
 import tawk from './modules/tawk';
 import tableOfContents from './modules/tableOfContents';
+import prism from './modules/prism';
 
 // utilities
 import inputTypeRangeExists from './utilities/inputTypeRangeExists';
+
+// prism
+prism();
 
 /**
  * Cookie handler (based on cookie bar ID)
