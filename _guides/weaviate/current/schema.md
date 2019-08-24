@@ -26,7 +26,7 @@ A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-
 - [RESTful API reference](#restful-api)
 - [Schema object](#schema-object)
 - [Property object](#property-object)
-- [Add a schema item](#add-a-schema-item)
+- [Create a schema item](#create-a-schema-item)
 - [Get the schema](#get-the-schema)
 - [Add a property to a schema item](#add-a-property-to-a-schema-item)
 - [Delete a property from a schema item](#delete-a-property-from-a-schema-item)
