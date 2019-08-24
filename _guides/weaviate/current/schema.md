@@ -102,8 +102,8 @@ When creating a property Weaviate needs to know what type of data you will give 
 | number   | float64 | `0.0` |
 | date     | string | [more info](#) |
 | text     | text   | `string` |
-| geoCoordinates | string | [more info](#geoCoordinates-data-type) |
-| CrossRef | string | [more info](#crossref-data-type) |
+| geoCoordinates | string | [more info](#geo-coordinates-type) |
+| CrossRef | string | [more info](#cross-reference-type) |
 
 ### Date Type
 

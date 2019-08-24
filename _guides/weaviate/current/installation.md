@@ -45,7 +45,7 @@ If you prefer video over text, you can use the video edition of this guide.
 Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal to quickly setup and test out Weaviate's capabilities. You can request sandboxes;
 
 - [Through this web-form](#)
-- [Through the weaviate-cli](/guides/weaviate-cli/current/sandbox-create/)
+- [Through the weaviate-cli](/guides/weaviate-cli/current/sandbox-create)
 
 ## Docker Compose
 
@@ -57,6 +57,8 @@ $ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.w
 # Run Docker compose
 $ docker-compose up
 ```
+
+### Docker Compose (manual installation)
 
 You can also download the files manually if you have trouble with the above script.
 
@@ -101,7 +103,7 @@ If anonymous access is selected, weaviate will accept requests without any
 authentication headers or parameters. Users sending such a request will be
 authenticated as `user: anyonmous, group: anonymous`.
 
-It is up to the [Authorization module](./authorization.md) to decide which
+It is up to the authorization module to decide which
 permissions anonymous users have. By disabling anonymous access alltogether,
 any request without an allowed authentication scheme, will return `401
 Unauthorized`.
