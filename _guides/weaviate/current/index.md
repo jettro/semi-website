@@ -1,5 +1,6 @@
 ---
 layout: layout-guide
+bodyclass: ["page--guides", " "]
 product: weaviate
 product-order: 1
 title: Introduction
