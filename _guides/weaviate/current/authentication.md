@@ -34,7 +34,7 @@ If you prefer video over text, you can use the video edition of this guide.
 
 - By default a Weaviate runs without any form of authentication.
 - You need to include a `Bearer` to authenticate.
-- The examples assume that Weaviate runs on port 80 on the localhost.
+- The examples assume that Weaviate runs on port 80 on the localhost without authentication.
 - The entry point to a Weaviate is always `/v1`.
 - [Configure](./installation#openid-authentication) OpenID on a Weaviate instance.
 - [Learn more about OpenID](http://openidexplained.com/)

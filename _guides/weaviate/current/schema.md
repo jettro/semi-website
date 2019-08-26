@@ -96,6 +96,12 @@ Person
     bornIn
 ```
 
+### Weaviate Schema versus Ontology
+
+Because Weaviate uses the [Contextionary](.#about-the-contextionary) to index data. The use of the schema becomes fuzzy. Meaning that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Company with the name Apple`) is semantically similar to `a Business with the label Apple Inc.`
+
+Within Weaviate, the schema is _only_ used to define the query and explore syntax.
+
 ## Property Types
 
 When creating a property, Weaviate needs to know what type of data you will give it. Weaviate accepts the following types:
@@ -144,11 +150,13 @@ properties:
 	  - Business
 ```
 
+Learn more about Weaviate Cross Reference Types [in the schema documentation](./schema.html).
+
 ## RESTful API
 
 - Weaviate uses a full RESTful API.
 - Examples are described in YAML and curl, but you can use it in any application.
-- The examples assume that Weaviate runs on port 80 on the localhost.
+- The examples assume that Weaviate runs on port 80 on the localhost without authentication.
 - The entry point to a Weaviate is always `/v1`.
 
 ## Schema Object

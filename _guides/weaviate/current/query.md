@@ -2,7 +2,7 @@
 layout: layout-guide
 product: weaviate
 product-order: 1
-title: Query
+title: Query data
 description: How to query weaviate.
 tags: ['Installation', 'Schema']
 video-link:
