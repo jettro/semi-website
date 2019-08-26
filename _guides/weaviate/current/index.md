@@ -6,8 +6,6 @@ product-order: 1
 title: Introduction
 description: Learn more about Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
-video-link:
-video-caption:
 menu-order: 1
 ---
 

@@ -15,24 +15,18 @@ import prism from './modules/prism';
 // utilities
 import inputTypeRangeExists from './utilities/inputTypeRangeExists';
 
-// prism
-prism();
-
 /**
  * Cookie handler (based on cookie bar ID)
  */
 cookie('cookie-notification');
 
+// prism
+prism();
+
 /**
  * Progressive enhanced mobile hamburger menu
  */
 siteMenu();
-
-/**
- * Send form submission data to mailchimp
- */
-// TODO: only load this init on contact/index and workshop/index
-mailChimp();
 
 /**
  * Initialize tawk chat

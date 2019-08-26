@@ -44,7 +44,7 @@ If you prefer video over text, you can use the video edition of this guide.
 
 Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal to quickly setup and test out Weaviate's capabilities. You can request sandboxes;
 
-- [Through this web-form](#)
+- [Through this web-form](/weaviate-sandbox/)
 - [Through the weaviate-cli](/guides/weaviate-cli/current/sandbox-create)
 
 ## Docker Compose
