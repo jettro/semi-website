@@ -13,9 +13,9 @@ open-graph-type: article
 
 # Installation Guide
 
-Weaviate is completely containerized, you can use Docker Compose, Kubernetes or Terraform.
-
 {% include badges.html %}
+
+Weaviate is completely containerized, you can use Docker Compose, Kubernetes or Terraform.
 
 ## Index
 

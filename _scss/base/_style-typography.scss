@@ -40,9 +40,10 @@ h6 {
 
 p, li {
 	font-size: $font-size-body;
-	margin: 0 0 1rem;
+	margin: 1.25rem 0 0 1.25rem;
 	max-width: 32em;
 }
+
 p.intro {
 	font-family: $typeface-brand;
 	font-size: 1.2rem;
@@ -76,6 +77,7 @@ hr {
 		font-size: 1.25rem;
 	}
 	p, li {
+		margin: 1.25rem 0 0 1.25rem;
 		font-size: 1.25rem;
 	}
 	p.intro {

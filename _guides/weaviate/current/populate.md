@@ -11,9 +11,9 @@ open-graph-type: article
 
 # Populate Guide
 
-When a Weaviate [schema](./schema.html) is created, you can populate a Weaviate with data.
-
 {% include badges.html %}
+
+When a Weaviate [schema](./schema.html) is created, you can populate a Weaviate with data.
 
 ## Index
 

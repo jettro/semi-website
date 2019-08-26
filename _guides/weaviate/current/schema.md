@@ -13,9 +13,9 @@ open-graph-type: article
 
 # Schema Guide
 
-A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-terminology) you will be adding to a Weaviate. It will function as the overall data model.
-
 {% include badges.html %}
+
+A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-terminology) you will be adding to a Weaviate. It will function as the overall data model.
 
 ## Index
 

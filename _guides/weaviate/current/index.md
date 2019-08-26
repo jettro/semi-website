@@ -11,9 +11,9 @@ menu-order: 1
 
 # Introduction to Weaviate
 
-Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph based on a word vector storage mechanism called the Contextionary.
-
 {% include badges.html %}
+
+Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph based on a word vector storage mechanism called the Contextionary.
 
 ## Index
 

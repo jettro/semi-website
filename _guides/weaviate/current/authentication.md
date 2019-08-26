@@ -13,9 +13,9 @@ open-graph-type: article
 
 # Authentication Guide
 
-If you run Weaviate with an [OpenID authentication scheme](./installation#openid-authentication), you need to send the correct credentials in a request.
-
 {% include badges.html %}
+
+If you run Weaviate with an [OpenID authentication scheme](./installation#openid-authentication), you need to send the correct credentials in a request.
 
 ## Index
 
