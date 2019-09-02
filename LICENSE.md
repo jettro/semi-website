@@ -1,4 +1,4 @@
-Copyright (c) 2016-2019, SeMI Technologies B.V. (registered @ Dutch Chamber of Commerce no 75231824)
+Copyright (c) 2016-2019, SeMI Holding B.V. (registered @ Dutch Chamber of Commerce no 75221632)
 
 All rights reserved.
 
@@ -15,6 +15,8 @@ modification, are permitted provided that the following conditions are met:
 * Neither the name of Weaviate nor the names of its
   contributors may be used to endorse or promote products derived from
   this software without specific prior written permission.
+  
+* The SeMI Playbook is published under the Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) copyright.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE

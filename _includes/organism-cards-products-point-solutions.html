@@ -1,38 +1,60 @@
 <ul class="cards">
-
+    
     {% include components/card/card.html
-        title="Common Knowledge"
-        inRnD=true
-        bodycopy="Fed by the largest encyclopedia in the world, Wikipedia, the Common Knowledge Network gives insights about an enormous range of subjects."
-        themeClass="card--white card--theme-weaviate"
-        imgUrl="/img/logo-icon-common-knowledge.svg"
-        linkUrl="#"
-    %}
-
-    {% include components/card/card.html
-        title="Small and Medium-Sized Enterprises"
-        inRnD=true
-        bodycopy="The SME Network contains an ever-growing knowledge graph of public SME data. Ideal for enhancing your own data sets."
+        title="Geo data"
+        inRnD=false
+        bodycopy="Enrich your data with geographic data and information."
         themeClass="card--white card--theme-weaviate"
         imgUrl="/img/logo-icon-sme.svg"
-        linkUrl="#"
+        linkUrl="javascript:void(Tawk_API.toggle())"
     %}
-
     {% include components/card/card.html
-        title="Weaviate Keyper"
-        bodycopy="Couple Weaviates together within and between organisations for enhanced productivity."
+        title="Data scraping"
+        inRnD=true
+        bodycopy="Add data from a variety of web-sources to enrich your datasets."
         themeClass="card--white card--theme-weaviate"
-        imgUrl="/img/logo-keyper.svg"
-        linkUrl="/products/keyper.html"
+        imgUrl="/img/logo-icon-common-knowledge.svg"
+        linkUrl="javascript:void(Tawk_API.toggle())"
     %}
-
     {% include components/card/card.html
         title="Tableau"
         bodycopy="Use Tableau to visualise your Weaviate data."
         themeClass="card--white card--theme-weaviate"
         imgUrl="/img/logo-external-tableau.svg"
-        linkUrl="/products/tableau.html"
+        linkUrl="javascript:void(Tawk_API.toggle())"
         logoWide=true
+    %}
+    {% include components/card/card.html
+        title="Microsoft Power BI"
+        bodycopy="Use Microsoft BI to visualise your Weaviate data."
+        themeClass="card--white card--theme-weaviate"
+        imgUrl="/img/logo-external-powerBI.svg"
+        linkUrl="javascript:void(Tawk_API.toggle())"
+        logoWide=false
+    %}
+    {% include components/card/card.html
+        title="SAP HANA"
+        bodycopy="Integrate Weaviate with SAP HANA."
+        themeClass="card--white card--theme-weaviate"
+        imgUrl="/img/logo-external-SAP.svg"
+        linkUrl="javascript:void(Tawk_API.toggle())"
+        logoWide=true
+    %}
+    {% include components/card/card.html
+        title="Excel"
+        bodycopy="Integrate Weaviates API's into Excel."
+        themeClass="card--white card--theme-weaviate"
+        imgUrl="/img/logo-external-excel.svg"
+        linkUrl="javascript:void(Tawk_API.toggle())"
+        logoWide=false
+    %}
+    {% include components/card/card.html
+        title="Salesforce"
+        bodycopy="Integrate Weaviates API's with Salesforce."
+        themeClass="card--white card--theme-weaviate"
+        imgUrl="/img/logo-external-salesforce.svg"
+        linkUrl="javascript:void(Tawk_API.toggle())"
+        logoWide=false
     %}
 
 </ul>

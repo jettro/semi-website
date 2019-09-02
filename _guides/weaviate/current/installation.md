@@ -13,9 +13,9 @@ open-graph-type: article
 
 # Installation Guide
 
-Weaviate is completely containerized, you can use Docker Compose, Kubernetes or Terraform.
-
 {% include badges.html %}
+
+Weaviate is completely containerized, you can use Docker Compose, Kubernetes or Terraform.
 
 ## Index
 
@@ -44,33 +44,34 @@ If you prefer video over text, you can use the video edition of this guide.
 
 Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal to quickly setup and test out Weaviate's capabilities. You can request sandboxes;
 
-- [Through this web-form](#)
-- [Through the weaviate-cli](/guides/weaviate-cli/current/sandbox-create/)
+- [Through this web-form](/weaviate-sandbox/)
+- [Through the weaviate-cli](/guides/weaviate-cli/current/sandbox-create)
 
 ## Docker Compose
 
-You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/compose/) as follows;
+You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/compose/) as follows on Linux and MacOS;
 
 ```bash
-# Download the runtime files
-$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/master/tools/download-docker-compose-deps.sh | bash
+# Download the runtime files (depends on jq and basename)
+$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/tools/download-docker-compose-deps.sh "{{ site.weaviate_version }}" | bash
 # Run Docker compose
 $ docker-compose up
 ```
 
+### Docker Compose (manual installation)
+
+You can also download the files manually if you have trouble with the above script.
+
+1. `$ mkdir weaviate && cd weaviate` 
+2. Download [the files located in this folder](https://github.com/semi-technologies/weaviate/blob/{{ site.weaviate_version }}/docker-compose/runtime).
+3. Run `docker-compose up` in the same location you've downloaded the files.
+
 The output of the above setup is quite verbose, you can also run the above command with Weaviate related logs only;
 
-```bash
-# Download the runtime files
-$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/master/tools/download-docker-compose-deps.sh | bash
+```
 # Run Docker compose with Weaviate logs only
 $ docker-compose up -d && docker-compose logs -f weaviate
 ```
-
-You can also download the files individually.
-
-1. Download [the file located in this folder](https://github.com/semi-technologies/weaviate/tree/master/docker-compose/runtime).
-2. Run `docker-compose up` in the same location you've downloaded the files.
 
 ## Kubernetes
 
@@ -102,7 +103,7 @@ If anonymous access is selected, weaviate will accept requests without any
 authentication headers or parameters. Users sending such a request will be
 authenticated as `user: anyonmous, group: anonymous`.
 
-It is up to the [Authorization module](./authorization.md) to decide which
+It is up to the authorization module to decide which
 permissions anonymous users have. By disabling anonymous access alltogether,
 any request without an allowed authentication scheme, will return `401
 Unauthorized`.

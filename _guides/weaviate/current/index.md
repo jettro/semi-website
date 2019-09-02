@@ -1,28 +1,29 @@
 ---
 layout: layout-guide
+bodyclass: ["page--guides", " "]
 product: weaviate
 product-order: 1
 title: Introduction
 description: Learn more about Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
-video-link:
-video-caption:
 menu-order: 1
 ---
 
 # Introduction to Weaviate
 
-Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph based on a word vector storage mechanism called the Contextionary. An overview of features can be found on the [product page](/products/weaviate.html).
-
 {% include badges.html %}
+
+Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph based on a word vector storage mechanism called the Contextionary.
 
 ## Index
 
 - [Video Guide](#video-guide)
 - [Why Weaviate?](#why-weaviate)
+- [Features](#features)
 - [Basic Terminology](#basic-terminology)
-- [About the Contextionary](#about-the-contextionary)
+- [Contextionary](#about-the-contextionary)
 - [Miscelenious](#miscelenious)
+- [FAQ](#faq)
 
 ## Video Guide
 
@@ -44,6 +45,10 @@ Because most data is related to something (e.g., Amsterdam _is the capital of_ T
 
 ![why Weaviate is a knowledge graph](/img/guides/knowledge-graph.jpg "why Weaviate is a knowledge graph")
 
+## Features
+
+...
+
 ## Basic Terminology
 
 | Term | Description |
@@ -56,12 +61,13 @@ Because most data is related to something (e.g., Amsterdam _is the capital of_ T
 | **Property** | All classes have properties. E.g., the class Company might have the property _name_. In Weaviate, properties can be recognized because they always have a lowercase first character. |
 | **Entity** | An entity refers to something -often- in the world around us. E.g., _a Company with the name Apple_ refers to an entity with a relation to _a Product with the name iPhone_. Weaviate's Contextionary tries to find as many entities in your data as possible. |
 | **Concept** | Concepts are related to entities. Often you will use concepts to search in your datasets. If your dataset has data about _An Actor with the name Arnold Schwarzenegger_ and _an Actor with the name Al Pacino_, the concepts _Movie_ and _Terminator_ will find a closer relation to the first actor rather than the latter. |
+| **Beacon** | A beacon is a reference to a location in the Contextionary. Often defined as follows: `weaviate://{peerName|/{semanticKind}/{UUID}`
 | **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution. Notably, this would mean |
 | **C11y** | Abbreviation of Contextionary. |
 
 ## About the Contextionary
 
-The Contextionary (derived from **dictionary**) gives context to the language used in your dataset. At the root, the Contextionary is based on the [*Global Vectors for Word Representation*](https://nlp.stanford.edu/projects/glove/) concept. When running a Weaviate instance, it comes with an out of the box Contextionary which is trained on Wikipedia and the Wiktionary.
+The Contextionary (derived from **dictionary**, aka `C11Y`) gives context to the language used in your dataset (there is an individual Contextionary per language). At the root, the Contextionary is based on the [*Global Vectors for Word Representation*](https://nlp.stanford.edu/projects/glove/) concept. When running a Weaviate instance, it comes with an out of the box Contextionary which is trained on Wikipedia and the Wiktionary. In principle, you never have to create a manual Contextionary. We aim to make the C11Y available for use cases in any domain, regardless if they are business-related, academic or other.
 
 The Contextionary doesn't use a traditional storage and indexing mechanism, but it uses vector positions to place data into a 600-dimensional space. When you run a Weaviate, it comes with a pre-trained Contextionary (you never have to do any training yourself) that contains the contextual representation that allows Weaviate to store data based on its contextual meaning.
 
@@ -84,3 +90,7 @@ When using the [GraphQL interface](./query), you can target a thing or action di
 ## Miscelenious
 
 - The Contextionary is limited to a single language per Weaviate instance (i.e., English Contextionary, Spanish Contextionary, etcetera).
+
+## FAQ
+
+- ...

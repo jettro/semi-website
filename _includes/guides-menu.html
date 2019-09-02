@@ -9,7 +9,7 @@
                     <ul class="list-ui guide-toc__list-pages">
                         {% for guide in guides.items  %}
                         <li>
-                            <a href="{{guide.url}}" class="{% if guide.title == page.title %}current{% endif %}">{{guide.title}}</a>
+                            <a href="{{guide.url}}.html" class="{% if guide.title == page.title %}current{% endif %}">{{guide.title}}</a>
                         </li>
                         {% endfor %}
                     </ul>

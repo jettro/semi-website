@@ -12,50 +12,49 @@ og-img: products.jpg
         <section class="layout layout--single section-page-intro">
             <div class="section-standout__text--centered space-header-page">
                 <h1 class="title-page header--centered">Core products</h1>
-                <!--div class="section-standout__text--centered">
-                    <p>Weaviate comes in three versions, each has powerful open-source Weaviate knowledge graph software at its heart. Review them to see which one suits your use case best. <a href="mailto:contact@semi.technology">Contact us</a> if you need help with your decision</p>
-                </div-->
+                <div class="section-standout__text--centered">
+                    <p>Our core product suite consists of the Weaviate knowledge graph and Knowledge Networks based on Weaviate. To help you integrate our solutions in your organization, we offer the help of Solution Engineers.</p>
+                </div>
             </div>
         </section>
         <section class="wrapper--wide">
             <ul class="cards cards--load-fade-in">
                 {% capture carOneContent %}
                     <div class="card__intro">
-                        <p><b>Explore the open source knowledge graph on Github.</b></p>
-                    </div>
-                {% endcapture %}
-
-                {% include components/card/card.html
-                    title="Weaviate Open Source"
-                    themeClass="card-white card--pilar card--theme-weaviate-oss"
-                    imgUrl="/img/logo-icon-weaviate-oss.svg"
-                    imgAlt="Weaviate Open Source logo"
-                    linkUrl='https://github.com/creativesoftwarefdn/weaviate'
-                    linkExternal=true
-                    ctaText="Explore on Github"
-                    content=carOneContent
-                %}
-                {% capture carTwoContent %}
-                    <div class="card__intro">
-                        <p><b>The power of Weaviate plus valuable enterprise tools and services.</b></p>
+                        <p><b>The power of the Weaviate knowledge graph for the enterprise.</b></p>
                     </div>
                 {% endcapture %}
 
                 {% include components/card/card.html
                     title="Weaviate Enterprise"
-                    themeClass="card--pilar card--theme-weaviate-enterprise"
-                    inverted=true
+                    themeClass="card-white card--pilar card--theme-weaviate"
                     imgUrl="/img/logo-icon-weaviate-enterprise.svg"
-                    imgAlt="Weaviate Enterprise logo"
+                    imgAlt="Weaviate for the Enterprise logo"
                     linkUrl="/products/weaviate.html"
                     linkExternal=false
                     ctaText="Explore Weaviate Enterprise"
+                    content=carOneContent
+                %}
+                {% capture carTwoContent %}
+                    <div class="card__intro">
+                        <p><b>P2P networks based on Weaviate to securely share data and knowledge between organizations.</b></p>
+                    </div>
+                {% endcapture %}
+
+                {% include components/card/card.html
+                    title="Knowledge Networks"
+                    themeClass="card-white card--pilar card--theme-weaviate"
+                    imgUrl="/img/logo-icon-weaviate-network.svg"
+                    imgAlt="Knowledge Network logo"
+                    linkUrl="/products/networks.html"
+                    linkExternal=false
+                    ctaText="Explore Knowledge Networks"
                     content=carTwoContent
                 %}
 
                 {% capture carThreeContent %}
                     <div class="card__intro">
-                        <p><b>Our solution engineers can help to integrate Weaviate into your business.</b></p>
+                        <p><b>Our solution engineers can help to integrate Weaviate and Weaviate Knowledge Networks into your business.</b></p>
                     </div>
                 {% endcapture %}
 
@@ -77,8 +76,10 @@ og-img: products.jpg
         <div class="wrapper">
             <div class="layout layout--single">
                 <div class="space-header-section header--centered">
-                    <h2 class="title-section">Point solutions</h2>
-                    <p>Unique solutions for specific industries, tasks or functionality</p>
+                    <h1 class="title-page header--centered">Add-ons &amp; Point Solutions</h1>
+                    <div class="section-standout__text--centered">
+                        <p>Our every growing market place of add-ons and points solutions for Weaviate.</p>
+                    </div>
                 </div>
             </div>
             {% include organism-cards-products-point-solutions.html %}
