@@ -4,7 +4,7 @@ Please read this Agreement carefully before purchasing and/or using our software
 
 1. HOW THIS AGREEMENT WORKS
 
-1.1.	The Agreement applies to those of our Products that you purchase or for which you acquire the right to access or use. You may order our Products from us by submitting an Order Form.
+1.1. The Agreement applies to those of our Products that you purchase or for which you acquire the right to access or use. You may order our Products from us by submitting an Order Form.
 1.2. The Agreement consists of three parts: (1) the General Terms; (2) the Product Descriptions (which may include end user license agreements) applicable to your Products; and (3) any Order Forms. Certain terms are defined at the end of these General Terms or in the Order Form. 
 1.3. In the event of any conflict among these documents, the above order of precedence applies to the extent of the conflict unless it’s clear that a lower ranked document explicitly deviates from a higher ranked document.
 
