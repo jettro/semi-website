@@ -19,7 +19,7 @@ addons:
 before_install:
 - openssl aes-256-cbc -K $encrypted_79b548fb7a17_key -iv $encrypted_79b548fb7a17_iv -in cloud.tar.enc -out cloud.tar -d
 - tar xvf cloud.tar
-- sudo apt-get install -y nodejs npm
+- sudo apt-get install -y nodejs npm python3
 - npm i
 - npm i -g html-minifier
 - npm i -g webpack
@@ -70,7 +70,13 @@ script:
       # gsutil iam ch allUsers:objectViewer gs://$BUCKET
       # Invalidate the CDN
       gcloud compute url-maps invalidate-cdn-cache semi-technology --host www.semi.technology --path "/*" --async
-      gcloud compute url-maps invalidate-cdn-cache semi-network --host www.semi.network --path "/*" --async
+      # sleep for invalidation to kick in
+      sleep 60
+      # generate the sitemap and push to the wayback machine
+      cd .. && cd script
+      pip3 install -r requirements.txt
+      python3 createSitemap.py
+      gsutil -m cp ./sitemap.xml gs://$BUCKET/sitemap.xml
     fi
   fi
 - |

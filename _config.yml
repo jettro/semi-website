@@ -24,6 +24,5 @@ exclude:
     - webpack.config.js
 plugins:
     - jekyll-redirect-from
-    - jekyll-sitemap
 whitelist:
     - jekyll-redirect-from
