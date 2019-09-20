@@ -7,7 +7,7 @@ description: How to query weaviate.
 tags: ['Query', 'GraphQL']
 video-link:
 video-caption:
-menu-order: 6
+menu-order: 8
 open-graph-type: article
 ---
 

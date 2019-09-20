@@ -22,8 +22,8 @@ Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph bas
 - [Features](#features)
 - [Basic Terminology](#basic-terminology)
 - [Contextionary](#about-the-contextionary)
-- [Miscelenious](#miscelenious)
-- [FAQ](#faq)
+- [Miscellaneous](#miscellaneous)
+- [FAQ](#frequently-asked-questions)
 
 ## Video Guide
 
@@ -61,8 +61,8 @@ Because most data is related to something (e.g., Amsterdam _is the capital of_ T
 | **Property** | All classes have properties. E.g., the class Company might have the property _name_. In Weaviate, properties can be recognized because they always have a lowercase first character. |
 | **Entity** | An entity refers to something -often- in the world around us. E.g., _a Company with the name Apple_ refers to an entity with a relation to _a Product with the name iPhone_. Weaviate's Contextionary tries to find as many entities in your data as possible. |
 | **Concept** | Concepts are related to entities. Often you will use concepts to search in your datasets. If your dataset has data about _An Actor with the name Arnold Schwarzenegger_ and _an Actor with the name Al Pacino_, the concepts _Movie_ and _Terminator_ will find a closer relation to the first actor rather than the latter. |
-| **Beacon** | A beacon is a reference to a location in the Contextionary. Often defined as follows: `weaviate://{peerName|/{semanticKind}/{UUID}`
-| **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution. Notably, this would mean |
+| **Beacon** | A beacon is a reference to a location in the Contextionary. Often defined as follows: `weaviate://{peerName}/{semanticKind}/{UUID}`
+| **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic" target="_blank) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution. Notably, this would mean |
 | **C11y** | Abbreviation of Contextionary. |
 
 ## About the Contextionary
@@ -87,10 +87,16 @@ When a new class object is created, it will be added to a Weaviate.
 
 When using the [GraphQL interface](./query), you can target a thing or action directly, or by searching for a nearby concept. E.g., the `company Apple` from the previous illustration, can be found by searching for the concept iPhone.
 
-## Miscelenious
+## Miscellaneous
 
 - The Contextionary is limited to a single language per Weaviate instance (i.e., English Contextionary, Spanish Contextionary, etcetera).
 
-## FAQ
+## Frequently Asked Questions
 
-- ...
+...
+
+
+If you can't find the answer to your question here, please use the:
+1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).

@@ -7,7 +7,7 @@ description: How to setup a weaviate schema.
 tags: ['Schema']
 video-link:
 video-caption:
-menu-order: 4
+menu-order: 6
 open-graph-type: article
 ---
 
@@ -78,9 +78,9 @@ Person
     email
 ```
 
-### Concetenate Classes and Proerties
+### Concetenate Classes and Properties
 
-Sometimes you might want to use multiple words to set as a class or property definition. For example, the year a person is born in, you might want to define with the two words: `born` and `in`. You can do this by capitalizing per word, for example, ` bornIn`. Weaviate will validate both words in the Contextionary.
+Sometimes you might want to use multiple words to set as a class or property definition. For example, the year a person is born in, you might want to define with the two words: `born` and `in`. You can do this by capitalizing per word, for example, `bornIn`. Weaviate will validate both words in the Contextionary.
 
 Examples expressed in YAML might look like this:
 
@@ -144,13 +144,10 @@ The following example is seen as a valid set of datatypes.
 
 ```yaml
 properties:
-  -
-	dataType:
+  - dataType:
 	  - Company
 	  - Business
 ```
-
-Learn more about Weaviate Cross Reference Types [in the schema documentation](./schema.html).
 
 ## RESTful API
 
@@ -170,8 +167,7 @@ keywords: # An array of keywords that Weaviate uses when a classname is ambigiou
 - keyword: string # A keyword in string format. For example, with the class "Company" you might want to add the keyword "business"
   weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
 properties: # An array of the properties you are adding, same as a Property Object
-  -
-    dataType: # The data type of the object as described above, When creating cross refferences, a property can have multiple dataTypes.
+  - dataType: # The data type of the object as described above, When creating cross references, a property can have multiple dataTypes.
     - string
     name: string # The name of the property
     keywords: # An array of keywords that Weaviate uses when a property is ambigious

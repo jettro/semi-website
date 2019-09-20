@@ -5,7 +5,7 @@ product-order: 1
 title: Populate
 description: How to populate a weaviate with data.
 tags: ['Populate']
-menu-order: 5
+menu-order: 7
 open-graph-type: article
 ---
 
