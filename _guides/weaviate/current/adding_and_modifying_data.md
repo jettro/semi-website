@@ -2,14 +2,14 @@
 layout: layout-guide
 product: weaviate
 product-order: 1
-title: Populate
-description: How to populate a weaviate with data.
-tags: ['Populate']
+title: Adding and Modifying Data
+description: How to fill a weaviate with data.
+tags: ['Add', 'Data', 'Modify']
 menu-order: 7
 open-graph-type: article
 ---
 
-# Populate Guide
+# Adding and Modifying Data Guide
 
 {% include badges.html %}
 
@@ -40,13 +40,13 @@ If you prefer video over text, you can use the video edition of this guide.
 ## Basics
 
 - Data is added through the RESTful API.
-- Individual [semantic kinds](./#basic-terminology) can be collected or listed. However, there are seperate docs for [querying](./query.html) and [exploring](./explore.html).
+- Individual [semantic kinds](./#basic-terminology) can be collected or listed. However, there are seperate documentation pages for [querying](./query.html) and [exploring](./explore.html).
 - The examples assume that Weaviate runs on port 80 on the localhost without authentication.
 - The entry point to a Weaviate is always `/v1`.
 
 ## Introduction
 
-Populating a Weaviate with data is very similar to filling traditional graph databases with data. The two differentiating factors within Weaviate are;
+Adding data to Weaviate is very similar to filling traditional graph databases with data. The two differentiating factors within Weaviate are:
 
 1. The ability to make direct and indirect references to nodes in the graph.
 2. Realtime semantic indexing in the [Contextionary](.#about-the-contextionary).
@@ -60,7 +60,7 @@ Weaviate has two types of references;
 
 ### Direct References
 
-A direct reference connects a concept directly to another concept. The use case for this type of reference is that you want to want to make 100% sure that you make a correct reference. A Person to a BankAccount might be an example.
+A direct reference connects a concept directly to another concept. The use case for this type of reference is that you want to want to make 100% sure that you make a correct reference. A `Company` to a `hasCEO` might be an example.
 
 Direct references are always set like this:
 
@@ -126,7 +126,7 @@ weaviate://localhost/things/6406759e-f6fb-47ba-a537-1a62728d2f55
 
 ## Concept Data Object
 
-A concept data object syntax is defined as follows;
+A concept data object syntax is defined as follows:
 
 ```yaml
 class: string # as defined during schema creation
@@ -139,7 +139,7 @@ schema:
 
 ## Add a concept data object
 
-A concept data object can be added to a Weaviate via the following endpoint;
+A concept data object can be added to a Weaviate via the following endpoint:
 
 ```bash
 $ curl http://localhost/v1/{semanticKind} -X POST -H '{contentType}' -d '{data}'
@@ -149,7 +149,7 @@ $ curl http://localhost/v1/{semanticKind} -X POST -H '{contentType}' -d '{data}'
 - `{contentType}` = JSON or YAML.
 - `{data}` = [concept data object](#concept-data-object).
 
-Example of adding a _thing_.
+Example of adding a _Thing_.
 
 ```bash
 $ curl http://localhost/v1/things -X POST -H 'Content-type: text/x-yaml' -d \
@@ -171,7 +171,7 @@ schema:
 
 ## Update a concept data object
 
-A concept data object can be updated inside a Weaviate via the following endpoint;
+A concept data object can be updated inside a Weaviate via the following endpoint:
 
 ```bash
 $ curl http://localhost/v1/{semanticKind}/{semanticKindUUID} -X PUT -H '{contentType}' -d '{data}'
@@ -182,13 +182,13 @@ $ curl http://localhost/v1/{semanticKind}/{semanticKindUUID} -X PUT -H '{content
 - `{contentType}` = JSON or YAML.
 - `{data}` = [concept data object](#concept-data-object).
 
-Example of updating a _thing_.
+Example of updating a _Thing_.
 
 ```bash
 $ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PUT -H 'Content-type: text/x-yaml' -d 
 'class: Person
 schema:
-  name: Tim Cook
+  name: Tim Cook'
 ```
 
 ## Get a concept data object

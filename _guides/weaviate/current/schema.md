@@ -22,15 +22,14 @@ A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-
 - [Video Guide](#video-guide)
 - [Basics](#basics)
 - [Introduction](#introduction)
-- [Property types](#property-types)
-- [RESTful API reference](#restful-api)
-- [Schema object](#schema-object)
-- [Property object](#property-object)
-- [Create a schema item](#create-a-schema-item)
+- [Defining Objects](#defining-objects)
+- [RESTful API](#restful-api)
 - [Get the schema](#get-the-schema)
+- [Create a schema item](#create-a-schema-item)
+- [Delete a schema item](#delete-a-schema-item)
 - [Add a property to a schema item](#add-a-property-to-a-schema-item)
 - [Delete a property from a schema item](#delete-a-property-from-a-schema-item)
-- [Delete a schema item](#delete-a-schema-item)
+- [FAQ](#frequently-asked-questions)
 
 ## Video Guide
 
@@ -40,20 +39,22 @@ If you prefer video over text, you can use the video edition of this guide.
 
 ## Basics
 
+- A schema consists of classes and properties.
+- Things are distinguished from Actions in schema classes.
 - Words used in the schema must be part of the [contextionary](./#about-the-contextionary).
-- The schema is manipulated through the RESTful API.
+- The schema can be modified through the RESTful API.
 
 ## Introduction
 
 When you startup an empty Weaviate, you need to define a schema to explain what kind of data you will add. Because Weaviate is a knowledge graph, the linguistic element plays an important role. When creating concepts, Weaviate will validate if it can understand the schema concepts you want to add based on the [contextionary](./#about-the-contextionary). You might notice that a lot of definitions are related to the everyday language we use. And this is the first best practice to bear in mind. When defining the schema, you should do this in the form like you would explain it to another person, not like tables and columns you would add to a traditional data solution.
 
-### Concepts and Their Structures
+### Concepts and their Structures
 
 Within Weaviate you will work with **concepts**. A concept refers to something which can be **things** or **actions**. The way you will define things or actions is always the same, but conceptually, they are different.
 
 ### Classes
 
-A concept definition is what we call a **class** and a class is always written with a capital first character. A class for a thing describes what it is in the form of a noun (e.g., Person, Product, Timezone, etcetera). For actions, this would be a verb (e.g., Move, Buy, Eats, etcetera). Bear in mind that Weaviate always validates if it contextually understands the words. If you add a thing or action that it can't recognize, it will not accept the schema.
+A concept definition is what we call a **class** and a class is always written with a **capital first character**. A class for a thing describes what it is in the form of a noun (e.g., *Person*, *Product*, *Timezone*, etcetera). For actions, this would be a verb (e.g., *Move*, *Buy*, *Eat*, etcetera). Bear in mind that Weaviate always validates if it contextually understands the words. If you add a thing or action that it can't recognize, it will not accept the schema.
 
 Examples expressed in YAML might look like this:
 
@@ -64,7 +65,7 @@ Person
 
 ### Properties
 
-Every class has a property which is always written with a lower case first character. For example, the class **Person** might have the property **name**.
+Every class has a property which is always written with a **lower case first character**. For example, the class **Person** might have the property **name**.
 
 Examples expressed in YAML might look like this:
 
@@ -78,9 +79,71 @@ Person
     email
 ```
 
+### Keywords
+
+Keywords give context to a class or property. They help a Weaviate instance to interpret different words that are spelled the same way (so-called homographs). A good example of this is the word seal. Do you mean a stamp or the sea animal? You can define this by setting keywords. The weights determine how important the keyword is. Setting low values is often already enough to determine the context of a thing or action.
+
+```yaml
+class: Seal
+description: An individual seal
+keywords:
+- keyword: animal
+  weight: 0.05
+- keyword: sea
+  weight: 0.01
+```
+
+### Weaviate Schema versus Ontology
+
+Because Weaviate uses the [Contextionary](.#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Company with the name Apple`) is semantically similar to `a Business with the label Apple Inc.`
+
+Within Weaviate, the schema is _only_ used to define the query and explore syntax.
+
+## Defining objects
+
+### Schema object
+
+A schema object is defined as follows;
+
+```yaml
+class: string # The name of the class in string format
+description: string # A description for your reference
+keywords: # An array of keywords that Weaviate uses when a classname is ambigious
+  - 
+    keyword: string # A keyword in string format. For example, with the class "Company" you might want to add the keyword "business"
+    weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
+properties: # An array of the properties you are adding, same as a Property Object
+  - 
+    dataType: # The data type of the object as described above, When creating cross references, a property can have multiple dataTypes.
+    - string
+    name: string # The name of the property
+    keywords: # An array of keywords that Weaviate uses when a property is ambigious
+      - 
+        keyword: string # A keyword in string format.
+        weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
+    cardinality: atMostOne OR many # Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
+    description: string # A description for your reference
+```
+
+### Property Object
+
+A property object is defined as follows;
+
+```yaml
+dataType: # The data type of the object as described above, When creating cross refferences, a property can have multiple dataTypes.
+  - string
+name: string # The name of the property
+keywords: # An array of keywords that Weaviate uses when a property is ambigious
+  - 
+    keyword: string # A keyword in string format.
+    weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
+cardinality: atMostOne OR many # Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
+description: string # A description for your reference
+```
+
 ### Concetenate Classes and Properties
 
-Sometimes you might want to use multiple words to set as a class or property definition. For example, the year a person is born in, you might want to define with the two words: `born` and `in`. You can do this by capitalizing per word, for example, `bornIn`. Weaviate will validate both words in the Contextionary.
+Sometimes you might want to use multiple words to set as a class or property definition. For example, the year a person is born in, you might want to define with the two words: `born` and `in`. You can do this by capitalizing per word (CamelCase), for example, `bornIn`. Weaviate will validate both words in the Contextionary.
 
 Examples expressed in YAML might look like this:
 
@@ -96,13 +159,56 @@ Person
     bornIn
 ```
 
-### Weaviate Schema versus Ontology
+[Keywords](#keywords) cannot be chained, they have to match exactly one word. However, there is no limit on the amount of keywords per class or per class property.
 
-Because Weaviate uses the [Contextionary](.#about-the-contextionary) to index data. The use of the schema becomes fuzzy. Meaning that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Company with the name Apple`) is semantically similar to `a Business with the label Apple Inc.`
+Note that stopwords automatically removed from camelCased and CamelCased names.
 
-Within Weaviate, the schema is _only_ used to define the query and explore syntax.
+### Stopwords
 
-## Property Types
+### What stopwords are and why they matter
+Stopwords are words that don't add semantic meaning to your concepts and are
+extremely common in texts across different contexts. For example, the sentence
+"a car is parked on the street" contains the following stopwords: "a", "is",
+"on", "the". If we look at the sentence "a banana is lying on
+the table", you would find the exact same stop words. So in those two sentences
+over 50% of the words overlap. Therefore they would be considered somewhat
+similar (based on the overall vector position).
+
+However, if we remove stopwords from both sentences, they become "car parked
+street" and "banana lying table". Suddently there are 0% identical words in the
+sentences, so it becomes easier to perform vector comparisons. Note at this
+point we cannot say whether both sentences are related or not. For this we'd
+need to know how close the vector position of the sentence "car parked street"
+is to the vector position of "banana lying table". But we do know that the
+result can now be calculated with a lot less noise.
+
+### Behavior around stop words
+
+Stopwords are useful for humans, so we don't want to encourage you to leave
+them out completely. Instead weaviate will remove them whenever your schema
+information is translated to vector positions.
+
+In most cases you won't even notice that this happens in the background,
+however, there are a few edge cases that might cause a validation error:
+
+* If your camelCased class or property name consists **only** of stopwords,
+  validation will fail. Example: `TheInA` is not a valid class name, however,
+  `TheCarInAField` is (and would internally be represented as `CarField`).
+
+* If your keyword list contains stop words, they will be removed. However, if
+  every single keyword is a stop word, validation will fail.
+
+### How does weaviate decide wether a word is a stop word or not?
+
+The list of stopwords is derived from the contextionary version used and is
+published alongside the contextionary files.
+
+Check the [contextionary](./contextionary) or a list of stopwords using
+the desired language and version. For example, to see the stopwords used in the
+english language contextionary version 0.5.0, check
+[https://c11y.semi.technology/0.5.0/en/stopwords.json](https://c11y.semi.technology/0.5.0/en/stopwords.json).
+
+### Property Types
 
 When creating a property, Weaviate needs to know what type of data you will give it. Weaviate accepts the following types:
 
@@ -117,13 +223,13 @@ When creating a property, Weaviate needs to know what type of data you will give
 | geoCoordinates | string | [more info](#geo-coordinates-type) |
 | CrossRef | string | [more info](#cross-reference-type) |
 
-### Date Type
+#### Date Type
 
 Weaviate accepts dates formatted in following the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard.
 
 For example: `2019-08-24T14:25:57Z`.
 
-### Geo Coordinates Type
+#### Geo Coordinates Type
 
 Weaviate allows you to store geo-coordinates related to a thing or action. When querying Weaviate, you can use this type to find items in a radius around this area.
 
@@ -136,7 +242,7 @@ Bike:
     longitude: 4.9
 ```
 
-### Cross Reference Type
+#### Cross Reference Type
 
 The cross-reference type is the graph element of Weaviate. When setting a data type, you can set multiple classes.
 
@@ -149,6 +255,31 @@ properties:
 	  - Business
 ```
 
+### Cardinality 
+
+A property's `dataType` is always set as one (`atMostOne`) meaning that it can
+have only one type (or class) to direct to. However, when setting cross-references, you
+sometimes want to be able to point to multiple things or action classes.
+
+For example, the class `Company` might have the property `hasCustomer` which can be
+a cross-reference to other compannies as well as businesses and individual persons. When using GraphQL to retrieve data
+from the graph, the cardinality will determine how the query is constructed.
+
+```yaml
+class: Company
+description: A company in our dataset
+keywords: []
+properties:
+- name: hasCustomer
+  dataType:
+  - Company
+  - Person
+  - Business
+  cardinality: many
+  description: An entity that buys from this company
+  keywords: []
+```
+
 ## RESTful API
 
 - Weaviate uses a full RESTful API.
@@ -156,40 +287,12 @@ properties:
 - The examples assume that Weaviate runs on port 80 on the localhost without authentication.
 - The entry point to a Weaviate is always `/v1`.
 
-## Schema Object
+## Get the Schema
 
-A schema object is defined as follows;
+The current schema can be viewed as follows:
 
-```yaml
-class: string # The name of the class in string format
-description: string # A description for your reference
-keywords: # An array of keywords that Weaviate uses when a classname is ambigious
-- keyword: string # A keyword in string format. For example, with the class "Company" you might want to add the keyword "business"
-  weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
-properties: # An array of the properties you are adding, same as a Property Object
-  - dataType: # The data type of the object as described above, When creating cross references, a property can have multiple dataTypes.
-    - string
-    name: string # The name of the property
-    keywords: # An array of keywords that Weaviate uses when a property is ambigious
-    - keyword: string # A keyword in string format.
-      weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
-    cardinality: atMostOne OR many # Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
-    description: string # A description for your reference
-```
-
-## Property Object
-
-A property object is defined as follows;
-
-```yaml
-dataType: # The data type of the object as described above, When creating cross refferences, a property can have multiple dataTypes.
-  - string
-name: string # The name of the property
-keywords: # An array of keywords that Weaviate uses when a property is ambigious
-  - keyword: string # A keyword in string format.
-    weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
-cardinality: atMostOne OR many # Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
-description: string # A description for your reference
+```bash
+$ curl http://localhost/v1/schema
 ```
 
 ## Create a Schema Item
@@ -201,18 +304,21 @@ An example of creating a schema item of the semantic kind _Thing_ might look lik
 ```bash
 $ curl http://localhost/v1/schema/things -X POST -H 'Content-type: text/x-yaml' -d \
 'class: Company
-description: A company in our dataset
+description: "A company in our dataset"
 keywords:
-- keyword: business
-  weight: 0.8
+  - 
+    keyword: business
+    weight: 0.8
 properties:
-- dataType:
-  - string
-  name: name
-  keywords:
-  - keyword: identifier
-    weight: 0.25
-  description: Name of the Company'
+  - 
+    dataType:
+      - string
+    name: name
+    keywords:
+    - 
+      keyword: identifier
+      weight: 0.25
+    description: "Name of the Company"'
 ```
 
 An example of creating a schema item of the semantic kind _Action_ might look like this:
@@ -246,12 +352,20 @@ properties:
     name: wasSuccesful'
 ```
 
-## Get the Schema
+## Delete a schema item
 
-The current schema can be viewed as follows:
+Deleting a schema class can be done by sending a DELETE request to `/v1/schema/{semantic kind}/{class name}` endpoint.
+
+An example of deleting a schema class item of the semantic kind _Thing_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema
+$ curl http://localhost/v1/schema/things/Company -X DELETE
+```
+
+An example of deleting a schema class item of the semantic kind _Action_ might look like this:
+
+```bash
+$ curl http://localhost/v1/schema/actions/Payment -X DELETE
 ```
 
 ## Add a property to a Schema item
@@ -279,7 +393,8 @@ $ curl http://localhost/v1/schema/actions/Payment/properties -X POST -H 'Content
   - number
 name: amount
 keywords:
-  - keyword: value
+  - 
+    keyword: value
     weight: 0.8
 description: "The amount paid"'
 ```
@@ -300,18 +415,12 @@ An example of deleting a property item of the semantic kind _Action_ might look 
 $ curl http://localhost/v1/schema/actions/Payment/properties/transactionDate -X DELETE
 ```
 
-## Delete a schema item
+## Frequently Asked Questions
 
-Deleting a schema class can be done by sending a DELETE request to `/v1/schema/{semantic kind}/{class name}` endpoint.
+...
 
-An example of deleting a schema class item of the semantic kind _Thing_ might look like this:
 
-```bash
-$ curl http://localhost/v1/schema/things/Company -X DELETE
-```
-
-An example of deleting a schema class item of the semantic kind _Action_ might look like this:
-
-```bash
-$ curl http://localhost/v1/schema/actions/Payment -X DELETE
-```
+If you can't find the answer to your question here, please use the:
+1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
