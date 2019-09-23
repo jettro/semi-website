@@ -7,7 +7,7 @@ description: How to work with Weaviate's Aggregate function.
 tags: ['Aggregate', 'GraphQL']
 video-link:
 video-caption:
-menu-order: 8
+menu-order: 10
 open-graph-type: article
 ---
 

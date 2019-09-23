@@ -15,10 +15,7 @@ open-graph-type: article
 
 {% include badges.html %}
 
-You can directly query the Weaviate knowledge graph. Finding concepts in the knowledge graph based on the Contextionary can be done through [exploring]().
-
-- Use the query functionality to target nodes in the graph directly.
-- Use the explore functionality to fuzzy search for concepts in the graph.
+You can directly query the Weaviate knowledge graph. Finding concepts in the knowledge graph based on the Contextionary can be done through [exploring](./expore).
 
 _Note: You can mix [explore](./explore.html) functions with regular query functions._
 
@@ -36,6 +33,7 @@ _Note: You can mix [explore](./explore.html) functions with regular query functi
     - [Beacon filter](#beacon-filter)
     - [Multiple filters and beacon filter](#multiple-filters-and-beacon-filter)
     - [Geo coordinates](#geo-coordinates-filter)
+- [FAQ](#frequently-asked-questions)
 
 ## Video Guide
 
@@ -46,20 +44,20 @@ If you prefer video over text, you can use the video edition of this guide.
 ## Basics
 
 - Weaviate's query language is [GraphQL](https://graphql.org/).
-- You can query a Weaviate after you've created a [schema](./schema.html) and [populated it](populate.html) with data.
+- You can query a Weaviate after you've created a [schema](./schema.html) and [populated it](./adding_and_modifying_data) with data.
 - You can easily query a Weaviate by using the GraphQL interface inside a [Weaviate Playground](/guides/weaviate-playground/current/).
 
 ## Introduction
 
-You can query Weaviate for semantic kinds based on standard GraphQL queries. The examples below only contain the GraphQL query. You can POST a GraphQL query to Weaviate as follows;
+You can query Weaviate for semantic kinds based on standard GraphQL queries. The examples below only contain the GraphQL query. You can POST a GraphQL query to Weaviate as follows:
 
 ```bash
-$ curl http://localhost/v1/graphql -X POST -H 'Content-type: application/json' -d '{GraphQL data}'
+$ curl http://localhost/v1/graphql -X POST -H 'Content-type: application/json' -d '{GraphQL query}'
 ```
 
 ## Weaviate's GraphQL function structure
 
-The basic function structure of a Weaviate is as follows;
+The basic function structure of a Weaviate is as follows:
 
 ```graphql
 {
@@ -69,7 +67,7 @@ The basic function structure of a Weaviate is as follows;
 }
 ```
 
-- _Note: This page describes the `Get{}` function. Use the left-hand menu for other functions._
+- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./aggregate), and about `Aggregate{}` [here](./aggregate)._
 
 ### Get{} query structure and syntax
 
@@ -111,7 +109,30 @@ A get function is always based on the schema. For example, if you've created a s
 }
 ```
 
-If you've set a cross-reference (aka [beacon](./#basic-terminology)) in the schema, you can query it as follows;
+The above query will result in something like the following:
+
+```json
+{
+  "data": {
+    "Get": {
+      "Things": {
+        "Company": [{
+          "name": "Apple Inc.",
+          "foundedIn": "1976"
+        }, {
+          "name": "Google LLC",
+          "foundedIn": "1998"
+        }, {
+          "name": "Microsoft",
+          "foundedIn": "1975"
+        }]
+      }
+    }
+  }
+}
+```
+
+If you've set a cross-reference (aka [beacon](./#basic-terminology)) in the schema, you can query it as follows:
 
 ```graphql
 {
@@ -131,7 +152,7 @@ If you've set a cross-reference (aka [beacon](./#basic-terminology)) in the sche
 }
 ```
 
-Note that if you've set the [cardinality](./schema.html#property-object) to `many`, you might have multiple data types. For example;
+Note that if you've set the [cardinality](./schema.html#property-object) to `many`, you might have multiple data types. For example:
 
 ```graphql
 {
@@ -401,3 +422,12 @@ An example of a combination of filters and a limit filter:
   }
 }
 ```
+
+## Frequently Asked Questions
+
+...
+
+If you can't find the answer to your question here, please use the:
+1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).

@@ -30,6 +30,8 @@ When a Weaviate [schema](./schema.html) is created, you can populate a Weaviate 
 - [Replace all references](#replace-all-references)
 - [Delete individual references](#delete-individual-references)
 - [Batching](#batching)
+- [FAQ](#frequently-asked-questions)
+
 
 ## Video Guide
 
@@ -283,7 +285,7 @@ $ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/reference
   beacon: "weaviate://localhost/kjd...d8s"'
 ```
 
-- _Note, you can only update multiple references if [the `cardinality` of the schema id set to `many`](./schema.html#create-a-schema-item)_
+- _Note, you can only update multiple references if [the `cardinality` of the schema is set to `many`](./schema.html#create-a-schema-item)_
 
 ## Delete individual references
 
@@ -294,3 +296,14 @@ You can delete a single reference that is given in the body from the list of ref
 ## Batching
 
 ...
+
+
+## Frequently Asked Questions
+
+...
+
+
+If you can't find the answer to your question here, please use the:
+1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).

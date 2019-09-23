@@ -62,7 +62,7 @@ Because most data is related to something (e.g., Amsterdam _is the capital of_ T
 | **Entity** | An entity refers to something -often- in the world around us. E.g., _a Company with the name Apple_ refers to an entity with a relation to _a Product with the name iPhone_. Weaviate's Contextionary tries to find as many entities in your data as possible. |
 | **Concept** | Concepts are related to entities. Often you will use concepts to search in your datasets. If your dataset has data about _An Actor with the name Arnold Schwarzenegger_ and _an Actor with the name Al Pacino_, the concepts _Movie_ and _Terminator_ will find a closer relation to the first actor rather than the latter. |
 | **Beacon** | A beacon is a reference to a location in the Contextionary. Often defined as follows: `weaviate://{peerName}/{semanticKind}/{UUID}`
-| **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic" target="_blank) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution. Notably, this would mean |
+| **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution. Notably, this would mean |
 | **C11y** | Abbreviation of Contextionary. |
 
 ## About the Contextionary
@@ -75,7 +75,7 @@ An empty Weaviate could be envisioned like this:
 
 ![empty Weaviate](/img/guides/c11y-empty.jpg "empty Weaviate")
 
-When using Weaviate's [RESTful API](./populate) to add data, the Contextionary calculates the position in the vector space that represents the real-world entity.
+When using Weaviate's [RESTful API](./adding_and_modifying_data) to add data, the Contextionary calculates the position in the vector space that represents the real-world entity.
 
 The process from a data object to vector reference is calculated based on the centroid of the words weighted by the occurrences of the individual words in the original training text-corpus (e.g., the word `the` is seen as less important than the word `apple`).
 

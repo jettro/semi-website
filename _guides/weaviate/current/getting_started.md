@@ -23,8 +23,8 @@ Learn how to get started with Weaviate, using a simple Docker-compose setup. A c
 - [Starting Weaviate](#starting-weaviate)
 - [Creating a schema](#creating-a-schema)
 - [Adding Nodes](#adding-nodes)
-- [Querying with GraphQL](#querying-with-graphwl)
-- [Querying with RESTful API](#querying-with-resultful-api)
+- [Querying with GraphQL](#querying-with-graphql)
+- [Querying with RESTful API](#querying-with-restful-api)
 - [FAQ](#frequently-asked-questions)
 
 ## Video Guide
@@ -68,7 +68,7 @@ You are now ready to get started! If you run into issues, please use the:
 ## Installation
 
 Warning: The output is quite verbose, for an alternative see [attaching to only
-the log output of weaviate](#attaching-to-the-log-output-of-only-weaviate).
+the log output of weaviate](installation/#attaching-to-the-log-output-of-only-weaviate).
 
 ```bash
 # Download the runtime files (depends on jq and basename)
@@ -350,7 +350,7 @@ We now have created a mini-graph of 4 nodes. Let's explore the graph now!
 
 One of the features of Weaviate is the use of GraphQL to query the graph. The docker-compose setup comes with the Weaviate Playground which we will use to crawl the graph.
 
-1. Open the Weaviate Playground by going to [http://localhost:80](http://localhost:80).
+1. Open the Weaviate Playground by going to `http://localhost:80`.
 2. Fill in the URL of your Weaviate instance: `http://localhost:8080/v1/graphql`.
 3. When the Weaviate Playground is loaded, click "GraphQL" in the right bottom of the screen.
 
