@@ -68,7 +68,7 @@ You are now ready to get started! If you run into issues, please use the:
 ## Installation
 
 Warning: The output is quite verbose, for an alternative see [attaching to only
-the log output of weaviate](installation/#attaching-to-the-log-output-of-only-weaviate).
+the log output of weaviate](installation#attaching-to-the-log-output-of-only-weaviate).
 
 ```bash
 # Download the runtime files (depends on jq and basename)
