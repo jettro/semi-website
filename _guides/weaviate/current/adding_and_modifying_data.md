@@ -70,7 +70,7 @@ $ curl http://localhost/v1/{semanticKind} -X POST -H '{contentType}' -d '{data}'
 
 - `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
 - `{contentType}` = JSON or YAML.
-- `{data}` = [concept data object](#concept-data-object).
+- `{data}` = [data object](#data-object).
 
 Example of adding a _Thing_:
 
@@ -107,7 +107,7 @@ $ curl http://localhost/v1/{semanticKind}/{semanticKindUUID} -X PUT -H '{content
 - `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 - `{contentType}` = JSON or YAML.
-- `{data}` = [concept data object](#concept-data-object).
+- `{data}` = [data object](#data-object).
 
 Example of updating a _Thing_.
 
@@ -136,7 +136,7 @@ Example of requesting a _thing_.
 $ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
 ```
 
-- _Note, the result will be in the form of a [concept data object](#concept-data-object)._
+- _Note, the result will be in the form of a [data object](#data-object)._
 - _Note, this endpoint is created the collect individual concepts directly, there are specific endpoints for [querying](./query.html) and [exploring](./explore.html)._
 
 ## Delete a data object

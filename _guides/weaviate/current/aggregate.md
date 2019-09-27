@@ -35,7 +35,7 @@ Data objects in Weaviate can be grouped, based on your filters. You can use Grap
 
 ## Introduction
 
-The `Aggregate{}` function can be used if you want to obtain meta information about the dataobjects in a Weaviate instance. Metainformation can be queried over all objects in a class (see [Query Structure](#query-structure)), or by groups in a class (see [Filters](#filters)).
+The `Aggregate{}` function can be used if you want to obtain meta information about the dataobjects in a Weaviate instance. Metainformation can be queried over all objects in a class (see [Aggregate function](#aggregate-function)), or by groups in a class (see [Filters](#filters)).
 
 `Aggregate{}` requests can be made using the same `graphql` REST endpoint using POST requests:
 

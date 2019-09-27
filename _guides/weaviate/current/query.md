@@ -352,7 +352,7 @@ For example, this curious returns all in a radius of 2KM around a specific geo-l
             longitude: 4.9    # longitude
           },
           distance: {
-            max:2.0           # distance in KM
+            max: 2000           # distance in meters
           }
         },
         path: ["geoLocation"] # property needs to be of geoLocation type.
