@@ -21,21 +21,10 @@ This means you can chose the plugin that fits your use case best. If you have on
 
 ## Index
 
-- [Video Guide](#video-guide)
-- [Basics](#basics)
 - [Admin List](#admin-list)
 - [RBAC](#rbac)
 - [FAQ](#frequently-asked-questions)
 
-## Video Guide
-
-If you prefer video over text, you can use the video edition of this guide.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5bqpcIX2VDQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Basics
-
-...
 
 ## Admin List
 
@@ -86,5 +75,5 @@ entirely unauthorized users.
 
 If you can't find the answer to your question here, please use the:
 1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
 3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).

@@ -19,7 +19,6 @@ A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-
 
 ## Index
 
-- [Video Guide](#video-guide)
 - [Basics](#basics)
 - [Introduction](#introduction)
 - [Defining Objects](#defining-objects)
@@ -30,12 +29,6 @@ A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-
 - [Add a property to a schema item](#add-a-property-to-a-schema-item)
 - [Delete a property from a schema item](#delete-a-property-from-a-schema-item)
 - [FAQ](#frequently-asked-questions)
-
-## Video Guide
-
-If you prefer video over text, you can use the video edition of this guide.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5bqpcIX2VDQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Basics
 
@@ -61,11 +54,12 @@ Examples expressed in YAML might look like this:
 ```yaml
 Company
 Person
+City
 ```
 
 ### Properties
 
-Every class has a property which is always written with a **lower case first character**. For example, the class **Person** might have the property **name**.
+Every class has properties, which are always written with a **lower case first character**. For example, the class **Person** might have the property **name**.
 
 Examples expressed in YAML might look like this:
 
@@ -77,6 +71,8 @@ Person
     name
     nickname
     email
+City
+    name
 ```
 
 ### Keywords
@@ -157,6 +153,9 @@ Person
     nickname
     email
     bornIn
+City
+    name
+    isCapital
 ```
 
 [Keywords](#keywords) cannot be chained, they have to match exactly one word. However, there is no limit on the amount of keywords per class or per class property.
@@ -321,7 +320,7 @@ properties:
     description: "Name of the Company"'
 ```
 
-An example of creating a schema item of the semantic kind _Action_ might look like this:
+An example of creating a schema item of the semantic kind _Action_ might look like this. Note that the properties `fromCompany` and `toCompany` are cross-references to the class `Company`:
 
 ```bash
 $ curl http://localhost/v1/schema/actions -X POST -H 'Content-type: text/x-yaml' -d \
@@ -334,7 +333,7 @@ properties:
     description: "date of the payment"
     name: transactionDate
   - 
-    cardinality: atMostOne
+    cardinality: many
     dataType: 
       - Company
     description: "the company that receives the payment"
@@ -349,7 +348,7 @@ properties:
     dataType: 
       - boolean
     description: "was the payment succesful?"
-    name: wasSuccesful'
+    name: success'
 ```
 
 ## Delete a schema item
@@ -375,7 +374,7 @@ Adding a schema can be done by POSTing a [property object](#property-object) to 
 An example of adding a schema item of the semantic kind _Thing_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema/actions/Company/properties -X POST -H 'Content-type: text/x-yaml' -d \
+$ curl http://localhost/v1/schema/things/Company/properties -X POST -H 'Content-type: text/x-yaml' -d \
 'dataType:
   - geoCoordinates
 name: location
@@ -422,5 +421,5 @@ $ curl http://localhost/v1/schema/actions/Payment/properties/transactionDate -X 
 
 If you can't find the answer to your question here, please use the:
 1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
 3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).

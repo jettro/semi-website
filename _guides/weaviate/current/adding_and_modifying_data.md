@@ -13,31 +13,24 @@ open-graph-type: article
 
 {% include badges.html %}
 
-When a Weaviate [schema](./schema.html) is created, you can populate a Weaviate with data.
+When a Weaviate [schema](./schema.html) is created, you can populate this Weaviate with data.
 
 ## Index
 
-- [Video Guide](#video-guide)
 - [Basics](#basics)
 - [Introduction](#introduction)
+- [Data Object](#data-object)
+- [Add a data object](#add-a-data-object)
+- [Update a data object](#update-a-data-object)
+- [Get a data object](#get-a-data-object)
+- [Delete a data object](#delete-a-data-object)
 - [References guide](#references-guide)
-- [Concept Data Object](#concept-data-object)
-- [Add a concept data object](#add-a-concept-data-object)
-- [Update a concept data object](#update-a-concept-data-object)
-- [Get a concept data object](#get-a-concept-data-object)
-- [Delete a concept data object](#delete-a-concept-data-object)
 - [Add individual references](#add-individual-references)
 - [Replace all references](#replace-all-references)
 - [Delete individual references](#delete-individual-references)
 - [Batching](#batching)
 - [FAQ](#frequently-asked-questions)
 
-
-## Video Guide
-
-If you prefer video over text, you can use the video edition of this guide.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5bqpcIX2VDQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Basics
 
@@ -53,9 +46,119 @@ Adding data to Weaviate is very similar to filling traditional graph databases w
 1. The ability to make direct and indirect references to nodes in the graph.
 2. Realtime semantic indexing in the [Contextionary](.#about-the-contextionary).
 
+
+## Data Object
+
+A data object syntax is defined as follows:
+
+```yaml
+class: string # as defined during schema creation
+id: "{UUID}" # optional, should be in UUID format.
+schema:
+  propertyI: defined as datatypes # as defined during schema creation
+  propertyII: defined as datatypes # as defined during schema creation
+  # etcetera
+```
+
+## Add a data object
+
+A concept data object can be added to a Weaviate via the following endpoint:
+
+```bash
+$ curl http://localhost/v1/{semanticKind} -X POST -H '{contentType}' -d '{data}'
+```
+
+- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{contentType}` = JSON or YAML.
+- `{data}` = [concept data object](#concept-data-object).
+
+Example of adding a _Thing_:
+
+```bash
+$ curl http://localhost/v1/things -X POST -H 'Content-type: text/x-yaml' -d \
+'class: Company
+id: f81bfe5e-16ba-4615-a516-46c2ae2e5a80
+schema:
+  name: Apple'
+```
+
+Example of adding an _Action_, with a [direct](#direct-references) reference:
+
+```bash
+$ curl http://localhost/v1/actions -X POST -H 'Content-type: text/x-yaml' -d \
+'class: Payment
+id: 22cc3380-ef73-48f8-9e3c-c603fae0f4b0
+schema:
+  date: "2019-03-24T14:25:57Z"
+  toCompany:
+  - beacon: weaviate://localhost/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80'
+```
+
+- _Note, it is assumed that the CREF f81bfe5e-16ba-4615-a516-46c2ae2e5a80 exsists_
+
+## Update a data object
+
+A concept data object can be updated inside a Weaviate via the following endpoint:
+
+```bash
+$ curl http://localhost/v1/{semanticKind}/{semanticKindUUID} -X PUT -H '{contentType}' -d '{data}'
+```
+
+- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKindUUID}` = the UUID that points to a concept.
+- `{contentType}` = JSON or YAML.
+- `{data}` = [concept data object](#concept-data-object).
+
+Example of updating a _Thing_.
+
+```bash
+$ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PUT -H 'Content-type: text/x-yaml' -d 
+'class: Company
+schema:
+  name: Apple Inc.
+id: f81bfe5e-16ba-4615-a516-46c2ae2e5a80'
+```
+
+## Get a data object
+
+A concept data object can be retrieved from a Weaviate directly via the following endpoint:
+
+```bash
+$ curl http://localhost/v1/{semanticKind}/{semanticKindUUID}
+```
+
+- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKindUUID}` = the UUID that points to a concept.
+
+Example of requesting a _thing_.
+
+```bash
+$ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
+```
+
+- _Note, the result will be in the form of a [concept data object](#concept-data-object)._
+- _Note, this endpoint is created the collect individual concepts directly, there are specific endpoints for [querying](./query.html) and [exploring](./explore.html)._
+
+## Delete a data object
+
+A concept data object can be deleted from a Weaviate directly via the following endpoint;
+
+```bash
+$ curl http://localhost/v1/{semanticKind}/{semanticKindUUID} -X DELETE
+```
+
+- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKindUUID}` = the UUID that points to a concept.
+
+Example of deleting a _thing_.
+
+```bash
+$ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X DELETE
+```
+
 ## References guide
 
-Weaviate has two types of references;
+Weaviate has two types of references:
 
 1. Direct references which are references to nodes in the graph (like a traditional graph-DB).
 2. Indirect references are references that are semantically similar to each other.
@@ -114,125 +217,21 @@ _Note: for more information about setting references, see the documentation belo
 
 ### Cross Reference Location (URL)
 
-Weaviate uses it's own transportaion schema. A URL is always defined in the same way;
+Weaviate uses it's own transportaion schema. A URL is always defined in the same way:
 
 | schema | location | concept | UUID |
 | ------ | -------- | ------- | ---- |
-| `weaviate://` | `localhost` or `peername` | `things` or `actions` | UUID |
+| `weaviate://` | `localhost` or `peername` | `/` `things` or `actions` | `/` UUID |
 
 For example:
 
-```bash
-weaviate://localhost/things/6406759e-f6fb-47ba-a537-1a62728d2f55
-```
-
-## Concept Data Object
-
-A concept data object syntax is defined as follows:
-
-```yaml
-class: string # as defined during schema creation
-id: "{UUID}" # optional, should be in UUID format.
-schema:
-  property I: defined as datatypes # as defined during schema creation
-  property II: defined as datatypes # as defined during schema creation
-  # etcetera
-```
-
-## Add a concept data object
-
-A concept data object can be added to a Weaviate via the following endpoint:
-
-```bash
-$ curl http://localhost/v1/{semanticKind} -X POST -H '{contentType}' -d '{data}'
-```
-
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
-- `{contentType}` = JSON or YAML.
-- `{data}` = [concept data object](#concept-data-object).
-
-Example of adding a _Thing_.
-
-```bash
-$ curl http://localhost/v1/things -X POST -H 'Content-type: text/x-yaml' -d \
-'class: Company
-id: f81bfe5e-16ba-4615-a516-46c2ae2e5a80
-schema:
-  name: Apple
-  foundedIn: 1974
-  inCountry:
-    beacon: weaviate://localhost/a3c...a6c
-  hasCeo:
-    name: Timmothy Cook
-    bornIn:
-      beacon: weaviate://localhost/a3c...a6c'
-```
-
-- _Note, it is assumed that the CREF a3c...a6c exsists_
-- _Note, the above example contains both a [direct](#direct-references) and an [indirect](#indirect-references) reference._
-
-## Update a concept data object
-
-A concept data object can be updated inside a Weaviate via the following endpoint:
-
-```bash
-$ curl http://localhost/v1/{semanticKind}/{semanticKindUUID} -X PUT -H '{contentType}' -d '{data}'
-```
-
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
-- `{semanticKindUUID}` = the UUID that points to a concept.
-- `{contentType}` = JSON or YAML.
-- `{data}` = [concept data object](#concept-data-object).
-
-Example of updating a _Thing_.
-
-```bash
-$ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PUT -H 'Content-type: text/x-yaml' -d 
-'class: Person
-schema:
-  name: Tim Cook'
-```
-
-## Get a concept data object
-
-A concept data object can be retrieved from a Weaviate directly via the following endpoint;
-
-```bash
-$ curl http://localhost/v1/{semanticKind}/{semanticKindUUID}
-```
-
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
-- `{semanticKindUUID}` = the UUID that points to a concept.
-
-Example of requesting a _thing_.
-
-```bash
-$ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
-```
-
-- _Note, the result will be in the form of a [concept data object](#concept-data-object)._
-- _Note, this endpoint is created the collect individual concepts directly, there are specific endpoints for [querying](./query.html) and [exploring](./explore.html)._
-
-## Delete a concept data object
-
-A concept data object can be deleted from a Weaviate directly via the following endpoint;
-
-```bash
-$ curl http://localhost/v1/{semanticKind}/{semanticKindUUID} -X DELETE
-```
-
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
-- `{semanticKindUUID}` = the UUID that points to a concept.
-
-Example of deleting a _thing_.
-
-```bash
-$ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X DELETE
-```
+`weaviate://localhost/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80`
 
 ## Add individual references
 
-An individual reference can be added to a concept data object as follows;
+Requests can be done to individual references if the cardinality of this property is set to `many`. If the cardinality is set to `atMostOne`, then this REST endpoint cannot be used for individual reference manipulations. 
+
+An individual reference can be added to a concept data object as follows:
 
 ```bash
 $ curl http://localhost/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X POST -H '{contentType}' -d '{data}'
@@ -247,7 +246,7 @@ $ curl http://localhost/v1/{semanticKind}/{semanticKindUUID}/references/{propert
 Example of adding a direct reference:
 
 ```bash
-$ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/inCountry -X POST -H 'Content-type: text/x-yaml' -d 'beacon: weaviate://localhost/lo9...b2c'
+$ curl http://localhost/v1/actions/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/toCompany -X POST -H 'Content-type: text/x-yaml' -d 'beacon: weaviate://localhost/things/22cc3380-ef73-48f8-9e3c-c609bae0b4b0'
 ```
 
 Example of adding an indirect reference:
@@ -256,14 +255,14 @@ Example of adding an indirect reference:
 $ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/hasCeo -X POST -H 'Content-type: text/x-yaml' -d \
 'name: Steve Jobs
   bornIn:
-    beacon: weaviate://localhost/lo9...b2c'
+    beacon: weaviate://localhost/things/lo9...b2c'
 ```
 
 - _Note, you can only add multiple references if [the `cardinality` of the schema id set to `many`](./schema.html#create-a-schema-item)_
 
 ## Replace all references
 
-All references related to a property can be updated as follows;
+All references related to a property can be updated as follows:
 
 ```bash
 $ curl http://localhost/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X PUT -H '{contentType}' -d '{data}'
@@ -280,9 +279,9 @@ Example of replacing a direct reference:
 ```bash
 $ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/hasCustomers -X POST -H 'Content-type: text/x-yaml' -d \
 '- 
-  beacon: "weaviate://localhost/lo9...b2c"
+  beacon: "weaviate://localhost/things/lo9...b2c"
 -
-  beacon: "weaviate://localhost/kjd...d8s"'
+  beacon: "weaviate://localhost/things/kjd...d8s"'
 ```
 
 - _Note, you can only update multiple references if [the `cardinality` of the schema is set to `many`](./schema.html#create-a-schema-item)_
@@ -291,11 +290,28 @@ $ curl http://localhost/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/reference
 
 You can delete a single reference that is given in the body from the list of references that this property has.
 
-...
+```bash
+$ curl http://localhost/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X DELETE -H '{contentType}' -d '{data}'
+```
 
 ## Batching
 
-...
+A bulk of objects can be added to Weaviate by using a batch POST. A seperate request should be done for the semantic kinds (`Things` or `Actions`).
+
+```bash
+$ curl http://localhost/v1/batching/things -X POST -H 'Content-type: text/x-yaml' -d \
+'fields:
+- ALL
+things:
+- class: Company
+  schema:
+    name: Apple Inc.
+  id: 0a85f1db-fbf3-4343-b45b-25c794c5419d
+- class: Company
+  schema:
+    name: Google LLC
+  id: b0c18f80-d7c1-44bf-a745-14b9df5b1055'
+```
 
 
 ## Frequently Asked Questions
@@ -305,5 +321,5 @@ You can delete a single reference that is given in the body from the list of ref
 
 If you can't find the answer to your question here, please use the:
 1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
 3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).

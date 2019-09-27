@@ -17,7 +17,6 @@ Learn how to get started with Weaviate, using a simple Docker-compose setup. A c
 
 ## Index
 
-- [Video Guide](#video-guide)
 - [Preparation](#preparation)
 - [Installation](#installation)
 - [Starting Weaviate](#starting-weaviate)
@@ -26,9 +25,6 @@ Learn how to get started with Weaviate, using a simple Docker-compose setup. A c
 - [Querying with GraphQL](#querying-with-graphql)
 - [Querying with RESTful API](#querying-with-restful-api)
 - [FAQ](#frequently-asked-questions)
-
-## Video Guide
-
 
 ## Preparation
 
@@ -45,7 +41,7 @@ operating systems.
 
 You are now ready to get started! If you run into issues, please use the:
 1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
 3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
 
 #### Important information
@@ -425,5 +421,5 @@ $ curl http://localhost:8080/v1/things
 
 If you can't find the answer to your question here, please use the:
 1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
 3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).

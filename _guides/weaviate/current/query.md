@@ -21,25 +21,21 @@ _Note: You can mix [explore](explore.html) functions with regular query function
 
 ## Index
 
-- [Video Guide](#video-guide)
 - [Basics](#basics)
 - [Introduction](#introduction)
 - [Weaviate's GraphQL function structure](#weaviates-graphql-function-structure)
-    - [Get{} query structure and syntax](#get-query-structure-and-syntax)
 - [Get{} Function](#get-function)
+    - [Get{} query structure and syntax](#get-query-structure-and-syntax)
 - [Filters](#filters)
     - [Simple filter](#simple-filter)
     - [Multiple filters](#multiple-filters)
     - [Beacon filter](#beacon-filter)
     - [Multiple filters and beacon filter](#multiple-filters-and-beacon-filter)
     - [Geo coordinates](#geo-coordinates-filter)
+    - [Group filter](#group-filter)
+    - [Explore filter](#explore-filter)
 - [FAQ](#frequently-asked-questions)
 
-## Video Guide
-
-If you prefer video over text, you can use the video edition of this guide.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5bqpcIX2VDQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Basics
 
@@ -69,6 +65,8 @@ The basic function structure of a Weaviate is as follows:
 
 - _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./aggregate), and about `Aggregate{}` [here](./aggregate)._
 
+# Get{} Function
+
 ### Get{} query structure and syntax
 
 The `Get{}` function is always defined based on the following principle:
@@ -78,23 +76,18 @@ The `Get{}` function is always defined based on the following principle:
   Get {
     <SematicKind> {
       <Class> {
-        <propertyWithBeacon> {
-          <property>
-          ... on <ClassOfWhereBeaconGoesTo> {
-            <propertyOfClass>
+        <property>
+        <PropertyWithReference>
+          ... on <ClassOfBeacon> {
+            <property>
           }
-        }
       }
     }
   }
 }
 ```
 
-See [&sect; Get{} Function](#get-function) for an example.
-
-# Get{} Function
-
-A get function is always based on the schema. For example, if you've created a schema with a class `Company` which has the properties `name` and `foundedIn`, you can query it as follows:
+A `Get{}` function is always based on the schema. For example, if you've created a schema with a class `Company` which has the properties `name` and `foundedIn`, you can query it as follows:
 
 ```graphql
 {
@@ -228,7 +221,7 @@ Weaviate comes with a variety of available filters. The `where` filter is an alg
 
 You can create simple filters by setting the `where` key. You always need to include the GraphQL property path, the operator type, and the valueType plus a value. You can read more about the type definitions [here](#filters).
 
-For example, this filter selects the class Company with a higher revenue then 10.000.000.
+For example, this filter selects the class Company with a higher revenue than 10.000.000.
 
 ```graphql
 {
@@ -251,7 +244,7 @@ For example, this filter selects the class Company with a higher revenue then 10
 
 You can set multiple operands by providing an array.
 
-For example, these filters select based on the class Company with a higher revenue then 10.000.000 and who have more than 20.000 employees.
+For example, these filters select based on the class Company with a revenue higher than 10.000.000 and who have less than 20.000 employees.
 
 ```graphql
 {
@@ -423,11 +416,17 @@ An example of a combination of filters and a limit filter:
 }
 ```
 
+### Group filter
+
+
+### Explore filter
+
+
 ## Frequently Asked Questions
 
 ...
 
 If you can't find the answer to your question here, please use the:
 1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
 3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).

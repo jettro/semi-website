@@ -19,18 +19,12 @@ If you run Weaviate with an [OpenID authentication scheme](./installation#openid
 
 ## Index
 
-- [Video Guide](#video-guide)
 - [Basics](#basics)
 - [Philosophy](#philosophy)
 - [OpenID details](#openid-details)
 - [Add a Bearer to a request](#add-a-bearer-to-a-request)
 - [FAQ](#frequently-asked-questions)
 
-## Video Guide
-
-If you prefer video over text, you can use the video edition of this guide.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5bqpcIX2VDQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Basics
 
@@ -185,5 +179,5 @@ $ curl http://localhost/v1/things -H "Authorization: Bearer {Bearer}"
 
 If you can't find the answer to your question here, please use the:
 1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
+2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
 3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
