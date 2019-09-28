@@ -41,7 +41,7 @@ _Note: You can mix [explore](explore.html) functions with regular query function
 
 - Weaviate's query language is [GraphQL](https://graphql.org/).
 - You can query a Weaviate after you've created a [schema](./schema.html) and [populated it](./adding_and_modifying_data) with data.
-- You can easily query a Weaviate by using the GraphQL interface inside a [Weaviate Playground](/guides/weaviate-playground/current/).
+- You can easily query a Weaviate by using the GraphQL interface inside a [Weaviate Playground](http://playground.semi.technology).
 
 ## Introduction
 

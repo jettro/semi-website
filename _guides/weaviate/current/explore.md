@@ -148,7 +148,7 @@ The `Explore{}` function is structured as follows:
 }
 ```
 
-Note that all words in the `concepts` argument array should be present in the Contextionary. More information about beacon interpretation can be found [here](./index.html#basic-terminology).
+Note that all words in the `concepts` argument array should be present in the Contextionary. More information about beacon interpretation can be found [here](./#basic-terminology).
 
 An example query:
 

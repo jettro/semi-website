@@ -17,7 +17,7 @@ menu-order: 7
 ## Index
 
 - [Basics](#basics)
-- [Schema Truncate](#initiation)
+- [Schema Truncate](#schema-truncate)
 
 ## Basics
 

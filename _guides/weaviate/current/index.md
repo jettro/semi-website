@@ -122,7 +122,7 @@ When creating automatic classification tasks, the user is able to define how cer
 
 ## About Weaviate Knowledge Networks
 
-_Coming soon! Sign up for our [newsletter](/newsletter.html) to be informed about release dates._
+_Coming soon! Sign up for our [newsletter](/newsletter) to be informed about release dates._
 
 Because Weaviate allows for fuzzy schema definitions (e.g., a "Company with the name Apple" is seen as semantically similar to a "Business with the identifier Apple Incorporated.") you can find beacons not only in your local Weaviate but also over a network of Weaviates. Allow creating a completely decentralized network of knowledge graphs, aka the knowledge network.
 

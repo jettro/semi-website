@@ -25,7 +25,6 @@ Data objects in Weaviate can be grouped, based on your filters. You can use Grap
 - [Filters](#filters)
   - [GroupBy](#groupby)
   - [Where and Limit](#where-and-limit)
-  - [OLAP](#olap)
 - [FAQ](#frequently-asked-questions)
 
 ## Basics
