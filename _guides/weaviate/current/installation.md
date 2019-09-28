@@ -23,11 +23,9 @@ Weaviate is completely containerized, you can use Docker Compose, Kubernetes or 
 - [Weaviate Sandbox](#weaviate-sandbox)
 - [Docker Compose](#docker-compose)
 - [Kubernetes](#kubernetes)
-- [Terraform](#terraform)
 - [Weaviate Configuration](#weaviate-configuration-file)
 - [OpenID (OICD) Authentication](#openid-authentication)
 - [FAQ](#frequently-asked-questions)
-
 
 ## Basics
 
@@ -47,16 +45,13 @@ Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal
 You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/compose/) as follows on Linux and MacOS:
 
 ```bash
-# Download the runtime files (depends on jq and basename)
-$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/tools/download-docker-compose-deps.sh "{{ site.weaviate_version }}" | bash
+# Download the Weaviate configuration file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/config.yaml
+# Download the Weaviate docker-compose file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
 # Run Docker compose
 $ docker-compose up
 ```
-
-You are now ready to get started! If you run into issues, please use the:
-1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate) . Or,
-3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
 
 ### Attaching to the log output of only weaviate
 The log output of weaviate's backing databases can be quite verbose. We instead
@@ -64,8 +59,10 @@ recommend to attach only to weaviate itself. In this case run `docker-compose
 up` like so:
 
 ```bash
-# Download the runtime files (depends on jq and basename)
-$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/tools/download-docker-compose-deps.sh "{{ site.weaviate_version }}" | bash
+# Download the Weaviate configuration file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/config.yaml
+# Download the Weaviate docker-compose file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
 # Run Docker compose
 $ docker-compose up -d && docker-compose logs -f weaviate
 ```
@@ -73,7 +70,6 @@ $ docker-compose up -d && docker-compose logs -f weaviate
 Alternatively you can run docker-compose entirely detached with `docker-compose
 up -d` and poll `{bind_address}:{port}/v1/meta` until you receive
 status `200 OK`.
-
 
 ### Docker Compose (manual installation)
 
@@ -85,14 +81,9 @@ You can also download the files manually if you have trouble with the above scri
 
 The output of the above setup is quite verbose, you can also run the above command with Weaviate related logs only;
 
-
 ## Kubernetes
 
-...
-
-## Terraform
-
-...
+_coming soon_
 
 ## Weaviate Configuration File
 
@@ -115,10 +106,4 @@ Weaviate will fail to start up and ask you to configure at least one.
 
 ## Frequently Asked Questions
 
-...
-
-
-If you can't find the answer to your question here, please use the:
-1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
-3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
+{% include support-links.html %}

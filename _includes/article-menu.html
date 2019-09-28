@@ -3,7 +3,7 @@
     <dl class="article-toc">
         <dd>
             <ul class="list-ui article-toc__list-pages">
-            {% assign sorted_articles = site.articles | sort: 'menu-order' %}
+            {% assign sorted_articles = site.news | sort: 'menu-order' %}
             {% for item in sorted_articles %}
                 <li>
                     <a href="{{item.url}}" class="{% if item.title == page.title %}current{% endif %}">{{item.title}}</a>

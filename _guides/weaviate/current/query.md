@@ -421,12 +421,8 @@ An example of a combination of filters and a limit filter:
 
 ### Explore filter
 
+Click [here](./explore.html#explore-filter) for more information about the explore filter.
 
 ## Frequently Asked Questions
 
-...
-
-If you can't find the answer to your question here, please use the:
-1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
-3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
+{% include support-links.html %}

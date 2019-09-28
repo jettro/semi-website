@@ -19,11 +19,10 @@ Learn how to get started with Weaviate, using a simple Docker-compose setup. A c
 
 - [Preparation](#preparation)
 - [Installation](#installation)
-- [Starting Weaviate](#starting-weaviate)
+- [Validating if the Weaviate is online](#validating-if-the-weaviate-is-online)
 - [Creating a schema](#creating-a-schema)
-- [Adding Nodes](#adding-nodes)
+- [Adding entities](#adding-entities)
 - [Querying with GraphQL](#querying-with-graphql)
-- [Querying with RESTful API](#querying-with-restful-api)
 - [FAQ](#frequently-asked-questions)
 
 ## Preparation
@@ -39,12 +38,10 @@ If you do not have Docker installed, you can read
 [here](https://docs.docker.com/install/) how to do this on a multitude of
 operating systems.
 
-You are now ready to get started! If you run into issues, please use the:
-1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
-3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
+You are now ready to get started! If you run into issues, please [let us know](#frequently-asked-questions).
 
 #### Important information
+
 1. The docker-compose setup contains the entire weaviate stack, including a
    Elasticsearch connector. To run this stack you should have
    at least **1 CPU and 3 GB of memory available**. If you are planning to import
@@ -67,13 +64,15 @@ Warning: The output is quite verbose, for an alternative see [attaching to only
 the log output of weaviate](installation#attaching-to-the-log-output-of-only-weaviate).
 
 ```bash
-# Download the runtime files (depends on jq and basename)
-$ curl -s https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/tools/download-docker-compose-deps.sh "{{ site.weaviate_version }}" | bash
+# Download the Weaviate configuration file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/config.yaml
+# Download the Weaviate docker-compose file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
 # Run Docker compose
 $ docker-compose up
 ```
 
-## Starting Weaviate
+## Validating if the Weaviate is online
 
 Check if Weaviate is up and running by using the following curl command:
 
@@ -103,37 +102,34 @@ You are now ready to start using Weaviate!
 
 The schema describes how the knowledge graph is structured on which semantic elements it is based, you can read more in-depth what the Weaviate schema entails [here](schema).
 
-In this example, we are going to create a knowledge graph of a zoo. Although you can automate the import of a schema, we will do it manually now to get an understanding of how the schema is structured.
+In this example, we are going to create a knowledge graph of a company. Although you can automate the import of a schema, we will do it manually now to get an understanding of how the schema is structured.
 
-First, we will create the `Zoo` as a Weaviate-thing like this;
+First, we will create the `Company` as a Weaviate-thing like this;
 
 ```bash
 $ curl -X POST http://localhost:8080/v1/schema/things -H "Content-Type: application/json" -d '{
-    "class": "Zoo",
+    "class": "Company",
     "keywords": [{
-        "keyword": "park",
-        "weight": 0.01
-    }, {
-        "keyword": "animals",
-        "weight": 0.01
+        "keyword": "business",
+        "weight": 1.0
     }],
-    "description": "Animal park",
+    "description": "Company in our Weaviate",
     "properties": [{
         "dataType": [
             "string"
         ],
         "cardinality": "atMostOne",
-        "description": "Name of the Zoo",
+        "description": "Name of the Company",
         "name": "name",
         "keywords": [{
             "keyword": "identifier",
-            "weight": 0.01
+            "weight": 0.25
         }]
     }]
 }'
 ```
 
-Next, we want to create a `City` class to describe which city a zoo is in.
+Next, we want to create a `City` class to describe which city the company is in.
 
 ```bash
 $ curl -X POST http://localhost:8080/v1/schema/things -H "Content-Type: application/json" -d '{
@@ -152,7 +148,7 @@ $ curl -X POST http://localhost:8080/v1/schema/things -H "Content-Type: applicat
         "name": "name",
         "keywords": [{
             "keyword": "identifier",
-            "weight": 0.01
+            "weight": 0.25
         }]
     }]
 }'
@@ -162,7 +158,7 @@ Now we have two classes but we have not yet defined where the point to, this is 
 
 Let's update both classes to include cross-references.
 
-First, we update the `Zoo` class:
+First, we update the `Company` class:
 
 ```bash
 $ curl -X POST http://localhost:8080/v1/schema/things/Zoo/properties -H "Content-Type: application/json" -d '{
@@ -170,7 +166,7 @@ $ curl -X POST http://localhost:8080/v1/schema/things/Zoo/properties -H "Content
     "City"
   ],
   "cardinality": "atMostOne",
-  "description": "In which city this zoo is located",
+  "description": "In which city this company is located",
   "name": "inCity",
   "keywords": []
 }'
@@ -181,11 +177,11 @@ Secondly, we update the `City` class:
 ```bash
 $ curl -X POST http://localhost:8080/v1/schema/things/City/properties -H "Content-Type: application/json" -d '{
   "dataType": [
-    "Zoo"
+    "Company"
   ],
   "cardinality": "atMostOne",
-  "description": "Which zoos are in this city?",
-  "name": "hasZoo",
+  "description": "Which companies are in this city?",
+  "name": "hasCompany",
   "keywords": []
 }'
 ```
@@ -208,11 +204,11 @@ $ curl -X POST http://localhost:8080/v1/schema/things/City/properties -H "Conten
 }'
 ```
 
-## Adding Nodes
+## Adding entities
 
 Now we have defined the schema, it is time to start adding data.
 
-We are going to add two cities and two zoos.
+We are going to add two cities and two companies.
 
 First the city of Amsterdam
 
@@ -246,16 +242,16 @@ Results in:
 }
 ```
 
-Next, the city of Berlin
+Next, the city of Cupertino
 
 ```bash
 $ curl -X POST http://localhost:8080/v1/things -H "Content-Type: application/json" -d '{
     "class": "City",
     "schema": {
-        "name": "Berlin",
+        "name": "Cupertino",
         "location": {
-            "latitude": 52.31,
-            "longitude": 13.23
+            "latitude": 37.323056, 
+            "longitude": -122.031944
         }
     }
 }'
@@ -268,23 +264,23 @@ which results in:
     "class": "City",
     "schema": {
         "location": {
-            "latitude": 52.31,
-            "longitude": 13.23
+            "latitude": 37.323056, 
+            "longitude": -122.031944
         },
-        "name": "Berlin"
+        "name": "Cupertino"
     },
     "creationTimeUnix": 1551613417125,
     "thingId": "f15ba7e7-0635-4009-828b-7a631cd6840e"
 }
 ```
 
-Now, we are going to add the Zoos, note how we are defining the cross-reference:
+Now, we are going to add the companies, note how we are defining the cross-reference:
 
 ```bash
 $ curl -X POST http://localhost:8080/v1/things -H "Content-Type: application/json" -d '{
-    "class": "Zoo",
+    "class": "Company",
     "schema": {
-        "name": "Artis",
+        "name": "SeMI Technologies",
         "inCity": {
             "beacon": "weaviate://localhost/things/6406759e-f6fb-47ba-a537-1a62728d2f55"
         }
@@ -296,12 +292,12 @@ Which results in:
 
 ```json
 {
-    "class": "Zoo",
+    "class": "Company",
     "schema": {
         "inCity": {
             "beacon": "weaviate://localhost/things/6406759e-f6fb-47ba-a537-1a62728d2f55"
         },
-        "name": "Artis"
+        "name": "SeMI Technologies"
     },
     "creationTimeUnix": 1551613482193,
     "thingId": "3c6ac167-d7e5-4479-a726-8341b9113e40"
@@ -314,9 +310,9 @@ We will do the same for the Berlin zoo:
 
 ```bash
 $ curl -X POST http://localhost:8080/v1/things -H "Content-Type: application/json" -d '{
-    "class": "Zoo",
+    "class": "Company",
     "schema": {
-        "name": "The Berlin Zoological Garden",
+        "name": "Apple",
         "inCity": {
             "beacon": "weaviate://localhost/things/f15ba7e7-0635-4009-828b-7a631cd6840e"
         }
@@ -328,12 +324,12 @@ Which results in:
 
 ```json
 {
-    "class": "Zoo",
+    "class": "Company",
     "schema": {
         "inCity": {
             "beacon": "weaviate://localhost/things/f15ba7e7-0635-4009-828b-7a631cd6840e"
         },
-        "name": "The Berlin Zoological Garden"
+        "name": "Apple"
     },
     "creationTimeUnix": 1551613546490,
     "thingId": "5322d290-9682-4e7a-ae65-270cefeba8e5"
@@ -346,7 +342,7 @@ We now have created a mini-graph of 4 nodes. Let's explore the graph now!
 
 One of the features of Weaviate is the use of GraphQL to query the graph. The docker-compose setup comes with the Weaviate Playground which we will use to crawl the graph.
 
-1. Open the Weaviate Playground by going to `http://localhost:80`.
+1. Open the Weaviate Playground by going to `http://playground.semi.technology`.
 2. Fill in the URL of your Weaviate instance: `http://localhost:8080/v1/graphql`.
 3. When the Weaviate Playground is loaded, click "GraphQL" in the right bottom of the screen.
 
@@ -358,7 +354,7 @@ Getting an overview of all Zoos would look like this:
 {
   Get{
     Things{
-      Zoo{
+      Company{
         name
       }
     }
@@ -366,13 +362,13 @@ Getting an overview of all Zoos would look like this:
 }
 ```
 
-We have added the Zoo to a city, to get the name of the City, we have to use the `InCity{}` reference and define that we want to get the results based on a city. But before we can do this, we need to know what the available classes of `InCity{}` are. We can get these insights by clicking `InCity` and inspecting the type (`[ZooInCityObj]`). Because there is only one possible type (`City`) we now know that `InCity{}` ingests the class: `City`.
+We have added the company to a city, to get the name of the city, we have to use the `InCity{}` reference and define that we want to get the results based on a city. But before we can do this, we need to know what the available classes of `InCity{}` are. We can get these insights by clicking `InCity` and inspecting the type (`[CompanyInCityObj]`). Because there is only one possible type (`City`) we now know that `InCity{}` ingests the class: `City`.
 
 ```graphql
 {
   Get {
     Things {
-      Zoo {
+      Company {
         name
         InCity{
           ... on City{
@@ -385,15 +381,15 @@ We have added the Zoo to a city, to get the name of the City, we have to use the
 }
 ```
 
-Because we have set the `HasZoo` property, we can also reverse the query:
+Because we have set the `HasCompany` property, we can also reverse the query:
 
 ```graphql
 {
   Get {
     Things {
       City {
-        HasZoo {
-          ... on Zoo {
+        HasCompany {
+          ... on Company {
             name
           }
         }
@@ -403,23 +399,6 @@ Because we have set the `HasZoo` property, we can also reverse the query:
 }
 ```
 
-# Querying with RESTful API
-
-You can also query individual nodes through the RESTful API.
-
-The following example results in all Things that are added to Weaviate;
-
-```bash
-$ curl http://localhost:8080/v1/things
-```
-
-[Click here](query) for a complete overview of RESTful API endpoint.
-
 ## Frequently Asked Questions
 
-...
-
-If you can't find the answer to your question here, please use the:
-1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
-3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
+{% include support-links.html %}
