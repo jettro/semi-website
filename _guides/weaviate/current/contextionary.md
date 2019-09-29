@@ -27,6 +27,10 @@ Weaviate has a contextionary endpoint which you can call to see how it indexed w
 
 - You can use this functionality to see how Weaviate functions under the hood.
 - All contextionary functionality is consolidated inside Weaviate itself, which means that in practice you will probably not need this end-point often.
+- The more training data is available to create the contextionary the better, and the latest versions are trained on the following corpus-sizes;
+    - English (8.7G en-corpus.txt)
+    - German (3.8G de-corpus.txt)
+    - Dutch (1.1G nl-corpus.txt)
 
 ## Find concepts
 
