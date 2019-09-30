@@ -1,12 +1,10 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Schema
+title: Documentation on how to work with the Weaviate schema
 description: How to setup a weaviate schema.
 tags: ['Schema']
-video-link:
-video-caption:
 menu-order: 6
 open-graph-type: article
 ---

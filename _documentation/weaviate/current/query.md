@@ -1,12 +1,10 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Query data   
+title: Documenation on how to query data   
 description: How to query weaviate.
 tags: ['Query', 'GraphQL']
-video-link:
-video-caption:
 menu-order: 8
 open-graph-type: article
 ---

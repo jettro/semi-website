@@ -1,12 +1,10 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Introduction
-description: At it's root, Weaviate 
-tags: ['Business', 'Summary', 'Blog']
-video-link:
-video-caption:
+title: Introduction to the Weaviate CLI tool
+description: Weaviate CLI tool
+tags: ['weaviate-cli', 'introduction']
 menu-order: 1
 open-graph-type: article
 ---

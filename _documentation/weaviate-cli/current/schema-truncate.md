@@ -1,13 +1,12 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Schema Truncate
-description: At it's root, Weaviate 
-tags: ['Business', 'Summary', 'Blog']
-video-link:
-video-caption:
+title: Documenttion on how to truncate a Weaviate schema
+description: Truncate a Weaviate schema.
+tags: ['weaviate-cli', 'schema', 'truncate']
 menu-order: 7
+open-graph-type: article
 ---
 
 # Schema Truncate Guide

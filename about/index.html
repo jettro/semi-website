@@ -1,7 +1,7 @@
 ---
 bodyclass: ["page--guides", " "]
 layout: layout-default
-title: about us
+title: About
 description: An overview of the SeMI team.
 ---
 
@@ -9,9 +9,9 @@ description: An overview of the SeMI team.
     <div class="container background-hexagon">
         <section class="layout layout--single section-page-intro">
             <div class="section-standout__text--centered space-header-page">
-                <h1 class="title-page header--centered">Meet our team</h1>
+                <h1 class="title-page header--centered">About SeMI</h1>
                 <div class="section-standout__text--centered">
-                    <p>We are a 100% remote team with a global client base. If you are interested in how we work, you can find this in the <a href="/playbook">SeMI Playbook</a>.<br>If you want to join our team or if you have other questions, please do reach out to us on <a href="mailto:hello@semi.technology">hello@semi.technology</a>.</p>
+                    <p>Hi there! We are the SeMI (semantic machine insights) team. If you are interested in working with us, you can reach out to us on <a href="mailto:hello@semi.technology">hello@semi.technology</a>. If you would like to learn how we work, check out the <a href="/playbook/#HR">SeMI Playbook</a>.</p>
                 </div>
             </div>
         </section>
@@ -162,6 +162,24 @@ description: An overview of the SeMI team.
                     linkUrl='https://www.linkedin.com/in/michaverhagen/'
                     linkExternal=true
                     ctaText="Contact me on LinkedIn"
+                    content=carOneContent
+                %}
+
+                {% capture carOneContent %}
+                <div class="card__intro">
+                    <p>Let us know how you can help!</p>
+                    <p>Wherever you want</p>
+                </div>
+                {% endcapture %}
+
+                {% include components/card/card.html
+                    title="You?"
+                    themeClass="card-white card--pilar card--theme-weaviate-oss"
+                    imgUrl="/img/question-mark.svg"
+                    imgAlt="You?"
+                    linkUrl='mailto:hello@semi.technology'
+                    linkExternal=true
+                    ctaText="email us on hello@semi.technology"
                     content=carOneContent
                 %}
                 

@@ -1,12 +1,10 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Authorization
+title: Documentation on how to do authorization
 description: How to setup weaviate authorization.
 tags: ['Installation', 'Authorization']
-video-link:
-video-caption:
 menu-order: 5
 open-graph-type: article
 ---

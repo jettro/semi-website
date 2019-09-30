@@ -74,7 +74,9 @@ $script('//rum-static.pingdom.net/pa-5b22f622a42dbb00070002a5.js');
  */
 var links = document.links;
 for (var i = 0, linksLength = links.length; i < linksLength; i++) {
-  if (links[i].hostname != window.location.hostname) {
-    links[i].target = '_blank';
-  } 
+  if(!links[i].href.startsWith("javascript:")){
+    if (links[i].hostname != window.location.hostname) {
+      links[i].target = '_blank';
+    } 
+  }
 }

@@ -1,12 +1,10 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Aggregate data
+title: Documentation on how to aggregate data
 description: How to work with Weaviate's Aggregate function.
 tags: ['Aggregate', 'GraphQL']
-video-link:
-video-caption:
 menu-order: 10
 open-graph-type: article
 ---

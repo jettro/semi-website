@@ -1,13 +1,12 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Empty Concepts
-description: At it's root, Weaviate 
-tags: ['Business', 'Summary', 'Blog']
-video-link:
-video-caption:
+title: Documentation on how to empty concepts from a Weaviate
+description: Remove concepts from Weaviate
+tags: ['weaviate-cli', 'empty']
 menu-order: 9
+open-graph-type: article
 ---
 
 # Empty Concepts Guide

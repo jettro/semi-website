@@ -1,12 +1,13 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 bodyclass: ["page--guides", " "]
 product: weaviate
 product-order: 1
-title: Introduction
+title: An introduction to Weaviate
 description: Learn more about Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
 menu-order: 1
+open-graph-type: article
 ---
 
 # Introduction to Weaviate
@@ -28,9 +29,9 @@ Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph bas
 - [Miscellaneous](#miscellaneous)
 - [FAQ](#frequently-asked-questions)
 
-> We aim to allow anyone, anywhere, any time to create their own knowledge graph or knowledge network.
-
 ## Why Weaviate?
+
+> We aim to allow anyone, anywhere, any time to create their own knowledge graph or knowledge network.
 
 In almost any situation where you work with data, you store information related to something in the real world. This can be data about transactions, cars, airplanes, products; you name it. The challenge with current databases is that it is difficult for the software to grasp the context of the entity you refer to in your datasets. Do the characters "Apple" refer to the company or the fruit?
 
