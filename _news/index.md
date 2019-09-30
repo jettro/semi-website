@@ -11,4 +11,4 @@ open-graph-type: article
 
 - [Knowledge graph meetups](./meetups.html)
 
-Keep up to date by signing up to our [newsletter](/newsletter.html).
+Keep up to date by signing up to our [newsletter](/newsletter/).
