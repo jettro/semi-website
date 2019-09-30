@@ -47,7 +47,7 @@ Because most data is related to something (e.g., Amsterdam _is the capital of_ T
 
 ## Features
 
-Weaviate has four core features and a variaty of additional features.
+Weaviate has four core features and a variety of additional features.
 
 ### Core features
 
