@@ -3,7 +3,7 @@ layout: layout-documentation
 bodyclass: ["page--guides", " "]
 product: weaviate
 product-order: 1
-title: An introduction to Weaviate
+title: Introduction
 description: Learn more about Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
 menu-order: 1
@@ -80,8 +80,11 @@ Weaviate consists of four core features;
 | **Concept** | Concepts are related to entities. Often you will use concepts to search in your datasets. If your dataset has data about _An Actor with the name Arnold Schwarzenegger_ and _an Actor with the name Al Pacino_, the concepts _Movie_ and _Terminator_ will find a closer relation to the first actor rather than the latter. |
 | **Beacon** | A beacon is a reference to a location iof a concept in Weaviate or inside the knowledge network. Often defined as follows: `weaviate://{peerName}/{semanticKind}/{UUID}`
 | **Knowledge Network** | A peer to peer (P2P) network of Weaviates |
-| **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution. Notably, this would mean |
+| **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution migth not. |
 | **C11y** | Abbreviation of Contextionary. |
+| **Weaviate Cluster** | A managed Weaviate cluster |
+| **Weaviate Cluster Service (WCS)** | A managed services that hosts Weaviate clusters on the SeMI Network |
+| **Weaviate Knowledge Network (WKN)** | A network of Weaviates |
 
 ## About the Contextionary
 

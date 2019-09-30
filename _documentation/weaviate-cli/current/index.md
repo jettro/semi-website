@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Introduction to the Weaviate CLI tool
+title: Introduction
 description: Weaviate CLI tool
 tags: ['weaviate-cli', 'introduction']
 menu-order: 1

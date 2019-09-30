@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Documenation on how to query data   
+title: Query data
 description: How to query weaviate.
 tags: ['Query', 'GraphQL']
 menu-order: 8

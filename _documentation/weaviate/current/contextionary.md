@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Documentation about the Weaviate contextionary
+title: Contextionary
 description: How to work with Weaviate's Contextionary.
 tags: ['Explore', 'Contextionary', 'C11y']
 menu-order: 11

@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Weaviate FAQ
+title: FAQ
 description: Frequently Asked Questions.
 tags: ['FAQ', 'Help']
 menu-order: 13

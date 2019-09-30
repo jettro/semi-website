@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Documentation on how to work with the Weaviate schema
+title: Schema
 description: How to setup a weaviate schema.
 tags: ['Schema']
 menu-order: 6

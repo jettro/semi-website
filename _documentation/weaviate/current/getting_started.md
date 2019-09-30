@@ -3,7 +3,7 @@ layout: layout-documentation
 bodyclass: ["page--guides", " "]
 product: weaviate
 product-order: 1
-title: Documentation on how to get started with Weaviate
+title: Getting started
 description: Getting started with Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
 menu-order: 2

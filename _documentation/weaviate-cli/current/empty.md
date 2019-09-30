@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Documentation on how to empty concepts from a Weaviate
+title: Empty a Weaviate
 description: Remove concepts from Weaviate
 tags: ['weaviate-cli', 'empty']
 menu-order: 9

@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Documentation on how to ping a Weaviate
+title: Ping
 description: Ping a Weaviate with the Weaviate CLI tool.
 tags: ['weaviate-cli', 'ping']
 menu-order: 4

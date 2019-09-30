@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Documentation on how to do initiation
+title: Initiation
 description: Initiate the Weaviate-CLI tool
 tags: ['weaviate-cli', 'initiation']
 menu-order: 4
@@ -20,7 +20,7 @@ open-graph-type: article
 
 ## Basics
 
-A weaviate-cli is always attached to a running Weaviate. If a Weaviate has [OpenID enabled](/guides/weaviate/current/authentication.html) the CLI tool will automatically request the necessary information from the Weaviate instance.
+A weaviate-cli is always attached to a running Weaviate. If a Weaviate has [OpenID enabled](/documentation/weaviate/current/authentication.html) the CLI tool will automatically request the necessary information from the Weaviate instance.
 
 ## Initiation
 

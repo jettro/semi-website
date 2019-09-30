@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Documenttion on how to truncate a Weaviate schema
+title: Truncate
 description: Truncate a Weaviate schema.
 tags: ['weaviate-cli', 'schema', 'truncate']
 menu-order: 7

@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Documentation on how to install Weaviate
+title: Installation
 description: How to install a weaviate setup.
 tags: ['Installation', 'Running', 'Kubernetes']
 menu-order: 3
@@ -18,7 +18,7 @@ Weaviate is completely containerized, you can use Docker Compose, Kubernetes or 
 ## Index
 
 - [Basics](#basics)
-- [Weaviate Sandbox](#weaviate-sandbox)
+- [Weaviate Cluster Service (WCS)](#weaviate-sandbox)
 - [Docker Compose](#docker-compose)
 - [Kubernetes](#kubernetes)
 - [Weaviate Configuration](#weaviate-configuration-file)
@@ -31,12 +31,12 @@ Weaviate is completely containerized, you can use Docker Compose, Kubernetes or 
 - If your Weaviate is available over the internet or locally, you can use the [Weaviate Playground](http://playground.semi.technology) to interact with it.
 - All environments run out of the box.
 
-## Weaviate Sandbox
+## Weaviate Cluster Service (WCS)
 
-Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal to quickly setup and test out Weaviate's capabilities. You can request sandboxes;
+Weaviate Clusters are managed instances hosted on the SeMI network. Weaviate Clusters are ideal to quickly setup and run or test out Weaviate's capabilities. You can request a free Weaviate Cluster;
 
-- [Through this web-form](/weaviate-sandbox/)
-- [Through the weaviate-cli](/guides/weaviate-cli/current/sandbox-create)
+- [Through this web-form](/weaviate-cluster/)
+- [Through the weaviate-cli](/guides/weaviate-cli/current/sandbox-cluster)
 
 ## Docker Compose
 
@@ -104,7 +104,7 @@ _coming soon_
 
 ## Weaviate Configuration File
 
-Configuration customizations can be made in the [configuration YAML file](https://github.com/semi-technologies/weaviate/blob/master/docker-compose/runtime/config.yaml).
+Configuration customizations can be made in the configuration YAML file.
 
 _Note: in principle Weaviate runs out of the box and the configuration should only be changed in very customized situations._
 

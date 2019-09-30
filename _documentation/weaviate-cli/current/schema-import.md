@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Documenation on how to import a schema into Weaviate
+title: Import a schema
 description: Weaviate CLI schema import
 tags: ['weaviate-cli', 'schema', 'import']
 menu-order: 5
@@ -63,7 +63,7 @@ You can save this schema as a JSON file.
 
 ### Creating a schema file
 
-You can follow the schema formatting as [described here](/guides/weaviate/current/schema.html).
+You can follow the schema formatting as [described here](/documentation/weaviate/current/schema.html).
 
 ## Simple schema example
 

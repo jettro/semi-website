@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Documentation on how to do authentication
+title: Authentication
 description: How to setup weaviate auhtentication.
 tags: ['Installation', 'Authentication']
 menu-order: 4

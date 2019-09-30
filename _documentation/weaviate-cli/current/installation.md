@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Documenation on how to install the Weaviate CLI tool
+title: Installation
 description: Installation of the Weaviate CLI tool
 tags: ['weaviate-cli', 'installation']
 menu-order: 2

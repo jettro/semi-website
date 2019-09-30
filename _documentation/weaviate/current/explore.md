@@ -2,7 +2,7 @@
 layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Documentation on how to explore weaviate
+title: Explore
 description: How to explore weaviate.
 tags: ['Explore', 'Contextionary']
 menu-order: 9
