@@ -415,6 +415,21 @@ Because we have set the `HasCompany` property, we can also reverse the query:
 }
 ```
 
+### Explore
+
+Exploring through the graph is possible using another function. If you use the `Explore` function, the `Contextionary` will be used to find objects you are looking for. For example, the following query will return objects with the class `City`. Although they are not named `place`, the objects are semantically close to cities, which is why cities will be returned. 
+
+```graphql
+{
+  Explore (concepts: ["place"]) {
+    className
+    beacon
+    certainty
+  }
+}
+```
+
+
 ## Frequently Asked Questions
 
 {% include support-links.html %}

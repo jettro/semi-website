@@ -174,7 +174,7 @@ $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X D
 Weaviate has two types of references:
 
 1. Direct references which are references to nodes in the graph (like a traditional graph-DB).
-2. Indirect references are references that are semantically similar to each other.
+2. Indirect references are references that are semantically similar to each other. _(coming soon)_
 
 ### Direct References
 
@@ -197,7 +197,7 @@ Direct references are always set like this:
 - _Note: for more information about setting references, see the documentation below._
 - _Note: click [here](#cross-reference-location-url) for more information about CREF location definitions_
 
-### Indirect References
+### Indirect References _(coming soon)_
 
 Indirect references tap into the natural language processing part of Weaviate. You can set a reference to something that is _close enough_ for Weaviate to recognize it. The use case here is that if you have multiple data entries that describe the same thing, it will help Weaviate recognize the entry and make the relations for you.
 
@@ -278,7 +278,7 @@ Example of adding a direct reference:
 $ curl http://localhost:8080/v1/actions/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/toCompany -X POST -H 'Content-type: application/json' -d 'beacon: weaviate://localhost/things/22cc3380-ef73-48f8-9e3c-c609bae0b4b0'
 ```
 
-Example of adding an indirect reference:
+Example of adding an indirect reference _(coming soon)_:
 
 ```bash
 $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/hasCeo -X POST -H 'Content-type: application/json' -d \
