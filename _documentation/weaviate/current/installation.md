@@ -36,7 +36,7 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
 Weaviate Clusters are managed instances hosted on the SeMI network. Weaviate Clusters are ideal to quickly setup and run or test out Weaviate's capabilities. You can request a free Weaviate Cluster;
 
 - [Through this web portal](/weaviate-cluster/). Or;
-- [Through the weaviate-cli](/guides/weaviate-cli/current/cluster-create.html)
+- [Through the weaviate-cli](/documentation/weaviate-cli/current/cluster-create.html)
 
 ## Docker Compose
 
