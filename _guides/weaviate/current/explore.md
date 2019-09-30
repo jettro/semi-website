@@ -60,11 +60,11 @@ The `Explore{}` function is structured as follows:
 ```graphql
 {
   Explore (
-    network: <Boolean>,  # If set to True, peers on the P2P network will be included in the search
-    concepts: [<String>]!,  # Required; an array of search items, which should be present in the Contextionary
-    limit: <Int>,   # The maximum amount of objects to return
-    certainty: <Float>, # Minimal level of certainty, computed by normalized distance. See [Certainty](#certainty) for more information
-    moveTo: {   # Giving directions to the search
+    network: <Boolean>,         # If set to True, peers on the P2P network will be included in the search
+    concepts: [<String>]!,      # Required; an array of search items, which should be present in the Contextionary
+    limit: <Int>,               # The maximum amount of objects to return
+    certainty: <Float>,         # Minimal level of certainty, computed by normalized distance. See [Certainty](#certainty) for more information
+    moveTo: {               # Giving directions to the search
       concepts: [<String>]!, # List of search items
       force: <Float>!   # The force to applu for a particular movement. Must be between 0 (no movement) and 1 (largest possible movement).
     },

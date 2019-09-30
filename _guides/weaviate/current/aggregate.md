@@ -47,7 +47,7 @@ $ curl http://localhost/v1/graphql -X POST -H 'Content-type: application/json' -
 
 The `Aggregate{}` function is structured the following:
 
-```graphql
+```js
 {
   Aggregate {
     <SematicKind> {
@@ -104,7 +104,7 @@ The `Aggregate{}` function is structured the following:
 
 An example query to obtain meta information about the data in the class `City` can be queried as follows. Note that the data is not grouped yet, the meta information is about all the data objects found with the class `City`.
 
-```graphql
+```js
 {
   Aggregate {
     Things {
@@ -247,40 +247,6 @@ which might result in something like this result:
 In the `Aggregate{}` function, as well as the `Get{}` function, a `where` filter and `limit` filter can be used on class-level to filter data. A detailed explanation of these filters can be found on the `Query` page ([here for `where` filter](./query#filters), and [here for `limit` filter](./query#limit-filter)).
 
 In addition, the `limit` filter can be used on the `topOccurrences` fields.
-
-#### OLAP
-
-OLAP queries take a long time (minutes to hours) to complete, so there is a way to send an OLAP query, let it run in the background, and come back later to get the results. The query result will be stored in cache.
-
-This applies to `Aggregate{}` queries only, where large amount of data may be processed. Currently, this is offered for queries to a local network. OLAP queries send to other nodes in a network outside the local network can be computationally very expensive, and a design for this is not implemented yet.
-
-The following two parameters can be set in the `<class>` level of GraphQL queries, which both allow boolean values:
-- `useAnalyticsEngine`
-- `forceRecalculate` 
-- Default setting is both `forceRecalculate` and `useAnalyticsEngine` to `false`. When these settings are set to other settings in the configuration file of Weaviate, these settings will be adopted. When these parameters are used in direct GraphQL queries, these settings are used rather than the default and configuration settings. Note that the following settings are not a valid combination and will fail in configuration: `(forceRecalculate: true, useAnalyticsEngine: false)`
-
-When you send a specific OLAP query for the first time for the first time, you will get an error message. This error message will let you know that the analytics engine is running to calculate the query results for you. When you run the same query again while the result is not ready yet, you will see another message to let you know the job is still running, under the same hash code. When you run the query again when the job is done, you will see the results. If you send the same query again without `forceRecalculate` set to `true`, the cached result will be retrieved and no recalculation will to be done.
-
-### Example
-``` graphql
-{
-  Aggregate {
-    Things {
-      City(groupBy: ["isCapital"],
-        forceRecalculate: false,
-        useAnalyticsEngine: true,
-      ) {
-        population {
-          mean
-        }
-        groupedBy {
-          value
-        }
-      }
-    }
-  }
-}
-```
 
 ## Frequently Asked Questions
 

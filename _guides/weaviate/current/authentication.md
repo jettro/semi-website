@@ -46,7 +46,7 @@ We want to make sure that Authentication reflects this. Thus, different authenti
 You can request all details needed from the following endpoint:
 
 ```bash
-$ curl http://localhost/v1/.well-known/openid-configuration
+$ curl http://localhost:8080/v1/.well-known/openid-configuration
 ```
 
 ### Anonymous Access
@@ -170,7 +170,7 @@ When you've received a Bearer, you can authenticate in the following manner wher
 
 ```bash
 # List all things with a Bearer
-$ curl http://localhost/v1/things -H "Authorization: Bearer {Bearer}"
+$ curl http://localhost:8080/v1/things -H "Authorization: Bearer {Bearer}"
 ```
 
 ## Frequently Asked Questions

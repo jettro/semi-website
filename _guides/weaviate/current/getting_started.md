@@ -85,15 +85,10 @@ The result should be an empty Weaviate:
 
 ```json
 {
-    "actionsSchema": {
-        "classes": [],
-        "type": "action"
-    },
-    "hostname": "http://[::]:8080",
-    "thingsSchema": {
-        "classes": [],
-        "type": "thing"
-    }
+"contextionaryVersion": "en0.8.0-v0.3.3",
+"contextionaryWordCount": 211170,
+"hostname": "http://[::]:8080",
+"version": "{{ site.weaviate_version }}"
 }
 ```
 
