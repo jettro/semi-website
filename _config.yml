@@ -4,9 +4,9 @@ kramdown:
     parse_block_html: false
 rdiscount extensions: [smart]
 collections:
-    articles:
+    news:
         output: true
-        permalink: /articles/:path
+        permalink: /news/:path
     guides:
         output: true
         permalink: /guides/:path

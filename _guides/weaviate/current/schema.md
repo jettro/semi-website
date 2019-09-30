@@ -80,13 +80,13 @@ City
 Keywords give context to a class or property. They help a Weaviate instance to interpret different words that are spelled the same way (so-called homographs). A good example of this is the word seal. Do you mean a stamp or the sea animal? You can define this by setting keywords. The weights determine how important the keyword is. Setting low values is often already enough to determine the context of a thing or action.
 
 ```yaml
-class: Seal
-description: An individual seal
+class: Company
+description: A company in the army
 keywords:
-- keyword: animal
-  weight: 0.05
-- keyword: sea
-  weight: 0.01
+- keyword: army
+  weight: 1.0
+- keyword: militaryUnit
+  weight: 0.75
 ```
 
 ### Weaviate Schema versus Ontology
@@ -101,40 +101,54 @@ Within Weaviate, the schema is _only_ used to define the query and explore synta
 
 A schema object is defined as follows;
 
-```yaml
-class: string # The name of the class in string format
-description: string # A description for your reference
-keywords: # An array of keywords that Weaviate uses when a classname is ambigious
-  - 
-    keyword: string # A keyword in string format. For example, with the class "Company" you might want to add the keyword "business"
-    weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
-properties: # An array of the properties you are adding, same as a Property Object
-  - 
-    dataType: # The data type of the object as described above, When creating cross references, a property can have multiple dataTypes.
-    - string
-    name: string # The name of the property
-    keywords: # An array of keywords that Weaviate uses when a property is ambigious
-      - 
-        keyword: string # A keyword in string format.
-        weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
-    cardinality: atMostOne OR many # Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
-    description: string # A description for your reference
+```js
+{
+  "class": "string",       // The name of the class in string format
+  "description": "string", // A description for your reference
+  "keywords": [            // An array of keywords that Weaviate uses when a classname is ambigious
+    {
+      "keyword": "string", // A keyword in string format. For example, with the class "Company" you might want to add the keyword "business"
+      "weight": 0.0        // The importance of the keyword. Min 0.0 and max 1.0
+    }
+  ],
+  "properties": [          // An array of the properties you are adding, same as a Property Object
+    {
+      "dataType": [        // The data type of the object as described above, When creating cross references, a property can have multiple dataTypes.
+        "string"
+      ],
+      "name": "string",    // The name of the property
+      "keywords": [        // An array of keywords that Weaviate uses when a property is ambigious
+        {
+          "keyword": "string", // A keyword in string format.
+          "weight": 0.0        // The importance of the keyword. Min 0.0 and max 1.0
+        }
+      ],
+      "cardinality": "atMostOne OR many", // Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
+      "description": "string"             // A description for your reference
+    }
+  ]
+}
 ```
 
 ### Property Object
 
 A property object is defined as follows;
 
-```yaml
-dataType: # The data type of the object as described above, When creating cross refferences, a property can have multiple dataTypes.
-  - string
-name: string # The name of the property
-keywords: # An array of keywords that Weaviate uses when a property is ambigious
-  - 
-    keyword: string # A keyword in string format.
-    weight: 0 # The importance of the keyword. Min 0.0 and max 1.0
-cardinality: atMostOne OR many # Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
-description: string # A description for your reference
+```js
+{
+  "dataType": [     // The data type of the object as described above, When creating cross refferences, a property can have multiple dataTypes.
+    "string"
+  ],
+  "name": "string", // The name of the property
+  "keywords": [     // An array of keywords that Weaviate uses when a property is ambigious
+    {
+      "keyword": "string", // A keyword in string format.
+      "weight": 0.0        // The importance of the keyword. Min 0.0 and max 1.0
+    }
+  ],
+  "cardinality": "atMostOne OR many", // Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
+  "description": "string"             // A description for your reference
+}
 ```
 
 ### Concetenate Classes and Properties
@@ -160,11 +174,12 @@ City
 
 [Keywords](#keywords) cannot be chained, they have to match exactly one word. However, there is no limit on the amount of keywords per class or per class property.
 
-Note that stopwords automatically removed from camelCased and CamelCased names.
-
 ### Stopwords
 
+Note that stopwords automatically removed from camelCased and CamelCased names.
+
 ### What stopwords are and why they matter
+
 Stopwords are words that don't add semantic meaning to your concepts and are
 extremely common in texts across different contexts. For example, the sentence
 "a car is parked on the street" contains the following stopwords: "a", "is",
@@ -234,11 +249,15 @@ Weaviate allows you to store geo-coordinates related to a thing or action. When 
 
 An example of how geo coordinates are defined as:
 
-```yaml
-Bike:
-  location:
-    latitude: 52.366667
-    longitude: 4.9
+```json
+{
+  "Bike": {
+    "location": {
+      "latitude": 52.366667,
+      "longitude": 4.9
+    }
+  }
+}
 ```
 
 #### Cross Reference Type
@@ -247,11 +266,17 @@ The cross-reference type is the graph element of Weaviate. When setting a data t
 
 The following example is seen as a valid set of datatypes.
 
-```yaml
-properties:
-  - dataType:
-	  - Company
-	  - Business
+```json
+{
+  "properties": [
+    {
+      "dataType": [
+        "Company",
+        "Business"
+      ]
+    }
+  ]
+}
 ```
 
 ### Cardinality 
@@ -264,19 +289,25 @@ For example, the class `Company` might have the property `hasCustomer` which can
 a cross-reference to other compannies as well as businesses and individual persons. When using GraphQL to retrieve data
 from the graph, the cardinality will determine how the query is constructed.
 
-```yaml
-class: Company
-description: A company in our dataset
-keywords: []
-properties:
-- name: hasCustomer
-  dataType:
-  - Company
-  - Person
-  - Business
-  cardinality: many
-  description: An entity that buys from this company
-  keywords: []
+```json
+{
+  "class": "Company",
+  "description": "A company in our dataset",
+  "keywords": [],
+  "properties": [
+    {
+      "name": "hasCustomer",
+      "dataType": [
+        "Company",
+        "Person",
+        "Business"
+      ],
+      "cardinality": "many",
+      "description": "An entity that buys from this company",
+      "keywords": []
+    }
+  ]
+}
 ```
 
 ## RESTful API
@@ -291,7 +322,7 @@ properties:
 The current schema can be viewed as follows:
 
 ```bash
-$ curl http://localhost/v1/schema
+$ curl http://localhost:8080/v1/schema
 ```
 
 ## Create a Schema Item
@@ -301,54 +332,74 @@ Adding a schema can be done by POSTing a [schema object](#schema-object) to the 
 An example of creating a schema item of the semantic kind _Thing_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema/things -X POST -H 'Content-type: text/x-yaml' -d \
-'class: Company
-description: "A company in our dataset"
-keywords:
-  - 
-    keyword: business
-    weight: 0.8
-properties:
-  - 
-    dataType:
-      - string
-    name: name
-    keywords:
-    - 
-      keyword: identifier
-      weight: 0.25
-    description: "Name of the Company"'
+$ curl http://localhost:8080/v1/schema/things -X POST -H 'Content-type: application/json' -d \
+'{
+  "class": "Company",
+  "description": "A company in our dataset",
+  "keywords": [
+    {
+      "keyword": "business",
+      "weight": 0.8
+    }
+  ],
+  "properties": [
+    {
+      "dataType": [
+        "string"
+      ],
+      "name": "name",
+      "keywords": [
+        {
+          "keyword": "identifier",
+          "weight": 0.25
+        }
+      ],
+      "description": "Name of the Company"
+    }
+  ]
+}'
 ```
 
 An example of creating a schema item of the semantic kind _Action_ might look like this. Note that the properties `fromCompany` and `toCompany` are cross-references to the class `Company`:
 
 ```bash
-$ curl http://localhost/v1/schema/actions -X POST -H 'Content-type: text/x-yaml' -d \
-'class: Payment
-description: "A payment that happened"
-properties: 
-  - 
-    dataType: 
-      - date
-    description: "date of the payment"
-    name: transactionDate
-  - 
-    cardinality: many
-    dataType: 
-      - Company
-    description: "the company that receives the payment"
-    name: toCompany
-  - 
-    cardinality: atMostOne
-    dataType: 
-      - Company
-    description: "the company that sends the payment"
-    name: fromCompany
-  - 
-    dataType: 
-      - boolean
-    description: "was the payment succesful?"
-    name: success'
+$ curl http://localhost:8080/v1/schema/actions -X POST -H 'Content-type: application/json' -d \
+'{
+  "class": "Payment",
+  "description": "A payment that happened",
+  "properties": [
+    {
+      "dataType": [
+        "date"
+      ],
+      "description": "date of the payment",
+      "name": "transactionDate"
+    },
+    {
+      "cardinality": "many",
+      "dataType": [
+        "Company"
+      ],
+      "description": "the company that receives the payment",
+      "name": "toCompany"
+    },
+    {
+      "cardinality": "atMostOne",
+      "dataType": [
+        "Company"
+      ],
+      "description": "the company that sends the payment",
+      "name": "fromCompany"
+    },
+    {
+      "dataType": [
+        "boolean"
+      ],
+      "description": "was the payment succesful?",
+      "name": "success"
+    }
+  ]
+}'
 ```
 
 ## Delete a schema item
@@ -358,13 +409,13 @@ Deleting a schema class can be done by sending a DELETE request to `/v1/schema/{
 An example of deleting a schema class item of the semantic kind _Thing_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema/things/Company -X DELETE
+$ curl http://localhost:8080/v1/schema/things/Company -X DELETE
 ```
 
 An example of deleting a schema class item of the semantic kind _Action_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema/actions/Payment -X DELETE
+$ curl http://localhost:8080/v1/schema/actions/Payment -X DELETE
 ```
 
 ## Add a property to a Schema item
@@ -374,28 +425,39 @@ Adding a schema can be done by POSTing a [property object](#property-object) to 
 An example of adding a schema item of the semantic kind _Thing_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema/things/Company/properties -X POST -H 'Content-type: text/x-yaml' -d \
-'dataType:
-  - geoCoordinates
-name: location
-keywords:
-  - keyword: geoLocation
-    weight: 0.8
-description: "The location of the company"'
+$ curl http://localhost:8080/v1/schema/things/Company/properties -X POST -H 'Content-type: application/json' -d \
+'{
+  "dataType": [
+    "geoCoordinates"
+  ],
+  "name": "location",
+  "keywords": [
+    {
+      "keyword": "geoLocation",
+      "weight": 0.8
+    }
+  ],
+  "description": "The location of the company"
+}'
 ```
 
 An example of adding a schema item of the semantic kind _Action_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema/actions/Payment/properties -X POST -H 'Content-type: text/x-yaml' -d \
-'dataType:
-  - number
-name: amount
-keywords:
-  - 
-    keyword: value
-    weight: 0.8
-description: "The amount paid"'
+$ curl http://localhost:8080/v1/schema/actions/Payment/properties -X POST -H 'Content-type: application/json' -d \
+'{
+  "dataType": [
+    "number"
+  ],
+  "name": "amount",
+  "keywords": [
+    {
+      "keyword": "value",
+      "weight": 0.8
+    }
+  ],
+  "description": "The amount paid"
+}'
 ```
 
 ## Delete a property from a schema item
@@ -405,21 +467,15 @@ Deleting a schema property can be done by sending a DELETE request to `/v1/schem
 An example of deleting a property item of the semantic kind _Thing_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema/things/Company/properties/name -X DELETE
+$ curl http://localhost:8080/v1/schema/things/Company/properties/name -X DELETE
 ```
 
 An example of deleting a property item of the semantic kind _Action_ might look like this:
 
 ```bash
-$ curl http://localhost/v1/schema/actions/Payment/properties/transactionDate -X DELETE
+$ curl http://localhost:8080/v1/schema/actions/Payment/properties/transactionDate -X DELETE
 ```
 
 ## Frequently Asked Questions
 
-...
-
-
-If you can't find the answer to your question here, please use the:
-1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
-3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
+{% include support-links.html %}

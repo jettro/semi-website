@@ -7,10 +7,30 @@ description: At it's root, Weaviate
 tags: ['Business', 'Summary', 'Blog']
 video-link:
 video-caption:
-menu-order: 3
-open-graph-type: article
-authorKey: bob
-pubdate: january 14, 2019
+menu-order: 4
 ---
 
-Foobar
+# Ping Guide
+
+{% include badges.html %}
+
+## Index
+
+- [Basics](#basics)
+- [Initiation](#initiation)
+
+## Basics
+
+You can ping a Weaviate to validate if it's up and running.
+
+## Initiation
+
+You can ping a Weaviate with the ping command
+
+```bash
+$ weaviate-cli ping
+```
+
+## Frequently Asked Questions
+
+{% include support-links.html %}

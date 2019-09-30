@@ -19,11 +19,16 @@ Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph bas
 
 - [Why Weaviate?](#why-weaviate)
 - [Features](#features)
+  - [Core features](#core-features)
+  - [Additional features](#additional-features)
 - [Basic Terminology](#basic-terminology)
 - [Contextionary](#about-the-contextionary)
+- [About Classification](#about-classification)
+- [About Weaviate Knowledge Networks](#about-weaviate-knowledge-networks)
 - [Miscellaneous](#miscellaneous)
 - [FAQ](#frequently-asked-questions)
 
+> We aim to allow anyone, anywhere, any time to create their own knowledge graph or knowledge network.
 
 ## Why Weaviate?
 
@@ -41,11 +46,28 @@ Because most data is related to something (e.g., Amsterdam _is the capital of_ T
 
 ## Features
 
-...
+Weaviate has four core features and a variaty of additional features.
+
+### Core features
+
+Weaviate consists of four core features;
+
+![weaviate knowledge graph USPs](/img/guides/USPs.png "weaviate knowledge graph USPs")
+
+1. The contextionary (c11y) is a vector index which stores _all_ data object based on their semantic meaning. This allows users to now only directly search and retrieve data, but also to search for its concepts.
+2. We believe that [GraphQL](https://graphql.org/) combined with a RESTful API, provides the best user experience to query Weaviate.
+3. Weaviate can automatically build its own graph relations through conceptual classification.
+4. With Weaviate you can create a semantic Knowledge Network based on a P2P network of Weaviates.
+
+### Additional features
+
+- Weaviate is completely containerized with Docker and Kubernetes.
+- Weaviate scales to support super-large graph sizes.
+- Fast vector space querying.
 
 ## Basic Terminology
 
-| Term | Description |
+| Terminology | Description |
 | --- | --- |
 | **Schema** | Where most knowledge graphs use an ontology, Weaviate uses a schema. The biggest difference sits in the fact that it doesn't matter for Weaviate _how_ you define what your data entails as long a semantic relation can be made (e.g., for Weaviate "A Company with the name Netflix" if similar to "A Business with the name Netflix Inc.") |
 | **Semantic Kinds** | Because of Weaviates semantic nature, we make a distinction in _semantic kinds_. Weaviate distinct two different kinds: *Things* and *Actions*. When creating a Weaviate Schema, you need to explain what Semantic Kind a data object entails. |
@@ -55,7 +77,8 @@ Because most data is related to something (e.g., Amsterdam _is the capital of_ T
 | **Property** | All classes have properties. E.g., the class Company might have the property _name_. In Weaviate, properties can be recognized because they always have a lowercase first character. |
 | **Entity** | An entity refers to something -often- in the world around us. E.g., _a Company with the name Apple_ refers to an entity with a relation to _a Product with the name iPhone_. Weaviate's Contextionary tries to find as many entities in your data as possible. |
 | **Concept** | Concepts are related to entities. Often you will use concepts to search in your datasets. If your dataset has data about _An Actor with the name Arnold Schwarzenegger_ and _an Actor with the name Al Pacino_, the concepts _Movie_ and _Terminator_ will find a closer relation to the first actor rather than the latter. |
-| **Beacon** | A beacon is a reference to a location in the Contextionary. Often defined as follows: `weaviate://{peerName}/{semanticKind}/{UUID}`
+| **Beacon** | A beacon is a reference to a location iof a concept in Weaviate or inside the knowledge network. Often defined as follows: `weaviate://{peerName}/{semanticKind}/{UUID}`
+| **Knowledge Network** | A peer to peer (P2P) network of Weaviates |
 | **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution. Notably, this would mean |
 | **C11y** | Abbreviation of Contextionary. |
 
@@ -79,7 +102,29 @@ When a new class object is created, it will be added to a Weaviate.
 
 ![Weaviate with data](/img/guides/c11y-with-data.jpg "Weaviate with data")
 
-When using the [GraphQL interface](./query), you can target a thing or action directly, or by searching for a nearby concept. E.g., the `company Apple` from the previous illustration, can be found by searching for the concept iPhone.
+When using the [GraphQL interface](./query), you can target a thing or action directly, or by searching for a nearby concept. E.g., the `company Apple` from the previous illustration, can be found by searching for the concept `iphone`.
+
+## About Classification
+
+Because Weaviate converts all data objects in a vector position based on their semantic meaning, data object get a logical distance from each other. This allows for a variety of automated classification tasks Weaviate can perform in near-realtime.
+
+### Example of a classification task
+
+Inside the Weaviate below, there are three data objects stored, a country, and two cities.
+
+![Weaviate with "Weaviate classification task, without relation](/img/guides/c11y-class1.jpg "Weaviate classification task, without relation")
+
+The country has a property called `hasCapital` of which the reference is unset. We can now request Weaviate to connect the most likely candidate as the capital. Because Weaviate -through the schema- knows that the value of `hasCapital` must be a `City` it can choose from both Amsterdam and New York. Because of the semantic relation of Amsterdam to The Netherlands, a decision can be made.
+
+![Weaviate with "Weaviate classification task, with relation](/img/guides/c11y-class2.jpg "Weaviate classification task, with relation")
+
+When creating automatic classification tasks, the user is able to define how certain Weaviate needs to be of the connection. During querying, the user can see if the relation was made automatically or manually.
+
+## About Weaviate Knowledge Networks
+
+_Coming soon! Sign up for our [newsletter](/newsletter) to be informed about release dates._
+
+Because Weaviate allows for fuzzy schema definitions (e.g., a "Company with the name Apple" is seen as semantically similar to a "Business with the identifier Apple Incorporated.") you can find beacons not only in your local Weaviate but also over a network of Weaviates. Allow creating a completely decentralized network of knowledge graphs, aka the knowledge network.
 
 ## Miscellaneous
 
@@ -87,10 +132,4 @@ When using the [GraphQL interface](./query), you can target a thing or action di
 
 ## Frequently Asked Questions
 
-...
-
-
-If you can't find the answer to your question here, please use the:
-1. [Knowledge base of old issues](https://github.com/semi-technologies/weaviate/issues?utf8=%E2%9C%93&q=label%3Abug). Or,
-2. For questions: [Stackoverflow](https://stackoverflow.com/questions/tagged/weaviate). Or,
-3. For issues: [Github](//github.com/semi-technologies/weaviate/issues).
+{% include support-links.html %}
