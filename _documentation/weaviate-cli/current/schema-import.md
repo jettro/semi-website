@@ -1,13 +1,12 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Schema Import
-description: At it's root, Weaviate 
-tags: ['Business', 'Summary', 'Blog']
-video-link:
-video-caption:
+title: Documenation on how to import a schema into Weaviate
+description: Weaviate CLI schema import
+tags: ['weaviate-cli', 'schema', 'import']
 menu-order: 5
+open-graph-type: article
 ---
 
 # Schema Import Guide

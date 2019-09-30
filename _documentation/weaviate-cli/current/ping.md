@@ -1,13 +1,12 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Ping
-description: At it's root, Weaviate 
-tags: ['Business', 'Summary', 'Blog']
-video-link:
-video-caption:
+title: Documentation on how to ping a Weaviate
+description: Ping a Weaviate with the Weaviate CLI tool.
+tags: ['weaviate-cli', 'ping']
 menu-order: 4
+open-graph-type: article
 ---
 
 # Ping Guide

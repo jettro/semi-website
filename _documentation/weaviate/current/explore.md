@@ -1,12 +1,10 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Explore data
+title: Documentation on how to explore weaviate
 description: How to explore weaviate.
 tags: ['Explore', 'Contextionary']
-video-link:
-video-caption:
 menu-order: 9
 open-graph-type: article
 ---

@@ -1,8 +1,8 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Adding and Modifying Data
+title: Documentation on adding and modifying data
 description: How to fill a weaviate with data.
 tags: ['Add', 'Data', 'Modify']
 menu-order: 7

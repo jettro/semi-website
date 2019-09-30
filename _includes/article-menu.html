@@ -1,13 +1,15 @@
-<a class="show-toc" href="#" data-toggle="toc">Table of contents</a>
+<a class="show-toc" href="#" data-toggle="toc">Table of page contents</a>
 <sidebar id="toc" class="article-toc-container" aria-expanded="false" itemscope itemtype="http://schema.org/SiteNavigationElement">
     <dl class="article-toc">
         <dd>
             <ul class="list-ui article-toc__list-pages">
             {% assign sorted_articles = site.news | sort: 'menu-order' %}
             {% for item in sorted_articles %}
-                <li>
-                    <a href="{{item.url}}" class="{% if item.title == page.title %}current{% endif %}">{{item.title}}</a>
-                </li>
+                {% unless item.title == 'News' %}
+                    <li>
+                        <a href="{{item.url}}" class="{% if item.title == page.title %}current{% endif %}">{{item.title}}</a>
+                    </li>
+                {% endunless %}
             {% endfor %}
             </ul>
         </dd>

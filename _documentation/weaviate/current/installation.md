@@ -1,12 +1,10 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Installation
+title: Documentation on how to install Weaviate
 description: How to install a weaviate setup.
 tags: ['Installation', 'Running', 'Kubernetes']
-video-link:
-video-caption:
 menu-order: 3
 open-graph-type: article
 ---
@@ -44,16 +42,35 @@ Sandboxes are Weaviate instances hosted on the SeMI network. Sandboxes are ideal
 
 You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/compose/) as follows on Linux and MacOS:
 
+Want another language? Make sure to let us know [here](https://github.com/semi-technologies/weaviate/issues).
+
+### Weaviate with an English contextionary
+
 ```bash
 # Download the Weaviate configuration file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/config.yaml
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
 # Download the Weaviate docker-compose file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/docker-compose.yml
 # Run Docker compose
 $ docker-compose up
 ```
 
+### Weaviate with a Dutch contextionary
+
+```bash
+# Download the Weaviate configuration file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/nl/config.yaml
+# Download the Weaviate docker-compose file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/nl/docker-compose.yml
+# Run Docker compose
+$ docker-compose up
+```
+
+Warning: The output is quite verbose, for an alternative see [attaching to only
+the log output of weaviate](#attaching-to-the-log-output-of-only-weaviate).
+
 ### Attaching to the log output of only weaviate
+
 The log output of weaviate's backing databases can be quite verbose. We instead
 recommend to attach only to weaviate itself. In this case run `docker-compose
 up` like so:

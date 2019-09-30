@@ -72,12 +72,9 @@
 .nav-main .main-nav--selected,
 .page--home .nav-main--home,
 .page--products .nav-main--products,
-.page--guides .nav-main--guides,
-.page--blog .nav-main--blog,
-.page--use-cases .nav-main--use-cases,
-.page--team .nav-main--team,
-.page--contact .nav-main--contact,
-.page--services .nav-main--services {
+.page--documentation .nav-main--documentation,
+.page--news .nav-main--news,
+.page--about .nav-main--about {
     a {
         background: $color-black;
         color: $color-white;

@@ -1,13 +1,12 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate-cli
 product-order: 3
-title: Initiation
+title: Documentation on how to do initiation
 description: Initiate the Weaviate-CLI tool
-tags: ['weaviate-cli', 'Initiation']
-video-link:
-video-caption:
+tags: ['weaviate-cli', 'initiation']
 menu-order: 4
+open-graph-type: article
 ---
 
 # Initiation Guide

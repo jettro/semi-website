@@ -49,14 +49,14 @@
 
 // specific to current hero text
 @include breakpoint(smallOnly) {
-  .title-hero { font-size: 1.2rem; }
+  .title-hero { font-size: 1.45rem; }
 }
 @include breakpoint(smallToMedium) {
-  .title-hero { font-size: 2rem; }
+  .title-hero { font-size: 1.8rem; }
 }
 @include breakpoint(medium) {
 
 }
 @include breakpoint(largeUp) {
-  .title-hero { font-size: 3.2rem; }
+  .title-hero { font-size: 2.5rem; }
 }

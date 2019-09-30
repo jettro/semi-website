@@ -1,12 +1,10 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Contextionary
+title: Documentation about the Weaviate contextionary
 description: How to work with Weaviate's Contextionary.
 tags: ['Explore', 'Contextionary', 'C11y']
-video-link:
-video-caption:
 menu-order: 11
 open-graph-type: article
 ---

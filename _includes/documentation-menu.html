@@ -1,9 +1,9 @@
-<a class="show-toc" href="#" data-toggle="toc">Table of contents</a>
+<a class="show-toc" href="#" data-toggle="toc">Table of page contents</a>
 <sidebar id="toc" class="guide-toc-container" aria-expanded="false" itemscope itemtype="http://schema.org/SiteNavigationElement">
     <dl class="article-toc guide-toc">
         <dd>
-            {% assign sorted_guides = site.guides | sort: 'menu-order' | group_by: 'product' %}
-            {% for guides in sorted_guides %}
+            {% assign sorted_documentation = site.documentation | sort: 'menu-order' | group_by: 'product' %}
+            {% for guides in sorted_documentation %}
                 {% if guides.name == page.product %}
                     <h3>{{ guides.name }}</h3>
                     <ul class="list-ui guide-toc__list-pages">

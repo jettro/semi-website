@@ -1,12 +1,13 @@
 ---
-layout: layout-guide
+layout: layout-documentation
 bodyclass: ["page--guides", " "]
 product: weaviate
 product-order: 1
-title: Getting Started
+title: Documentation on how to get started with Weaviate
 description: Getting started with Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
 menu-order: 2
+open-graph-type: article
 ---
 
 # Getting started
@@ -60,17 +61,32 @@ You are now ready to get started! If you run into issues, please [let us know](#
 
 ## Installation
 
-Warning: The output is quite verbose, for an alternative see [attaching to only
-the log output of weaviate](installation#attaching-to-the-log-output-of-only-weaviate).
+Want another language? Make sure to let us know [here](https://github.com/semi-technologies/weaviate/issues).
+
+### Weaviate with an English contextionary
 
 ```bash
 # Download the Weaviate configuration file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/config.yaml
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
 # Download the Weaviate docker-compose file
 $ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
 # Run Docker compose
 $ docker-compose up
 ```
+
+### Weaviate with a Dutch contextionary
+
+```bash
+# Download the Weaviate configuration file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
+# Download the Weaviate docker-compose file
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
+# Run Docker compose
+$ docker-compose up
+```
+
+Warning: The output is quite verbose, for an alternative see [attaching to only
+the log output of weaviate](./installation.html#attaching-to-the-log-output-of-only-weaviate).
 
 ## Validating if the Weaviate is online
 
