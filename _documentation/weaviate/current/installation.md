@@ -13,7 +13,7 @@ open-graph-type: article
 
 {% include badges.html %}
 
-Weaviate is completely containerized, you can use Docker Compose, Kubernetes or Terraform.
+Weaviate is completely containerized, you can use Docker Compose and/or Kubernetes to run it.
 
 ## Index
 
@@ -110,7 +110,7 @@ _Note: in principle Weaviate runs out of the box and the configuration should on
 
 ## OpenID Authentication
 
-In the configuration YAML file, you can specify the open ID authentication.
+In the configuration YAML file, you can specify the desired mode of authentication, such as OpenID Connect.
 
 Currently [Anonymous Access](authentication#anonymous-access) and [OpenID
 Connect](authentication#openid-connect-oidc) are supported. Other Authentication schemes

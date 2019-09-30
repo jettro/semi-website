@@ -70,15 +70,15 @@ Weaviate consists of four core features;
 
 | Terminology | Description |
 | --- | --- |
-| **Schema** | Where most knowledge graphs use an ontology, Weaviate uses a schema. The biggest difference sits in the fact that it doesn't matter for Weaviate _how_ you define what your data entails as long a semantic relation can be made (e.g., for Weaviate "A Company with the name Netflix" if similar to "A Business with the name Netflix Inc.") |
+| **Schema** | In Weaviate, a schema is used to define the types of data you will be adding and querying. You can learn more about it [here](./schema.html). |
 | **Semantic Kinds** | Because of Weaviates semantic nature, we make a distinction in _semantic kinds_. Weaviate distinct two different kinds: *Things* and *Actions*. When creating a Weaviate Schema, you need to explain what Semantic Kind a data object entails. |
 | **Thing** | A thing is a **semantic kind**, referring to an object (e.g., car, rocketship, product). The easiest way to think about Things is in the form of nouns. |
 | **Action** | An action is a **semantic kind**, referring to an action (e.g., walking, dancing, buying). The easiest way to think about Things is in the form of verbs. |
-| **Class** | A class is an instance of a semantic kind which you are free to define. E.g., the Class Company or the Class Move. In Weaviate, classes can be recognized because they always have a capitalized first character. You can set as many classes with a naming you choose. |
+| **Class** | A class is a definition of a semantic kind. E.g., the Class Company or the Class Move. In Weaviate, classes can be recognized because they always have a capitalized first character. You can set as many classes with a naming you choose. |
 | **Property** | All classes have properties. E.g., the class Company might have the property _name_. In Weaviate, properties can be recognized because they always have a lowercase first character. |
 | **Entity** | An entity refers to something -often- in the world around us. E.g., _a Company with the name Apple_ refers to an entity with a relation to _a Product with the name iPhone_. Weaviate's Contextionary tries to find as many entities in your data as possible. |
 | **Concept** | Concepts are related to entities. Often you will use concepts to search in your datasets. If your dataset has data about _An Actor with the name Arnold Schwarzenegger_ and _an Actor with the name Al Pacino_, the concepts _Movie_ and _Terminator_ will find a closer relation to the first actor rather than the latter. |
-| **Beacon** | A beacon is a reference to a location iof a concept in Weaviate or inside the knowledge network. Often defined as follows: `weaviate://{peerName}/{semanticKind}/{UUID}`
+| **Beacon** | A beacon is a reference to a particular data object in Weaviate or inside the knowledge network, this data object in turn has a position in the contextionary. Often defined as follows: `weaviate://{peerName}/{semanticKind}/{UUID}`
 | **Knowledge Network** | A peer to peer (P2P) network of Weaviates |
 | **Fuzzy** | Opposed to most other data solutions, Weaviate uses [fuzzy logic](https://en.wikipedia.org/wiki/Fuzzy_logic) to interpret a query. The upside of this is that it might find answers to queries where a traditional data solution migth not. |
 | **C11y** | Abbreviation of Contextionary. |
@@ -98,7 +98,7 @@ An empty Weaviate could be envisioned like this:
 
 When using Weaviate's [RESTful API](./adding_and_modifying_data) to add data, the Contextionary calculates the position in the vector space that represents the real-world entity.
 
-The process from a data object to vector reference is calculated based on the centroid of the words weighted by the occurrences of the individual words in the original training text-corpus (e.g., the word `the` is seen as less important than the word `apple`).
+The process from a data object to a vector position is calculated based on the centroid of the words weighted by the occurrences of the individual words in the original training text-corpus (e.g., the word `the` is seen as less important than the word `apple`).
 
 ![how the Contextionary calculates a vector](/img/guides/object-to-vector.jpg "how the Contextionary calculates a vector")
 
