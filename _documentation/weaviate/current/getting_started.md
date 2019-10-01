@@ -69,7 +69,7 @@ Want another language? Make sure to let us know [here](https://github.com/semi-t
 # Download the Weaviate configuration file
 $ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
 # Download the Weaviate docker-compose file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/docker-compose.yml
 # Run Docker compose
 $ docker-compose up
 ```
@@ -80,7 +80,7 @@ $ docker-compose up
 # Download the Weaviate configuration file
 $ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
 # Download the Weaviate docker-compose file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/docker-compose.yml
 # Run Docker compose
 $ docker-compose up
 ```
