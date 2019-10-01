@@ -75,11 +75,10 @@ The log output of weaviate's backing databases can be quite verbose. We instead
 recommend to attach only to weaviate itself. In this case run `docker-compose
 up` like so:
 
+- Download the `config.yaml` and `docker-compose.yml` compose files as mentioned [here](#docker-compose).
+- Instead of running `docker-compose up` run the following command;
+
 ```bash
-# Download the Weaviate configuration file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/config.yaml
-# Download the Weaviate docker-compose file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/docker-compose.yml
 # Run Docker compose
 $ docker-compose up -d && docker-compose logs -f weaviate
 ```

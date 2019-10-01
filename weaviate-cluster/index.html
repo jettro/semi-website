@@ -1,10 +1,50 @@
 ---
 bodyclass: page--services
 layout: layout-default
-title: weaviate sandbox
-description: Create a free Weaviate sandbox
+title: weaviate cluster
+description: Create a free Weaviate Cluster
 footer_squared: true
 og-img: services.jpg
 ---
 
-# FOO BAR
+<article>
+    <div class="container background-hexagon">
+        <section class="layout layout--single section-page-intro">
+            <div class="section-standout__text--left space-header-page">
+                <h1 class="title-page header--centered">Create a free Weaviate Cluster</h1>
+                <div class="section-standout__text--left">
+                    <p>
+                        Welcome to the pre-release page of our Weaviate Cluster Service (WCS). A managed Weaviate platform that you can use to create Weaviate clusters on the SeMI Knowledge Network.
+                    </p>
+                    <p>
+                        As a pre-release, you can now create Weaviate Clusters, <b>for free that will last for two weeks</b>! 
+                    </p>
+                    <p>
+                        How it works;<br>
+                        1. Create a free weaviate cluster below.<br>
+                        2. Go to our documentation here to get started.
+                    </p>
+                    <p id="collectEmail">
+                        <label for="input-email">Your email address:</label>
+                        <input id="input-email" placeholder="Your email" type="email" />
+                        <br><br>
+                        <input class="button--small" type="button" value="Create my Weaviate Cluster!" onclick="createACluster()" />
+                    </p>
+                    <p id="showProgress">
+                        
+                    </p>
+                    <p>
+                        Prefer to work with Weaviate directly? That is possible as well by running the Docker Containers, more about that here.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</article>
+
+<script>
+function createACluster(){
+    var email = document.getElementById('input-email').value
+    console.log(email)
+}
+</script>
