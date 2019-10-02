@@ -7,6 +7,7 @@ description: Truncate a Weaviate schema.
 tags: ['weaviate-cli', 'schema', 'truncate']
 menu-order: 7
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Schema Truncate Guide

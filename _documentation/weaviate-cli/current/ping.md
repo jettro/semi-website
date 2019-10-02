@@ -7,6 +7,7 @@ description: Ping a Weaviate with the Weaviate CLI tool.
 tags: ['weaviate-cli', 'ping']
 menu-order: 4
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Ping Guide

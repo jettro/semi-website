@@ -7,6 +7,7 @@ description: How to setup a weaviate schema.
 tags: ['Schema']
 menu-order: 6
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Schema Guide
@@ -17,6 +18,7 @@ A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-
 
 ## Index
 
+- [Video tutorial](#video-tutorial)
 - [Basics](#basics)
 - [Introduction](#introduction)
 - [Defining Objects](#defining-objects)
@@ -27,6 +29,12 @@ A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-
 - [Add a property to a schema item](#add-a-property-to-a-schema-item)
 - [Delete a property from a schema item](#delete-a-property-from-a-schema-item)
 - [FAQ](#frequently-asked-questions)
+
+## Video Tutorial
+
+Do you prefer video over text or do you want more background information?
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/xxRl5lATkuo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 ## Basics
 

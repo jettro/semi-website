@@ -7,6 +7,7 @@ description: How to setup weaviate authorization.
 tags: ['Installation', 'Authorization']
 menu-order: 5
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Authorization Guide

@@ -7,6 +7,7 @@ description: Initiate the Weaviate-CLI tool
 tags: ['weaviate-cli', 'initiation']
 menu-order: 4
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Initiation Guide

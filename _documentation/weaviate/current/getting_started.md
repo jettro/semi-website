@@ -8,6 +8,7 @@ description: Getting started with Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
 menu-order: 2
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Getting started

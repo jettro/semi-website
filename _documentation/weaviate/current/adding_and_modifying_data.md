@@ -7,6 +7,7 @@ description: How to fill a weaviate with data.
 tags: ['Add', 'Data', 'Modify']
 menu-order: 7
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Adding and Modifying Data Guide

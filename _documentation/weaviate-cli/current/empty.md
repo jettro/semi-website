@@ -7,6 +7,7 @@ description: Remove concepts from Weaviate
 tags: ['weaviate-cli', 'empty']
 menu-order: 9
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Empty Concepts Guide

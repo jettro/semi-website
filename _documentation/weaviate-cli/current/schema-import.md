@@ -7,6 +7,7 @@ description: Weaviate CLI schema import
 tags: ['weaviate-cli', 'schema', 'import']
 menu-order: 5
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Schema Import Guide

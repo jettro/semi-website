@@ -7,6 +7,7 @@ description: How to setup weaviate auhtentication.
 tags: ['Installation', 'Authentication']
 menu-order: 4
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Authentication Guide

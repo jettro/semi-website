@@ -7,6 +7,7 @@ description: Installation of the Weaviate CLI tool
 tags: ['weaviate-cli', 'installation']
 menu-order: 2
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Installation Guide

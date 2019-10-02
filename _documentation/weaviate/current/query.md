@@ -7,6 +7,7 @@ description: How to query weaviate.
 tags: ['Query', 'GraphQL']
 menu-order: 8
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Query Guide

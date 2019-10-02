@@ -7,6 +7,7 @@ description: How to work with Weaviate's Contextionary.
 tags: ['Explore', 'Contextionary', 'C11y']
 menu-order: 11
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Contextionary Guide

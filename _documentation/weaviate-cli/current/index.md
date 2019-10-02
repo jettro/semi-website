@@ -7,6 +7,7 @@ description: Weaviate CLI tool
 tags: ['weaviate-cli', 'introduction']
 menu-order: 1
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Introduction to Weaviate-CLI
@@ -20,7 +21,7 @@ open-graph-type: article
 
 ## Basics
 
-You can ping a Weaviate to validate if it's up and running.
+- The weaviate-cli tool is used work with individual weaviates or the weaviate cluster service.
 
 ## Initiation
 
@@ -34,14 +35,14 @@ Overview of current commands:
 
 ```markdown
 usage: weaviate-cli [-h]
-                    {init,schema-import,schema-export,schema-truncate,empty,sandbox-create,sandbox-remove,sandbox-list,ping,version}
+                    {init,schema-import,schema-export,schema-truncate,empty,cluster-create,cluster-remove,cluster-list,ping,version}
                     ...
 
 CLI tool to interact with Weaviate instances. Mre information:
 https://semi.technology/documentation/weaviate-cli
 
 positional arguments:
-  {init,schema-import,schema-export,schema-truncate,empty,sandbox-create,sandbox-remove,sandbox-list,ping,version}
+  {init,schema-import,schema-export,schema-truncate,empty,cluster-create,cluster-remove,cluster-list,ping,version}
     init                Initiate a Weaviate. This function is used to connect
                         the CLI to a Weaviate instance
     schema-import       The schema file should be in the same format as
@@ -50,9 +51,9 @@ positional arguments:
     schema-truncate     Truncate the schema, the Weaviate must be empty.
     empty               Empty the Weaviate (i.e., all concepts will be
                         removed)
-    sandbox-create      Create a Weaviate sandbox on the SeMI network
-    sandbox-remove      Delete a sandbox
-    sandbox-list        Delete a sandbox
+    cluster-create      Create a Weaviate cluster on the SeMI network
+    cluster-remove      Delete a cluster
+    cluster-list        List all clusters connected to configured email
     ping                Validate if a Weaviate can be pinged with or without
                         authentication
     version             Get the current version number

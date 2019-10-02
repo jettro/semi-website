@@ -7,6 +7,7 @@ description: Frequently Asked Questions.
 tags: ['FAQ', 'Help']
 menu-order: 13
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Frequently Asked Questions

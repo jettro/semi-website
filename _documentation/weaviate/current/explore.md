@@ -7,6 +7,7 @@ description: How to explore weaviate.
 tags: ['Explore', 'Contextionary']
 menu-order: 9
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Explore Guide

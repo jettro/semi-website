@@ -8,6 +8,7 @@ description: Learn more about Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
 menu-order: 1
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Introduction to Weaviate
@@ -18,6 +19,7 @@ Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph bas
 
 ## Index
 
+- [Video tutorial](#video-tutorial)
 - [Why Weaviate?](#why-weaviate)
 - [Features](#features)
   - [Core features](#core-features)
@@ -28,6 +30,12 @@ Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph bas
 - [About Weaviate Knowledge Networks](#about-weaviate-knowledge-networks)
 - [Miscellaneous](#miscellaneous)
 - [FAQ](#frequently-asked-questions)
+
+## Video Tutorial
+
+Do you prefer video over text or do you want more background information?
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/ImuofO5V0Cc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 ## Why Weaviate?
 

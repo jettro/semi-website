@@ -7,6 +7,7 @@ description: How to install a weaviate setup.
 tags: ['Installation', 'Running', 'Kubernetes']
 menu-order: 3
 open-graph-type: article
+og-img: documentation.jpg
 ---
 
 # Installation Guide
@@ -17,6 +18,7 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
 
 ## Index
 
+- [Video tutorial](#video-tutorial)
 - [Basics](#basics)
 - [Weaviate Cluster Service (WCS)](#weaviate-cluster-service-wcs)
 - [Docker Compose](#docker-compose)
@@ -24,6 +26,12 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
 - [Weaviate Configuration](#weaviate-configuration-file)
 - [OpenID (OICD) Authentication](#openid-authentication)
 - [FAQ](#frequently-asked-questions)
+
+## Video Tutorial
+
+Do you prefer video over text or do you want more background information?
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/ye-dmGBsxf4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 ## Basics
 
@@ -35,8 +43,7 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
 
 Weaviate Clusters are managed instances hosted on the SeMI network. Weaviate Clusters are ideal to quickly setup and run or test out Weaviate's capabilities. You can request a free Weaviate Cluster;
 
-- [Through this web portal](/weaviate-cluster/). Or;
-- [Through the weaviate-cli](/documentation/weaviate-cli/current/cluster-create.html)
+- [Through the weaviate-cli](/documentation/weaviate-cli/current/cluster-create.html).
 
 ## Docker Compose
 
