@@ -26,7 +26,7 @@ og-img: documentation.jpg
 
 ## Remove a single cluster
 
-You can delete an individual cluster by running;
+You can remove an individual cluster by running;
 
 ```bash
 $ weaviate-cli cluster-remove
@@ -48,7 +48,7 @@ optional arguments:
   --force         Force deletion
 ```
 
-## Delete all clusters
+## Remove all clusters
 
 You can also remove all clusters related to your email address
 
