@@ -25,7 +25,15 @@ Demo datasets that you can use to learn about Weaviate.
 
 ## Basics
 
-- All datasets can be imported by using Docker. You need to specify the complete endpoint (e.g., `http://localhost:8080` or `https://foobar.semi.network`).
+- All datasets can be imported by using Docker. You need to specify the complete endpoint (e.g., `https://foobar.semi.network`).
+- Running on the localhost? Set WEAVIATE_HOST with the following commands;
+
+```bash
+# Set local Weaviate English
+$ export WEAVIATE_HOST="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' en_weaviate_1):8080"
+# Set local Weaviate Dutch
+$ export WEAVIATE_HOST="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nl_weaviate_1):8080"
+```
 
 ## Datasets
 
@@ -38,8 +46,10 @@ This dataset contains 250 random news articles from; Financial Times, New York T
 Usage with Docker;
 
 ```bash
+# Weaviate host (e.g., https://foobar.semi.network), note paragraph basics for setting the local IP
+$ export WEAVIATE_HOST=YOUR HOST
 # Make sure to replace YOUR_HOST with the Weaviate host as mentioned in the basics above
-$ docker run -i -e weaviate_host=YOUR_HOST semitechnologies/weaviate-demo-newspublications
+$ docker run -i -e weaviate_host=$WEAVIATE_HOST semitechnologies/weaviate-demo-newspublications
 ```
 
 ## FAQ
