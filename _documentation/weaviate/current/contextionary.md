@@ -19,8 +19,8 @@ Weaviate has a contextionary endpoint which you can call to see how it indexed w
 ## Index
 
 - [Basics](#basics)
-- [Introduction](#introduction)
 - [Find concepts](#find-concepts)
+- [FAQ](#faq)
 
 ## Basics
 
