@@ -2033,6 +2033,6 @@ which results in (depending on the current C11y) something like;
 }
 ```
 
-## Introduction
+## FAQ
 
 {% include support-links.html %}

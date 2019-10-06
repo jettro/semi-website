@@ -2,9 +2,9 @@
 layout: layout-documentation
 product: weaviate
 product-order: 1
-title: Explore
+title: Explore data
 description: How to explore weaviate.
-tags: ['Explore', 'Contextionary']
+tags: ['Explore', 'GraphQL', 'Contextionary']
 menu-order: 9
 open-graph-type: article
 og-img: documentation.jpg
@@ -14,7 +14,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-You can explore through the data in the Weaviate knowledge graph using the GraphQL `Explore{}` function.
+You can explore the knowledge graph based on the semantic meaning of the data concepts in a Weaviate using the GraphQL `Explore{}` function or the the `explore{}` filter.
 
 ## Index
 
@@ -27,7 +27,6 @@ You can explore through the data in the Weaviate knowledge graph using the Graph
 - [Explore{} Filter](#explore-filter)
 - [Explore{} Function](#explore-function)
 - [FAQ](#frequently-asked-questions)
-
 
 ## Basics
 
