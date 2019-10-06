@@ -57,6 +57,7 @@ positional arguments:
     ping                Validate if a Weaviate can be pinged with or without
                         authentication
     version             Get the current version number
+    upgrade             Upgrade the cli to the current version on Github
 
 optional arguments:
   -h, --help            show this help message and exit
