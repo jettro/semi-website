@@ -46,7 +46,7 @@ also connect to the right network
 {% raw %}
 ```bash
 # Set the correct network for Weaviate English
-$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' en_weaviate_1)
+$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
 # Set the correct network for Weaviate Dutch
 $ export WEAVIATE_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
 ```
