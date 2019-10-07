@@ -11,7 +11,7 @@ layout: none
             {% if page.url != "/news/index" %}
             <item>
                 <title>{{ page.title }}</title>
-                <link>https://semi.technology/{{ page.url }}</link>
+                <link>https://semi.technology{{ page.url }}</link>
                 <description>{{ page.description }}</description>
             </item>
             {% endif %}
