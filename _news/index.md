@@ -9,6 +9,10 @@ menu-order: 999
 open-graph-type: article
 ---
 
-- [Knowledge graph meetups](./meetups.html)
+{% for page in site.news %}
+{% if page.url != "/news/index" %}
+- [{{ page.title }}](https://semi.technology{{ page.url }}) ({{ page.pubdate }})
+{% endif %}
+{% endfor %}
 
 Keep up to date by signing up to our [newsletter](/newsletter/).

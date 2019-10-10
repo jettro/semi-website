@@ -3,8 +3,7 @@ layout: layout-blog-article
 title: Google Cloud Podcast
 description: Laura Ham is a guest on the Google Cloud podcast to talk about Weaviate and SeMI
 tags: ['Podcast', 'Google Cloud']
-video-link:
-video-caption:
+pubdate: October 9th, 2019
 menu-order: 3
 open-graph-type: article
 ---

@@ -3,8 +3,7 @@ layout: layout-blog-article
 title: Knowledge Graph Meetups
 description: We organize meetups in Amsterdam, New York and the Bay Area.
 tags: ['Meetup', 'Technology', 'Summary', 'Blog']
-video-link:
-video-caption:
+pubdate: October 1st, 2019
 menu-order: 2
 open-graph-type: article
 ---
