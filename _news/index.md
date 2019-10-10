@@ -11,7 +11,7 @@ open-graph-type: article
 
 {% for page in site.news %}
 {% if page.url != "/news/index" %}
-- [{{ page.title }}](https://semi.technology{{ page.url }}) ({{ page.pubdate }})
+- [{{ page.title }}]({{ page.url }}) ({{ page.pubdate }})
 {% endif %}
 {% endfor %}
 
