@@ -1,4 +1,4 @@
-weaviate_version: 0.20.1
+weaviate_version: 0.20.2
 markdown: kramdown
 kramdown:
     parse_block_html: false
