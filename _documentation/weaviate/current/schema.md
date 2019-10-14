@@ -130,7 +130,8 @@ A schema object is defined as follows;
         }
       ],
       "cardinality": "atMostOne OR many", // Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
-      "description": "string"             // A description for your reference
+      "description": "string",             // A description for your reference
+      "index": true        // Optional, default is true. By default each property is fully indexed both for full-text, as well as vector-search. You can ignore properties in searches by explicitly setting index to false.
     }
   ]
 }
@@ -154,6 +155,7 @@ A property object is defined as follows;
   ],
   "cardinality": "atMostOne OR many", // Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
   "description": "string"             // A description for your reference
+  "index": true        // Optional, default is true. By default each property is fully indexed both for full-text, as well as vector-search. You can ignore properties in searches by explicitly setting index to false.
 }
 ```
 
@@ -402,11 +404,15 @@ $ curl http://localhost:8080/v1/schema/actions -X POST -H 'Content-type: applica
         "boolean"
       ],
       "description": "was the payment succesful?",
-      "name": "success"
+      "name": "success",
+      "index": false
     }
   ]
 }'
 ```
+
+#### Indexing
+By default, all properties of a schema item will be both for full-text, as well as vector-search. If you explicitely set `"index"` to `false`, then this property will not be included in indexing, this property will be ignored in search.
 
 ## Delete a schema item
 
