@@ -14,7 +14,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-You can directly query the Weaviate knowledge graph. Finding concepts in the knowledge graph based on the Contextionary can be done through [exploring](explore).
+You can directly query the Weaviate knowledge graph. Finding concepts in the knowledge graph based on the Contextionary can be done through [exploring](explore.html).
 
 _Note: You can mix [explore](explore.html) functions with regular query functions._
 
@@ -62,7 +62,7 @@ The basic function structure of a Weaviate is as follows:
 }
 ```
 
-- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./aggregate), and about `Aggregate{}` [here](./aggregate)._
+- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./explore.html), and about `Aggregate{}` [here](./aggregate.html)._
 
 # Get{} Function
 

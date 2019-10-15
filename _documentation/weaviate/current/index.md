@@ -104,7 +104,7 @@ An empty Weaviate could be envisioned like this:
 
 ![empty Weaviate](/img/guides/c11y-empty.jpg "empty Weaviate")
 
-When using Weaviate's [RESTful API](./adding_and_modifying_data) to add data, the Contextionary calculates the position in the vector space that represents the real-world entity.
+When using Weaviate's [RESTful API](./adding_and_modifying_data.html) to add data, the Contextionary calculates the position in the vector space that represents the real-world entity.
 
 The process from a data object to a vector position is calculated based on the centroid of the words weighted by the occurrences of the individual words in the original training text-corpus (e.g., the word `the` is seen as less important than the word `apple`).
 
@@ -114,7 +114,7 @@ When a new class object is created, it will be added to a Weaviate.
 
 ![Weaviate with data](/img/guides/c11y-with-data.jpg "Weaviate with data")
 
-When using the [GraphQL interface](./query), you can target a thing or action directly, or by searching for a nearby concept. E.g., the `company Apple` from the previous illustration, can be found by searching for the concept `iphone`.
+When using the [GraphQL interface](./query.html), you can target a thing or action directly, or by searching for a nearby concept. E.g., the `company Apple` from the previous illustration, can be found by searching for the concept `iphone`.
 
 ## About Classification
 

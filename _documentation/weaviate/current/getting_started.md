@@ -117,7 +117,7 @@ You are now ready to start using Weaviate!
 
 ## Creating a Schema
 
-The schema describes how the knowledge graph is structured on which semantic elements it is based, you can read more in-depth what the Weaviate schema entails [here](schema).
+The schema describes how the knowledge graph is structured on which semantic elements it is based, you can read more in-depth what the Weaviate schema entails [here](schema.html).
 
 In this example, we are going to create a knowledge graph of a company. Although you can automate the import of a schema, we will do it manually now to get an understanding of how the schema is structured.
 
