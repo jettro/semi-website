@@ -14,7 +14,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-If you run Weaviate with an [OpenID authentication scheme](./installation#openid-authentication), you need to send the correct credentials in a request.
+If you run Weaviate with an [OpenID authentication scheme](./installation.html#openid-authentication), you need to send the correct credentials in a request.
 
 ## Index
 

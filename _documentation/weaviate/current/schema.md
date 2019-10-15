@@ -14,7 +14,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-terminology) you will be adding to a Weaviate. It will function as the overall data model.
+A Weaviate schema is used to define what kind of [semantic kinds](./index.html#basic-terminology) you will be adding to a Weaviate. It will function as the overall data model.
 
 ## Index
 
@@ -97,7 +97,7 @@ keywords:
 
 ### Weaviate Schema versus Ontology
 
-Because Weaviate uses the [Contextionary](.#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Company with the name Apple`) is semantically similar to `a Business with the label Apple Inc.`
+Because Weaviate uses the [Contextionary](./index.html#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Company with the name Apple`) is semantically similar to `a Business with the label Apple Inc.`
 
 Within Weaviate, the schema is _only_ used to define the query and explore syntax.
 
