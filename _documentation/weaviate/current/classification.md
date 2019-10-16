@@ -23,7 +23,7 @@ Perform classification through the RESTapi to enhance your dataset.
     - [Requirements](#requirements)
 - [How to use](#how-to-use)
     - [Start a Classification](#start-a-classification)
-    - [See the Status of a Classfication](#see-the-status-of-classification)
+    - [See the Status of a Classification](#see-the-status-of-a-classification)
     - [Get Classification Meta Information of Data Objects](#get-classification-meta-information-of-data-objects)
 - [Example](#example)
 - [Tips and Best Practices](#tips-and-best-practices)
@@ -87,7 +87,7 @@ Which returns a body like the following if the classification was successfully s
 }
 ```
 
-### See the Status of a Classfication
+### See the Status of a Classification
 The ID returned in the POST request can be used to request information about the classification process, by performing a `GET` on `v1/classification/{classificationId}`. A similar result as above will be returned, containing information about the classification. The status of the classification van 
 
 ```json
