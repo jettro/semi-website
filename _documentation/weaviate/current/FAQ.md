@@ -14,11 +14,11 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-Aha, you have a question! We hope that you can find it here, but if you don't, you can reach us via [Stackoverflow](https://stackoverflow.com/tags/weaviate/) (make sure to tag your question with weaviate), [Github](https://github.com/semi-technologies/weaviate/issues), or [Twitter](https://twitter.com/SeMI_tech). If your question serves a general-purpose, we will add it to this page.
+Aha, you have a question! We hope that you can find the answer here, but if you don't, you can reach us via [Stackoverflow](https://stackoverflow.com/tags/weaviate/) (make sure to tag your question with weaviate), [Github](https://github.com/semi-technologies/weaviate/issues), or [Twitter](https://twitter.com/SeMI_tech). If your question serves a general-purpose, we will add it to this page.
 
 ### Q: Why would I use Weaviate as my knowledge graph engine?
 
-A: Our goal is three-folded. Firstly, we want to make it as easy as possible for others to create there own semantic systems or knowledge graphs (hence, we are API based). Secondly, we have a strong focus on the semantic element (the "knowledge" in "knowledge graph," if you will). Our ultimate goal is to have Weaviate help you to manage, index, and "understand" your data so that you can build newer, better, and faster applications. And thirdly, we want you to be able to run it everywhere. This is the reason why Weaviate comes containerized.
+A: Our goal is three-folded. Firstly, we want to make it as easy as possible for others to create their own semantic systems or knowledge graphs (hence, we are API based). Secondly, we have a strong focus on the semantic element (the "knowledge" in "knowledge graph," if you will). Our ultimate goal is to have Weaviate help you manage, index, and "understand" your data so that you can build newer, better, and faster applications. And thirdly, we want you to be able to run it everywhere. This is the reason why Weaviate comes containerized.
 
 ### Q: Do you offer Weaviate as a managed service?
 
@@ -26,11 +26,11 @@ A: Yes, soon, we will release the Weaviate Cluster Service! [Sign up for our new
 
 ### Q: Can I train my own contextionary?
 
-A: No, but the good news is. You don't have to. The [function of a contextionary](./#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By add data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You [just run the Weaviate containers](./installation.html) in a language of choice, and you are good to go!
+A: No, but the good news is. You don't have to. The [function of the contextionary](./#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By adding data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You just have to [run the Weaviate containers](./installation.html) in a language of choice, and you are good to go!
 
 ### Q: Why does Weaviate have a schema and not an ontology?
 
-A: We use a schema because it focusses on the representation of your data (in our case in the GraphQL API). You can use a Weaviate schema to express an ontology, though. One of Weaviate's core features is that it semantically interprets your schema (and with that your ontology) so that you can search on concepts rather than formally defined entities.
+A: We use a schema because it focusses on the representation of your data (in our case in the GraphQL API) but you can use a Weaviate schema to express an ontology. One of Weaviate's core features is that it semantically interprets your schema (and with that your ontology) so that you can search for concepts rather than formally defined entities.
 
 ### Q: Can I use Weaviate to create a traditional knowledge graph.
 
@@ -54,7 +54,7 @@ A: How can Weaviate interpret that you mean a company, as in business, and not a
 
 ### Q: Why did you use GraphQL instead of SPARQL?
 
-A: Two words, user experience. We want to make it as simple as possible to integrate Weaviate into your stack, and we believe that GraphQL is the answer to this. The community and client libraries around Weaviate are enormous, and you can use almost all of them with Weaviate.
+A: Two words, user experience. We want to make it as simple as possible to integrate Weaviate into your stack, and we believe that GraphQL is the answer to this. The community and client libraries around GraphQL are enormous, and you can use almost all of them with Weaviate.
 
 ### Q: Can I request a feature in Weaviate?
 
