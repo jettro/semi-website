@@ -27,7 +27,7 @@ Perform classification through the RESTapi to enhance your dataset.
     - [Get Classification Meta Information of Data Objects](#get-classification-meta-information-of-data-objects)
 - [Example](#example)
 - [Tips and Best Practices](#tips-and-best-practices)
-    - [Amount of Training Data](#amount-of-training-data)
+    - [Training Data](#training-data)
     - [Optimal Value for kNN](#optimal-value-for-knn)
 
 ## Basics
@@ -277,15 +277,16 @@ If we later want to know to which `Country` the `Company(name:YLE)` refers to, w
 
 ## Tips and Best Practices
 
-### Amount of Training Data
-The more training data, the higher the performance of the classification. There is no rule for a minimum amount of training data, but the more the better (and more computationally intensive).
+### Training Data
+- The more training data, the higher the performance of the classification. There is no rule for a minimum amount of training data, but the more the better (and more computationally intensive). The amount of training data can roughly be chosen by the amount of features `n`, using the formula: `1e[1, 2]+n`.
+- In addition, the training data should be representative for the data to be classified. The model should have relevant information to learn from. For example, it is hard to classify data for persons of age 60-70 when all persons in the training data are 18-25 years old.
 
 ### Optimal Value for kNN
 There is no one optimal value for kNN. The optimal value is different for every classification problem, and depends on a lot of factors. There are however some tips to find a good k value:
-- Large k values will result in classification to the most probably class around in a large space, which also makes it more computationally intensive.
-- Small k values will result in a more unstable classification. Small changes in the training set and noise will result in large changes in classification.
-- Check the `distanceWinning` and `distanceLosing` values of individual classified data objects. If `distanceWinning` is way larger than `distanceLosing`, then the kNN could be set too high.
-
+- Large `k` values will result in classification to the most probably class around in a large space, which also makes it more computationally intensive.
+- Small `k` values will result in a more unstable classification. Small changes in the training set and noise will result in large changes in classification.
+- `k` is usually chosen not too high. This depends also on the amount of classes. A good start is taking `k` between 3 and 7 (3 <= k <=7). 
+- Check the `distanceWinning` and `distanceLosing` values of individual classified data objects. If `distanceWinning` is way larger than `distanceLosing`, then the `k` could be set too high. `k` can be optimized just like every other hyper parameter in other ML-algorithms just by plotting the overall validation error against k.
 
 ## Frequently Asked Questions
 
