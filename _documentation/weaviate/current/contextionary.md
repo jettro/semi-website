@@ -5,7 +5,7 @@ product-order: 1
 title: Contextionary
 description: How to work with Weaviate's Contextionary.
 tags: ['Explore', 'Contextionary', 'C11y']
-menu-order: 11
+menu-order: 12
 open-graph-type: article
 og-img: documentation.jpg
 ---
