@@ -30,14 +30,14 @@ Demo datasets that you can use to learn about Weaviate.
 
 ### Running on the localhost
 
-Running on the localhost? No problem, but first set the WEAVIATE_HOST and the WEAVIATE_NETWORK with the following commands;
+Running on the localhost? No problem, but first set the WEAVIATE_HOST and the WEAVIATE_NETWORK with the following commands:
 
 {% raw %}
 ```bash
 # Set local Weaviate English
 $ export WEAVIATE_HOST="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' en_weaviate_1):8080"
 # Set local Weaviate Dutch
-$ export WEAVIATE_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' en_weaviate_1)
+$ export WEAVIATE_HOST="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nl_weaviate_1):8080"
 ```
 {% endraw %}
 
@@ -46,11 +46,13 @@ also connect to the right network
 {% raw %}
 ```bash
 # Set the correct network for Weaviate English
-$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
+$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' en_weaviate_1)
 # Set the correct network for Weaviate Dutch
-$ export WEAVIATE_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
+$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
 ```
 {% endraw %}
+
+Note that the name of the container may differ. E.g. in a **Docker Compose** setup `en_weaviate_1` may be replaced with `docker_compose_weaviate_1`. Container names can be listed using `docker ps`.
 
 ## Datasets
 
