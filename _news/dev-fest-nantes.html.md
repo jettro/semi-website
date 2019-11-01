@@ -1,6 +1,6 @@
 ---
 layout: layout-blog-article
-title: Weaviate introduction & demo at DevFest Nantes, France
+title: Introduction & Demo video
 description: Weaviate introduction and demo during Dev Fest Nantest
 tags: ['Video', 'Demo', 'DevFest', 'Nantes']
 pubdate: November 1st, 2019
