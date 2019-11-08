@@ -64,6 +64,7 @@ client.add_reference_to_thing("2db436b5-0557-5016-9c5f-531412adf9c6", "members",
 *Note: Weaviate might need a short time to update its index after a new thing has been created.*
 
 Look at the data using the simple query on the GraphQL endpoint:
+
 ```bash
 curl http://localhost/v1/graphql -X POST -H 'Content-type: application/json' -d '
 {

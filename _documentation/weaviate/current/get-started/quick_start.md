@@ -12,7 +12,7 @@ open-graph-type: article
 og-img: documentation.jpg
 ---
 
-# Quick start quide
+# Quick start guide
 
 {% include badges.html %}
 
@@ -25,7 +25,7 @@ This quick start guide will give you a 10-minute tour of Weaviate. In it you wil
 
 - [Video tutorial](#video-tutorial)
 - [Run Weaviate with a demo dataset](#run-weaviate-with-a-demo-dataset)
-  - [Weaviate Cluster Service (WCS)](#)
+  - [Weaviate Cluster Service (WCS)](#weaviate-cluster-service-wcs)
   - [Docker compose](#docker-compose)
 - [Validate via the RESTful API](#validate-via-the-restful-api)
 - [Query the dataset with GraphQL](#query-the-dataset-with-graphql)
@@ -187,7 +187,7 @@ The output will look something like this but significantly longer:
 
 ## Query the dataset with GraphQL
 
-...
+Running Weaviate with GraphQL 
 
 ## Next steps
 
