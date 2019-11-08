@@ -18,7 +18,8 @@ og-img: documentation.jpg
 ## Index
 
 - [Basics](#basics)
-- [Usage](#usage)
+- [Example Usage](#example-usage)
+- [Functions](#functions)
 
 ## Basics
 - A python native weaviate client makes using the Weaviate API easier.
@@ -45,7 +46,7 @@ client.create_schema("https://raw.githubusercontent.com/semi-technologies/weavia
 ```
 
 A schema can be provided as an URL, file or a dict.
-Now lets create some things.
+Now let's create some things.
 
 ```python
 client.create_thing({"name": "John von Neumann"}, "Person", "b36268d4-a6b5-5274-985f-45f13ce0c642")
@@ -60,10 +61,11 @@ client.add_reference_to_thing("2db436b5-0557-5016-9c5f-531412adf9c6", "members",
 client.add_reference_to_thing("2db436b5-0557-5016-9c5f-531412adf9c6", "members", "1c9cd584-88fe-5010-83d0-017cb3fcb446")
 ```
 
-*Note: Weaviate might needs a second to update its index after a new thing has been created.*
+*Note: Weaviate might need a short time to update its index after a new thing has been created.*
 
-Look at the data using the simple query:
-```graphql
+Look at the data using the simple query on the GraphQL endpoint:
+```bash
+curl http://localhost/v1/graphql -X POST -H 'Content-type: application/json' -d '
 {
   Get {
     Things {
@@ -79,7 +81,7 @@ Look at the data using the simple query:
       }
     }
   }
-}
+}'
 ```
 
 Please find the [full client documentation here](https://semi-technologies.github.io/weaviate-python-client/html/index.html).
