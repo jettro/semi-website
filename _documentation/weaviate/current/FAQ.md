@@ -29,6 +29,10 @@ A: Yes, soon, we will release the Weaviate Cluster Service! [Sign up for our new
 
 A: No, but the good news is. You don't have to. The [function of the contextionary](./philosophy#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By adding data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You just have to [run the Weaviate containers](./install.html) in a language of choice, and you are good to go!
 
+### Q: Why is the contextionary created using GloVe?
+
+A: There are many natural language processing vectorization models available. The reason we choose GloVe at the root of the model is that we rely on the spacial element that GloVe brings. Weaviate aims to _index data objects based on their semantics_ therefore, we need to calculate where the data object will be located in the vector space. Bidirectional models (e.g., BERT, ELMo, and co) don't provide a unique representation and are therefore not suited for our case.
+
 ### Q: Why does Weaviate have a schema and not an ontology?
 
 A: We use a schema because it focusses on the representation of your data (in our case in the GraphQL API) but you can use a Weaviate schema to express an ontology. One of Weaviate's core features is that it semantically interprets your schema (and with that your ontology) so that you can search for concepts rather than formally defined entities.
