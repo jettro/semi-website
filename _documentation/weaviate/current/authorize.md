@@ -1,6 +1,7 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Get started
 product-order: 1
 title: Authorization
 description: How to setup weaviate authorization.

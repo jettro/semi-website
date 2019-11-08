@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Add data
 product-order: 1
-title: Schema
+title: Define schema
 description: How to setup a weaviate schema.
 tags: ['Schema']
-menu-order: 6
+menu-order: 1
 open-graph-type: article
 og-img: documentation.jpg
 ---
@@ -14,7 +15,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-A Weaviate schema is used to define what kind of [semantic kinds](./index#basic-terminology) you will be adding to a Weaviate. It will function as the overall data model.
+A Weaviate schema is used to define what kind of [semantic kinds](./philosophy.html#basic-terminology) you will be adding to a Weaviate. It will function as the overall data model.
 
 ## Index
 
@@ -40,12 +41,12 @@ Do you prefer video over text or do you want more background information?
 
 - A schema consists of classes and properties.
 - Things are distinguished from Actions in schema classes.
-- Words used in the schema must be part of the [contextionary](./#about-the-contextionary).
+- Words used in the schema must be part of the [contextionary](./philosophy#about-the-contextionary).
 - The schema can be modified through the RESTful API.
 
 ## Introduction
 
-When you startup an empty Weaviate, you need to define a schema to explain what kind of data you will add. Because Weaviate is a knowledge graph, the linguistic element plays an important role. When creating concepts, Weaviate will validate if it can understand the schema concepts you want to add based on the [contextionary](./#about-the-contextionary). You might notice that a lot of definitions are related to the everyday language we use. And this is the first best practice to bear in mind. When defining the schema, you should do this in the form like you would explain it to another person, not like tables and columns you would add to a traditional data solution.
+When you startup an empty Weaviate, you need to define a schema to explain what kind of data you will add. Because Weaviate is a knowledge graph, the linguistic element plays an important role. When creating concepts, Weaviate will validate if it can understand the schema concepts you want to add based on the [contextionary](./philosophy#about-the-contextionary). You might notice that a lot of definitions are related to the everyday language we use. And this is the first best practice to bear in mind. When defining the schema, you should do this in the form like you would explain it to another person, not like tables and columns you would add to a traditional data solution.
 
 ### Concepts and their Structures
 
@@ -97,7 +98,7 @@ keywords:
 
 ### Weaviate Schema versus Ontology
 
-Because Weaviate uses the [Contextionary](.#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Company with the name Apple`) is semantically similar to `a Business with the label Apple Inc.`
+Because Weaviate uses the [Contextionary](./philosophy#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Company with the name Apple`) is semantically similar to `a Business with the label Apple Inc.`
 
 Within Weaviate, the schema is _only_ used to define the query and explore syntax.
 
@@ -130,7 +131,8 @@ A schema object is defined as follows;
         }
       ],
       "cardinality": "atMostOne OR many", // Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
-      "description": "string"             // A description for your reference
+      "description": "string",             // A description for your reference
+      "index": true        // Optional, default is true. By default each property is fully indexed both for full-text, as well as vector-search. You can ignore properties in searches by explicitly setting index to false.
     }
   ]
 }
@@ -154,6 +156,7 @@ A property object is defined as follows;
   ],
   "cardinality": "atMostOne OR many", // Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
   "description": "string"             // A description for your reference
+  "index": true        // Optional, default is true. By default each property is fully indexed both for full-text, as well as vector-search. You can ignore properties in searches by explicitly setting index to false.
 }
 ```
 
@@ -402,11 +405,15 @@ $ curl http://localhost:8080/v1/schema/actions -X POST -H 'Content-type: applica
         "boolean"
       ],
       "description": "was the payment succesful?",
-      "name": "success"
+      "name": "success",
+      "index": false
     }
   ]
 }'
 ```
+
+#### Indexing
+By default, all properties of a schema item will be both for full-text, as well as vector-search. If you explicitely set `"index"` to `false`, then this property will not be included in indexing, this property will be ignored in search.
 
 ## Delete a schema item
 

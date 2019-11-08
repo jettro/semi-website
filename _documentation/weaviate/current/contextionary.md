@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: About
 product-order: 1
 title: Contextionary
 description: How to work with Weaviate's Contextionary.
 tags: ['Explore', 'Contextionary', 'C11y']
-menu-order: 12
+menu-order: 2
 open-graph-type: article
 og-img: documentation.jpg
 ---

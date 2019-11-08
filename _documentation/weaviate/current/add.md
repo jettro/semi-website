@@ -1,20 +1,21 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Add data
 product-order: 1
-title: Adding and modifying data
+title: Adding data
 description: How to fill a weaviate with data.
-tags: ['Add', 'Data', 'Modify']
-menu-order: 7
+tags: ['Add', 'Data']
+menu-order: 2
 open-graph-type: article
 og-img: documentation.jpg
 ---
 
-# Adding and Modifying Data Guide
+# Adding Data Guide
 
 {% include badges.html %}
 
-When a Weaviate [schema](./schema.html) is created, you can populate this Weaviate with data.
+When a Weaviate [schema](./define_schema.html) is created, you can populate this Weaviate with data.
 
 ## Index
 
@@ -36,7 +37,7 @@ When a Weaviate [schema](./schema.html) is created, you can populate this Weavia
 ## Basics
 
 - Data is added through the RESTful API.
-- Individual [semantic kinds](./#basic-terminology) can be collected or listed. However, there are seperate documentation pages for [querying](./query.html) and [exploring](./explore.html).
+- Individual [semantic kinds](./philosophy#basic-terminology) can be collected or listed. However, there are seperate documentation pages for [querying](./get.html) and [exploring](./explore.html).
 - The examples assume that Weaviate runs on port 80 on the localhost without authentication.
 - The entry point to a Weaviate is always `/v1`.
 
@@ -70,7 +71,7 @@ A concept data object can be added to a Weaviate via the following endpoint:
 $ curl http://localhost:8080/v1/{semanticKind} -X POST -H '{contentType}' -d '{data}'
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](./philosophy#basic-terminology)).
 - `{contentType}` = JSON or YAML.
 - `{data}` = [data object](#data-object).
 
@@ -115,7 +116,7 @@ A concept data object can be updated inside a Weaviate via the following endpoin
 $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID} -X PUT -H '{contentType}' -d '{data}'
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](./philosophy#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 - `{contentType}` = JSON or YAML.
 - `{data}` = [data object](#data-object).
@@ -141,7 +142,7 @@ A concept data object can be retrieved from a Weaviate directly via the followin
 $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](./philosophy#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 
 Example of requesting a _thing_.
@@ -151,7 +152,7 @@ $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
 ```
 
 - _Note, the result will be in the form of a [data object](#data-object)._
-- _Note, this endpoint is created the collect individual concepts directly, there are specific endpoints for [querying](./query.html) and [exploring](./explore.html)._
+- _Note, this endpoint is created the collect individual concepts directly, there are specific endpoints for [querying](./get.html) and [exploring](./explore.html)._
 
 ## Delete a data object
 
@@ -161,7 +162,7 @@ A concept data object can be deleted from a Weaviate directly via the following 
 $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID} -X DELETE
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](./philosophy#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 
 Example of deleting a _thing_.
@@ -267,7 +268,7 @@ An individual reference can be added to a concept data object as follows:
 $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X POST -H '{contentType}' -d '{data}'
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](./philosophy#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 - `{propertyName}` = the name of the property related to this class.
 - `{contentType}` = JSON or YAML.
@@ -291,7 +292,7 @@ $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/refe
 }'
 ```
 
-- _Note, you can only add multiple references if [the `cardinality` of the schema id set to `many`](./schema.html#create-a-schema-item)_
+- _Note, you can only add multiple references if [the `cardinality` of the schema id set to `many`](./define_schema.html#create-a-schema-item)_
 
 ## Replace all references
 
@@ -301,7 +302,7 @@ All references related to a property can be updated as follows:
 $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X PUT -H '{contentType}' -d '{data}'
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](./#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](./philosophy#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 - `{propertyName}` = the name of the property related to this class.
 - `{contentType}` = JSON or YAML.
@@ -321,7 +322,7 @@ $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/refe
 ]'
 ```
 
-- _Note, you can only update multiple references if [the `cardinality` of the schema is set to `many`](./schema.html#create-a-schema-item)_
+- _Note, you can only update multiple references if [the `cardinality` of the schema is set to `many`](./define_schema.html#create-a-schema-item)_
 
 ## Delete individual references
 

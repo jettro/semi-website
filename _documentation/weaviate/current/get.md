@@ -1,20 +1,21 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Add data
 product-order: 1
-title: Query data
+title: Get
 description: How to query weaviate.
 tags: ['Query', 'GraphQL']
-menu-order: 8
+menu-order: 1
 open-graph-type: article
 og-img: documentation.jpg
 ---
 
-# Query Guide
+# Get Guide
 
 {% include badges.html %}
 
-You can directly query the Weaviate knowledge graph. Finding concepts in the knowledge graph based on the Contextionary can be done through [exploring](explore).
+You can directly query the Weaviate knowledge graph. Finding concepts in the knowledge graph based on the Contextionary can be done through [exploring](explore.html).
 
 _Note: You can mix [explore](explore.html) functions with regular query functions._
 
@@ -39,7 +40,7 @@ _Note: You can mix [explore](explore.html) functions with regular query function
 ## Basics
 
 - Weaviate's query language is [GraphQL](https://graphql.org/).
-- You can query a Weaviate after you've created a [schema](./schema.html) and [populated it](./adding_and_modifying_data) with data.
+- You can query a Weaviate after you've created a [schema](./define_schema.html) and [populated it](./add.html) with data.
 - You can easily query a Weaviate by using the GraphQL interface inside a [Weaviate Playground](http://playground.semi.technology).
 
 ## Introduction
@@ -62,7 +63,7 @@ The basic function structure of a Weaviate is as follows:
 }
 ```
 
-- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./aggregate), and about `Aggregate{}` [here](./aggregate)._
+- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./explore.html), and about `Aggregate{}` [here](./aggregate.html)._
 
 # Get{} Function
 
@@ -124,7 +125,7 @@ The above query will result in something like the following:
 }
 ```
 
-If you've set a cross-reference (aka [beacon](./#basic-terminology)) in the schema, you can query it as follows:
+If you've set a cross-reference (aka [beacon](./philosophy#basic-terminology)) in the schema, you can query it as follows:
 
 ```graphql
 {
@@ -144,7 +145,7 @@ If you've set a cross-reference (aka [beacon](./#basic-terminology)) in the sche
 }
 ```
 
-Note that if you've set the [cardinality](./schema.html#property-object) to `many`, you might have multiple data types. For example:
+Note that if you've set the [cardinality](./define_schema.html#property-object) to `many`, you might have multiple data types. For example:
 
 ```graphql
 {
@@ -335,7 +336,7 @@ For example, these filters select based on the class Company with a higher reven
 
 ### Geo Coordinates filter
 
-If you've set the [geo location](./schema.html#property-types) property type, you can search in an area based on kilometers.
+If you've set the [geo location](./define_schema.html#property-types) property type, you can search in an area based on kilometers.
 
 For example, this curious returns all in a radius of 2KM around a specific geo-location:
 

@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Get started
 product-order: 1
 title: Demo datasets
 description: demo datasets for Weaviate
-tags: ['Demo', 'datasets']
-menu-order: 13
+tags: ['Demo', 'Datasets']
+menu-order: 3
 open-graph-type: article
 og-img: documentation.jpg
 ---

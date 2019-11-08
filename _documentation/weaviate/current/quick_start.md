@@ -2,16 +2,17 @@
 layout: layout-documentation
 bodyclass: ["page--guides", " "]
 product: weaviate
+sub-menu: Get started
 product-order: 1
-title: Getting started
+title: Quick start
 description: Getting started with Weaviate
 tags: ['introduction', 'Weaviate', 'Contextionary']
-menu-order: 2
+menu-order: 1
 open-graph-type: article
 og-img: documentation.jpg
 ---
 
-# Getting started
+# Quick start quide
 
 {% include badges.html %}
 
@@ -87,7 +88,7 @@ $ docker-compose up
 ```
 
 Warning: The output is quite verbose, for an alternative see [attaching to only
-the log output of weaviate](./installation.html#attaching-to-the-log-output-of-only-weaviate).
+the log output of weaviate](./install.html#attaching-to-the-log-output-of-only-weaviate).
 
 ## Validating if the Weaviate is online
 

@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Features
 product-order: 1
-title: Classify data
+title: Classification
 description: How to perform classification for properties of data objects
 tags: ['Classification', 'Data', 'Modify']
-menu-order: 11
+menu-order: 1
 open-graph-type: article
 og-img: documentation.jpg
 ---

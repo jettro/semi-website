@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Query data
 product-order: 1
 title: Aggregate data
 description: How to work with Weaviate's Aggregate function.
 tags: ['Aggregate', 'GraphQL']
-menu-order: 10
+menu-order: 4
 open-graph-type: article
 og-img: documentation.jpg
 ---
@@ -241,7 +242,7 @@ which might result in something like this result:
 ```
 
 #### Where and Limit
-In the `Aggregate{}` function, as well as the `Get{}` function, a `where` filter and `limit` filter can be used on class-level to filter data. A detailed explanation of these filters can be found on the `Query` page ([here for `where` filter](./query#filters), and [here for `limit` filter](./query#limit-filter)).
+In the `Aggregate{}` function, as well as the `Get{}` function, a `where` filter and `limit` filter can be used on class-level to filter data. A detailed explanation of these filters can be found on the `Query` page ([here for `where` filter](./get#filters), and [here for `limit` filter](./get#limit-filter)).
 
 In addition, the `limit` filter can be used on the `topOccurrences` fields.
 

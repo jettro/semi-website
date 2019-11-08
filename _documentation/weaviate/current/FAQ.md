@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: FAQ
 product-order: 1
 title: FAQ
 description: Frequently Asked Questions.
 tags: ['FAQ', 'Help']
-menu-order: 14
+menu-order: 1
 open-graph-type: article
 og-img: documentation.jpg
 ---

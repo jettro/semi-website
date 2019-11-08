@@ -1,8 +1,9 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Get started
 product-order: 1
-title: Authentication
+title: authenticate
 description: How to setup weaviate auhtentication.
 tags: ['Installation', 'Authentication']
 menu-order: 4
@@ -14,7 +15,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-If you run Weaviate with an [OpenID authentication scheme](./installation.html#openid-authentication), you need to send the correct credentials in a request.
+If you run Weaviate with an [OpenID authentication scheme](./install.html#openid-authentication), you need to send the correct credentials in a request.
 
 ## Index
 

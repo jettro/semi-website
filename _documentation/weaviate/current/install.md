@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate
+sub-menu: Get started
 product-order: 1
 title: Installation
 description: How to install a weaviate setup.
 tags: ['Installation', 'Running', 'Kubernetes']
-menu-order: 3
+menu-order: 2
 open-graph-type: article
 og-img: documentation.jpg
 ---
@@ -23,6 +24,11 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
 - [Weaviate Cluster Service (WCS)](#weaviate-cluster-service-wcs)
 - [Docker Compose](#docker-compose)
 - [Kubernetes](#kubernetes)
+  - [K8s configuration](#k8s-configuration)
+  - [Get the Helm Chart](#get-the-helm-chart)
+  - [Deploy](#deploy)
+  - [Additional configuration](#additional-configuration)
+  - [Etcd Disaster Recovery](#etcd-disaster-recovery)
 - [Weaviate Configuration](#weaviate-configuration-file)
 - [OpenID (OICD) Authentication](#openid-authentication)
 - [FAQ](#frequently-asked-questions)
@@ -106,6 +112,66 @@ The output of the above setup is quite verbose, you can also run the above comma
 
 ## Kubernetes
 
+To run Weaviate with Kubernetes take the following steps.
+
+```bash
+# Check if helm is installed
+$ helm version
+# Check if pods are running properly
+$ kubectl -n kube-system get pods
+```
+
+### Get the Helm Chart
+
+Get the Helm chart and configuration files.
+
+```bash
+# Set the Weaviate chart version
+export CHART_VERSION="v8.0.0"
+# Download Helm charts
+wget https://github.com/semi-technologies/weaviate-helm/releases/download/$CHART_VERSION/weaviate.tgz
+# Download configuration values
+wget https://raw.githubusercontent.com/semi-technologies/weaviate-helm/$CHART_VERSION/weaviate/values.yaml
+```
+
+### K8s configuration
+
+In the values.yaml file you can tweak the configuration to align it with your setup. The yaml file is extensively documented to help you align the configuration with your setup.
+
+Out of the box, the configuration file is setup for;
+
+- 1 Weaviate replica.
+- `anonymous_access` = enabled.
+- 3 esvector replicas.
+- 3 etcd replicas.
+
+As a rule of thumb, you can;
+
+- increase Weaviate replicas if you have a high load.
+- increase esvector replicas if you have a high load and/or a lot of data.
+
+### Deploy
+
+You can deploy the helm charts as follows;
+
+```bash
+# Init helm (if you haven't done this already)
+$ helm init
+# Deploy
+$ helm upgrade \
+  --values ./values.yaml \
+  --install \
+  --namespace "weaviate" \
+  "weaviate" \
+  weaviate.tgz
+  ```
+
+### Additional Configuration
+
+- [Cannot list resource “configmaps” in API group when deploying Weaviate k8s setup on GCP](https://stackoverflow.com/questions/58501558/cannot-list-resource-configmaps-in-api-group-when-deploying-weaviate-k8s-setup)
+
+### etcd Disaster Recovery
+
 _coming soon_
 
 ## Weaviate Configuration File
@@ -118,11 +184,11 @@ _Note: in principle Weaviate runs out of the box and the configuration should on
 
 In the configuration YAML file, you can specify the desired mode of authentication, such as OpenID Connect.
 
-Currently [Anonymous Access](authentication#anonymous-access) and [OpenID
-Connect](authentication#openid-connect-oidc) are supported. Other Authentication schemes
+Currently [Anonymous Access](authentication.html#anonymous-access) and [OpenID
+Connect](authentication.html#openid-connect-oidc) are supported. Other Authentication schemes
 might become available in the near future.
 
-You can read more about how to setup (OpenID) authentication [here](authentication#openid-details).
+You can read more about how to setup (OpenID) authentication [here](authentication.html#openid-details).
 
 If all authentication schemes - including anonymous access - are disabled,
 Weaviate will fail to start up and ask you to configure at least one.
