@@ -49,7 +49,7 @@ __Client libs__
 - [CLI tool](./cli_tool)
 
 __FAQ__
-- [FAQ](./faq)
+- [FAQ](./FAQ)
 - [How to](./how_to)
 
 __About__

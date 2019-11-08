@@ -21,7 +21,7 @@ og-img: documentation.jpg
 
 ## Basics
 
-A weaviate-cli is always attached to a running Weaviate. If a Weaviate has [OpenID enabled](/documentation/weaviate/current/authentication.html) the CLI tool will automatically request the necessary information from the Weaviate instance.
+A weaviate-cli is always attached to a running Weaviate. If a Weaviate has [OpenID enabled](/documentation/weaviate/current/authenticate.html) the CLI tool will automatically request the necessary information from the Weaviate instance.
 
 ## Initiation
 

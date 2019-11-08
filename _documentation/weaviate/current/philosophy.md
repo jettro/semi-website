@@ -79,7 +79,7 @@ Weaviate consists of four core features;
 
 | Terminology | Description |
 | --- | --- |
-| **Schema** | In Weaviate, a schema is used to define the types of data you will be adding and querying. You can learn more about it [here](./schema.html). |
+| **Schema** | In Weaviate, a schema is used to define the types of data you will be adding and querying. You can learn more about it [here](./define_schema.html). |
 | **Semantic Kinds** | Because of Weaviates semantic nature, we make a distinction in _semantic kinds_. Weaviate distinct two different kinds: *Things* and *Actions*. When creating a Weaviate Schema, you need to explain what Semantic Kind a data object entails. |
 | **Thing** | A thing is a **semantic kind**, referring to an object (e.g., car, rocketship, product). The easiest way to think about Things is in the form of nouns. |
 | **Action** | An action is a **semantic kind**, referring to an action (e.g., walking, dancing, buying). The easiest way to think about Things is in the form of verbs. |
@@ -105,7 +105,7 @@ An empty Weaviate could be envisioned like this:
 
 ![empty Weaviate](/img/guides/c11y-empty.jpg "empty Weaviate")
 
-When using Weaviate's [RESTful API](./adding_and_modifying_data.html) to add data, the Contextionary calculates the position in the vector space that represents the real-world entity.
+When using Weaviate's [RESTful API](./add.html) to add data, the Contextionary calculates the position in the vector space that represents the real-world entity.
 
 The process from a data object to a vector position is calculated based on the centroid of the words weighted by the occurrences of the individual words in the original training text-corpus (e.g., the word `the` is seen as less important than the word `apple`).
 
@@ -115,7 +115,7 @@ When a new class object is created, it will be added to a Weaviate.
 
 ![Weaviate with data](/img/guides/c11y-with-data.jpg "Weaviate with data")
 
-When using the [GraphQL interface](./query.html), you can target a thing or action directly, or by searching for a nearby concept. E.g., the `company Apple` from the previous illustration, can be found by searching for the concept `iphone`.
+When using the [GraphQL interface](./get.html), you can target a thing or action directly, or by searching for a nearby concept. E.g., the `company Apple` from the previous illustration, can be found by searching for the concept `iphone`.
 
 ## About Classification
 

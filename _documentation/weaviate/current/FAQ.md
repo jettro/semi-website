@@ -27,7 +27,7 @@ A: Yes, soon, we will release the Weaviate Cluster Service! [Sign up for our new
 
 ### Q: Can I train my own contextionary?
 
-A: No, but the good news is. You don't have to. The [function of the contextionary](./#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By adding data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You just have to [run the Weaviate containers](./installation.html) in a language of choice, and you are good to go!
+A: No, but the good news is. You don't have to. The [function of the contextionary](./philosophy#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By adding data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You just have to [run the Weaviate containers](./install.html) in a language of choice, and you are good to go!
 
 ### Q: Why does Weaviate have a schema and not an ontology?
 
@@ -47,7 +47,7 @@ A: Sometimes, users work with custom terminology, which often comes in the form 
 
 ### Q: How can you index data near-realtime without losing semantic meaning?
 
-A: Every data object [gets its vector representation](./#about-the-contextionary) based on its semantic meaning. In a nutshell, we calculate the vector position of the data object based on the words and concepts used in the data object. The existing model in the contextionary gives already enough context. If you want to get in the nitty-gritty, you can [browse the code here](https://github.com/semi-technologies/contextionary/tree/master/server), but you can also ask a [specific question on Stackoverflow](https://stackoverflow.com/tags/weaviate/) and tag it with Weaviate.
+A: Every data object [gets its vector representation](./philosophy#about-the-contextionary) based on its semantic meaning. In a nutshell, we calculate the vector position of the data object based on the words and concepts used in the data object. The existing model in the contextionary gives already enough context. If you want to get in the nitty-gritty, you can [browse the code here](https://github.com/semi-technologies/contextionary/tree/master/server), but you can also ask a [specific question on Stackoverflow](https://stackoverflow.com/tags/weaviate/) and tag it with Weaviate.
 
 ### Q: How do you deal with words that have multiple meanings?
 

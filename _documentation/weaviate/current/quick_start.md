@@ -118,7 +118,7 @@ You are now ready to start using Weaviate!
 
 ## Creating a Schema
 
-The schema describes how the knowledge graph is structured on which semantic elements it is based, you can read more in-depth what the Weaviate schema entails [here](schema.html).
+The schema describes how the knowledge graph is structured on which semantic elements it is based, you can read more in-depth what the Weaviate schema entails [here](./define_schema.html).
 
 In this example, we are going to create a knowledge graph of a company. Although you can automate the import of a schema, we will do it manually now to get an understanding of how the schema is structured.
 
@@ -206,7 +206,7 @@ $ curl -X POST http://localhost:8080/v1/schema/things/City/properties -H "Conten
 
 #### Adding Special Types to the Schema
 
-Besides cross-references, Weaviate has a variety of special data types like geocoding. Click [here](schema.html#property-types) for an overview of available types.
+Besides cross-references, Weaviate has a variety of special data types like geocoding. Click [here](./define_schema.html#property-types) for an overview of available types.
 
 Let's update the `City` class with a location.
 
@@ -364,7 +364,7 @@ One of the features of Weaviate is the use of GraphQL to query the graph. The do
 2. Fill in the URL of your Weaviate instance: `http://localhost:8080/v1/graphql`.
 3. When the Weaviate Playground is loaded, click "GraphQL" in the right bottom of the screen.
 
-You can learn more about all functionalities [here](query).
+You can learn more about all functionalities [here](./get).
 
 Getting an overview of all Zoos would look like this:
 

@@ -64,7 +64,7 @@ You can save this schema as a JSON file.
 
 ### Creating a schema file
 
-You can follow the schema formatting as [described here](/documentation/weaviate/current/schema.html).
+You can follow the schema formatting as [described here](/documentation/weaviate/current/define_schema.html).
 
 ## Simple schema example
 
