@@ -3,7 +3,7 @@ layout: layout-documentation
 product: weaviate
 sub-menu: Get started
 product-order: 1
-title: authenticate
+title: Authenticate
 description: How to setup weaviate auhtentication.
 tags: ['Installation', 'Authentication']
 menu-order: 4
