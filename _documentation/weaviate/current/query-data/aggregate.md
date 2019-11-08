@@ -3,7 +3,7 @@ layout: layout-documentation
 product: weaviate
 sub-menu: Query data
 product-order: 1
-title: Aggregate data
+title: Aggregate
 description: How to work with Weaviate's Aggregate function.
 tags: ['Aggregate', 'GraphQL']
 menu-order: 4

@@ -1,7 +1,7 @@
 ---
 layout: layout-documentation
 product: weaviate
-sub-menu: Add data
+sub-menu: Query data
 product-order: 1
 title: Get
 description: How to query weaviate.
