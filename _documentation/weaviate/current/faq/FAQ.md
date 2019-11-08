@@ -27,7 +27,7 @@ A: Yes, soon, we will release the Weaviate Cluster Service! [Sign up for our new
 
 ### Q: Can I train my own contextionary?
 
-A: No, but the good news is. You don't have to. The [function of the contextionary](./philosophy#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By adding data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You just have to [run the Weaviate containers](./install.html) in a language of choice, and you are good to go!
+A: No, but the good news is. You don't have to. The [function of the contextionary](../about/philosophy#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By adding data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You just have to [run the Weaviate containers](../get-started/install.html) in a language of choice, and you are good to go!
 
 ### Q: Why is the contextionary created using GloVe?
 
@@ -51,11 +51,11 @@ A: Sometimes, users work with custom terminology, which often comes in the form 
 
 ### Q: How can you index data near-realtime without losing semantic meaning?
 
-A: Every data object [gets its vector representation](./philosophy#about-the-contextionary) based on its semantic meaning. In a nutshell, we calculate the vector position of the data object based on the words and concepts used in the data object. The existing model in the contextionary gives already enough context. If you want to get in the nitty-gritty, you can [browse the code here](https://github.com/semi-technologies/contextionary/tree/master/server), but you can also ask a [specific question on Stackoverflow](https://stackoverflow.com/tags/weaviate/) and tag it with Weaviate.
+A: Every data object [gets its vector representation](../about/philosophy#about-the-contextionary) based on its semantic meaning. In a nutshell, we calculate the vector position of the data object based on the words and concepts used in the data object. The existing model in the contextionary gives already enough context. If you want to get in the nitty-gritty, you can [browse the code here](https://github.com/semi-technologies/contextionary/tree/master/server), but you can also ask a [specific question on Stackoverflow](https://stackoverflow.com/tags/weaviate/) and tag it with Weaviate.
 
 ### Q: How do you deal with words that have multiple meanings?
 
-A: How can Weaviate interpret that you mean a company, as in business, and not as the division of the army? We do this based on the structure of the schema and the data you add. A schema in Weaviate might contain a company class with the property name and the value Apple. This simple representation (company, name, apple) is already enough to gravitate the vector position of the data object towards businesses or the iPhone. You can read [here](./) how we do this, or you can ask a specific question on [Stackoverflow](https://stackoverflow.com/tags/weaviate/) and tag it with Weaviate.
+A: How can Weaviate interpret that you mean a company, as in business, and not as the division of the army? We do this based on the structure of the schema and the data you add. A schema in Weaviate might contain a company class with the property name and the value Apple. This simple representation (company, name, apple) is already enough to gravitate the vector position of the data object towards businesses or the iPhone. You can read [here](../about/philosophy.html) how we do this, or you can ask a specific question on [Stackoverflow](https://stackoverflow.com/tags/weaviate/) and tag it with Weaviate.
 
 ### Q: Why did you use GraphQL instead of SPARQL?
 
