@@ -11,15 +11,9 @@ open-graph-type: article
 og-img: documentation.jpg
 ---
 
-# Classification Guide
+# CLI tool
 
 {% include badges.html %}
 
-## Index
-
-- [Basics](#basics)
-- [Introduction](#introduction)
-
-## Basics
-
-## Introduction
+- The CLI tool interacts with an individual Weaviate or to the Weaviate cluster.
+- Full documentation of the CLI tool can be found [here](https://www.semi.technology/documentation/weaviate-cli/current/)
