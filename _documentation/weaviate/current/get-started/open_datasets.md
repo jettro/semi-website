@@ -38,7 +38,7 @@ Running on the localhost? No problem, but first set the WEAVIATE_HOST and the WE
 # Set local Weaviate English
 $ export WEAVIATE_HOST="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' en_weaviate_1):8080"
 # Set local Weaviate Dutch
-$ export WEAVIATE_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' en_weaviate_1)
+$ export WEAVIATE_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
 ```
 {% endraw %}
 
@@ -47,9 +47,9 @@ also connect to the right network
 {% raw %}
 ```bash
 # Set the correct network for Weaviate English
-$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
+$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' en_weaviate_1)
 # Set the correct network for Weaviate Dutch
-$ export WEAVIATE_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
+$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
 ```
 {% endraw %}
 

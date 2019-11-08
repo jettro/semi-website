@@ -16,421 +16,182 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-Learn how to get started with Weaviate, using a simple Docker-compose setup. A complete Weaviate stack can be directly run with the Docker compose files available. This setup will also include the Weaviate Playground.
+This quick start guide will give you a 10-minute tour of Weaviate. In it you will;
+- Set up your Weaviate through the managed cluster service or Docker.
+- Add a simple dataset with news articles.
+- Browse through the dataset with the Weaviate Playground.
 
 ## Index
 
-- [Preparation](#preparation)
-- [Installation](#installation)
-- [Validating if the Weaviate is online](#validating-if-the-weaviate-is-online)
-- [Creating a schema](#creating-a-schema)
-- [Adding entities](#adding-entities)
-- [Querying with GraphQL](#querying-with-graphql)
+- [Video tutorial](#video-tutorial)
+- [Run Weaviate with a demo dataset](#run-weaviate-with-a-demo-dataset)
+  - [Weaviate Cluster Service (WCS)](#)
+  - [Docker compose](#docker-compose)
+- [Validate via the RESTful API](#validate-via-the-restful-api)
+- [Query the dataset with GraphQL](#query-the-dataset-with-graphql)
+- [Next steps](#next-steps)
 - [FAQ](#frequently-asked-questions)
 
-## Preparation
+## Video tutorial
 
-Check you have Docker and Docker-compose installed:
+This guide in video format.
 
-```bash
-$ docker --version
-$ docker-compose --version
-```
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/S7SLep244ss" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
-If you do not have Docker installed, you can read
-[here](https://docs.docker.com/install/) how to do this on a multitude of
-operating systems.
+## Run Weaviate with a demo dataset
 
-You are now ready to get started! If you run into issues, please [let us know](#frequently-asked-questions).
+There are many different ways how you can run Weaviate, from local development setups up to large scale Kubernetes environments or hosted and managed Weaviate clusters. For this quick start guide you can choose between;
 
-#### Important information
+- Using the Weaviate Cluster Service (WPC) where you can create a free cluster that contains the demo dataset. Or;
+- Using the Docker compose setup where you can run Weaviate on your local machine to which we will add the demo dataset.
 
-1. The docker-compose setup contains the entire weaviate stack, including a
-   Elasticsearch connector. To run this stack you should have
-   at least **1 CPU and 3 GB of memory available**. If you are planning to import
-   large amounts of data, a larger setup is recommended.
-2. It takes some time to start up the whole infrastructure. During this time,
-   the backing databases will produce plenty of log output. We recommend to not
-   attach to the log-output of the entire setup, but only to those of weaviate.
-   Weaviate will will wait up to 2 minutes for the backing databases to come
-   up. This is indicated by logging `waiting to establish database connection,
-   this can take some time`. You will know that the entire stack is ready when
-   weaviate logs the bind address and port it is listenting on.
-3. The configuration values used in the docker-compose setup reflect a "Try it
-   out" or development setup. Production usage requires considerably more
-   resources. Do not use the docker-compose setup below in production. For
-   production setups, we recommend running the weaviate stack on Kubernetes.
+### Weaviate Cluster Service (WCS)
 
-## Installation
+The quickest way to get started is using the Weaviate Cluster Service (WPC).
 
-Want another language? Make sure to let us know [here](https://github.com/semi-technologies/weaviate/issues).
+Take the following steps;
 
-### Weaviate with an English contextionary
+0. Go to the WPC beta page [here](/weaviate-cluster/).
+0. Fill in your details and **make sure to select the Newspublications demo dataset**.
+0. Collect your Weaviate URL on the SeMI network that looks something like https://xxxx.semi.network
 
-```bash
-# Download the Weaviate configuration file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
-# Download the Weaviate docker-compose file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/docker-compose.yml
-# Run Docker compose
-$ docker-compose up
-```
+If the import is finished, you are all set for the [next step](#query-the-dataset-with-graphql).
 
-### Weaviate with a Dutch contextionary
+### Docker compose
 
-```bash
-# Download the Weaviate configuration file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
-# Download the Weaviate docker-compose file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/docker-compose.yml
-# Run Docker compose
-$ docker-compose up
-```
+If you want to run Weaviate on a location of your choice, you can use Docker-compose. 
 
-Warning: The output is quite verbose, for an alternative see [attaching to only
-the log output of weaviate](./install.html#attaching-to-the-log-output-of-only-weaviate).
+Take the following steps;
 
-## Validating if the Weaviate is online
+0. Follow the three installation steps outlined [here](open_datasets.html#weaviate-with-an-english-contextionary). **Make sure that you install Weaviate with the English contextionary.**
+0. Because you are using the Docker compose setup, you need to define the `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables. You can learn how to do this [here](open_datasets.html#running-on-the-localhost).
+0. You can now add the demo dataset by running the docker command mentioned [here](open_datasets.html#news-publications). Make sure you use the command that consumes both the  `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables.
 
-Check if Weaviate is up and running by using the following curl command:
+If the import is finished, you are all set for the [next step](#query-the-dataset-with-graphql).
+
+## Validate via the RESTful API
+
+You will always use Weaviate via its HTTP API interface. The interface consists of two different interfaces;
+The RESTful API, which is mostly used to add and manipulate data.
+The GraphQL API (which also runs over HTTP) to query data.
+
+We will first check if Weaviate runs correctly, if the schema is added successfully, and if the data is available. You will do the via three HTTP API calls. You can run these calls via the command line with [jq](https://stedolan.github.io/jq/), in your browser, a HTTP-API tool like [Postman](https://www.getpostman.com/) or in your code.
+
+In the example below, we will show you how to do it from the command line with jq.
+
+First, we want to check if Weaviate is running correctly by inspecting the `/v1/meta` endpoint.
+
+_Note: make sure to replace `{WEAVIATE}` with the location of your Weaviate._
 
 ```bash
-$ curl http://localhost:8080/v1/meta
+$ curl -s http://{WEAVIATE}/v1/meta | jq .
 ```
 
-The result should be an empty Weaviate:
+The output will look something like this:
 
 ```json
 {
-    "actionsSchema": {
-        "classes": [],
-        "type": "action"
-    },
-    "hostname": "http://[::]:8080",
-    "thingsSchema": {
-        "classes": [],
-        "type": "thing"
-    }
+  "contextionaryVersion": "en0.8.0-v0.3.3",
+  "contextionaryWordCount": 211170,
+  "hostname": "http://[::]:8080",
+  "version": "{{ site.weaviate_version }}"
 }
 ```
 
-You are now ready to start using Weaviate!
+This validates that your Weaviate is running correctly.
 
-## Creating a Schema
-
-The schema describes how the knowledge graph is structured on which semantic elements it is based, you can read more in-depth what the Weaviate schema entails [here](../add-data/define_schema.html).
-
-In this example, we are going to create a knowledge graph of a company. Although you can automate the import of a schema, we will do it manually now to get an understanding of how the schema is structured.
-
-First, we will create the `Company` as a Weaviate-thing like this;
+Next, we want to check if the news publication schema was added correctly, we can do this by inspecting the `/v1/schema` endpoint.
 
 ```bash
-$ curl -X POST http://localhost:8080/v1/schema/things -H "Content-Type: application/json" -d '{
-    "class": "Company",
-    "keywords": [{
-        "keyword": "business",
-        "weight": 1.0
-    }],
-    "description": "Company in our Weaviate",
-    "properties": [{
-        "dataType": [
-            "string"
-        ],
-        "cardinality": "atMostOne",
-        "description": "Name of the Company",
-        "name": "name",
-        "keywords": [{
-            "keyword": "identifier",
-            "weight": 0.25
-        }]
-    }]
-}'
+$ curl -s http://{WEAVIATE}/v1/schema | jq .
 ```
 
-Next, we want to create a `City` class to describe which city the company is in.
-
-```bash
-$ curl -X POST http://localhost:8080/v1/schema/things -H "Content-Type: application/json" -d '{
-    "class": "City",
-    "keywords": [{
-        "keyword": "village",
-        "weight": 0.01
-    }],
-    "description": "City",
-    "properties": [{
-        "dataType": [
-            "string"
-        ],
-        "cardinality": "atMostOne",
-        "description": "Name of the City",
-        "name": "name",
-        "keywords": [{
-            "keyword": "identifier",
-            "weight": 0.25
-        }]
-    }]
-}'
-```
-
-Now we have two classes but we have not yet defined where the point to, this is because you can't create a cross-reference to a nonexisting class.
-
-Let's update both classes to include cross-references.
-
-First, we update the `Company` class:
-
-```bash
-$ curl -X POST http://localhost:8080/v1/schema/things/Zoo/properties -H "Content-Type: application/json" -d '{
-  "dataType": [
-    "City"
-  ],
-  "cardinality": "atMostOne",
-  "description": "In which city this company is located",
-  "name": "inCity",
-  "keywords": []
-}'
-```
-
-Secondly, we update the `City` class:
-
-```bash
-$ curl -X POST http://localhost:8080/v1/schema/things/City/properties -H "Content-Type: application/json" -d '{
-  "dataType": [
-    "Company"
-  ],
-  "cardinality": "atMostOne",
-  "description": "Which companies are in this city?",
-  "name": "hasCompany",
-  "keywords": []
-}'
-```
-
-#### Adding Special Types to the Schema
-
-Besides cross-references, Weaviate has a variety of special data types like geocoding. Click [here](../add-data/define_schema.html#property-types) for an overview of available types.
-
-Let's update the `City` class with a location.
-
-```bash
-$ curl -X POST http://localhost:8080/v1/schema/things/City/properties -H "Content-Type: application/json" -d '{
-  "dataType": [
-    "geoCoordinates"
-  ],
-  "cardinality": "atMostOne",
-  "description": "Where is the city located on the earth?",
-  "name": "location",
-  "keywords": []
-}'
-```
-
-## Adding entities
-
-Now we have defined the schema, it is time to start adding data.
-
-We are going to add two cities and two companies.
-
-First the city of Amsterdam
-
-```bash
-$ curl -X POST http://localhost:8080/v1/things -H "Content-Type: application/json" -d '{
-    "class": "City",
-    "schema": {
-        "name": "Amsterdam",
-        "location": {
-            "latitude": 52.22,
-            "longitude": 4.54
-        }
-    }
-}'
-```
-
-Results in:
+The output will look something like this but significantly longer:
 
 ```json
 {
-    "class": "City",
-    "schema": {
-        "location": {
-            "latitude": 52.22,
-            "longitude": 4.54
-        },
-        "name": "Amsterdam"
-    },
-    "creationTimeUnix": 1551613377976,
-    "thingId": "6406759e-f6fb-47ba-a537-1a62728d2f55"
-}
-```
-
-Next, the city of Cupertino
-
-```bash
-$ curl -X POST http://localhost:8080/v1/things -H "Content-Type: application/json" -d '{
-    "class": "City",
-    "schema": {
-        "name": "Cupertino",
-        "location": {
-            "latitude": 37.323056, 
-            "longitude": -122.031944
-        }
-    }
-}'
-```
-
-which results in:
-
-```json
-{
-    "class": "City",
-    "schema": {
-        "location": {
-            "latitude": 37.323056, 
-            "longitude": -122.031944
-        },
-        "name": "Cupertino"
-    },
-    "creationTimeUnix": 1551613417125,
-    "thingId": "f15ba7e7-0635-4009-828b-7a631cd6840e"
-}
-```
-
-Now, we are going to add the companies, note how we are defining the cross-reference:
-
-```bash
-$ curl -X POST http://localhost:8080/v1/things -H "Content-Type: application/json" -d '{
-    "class": "Company",
-    "schema": {
-        "name": "SeMI Technologies",
-        "inCity": {
-            "beacon": "weaviate://localhost/things/6406759e-f6fb-47ba-a537-1a62728d2f55"
-        }
-    }
-}'
-```
-
-Which results in:
-
-```json
-{
-    "class": "Company",
-    "schema": {
-        "inCity": {
-            "beacon": "weaviate://localhost/things/6406759e-f6fb-47ba-a537-1a62728d2f55"
-        },
-        "name": "SeMI Technologies"
-    },
-    "creationTimeUnix": 1551613482193,
-    "thingId": "3c6ac167-d7e5-4479-a726-8341b9113e40"
-}
-```
-
-Note how we are using the UUID of the city Amsterdam (which we created above) to point to the correct thing in the graph.
-
-We will do the same for the Berlin zoo:
-
-```bash
-$ curl -X POST http://localhost:8080/v1/things -H "Content-Type: application/json" -d '{
-    "class": "Company",
-    "schema": {
-        "name": "Apple",
-        "inCity": {
-            "beacon": "weaviate://localhost/things/f15ba7e7-0635-4009-828b-7a631cd6840e"
-        }
-    }
-}'
-```
-
-Which results in:
-
-```json
-{
-    "class": "Company",
-    "schema": {
-        "inCity": {
-            "beacon": "weaviate://localhost/things/f15ba7e7-0635-4009-828b-7a631cd6840e"
-        },
-        "name": "Apple"
-    },
-    "creationTimeUnix": 1551613546490,
-    "thingId": "5322d290-9682-4e7a-ae65-270cefeba8e5"
-}
-```
-
-We now have created a mini-graph of 4 nodes. Let's explore the graph now!
-
-## Querying with GraphQL
-
-One of the features of Weaviate is the use of GraphQL to query the graph. The docker-compose setup comes with the Weaviate Playground which we will use to crawl the graph.
-
-1. Open the Weaviate Playground by going to `http://playground.semi.technology`.
-2. Fill in the URL of your Weaviate instance: `http://localhost:8080/v1/graphql`.
-3. When the Weaviate Playground is loaded, click "GraphQL" in the right bottom of the screen.
-
-You can learn more about all functionalities [here](../query-data/get).
-
-Getting an overview of all Zoos would look like this:
-
-```graphql
-{
-  Get{
-    Things{
-      Company{
-        name
-      }
-    }
-  }
-}
-```
-
-We have added the company to a city, to get the name of the city, we have to use the `InCity{}` reference and define that we want to get the results based on a city. But before we can do this, we need to know what the available classes of `InCity{}` are. We can get these insights by clicking `InCity` and inspecting the type (`[CompanyInCityObj]`). Because there is only one possible type (`City`) we now know that `InCity{}` ingests the class: `City`.
-
-```graphql
-{
-  Get {
-    Things {
-      Company {
-        name
-        InCity{
-          ... on City{
-            name
+  "actions": {
+    "classes": [],
+    "type": "action"
+  },
+  "things": {
+    "classes": [
+      {
+        "class": "Publication",
+        "description": "A publication with an online source",
+        "properties": [
+          {
+            "cardinality": "atMostOne",
+            "dataType": [
+              "string"
+            ],
+            "description": "Name of the publication",
+            "name": "name"
+          },
+          {
+            "cardinality": "many",
+            "dataType": [
+              "Article"
+            ],
+            "description": "The articles this publication has",
+            "name": "hasArticles"
           }
-        }
+        ]
       }
-    }
+    ]
   }
 }
 ```
 
-Because we have set the `HasCompany` property, we can also reverse the query:
+You should be able to identify three classes; `Publication`, `Author` and, `Article`.
 
-```graphql
+Lastly, we will validate if all data was added correctly, we will do this via the `/v1/things` endpoint.
+
+```bash
+$ curl -s http://{WEAVIATE}/v1/things | jq .
+```
+
+The output will look something like this but significantly longer:
+
+```json
 {
-  Get {
-    Things {
-      City {
-        HasCompany {
-          ... on Company {
-            name
-          }
+    "things": [
+        {
+            "class": "Article",
+            "creationTimeUnix": 1573143373633,
+            "id": "02c4dc2b-6941-3a77-a54d-5f51a1926d22",
+            "lastUpdateTimeUnix": 1573143373633,
+            "schema": {
+                "hasAuthors": [
+                    {
+                        "beacon": "weaviate://localhost/things/75479bb9-5871-3395-b49d-eb6037fb8082"
+                    },
+                    {
+                        "beacon": "weaviate://localhost/things/dedd462a-23c8-32d0-9412-6fcf9c1e8149"
+                    }
+                ],
+                "inPublication": [
+                    {
+                        "beacon": "weaviate://localhost/things/7e9b9ffe-e645-302d-9d94-517670623b35"
+                    }
+                ],
+                "summary": "The result is a movie of a cynicism so vast and pervasive as to render the viewing experience even emptier than its slapdash aesthetic does. In between these two events, Arthur is seated on a city bus that’s crowded with passengers. In “Joker,” Arthur is quickly seen to be mentally ill, and he knows it—he takes seven medications and wants more. “Joker” is a wannabe movie that also wants to be all things to all viewers, that imitates the notion of adding substance while only subtracting it. “Joker” is a viewing experience of a rare, numbing emptiness.",
+                "title": "“Joker” Is a Viewing Experience of Rare, Numbing Emptiness",
+                "url": "https://www.newyorker.com/culture/the-front-row/joker-is-a-viewing-experience-of-rare-numbing-emptiness",
+                "wordCount": 1794
+            }
         }
-      }
-    }
-  }
+    ]
 }
 ```
 
-### Explore
+## Query the dataset with GraphQL
 
-Exploring through the graph is possible using another function. If you use the `Explore` function, the `Contextionary` will be used to find objects you are looking for. For example, the following query will return objects with the class `City`. Although they are not named `place`, the objects are semantically close to cities, which is why cities will be returned. 
+...
 
-```graphql
-{
-  Explore (concepts: ["place"]) {
-    className
-    beacon
-    certainty
-  }
-}
-```
+## Next steps
 
+...
 
 ## Frequently Asked Questions
 

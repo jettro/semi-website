@@ -35,7 +35,7 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
 
 ## Video Tutorial
 
-Do you prefer video over text or do you want more background information?
+This guide in video format.
 
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/ye-dmGBsxf4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 

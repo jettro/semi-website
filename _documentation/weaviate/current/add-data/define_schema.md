@@ -33,7 +33,7 @@ A Weaviate schema is used to define what kind of [semantic kinds](../about/philo
 
 ## Video Tutorial
 
-Do you prefer video over text or do you want more background information?
+This guide in video format.
 
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/xxRl5lATkuo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
