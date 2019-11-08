@@ -3,20 +3,26 @@
     <dl class="article-toc guide-toc">
         <dd>
             <ul class="list-ui guide-toc__list-pages">
+            <!-- IMPORTANT: NOTE THAT THE SUBMENU ORDER IS SET IN CONFIG.YML -->
             {% assign sorted_documentation = site.documentation | sort: 'menu-order' | group_by: 'product' %}
             {% for guides in sorted_documentation %}
                 {% if guides.name == page.product %}
                     <h3>{{ guides.name }}</h3>
-                    {% assign sorted_menus = site.documentation | group_by: 'sub-menu' %}
-                    {% for menu in sorted_menus %}
-                        <li class="sub-menu">
-                            {{ menu.name }}
-                        </li>
-                        {% for guide in site.documentation %}
-                            {% if menu.name == guide.sub-menu %}
-                            <li class="sub-menu-item">
-                                <a href="{{guide.url}}.html" class="{% if guide.title == page.title %}current{% endif %}">{{guide.title}}</a>
-                            </li>
+                    {% for menuItem in site.docs[guides.name] %}
+                        {% assign sorted_menus = site.documentation | group_by: 'sub-menu' %}
+                        {% for menu in sorted_menus %}
+                            {% if menuItem == menu.name %}
+                                <li class="sub-menu">
+                                    {{ menu.name }}
+                                </li>
+                                {% assign sorted_sub_menus = site.documentation | sort: 'menu-order' %}
+                                {% for guide in sorted_sub_menus %}
+                                    {% if menu.name == guide.sub-menu %}
+                                    <li class="sub-menu-item">
+                                        <a href="{{ guide.url }}.html" class="{% if guide.title == page.title %}current{% endif %}">{{guide.title}}</a>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -26,12 +32,3 @@
         </dd>
     </dl>
 </sidebar>
-
-<style>
-.list-ui .sub-menu {
-    font-weight: bold;
-}
-.list-ui .sub-menu-item {
-    margin: 0 0 0 1.75rem;
-}
-</style>

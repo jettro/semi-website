@@ -29,3 +29,12 @@ plugins:
     - jekyll-redirect-from
 whitelist:
     - jekyll-redirect-from
+docs:
+    weaviate:
+        - Get started
+        - Add data
+        - Query data
+        - Features
+        - Client libs
+        - FAQ
+        - About
