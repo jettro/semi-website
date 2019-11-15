@@ -60,6 +60,7 @@ Weaviate comes with a variety of available filters. The `where` filter is an alg
   - `GreaterThanEqual`
   - `LessThan`
   - `LessThanEqual`
+  - `Like`
 - `Operands`: Is a list of filter objects of this same structure.
 - `Path`: Is a list of strings indicating the property name of the class. If the property is a beacon (i.e., cross-reference), the path should be followed to the property of the beacon which should be specified as a list of strings.
 - `ValueInt`: The integer value where the `Path`'s last property name should be compared to.
@@ -96,6 +97,27 @@ Weaviate comes with a variety of available filters. The `where` filter is an alg
 }
 ```
 
+### Like operator
+As mentioned in the list of possible `operator` values, `Like` is one of them. Using the `Like` operator allows you to do string searches based on partial match. For example, wildcard searches are possible: 
+
+``` graphql
+{
+  Get {
+    Things {
+      Company(where: {
+            path: ["name"],
+            operator: Like,
+            valueString: "Ap*e"
+        }) {
+        name
+      }
+    }
+  }
+}
+```
+
+This query would return both the companies with the name `Apple` and `Apache` if they are present in the Weaviate instance.
+
 ## Simple filter
 
 You can create simple filters by setting the `where` key. You always need to include the GraphQL property path, the operator type, and the valueType plus a value. You can read more about the type definitions [here](#where-filter).
@@ -108,7 +130,7 @@ For example, this filter selects the class Company with a higher revenue than 10
     Things {
       Company(where: {
             path: ["revenue"],
-            operator: GreaterThan
+            operator: GreaterThan,
             valueInt: 10000000
         }) {
         name
