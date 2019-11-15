@@ -110,6 +110,8 @@ $ curl http://localhost:8080/v1/actions -X POST -H 'Content-type: application/js
 
 ## Update a data object
 
+### PUT
+
 A concept data object can be updated inside a Weaviate via the following endpoint:
 
 ```bash
@@ -125,6 +127,37 @@ Example of updating a _Thing_.
 
 ```bash
 $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PUT -H 'Content-type: application/json' -d 
+'{
+  "class": "Company",
+  "schema": {
+    "name": "Apple Inc."
+  },
+  "id": "f81bfe5e-16ba-4615-a516-46c2ae2e5a80"
+}'
+```
+
+### PATCH
+
+Alternatively to the `PUT` request, a `PATCH` request can be made to update a `Thing` or `Action` based on its `UUID` using patch semantics. `PATCH` requests suppoort json-merge style patch semantics defined by [RFC 7396](https://tools.ietf.org/html/rfc7396). 
+
+- The body of the request (the `{data}` object) is either a `Thing` or an `Action` object.
+- The `class` field in the body is required and immutable.  It is therefore not possible to change the class of a specific object using `PATCH`.
+- Any primitive schema property will be appended to the existing object or overwritten if it already existed.
+- Any reference inside a reference property will be appended to the existing list of references. It is not possible to delete existing references using `PATCH`.
+- A successful merge returns `204 No Content`.
+- Properties explicitly set to `null` are ignored by `PATCH`. 
+- Note that the `PATCH` endpoint uses the regular `application/json` header like all other endpoints. This is in contrast to what the official [RFC 7396](https://tools.ietf.org/html/rfc7396) requires (which is `content-type: application/merge-patch+json`).
+
+The request can be used like this:
+
+```bash
+$ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID} -X PATCH -H '{contentType}' -d '{data}'
+```
+
+For example with the (`{data}`) object filled, the request can look something this:
+
+```bash
+$ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PATCH -H 'Content-type: application/json' -d 
 '{
   "class": "Company",
   "schema": {
