@@ -98,6 +98,7 @@ Weaviate comes with a variety of available filters. The `where` filter is an alg
 ```
 
 ### Like operator
+
 As mentioned in the list of possible `operator` values, `Like` is one of them. Using the `Like` operator allows you to do string searches based on partial match. For example, wildcard searches are possible: 
 
 ``` graphql
