@@ -52,7 +52,7 @@ $ curl http://localhost/v1/.well-known/openid-configuration
 ### Anonymous Access
 If anonymous access is selected, weaviate will accept requests without any
 authentication headers or parameters. Users sending such a request will be
-authenticated as `user: anyonmous, group: anonymous`.
+authenticated as `user: anonymous, group: anonymous`.
 
 It is up to the authorization module to decide which
 permissions anonymous users have. By disabling anonymous access alltogether,

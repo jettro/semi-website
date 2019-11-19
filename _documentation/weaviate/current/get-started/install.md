@@ -47,7 +47,7 @@ This guide in video format.
 
 ## Weaviate Cluster Service (WCS)
 
-Weaviate Clusters are managed instances hosted on the SeMI network. Weaviate Clusters are ideal to quickly setup and run or test out Weaviate's capabilities. You can request a free Weaviate Cluster;
+Weaviate Clusters are managed instances hosted on the SeMI network. Weaviate Clusters are ideal to quickly setup and run or test out Weaviate's capabilities. You can request a free Weaviate Cluster:
 
 - [Through the weaviate-cli](/documentation/weaviate-cli/current/cluster-create.html).
 
@@ -89,7 +89,7 @@ recommend to attach only to weaviate itself. In this case run `docker-compose
 up` like so:
 
 - Download the `config.yaml` and `docker-compose.yml` compose files as mentioned [here](#docker-compose).
-- Instead of running `docker-compose up` run the following command;
+- Instead of running `docker-compose up` run the following command:
 
 ```bash
 # Run Docker compose
@@ -108,7 +108,7 @@ You can also download the files manually if you have trouble with the above scri
 2. Download [the files located in this folder](https://github.com/semi-technologies/weaviate/blob/{{ site.weaviate_version }}/docker-compose/runtime).
 3. Run `docker-compose up` in the same location you've downloaded the files.
 
-The output of the above setup is quite verbose, you can also run the above command with Weaviate related logs only;
+The output of the above setup is quite verbose, you can also run the above command with Weaviate related logs only:
 
 ## Kubernetes
 
@@ -138,21 +138,21 @@ wget https://raw.githubusercontent.com/semi-technologies/weaviate-helm/$CHART_VE
 
 In the values.yaml file you can tweak the configuration to align it with your setup. The yaml file is extensively documented to help you align the configuration with your setup.
 
-Out of the box, the configuration file is setup for;
+Out of the box, the configuration file is setup for:
 
 - 1 Weaviate replica.
 - `anonymous_access` = enabled.
 - 3 esvector replicas.
 - 3 etcd replicas.
 
-As a rule of thumb, you can;
+As a rule of thumb, you can:
 
 - increase Weaviate replicas if you have a high load.
 - increase esvector replicas if you have a high load and/or a lot of data.
 
 ### Deploy
 
-You can deploy the helm charts as follows;
+You can deploy the helm charts as follows:
 
 ```bash
 # Init helm (if you haven't done this already)

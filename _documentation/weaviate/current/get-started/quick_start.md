@@ -16,7 +16,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-This quick start guide will give you a 10-minute tour of Weaviate. In it you will;
+This quick start guide will give you a 10-minute tour of Weaviate. In it you will:
 - Set up your Weaviate through the managed cluster service or Docker.
 - Add a simple dataset with news articles.
 - Browse through the dataset with the Weaviate Playground.
@@ -40,7 +40,7 @@ This guide in video format.
 
 ## Run Weaviate with a demo dataset
 
-There are many different ways how you can run Weaviate, from local development setups up to large scale Kubernetes environments or hosted and managed Weaviate clusters. For this quick start guide you can choose between;
+There are many different ways how you can run Weaviate, from local development setups up to large scale Kubernetes environments or hosted and managed Weaviate clusters. For this quick start guide you can choose between:
 
 - Using the Weaviate Cluster Service (WPC) where you can create a free cluster that contains the demo dataset. Or;
 - Using the Docker compose setup where you can run Weaviate on your local machine to which we will add the demo dataset.
@@ -49,7 +49,7 @@ There are many different ways how you can run Weaviate, from local development s
 
 The quickest way to get started is using the Weaviate Cluster Service (WPC).
 
-Take the following steps;
+Take the following steps:
 
 0. Go to the WPC beta page [here](/weaviate-cluster/).
 0. Fill in your details and **make sure to select the Newspublications demo dataset**.
@@ -61,7 +61,7 @@ If the import is finished, you are all set for the [next step](#query-the-datase
 
 If you want to run Weaviate on a location of your choice, you can use Docker-compose. 
 
-Take the following steps;
+Take the following steps:
 
 0. Follow the three installation steps outlined [here](open_datasets.html#weaviate-with-an-english-contextionary). **Make sure that you install Weaviate with the English contextionary.**
 0. Because you are using the Docker compose setup, you need to define the `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables. You can learn how to do this [here](open_datasets.html#running-on-the-localhost).
@@ -71,7 +71,7 @@ If the import is finished, you are all set for the [next step](#query-the-datase
 
 ## Validate via the RESTful API
 
-You will always use Weaviate via its HTTP API interface. The interface consists of two different interfaces;
+You will always use Weaviate via its HTTP API interface. The interface consists of two different interfaces:
 The RESTful API, which is mostly used to add and manipulate data.
 The GraphQL API (which also runs over HTTP) to query data.
 
@@ -143,7 +143,7 @@ The output will look something like this but significantly longer:
 }
 ```
 
-You should be able to identify three classes; `Publication`, `Author` and, `Article`.
+You should be able to identify three classes: `Publication`, `Author` and, `Article`.
 
 Lastly, we will validate if all data was added correctly, we will do this via the `/v1/things` endpoint.
 
