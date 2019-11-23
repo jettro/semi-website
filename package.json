@@ -52,5 +52,8 @@
   "homepage": "https://github.com/SeMI-network/semi-website#readme",
   "dependencies": {
     "jquery": "^3.4.1"
-  }
+  },
+  "browserslist": [
+    "defaults"
+  ]
 }
