@@ -9,7 +9,7 @@
                 {% if guides.name == page.product %}
                     <h3>{{ guides.name }}</h3>
                     <li class="sub-menu-item">
-                        <a href="{% if page.title == 'Index' %}./{% else %}../{% endif %}" class="{% if guide.title == page.title %}current{% endif %}">About</a>
+                        <a href="{% if page.title == 'Index' %}./{% else %}../{% endif %}index.html" class="{% if guide.title == page.title %}current{% endif %}">About</a>
                     </li>
                     {% for menuItem in site.docs[guides.name] %}
                         {% assign sorted_menus = site.documentation | group_by: 'sub-menu' %}
