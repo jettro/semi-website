@@ -63,8 +63,8 @@ If you want to run Weaviate on a location of your choice, you can use Docker-com
 
 Take the following steps:
 
-0. Follow the three installation steps outlined [here](open_datasets.html#weaviate-with-an-english-contextionary). **Make sure that you install Weaviate with the English contextionary.**
-0. Because you are using the Docker compose setup, you need to define the `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables. You can learn how to do this [here](open_datasets.html#running-on-the-localhost).
+0. Follow the three installation steps outlined [here](open_datasets.html). **Make sure that you install Weaviate with the English contextionary.**
+0. Because you are using the Docker compose setup, you need to define the `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables.
 0. You can now add the demo dataset by running the docker command mentioned [here](open_datasets.html#news-publications). Make sure you use the command that consumes both the  `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables.
 
 If the import is finished, you are all set for the [next step](#query-the-dataset-with-graphql).

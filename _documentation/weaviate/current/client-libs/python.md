@@ -18,8 +18,7 @@ og-img: documentation.jpg
 ## Index
 
 - [Basics](#basics)
-- [Example Usage](#example-usage)
-- [Functions](#functions)
+- [Usage](#usage)
 
 ## Basics
 - A python native weaviate client makes using the Weaviate API easier.
