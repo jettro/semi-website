@@ -1,12 +1,11 @@
 ---
 layout: layout-documentation
 product: weaviate
-sub-menu: Get started
 product-order: 1
 title: Demo datasets
 description: demo datasets for Weaviate
-tags: ['Demo', 'Datasets']
-menu-order: 3
+tags: ['Demo', 'datasets']
+menu-order: 13
 open-graph-type: article
 og-img: documentation.jpg
 ---
@@ -20,7 +19,6 @@ Demo datasets that you can use to learn about Weaviate.
 ## Index
 
 - [Basics](#basics)
-    - [Running on the localhost](#running-on-the-localhost)
 - [Datasets](#datasets)
     - [News publications](#news-publications)
 - [FAQ](#faq)
@@ -28,30 +26,6 @@ Demo datasets that you can use to learn about Weaviate.
 ## Basics
 
 - All datasets can be imported by using Docker. You need to specify the complete endpoint (e.g., `https://foobar.semi.network`).
-
-### Running on the localhost
-
-Running on the localhost? No problem, but first set the WEAVIATE_HOST and the WEAVIATE_NETWORK with the following commands;
-
-{% raw %}
-```bash
-# Set local Weaviate English
-$ export WEAVIATE_HOST="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' en_weaviate_1):8080"
-# Set local Weaviate Dutch
-$ export WEAVIATE_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
-```
-{% endraw %}
-
-also connect to the right network
-
-{% raw %}
-```bash
-# Set the correct network for Weaviate English
-$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' en_weaviate_1)
-# Set the correct network for Weaviate Dutch
-$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' nl_weaviate_1)
-```
-{% endraw %}
 
 ## Datasets
 
@@ -72,14 +46,18 @@ $ docker run -i -e weaviate_host=$WEAVIATE_HOST semitechnologies/weaviate-demo-n
 
 Usage with Docker on **local** host **with** Docker Compose;
 
+_Note: run this from the same directory where the Weaviate Docker-compose files are located_
+
+{% raw %}
 ```bash
 # WEAVIATE HOST (e.g., http://localhost:8080), note the paragraph "basics" for setting the local IP
-$ export WEAVIATE_HOST=YOUR WEAVIATE HOST
+$ export WEAVIATE_HOST="http://$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${PWD##*/}_weaviate_1):8080"
 # WEAVIATE NETWORK (see paragraph: Running on the localhost)
-$ export WEAVIATE_NETWORK=WEAVIATE NETWORK
-# Make sure to replace YOUR_HOST with the Weaviate host as mentioned in the basics above
+$ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' ${PWD##*/}_weaviate_1)
+# Run docker
 $ docker run -i --network=$WEAVIATE_NETWORK -e weaviate_host=$WEAVIATE_HOST semitechnologies/weaviate-demo-newspublications
 ```
+{% endraw %}
 
 ## FAQ
 
