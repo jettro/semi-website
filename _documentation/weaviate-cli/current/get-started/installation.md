@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate-cli
+sub-menu: Get started
 product-order: 3
-title: Installation
-description: Installation of the Weaviate CLI tool
-tags: ['weaviate-cli', 'installation']
-menu-order: 2
+title: Install
+description: Weaviate-cli Install
+tags: ['weaviate-cli', 'install']
+menu-order: 5
 open-graph-type: article
 og-img: documentation.jpg
 ---

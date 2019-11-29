@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate-cli
+sub-menu: Get started
 product-order: 3
 title: Upgrade
-description: Pulls the most current version of the weaviate-cli from the repository.
+description: Weaviate-cli Upgrade
 tags: ['weaviate-cli', 'upgrade']
-menu-order: 10
+menu-order: 5
 open-graph-type: article
 og-img: documentation.jpg
 ---

@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate-cli
+sub-menu: Misc
 product-order: 3
-title: Empty a Weaviate
-description: Remove concepts from Weaviate
+title: Empty
+description: Empty a Weaviate
 tags: ['weaviate-cli', 'empty']
-menu-order: 9
+menu-order: 5
 open-graph-type: article
 og-img: documentation.jpg
 ---

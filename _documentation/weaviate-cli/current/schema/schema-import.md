@@ -1,9 +1,10 @@
 ---
 layout: layout-documentation
 product: weaviate-cli
+sub-menu: Schema
 product-order: 3
-title: Import a schema
-description: Weaviate CLI schema import
+title: Import
+description: Import a schema
 tags: ['weaviate-cli', 'schema', 'import']
 menu-order: 5
 open-graph-type: article

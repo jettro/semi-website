@@ -1,6 +1,7 @@
 ---
 layout: layout-documentation
 product: weaviate-cli
+sub-menu: Cluster
 product-order: 3
 title: Create a cluster
 description: Weaviate cluster create

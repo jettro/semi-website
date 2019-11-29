@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate-cli
+sub-menu: Schema
 product-order: 3
 title: Truncate
-description: Truncate a Weaviate schema.
+description: Truncate a schema
 tags: ['weaviate-cli', 'schema', 'truncate']
-menu-order: 7
+menu-order: 5
 open-graph-type: article
 og-img: documentation.jpg
 ---
@@ -21,7 +22,7 @@ og-img: documentation.jpg
 
 ## Basics
 
-If a weaviate [is empty](./empty.html), you can truncate the schema.
+If a weaviate [is empty](../misc/empty.html), you can truncate the schema.
 
 ## Schema Truncate
 

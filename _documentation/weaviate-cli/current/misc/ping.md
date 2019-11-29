@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate-cli
+sub-menu: Misc
 product-order: 3
 title: Ping
-description: Ping a Weaviate with the Weaviate CLI tool.
+description: Ping a Weaviate
 tags: ['weaviate-cli', 'ping']
-menu-order: 4
+menu-order: 5
 open-graph-type: article
 og-img: documentation.jpg
 ---

@@ -1,11 +1,12 @@
 ---
 layout: layout-documentation
 product: weaviate-cli
+sub-menu: Cluster
 product-order: 3
 title: Remove a cluster
-description: Weaviate cluster remove
+description: Weaviate cluster create
 tags: ['weaviate-cli', 'cluster', 'remove']
-menu-order: 6
+menu-order: 5
 open-graph-type: article
 og-img: documentation.jpg
 ---
