@@ -165,7 +165,7 @@ The stucture of this filter in the query is as follows:
         meta {
           count
         }
-        <propertyName {
+        <propertyName> {
           count
         }
       }
