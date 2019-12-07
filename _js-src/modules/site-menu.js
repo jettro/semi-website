@@ -32,22 +32,22 @@ function createHorizontal() {
 
 export default function() {
   /** initial navigation setting for small to medium screensizes */
-  if (window.matchMedia(`(max-width: ${toMediumQuerySize})`).matches) {
+  //if (window.matchMedia(`(max-width: ${toMediumQuerySize})`).matches) {
     createVerticalNav();
-  }
+  //}
 
   /** when browser window is resized */
   window.addEventListener(
     'resize',
     debounce(function() {
       /** reset to vertical if window size is lower than medium screensize */
-      if (window.matchMedia(`(max-width: ${toMediumQuerySize})`).matches) {
-        createVerticalNav();
-      }
+      //if (window.matchMedia(`(max-width: ${toMediumQuerySize})`).matches) {
+      //  createVerticalNav();
+      //}
       /** reset to horizontal if window size exceeds medium screensize */
-      if (window.matchMedia(`(min-width: ${toMediumQuerySize})`).matches) {
+      //if (window.matchMedia(`(min-width: ${toMediumQuerySize})`).matches) {
         createHorizontal();
-      }
+      //}
     }),
   );
 
