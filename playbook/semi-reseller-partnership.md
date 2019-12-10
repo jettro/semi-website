@@ -1,6 +1,6 @@
 ---
 layout: service-manual
-title: SeMI Sales Partnership (SSP)
+title: SeMI Reseller Partnership (SRP)
 ---
 
 <article class="article container">
