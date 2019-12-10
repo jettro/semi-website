@@ -29,10 +29,10 @@ The following document contains the guiding principles for a SeMI Reseller Partn
 
 ## SRP commission & pricing
 
-- A sales commission via an SRP is 25% based on any license structure (except for cloud costs regarding a Weaviate Cluster Platform (WCP) i.e., Weaviate’s managed service.) or lump sum price for e.g. training and certification.
+- A sales commission via an SRP is X% based on any license structure (except for cloud costs regarding a Weaviate Cluster Platform (WCP) i.e., Weaviate’s managed service.) or lump sum price for e.g. training and certification.
 - An SRP may offer secondary training to Weaviate.
 - An SRP may not offer secondary certification to Weaviate.
-- A sales commission in the territory and branch of an SRP through another referral is 10%  based on any license structure (except for cloud costs regarding a Weaviate Cluster Platform (WCP) i.e., Weaviate’s managed service.) or lump sum price for e.g. training and certification.
+- A sales commission in the territory and branch of an SRP through another referral is Y%  based on any license structure (except for cloud costs regarding a Weaviate Cluster Platform (WCP) i.e., Weaviate’s managed service.) or lump sum price for e.g. training and certification.
 - Weaviate pricing is determined by SeMI.
 
 ## SeMI services towards an SRP
