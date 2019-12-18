@@ -112,6 +112,12 @@ The output of the above setup is quite verbose, you can also run the above comma
 
 ## Kubernetes
 
+_Note I: the Kubernetes setup is only for large scale deployments of Weaviate. In case you want to work with smaller deployments, you can always user Docker Compose or the Weaviate Cluster Service._
+
+_Note II: tested until Kubernetes 1.14.*_
+
+_Note III: In case your are running a very small setup. We would advice to use Docker Compose, but you can also this [minimal configuration](https://github.com/semi-technologies/weaviate-helm/blob/v{{ site.helm_version }}/weaviate/values-minimal.yaml)._
+
 To run Weaviate with Kubernetes take the following steps.
 
 ```bash
@@ -127,7 +133,7 @@ Get the Helm chart and configuration files.
 
 ```bash
 # Set the Weaviate chart version
-export CHART_VERSION="v8.0.0"
+export CHART_VERSION="v{{ site.helm_version }}"
 # Download Helm charts
 wget https://github.com/semi-technologies/weaviate-helm/releases/download/$CHART_VERSION/weaviate.tgz
 # Download configuration values
@@ -156,19 +162,23 @@ You can deploy the helm charts as follows:
 
 ```bash
 # Init helm (if you haven't done this already)
-$ helm init
+$ helm init --upgrade
+# Create a Weaviate namespace
+$ kubectl create namespace weaviate
 # Deploy
 $ helm upgrade \
   --values ./values.yaml \
   --install \
+  --wait \
   --namespace "weaviate" \
   "weaviate" \
   weaviate.tgz
   ```
 
-### Additional Configuration
+### Additional Configuration help
 
 - [Cannot list resource “configmaps” in API group when deploying Weaviate k8s setup on GCP](https://stackoverflow.com/questions/58501558/cannot-list-resource-configmaps-in-api-group-when-deploying-weaviate-k8s-setup)
+- [Error: UPGRADE FAILED: configmaps is forbidden](https://stackoverflow.com/questions/58501558/cannot-list-resource-configmaps-in-api-group-when-deploying-weaviate-k8s-setup)
 
 ### etcd Disaster Recovery
 
