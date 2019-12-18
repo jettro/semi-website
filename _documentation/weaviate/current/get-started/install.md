@@ -27,7 +27,7 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
   - [K8s configuration](#k8s-configuration)
   - [Get the Helm Chart](#get-the-helm-chart)
   - [Deploy](#deploy)
-  - [Additional configuration](#additional-configuration)
+  - [Additional configuration](#additional-configuration-help)
   - [Etcd Disaster Recovery](#etcd-disaster-recovery)
 - [Weaviate Configuration](#weaviate-configuration-file)
 - [OpenID (OICD) Authentication](#openid-authentication)
@@ -175,7 +175,7 @@ $ helm upgrade \
   weaviate.tgz
   ```
 
-### Additional Configuration help
+### Additional Configuration Help
 
 - [Cannot list resource “configmaps” in API group when deploying Weaviate k8s setup on GCP](https://stackoverflow.com/questions/58501558/cannot-list-resource-configmaps-in-api-group-when-deploying-weaviate-k8s-setup)
 - [Error: UPGRADE FAILED: configmaps is forbidden](https://stackoverflow.com/questions/58501558/cannot-list-resource-configmaps-in-api-group-when-deploying-weaviate-k8s-setup)

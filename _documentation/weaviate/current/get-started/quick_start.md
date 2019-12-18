@@ -29,7 +29,6 @@ This quick start guide will give you a 10-minute tour of Weaviate. In it you wil
   - [Docker compose](#docker-compose)
 - [Validate via the RESTful API](#validate-via-the-restful-api)
 - [Query the dataset with GraphQL](#query-the-dataset-with-graphql)
-- [Next steps](#next-steps)
 - [FAQ](#frequently-asked-questions)
 
 ## Video tutorial
