@@ -16,7 +16,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-Weaviate is an open-source, GraphQL and RESTful API-enabled, knowledge graph based on a graph embedding mechanism called the Contextionary.
+Weaviate is an open-source, GraphQL and RESTful API-enabled, smart graph based on a graph embedding mechanism called the Contextionary.
 
 ## Weaviate in a Nutshell
 
