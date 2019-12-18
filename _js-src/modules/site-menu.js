@@ -34,15 +34,6 @@ export default function() {
   /** initial navigation setting for small to medium screensizes */
   createVerticalNav();
 
-  /** when browser window is resized */
-  window.addEventListener(
-    'resize',
-    debounce(function() {
-      /** reset to vertical if window size is lower than medium screensize */
-      createHorizontal();
-    }),
-  );
-
   /** the show hide for the navigation */
   trigger.addEventListener('click', function() {
     const [menuIcon] = this.getElementsByTagName('img');
