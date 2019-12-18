@@ -15,7 +15,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-Data objects in Weaviate can be grouped, based on your filters. You can use GraphQL's `Aggregation{}` function to then obtain meta information about these groups. Direct data querying can be done by the [`Get{}`](./explore) function, and exploration can be done by the [`Explore{}`](./explore) function.
+Data objects in Weaviate can be grouped, based on your filters. You can use GraphQL's `Aggregation{}` function to then obtain meta information about these groups. Direct data querying can be done by the [`Get{}`](./get.html) function, and exploration can be done by the [`Explore{}`](./explore.html) function.
 
 ## Index
 
