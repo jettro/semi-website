@@ -29,6 +29,7 @@ This quick start guide will give you a 10-minute tour of Weaviate. In it you wil
   - [Docker compose](#docker-compose)
 - [Validate via the RESTful API](#validate-via-the-restful-api)
 - [Query the dataset with GraphQL](#query-the-dataset-with-graphql)
+- [Automatic Classification](#automatic-classification)
 - [FAQ](#frequently-asked-questions)
 
 ## Video tutorial
@@ -400,7 +401,7 @@ Or publications related to fashion.
 }
 ```
 
-### Your First Classification
+## Automatic Classification
 
 If you run the following query, you might notice that there are no categories classified for new articles.
 
