@@ -251,10 +251,7 @@ In addition, the `limit` filter can be used on the `topOccurrences` fields.
 {
   Aggregate {
     Things {
-      City(groupBy: ["isCapital"],
-        forceRecalculate: false,
-        useAnalyticsEngine: true,
-      ) {
+      City(groupBy: ["isCapital"]) {
         population {
           mean
         }
