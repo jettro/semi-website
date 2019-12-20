@@ -21,6 +21,9 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: .25em;
 	max-width: $component-primary-max-width;
 }
+.article h2, .article h3, .article h4, .article h5, .article h6 {
+    padding-top: 1.5rem;
+}
 h2 {
 	font-size: 1.75rem;
 }
