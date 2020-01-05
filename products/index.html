@@ -1,9 +1,8 @@
 ---
 bodyclass: ["page--products", " ", "page--products-index"]
 layout: layout-default
-title: Products
-description: An overview of SeMI's products.
-open-graph-type: product
+title: Product overview
+description: Weaviate products and knowledge network offerings
 og-img: products.jpg
 ---
 
@@ -14,7 +13,7 @@ og-img: products.jpg
                 <!-- <h1 class="title-page header--centered">Core products</h1> -->
                 <h1 class="title-page header--centered">Discover our products</h1>
                 <div class="section-standout__text--centered">
-                    <p>Our core product suite consists of the Weaviate knowledge graph and Knowledge Networks based on Weaviate.</p>
+                    <p>Our core product suite consists of the Weaviate Smart Graph and Knowledge Networks based on Weaviate.</p>
                 </div>
             </div>
         </section>
@@ -22,18 +21,18 @@ og-img: products.jpg
             <ul class="cards cards--load-fade-in">
                 {% capture carOneContent %}
                     <div class="card__intro">
-                        <p><b>Learn more about our offerings of the Weaviate knowledge graph from open source to enterprise.</b></p>
+                        <p><b>Learn more about our offerings of the Weaviate Smart Graph from open source to enterprise.</b></p>
                     </div>
                 {% endcapture %}
 
                 {% include components/card/card.html
                     title="Weaviate"
                     themeClass="card-white card--pilar card--theme-weaviate"
-                    imgUrl="/img/logo-icon-weaviate-enterprise.svg"
-                    imgAlt="Weaviate for the Enterprise logo"
+                    imgUrl="/img/logo-weaviate-emblem-color.svg"
+                    imgAlt="Weaviate for the logo"
                     linkUrl="/products/weaviate.html"
                     linkExternal=false
-                    ctaText="Explore Weaviate"
+                    ctaText="Explore Weaviate Enterprise"
                     content=carOneContent
                 %}
                 {% capture carTwoContent %}
@@ -49,7 +48,7 @@ og-img: products.jpg
                     imgAlt="Knowledge Network logo"
                     linkUrl="/newsletter"
                     linkExternal=false
-                    ctaText="coming soon"
+                    ctaText="Sign up for the beta program"
                     content=carTwoContent
                 %}
                 

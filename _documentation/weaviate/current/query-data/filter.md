@@ -15,7 +15,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-You can directly query the Weaviate knowledge graph. Finding concepts in the knowledge graph based on the Contextionary can be done through [exploring](explore.html).
+You can directly query the Weaviate smart graph. Finding concepts in the smart graph based on the Contextionary can be done through [exploring](explore.html).
 
 _Note: You can mix [explore](explore.html) functions with regular query functions._
 

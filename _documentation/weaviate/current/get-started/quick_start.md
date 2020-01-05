@@ -469,7 +469,7 @@ $ curl -k https://wcjswuxctfvlxuxl.semi.network/v1/things/b8977d2e-a026-36dc-bc3
 
 This was a sneak peek of Weaviate. In the documentation, you can find more videos and guides on how to work with Weaviate in depth.
 
-Have fun building your own smart graph or knowledge graph with Weaviate!
+Have fun building your own smart graph or smart graph with Weaviate!
 
 ## Frequently Asked Questions
 

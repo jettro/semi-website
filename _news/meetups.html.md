@@ -1,6 +1,6 @@
 ---
 layout: layout-blog-article
-title: Knowledge Graph Meetups
+title: Smart Graph Meetups
 description: We organize meetups in Amsterdam, New York and the Bay Area.
 tags: ['Meetup', 'Technology', 'Summary', 'Blog']
 pubdate: October 1st, 2019

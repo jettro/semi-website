@@ -1,54 +1,84 @@
 
-- title: "Scalable knowledge graph (click <a href='#'>here</a> for tech features)"
+- title: "Scalable smart graph (<a href='/documentation/weaviate/current/'>tech features</a>)"
   note: ""
   opensource: true
   enterprise: true
-  whitelabel: true
+  enterpriseplus: true
 
-- title: "Helm and Kubernetes charts to run on cloud providers an on premise"
+- title: "Helm and Kubernetes charts"
   note: ""
   opensource: true
   enterprise: true
-  whitelabel: true
+  enterpriseplus: true
 
-- title: "Access to our community solution engineers for guidance"
+- title: "Community support"
   note: ""
   opensource: true
   enterprise: true
-  whitelabel: true
-
-- title: "Open Source 3-Clause BSD License (BSD-3) license"
-  note: ""
-  opensource: true
-  enterprise: false
-  whitelabel: false
+  enterpriseplus: true
 
 - title: "Enterprise service-level agreement (SLA)"
   note: ""
   opensource: false
   enterprise: true
-  whitelabel: true
+  enterpriseplus: true
 
 - title: "Enterprise Terms of Service (ToS)"
   note: ""
   opensource: false
   enterprise: true
-  whitelabel: true
+  enterpriseplus: true
 
 - title: "Enterprise End-User Licence Agreement (EULA)"
   note: ""
   opensource: false
   enterprise: true
-  whitelabel: true
+  enterpriseplus: true
 
-- title: "Access to our solution engineers to help you implement your use cases"
+- title: "Global Weaviate as a Service (WaaS)"
   note: ""
   opensource: false
   enterprise: true
-  whitelabel: true
+  enterpriseplus: true
 
-- title: "Have SeMI run Weaviate for you in a datacenter of choice"
+- title: "Feature requests"
   note: ""
   opensource: false
   enterprise: true
-  whitelabel: true
+  enterpriseplus: true
+
+- title: "Dedicated Weaviate support"
+  note: ""
+  opensource: false
+  enterprise: true
+  enterpriseplus: true
+
+- title: "Last-come-first-served Silver (<a href='#asterisk'>*</a>)"
+  note: ""
+  opensource: false
+  enterprise: true
+  enterpriseplus: true
+
+- title: "Access to our solution engineers (<a href='#dagger'>†</a>)"
+  note: ""
+  opensource: false
+  enterprise: true
+  enterpriseplus: true
+
+- title: "Dedicated implemantation support"
+  note: ""
+  opensource: false
+  enterprise: false
+  enterpriseplus: true
+
+- title: "Last-come-first-served Gold (<a href='#double-dagger'>‡</a>)"
+  note: ""
+  opensource: false
+  enterprise: false
+  enterpriseplus: true
+
+- title: "Access to our core engineers (<a href='#section-sign'>§</a>)"
+  note: ""
+  opensource: false
+  enterprise: false
+  enterpriseplus: true

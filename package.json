@@ -42,14 +42,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SeMI-network/semi-website.git"
+    "url": "git+https://github.com/semi-technologies/semi-website.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SeMI-network/semi-website/issues"
+    "url": "https://github.com/semi-technologies/semi-website/issues"
   },
-  "homepage": "https://github.com/SeMI-network/semi-website#readme",
+  "homepage": "https://github.com/semi-technologies/semi-website#readme",
   "dependencies": {
     "jquery": "^3.4.1"
   },
