@@ -1,5 +1,9 @@
 <div class="container">
-    <nav id="js-site-nav" class="nav-main wrapper--wide">
+    {%- if page.url == "/" -%}
+        <nav id="js-site-nav" class="nav-main wrapper--wide nav-main--inverted">
+    {%- else -%}
+        <nav id="js-site-nav" class="nav-main wrapper--wide">
+    {%- endif -%}
         <ul>
             <li class="nav-main--home"><a href="/">home</a></li>
             <!-- <li class="nav-main--services"><a href="/services/">services</a></li> -->

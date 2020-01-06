@@ -64,6 +64,14 @@
 	}
 }
 
+.nav-main--inverted {
+	background-color: $color-white !important;
+}
+
+.nav-main--inverted ul li a {
+	color: $color-black !important;
+}
+
 .nav-vertical--active {
 	display: flex;
 	height: auto;
