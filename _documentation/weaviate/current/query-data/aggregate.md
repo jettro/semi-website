@@ -15,7 +15,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-Data objects in Weaviate can be grouped, based on your filters. You can use GraphQL's `Aggregation{}` function to then obtain meta information about these groups. Direct data querying can be done by the [`Get{}`](./get.html) function, and exploration can be done by the [`Explore{}`](./explore.html) function.
+Data objects in Weaviate can be grouped, based on your filters. You can use GraphQL's `Aggregation{}` function to then obtain meta information about these groups. Direct data querying can be done by the [`Get{}`](./get.html) function, and exploration can be done by the [`Explore{}`](./explore-filter.html) function.
 
 ## Index
 
@@ -242,7 +242,7 @@ which might result in something like this result:
 ```
 
 #### Where and Limit
-In the `Aggregate{}` function, as well as the `Get{}` function, a `where` filter and `limit` filter can be used on class-level to filter data. A detailed explanation of these filters can be found on the `Query` page ([here for `where` filter](./filter), and [here for `limit` filter](./filter#limit-filter)).
+In the `Aggregate{}` function, as well as the `Get{}` function, a `where` filter and `limit` filter can be used on class-level to filter data. A detailed explanation of these filters can be found on the `Query` page ([here for `where` filter](./where-filter.html#limit-filter), and [here for `limit` filter](./where-filter.html#limit-filter)).
 
 In addition, the `limit` filter can be used on the `topOccurrences` fields.
 

@@ -110,29 +110,31 @@ A schema object is defined as follows;
 
 ```js
 {
-  "class": "string",       // The name of the class in string format
-  "description": "string", // A description for your reference
-  "keywords": [            // An array of keywords that Weaviate uses when a classname is ambigious
+  "class": "string",              // The name of the class in string format
+  "description": "string",        // A description for your reference
+  "vectorizeClassName": "boolean" // vectorize the class true or false?
+  "keywords": [                   // An array of keywords that Weaviate uses when a classname is ambigious
     {
-      "keyword": "string", // A keyword in string format. For example, with the class "Company" you might want to add the keyword "business"
-      "weight": 0.0        // The importance of the keyword. Min 0.0 and max 1.0
+      "keyword": "string",        // A keyword in string format. For example, with the class "Company" you might want to add the keyword "business"
+      "weight": 0.0               // The importance of the keyword. Min 0.0 and max 1.0
     }
   ],
-  "properties": [          // An array of the properties you are adding, same as a Property Object
+  "properties": [                 // An array of the properties you are adding, same as a Property Object
     {
-      "dataType": [        // The data type of the object as described above, When creating cross references, a property can have multiple dataTypes.
+      "dataType": [               // The data type of the object as described above, When creating cross references, a property can have multiple dataTypes.
         "string"
       ],
-      "name": "string",    // The name of the property
-      "keywords": [        // An array of keywords that Weaviate uses when a property is ambigious
+      "name": "string",           // The name of the property
+      "vectorizePropertyName": "boolean" // vectorize the property true or false?
+      "keywords": [               // An array of keywords that Weaviate uses when a property is ambigious
         {
-          "keyword": "string", // A keyword in string format.
-          "weight": 0.0        // The importance of the keyword. Min 0.0 and max 1.0
+          "keyword": "string",    // A keyword in string format.
+          "weight": 0.0           // The importance of the keyword. Min 0.0 and max 1.0
         }
       ],
       "cardinality": "atMostOne OR many", // Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
-      "description": "string",             // A description for your reference
-      "index": true        // Optional, default is true. By default each property is fully indexed both for full-text, as well as vector-search. You can ignore properties in searches by explicitly setting index to false.
+      "description": "string",            // A description for your reference
+      "index": true                       // Optional, default is true. By default each property is fully indexed both for full-text, as well as vector-search. You can ignore properties in searches by explicitly setting index to false.
     }
   ]
 }
@@ -144,10 +146,11 @@ A property object is defined as follows;
 
 ```js
 {
-  "dataType": [     // The data type of the object as described above, When creating cross refferences, a property can have multiple dataTypes.
+  "dataType": [ // The data type of the object as described above, When creating cross refferences, a property can have multiple dataTypes.
     "string"
   ],
   "name": "string", // The name of the property
+  "vectorizePropertyName": "boolean" // vectorize the property true or false?
   "keywords": [     // An array of keywords that Weaviate uses when a property is ambigious
     {
       "keyword": "string", // A keyword in string format.
@@ -156,7 +159,7 @@ A property object is defined as follows;
   ],
   "cardinality": "atMostOne OR many", // Only used with cross references. Will there only be one refference made (e.g., "bornIn") or multiple ones (e.g., "hasProducts")
   "description": "string"             // A description for your reference
-  "index": true        // Optional, default is true. By default each property is fully indexed both for full-text, as well as vector-search. You can ignore properties in searches by explicitly setting index to false.
+  "index": true                       // Optional, default is true. By default each property is fully indexed both for full-text, as well as vector-search. You can ignore properties in searches by explicitly setting index to false.
 }
 ```
 

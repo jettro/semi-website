@@ -88,7 +88,7 @@ function createCluster(){
 
         if(selectedDataset != 'empty'){
             requestObj['configuration'] = {}
-            requestObj['configuration']['demo'] = selectedDataset
+            requestObj['configuration']['demoData'] = selectedDataset
         }
 
         loadJSON(WCSURL + '/clusters', 'POST', requestObj, processRequest)

@@ -1,7 +1,7 @@
 ---
 layout: layout-documentation
 product: weaviate
-sub-menu: Get started
+sub-menu: Setup
 product-order: 1
 title: Health checks 
 description: Live and readiness checks endpoints.

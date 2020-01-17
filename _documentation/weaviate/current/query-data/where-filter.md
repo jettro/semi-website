@@ -3,7 +3,7 @@ layout: layout-documentation
 product: weaviate
 sub-menu: Query data
 product-order: 1
-title: Filter
+title: Where filter
 description: How to filter queries to weaviate.
 tags: ['Query', 'GraphQL', 'Filter']
 menu-order: 2
@@ -15,9 +15,9 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-You can directly query the Weaviate smart graph. Finding concepts in the smart graph based on the Contextionary can be done through [exploring](explore.html).
+You can directly query the Weaviate smart graph. Finding concepts in the smart graph based on the Contextionary can be done through [exploring](explore-filter.html).
 
-_Note: You can mix [explore](explore.html) functions with regular query functions._
+_Note: You can mix [explore](explore-filter.html) functions with regular query functions._
 
 ## Index
 
@@ -29,10 +29,7 @@ _Note: You can mix [explore](explore.html) functions with regular query function
 - [Beacon filter](#beacon-filter)
 - [Multiple filters and beacon filter](#multiple-filters-and-beacon-filter)
 - [Geo coordinates](#geo-coordinates-filter)
-- [Group filter](#group-filter)
-- [Explore filter](#explore-filter)
 - [FAQ](#frequently-asked-questions)
-
 
 ## Basics
 
@@ -317,13 +314,6 @@ An example of a combination of filters and a limit filter:
   }
 }
 ```
-
-## Group filter
-
-
-## Explore filter
-
-Click [here](./explore.html#explore-filter) for more information about the explore filter.
 
 ## Frequently Asked Questions
 

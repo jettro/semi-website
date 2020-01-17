@@ -15,9 +15,9 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-You can directly query the Weaviate smart graph. Finding concepts in the smart graph based on the Contextionary can be done through [exploring](explore.html).
+You can directly query the Weaviate smart graph. Finding concepts in the smart graph based on the Contextionary can be done through [exploring](explore-filter.html).
 
-_Note: You can mix [explore](explore.html) functions with regular query functions._
+_Note: You can mix [explore](explore-filter.html) functions with regular query functions._
 
 ## Index
 
@@ -26,9 +26,7 @@ _Note: You can mix [explore](explore.html) functions with regular query function
 - [Weaviate's GraphQL function structure](#weaviates-graphql-function-structure)
 - [Get{} Function](#get-function)
     - [Get{} query structure and syntax](#get-query-structure-and-syntax)
-- [Filters](#filters)
 - [FAQ](#frequently-asked-questions)
-
 
 ## Basics
 
@@ -56,7 +54,7 @@ The basic function structure of a Weaviate is as follows:
 }
 ```
 
-- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./explore.html), and about `Aggregate{}` [here](./aggregate.html)._
+- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./explore-filter.html), and about `Aggregate{}` [here](./aggregate.html)._
 
 # Get{} Function
 
@@ -160,9 +158,6 @@ Note that if you've set the [cardinality](../add-data/define_schema.html#propert
   }
 }
 ```
-
-## Filters
-Click [here](./filter.html) for more information about the filter queries.
 
 ## Frequently Asked Questions
 

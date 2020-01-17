@@ -194,11 +194,11 @@ _Note: in principle Weaviate runs out of the box and the configuration should on
 
 In the configuration YAML file, you can specify the desired mode of authentication, such as OpenID Connect.
 
-Currently [Anonymous Access](authenticate.html#anonymous-access) and [OpenID
-Connect](authenticate.html#openid-connect-oidc) are supported. Other Authentication schemes
+Currently [Anonymous Access](../setup/../setup/authenticate.html#anonymous-access) and [OpenID
+Connect](../setup/../setup/authenticate.html#openid-connect-oidc) are supported. Other Authentication schemes
 might become available in the near future.
 
-You can read more about how to setup (OpenID) authentication [here](authenticate.html#openid-details).
+You can read more about how to setup (OpenID) authentication [here](../setup/../setup/authenticate.html#openid-details).
 
 If all authentication schemes - including anonymous access - are disabled,
 Weaviate will fail to start up and ask you to configure at least one.

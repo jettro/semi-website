@@ -3,7 +3,7 @@ layout: layout-documentation
 product: weaviate
 sub-menu: Query data
 product-order: 1
-title: Explore
+title: Explore filter
 description: How to explore weaviate.
 tags: ['Explore', 'GraphQL', 'Contextionary']
 menu-order: 3

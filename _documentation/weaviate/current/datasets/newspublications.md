@@ -13,11 +13,36 @@ og-img: documentation.jpg
 
 # Dataset News Publications
 
-### News publications
+{% include badges.html %}
 
-This dataset contains 1234 random news articles from; Financial Times, New York Times, Guardian, Wallstreet Journal, CNN, Fox News, The Economist, New Yorker, Wired, Vogue, Game Informer.
+This dataset contains +/- 1000 random news articles from; Financial Times, New York Times, Guardian, Wallstreet Journal, CNN, Fox News, The Economist, New Yorker, Wired, Vogue, Game Informer.
 
 This dataset can be used to easily demo all Weaviate's features.
+
+- [Run with the Weaviate Cluster Service](#run-with-the-weaviate-cluster-service)
+- [Run with Docker Compose](#run-with-docker-compose)
+- [Run manually with Docker](#run-manually-with-docker)
+
+### Run with the Weaviate Cluster Service
+
+The easiest way is to run this dataset is with the Weaviate Cluster service.
+
+Click [here](/weaviate-cluster/) and select the "news publications" dataset.
+
+### Run with Docker Compose
+
+If you want to run this dataset locally, you can run it in one go with Docker Compose.
+
+```bash
+# download the config file
+$ curl -O  
+# download the Docker Compose file
+$ curl -O 
+# Run docker
+$ docker-compose up
+```
+
+### Run manually with Docker
 
 Usage with Docker on **external** host or localhost **without** Docker Compose;
 
