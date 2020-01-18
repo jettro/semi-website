@@ -4,8 +4,8 @@ bodyclass: ["page--guides", " "]
 product: weaviate-cli
 sub-menu: index
 product-order: 3
-title: Index
-description: Documentation index
+title: About
+description: About
 tags: ['index', 'Weaviate-cli']
 menu-order: 1
 open-graph-type: article

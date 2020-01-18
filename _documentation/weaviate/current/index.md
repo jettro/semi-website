@@ -5,7 +5,7 @@ product: weaviate
 sub-menu: index
 product-order: 1
 title: About
-description: About Weaviate
+description: About
 tags: ['Weaviate', 'introduction']
 menu-order: 1
 open-graph-type: article
