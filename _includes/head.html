@@ -10,7 +10,13 @@
 	<meta name="author" content="SeMI Technologies" />
 	<meta name="description" content="{{ page.description }}" />
 	{% include og.html %}
-	<title>{{ page.title }}</title>
+	{% if page.url == "/" %}
+		<title>{{ page.title }}</title>
+	{% elsif page.layout == "layout-documentation" %}
+		<title>{{ page.title }} - {{ page.product }} documentation</title>
+	{% else %}
+		<title>{{ page.title }} - SeMI Technologies</title>
+	{% endif %}
 	<link rel="canonical" href="https://www.semi.technology{{ page.url | replace:'index.html','/' | replace: '/index', '/'}}" />
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,500,500i,700,700i|Alegreya:400,400i,500,500i|IBM+Plex+Mono:400,600" rel="stylesheet">
 	<link rel="shortcut icon" href="/favicon.ico" />

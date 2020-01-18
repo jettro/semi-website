@@ -4,8 +4,8 @@ bodyclass: ["page--guides", " "]
 product: weaviate
 sub-menu: index
 product-order: 1
-title: Index
-description: Documentation index
+title: About
+description: About Weaviate
 tags: ['Weaviate', 'introduction']
 menu-order: 1
 open-graph-type: article
