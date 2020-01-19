@@ -2,7 +2,7 @@
  * Google tagmanager
  */
 export default function(key) {
-  // OLD TAG MANAGER
+
   // eslint-disable-next-line
   // (function(w, d, s, l, i) {
   //   // eslint-disable-next-line
@@ -19,7 +19,9 @@ export default function(key) {
   //   f.parentNode.insertBefore(j, f);
   // })(window, document, 'script', 'dataLayer', key);
 
+  // eslint-disable-next-line
   (function (w, d, s, l, i) {
+    // eslint-disable-next-line
     w[l] = w[l] || [];
     w[l].push({
       'gtm.start': new Date().getTime(),
