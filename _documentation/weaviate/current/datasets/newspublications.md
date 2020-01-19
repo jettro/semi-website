@@ -19,15 +19,8 @@ This dataset contains +/- 1000 random news articles from; Financial Times, New Y
 
 This dataset can be used to easily demo all Weaviate's features.
 
-- [Run with the Weaviate Cluster Service](#run-with-the-weaviate-cluster-service)
 - [Run with Docker Compose](#run-with-docker-compose)
-- [Run manually with Docker](#run-manually-with-docker)
-
-### Run with the Weaviate Cluster Service
-
-The easiest way is to run this dataset is with the Weaviate Cluster service.
-
-Click [here](/weaviate-cluster/) and select the "news publications" dataset.
+- [Run manually](#run-manually)
 
 ### Run with Docker Compose
 

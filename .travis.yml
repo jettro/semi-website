@@ -4,6 +4,7 @@ cache:
   - npm: true
   - pip: true
   - bundler: true
+dist: bionic
 rvm:
 - 2.6
 node_js:
