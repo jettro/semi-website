@@ -43,6 +43,7 @@ This guide in video format.
 - Things are distinguished from Actions in schema classes.
 - Words used in the schema must be part of the [contextionary](../about/philosophy#about-the-contextionary).
 - The schema can be modified through the RESTful API.
+- You can import and export complete schemas with the [weaviate-cli](/documentation/weaviate-cli/current/schema/schema-import.html) tool.
 
 ## Introduction
 

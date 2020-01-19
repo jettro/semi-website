@@ -33,6 +33,8 @@ Click [here](/weaviate-cluster/) and select the "news publications" dataset.
 
 If you want to run this dataset locally, you can run it in one go with Docker Compose.
 
+The Docker compose files below contain both Weaviate and the dataset.
+
 ```bash
 # download the config file
 $ curl -O https://raw.githubusercontent.com/semi-technologies/DEMO-datasets/master/newspublications/config.yaml
@@ -47,9 +49,9 @@ Weaviate will be available and preloaded with the newsarticle demo dataset on:
 - `http://localhost:8080/`
 - [Via the Playground](http://playground.semi.technology/?weaviateUri=http%3A%2F%2Flocalhost%3A8080%2Fv1%2Fgraphql)
 
-### Run manually with Docker
+### Run manually
 
-Usage with Docker on **external** host or localhost **without** Docker Compose;
+If you have your own version of Weaviate running on an **external** host or localhost **without** Docker Compose;
 
 ```bash
 # WEAVIATE HOST (e.g., https://foobar.semi.network), note paragraph basics for setting the local IP

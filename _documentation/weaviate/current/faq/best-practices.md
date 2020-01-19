@@ -3,9 +3,9 @@ layout: layout-documentation
 product: weaviate
 sub-menu: FAQ
 product-order: 1
-title: How to
+title: Best practices.md
 description: Quick examples of how to use Weaviate
-tags: ['Help', 'How']
+tags: ['Help', 'Best practices']
 menu-order: 2
 open-graph-type: article
 og-img: documentation.jpg
