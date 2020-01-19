@@ -44,7 +44,7 @@ $ docker-compose up
 
 Weaviate will be available and preloaded with the newsarticle demo dataset on:
 
-- [http://localhost:8080/](http://localhost:8080/v1/meta)
+- `http://localhost:8080/`
 - [Via the Playground](http://playground.semi.technology/?weaviateUri=http%3A%2F%2Flocalhost%3A8080%2Fv1%2Fgraphql)
 
 ### Run manually with Docker
