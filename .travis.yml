@@ -1,5 +1,9 @@
 sudo: required
 language: ruby
+cache:
+  - npm: true
+  - pip: true
+  - bundler: true
 rvm:
 - 2.6
 node_js:
