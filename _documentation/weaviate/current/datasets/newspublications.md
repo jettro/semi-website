@@ -35,12 +35,17 @@ If you want to run this dataset locally, you can run it in one go with Docker Co
 
 ```bash
 # download the config file
-$ curl -O  
+$ curl -O https://raw.githubusercontent.com/semi-technologies/DEMO-datasets/master/newspublications/config.yaml
 # download the Docker Compose file
-$ curl -O 
+$ curl -O https://raw.githubusercontent.com/semi-technologies/DEMO-datasets/master/newspublications/docker-compose.yml
 # Run docker
 $ docker-compose up
 ```
+
+Weaviate will be available and preloaded with the newsarticle demo dataset on:
+
+- [http://localhost:8080/](http://localhost:8080/v1/meta)
+- [Via the Playground](http://playground.semi.technology/?weaviateUri=http%3A%2F%2Flocalhost%3A8080%2Fv1%2Fgraphql)
 
 ### Run manually with Docker
 
