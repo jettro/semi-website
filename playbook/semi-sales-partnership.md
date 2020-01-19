@@ -20,7 +20,7 @@ The SSP rewards partners for warm, successful referrals. consists of warm introd
 - A referral always needs to be warm. I.e.;
     - At least one Weaviate use case must be discussed.
     - A meeting must take place over video conferencing or in person.
-- A commission is X% of recurring revenue for a maximum of 3 years per use case _or_ Y% of the first invoice.
+- A commission is X% of recurring revenue for a maximum of 3 invoices per use case _or_ Y% of the first invoice.
 - Partnership contracts are reviewed by two SeMI directors and confirmed via DocuSign. A partnership starts when the partnership contract is signed.
 - SeMI is responsible for providing information to construct a use case, this information will always be delivered through the website.
 - An SSP partner is responsible for defining the use case.
