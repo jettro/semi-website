@@ -64,8 +64,12 @@ A data object syntax is defined as follows:
 
 A concept data object can be added to a Weaviate via the following endpoint:
 
-```bash
-$ curl http://localhost:8080/v1/{semanticKind} -X POST -H '{contentType}' -d '{data}'
+```js
+POST /v1/{semanticKind}
+
+{
+  DATA
+}
 ```
 
 - `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
@@ -74,22 +78,24 @@ $ curl http://localhost:8080/v1/{semanticKind} -X POST -H '{contentType}' -d '{d
 
 Example of adding a _Thing_:
 
-```bash
-$ curl http://localhost:8080/v1/things -X POST -H 'Content-type: application/json' -d \
-'{
+```js
+POST /v1/things
+
+{
   "class": "Publication",
   "id": "f81bfe5e-16ba-4615-a516-46c2ae2e5a80",
   "schema": {
     "name": "New York Times"
   }
-}'
+}
 ```
 
 Example of adding an _Action_, with a [direct](#direct-references) reference:
 
-```bash
-$ curl http://localhost:8080/v1/actions -X POST -H 'Content-type: application/json' -d \
-'{
+```js
+POST /v1/actions
+
+{
   "class": "Payment",
   "id": "22cc3380-ef73-48f8-9e3c-c603fae0f4b0",
   "schema": {
@@ -100,7 +106,7 @@ $ curl http://localhost:8080/v1/actions -X POST -H 'Content-type: application/js
       }
     ]
   }
-}'
+}
 ```
 
 - _Note, it is assumed that the beacon f81bfe5e-16ba-4615-a516-46c2ae2e5a80 exsists_
@@ -111,8 +117,12 @@ $ curl http://localhost:8080/v1/actions -X POST -H 'Content-type: application/js
 
 A concept data object can be updated inside a Weaviate via the following endpoint:
 
-```bash
-$ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID} -X PUT -H '{contentType}' -d '{data}'
+```js
+PUT /v1/{semanticKind}/{semanticKindUUID}
+
+{
+  DATA
+}
 ```
 
 - `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
@@ -122,15 +132,16 @@ $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID} -X PUT -H '{co
 
 Example of updating a _Thing_.
 
-```bash
-$ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PUT -H 'Content-type: application/json' -d 
-'{
+```js
+PUT /v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
+
+{
   "class": "Publication",
   "schema": {
     "name": "New York Times Corporation"
   },
   "id": "f81bfe5e-16ba-4615-a516-46c2ae2e5a80"
-}'
+}
 ```
 
 ### PATCH
@@ -147,29 +158,34 @@ Alternatively to the `PUT` request, a `PATCH` request can be made to update a `T
 
 The request can be used like this:
 
-```bash
-$ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID} -X PATCH -H '{contentType}' -d '{data}'
+```js
+PATCH /v1/{semanticKind}/{semanticKindUUID}
+
+{
+  DATA
+}
 ```
 
 For example with the (`{data}`) object filled, the request can look something this:
 
 ```bash
-$ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PATCH -H 'Content-type: application/json' -d 
-'{
+PATCH /v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 
+
+{
   "class": "Publication",
   "schema": {
     "name": ""New York Times Corporation""
   },
   "id": "f81bfe5e-16ba-4615-a516-46c2ae2e5a80"
-}'
+}
 ```
 
 ## Get a data object
 
 A concept data object can be retrieved from a Weaviate directly via the following endpoint:
 
-```bash
-$ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}
+```js
+GET /v1/{semanticKind}/{semanticKindUUID}
 ```
 
 - `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
@@ -177,8 +193,8 @@ $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}
 
 Example of requesting a _thing_.
 
-```bash
-$ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
+```js
+GET /v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
 ```
 
 - _Note, the result will be in the form of a [data object](#data-object)._
@@ -188,8 +204,8 @@ $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
 
 A concept data object can be deleted from a Weaviate directly via the following endpoint;
 
-```bash
-$ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID} -X DELETE
+```js
+DELETE /v1/{semanticKind}/{semanticKindUUID}
 ```
 
 - `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
@@ -197,8 +213,8 @@ $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID} -X DELETE
 
 Example of deleting a _thing_.
 
-```bash
-$ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X DELETE
+```js
+DELET /v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
 ```
 
 ## References guide
@@ -294,8 +310,12 @@ Requests can be done to individual references if the cardinality of this propert
 
 An individual reference can be added to a concept data object as follows:
 
-```bash
-$ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X POST -H '{contentType}' -d '{data}'
+```js
+POST /v1/{semanticKind}/{semanticKindUUID}/references/{propertyName}
+
+{
+  DATA
+}
 ```
 
 - `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
@@ -306,20 +326,25 @@ $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{pr
 
 Example of adding a direct reference:
 
-```bash
-$ curl http://localhost:8080/v1/actions/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/toPublication -X POST -H 'Content-type: application/json' -d 'beacon: weaviate://localhost/things/22cc3380-ef73-48f8-9e3c-c609bae0b4b0'
+```js
+POST /v1/actions/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/toPublication
+
+{
+  "beacon": "weaviate://localhost/things/22cc3380-ef73-48f8-9e3c-c609bae0b4b0"
+}
 ```
 
 Example of adding an indirect reference _(coming soon)_:
 
-```bash
-$ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/hasCeo -X POST -H 'Content-type: application/json' -d \
-'{
+```js
+POST /v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/hasCeo
+
+{
   "name": "Mark Thompson",
   "bornIn": {
     "beacon": "weaviate://localhost/things/lo9...b2c"
   }
-}'
+}
 ```
 
 - _Note, you can only add multiple references if [the `cardinality` of the schema id set to `many`](.././add-data/define_schema.html#create-a-schema-item)_
@@ -328,8 +353,12 @@ $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/refe
 
 All references related to a property can be updated as follows:
 
-```bash
-$ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X PUT -H '{contentType}' -d '{data}'
+```js
+PUT /v1/{semanticKind}/{semanticKindUUID}/references/{propertyName}
+
+{
+  DATA
+}
 ```
 
 - `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
@@ -340,16 +369,17 @@ $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{pr
 
 Example of replacing a direct reference:
 
-```bash
-$ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/hasCustomers -X POST -H 'Content-type: application/json' -d \
-'[
+```js
+POST /v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/hasCustomers
+
+[
   {
     "beacon": "weaviate://localhost/things/lo9...b2c"
   },
   {
     "beacon": "weaviate://localhost/things/kjd...d8s"
   }
-]'
+]
 ```
 
 - _Note, you can only update multiple references if [the `cardinality` of the schema is set to `many`](.././add-data/define_schema.html#create-a-schema-item)_
@@ -358,8 +388,12 @@ $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/refe
 
 You can delete a single reference that is given in the body from the list of references that this property has.
 
-```bash
-$ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X DELETE -H '{contentType}' -d '{data}'
+```js
+DELETE /v1/{semanticKind}/{semanticKindUUID}/references/{propertyName}
+
+{
+  DATA
+}
 ```
 
 ## Frequently Asked Questions
