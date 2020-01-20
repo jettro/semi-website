@@ -17,8 +17,8 @@ og-img: documentation.jpg
 {% include badges.html %}
 
 This quick start guide will give you a 10-minute tour of Weaviate. You will:
-- Set up your Weaviate through the managed cluster service or Docker.
-- Add a simple dataset with news articles.
+- Set up your Weaviate with Docker.
+- Add a example dataset with news articles.
 - Browse through the dataset with the Weaviate Playground.
 
 ## Index
@@ -40,51 +40,30 @@ This guide in video format.
 
 ## Run Weaviate with a demo dataset
 
-There are many different ways how you can run Weaviate, from local development setups up to large scale Kubernetes environments or hosted and managed Weaviate clusters. For this quick start guide you can choose between:
+There are many different ways how you can run Weaviate, from local development setups up to large scale Kubernetes environments or hosted and managed Weaviate clusters. For this quick start guide we will be using the [Docker compose](#docker-compose-setup) setup where you can run Weaviate on your local machine to which we will add the demo dataset.
 
-- Using the [Weaviate Cluster Service (WPC)](#weaviate-cluster-service-wcs) where you can create a free cluster that contains the demo dataset. Or;
-- Using the [Docker compose](#docker-compose) setup where you can run Weaviate on your local machine to which we will add the demo dataset.
-
-### Weaviate Cluster Service (WCS)
-
-The quickest way to get started is using the Weaviate Cluster Service (WPC).
+### Docker compose setup
 
 Take the following steps:
 
-0. Go to the WPC beta page [here](/weaviate-cluster/).
-0. Fill in your details and **make sure to select the NewsPublications demo dataset**.
-0. Collect your Weaviate URL on the SeMI network that looks something like https://xxxx.semi.network
-
-If the import is finished, you are all set for the [next step](#validate-via-the-restful-api).
-
-### Docker compose
-
-If you want to run Weaviate on a location of your choice, you can use Docker-compose. 
-
-Take the following steps:
-
-0. Follow the three installation steps outlined [here](../datasets/newspublications.html). **Make sure that you install Weaviate with the English contextionary.**
-0. Because you are using the Docker compose setup, you need to define the `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables.
-0. You can now add the demo dataset by running the docker command mentioned [here](../datasets/newspublications.html). Make sure you use the command that consumes both the  `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables.
-
-If the import is finished, you are all set for the [next step](#validate-via-the-restful-api).
+0. Follow one of the installation steps outlined [here](../datasets/newspublications.html). Tip: the easiest way is to use the Docker compose setup.
+0. If the import is finished, you are all set for the [next step](#validate-via-the-restful-api).
 
 ## Validate via the RESTful API
 
 You will always use Weaviate via its HTTP API interface. The interface consists of two different interfaces:
-The RESTful API, which is mostly used to add and manipulate data.
-The GraphQL API (which also runs over HTTP) to query data.
 
-We will first check if Weaviate runs correctly, if the schema is added successfully, and if the data is available. You will do the via three HTTP API calls. You can run these calls via the command line with [jq](https://stedolan.github.io/jq/), in your browser, a HTTP-API tool like [Postman](https://www.getpostman.com/) or in your code.
+- The RESTful API, which is mostly used to add and manipulate data.
+- The GraphQL API (which also runs over HTTP) to query data.
 
-In the example below, we will show you how to do it from the command line with jq.
+We will first check if Weaviate runs correctly, if the schema is added successfully, and if the data is available. In the example below, we will show you how to do it from the command line with jq.
 
 First, we want to check if Weaviate is running correctly by inspecting the `/v1/meta` endpoint.
 
-_Note: make sure to replace `{WEAVIATE}` with the location of your Weaviate._
+_Note: make sure to replace `$WEAVIATE` with the location of your Weaviate._
 
 ```bash
-$ curl -s http://{WEAVIATE}/v1/meta | jq .
+$ curl -s http://$WEAVIATE/v1/meta | jq .
 ```
 
 The output will look something like this:
@@ -100,10 +79,10 @@ The output will look something like this:
 
 This validates that your Weaviate is running correctly.
 
-Next, we want to check if the news publication schema was added correctly, we can do this by inspecting the `/v1/schema` endpoint.
+Next, we want to check if the news publication schema was added correctly, you can do this by inspecting the `/v1/schema` endpoint.
 
 ```bash
-$ curl -s http://{WEAVIATE}/v1/schema | jq .
+$ curl -s http://$WEAVIATE/v1/schema | jq .
 ```
 
 The output will look something like this but significantly longer:
@@ -148,7 +127,7 @@ You should be able to identify three classes: `Publication`, `Author` and, `Arti
 Lastly, we will validate if all data was added correctly, we will do this via the `/v1/things` endpoint.
 
 ```bash
-$ curl -s http://{WEAVIATE}/v1/things | jq .
+$ curl -s http://$WEAVIATE/v1/things | jq .
 ```
 
 The output will look something like this but significantly longer:
@@ -187,7 +166,7 @@ The output will look something like this but significantly longer:
 
 ## Query the dataset with GraphQL
 
-When querying Weaviate, you will always be using the GraphQL API. Weaviate has a publicly available graphical user interface (GUI) called the playground, which you can use to query.
+When querying Weaviate, you will always be using the GraphQL API. Weaviate has a publicly available graphical user interface (GUI) called [The Playground](http://playground.semi.technology), which you can use to query.
 
 ### Accessing the Playground
 
@@ -241,7 +220,7 @@ And you can even go deeper, to find which authors are related to these publiatio
 {
   Get {
     Things {
-      Publication {
+      Publication(limit: 3) {
         name
         HasArticles{
           ... on Article{
@@ -271,7 +250,7 @@ When querying for articles, you can also add classic filters to narrow down your
         where:{
           operator: GreaterThanEqual
           path: ["wordCount"]
-          valueInt:1000
+          valueInt: 1000
         }
         limit: 10
       ) {
@@ -340,12 +319,6 @@ In Weaviate, you can also semantically explore your datasets. Let's search for a
       ) {
         title
         summary
-        wordCount
-        HasAuthors {
-          ... on Author{
-            name
-          }
-        }
       }
     }
   }
@@ -388,7 +361,9 @@ You can also combine filters!
 ```
 {% include molecule-gql-demo.html %}
 
-Or publications related to fashion.
+Or group similar topics semantically together.
+
+_Tip: play around with the force variable._
 
 ```graphql
 # GraphQL
@@ -396,9 +371,9 @@ Or publications related to fashion.
   Get {
     Things {
       Publication(
-        explore: {
-          concepts: ["fashion"]
-          certainty: 0.725
+       	group: {
+          type: merge
+          force: 0.05
         }
       ) {
         name
@@ -411,7 +386,7 @@ Or publications related to fashion.
 
 ## Automatic Classification
 
-If you run the following query, you might notice that there are no categories classified for new articles.
+If you run the following query, you might notice that there are no categories classified for articles.
 
 ```graphql
 # GraphQL
@@ -479,7 +454,7 @@ $ curl -k https://{YOUR WEAVIATE HOST}/v1/things/{CLASSIFICATION ID}?meta=true |
 
 This was a sneak peek of Weaviate. In the documentation, you can find more videos and guides on how to work with Weaviate in depth.
 
-Have fun building your own smart graph or smart graph with Weaviate!
+Have fun building your own smart graph with Weaviate!
 
 ## Frequently Asked Questions
 

@@ -6,7 +6,7 @@ product-order: 1
 title: Group filter
 description: How to merge entities?
 tags: ['Entity merging', 'Grouping']
-menu-order: 3
+menu-order: 5
 open-graph-type: article
 og-img: documentation.jpg
 ---

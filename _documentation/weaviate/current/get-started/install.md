@@ -48,7 +48,7 @@ This guide in video format.
 
 You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/compose/) as follows on Linux and MacOS:
 
-Want another language? Make sure to let us know [here](https://github.com/semi-technologies/weaviate/issues).
+Want another natural language? Make sure to let us know [here](https://github.com/semi-technologies/weaviate/issues).
 
 ### Weaviate with an English contextionary
 

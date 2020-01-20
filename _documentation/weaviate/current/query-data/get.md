@@ -15,15 +15,14 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-You can directly query the Weaviate smart graph. Finding concepts in the smart graph based on the Contextionary can be done through [exploring](explore.html).
-
-_Note: You can mix [explore](explore.html) functions with regular query functions._
+The `Get{}` function is Weaviate's bread and butter. The most direct way to access data.
 
 ## Index
 
 - [Basics](#basics)
 - [Introduction](#introduction)
-- [Weaviate's GraphQL function structure](#weaviates-graphql-function-structure)
+  - [Define a query](#define-a-query)
+  - [Work with graph beacons](#work-with-graph-beacons)
 - [Get{} Function](#get-function)
 - [FAQ](#frequently-asked-questions)
 
@@ -32,8 +31,13 @@ _Note: You can mix [explore](explore.html) functions with regular query function
 - Weaviate's query language is [GraphQL](https://graphql.org/).
 - You can query a Weaviate after you've created a [schema](../add-data/define_schema.html) and [populated it](../add-data/add_and_modify.html) with data.
 - You can easily query a Weaviate by using the GraphQL interface inside a [Weaviate Playground](http://playground.semi.technology).
+- Some aggregate functions have (semantic) [filters](./filters.html) available.
 
 ## Introduction
+
+The `Get{}` function is the most straight-ahead function Weaviate has. It is the most direct wat to collect data from a weaviate. Especially when you combine them with [filters](#filters), you can easily browse your Weaviate.
+
+### Define a query
 
 You can query Weaviate for semantic kinds based on standard GraphQL queries. The examples below only contain the GraphQL query. You can POST a GraphQL query to Weaviate as follows:
 
@@ -41,19 +45,13 @@ You can query Weaviate for semantic kinds based on standard GraphQL queries. The
 $ curl http://localhost/v1/graphql -X POST -H 'Content-type: application/json' -d '{GraphQL query}'
 ```
 
-## Weaviate's GraphQL function structure
+A GraphQL JSON object is defined as:
 
-The basic function structure of a Weaviate is as follows:
-
-```graphql
+```json
 {
-  Get       # Gets concepts from Weaviate
-  Explore   # Explores concepts within Weaviate
-  Aggregate # Aggregates data from a Weaviate
+    "query": "{ # GRAPHQL QUERY }"
 }
 ```
-
-- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./explore.html), and about `Aggregate{}` [here](./aggregate.html)._
 
 # Get{} Function
 
@@ -112,7 +110,9 @@ The above query will result in something like the following:
 }
 ```
 
-If you've set a cross-reference (aka [beacon](../about/philosophy#basic-terminology)) in the schema, you can query it as follows:
+### Work with graph beacons
+
+If you've set a [beacon reference](../about/philosophy#basic-terminology) in the schema, you can query it as follows:
 
 ```graphql
 {
@@ -122,9 +122,9 @@ If you've set a cross-reference (aka [beacon](../about/philosophy#basic-terminol
         title
         url
         wordCount
-        inPublication {        # the reference
-          ... on Publication {   # you always set the destination class
-            name           # the property related to target class
+        inPublication {           # the reference
+          ... on Publication {    # you always set the destination class
+            name                  # the property related to target class
           }
         }
       }

@@ -34,19 +34,19 @@ Concepts in the Contextionary can be overwritten and new concepts can be added t
 ## Usage
 An example of using the `/v1/c11y/extensions` endpoint to add or overwrite concepts:
 
-```json
+```js
 POST /v1/c11y/extensions
 
 {
-  "concept": "zip groove",
-  "definition": "reduced diameter section that has been machined",
+  "concept": "buried lede",
+  "definition": "The central element of an article mistakenly appearing deep in the text",
   "weight": 1
 }
 ```
 
 You can always check if a concept exists in the Contextionary:
 
-```json
+```js
 GET /v1/c11y/concepts/{concept}
 ```
 

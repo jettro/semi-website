@@ -331,8 +331,8 @@ from the graph, the cardinality will determine how the query is constructed.
 
 The current schema can be viewed as follows:
 
-```bash
-$ curl http://localhost:8080/v1/schema
+```js
+GET /v1/schema
 ```
 
 ## Create a Schema Item
@@ -341,9 +341,10 @@ Adding a schema can be done by POSTing a [schema object](#schema-object) to the 
 
 An example of creating a schema item of the semantic kind _Thing_ might look like this:
 
-```bash
-$ curl http://localhost:8080/v1/schema/things -X POST -H 'Content-type: application/json' -d \
-'{
+```js
+POST /v1/schema/things
+
+{
   "class": "Publication",
   "description": "A publication with an online source",
   "vectorizeClassName": false,
@@ -366,14 +367,15 @@ $ curl http://localhost:8080/v1/schema/things -X POST -H 'Content-type: applicat
       "description": "Name of the publication"
     }
   ]
-}'
+}
 ```
 
 An example of creating a schema item of the semantic kind _Action_ might look like this. Note that the properties `fromCompany` and `toCompany` are cross-references to the class `Company`:
 
-```bash
-$ curl http://localhost:8080/v1/schema/actions -X POST -H 'Content-type: application/json' -d \
-'{
+```JS
+POST /v1/schema/actions
+
+{
   "class": "Payment",
   "description": "A payment that happened",
   "properties": [
@@ -409,10 +411,11 @@ $ curl http://localhost:8080/v1/schema/actions -X POST -H 'Content-type: applica
       "index": false
     }
   ]
-}'
+}
 ```
 
 #### Indexing
+
 By default, all properties of a schema item will be both for full-text, as well as vector-search. If you explicitely set `"index"` to `false`, then this property will not be included in indexing, this property will be ignored in search.
 
 ## Delete a schema item
@@ -421,14 +424,14 @@ Deleting a schema class can be done by sending a DELETE request to `/v1/schema/{
 
 An example of deleting a schema class item of the semantic kind _Thing_ might look like this:
 
-```bash
-$ curl http://localhost:8080/v1/schema/things/Company -X DELETE
+```JS
+DELETE /v1/schema/things/Company
 ```
 
 An example of deleting a schema class item of the semantic kind _Action_ might look like this:
 
-```bash
-$ curl http://localhost:8080/v1/schema/actions/Payment -X DELETE
+```JS
+DELETE /v1/schema/actions/Payment
 ```
 
 ## Add a property to a Schema item
@@ -437,9 +440,10 @@ Adding a schema can be done by POSTing a [property object](#property-object) to 
 
 An example of adding a schema item of the semantic kind _Thing_ might look like this:
 
-```bash
-$ curl http://localhost:8080/v1/schema/things/Company/properties -X POST -H 'Content-type: application/json' -d \
-'{
+```js
+POST /v1/schema/things/Company/properties 
+
+{
   "dataType": [
     "geoCoordinates"
   ],
@@ -451,14 +455,15 @@ $ curl http://localhost:8080/v1/schema/things/Company/properties -X POST -H 'Con
     }
   ],
   "description": "The location of the company"
-}'
+}
 ```
 
 An example of adding a schema item of the semantic kind _Action_ might look like this:
 
-```bash
-$ curl http://localhost:8080/v1/schema/actions/Payment/properties -X POST -H 'Content-type: application/json' -d \
-'{
+```js
+POST /v1/schema/actions/Payment/properties
+
+{
   "dataType": [
     "number"
   ],
@@ -470,7 +475,7 @@ $ curl http://localhost:8080/v1/schema/actions/Payment/properties -X POST -H 'Co
     }
   ],
   "description": "The amount paid"
-}'
+}
 ```
 
 ## Delete a property from a schema item
@@ -479,14 +484,14 @@ Deleting a schema property can be done by sending a DELETE request to `/v1/schem
 
 An example of deleting a property item of the semantic kind _Thing_ might look like this:
 
-```bash
-$ curl http://localhost:8080/v1/schema/things/Company/properties/name -X DELETE
+```js
+DELETE /v1/schema/things/Company/properties/name
 ```
 
 An example of deleting a property item of the semantic kind _Action_ might look like this:
 
-```bash
-$ curl http://localhost:8080/v1/schema/actions/Payment/properties/transactionDate -X DELETE
+```js
+DELETE /v1/schema/actions/Payment/properties/transactionDate
 ```
 
 ## Frequently Asked Questions

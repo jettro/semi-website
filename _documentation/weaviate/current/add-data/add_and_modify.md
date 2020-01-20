@@ -22,17 +22,15 @@ When a Weaviate [schema](./define_schema.html) is created, you can populate this
 - [Basics](#basics)
 - [Introduction](#introduction)
 - [Data Object](#data-object)
-- [Add a data object](#add-a-data-object)
-- [Update a data object](#update-a-data-object)
-- [Get a data object](#get-a-data-object)
-- [Delete a data object](#delete-a-data-object)
+  - [Add a data object](#add-a-data-object)
+  - [Update a data object](#update-a-data-object)
+  - [Get a data object](#get-a-data-object)
+  - [Delete a data object](#delete-a-data-object)
 - [References guide](#references-guide)
-- [Add individual references](#add-individual-references)
-- [Replace all references](#replace-all-references)
-- [Delete individual references](#delete-individual-references)
-- [Batching](#batching)
+  - [Add individual references](#add-individual-references)
+  - [Replace all references](#replace-all-references)
+  - [Delete individual references](#delete-individual-references)
 - [FAQ](#frequently-asked-questions)
-
 
 ## Basics
 
@@ -48,15 +46,14 @@ Adding data to Weaviate is very similar to filling traditional graph databases w
 1. The ability to make direct and indirect references to nodes in the graph.
 2. Realtime semantic indexing in the [Contextionary](.././about/philosophy#about-the-contextionary).
 
-
 ## Data Object
 
 A data object syntax is defined as follows:
 
 ```js
 {
-  "class": "string", // as defined during schema creation
-  "id": "{UUID}", // optional, should be in UUID format.
+  "class": "string",  // as defined during schema creation
+  "id": "{UUID}",     // optional, should be in UUID format.
   "schema": {
     "property": "defined as datatypes", // defined as datatypes # as defined during schema creation
   }
@@ -80,10 +77,10 @@ Example of adding a _Thing_:
 ```bash
 $ curl http://localhost:8080/v1/things -X POST -H 'Content-type: application/json' -d \
 '{
-  "class": "Company",
+  "class": "Publication",
   "id": "f81bfe5e-16ba-4615-a516-46c2ae2e5a80",
   "schema": {
-    "name": "Apple"
+    "name": "New York Times"
   }
 }'
 ```
@@ -106,7 +103,7 @@ $ curl http://localhost:8080/v1/actions -X POST -H 'Content-type: application/js
 }'
 ```
 
-- _Note, it is assumed that the CREF f81bfe5e-16ba-4615-a516-46c2ae2e5a80 exsists_
+- _Note, it is assumed that the beacon f81bfe5e-16ba-4615-a516-46c2ae2e5a80 exsists_
 
 ## Update a data object
 
@@ -128,9 +125,9 @@ Example of updating a _Thing_.
 ```bash
 $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PUT -H 'Content-type: application/json' -d 
 '{
-  "class": "Company",
+  "class": "Publication",
   "schema": {
-    "name": "Apple Inc."
+    "name": "New York Times Corporation"
   },
   "id": "f81bfe5e-16ba-4615-a516-46c2ae2e5a80"
 }'
@@ -159,9 +156,9 @@ For example with the (`{data}`) object filled, the request can look something th
 ```bash
 $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80 -X PATCH -H 'Content-type: application/json' -d 
 '{
-  "class": "Company",
+  "class": "Publication",
   "schema": {
-    "name": "Apple Inc."
+    "name": ""New York Times Corporation""
   },
   "id": "f81bfe5e-16ba-4615-a516-46c2ae2e5a80"
 }'
@@ -219,9 +216,9 @@ Direct references are always set like this:
 
 ```json
 {
-  "class": "Company",
+  "class": "Publication",
   "schema": {
-    "name": "Apple",
+    "name": "New York Times",
     "hasCeo": {
       "beacon": "weaviate://localhost/things/{concept ID}"
     }
@@ -241,9 +238,9 @@ Concider the following two entries that might be in you database:
 ```json
 {
   "Company": {
-    "name": "Apple",
+    "name": "New York Times",
     "hasCeo": {
-      "name": "Tim Cook"
+      "name": "Mark Thompson"
     }
   }
 }
@@ -254,7 +251,7 @@ and
 ```json
 {
   "Person": {
-    "name": "Timmothy Cook"
+    "name": "Mark Thompson"
   }
 }
 ```
@@ -265,12 +262,12 @@ Indirect references are always set like this:
 
 ```json
 {
-  "class": "Company",
+  "class": "Publication",
   "schema": {
-    "name": "Apple",
+    "name": "New York Times",
     "hasCeo": {
       "Person": {
-        "name": "Tim Cook"
+        "name": "Mark Thompson"
       }
     }
   }
@@ -310,7 +307,7 @@ $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{pr
 Example of adding a direct reference:
 
 ```bash
-$ curl http://localhost:8080/v1/actions/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/toCompany -X POST -H 'Content-type: application/json' -d 'beacon: weaviate://localhost/things/22cc3380-ef73-48f8-9e3c-c609bae0b4b0'
+$ curl http://localhost:8080/v1/actions/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/toPublication -X POST -H 'Content-type: application/json' -d 'beacon: weaviate://localhost/things/22cc3380-ef73-48f8-9e3c-c609bae0b4b0'
 ```
 
 Example of adding an indirect reference _(coming soon)_:
@@ -318,7 +315,7 @@ Example of adding an indirect reference _(coming soon)_:
 ```bash
 $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80/references/hasCeo -X POST -H 'Content-type: application/json' -d \
 '{
-  "name": "Steve Jobs",
+  "name": "Mark Thompson",
   "bornIn": {
     "beacon": "weaviate://localhost/things/lo9...b2c"
   }
@@ -364,36 +361,6 @@ You can delete a single reference that is given in the body from the list of ref
 ```bash
 $ curl http://localhost:8080/v1/{semanticKind}/{semanticKindUUID}/references/{propertyName} -X DELETE -H '{contentType}' -d '{data}'
 ```
-
-## Batching
-
-A bulk of objects can be added to Weaviate by using a batch POST. A seperate request should be done for the semantic kinds (`Things` or `Actions`).
-
-```bash
-$ curl http://localhost:8080/v1/batching/things -X POST -H 'Content-type: application/json' -d \
-'{
-  "fields": [
-    "ALL"
-  ],
-  "things": [
-    {
-      "class": "Company",
-      "schema": {
-        "name": "Apple Inc."
-      },
-      "id": "0a85f1db-fbf3-4343-b45b-25c794c5419d"
-    },
-    {
-      "class": "Company",
-      "schema": {
-        "name": "Google LLC"
-      },
-      "id": "b0c18f80-d7c1-44bf-a745-14b9df5b1055"
-    }
-  ]
-}'
-```
-
 
 ## Frequently Asked Questions
 

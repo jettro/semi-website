@@ -6,7 +6,7 @@ product-order: 1
 title: Aggregate
 description: How to work with Weaviate's Aggregate function.
 tags: ['Aggregate', 'GraphQL']
-menu-order: 4
+menu-order: 3
 open-graph-type: article
 og-img: documentation.jpg
 ---
@@ -15,30 +15,39 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-Data objects in Weaviate can be grouped, based on your filters. You can use GraphQL's `Aggregation{}` function to then obtain meta information about these groups. Direct data querying can be done by the [`Get{}`](./get.html) function, and exploration can be done by the [`Explore{}`](./explore.html) function.
+You can use Weaviate's `Aggregation{}` function to obtain meta information about collections of data.
 
 ## Index
 
 - [Basics](#basics)
 - [Introduction](#introduction)
+  - [Define a query](#define-a-query)
 - [Aggregate{} Function](#aggregate-function)
-- [Filters](#filters)
-  - [GroupBy](#groupby)
-  - [Where and Limit](#where-and-limit)
 - [FAQ](#frequently-asked-questions)
 
 ## Basics
 
 - You can use the `Aggregation` function to get meta information about filtered groups in the data.
+- Some aggregate functions have (semantic) [filters](./filters.html) available.
 
 ## Introduction
 
 The `Aggregate{}` function can be used if you want to obtain meta information about the dataobjects in a Weaviate instance. Metainformation can be queried over all objects in a class (see [Aggregate function](#aggregate-function)), or by groups in a class (see [Filters](#filters)).
 
-`Aggregate{}` requests can be made using the same `graphql` REST endpoint using POST requests:
+### Define a query
+
+You can query Weaviate for semantic kinds based on standard GraphQL queries. The examples below only contain the GraphQL query. You can POST a GraphQL query to Weaviate as follows:
 
 ```bash
-$ curl http://localhost:8080/v1/graphql -X POST -H 'Content-type: application/json' -d '{GraphQL query}'
+$ curl http://localhost/v1/graphql -X POST -H 'Content-type: application/json' -d '{GraphQL query}'
+```
+
+A GraphQL JSON object is defined as:
+
+```json
+{
+    "query": "{ # GRAPHQL QUERY }"
+}
 ```
 
 ## Aggregate Function
@@ -131,126 +140,6 @@ An example query to obtain meta information about the data in the class `City` c
           mode
           sum
           type
-        }
-      }
-    }
-  }
-}
-```
-{% include molecule-gql-demo.html %}
-
-### Filters
-
-#### GroupBy
-If you want meta information about groups of dataobjects, you can group them using the `groupBy` filter in the `Aggregate` function. 
-
-The stucture of this filter in the query is as follows:
-
-```graphql
-{
-  Aggregate {
-    <SematicKind> {
-      <Class> ( groupBy: ["<propertyName>"] ) {
-        groupedBy {
-            path
-            value
-        }
-        meta {
-          count
-        }
-        <propertyName> {
-          count
-        }
-      }
-    }
-  }
-}
-```
-
-In the following example, the cities are grouped by the property `isCapital`, where one group contains capital cities, and the second group contains cities of which the property `isCapital` is set to `False`.
-
-```graphql
-{
-  Aggregate {
-    Things {
-      Article (groupBy:["isCapital"]) {
-        meta {
-          count
-        }
-        population {
-          mean
-        }
-        groupedBy {
-          value
-          path
-        }
-      }
-    }
-  }
-}
-```
-{% include molecule-gql-demo.html %}
-
-which might result in something like this result:
-
-```json
-{
-  "data": {
-    "Aggregate": {
-      "Things": {
-        "City": [
-          {
-            "groupedBy": {
-              "path": [
-                "isCapital"
-              ],
-              "value": "1"
-            },
-            "meta": {
-              "count": 2
-            },
-            "population": {
-              "mean": 9900000
-            }
-          },
-          {
-            "groupedBy": {
-              "path": [
-                "isCapital"
-              ],
-              "value": "0"
-            },
-            "meta": {
-              "count": 2
-            },
-            "population": {
-              "mean": 5500000
-            }
-          }
-        ]
-      }
-    }
-  },
-  "errors": null
-}
-```
-
-#### Where and Limit
-In the `Aggregate{}` function, as well as the `Get{}` function, a `where` filter and `limit` filter can be used on class-level to filter data. A detailed explanation of these filters can be found on the `Query` page ([here for `where` filter](./where-filter.html#limit-filter), and [here for `limit` filter](./where-filter.html#limit-filter)).
-
-In addition, the `limit` filter can be used on the `topOccurrences` fields.
-
-### Example
-``` graphql
-{
-  Aggregate {
-    Things {
-      City(groupBy: ["isCapital"]) {
-        population {
-          mean
-        }
-        groupedBy {
-          value
         }
       }
     }

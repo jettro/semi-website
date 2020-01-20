@@ -11,11 +11,11 @@ open-graph-type: article
 og-img: documentation.jpg
 ---
 
-# Classification Guide
+# KNN Classification Guide
 
 {% include badges.html %}
 
-Perform classification through the RESTapi to enhance your dataset. 
+Perform [k-nearest neighbors](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifications through the RESTapi to enhance your dataset. 
 
 ## Index
 
@@ -33,24 +33,28 @@ Perform classification through the RESTapi to enhance your dataset.
 
 ## Basics
 
-- Weaviate's classification features allows you to classify data objects.
 - Reference properties of data objects can be classified with a kNN approach.
 - Use the RESTful api queries `v1/classification/` for classification.
 - Classification meta information of data objects can be requested by setting `?meta=true` in `GET /things/{kinds}/{id}` requests for things and actions.
 
 ## Introduction
-Weaviate's classification features allows you to classify data objects. Cross-references will be predicted, after a model has been trained on your own data with existing references. You need to have at least two schema classes and one cross-reference between both classes in your schema. Classification is currently kNN-based.
+
+Weaviate's classification features allows you to classify data objects. Cross-references will be predicted, after a model has been trained on your own data with existing references. You need to have at least two schema classes and one cross-reference between both classes in your schema. This is done kNN-based.
 
 ### Requirements
+
 - A schema with at least two classes and a cross-reference between both classes.
 - Some training data, which are data objects in the class with a reference (you want to predict for other objects) to another class already made.
 
 ## How to use
+
 Classification can be performed via the `v1/classification/` endpoint on the RESTful API. There are two operations possible. To start a classification job, send a `POST` request to `v1/classification/`. To view previously created classifications, send a `GET` request to `v1/classification/{classificationId}`.
 
 ### Start a Classification
+
 To start a classification, send a `POST` request to `v1/classification/` with the following body:
-```json
+
+```js
 POST /v1/classifications
 
 {
@@ -61,10 +65,11 @@ POST /v1/classifications
   "k": 3 // optional, default to ??
 }
 
-returns GET response + Header 'Location: /v1/classifications/<classificationId>'
+// returns GET response + Header 'Location: /v1/classifications/<classificationId>'
 ```
 
 Which returns a body like the following if the classification was successfully started:
+
 ```json
 {
   "id": "<classificationId>",
@@ -89,6 +94,7 @@ Which returns a body like the following if the classification was successfully s
 ```
 
 ### See the Status of a Classification
+
 The ID returned in the POST request can be used to request information about the classification process, by performing a `GET` on `v1/classification/{classificationId}`. A similar result as above will be returned, containing information about the classification. The status of the classification van 
 
 ```json
@@ -117,8 +123,8 @@ GET /v1/classifications/<classificationID>
 ```
 
 ### Get Classification Meta Information of Data Objects 
-After the classification is completed, the concerning reference properties data objects in the Weaviate instance are updated according to the classification. These data objects will be represented similarly to other data objects. When you perform a `GET` request to a specific `Thing` or `Action`, no additional information about classifiction will be shown, unless you specifically add a parameter `meta=true` to the request:
 
+After the classification is completed, the concerning reference properties data objects in the Weaviate instance are updated according to the classification. These data objects will be represented similarly to other data objects. When you perform a `GET` request to a specific `Thing` or `Action`, no additional information about classifiction will be shown, unless you specifically add a parameter `meta=true` to the request:
  
 ```json
 GET /v1/things/<id>/?meta=true
@@ -167,15 +173,14 @@ This returned information does not only show the values of the properties of the
 
 When a property value of a reference property is filled by classification, then `classification` information will appear in the `meta` field of this property. It contains information about `distanceWinning` and `distanceLosing`, which gives information about how the reference has been classified. The float numbers are a normalized distance (between 0 and 1), where 0 means equal and 1 would mean a perfect opposite. In kNN classification, the classification decision is based on vectors of the classes around a guessed vector. 
 
-
 For example, if the kNN is set to 3, the closest 3 objects to the computed vector are taken into consideration. Let's say these 3 objects are of 2 different classes, then we classify the data object as the class of the majority. These two objects are "winning", and the other 1 object is "losing" in the classification. The distance of the winning data objects to the computed vector of the 'to be classified' data object is averaged and normalized. The same will be done to the losing data objects (in this case only 1). 
 
 `distanceWinning` and `distanceLosing` are a good indicators if you set the amount of k nearest neighbours right. For example if the `distanceLosing` is way smaller than the `distanceWinning`, than the set k values was too high because many their where many classifications to the same, but far group, and only one or a few classifications to a near group. Less abstract, this means that the 'to be classified' property is classified as a class that many other -not so similar- data objects have (winning but far away), and not as class of, losing, more similar data objects because they were in minority. In this case, the kNN was perhaps set too high, and a lower amount of kNN might lead to better classification.
 
 Then, additional meta information about the classication of this data object is shown in the last `meta` field on a higher level.
 
-
 ## Example
+
 To explain how to use the API calls to perform classification less abstract, let's go into an example. Let's say we want to classify in which Country Companies are based in, using the schema of previous examples in the documentation. We have the following information:
 - A schema class `Country`, with a property `name`.
 - A schema class `Company`, with at least the properties `name` and `description`, and `inCountry` which refers to `Country`. (`Company(name, description) --> inCountry --> Country(name)`).
@@ -184,6 +189,7 @@ To explain how to use the API calls to perform classification less abstract, let
 - Data objects of the class `Company`, with the reference property `inCountry` not filled yet. For example `name: YLE, description: Finnish broadcasting company.`
 
 We can now send `POST` request with the following body to `/v1/classification`:
+
 ```json
 {
   "class": "Aricle",
@@ -195,6 +201,7 @@ We can now send `POST` request with the following body to `/v1/classification`:
 ```
 
 which will return the following `meta` information:
+
 ```json
 {
   "id": "ee722219-b8ec-4db1-8f8d-5150bb1a9e0c",
@@ -279,10 +286,12 @@ If we later want to know to which `Country` the `Company(name:YLE)` refers to, w
 ## Tips and Best Practices
 
 ### Training Data
+
 - The more training data, the higher the performance of the classification. There is no rule for a minimum amount of training data, but the more the better (and more computationally intensive). The amount of training data can roughly be chosen by the amount of features `n`, using the formula: `1e[1, 2]+n`.
 - In addition, the training data should be representative for the data to be classified. The model should have relevant information to learn from. For example, it is hard to classify data for persons of age 60-70 when all persons in the training data are 18-25 years old.
 
 ### Optimal Value for kNN
+
 There is no one optimal value for kNN. The optimal value is different for every classification problem, and depends on a lot of factors. There are however some tips to find a good k value:
 - Large `k` values will result in classification to the most probably class around in a large space, which also makes it more computationally intensive.
 - Small `k` values will result in a more unstable classification. Small changes in the training set and noise will result in large changes in classification.
