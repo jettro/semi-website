@@ -32,7 +32,7 @@ You can use Weaviate's `Aggregation{}` function to obtain meta information about
 
 ## Introduction
 
-The `Aggregate{}` function can be used if you want to obtain meta information about the dataobjects in a Weaviate instance. Metainformation can be queried over all objects in a class (see [Aggregate function](#aggregate-function)), or by groups in a class (see [Filters](#filters)).
+The `Aggregate{}` function can be used if you want to obtain meta information about the dataobjects in a Weaviate instance. Metainformation can be queried over all objects in a class (see [Aggregate function](#aggregate-function)), or by groups in a class.
 
 ### Define a query
 

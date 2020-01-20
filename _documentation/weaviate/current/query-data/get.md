@@ -35,7 +35,7 @@ The `Get{}` function is Weaviate's bread and butter. The most direct way to acce
 
 ## Introduction
 
-The `Get{}` function is the most straight-ahead function Weaviate has. It is the most direct wat to collect data from a weaviate. Especially when you combine them with [filters](#filters), you can easily browse your Weaviate.
+The `Get{}` function is the most straight-ahead function Weaviate has. It is the most direct wat to collect data from a weaviate. Especially when you combine them with [filters](./filters.html), you can easily browse your Weaviate.
 
 ### Define a query
 

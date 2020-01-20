@@ -30,7 +30,6 @@ Filters can be set to order or sort your dataset or to find specific data object
 - [Limit filter](#limit-filter)
 - [Explore filter](#explore-filter)
   - [Get function](#get-function)
-  - [Explore function](#explore-function)
 - [Group filter](#group-filter)
   - [Types of grouping](#types-of-grouping)
 - [GroupBy filter](#groupby-filter)
