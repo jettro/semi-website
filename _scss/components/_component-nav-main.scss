@@ -64,14 +64,6 @@
 	}
 }
 
-.nav-main--inverted {
-	background-color: $color-white !important;
-}
-
-.nav-main--inverted ul li a {
-	color: $color-black !important;
-}
-
 .nav-vertical--active {
 	display: flex;
 	height: auto;
@@ -89,7 +81,7 @@
     }
 }
 
-@media (min-width: 34em) {
+@media (min-width: 814px) {
 
 	.main-nav__item-right {
 		margin-left: auto;
