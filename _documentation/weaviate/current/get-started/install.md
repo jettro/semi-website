@@ -154,7 +154,7 @@ As a rule of thumb, you can:
 You can deploy the helm charts as follows:
 
 ```bash
-# Init helm (if you haven't done this already)
+# Init helm (if you use Helm 2)
 $ helm init --upgrade
 # Create a Weaviate namespace
 $ kubectl create namespace weaviate
