@@ -22,7 +22,6 @@ og-img: documentation.jpg
 - [Video tutorial](#video-tutorial)
 - [Basics](#basics)
 - [Introduction](#introduction)
-
 - [FAQ](#frequently-asked-questions)
 
 ## Video Tutorial
