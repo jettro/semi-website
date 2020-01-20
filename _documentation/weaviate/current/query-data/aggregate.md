@@ -27,7 +27,7 @@ You can use Weaviate's `Aggregation{}` function to obtain meta information about
 
 ## Basics
 
-- You can use the `Aggregation` function to get meta information about filtered groups in the data.
+- You can use the `Aggregate{}` function to get meta information about filtered groups in the data.
 - Some aggregate functions have (semantic) [filters](./filters.html) available.
 
 ## Introduction

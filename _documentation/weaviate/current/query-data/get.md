@@ -31,7 +31,7 @@ The `Get{}` function is Weaviate's bread and butter. The most direct way to acce
 - Weaviate's query language is [GraphQL](https://graphql.org/).
 - You can query a Weaviate after you've created a [schema](../add-data/define_schema.html) and [populated it](../add-data/add_and_modify.html) with data.
 - You can easily query a Weaviate by using the GraphQL interface inside a [Weaviate Playground](http://playground.semi.technology).
-- Some aggregate functions have (semantic) [filters](./filters.html) available.
+- Some functions have (semantic) [filters](./filters.html) available.
 
 ## Introduction
 

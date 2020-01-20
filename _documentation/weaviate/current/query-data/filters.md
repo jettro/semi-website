@@ -24,15 +24,16 @@ Filters can be set to order or sort your dataset or to find specific data object
 - [Where filter](#where-filter)
   - [Operator filter](#operator-filter)
   - [Multiple operator filters](#multiple-operator-filters)
-  - [like operator](#like-operator)
+  - [Like operator](#like-operator)
   - [Beacon filters operator](#like-operator)
-- [Geo Coordinates filter](#geo-coordinates-filter)
+- [GeoCoordinates filter](#geocoordinates-filter)
 - [Limit filter](#limit-filter)
 - [Explore filter](#explore-filter)
   - [Get function](#get-function)
   - [Explore function](#explore-function)
 - [Group filter](#group-filter)
   - [Types of grouping](#types-of-grouping)
+- [GroupBy filter](#groupby-filter)
 - [FAQ](#frequently-asked-questions)
 
 ## Basics
@@ -174,7 +175,7 @@ Using the `Like` operator allows you to do string searches based on partial matc
 
 {% include molecule-gql-demo.html %}
 
-This query would return both the publications with the name `New Yorker` and `New York Times` if they are present in the Weaviate instance.
+This query would return both the publications with the name `New Yorker`, `New York Times` and `New Scientist` if they are present in the Weaviate instance.
 
 ### Beacon filters
 
@@ -241,11 +242,11 @@ For example, these filters select based on the class Article with a wordcount hi
 ```
 {% include molecule-gql-demo.html %}
 
-## Geo Coordinates filter
+## GeoCoordinates filter
 
 Supported by the `Get{}` function.
 
-If you've set the [geo location](../add-data/define_schema.html#property-types) property type, you can search in an area based on kilometers.
+If you've set the [geoCoordinates](../add-data/define_schema.html#property-types) property type, you can search in an area based on kilometers.
 
 For example, this curious returns all in a radius of 2KM around a specific geo-location:
 
@@ -365,7 +366,7 @@ An example query:
 
 Supported by the `Get{}` function.
 
-You can use an group filter to combine similar concepts (aka _entity merging_).
+You can use a group filter to combine similar concepts (aka _entity merging_).
 
 The `group{}` filter is structured as follows for the `Get{}` function:
 
@@ -413,8 +414,61 @@ An example query:
 
 There are two ways of grouping objects with a semantic similarity together.
 
-- `closest` = shows the one result closest to the others.
-- `merge` = merges all results into one.
+- `closest`, which shows the one result closest to the others.
+- `merge`, which merges all results into one.
+
+## GroupBy filter
+
+Supported by the `Aggregate{}` function.
+
+You can use a groupBy filter to get meta information about groups of dataobjects.
+
+The `group{}` filter is structured as follows for the `Get{}` function:
+
+```json
+{
+  Aggregate {
+    <SematicKind> {
+      <Class> ( groupBy: ["<propertyName>"] ) {
+        groupedBy {
+            path
+            value
+        }
+        meta {
+          count
+        }
+        <propertyName> {
+          count
+        }
+      }
+    }
+  }
+}
+```
+
+In the following example, the articles are grouped by the property `isAccessible`, where one group contains accessible artibles, and the second group contains articles of which the `isAccessible` property is set to False.
+
+```graphql
+{
+  Aggregate {
+    Things {
+      Article (groupBy:["isAccessible"]) {
+        meta {
+          count
+        }
+        wordCount {
+          mean
+        }
+        groupedBy {
+          value
+          path
+        }
+      }
+    }
+  }
+}
+```
+{% include molecule-gql-demo.html %}
 
 ## Frequently Asked Questions
 
