@@ -19,7 +19,6 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
 
 ## Index
 
-- [Video tutorial](#video-tutorial)
 - [Basics](#basics)
 - [Docker Compose](#docker-compose)
 - [Kubernetes](#kubernetes)
@@ -30,13 +29,7 @@ Weaviate is completely containerized, you can use Docker Compose and/or Kubernet
   - [Etcd Disaster Recovery](#etcd-disaster-recovery)
 - [Weaviate Configuration](#weaviate-configuration-file)
 - [OpenID (OICD) Authentication](#openid-authentication)
-- [FAQ](#frequently-asked-questions)
-
-## Video Tutorial
-
-This guide in video format.
-
-<p><iframe width="560" height="315" src="https://www.youtube.com/embed/ye-dmGBsxf4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+- [More resources](#more-resources)
 
 ## Basics
 
@@ -57,7 +50,7 @@ Want another natural language? Make sure to let us know [here](https://github.co
 $ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
 # Download the Weaviate docker-compose file
 $ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/docker-compose.yml
-# Run Docker compose
+# Run Docker Compose
 $ docker-compose up
 ```
 
@@ -68,7 +61,7 @@ $ docker-compose up
 $ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/nl/config.yaml
 # Download the Weaviate docker-compose file
 $ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/nl/docker-compose.yml
-# Run Docker compose
+# Run Docker Compose
 $ docker-compose up
 ```
 
@@ -85,7 +78,7 @@ up` like so:
 - Instead of running `docker-compose up` run the following command:
 
 ```bash
-# Run Docker compose
+# Run Docker Compose
 $ docker-compose up -d && docker-compose logs -f weaviate
 ```
 
@@ -196,6 +189,6 @@ You can read more about how to setup (OpenID) authentication [here](../setup/../
 If all authentication schemes - including anonymous access - are disabled,
 Weaviate will fail to start up and ask you to configure at least one.
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

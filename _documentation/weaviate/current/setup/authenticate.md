@@ -23,7 +23,7 @@ If you run Weaviate with an [OpenID authentication scheme](../get-started/instal
 - [Philosophy](#philosophy)
 - [OpenID details](#openid-details)
 - [Add a Bearer to a request](#add-a-bearer-to-a-request)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 
 ## Basics
@@ -173,6 +173,6 @@ When you've received a Bearer, you can authenticate in the following manner wher
 $ curl http://localhost/v1/things -H "Authorization: Bearer {Bearer}"
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

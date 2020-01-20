@@ -25,11 +25,11 @@ This quick start guide will give you a 10-minute tour of Weaviate. You will:
 
 - [Video tutorial](#video-tutorial)
 - [Run Weaviate with a demo dataset](#run-weaviate-with-a-demo-dataset)
-  - [Docker compose setup](#docker-compose-setup)
+  - [Docker Compose setup](#docker-compose-setup)
 - [Validate via the RESTful API](#validate-via-the-restful-api)
 - [Query the dataset with GraphQL](#query-the-dataset-with-graphql)
 - [Automatic Classification](#automatic-classification)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 ## Video tutorial
 
@@ -39,13 +39,13 @@ This guide in video format.
 
 ## Run Weaviate with a demo dataset
 
-There are many different ways how you can run Weaviate, from local development setups up to large scale Kubernetes environments or hosted and managed Weaviate clusters. For this quick start guide we will be using the [Docker compose](#docker-compose-setup) setup where you can run Weaviate on your local machine to which we will add the demo dataset.
+There are many different ways how you can run Weaviate, from local development setups up to large scale Kubernetes environments or hosted and managed Weaviate clusters. For this quick start guide we will be using the [Docker Compose](#docker-compose-setup) setup where you can run Weaviate on your local machine to which we will add the demo dataset.
 
-### Docker compose setup
+### Docker Compose setup
 
 Take the following steps:
 
-0. Follow one of the installation steps outlined [here](../datasets/newspublications.html). Tip: the easiest way is to use the Docker compose setup.
+0. Follow one of the installation steps outlined [here](../datasets/newspublications.html). Tip: the easiest way is to use the Docker Compose setup.
 0. If the import is finished, you are all set for the [next step](#validate-via-the-restful-api).
 
 ## Validate via the RESTful API
@@ -455,6 +455,6 @@ This was a sneak peek of Weaviate. In the documentation, you can find more video
 
 Have fun building your own smart graph with Weaviate!
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

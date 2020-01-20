@@ -98,6 +98,6 @@ An example of a schema template looks as follows:
 }
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

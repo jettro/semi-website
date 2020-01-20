@@ -65,6 +65,6 @@ optional arguments:
   -h, --help            show this help message and exit
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

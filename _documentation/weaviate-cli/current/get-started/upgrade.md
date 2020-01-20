@@ -32,6 +32,6 @@ Start the upgrade using the upgrade command
 $ weaviate-cli upgrade
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

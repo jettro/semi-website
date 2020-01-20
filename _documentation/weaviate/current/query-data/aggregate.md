@@ -23,7 +23,7 @@ You can use Weaviate's `Aggregation{}` function to obtain meta information about
 - [Introduction](#introduction)
   - [Define a query](#define-a-query)
 - [Aggregate{} Function](#aggregate-function)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 ## Basics
 
@@ -148,6 +148,6 @@ An example query to obtain meta information about the data in the class `City` c
 ```
 {% include molecule-gql-demo.html %}
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

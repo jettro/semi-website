@@ -32,6 +32,6 @@ You can ping a Weaviate with the ping command
 $ weaviate-cli ping
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

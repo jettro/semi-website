@@ -21,12 +21,13 @@ This dataset can be used to easily demo all Weaviate's features.
 
 - [Run with Docker Compose](#run-with-docker-compose)
 - [Run manually](#run-manually)
+- [More resources](#more-resources)
 
 ### Run with Docker Compose
 
 If you want to run this dataset locally, you can run it in one go with Docker Compose.
 
-The Docker compose files below contain both Weaviate and the dataset.
+The Docker Compose files below contain both Weaviate and the dataset.
 
 ```bash
 # download the config file
@@ -55,7 +56,7 @@ $ docker run -i -e weaviate_host=$WEAVIATE_HOST semitechnologies/weaviate-demo-n
 
 Usage with Docker on **local** host **with** Docker Compose;
 
-_Note: run this from the same directory where the Weaviate Docker-compose files are located_
+_Note: run this from the same directory where the Weaviate Docker Compose files are located_
 
 {% raw %}
 ```bash
@@ -67,3 +68,7 @@ $ export WEAVIATE_NETWORK=$(docker inspect -f '{{range .NetworkSettings.Networks
 $ docker run -i --network=$WEAVIATE_NETWORK -e weaviate_host=$WEAVIATE_HOST semitechnologies/weaviate-demo-newspublications:latest
 ```
 {% endraw %}
+
+## More Resources
+
+{% include support-links.html %}

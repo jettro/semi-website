@@ -24,7 +24,7 @@ The `Get{}` function is Weaviate's bread and butter. The most direct way to acce
   - [Define a query](#define-a-query)
   - [Work with graph beacons](#work-with-graph-beacons)
 - [Get{} Function](#get-function)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 ## Basics
 
@@ -159,6 +159,6 @@ Note that if you've set the [cardinality](../add-data/define_schema.html#propert
 ```
 {% include molecule-gql-demo.html %}
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

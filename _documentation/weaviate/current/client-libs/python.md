@@ -19,6 +19,7 @@ og-img: documentation.jpg
 
 - [Basics](#basics)
 - [Usage](#usage)
+- [More resources](#more-resources)
 
 ## Basics
 - A python native weaviate client makes using the Weaviate API easier.
@@ -85,3 +86,7 @@ curl http://localhost/v1/graphql -X POST -H 'Content-type: application/json' -d 
 ```
 
 Please find the [full client documentation here](https://semi-technologies.github.io/weaviate-python-client/html/index.html).
+
+## More Resources
+
+{% include support-links.html %}

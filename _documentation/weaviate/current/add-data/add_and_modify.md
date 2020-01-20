@@ -30,7 +30,7 @@ When a Weaviate [schema](./define_schema.html) is created, you can populate this
   - [Add individual references](#add-individual-references)
   - [Replace all references](#replace-all-references)
   - [Delete individual references](#delete-individual-references)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 ## Basics
 
@@ -396,6 +396,6 @@ DELETE /v1/{semanticKind}/{semanticKindUUID}/references/{propertyName}
 }
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

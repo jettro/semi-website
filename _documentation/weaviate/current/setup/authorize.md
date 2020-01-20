@@ -23,7 +23,7 @@ This means you can chose the plugin that fits your use case best. If you have on
 
 - [Admin List](#admin-list)
 - [RBAC](#rbac)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 
 ## Admin List
@@ -69,6 +69,6 @@ More fine-grained Role-Based Access Control (RBAC) coming soon. As of know the
 only possible distinction is between Admins (CRUD), Read-Only Users and
 entirely unauthorized users.
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

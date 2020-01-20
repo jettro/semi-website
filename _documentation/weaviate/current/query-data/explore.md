@@ -26,7 +26,7 @@ You can explore the smart graph based on the semantic meaning of the data concep
   - [CamelCase interpretation](#camelcase-interpretation)
   - [Moving](#moving)
 - [Explore{} Function](#explore-function)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 ## Basics
 
@@ -121,6 +121,6 @@ An example query:
 ```
 {% include molecule-gql-demo.html %}
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

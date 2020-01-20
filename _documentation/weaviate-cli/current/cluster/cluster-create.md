@@ -23,7 +23,7 @@ og-img: documentation.jpg
 
 ## Basics
 
-- You can create Weaviate Clusters through the Weaviate Cluster Service (WPC).
+- You can create Weaviate Clusters through the Weaviate Cluster Service (WCS).
 - Weaviate Clusters are managed weaviates.
 - Clusters are currently free and have a two week lifetime.
 
@@ -72,6 +72,6 @@ optional arguments:
   -h, --help    show this help message and exit
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

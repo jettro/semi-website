@@ -19,7 +19,6 @@ A Weaviate schema is used to define what kind of [semantic kinds](../about/philo
 
 ## Index
 
-- [Video tutorial](#video-tutorial)
 - [Basics](#basics)
 - [Introduction](#introduction)
 - [Defining Objects](#defining-objects)
@@ -29,13 +28,7 @@ A Weaviate schema is used to define what kind of [semantic kinds](../about/philo
 - [Delete a schema item](#delete-a-schema-item)
 - [Add a property to a schema item](#add-a-property-to-a-schema-item)
 - [Delete a property from a schema item](#delete-a-property-from-a-schema-item)
-- [FAQ](#frequently-asked-questions)
-
-## Video Tutorial
-
-This guide in video format.
-
-<p><iframe width="560" height="315" src="https://www.youtube.com/embed/xxRl5lATkuo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+- [More resources](#more-resources)
 
 ## Basics
 
@@ -494,6 +487,6 @@ An example of deleting a property item of the semantic kind _Action_ might look 
 DELETE /v1/schema/actions/Payment/properties/transactionDate
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

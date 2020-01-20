@@ -57,6 +57,6 @@ You can also remove all clusters related to your email address
 $ weaviate-cli cluster-remove --all
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

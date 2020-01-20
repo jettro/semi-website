@@ -33,7 +33,7 @@ Filters can be set to order or sort your dataset or to find specific data object
 - [Group filter](#group-filter)
   - [Types of grouping](#types-of-grouping)
 - [GroupBy filter](#groupby-filter)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 ## Basics
 
@@ -469,6 +469,6 @@ In the following example, the articles are grouped by the property `isAccessible
 ```
 {% include molecule-gql-demo.html %}
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

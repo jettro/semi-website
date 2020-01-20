@@ -46,7 +46,3 @@ Want to get started or want to learn more? These resources might help you furthe
 - Get started:
     - [Weaviate in 10 minutes](./get-started/quick_start.html).
     - [Installation](./get-started/install.html).
-
-## FAQ
-
-{% include support-links.html %}

@@ -45,6 +45,6 @@ optional arguments:
   --force          Force the truncation of the schema
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

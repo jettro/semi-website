@@ -39,6 +39,6 @@ $ pip3 install -r requirements.txt
 $ sudo ln -s $(pwd)/bin/weaviate-cli /usr/local/bin/weaviate-cli
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

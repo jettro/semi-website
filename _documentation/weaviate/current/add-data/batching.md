@@ -22,7 +22,7 @@ Add many data objects in one API call.
 - [Basics](#basics)
 - [Introduction](#introduction)
 - [RESTful API](#restful-api)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 ## Basics
 
@@ -66,6 +66,6 @@ $ curl http://localhost:8080/v1/batching/things -X POST -H 'Content-type: applic
 }'
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

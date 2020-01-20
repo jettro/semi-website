@@ -49,6 +49,6 @@ optional arguments:
                         What is the OAuth client_secret?
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

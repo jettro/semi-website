@@ -47,6 +47,6 @@ optional arguments:
   --force     Force deletion
 ```
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}

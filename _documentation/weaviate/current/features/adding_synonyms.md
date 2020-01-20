@@ -20,6 +20,7 @@ og-img: documentation.jpg
 - [Basics](#basics)
 - [Introduction](#introduction)
 - [Usage](#usage)
+- [More resources](#more-resources)
 
 ## Basics
 - Concepts in the Contextionary can be overwritten and new concepts can be added to the Contextionary.
@@ -54,3 +55,7 @@ For example:
 ```bash
 curl http://localhost:8080/v1/c11y/concepts/zipGroove
 ```
+
+## More Resources
+
+{% include support-links.html %}

@@ -30,7 +30,7 @@ Weaviate is an open-source, GraphQL and RESTful API-enabled, smart graph based o
 - [About Classification](#about-classification)
 - [About Weaviate Knowledge Networks](#about-weaviate-knowledge-networks)
 - [Miscellaneous](#miscellaneous)
-- [FAQ](#frequently-asked-questions)
+- [More resources](#more-resources)
 
 ## Video Tutorial
 
@@ -143,6 +143,6 @@ Because Weaviate allows for fuzzy schema definitions (e.g., a "Company with the 
 
 - The Contextionary is limited to a single language per Weaviate instance (i.e., English Contextionary, Spanish Contextionary, etcetera).
 
-## Frequently Asked Questions
+## More Resources
 
 {% include support-links.html %}
