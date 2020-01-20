@@ -107,7 +107,7 @@ The output of the above setup is quite verbose, you can also run the above comma
 
 _Note I: the Kubernetes setup is only for large scale deployments of Weaviate. In case you want to work with smaller deployments, you can always user Docker Compose or the Weaviate Cluster Service._
 
-_Note II: tested until Kubernetes 1.14.*_
+_Note II: tested until Kubernetes 1.14.x_
 
 _Note III: In case your are running a very small setup. We would advice to use Docker Compose, but you can also this [minimal configuration](https://github.com/semi-technologies/weaviate-helm/blob/v{{ site.helm_version }}/weaviate/values-minimal.yaml)._
 

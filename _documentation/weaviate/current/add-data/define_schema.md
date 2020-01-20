@@ -60,27 +60,24 @@ A concept definition is what we call a **class** and a class is always written w
 Examples expressed in YAML might look like this:
 
 ```yaml
-Company
-Person
-City
+Publication
+Article
+Author
 ```
 
 ### Properties
 
-Every class has properties, which are always written with a **lower case first character**. For example, the class **Person** might have the property **name**.
+Every class has properties, which are always written with a **lower case first character**. For example, the class **Publication** might have the property **name**.
 
 Examples expressed in YAML might look like this:
 
 ```yaml
-Company
-    name
-    industry
-Person
-    name
-    nickname
-    email
-City
-    name
+Publication
+  name
+Article
+  title
+Author
+  name
 ```
 
 ### Keywords
@@ -88,18 +85,18 @@ City
 Keywords give context to a class or property. They help a Weaviate instance to interpret different words that are spelled the same way (so-called homographs). A good example of this is the word seal. Do you mean a stamp or the sea animal? You can define this by setting keywords. The weights determine how important the keyword is. Setting low values is often already enough to determine the context of a thing or action.
 
 ```yaml
-class: Company
-description: A company in the army
+class: Publication
+description: A publication with an online source
 keywords:
-- keyword: army
+- keyword: newspaper
   weight: 1.0
-- keyword: militaryUnit
-  weight: 0.75
+- keyword: magazine
+  weight: 1.0
 ```
 
 ### Weaviate Schema versus Ontology
 
-Because Weaviate uses the [Contextionary](../about/philosophy#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Company with the name Apple`) is semantically similar to `a Business with the label Apple Inc.`
+Because Weaviate uses the [Contextionary](../about/philosophy#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Publication with the name New Yorker`) is semantically similar to `a Magazine with the label New Yorker`.
 
 Within Weaviate, the schema is _only_ used to define the query and explore syntax.
 
@@ -171,18 +168,21 @@ Sometimes you might want to use multiple words to set as a class or property def
 Examples expressed in YAML might look like this:
 
 ```yaml
-Company
-    name
-    industry
-    foundedIn
-Person
-    name
-    nickname
-    email
-    bornIn
-City
-    name
-    isCapital
+Publication
+  name
+  hasArticles
+Article
+  title
+  summary
+  wordCount
+  url
+  hasAuthors
+  inPublication
+  publicationDate
+Author
+  name
+  wroteArticles
+  writesFor
 ```
 
 [Keywords](#keywords) cannot be chained, they have to match exactly one word. However, there is no limit on the amount of keywords per class or per class property.
@@ -245,7 +245,7 @@ When creating a property, Weaviate needs to know what type of data you will give
 | int      | int64  | `0` |
 | boolean  | boolean | `true`/`false` |
 | number   | float64 | `0.0` |
-| date     | string | [more info](#) |
+| date     | string | [more info](#date-type) |
 | text     | text   | `string` |
 | geoCoordinates | string | [more info](#geo-coordinates-type) |
 | CrossRef | string | [more info](#cross-reference-type) |
@@ -264,7 +264,7 @@ An example of how geo coordinates are defined as:
 
 ```json
 {
-  "Bike": {
+  "City": {
     "location": {
       "latitude": 52.366667,
       "longitude": 4.9
@@ -284,8 +284,7 @@ The following example is seen as a valid set of datatypes.
   "properties": [
     {
       "dataType": [
-        "Company",
-        "Business"
+        "Article"
       ]
     }
   ]
@@ -304,20 +303,18 @@ from the graph, the cardinality will determine how the query is constructed.
 
 ```json
 {
-  "class": "Company",
-  "description": "A company in our dataset",
+  "class": "Article",
+  "description": "Normalised types",
   "keywords": [],
   "properties": [
     {
-      "name": "hasCustomer",
+      "name": "hasAuthors",
       "dataType": [
-        "Company",
-        "Person",
-        "Business"
+         "Author", 
+         "Publication"
       ],
       "cardinality": "many",
-      "description": "An entity that buys from this company",
-      "keywords": []
+      "description": "authors this article has"
     }
   ]
 }
@@ -347,12 +344,17 @@ An example of creating a schema item of the semantic kind _Thing_ might look lik
 ```bash
 $ curl http://localhost:8080/v1/schema/things -X POST -H 'Content-type: application/json' -d \
 '{
-  "class": "Company",
-  "description": "A company in our dataset",
+  "class": "Publication",
+  "description": "A publication with an online source",
+  "vectorizeClassName": false,
   "keywords": [
     {
-      "keyword": "business",
-      "weight": 0.8
+      "keyword": "newspaper",
+      "weight": 1.0
+    },
+    {
+      "keyword": "magazine",
+      "weight": 1.0
     }
   ],
   "properties": [
@@ -361,13 +363,7 @@ $ curl http://localhost:8080/v1/schema/things -X POST -H 'Content-type: applicat
         "string"
       ],
       "name": "name",
-      "keywords": [
-        {
-          "keyword": "identifier",
-          "weight": 0.25
-        }
-      ],
-      "description": "Name of the Company"
+      "description": "Name of the publication"
     }
   ]
 }'

@@ -186,7 +186,7 @@ To explain how to use the API calls to perform classification less abstract, let
 We can now send `POST` request with the following body to `/v1/classification`:
 ```json
 {
-  "class": "Company",
+  "class": "Aricle",
   "classifyProperties": ["inCountry"],
   "basedOnProperties": ["description"],
   "type": "knn",

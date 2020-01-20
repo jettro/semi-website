@@ -26,15 +26,15 @@ Weaviate is an open-source, GraphQL and RESTful API-enabled, smart graph based o
 
 0. **Semantic Search** to not only search but also for concepts and relations.
 0. **Automatic Classification** to automatically extend your graph.
-0. **Knowledge Representation** to represent the knowledge in a dataset.
+0. **Knowledge Representation** to represent information that systems and humans understand.
 
 ## Core developer features
 
-0. **Contextionary** the core graph embedding mechanism that indexes all data objects.
-0. **GraphQL API** an easy to use interface to query a Weaviate.
-0. **RESTful API** an easy to use interface to populate a Weaviate.
-0. **Containerized** to run it efficiently.
-0. **Scalable** to huge graph sizes.
+0. **Contextionary** - the core graph embedding mechanism that indexes all data objects.
+0. **GraphQL API** - an easy to use interface to query a Weaviate.
+0. **RESTful API** - an easy to use interface to populate a Weaviate.
+0. **Containerized** - to run it efficiently.
+0. **Scalable** - to huge graph sizes.
 
 ## FAQ
 

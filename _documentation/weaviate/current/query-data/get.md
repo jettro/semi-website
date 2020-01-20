@@ -15,9 +15,9 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-You can directly query the Weaviate smart graph. Finding concepts in the smart graph based on the Contextionary can be done through [exploring](explore-filter.html).
+You can directly query the Weaviate smart graph. Finding concepts in the smart graph based on the Contextionary can be done through [exploring](explore.html).
 
-_Note: You can mix [explore](explore-filter.html) functions with regular query functions._
+_Note: You can mix [explore](explore.html) functions with regular query functions._
 
 ## Index
 
@@ -25,7 +25,6 @@ _Note: You can mix [explore](explore-filter.html) functions with regular query f
 - [Introduction](#introduction)
 - [Weaviate's GraphQL function structure](#weaviates-graphql-function-structure)
 - [Get{} Function](#get-function)
-    - [Get{} query structure and syntax](#get-query-structure-and-syntax)
 - [FAQ](#frequently-asked-questions)
 
 ## Basics
@@ -54,7 +53,7 @@ The basic function structure of a Weaviate is as follows:
 }
 ```
 
-- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./explore-filter.html), and about `Aggregate{}` [here](./aggregate.html)._
+- _Note: This page describes the `Get{}` function. Learn more about `Explore{}` [here](./explore.html), and about `Aggregate{}` [here](./aggregate.html)._
 
 # Get{} Function
 
@@ -78,15 +77,16 @@ The `Get{}` function is always defined based on the following principle:
 }
 ```
 
-A `Get{}` function is always based on the schema. For example, if you've created a schema with a class `Company` which has the properties `name` and `foundedIn`, you can query it as follows:
+A `Get{}` function is always based on the schema. For example, if you've created a schema with a class `Articles` which has the properties `name` and `publicationDate`, you can query it as follows:
 
 ```graphql
 {
   Get {
     Things {
-      Company {
-        name
-        foundedIn
+      Articles {
+        title
+        url
+        wordCount
       }
     }
   }
@@ -101,15 +101,10 @@ The above query will result in something like the following:
   "data": {
     "Get": {
       "Things": {
-        "Company": [{
-          "name": "Apple Inc.",
-          "foundedIn": "1976"
-        }, {
-          "name": "Google LLC",
-          "foundedIn": "1998"
-        }, {
-          "name": "Microsoft",
-          "foundedIn": "1975"
+        "Articles": [{
+          "title": "“Joker” Is a Viewing Experience of Rare, Numbing Emptiness",
+          "url": "https://www.newyorker.com/culture/the-front-row/joker-is-a-viewing-experience-of-rare-numbing-emptiness",
+          "wordCount": 1794
         }]
       }
     }
@@ -123,11 +118,12 @@ If you've set a cross-reference (aka [beacon](../about/philosophy#basic-terminol
 {
   Get {
     Things {
-      Company {
-        name
-        foundedIn
-        inCountry {        # the reference
-          ... on Country { # you always set the destination class
+      Articles {
+        title
+        url
+        wordCount
+        inPublication {        # the reference
+          ... on Publication {   # you always set the destination class
             name           # the property related to target class
           }
         }
@@ -144,14 +140,15 @@ Note that if you've set the [cardinality](../add-data/define_schema.html#propert
 {
   Get {
     Things {
-      Company {
-        name
-        foundedIn
-        sells {
-          ... on Products {
+      Articles {
+        title
+        url
+        wordCount
+        hasAuthors {
+          ... on Author {
             name
           }
-          ... on Services {
+          ... on Publication {
             name
           }
         }

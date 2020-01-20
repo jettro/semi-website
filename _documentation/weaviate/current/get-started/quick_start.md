@@ -16,7 +16,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-This quick start guide will give you a 10-minute tour of Weaviate. In it you will:
+This quick start guide will give you a 10-minute tour of Weaviate. You will:
 - Set up your Weaviate through the managed cluster service or Docker.
 - Add a simple dataset with news articles.
 - Browse through the dataset with the Weaviate Playground.
@@ -42,8 +42,8 @@ This guide in video format.
 
 There are many different ways how you can run Weaviate, from local development setups up to large scale Kubernetes environments or hosted and managed Weaviate clusters. For this quick start guide you can choose between:
 
-- Using the Weaviate Cluster Service (WPC) where you can create a free cluster that contains the demo dataset. Or;
-- Using the Docker compose setup where you can run Weaviate on your local machine to which we will add the demo dataset.
+- Using the [Weaviate Cluster Service (WPC)](#weaviate-cluster-service-wcs) where you can create a free cluster that contains the demo dataset. Or;
+- Using the [Docker compose](#docker-compose) setup where you can run Weaviate on your local machine to which we will add the demo dataset.
 
 ### Weaviate Cluster Service (WCS)
 
@@ -52,10 +52,10 @@ The quickest way to get started is using the Weaviate Cluster Service (WPC).
 Take the following steps:
 
 0. Go to the WPC beta page [here](/weaviate-cluster/).
-0. Fill in your details and **make sure to select the Newspublications demo dataset**.
+0. Fill in your details and **make sure to select the NewsPublications demo dataset**.
 0. Collect your Weaviate URL on the SeMI network that looks something like https://xxxx.semi.network
 
-If the import is finished, you are all set for the [next step](#query-the-dataset-with-graphql).
+If the import is finished, you are all set for the [next step](#validate-via-the-restful-api).
 
 ### Docker compose
 
@@ -63,11 +63,11 @@ If you want to run Weaviate on a location of your choice, you can use Docker-com
 
 Take the following steps:
 
-0. Follow the three installation steps outlined [here](open_datasets.html). **Make sure that you install Weaviate with the English contextionary.**
+0. Follow the three installation steps outlined [here](../datasets/newspublications.html). **Make sure that you install Weaviate with the English contextionary.**
 0. Because you are using the Docker compose setup, you need to define the `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables.
-0. You can now add the demo dataset by running the docker command mentioned [here](open_datasets.html#news-publications). Make sure you use the command that consumes both the  `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables.
+0. You can now add the demo dataset by running the docker command mentioned [here](../datasets/newspublications.html). Make sure you use the command that consumes both the  `WEAVIATE_HOST` and `WEAVIATE_NETWORK` variables.
 
-If the import is finished, you are all set for the [next step](#query-the-dataset-with-graphql).
+If the import is finished, you are all set for the [next step](#validate-via-the-restful-api).
 
 ## Validate via the RESTful API
 
@@ -211,6 +211,7 @@ Let's first get all news publications out.
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 You can also find which articles are related to these publications.
 
@@ -231,6 +232,7 @@ You can also find which articles are related to these publications.
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 And you can even go deeper, to find which authors are related to these publiations.
 
@@ -256,6 +258,7 @@ And you can even go deeper, to find which authors are related to these publiatio
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 When querying for articles, you can also add classic filters to narrow down your search.
 
@@ -280,6 +283,7 @@ When querying for articles, you can also add classic filters to narrow down your
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 Do you want to know how many articles, authors and publications there are? This is something you can find using the Aggregate{} function.
 
@@ -317,6 +321,7 @@ Do you want to know how many articles, authors and publications there are? This 
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 ### Explore the smart graph
 
@@ -346,6 +351,7 @@ In Weaviate, you can also semantically explore your datasets. Let's search for a
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 You can also combine filters!
 
@@ -380,6 +386,7 @@ You can also combine filters!
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 Or publications related to fashion.
 
@@ -400,6 +407,7 @@ Or publications related to fashion.
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 ## Automatic Classification
 
@@ -422,6 +430,7 @@ If you run the following query, you might notice that there are no categories cl
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 Here we can use Weaviate's auto-classification function to let Weaviate decide which categories to attach to news publications.
 
@@ -460,11 +469,12 @@ When Weaviate is done with the classification, you can rerun the previous query 
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 By using the RESTful API, you can even get statistics related to the classification.
 
 ```bash
-$ curl -k https://wcjswuxctfvlxuxl.semi.network/v1/things/b8977d2e-a026-36dc-bc34-f21a35188010?meta=true | jq .
+$ curl -k https://{YOUR WEAVIATE HOST}/v1/things/{CLASSIFICATION ID}?meta=true | jq .
 ```
 
 This was a sneak peek of Weaviate. In the documentation, you can find more videos and guides on how to work with Weaviate in depth.

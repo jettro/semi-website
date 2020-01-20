@@ -21,6 +21,7 @@ With calling the health check endpoints, the Weaviate instance will let you know
 ## Index
 
 - [Live and Readiness Endpoints](#live-and-readiness-endpoints)
+- [FAQ](#frequently-asked-questions)
 
 ## Live and Readiness Endpoints
 

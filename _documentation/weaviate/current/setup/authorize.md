@@ -3,7 +3,7 @@ layout: layout-documentation
 product: weaviate
 sub-menu: Setup
 product-order: 1
-title: Authorization
+title: Authorize
 description: How to setup weaviate authorization.
 tags: ['Installation', 'Authorization']
 menu-order: 5

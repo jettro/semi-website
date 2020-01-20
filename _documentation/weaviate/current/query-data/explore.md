@@ -3,7 +3,7 @@ layout: layout-documentation
 product: weaviate
 sub-menu: Query data
 product-order: 1
-title: Explore filter
+title: Explore
 description: How to explore weaviate.
 tags: ['Explore', 'GraphQL', 'Contextionary']
 menu-order: 3
@@ -31,7 +31,8 @@ You can explore the smart graph based on the semantic meaning of the data concep
 
 ## Basics
 
-- Data objects in Weaviate can be found using a fuzzy search with the `Explore{}` function of the GraphQL API.
+- With the `explore{}` filter in `Get{}` queries you can filter to find concepts.
+- With the `Explore{}` query function, you can fuzzy search for data objects in Weaviate.
 - Search results are based on given data, meta data and the `Contextionary` used in Weaviate.
 
 ## Introduction
@@ -58,7 +59,7 @@ Weaviate splits words based on CamelCase. For example, if a user wants to explor
 
 ### Moving
 
-Because pagination is not possible in multidimensional storage, you can improve your results with additional explore functions which can move away from semantic concepts or towards semantic concepts. E.g., if you look for the concept 'apple' but don't want to find the company, you can use the  `moveAway{}` function by using the words 'company'.
+Because pagination is not possible in multidimensional storage, you can improve your results with additional explore functions which can move away from semantic concepts or towards semantic concepts. E.g., if you look for the concept 'New York Times' but don't want to find the city New York, you can use the  `moveAway{}` function by using the words 'New York'.
 
 ## Explore{} filter
 
@@ -98,15 +99,15 @@ An example query:
 {
   Get{
     Things{
-      Company(
+      Article(
         explore: {
-          concepts: ["windows"],
+          concepts: ["Joker"],
           moveAwayFrom: {
-            concepts: ["technology"],
+            concepts: ["cardgame"],
             force: 0.9
           },
           moveTo: {
-            concepts: ["glass"],
+            concepts: ["movie"],
             force: 0.85
           }
         }
@@ -117,10 +118,11 @@ An example query:
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 ## Explore{} function
 
-The Explore function can be used if a user doesn't know what to look for at all. The explore function will return everything it found around a particular set of given concepts.
+The Explore function can be used if a user doesn't know what to look for at all. For example, you might not be familiar with the exact class names of the concept you are looking for. The explore function will return everything it found around a particular set of given concepts.
 
 The `Explore{}` function is structured as follows:
 
@@ -154,14 +156,14 @@ An example query:
 ```graphql
 {
   Explore (
-    concepts: ["bank"],
+    concepts: ["New Yorker"],
     certainty: 0.95,
     moveTo: {
-      concepts: ["transation", "money"],
+      concepts: ["publisher", "articles"],
       force: 0.5
     },
     moveAwayFrom: {
-      concepts: ["river", "animal"],
+      concepts: ["city", "fashion", "shop"],
       force: 0.5
     }
   ) {
@@ -171,6 +173,7 @@ An example query:
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 ## Frequently Asked Questions
 

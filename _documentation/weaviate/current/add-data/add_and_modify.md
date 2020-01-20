@@ -37,7 +37,7 @@ When a Weaviate [schema](./define_schema.html) is created, you can populate this
 ## Basics
 
 - Data is added through the RESTful API.
-- Individual [semantic kinds](.././about/philosophy#basic-terminology) can be collected or listed. However, there are seperate documentation pages for [querying](.././query-data/get.html) and [exploring](.././query-data/explore-filter.html).
+- Individual [semantic kinds](.././about/philosophy#basic-terminology) can be collected or listed. However, there are seperate documentation pages for [querying](.././query-data/get.html) and [exploring](.././query-data/explore.html).
 - The examples assume that Weaviate runs on port 80 on the localhost without authentication.
 - The entry point to a Weaviate is always `/v1`.
 
@@ -185,7 +185,7 @@ $ curl http://localhost:8080/v1/things/f81bfe5e-16ba-4615-a516-46c2ae2e5a80
 ```
 
 - _Note, the result will be in the form of a [data object](#data-object)._
-- _Note, this endpoint is created the collect individual concepts directly, there are specific endpoints for [querying](.././query-data/get.html) and [exploring](.././query-data/explore-filter.html)._
+- _Note, this endpoint is created the collect individual concepts directly, there are specific endpoints for [querying](.././query-data/get.html) and [exploring](.././query-data/explore.html)._
 
 ## Delete a data object
 

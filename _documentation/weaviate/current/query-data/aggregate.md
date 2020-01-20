@@ -15,7 +15,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-Data objects in Weaviate can be grouped, based on your filters. You can use GraphQL's `Aggregation{}` function to then obtain meta information about these groups. Direct data querying can be done by the [`Get{}`](./get.html) function, and exploration can be done by the [`Explore{}`](./explore-filter.html) function.
+Data objects in Weaviate can be grouped, based on your filters. You can use GraphQL's `Aggregation{}` function to then obtain meta information about these groups. Direct data querying can be done by the [`Get{}`](./get.html) function, and exploration can be done by the [`Explore{}`](./explore.html) function.
 
 ## Index
 
@@ -106,21 +106,13 @@ An example query to obtain meta information about the data in the class `City` c
 {
   Aggregate {
     Things {
-      City {
-        InCountry {
-          pointingTo
-          type
-        }
-        isCapital {
-          count
-          percentageFalse
-          percentageTrue
-          totalFalse
-          totalTrue
-          type
-        }
+      Article {
         meta {
           count
+        }
+        InPublication {
+          pointingTo
+          type
         }
         name {
           count
@@ -130,7 +122,7 @@ An example query to obtain meta information about the data in the class `City` c
             value
           }
         }
-        population {
+        wordCount {
           count
           maximum
           mean
@@ -145,6 +137,7 @@ An example query to obtain meta information about the data in the class `City` c
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 ### Filters
 
@@ -180,7 +173,7 @@ In the following example, the cities are grouped by the property `isCapital`, wh
 {
   Aggregate {
     Things {
-      City (groupBy:["isCapital"]) {
+      Article (groupBy:["isCapital"]) {
         meta {
           count
         }
@@ -196,6 +189,7 @@ In the following example, the cities are grouped by the property `isCapital`, wh
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 which might result in something like this result:
 
@@ -263,6 +257,7 @@ In addition, the `limit` filter can be used on the `topOccurrences` fields.
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 ## Frequently Asked Questions
 
