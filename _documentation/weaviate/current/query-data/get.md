@@ -92,6 +92,7 @@ A `Get{}` function is always based on the schema. For example, if you've created
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 The above query will result in something like the following:
 
@@ -135,6 +136,7 @@ If you've set a cross-reference (aka [beacon](../about/philosophy#basic-terminol
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 Note that if you've set the [cardinality](../add-data/define_schema.html#property-object) to `many`, you might have multiple data types. For example:
 
@@ -158,6 +160,7 @@ Note that if you've set the [cardinality](../add-data/define_schema.html#propert
   }
 }
 ```
+{% include molecule-gql-demo.html %}
 
 ## Frequently Asked Questions
 
