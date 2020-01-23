@@ -1,7 +1,6 @@
 
-- title: "Scalable smart graph (<a href='/documentation/weaviate/current/'>tech features</a>)"
+- title: "Weaviate smart graph (<a href='/documentation/weaviate/current/'>tech features</a>)"
   note: ""
-  opensource: true
   startup: true
   scaleup: true
   prof: true
@@ -9,9 +8,8 @@
   enterprise: true
   enterpriseplus: true
 
-- title: "Helm and Kubernetes charts"
+- title: "Weaviate Cluster Service"
   note: ""
-  opensource: true
   startup: true
   scaleup: true
   prof: true
@@ -21,7 +19,6 @@
 
 - title: "Community support"
   note: ""
-  opensource: true
   startup: true
   scaleup: true
   prof: true
@@ -29,57 +26,28 @@
   enterprise: true
   enterpriseplus: true
 
-- title: "Enterprise service-level agreement (SLA)"
+- title: "Email support"
   note: ""
-  opensource: true
-  startup: true
+  startup: false
   scaleup: true
   prof: true
   profplus: true
   enterprise: true
   enterpriseplus: true
 
-- title: "Enterprise Terms of Service (ToS)"
+- title: "Slack support"
   note: ""
-  opensource: false
-  enterprise: true
-  enterpriseplus: true
-
-- title: "Enterprise End-User Licence Agreement (EULA)"
-  note: ""
-  opensource: true
-  startup: true
-  scaleup: true
+  startup: false
+  scaleup: false
   prof: true
   profplus: true
   enterprise: true
   enterpriseplus: true
 
-- title: "Global Weaviate as a Service (WaaS)"
+- title: "Account manager support (SPOC)"
   note: ""
-  opensource: true
-  startup: true
-  scaleup: true
-  prof: true
-  profplus: true
-  enterprise: true
-  enterpriseplus: true
-
-- title: "Feature requests"
-  note: ""
-  opensource: true
-  startup: true
-  scaleup: true
-  prof: true
-  profplus: true
-  enterprise: true
-  enterpriseplus: true
-
-- title: "Dedicated Weaviate support"
-  note: ""
-  opensource: true
-  startup: true
-  scaleup: true
+  startup: false
+  scaleup: false
   prof: true
   profplus: true
   enterprise: true
@@ -87,9 +55,8 @@
 
 - title: "Last-come-first-served Silver (<a href='#asterisk'>*</a>)"
   note: ""
-  opensource: true
-  startup: true
-  scaleup: true
+  startup: false
+  scaleup: false
   prof: true
   profplus: true
   enterprise: true
@@ -97,40 +64,72 @@
 
 - title: "Access to our solution engineers (<a href='#dagger'>†</a>)"
   note: ""
-  opensource: true
-  startup: true
-  scaleup: true
+  startup: false
+  scaleup: false
   prof: true
   profplus: true
   enterprise: true
   enterpriseplus: true
 
-- title: "Dedicated implemantation support"
+- title: "Private cloud or on premise"
   note: ""
-  opensource: true
-  startup: true
-  scaleup: true
-  prof: true
-  profplus: true
+  startup: false
+  scaleup: false
+  prof: false
+  profplus: false
+  enterprise: true
+  enterpriseplus: true
+
+- title: "Enterprise service-level agreement (SLA)"
+  note: ""
+  startup: false
+  scaleup: false
+  prof: false
+  profplus: false
+  enterprise: true
+  enterpriseplus: true
+
+- title: "Enterprise Terms of Service (ToS)"
+  note: ""
+  startup: false
+  scaleup: false
+  prof: false
+  profplus: false
+  enterprise: true
+  enterpriseplus: true
+
+- title: "Enterprise End-User Licence Agreement (EULA)"
+  note: ""
+  startup: false
+  scaleup: false
+  prof: false
+  profplus: false
+  enterprise: true
+  enterpriseplus: true
+
+- title: "Access to our core engineers (<a href='#dagger'>†</a>)"
+  note: ""
+  startup: false
+  scaleup: false
+  prof: false
+  profplus: false
   enterprise: true
   enterpriseplus: true
 
 - title: "Last-come-first-served Gold (<a href='#double-dagger'>‡</a>)"
   note: ""
-  opensource: true
-  startup: true
-  scaleup: true
-  prof: true
-  profplus: true
+  startup: false
+  scaleup: false
+  prof: false
+  profplus: false
   enterprise: true
   enterpriseplus: true
 
-- title: "Access to our core engineers (<a href='#section-sign'>§</a>)"
+- title: "Dedicated implemantation support"
   note: ""
-  opensource: true
-  startup: true
-  scaleup: true
-  prof: true
-  profplus: true
-  enterprise: true
+  startup: false
+  scaleup: false
+  prof: false
+  profplus: false
+  enterprise: false
   enterpriseplus: true
