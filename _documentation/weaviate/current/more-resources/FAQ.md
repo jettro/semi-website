@@ -1,7 +1,7 @@
 ---
 layout: layout-documentation
 product: weaviate
-sub-menu: FAQ
+sub-menu: More resources
 product-order: 1
 title: FAQ
 description: Frequently Asked Questions.

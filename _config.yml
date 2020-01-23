@@ -39,7 +39,7 @@ docs:
         - Features
         - Datasets
         - Client libs
-        - FAQ
+        - More resources
         - About
     weaviate-cli:
         - Get started
