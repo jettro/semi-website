@@ -2,24 +2,40 @@
 - title: "Scalable smart graph (<a href='/documentation/weaviate/current/'>tech features</a>)"
   note: ""
   opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Helm and Kubernetes charts"
   note: ""
   opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Community support"
   note: ""
   opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Enterprise service-level agreement (SLA)"
   note: ""
-  opensource: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
@@ -31,54 +47,90 @@
 
 - title: "Enterprise End-User Licence Agreement (EULA)"
   note: ""
-  opensource: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Global Weaviate as a Service (WaaS)"
   note: ""
-  opensource: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Feature requests"
   note: ""
-  opensource: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Dedicated Weaviate support"
   note: ""
-  opensource: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Last-come-first-served Silver (<a href='#asterisk'>*</a>)"
   note: ""
-  opensource: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Access to our solution engineers (<a href='#dagger'>†</a>)"
   note: ""
-  opensource: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
   enterprise: true
   enterpriseplus: true
 
 - title: "Dedicated implemantation support"
   note: ""
-  opensource: false
-  enterprise: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
+  enterprise: true
   enterpriseplus: true
 
 - title: "Last-come-first-served Gold (<a href='#double-dagger'>‡</a>)"
   note: ""
-  opensource: false
-  enterprise: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
+  enterprise: true
   enterpriseplus: true
 
 - title: "Access to our core engineers (<a href='#section-sign'>§</a>)"
   note: ""
-  opensource: false
-  enterprise: false
+  opensource: true
+  startup: true
+  scaleup: true
+  prof: true
+  profplus: true
+  enterprise: true
   enterpriseplus: true

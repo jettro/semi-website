@@ -3,19 +3,19 @@ layout: layout-documentation
 product: weaviate
 sub-menu: Features
 product-order: 1
-title: KNN Classification
-description: How to perform KNN classification for properties of data objects
-tags: ['KNN Classification', 'Data', 'Modify']
-menu-order: 2
+title: Contextual Classification
+description: How to perform Contextual classification for properties of data objects
+tags: ['Contextual Classification', 'Data', 'Modify']
+menu-order: 1
 open-graph-type: article
 og-img: documentation.jpg
 ---
 
-# KNN Classification Guide
+# Contextual Classification Guide
 
 {% include badges.html %}
 
-Perform [k-nearest neighbors](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifications through the RESTapi to enhance your dataset. 
+Perform contextual classifications through the RESTapi to enhance your dataset. 
 
 ## Index
 

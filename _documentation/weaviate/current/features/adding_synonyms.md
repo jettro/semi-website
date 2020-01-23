@@ -6,7 +6,7 @@ product-order: 1
 title: Adding synonyms
 description: How to add custom synonyms to the contextionary
 tags: ['Contextionary', 'Synonyms']
-menu-order: 2
+menu-order: 3
 open-graph-type: article
 og-img: documentation.jpg
 ---
@@ -53,7 +53,7 @@ GET /v1/c11y/concepts/{concept}
 
 For example: 
 ```bash
-curl http://localhost:8080/v1/c11y/concepts/zipGroove
+curl http://localhost:8080/v1/c11y/concepts/buriedLede
 ```
 
 ## More Resources
