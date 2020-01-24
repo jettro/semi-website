@@ -23,19 +23,12 @@ This quick start guide will give you a 10-minute tour of Weaviate. You will:
 
 ## Index
 
-- [Video tutorial](#video-tutorial)
 - [Run Weaviate with a demo dataset](#run-weaviate-with-a-demo-dataset)
   - [Docker Compose setup](#docker-compose-setup)
 - [Validate via the RESTful API](#validate-via-the-restful-api)
 - [Query the dataset with GraphQL](#query-the-dataset-with-graphql)
 - [Automatic Classification](#automatic-classification)
 - [More resources](#more-resources)
-
-## Video tutorial
-
-This guide in video format.
-
-<p><iframe width="560" height="315" src="https://www.youtube.com/embed/S7SLep244ss" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 ## Run Weaviate with a demo dataset
 
