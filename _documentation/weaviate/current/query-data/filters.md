@@ -304,6 +304,14 @@ Supported by the `Get{}` and `Explore{}` function.
 
 You can use an explore filter to find concepts in your dataset.
 
+There are three ways to define the `concepts` array argument in the Explore filter.
+
+- `["New York Times"]` = one vector position is determined based on the occurences of the words
+- `["New", "York", "Times"]` = all concepts have a similar weight.
+- `["New York", "Times"]` = a combination of the two above.
+
+Practical example: `concepts: ["beatles", "John Lennon"]`
+
 ### Get function
 
 The `explore{}` filter is structured as follows for the `Get{}` function:

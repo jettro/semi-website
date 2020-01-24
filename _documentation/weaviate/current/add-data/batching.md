@@ -27,9 +27,9 @@ Add many data objects in one API call.
 ## Basics
 
 - For larger datasets you can use batching to quickly import a lot of data.
-- A batch can contain:
+- A batch can contain (whichever limit hits first):
   - Up to 1000 objects. Or
-  - Max XXX MB.
+  - Max 1 MB
 
 ## Introduction
 
@@ -42,8 +42,9 @@ A bulk of objects can be added to Weaviate by using a batch POST. A seperate req
 Example based on _things_:
 
 ```bash
-$ curl http://localhost:8080/v1/batching/things -X POST -H 'Content-type: application/json' -d \
-'{
+POST /v1/batching/things 
+
+{
   "fields": [
     "ALL"
   ],
@@ -63,7 +64,7 @@ $ curl http://localhost:8080/v1/batching/things -X POST -H 'Content-type: applic
       "id": "b0c18f80-d7c1-44bf-a745-14b9df5b1055"
     }
   ]
-}'
+}
 ```
 
 ## More Resources

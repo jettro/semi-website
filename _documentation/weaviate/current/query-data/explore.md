@@ -26,6 +26,7 @@ You can explore the smart graph based on the semantic meaning of the data concep
   - [CamelCase interpretation](#camelcase-interpretation)
   - [Moving](#moving)
 - [Explore{} Function](#explore-function)
+  - [Concepts array function](#concepts-array-function)
 - [More resources](#more-resources)
 
 ## Basics
@@ -120,6 +121,16 @@ An example query:
 }
 ```
 {% include molecule-gql-demo.html %}
+
+### Concepts array function
+
+There are three ways to define the `concepts` array argument in the Explore filter.
+
+- `["New York Times"]` = one vector position is determined based on the occurences of the words
+- `["New", "York", "Times"]` = all concepts have a similar weight.
+- `["New York", "Times"]` = a combination of the two above.
+
+Practical example: `concepts: ["beatles", "John Lennon"]`
 
 ## More Resources
 
