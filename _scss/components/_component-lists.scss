@@ -31,7 +31,13 @@ li.list-bullet--disabled {
 .list-ui {
 	li {
 		list-style: none !important;
-	}
+    }
+    .sub-menu {
+        font-weight: bold;
+    }
+    .sub-menu-item {
+        margin: 0 0 0 1.75rem;
+    }
 }
 
 .list-ui-hor {

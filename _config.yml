@@ -1,4 +1,5 @@
-weaviate_version: 0.20.1
+weaviate_version: 0.22.0
+helm_version: 8.2.1
 markdown: kramdown
 kramdown:
     parse_block_html: false
@@ -29,3 +30,19 @@ plugins:
     - jekyll-redirect-from
 whitelist:
     - jekyll-redirect-from
+docs:
+    weaviate:
+        - Get started
+        - Setup
+        - Add data
+        - Query data
+        - Features
+        - Datasets
+        - Client libs
+        - More resources
+        - About
+    weaviate-cli:
+        - Get started
+        - Cluster
+        - Schema
+        - Misc
