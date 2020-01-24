@@ -6,7 +6,7 @@ product-order: 3
 title: Initiate
 description: Weaviate-cli initiate
 tags: ['weaviate-cli', 'initiate']
-menu-order: 5
+menu-order: 2
 open-graph-type: article
 og-img: documentation.jpg
 ---

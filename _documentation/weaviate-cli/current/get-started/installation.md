@@ -6,7 +6,7 @@ product-order: 3
 title: Install
 description: Weaviate-cli Install
 tags: ['weaviate-cli', 'install']
-menu-order: 5
+menu-order: 1
 open-graph-type: article
 og-img: documentation.jpg
 ---

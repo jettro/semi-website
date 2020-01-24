@@ -6,7 +6,7 @@ product-order: 3
 title: Upgrade
 description: Weaviate-cli Upgrade
 tags: ['weaviate-cli', 'upgrade']
-menu-order: 5
+menu-order: 3
 open-graph-type: article
 og-img: documentation.jpg
 ---

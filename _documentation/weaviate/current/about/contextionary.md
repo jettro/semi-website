@@ -37,19 +37,19 @@ Weaviate has a contextionary endpoint which you can call to see how it indexed w
 To find a concept you can run the following request.
 
 ```js
-GET /v1/c11y/words/{CamelCasedWords}
+GET /v1/c11y/concepts/{CamelCasedWords}
 ```
 
 Examples;
 
 ```js
-GET /v1/c11y/words/apple
+GET /v1/c11y/concepts/apple
 ```
 
 or
 
 ```js
-GET /v1/c11y/words/appleIphone
+GET /v1/c11y/concepts/appleIphone
 ```
 
 which results in (depending on the current C11y) something like;
