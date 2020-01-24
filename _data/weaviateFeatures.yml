@@ -121,7 +121,7 @@
   startup: false
   scaleup: false
   prof: false
-  profplus: false
+  profplus: true
   enterprise: true
   enterpriseplus: true
 

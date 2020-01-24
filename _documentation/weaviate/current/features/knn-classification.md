@@ -63,7 +63,7 @@ POST /v1/classifications
   "classifyProperties": ["<property1>", "<property2>"],
   "basedOnProperties": ["<property3>"],
   "type": "knn", // optional, default is knn
-  "k": 3 // optional, default to ??
+  "k": 3 // optional, default to 3
 }
 
 // returns GET response + Header 'Location: /v1/classifications/<classificationId>'
