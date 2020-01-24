@@ -193,7 +193,7 @@ We can now send `POST` request with the following body to `/v1/classification`:
 
 ```json
 {
-  "class": "Aricle",
+  "class": "Country",
   "classifyProperties": ["inCountry"],
   "basedOnProperties": ["description"],
   "type": "knn",
