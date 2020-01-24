@@ -10,6 +10,11 @@
 	<meta name="author" content="SeMI Technologies" />
 	<meta name="description" content="{{ page.description }}" />
 	{% include og.html %}
+
+	{% if page.layout == 'layout-blog-article' %}
+		<link rel="alternate" type="application/rss+xml" title="SeMI Technology and Weaviate RSS newsfeed" href="https://semi.technology/news.xml" />
+	{% endif %}
+
 	{% if page.url == "/" %}
 		<title>{{ page.title }}</title>
 	{% elsif page.layout == "layout-documentation" %}

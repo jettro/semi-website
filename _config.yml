@@ -17,6 +17,7 @@ collections:
     authors:
         output: true
 exclude:
+    - "console/*"
     - "*.json"
     - "Gemfile*"
     - "*.enc"
