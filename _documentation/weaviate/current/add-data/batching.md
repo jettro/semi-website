@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Add data
 product-order: 1
 title: Batching
-description: How to setup a weaviate schema.
+description: How to add large datasets.
 tags: ['Batching']
 menu-order: 3
 open-graph-type: article
@@ -22,6 +22,9 @@ Add many data objects in one API call.
 - [Basics](#basics)
 - [Introduction](#introduction)
 - [RESTful API](#restful-api)
+  - [Add Things](#add-things)
+  - [Add Actions](#add-actions)
+  - [Add references](#add-references)
 - [More resources](#more-resources)
 
 ## Basics
@@ -38,6 +41,8 @@ For larger datasets you can use batching to quickly import a lot of data. The co
 ## RESTful API
 
 A bulk of objects can be added to Weaviate by using a batch POST. A seperate request should be done for the semantic kinds (`Things` or `Actions`). The definitions of the data objects is similar to adding [single data objects](./add_and_modify.html#add-a-data-object).
+
+### Add Things
 
 Example based on _things_:
 
@@ -65,6 +70,60 @@ POST /v1/batching/things
     }
   ]
 }
+```
+
+### Add Actions
+
+Example based on _actions_:
+
+```bash
+POST /v1/batching/actions 
+
+{
+  "fields": [
+    "ALL"
+  ],
+  "actions": [
+    {
+      "class": "Buy",
+      "schema": {
+        // data object
+      },
+    },
+    {
+      "class": "Buy",
+      "schema": 
+        // data object
+      },
+    }
+  ]
+}
+```
+
+### Add references
+
+Batching references can be set in the following way:
+
+- `from` = `weaviate://{peerName}/{semanticKind}/{nameOfClass}/{UUID}/{property}`
+  - `peerName` = name of the Weaviate instance, often localhost.
+  - `semanticKind` = Thing or Action.
+  - `nameOfClass` = name of the class of the Thing or Action.
+  - `UUID` = the UUID of the entity the references should be added to.
+  - `property` = the property that should contain the link.
+- `to` = `weaviate://{peerName}/{semanticKind}/{UUID}/`
+  - `UUID` = the UUID of the entity the references should be added to.
+
+Example:
+
+```bash
+POST /batching/references
+
+[
+  {
+    "from": "weaviate://localhost/things/Buy/a5d09582-4239-4702-81c9-92a6e0122bb4/products",
+    "to": "weaviate://localhost/things/97525810-a9a5-4eb0-858a-71449aeb007f"
+  }
+]
 ```
 
 ## More Resources

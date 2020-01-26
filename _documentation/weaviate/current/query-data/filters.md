@@ -31,7 +31,7 @@ Filters can be set to order or sort your dataset or to find specific data object
 - [Explore filter](#explore-filter)
   - [Get function](#get-function)
 - [Group filter](#group-filter)
-  - [Types of grouping](#types-of-grouping)
+  - [Grouping Best Practices](#grouping-best-practices)
 - [GroupBy filter](#groupby-filter)
 - [More resources](#more-resources)
 
@@ -69,7 +69,7 @@ The `where` filter is an [algebraic object](https://en.wikipedia.org/wiki/Algebr
 - `valueBoolean`: The boolean value that the `Path`'s last property name should be compared to.
 - `valueString`: The string value that the `Path`'s last property name should be compared to.
 - `valueNumber`: The number (float) value that the `Path`'s last property name should be compared to.
-- `valueDate`: The date (ISO 8601 timestamp) value that the `Path`'s last property name should be compared to.
+- `valueDate`: The date (ISO 8601 timestamp, formatted as [RFC3339](https://tools.ietf.org/html/rfc3339)) value that the `Path`'s last property name should be compared to.
 
 ```graphql
 {
@@ -114,7 +114,7 @@ For example, this filter selects articles from the class Article with a wordcoun
             operator: GreaterThan,  # operator
             valueInt: 1000          # value (which is always = to the type of the path property)
         }) {
-        name
+        title
       }
     }
   }
@@ -126,7 +126,7 @@ For example, this filter selects articles from the class Article with a wordcoun
 
 You can set multiple operands by providing an array.
 
-For example, these filters select based on the class Article with a wordCount higher than 1000 and who are published before January 1st 2020. Note that you can filter a date and time just similar to numbers, with the `valueDate` given as `string`. 
+For example, these filters select based on the class Article with a wordCount higher than 1000 and who are published before January 1st 2020. Note that you can filter a date and time just similar to numbers, with the `valueDate` given as `string`. Note that the `valueDate` should be formatted according to standard [RFC3339](https://tools.ietf.org/html/rfc3339).
 
 ```graphql
 {
@@ -141,10 +141,10 @@ For example, these filters select based on the class Article with a wordCount hi
           }, {
             path: ["publicationDate"],
             operator: LessThan,
-            valueDate: "2020-01-01T00:00:00"
+            valueDate: "2020-01-01T00:00:00Z"
           }]
         }) {
-        name
+        title
       }
     }
   }
@@ -180,7 +180,7 @@ This query would return both the publications with the name `New Yorker`, `New Y
 
 You can also search for the value of the property of a beacon.
 
-For example, these filters select based on the class Article but who have `inPublication` set to The New Yorker.
+For example, these filters select based on the class Article but who have `inPublication` set to New Yorker.
 
 ```graphql
 {
@@ -189,10 +189,10 @@ For example, these filters select based on the class Article but who have `inPub
       Article(where: {
           path: ["inPublication", "Publication", "name"],
           operator: Equal,
-          valueString: "The New Yorker"
+          valueString: "New Yorker"
         }) {
-        name
-        inPublication{
+        title
+        InPublication{
           ... on Publication{
             name
           }
@@ -206,7 +206,7 @@ For example, these filters select based on the class Article but who have `inPub
 
 You can also combine all filters into one request.
 
-For example, these filters select based on the class Article with a wordcount higher then 1000, published before January 1st 2020 and who have `inPublication` set to The New Yorker.
+For example, these filters select based on the class Article with a wordcount higher then 1000, published before January 1st 2020 and who have `inPublication` set to New Yorker.
 
 ```graphql
 {
@@ -221,11 +221,11 @@ For example, these filters select based on the class Article with a wordcount hi
           }, {
             path: ["publicationDate"],
             operator: LessThan,
-            valueDate: "2020-01-01T00:00:00"
+            valueDate: "2020-01-01T00:00:00Z"
           },{
             path: ["inPublication", "Publication", "name"],
             operator: Equal,
-            valueString: "The New Yorker"
+            valueString: "New Yorker"
           }]
         }) {
         name
@@ -291,7 +291,7 @@ An example of a stand-alone limit filter:
   Get {
     Things {
       Article(limit:5) {
-        name
+        title
       }
     }
   }
@@ -352,7 +352,7 @@ An example query:
         explore: {
           concepts: ["Joker"],
           moveAwayFrom: {
-            concepts: ["cardgame"],
+            concepts: ["game"],
             force: 0.9
           },
           moveTo: {
@@ -361,7 +361,7 @@ An example query:
           }
         }
       ){
-        name
+        title 
       }
     }
   }
@@ -373,7 +373,10 @@ An example query:
 
 Supported by the `Get{}` function.
 
-You can use a group filter to combine similar concepts (aka _entity merging_).
+You can use a group filter to combine similar concepts (aka _entity merging_). There are two ways of grouping objects with a semantic similarity together.
+
+- `closest`, which shows the one result closest to the others.
+- `merge`, which merges all results into one.
 
 The `group{}` filter is structured as follows for the `Get{}` function:
 
@@ -413,16 +416,13 @@ An example query:
     }
   }
 }
-
 ```
 {% include molecule-gql-demo.html %}
 
-### Types of grouping
+### Grouping best practices
 
-There are two ways of grouping objects with a semantic similarity together.
-
-- `closest`, which shows the one result closest to the others.
-- `merge`, which merges all results into one.
+- The grouping/merging is done internally based on vector distance. It is thus important that the items to be merged are as close to each other as possible. If your items use a lot of words which are not recognized by the contextionary, those words do not influence the vector position. In this case consider extending the contextionary using the REST API (/c11y/extensions), so that it understands more words from your object.
+- You get the best possible results if noise is removed in vectorization, we thus strongly recommend setting `vectorizeClassName: false` and `vectorizePropertyName: false` for each property.
 
 ## GroupBy filter
 

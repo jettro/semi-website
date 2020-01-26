@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Features
 product-order: 1
 title: Adding synonyms
-description: How to add custom synonyms to the contextionary
+description: How to add custom synonyms to the contextionary.
 tags: ['Contextionary', 'Synonyms']
 menu-order: 3
 open-graph-type: article

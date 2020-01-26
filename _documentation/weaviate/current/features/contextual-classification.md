@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Features
 product-order: 1
 title: Contextual Classification
-description: How to perform Contextual classification for properties of data objects
+description: How to perform Contextual classification for properties of data objects.
 tags: ['Contextual Classification', 'Data', 'Modify']
 menu-order: 1
 open-graph-type: article
@@ -41,7 +41,8 @@ Weaviate's classification features allows you to classify data objects. Cross-re
 
 ## How to use
 
-Classification can be performed via the `v1/classification/` endpoint on the RESTful API. There are two operations possible. To start a classification job, send a `POST` request to `v1/classification/`, and specify the `type` of the classification to `contextual`  in the body (see below). To view previously created classifications, send a `GET` request to `v1/classification/{classificationId}`.
+Classification can be performed via the `v1/classification/` endpoint on the RESTful API. There are two operations possible. To start a classification job, send a `POST` request to `v1/classification/`, and specify the `type` of the classification to `contextual` in the body (see below). The field `basedOnProperties` currently accepts only one property of the class, but all other properties of the class are also taken into account, since the vector representation of the whole object in the class is taken. The field property must be of the datatype `text`. 
+To view previously created classifications, send a `GET` request to `v1/classification/{classificationId}`.
 
 ### Start a Classification
 
@@ -75,13 +76,9 @@ Which returns a body like the following if the classification was successfully s
   "status": "running",
   "meta": {
     "started": "<timestamp>",
-    "completed": "<timestamp>" || null,
-    "count": 147,
-    "countSucceeded": 140,
-    "countFailed": 7
+    "completed": "<timestamp>"
   },
-  "type": "contextual",
-  "certainty": 0.8
+  "type": "contextual"
 }
 ```
 
@@ -104,13 +101,12 @@ GET /v1/classifications/<classificationID>
   "status": "running",
   "meta": {
     "started": "<timestamp>",
-    "completed": "<timestamp>" || null,
+    "completed": "<timestamp>",
     "count": 147,
     "countSucceeded": 140,
     "countFailed": 7
   },
-  "type": "contextual",
-  "certainty": 0.8
+  "type": "contextual"
 }
 ```
 
@@ -136,7 +132,7 @@ GET /v1/things/<id>/?meta=true
          "beacon": "...",
          "meta": {
             "classification": {
-              "distanceWinning": float
+              "winningDistance": float
             },
           },
       }
@@ -170,7 +166,7 @@ Then, additional meta information about the classication of this data object is 
 
 To explain how to use the API calls to perform classification less abstract, let's go into an example. Let's say we want to classify to which Category Articles belong to, using the schema of previous examples in the documentation. We have the following information:
 - A schema class `Category`, with a property `name`.
-- A schema class `Article`, with at least the properties `description` and `ofCategory` which refers to `Category`. (`Article(description) --> ofCategory --> Category(name)`).
+- A schema class `Article`, with at least the properties `summary` and `ofCategory` which refers to `Category`. (`Article(summary) --> ofCategory --> Category(name)`).
 - Data objects of the class `Category`, with the `name` property filled.
 - Data objects of the class `Article`, with the reference property `ofCategory` not filled yet.
 
@@ -178,9 +174,9 @@ We can now send `POST` request with the following body to `/v1/classification`:
 
 ```json
 {
-  "class": "Aricle",
+  "class": "Article",
   "classifyProperties": ["ofCategory"],
-  "basedOnProperties": ["description"],
+  "basedOnProperties": ["summary"],
   "type": "contextual"
 }
 ```
@@ -189,47 +185,43 @@ which will return the following `meta` information:
 
 ```json
 {
-  "id": "ee722219-b8ec-4db1-8f8d-5150bb1a9e0c",
-  "class": "Aricle",
-  "classifyProperties": [
-    "ofCategory"
-  ],
-  "basedOnProperties": [
-    "description"
-  ],
-  "status": "running",
-  "meta": {
-    "started": "2017-07-21T17:32:28Z",
-    "completed": null,
-    "count": 147,
-    "countSucceeded": 140,
-    "countFailed": 7
-  },
-  "type": "contextual"
+    "basedOnProperties": [
+        "summary"
+    ],
+    "class": "Article",
+    "classifyProperties": [
+        "ofCategory"
+    ],
+    "id": "853c5eb4-6785-4a95-9a30-9cc70ea21fd8",
+    "meta": {
+        "completed": null,
+        "started": "20-01-26T13:25:32.427Z"
+    },
+    "status": "running",
+    "type": "contextual"
 }
 ```
 
-If we later check the status by performing a GET request to `v1/classification/ee722219-b8ec-4db1-8f8d-5150bb1a9e0c`, we will get the following information if the classification has finished.
+If we later check the status by performing a GET request to `v1/classification/853c5eb4-6785-4a95-9a30-9cc70ea21fd8`, we will get the following information if the classification has finished.
 
 ```json
 {
-  "id": "ee722219-b8ec-4db1-8f8d-5150bb1a9e0c",
-  "class": "Article",
-  "classifyProperties": [
-    "ofCategory"
-  ],
-  "basedOnProperties": [
-    "description"
-  ],
-  "status": "completed",
-  "meta": {
-    "started": "2017-07-21T17:32:28Z",
-    "completed": "2017-07-21T17:56:23Z",
-    "count": 304,
-    "countSucceeded": 296,
-    "countFailed": 8
-  },
-  "type": "contextual"
+    "basedOnProperties": [
+        "summary"
+    ],
+    "class": "Article",
+    "classifyProperties": [
+        "ofCategory"
+    ],
+    "id": "853c5eb4-6785-4a95-9a30-9cc70ea21fd8",
+    "meta": {
+        "completed": "2020-01-26T13:26:20.453Z",
+        "count": 1310,
+        "countSucceeded": 1310,
+        "started": "2020-01-26T13:25:32.427Z"
+    },
+    "status": "completed",
+    "type": "contextual"
 }
 ```
 
@@ -237,30 +229,54 @@ If we later want to know to which `Category` the `Article` refers to, we can sen
 
 ```json
 {
-  "class": "Article",
-  "id": "c370fd85-c2d8-4321-80c4-ae6744abe671",
-  "schema": {
-    "description": "Scientists discover new species",
-    "ofCategory": [
-      {
-         "beacon": "<beaconToCategoryWithNameScience>",
-         "meta": {
-            "classification": {
-              "distanceWinning": 0.5,
+    "class": "Article",
+    "creationTimeUnix": 1580044437155,
+    "id": "c9094d69-d45b-3508-85e5-23445cfb5f9f",
+    "meta": {
+        "classification": {
+            "basedOn": null,
+            "classifiedFields": [
+                "ofCategory"
+            ],
+            "completed": "2020-01-26T13:25:34.230Z",
+            "id": "853c5eb4-6785-4a95-9a30-9cc70ea21fd8",
+            "scope": [
+                "ofCategory"
+            ]
+        }
+    },
+    "schema": {
+        "hasAuthors": [
+            {
+                "beacon": "weaviate://localhost/things/18c65463-f425-3bd3-9d8d-548208966f9b"
             },
-          }
-      }
-    ]
-  },
-  "meta": {
-    "classification": {
-      "id": "ee722219-b8ec-4db1-8f8d-5150bb1a9e0c",
-      "completed": "2017-07-21T17:56:23Z",
-      "classifiedFields": ["ofCategory"],
-      "scope": ["ofCategory"],
-      "basedOn": ["description"]
+            {
+                "beacon": "weaviate://localhost/things/b451a0af-4b28-35e0-808a-de7784fbece8"
+            },
+            {
+                "beacon": "weaviate://localhost/things/16476dca-59ce-395e-b896-050080120cd4"
+            }
+        ],
+        "inPublication": [
+            {
+                "beacon": "weaviate://localhost/things/16476dca-59ce-395e-b896-050080120cd4"
+            }
+        ],
+        "ofCategory": [
+            {
+                "beacon": "weaviate://localhost/things/8fe49280-5d2e-3d73-9b0f-7b76e2f23c65",
+                "meta": {
+                    "classification": {
+                        "winningDistance": 0.20993641018867493
+                    }
+                }
+            }
+        ],
+        "summary": "A New Mexico state senator was reportedly convicted on misdemeanor aggravated drunken driving and reckless driving charges Tuesday -- nearly six months after he rear-ended a driver stopped at a red light in the state. Third, the consequences,” Mark Probasco, a special prosecutor with the state attorney general’s office said, according to The Journal. — Mark Probasco, special prosecutor with New Mexico state attorney general’s officeMartinez originally told officers he had only “a beer or two,” but later admitted he had multiple glasses of wine. The officer who arrested Martinez said the senator was slurring his speech and had alcohol on his breath. CLICK HERE TO GET THE FOX NEWS APPA former Republican state senator in New Mexico was defeated last year after she was convicted for DUI in 2018, The Journal reported.",
+        "title": "New Mexico Democrat's DUI conviction could cost him panel chairmanship, state party leaders warn",
+        "url": "https://www.foxnews.com/politics/new-mexico-democratic-state-senator-convicted-of-dui-reckless-driving-in-june-crash",
+        "wordCount": 377
     }
-  }
 }
 ```
 

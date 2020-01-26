@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Client libs
 product-order: 1
 title: Python
-description: Python client library
+description: Weaviate Python client library.
 tags: ['Python', 'Library']
 menu-order: 1
 open-graph-type: article

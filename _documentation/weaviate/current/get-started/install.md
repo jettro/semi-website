@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Get started
 product-order: 1
 title: Installation
-description: How to install a weaviate setup.
+description: How to install a Weaviate or Weaviate Kubernetes cluster.
 tags: ['Installation', 'Running', 'Kubernetes']
 menu-order: 2
 open-graph-type: article
