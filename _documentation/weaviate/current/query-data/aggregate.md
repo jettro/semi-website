@@ -123,7 +123,7 @@ An example query to obtain meta information about the data in the class `City` c
           pointingTo
           type
         }
-        name {
+        title {
           count
           type
           topOccurrences {
