@@ -3,7 +3,7 @@
     <dl class="article-toc">
         <dd>
             <ul class="list-ui article-toc__list-pages">
-            {% assign sorted_articles = site.news | sort: 'menu-order' %}
+            {% assign sorted_articles = site.news | sort: 'pubdate' %}
             {% for item in sorted_articles %}
                 {% unless item.title == 'News' %}
                     <li>
