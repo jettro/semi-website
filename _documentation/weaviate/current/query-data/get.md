@@ -81,7 +81,7 @@ A `Get{}` function is always based on the schema. For example, if you've created
 {
   Get {
     Things {
-      Articles {
+      Article {
         title
         url
         wordCount
@@ -99,7 +99,7 @@ The above query will result in something like the following:
   "data": {
     "Get": {
       "Things": {
-        "Articles": [{
+        "Article": [{
           "title": "“Joker” Is a Viewing Experience of Rare, Numbing Emptiness",
           "url": "https://www.newyorker.com/culture/the-front-row/joker-is-a-viewing-experience-of-rare-numbing-emptiness",
           "wordCount": 1794
@@ -118,11 +118,11 @@ If you've set a [beacon reference](../about/philosophy#basic-terminology) in the
 {
   Get {
     Things {
-      Articles {
+      Article {
         title
         url
         wordCount
-        inPublication {           # the reference
+        InPublication {           # the reference
           ... on Publication {    # you always set the destination class
             name                  # the property related to target class
           }
@@ -140,11 +140,11 @@ Note that if you've set the [cardinality](../add-data/define_schema.html#propert
 {
   Get {
     Things {
-      Articles {
+      Article {
         title
         url
         wordCount
-        hasAuthors {
+        HasAuthors {
           ... on Author {
             name
           }

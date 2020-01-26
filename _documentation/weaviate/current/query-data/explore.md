@@ -110,8 +110,8 @@ An example query:
       force: 0.5
     },
     moveAwayFrom: {
-      concepts: ["city", "fashion", "shop"],
-      force: 0.5
+      concepts: ["fashion", "shop"],
+      force: 0.2
     }
   ) {
     beacon
