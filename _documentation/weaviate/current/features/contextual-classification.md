@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Features
 product-order: 1
 title: Contextual Classification
-description: How to perform Contextual classification for properties of data objects
+description: How to perform Contextual classification for properties of data objects.
 tags: ['Contextual Classification', 'Data', 'Modify']
 menu-order: 1
 open-graph-type: article

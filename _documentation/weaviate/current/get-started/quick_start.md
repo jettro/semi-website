@@ -5,7 +5,7 @@ product: weaviate
 sub-menu: Get started
 product-order: 1
 title: Quick start
-description: Getting started with Weaviate
+description: Getting started with Weaviate.
 tags: ['introduction', 'Weaviate', 'Contextionary']
 menu-order: 1
 open-graph-type: article

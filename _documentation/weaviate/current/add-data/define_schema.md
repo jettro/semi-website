@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Add data
 product-order: 1
 title: Define schema
-description: How to setup a weaviate schema.
+description: How to define a weaviate schema.
 tags: ['Schema']
 menu-order: 1
 open-graph-type: article

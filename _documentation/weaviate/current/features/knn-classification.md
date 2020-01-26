@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Features
 product-order: 1
 title: KNN Classification
-description: How to perform KNN classification for properties of data objects
+description: How to perform KNN classification for properties of data objects.
 tags: ['KNN Classification', 'Data', 'Modify']
 menu-order: 2
 open-graph-type: article

@@ -5,7 +5,7 @@ product: weaviate
 sub-menu: About
 product-order: 1
 title: Philosophy
-description: Learn more about Weaviate
+description: Learn more about the philosophy behind Weaviate.
 tags: ['introduction', 'Weaviate', 'Contextionary', 'Philosohpy']
 menu-order: 1
 open-graph-type: article

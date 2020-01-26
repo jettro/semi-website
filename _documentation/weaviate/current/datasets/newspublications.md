@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Datasets
 product-order: 1
 title: News publications
-description: Datasets.
+description: Weaviate dataset with news publications.
 tags: ['Datasets', 'News publications', 'Help']
 menu-order: 1
 open-graph-type: article
