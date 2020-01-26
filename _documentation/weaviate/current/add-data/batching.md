@@ -72,9 +72,9 @@ POST /v1/batching/things
 }
 ```
 
-### Add Things
+### Add Actions
 
-Example based on _things_:
+Example based on _actions_:
 
 ```bash
 POST /v1/batching/actions 
@@ -86,11 +86,15 @@ POST /v1/batching/actions
   "actions": [
     {
       "class": "Buy",
-      "schema": {},
+      "schema": {
+        // data object
+      },
     },
     {
       "class": "Buy",
-      "schema": {},
+      "schema": 
+        // data object
+      },
     }
   ]
 }
