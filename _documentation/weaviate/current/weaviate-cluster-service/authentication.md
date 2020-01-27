@@ -1,10 +1,10 @@
 ---
 layout: layout-documentation
 product: weaviate
-sub-menu: Setup
+sub-menu: Weaviate Cluster Service
 product-order: 1
-title: WCS Auth
-description: How to use auth with WCS
+title: Authentication
+description: How to use authentication with WCS
 tags: ['Installation', 'Authentication', 'WCS', 'WCS Auth']
 menu-order: 7
 open-graph-type: article
@@ -41,7 +41,7 @@ you obtain a token and use it with Weaviate.
   each request to weaviate, as it will authenticate you.
 - If you are not using the Weaviate Cluster Service, this guide is not
   applicable. To see how to use Weaviate with OIDC in general, see
-  [Authentication](authenticate.html).
+  [Authentication](../setup/authenticate.html).
 
 ## OIDC Details
 
