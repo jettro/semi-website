@@ -19,7 +19,7 @@ If you are using the Weaviate Cluster Service (WCS) you can set the
 `"requiresAuthentication": true` option when provisioning your cluster. This
 will protect the new Weaviate instance with [OpenID
 Connect](https://openid.net/connect/) (OIDC) Authentication. This guide helps
-you obtain a token and use it with weaviate.
+you obtain a token and use it with Weaviate.
 
 
 ## Index
@@ -41,7 +41,7 @@ you obtain a token and use it with weaviate.
   each request to weaviate, as it will authenticate you.
 - If you are not using the Weaviate Cluster Service, this guide is not
   applicable. To see how to use Weaviate with OIDC in general, see
-  [Authentication](authentication.html).
+  [Authentication](authenticate.html).
 
 ## OIDC Details
 
@@ -114,7 +114,7 @@ You should see a response similar to the following:
 
 ## Login to the Playground
 
-If you want to connect the [Playground](https://playground.semi.technology),
+If you want to connect the [Playground](http://playground.semi.technology),
 with your instance, simply enter the GraphQL endpoint of your cluster (e.g.
 `https://[your-cluster-id].semi.network/v1/graphql`) into the Playground app in
 your browser.
