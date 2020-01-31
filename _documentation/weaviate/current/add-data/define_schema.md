@@ -21,13 +21,31 @@ A Weaviate schema is used to define what kind of [semantic kinds](../about/philo
 
 - [Basics](#basics)
 - [Introduction](#introduction)
+  - [Concepts and their Structures](#concepts-and-their-structures)
+  - [Classes](#classes)
+  - [Properties](#properties)
+  - [Keywords](#keywords)
+  - [Weaviate Schema versus Ontology](#weaviate-schema-versus-ontology)
 - [Defining Objects](#defining-objects)
-- [RESTful API](#restful-api)
-- [Get the schema](#get-the-schema)
-- [Create a schema item](#create-a-schema-item)
-- [Delete a schema item](#delete-a-schema-item)
-- [Add a property to a schema item](#add-a-property-to-a-schema-item)
-- [Delete a property from a schema item](#delete-a-property-from-a-schema-item)
+  - [Schema Object](#schema-object)
+  - [Property Object](#property-object)
+  - [Concatenate Classes and Properties](#concatenate-classes-and-properties)
+  - [Stopwords](#stopwords)
+    - [What stopwords are and why they matter](#what-stopwords-are-and-why-they-matter)
+    - [Behavior around stop words](#behavior-around-stop-words)
+    - [How does weaviate decide wether a word is a stop word or not?](#how-does-weaviate-decide-wether-a-word-is-a-stop-word-or-not)
+  - [Property Types](#property-types)
+    - [Date Type](#date-type)
+    - [Geo Coordinates Type](#geo-coordinates-type)
+    - [Cross Reference Type](#cross-reference-type)
+    - [Cardinality](#cardinality)
+- [Using the Schema API](#using-the-schema-api)
+  - [Create a schema item](#create-a-schema-item)
+    - [Regulate Indexing](#regulate-indexing)
+  - [Get the schema](#get-the-schema)
+  - [Delete a schema item](#delete-a-schema-item)
+  - [Add a property to a schema item](#add-a-property-to-a-schema-item)
+  - [Delete a property from a schema item](#delete-a-property-from-a-schema-item)
 - [More resources](#more-resources)
 
 ## Basics
@@ -154,7 +172,7 @@ A property object is defined as follows;
 }
 ```
 
-### Concetenate Classes and Properties
+### Concatenate Classes and Properties
 
 Sometimes you might want to use multiple words to set as a class or property definition. For example, the year a person is born in, you might want to define with the two words: `born` and `in`. You can do this by capitalizing per word (CamelCase), for example, `bornIn`. Weaviate will validate both words in the Contextionary.
 
@@ -184,7 +202,7 @@ Author
 
 Note that stopwords automatically removed from camelCased and CamelCased names.
 
-### What stopwords are and why they matter
+#### What stopwords are and why they matter
 
 Stopwords are words that don't add semantic meaning to your concepts and are
 extremely common in texts across different contexts. For example, the sentence
@@ -202,7 +220,7 @@ need to know how close the vector position of the sentence "car parked street"
 is to the vector position of "banana lying table". But we do know that the
 result can now be calculated with a lot less noise.
 
-### Behavior around stop words
+#### Behavior around stop words
 
 Stopwords are useful for humans, so we don't want to encourage you to leave
 them out completely. Instead weaviate will remove them whenever your schema
@@ -218,7 +236,7 @@ however, there are a few edge cases that might cause a validation error:
 * If your keyword list contains stop words, they will be removed. However, if
   every single keyword is a stop word, validation will fail.
 
-### How does weaviate decide wether a word is a stop word or not?
+#### How does weaviate decide wether a word is a stop word or not?
 
 The list of stopwords is derived from the contextionary version used and is
 published alongside the contextionary files.
@@ -313,20 +331,12 @@ from the graph, the cardinality will determine how the query is constructed.
 }
 ```
 
-## RESTful API
+## Using the Schema API
 
 - Weaviate uses a full RESTful API.
 - Examples are described in YAML and curl, but you can use it in any application.
 - The examples assume that Weaviate runs on port 80 on the localhost without authentication.
 - The entry point to a Weaviate is always `/v1`.
-
-## Get the Schema
-
-The current schema can be viewed as follows:
-
-```js
-GET /v1/schema
-```
 
 ## Create a Schema Item
 
@@ -407,9 +417,106 @@ POST /v1/schema/actions
 }
 ```
 
-#### Indexing
+#### Regulate Indexing
 
-By default, all properties of a schema item will be both for full-text, as well as vector-search. If you explicitely set `"index"` to `false`, then this property will not be included in indexing, this property will be ignored in search.
+By default, all properties of a schema item will be both for full-text, as well as vector-search. But in some cases you want to be able to regulate specific parts of the schema to optimise indexing.
+
+For example, a data object with the following schema:
+
+```yaml
+Article:
+  title: Cows lose their jobs as milk prices drop
+  content: As his 100 diary cows lumberred over for their Monday...
+```
+
+which will be vectorized as:
+
+```md
+article, title, cows, lose, their,
+jobs, as, milk, prices,drop, content,
+as, his, diary, cows, lumberred,
+over, for, their, monday
+```
+
+There are three ways how you can regulate the indexing.
+
+**1. Index the Class**
+
+You can disable indexing of the class name by adding `vectorizeClassName` to the class definition.
+
+For example: to disable the indexing of the word "Article" (which is the class name) of the data object, you can set is like this:
+
+```js
+{
+  "class": "Article",
+  "vectorizeClassName": false,
+  // etcetera
+```
+
+which will be vectorized as:
+
+```md
+title, cows, lose, their,
+jobs, as, milk, prices,drop, content,
+as, his, diary, cows, lumberred,
+over, for, their, monday
+```
+
+**2. Indexing the property**
+
+You can disable indexing of the class name by adding `vectorizePropertyName` to a property definition.
+
+For example: to disable the indexing of the word "title" (which is the property name of the data object):
+
+```js
+{
+  "class": "Article",
+  "properties": [{
+    "name": "title"
+    "vectorizePropertyName": false
+  // etcetera
+```
+
+which will be vectorized as:
+
+```md
+article, cows, lose, their,
+jobs, as, milk, prices,drop, content,
+as, his, diary, cows, lumberred,
+over, for, their, monday
+```
+
+**3. Indexing the value**
+
+You can disable indexing of a property value by adding `index` to a property definition.
+
+For example: to disable the indexing of the values of "content":
+
+```js
+{
+  "class": "Article",
+  "properties": [{
+    "name": "content"
+    "index": false
+  // etcetera
+```
+
+which will be vectorized as:
+
+```md
+article, title, cows, lose, their,
+jobs, as, milk, prices, drop, content
+```
+
+## Get the Schema
+
+The current schema can be viewed as follows:
+
+```js
+GET /v1/schema
+```
+
+A download of the schema can be used in the [weaviate-cli](/documentation/weaviate-cli/current/) client or [python client](../client-libs/python.html) library to import a schema.
 
 ## Delete a schema item
 
