@@ -15,12 +15,7 @@ og-img: documentation.jpg
 
 {% include badges.html %}
 
-If you are using the Weaviate Cluster Service (WCS) you can set the
-`"requiresAuthentication": true` option when provisioning your cluster. This
-will protect the new Weaviate instance with [OpenID
-Connect](https://openid.net/connect/) (OIDC) Authentication. This guide helps
-you obtain a token and use it with Weaviate.
-
+If you are using the Weaviate Cluster Service (WCS) you can protect your cluster with [OpenID Connect](https://openid.net/connect/) (OIDC) Authentication.
 
 ## Index
 
@@ -30,9 +25,9 @@ you obtain a token and use it with Weaviate.
 - [Login to the playground](#login-to-the-playground)
 - [More resources](#more-resources)
 
-
 ## Basics
 
+- You need to set `"requiresAuthentication": true` when requesting a cluster.
 - After creating a setup with the Weaviate Cluster Serivce (WCS), your instance
   is protected with OIDC Authentication.
 - An email was sent to the email address you used on registration with a
