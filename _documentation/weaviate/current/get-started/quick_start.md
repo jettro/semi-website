@@ -182,7 +182,7 @@ Let's first get all news publications out.
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Publication+%7B%0D%0A++++++++name%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 You can also find which articles are related to these publications.
 
@@ -203,7 +203,7 @@ You can also find which articles are related to these publications.
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Publication+%7B%0D%0A++++++++name%0D%0A++++++++HasArticles%7B%0D%0A++++++++++...+on+Article%7B%0D%0A++++++++++++title%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 And you can even go deeper, to find which authors are related to these publiations.
 
@@ -229,7 +229,7 @@ And you can even go deeper, to find which authors are related to these publiatio
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Publication%28limit%3A+3%29+%7B%0D%0A++++++++name%0D%0A++++++++HasArticles%7B%0D%0A++++++++++...+on+Article%7B%0D%0A++++++++++++title%0D%0A++++++++++++HasAuthors+%7B%0D%0A++++++++++++++...+on+Author%7B%0D%0A++++++++++++++++name%0D%0A++++++++++++++%7D%0D%0A++++++++++++%7D%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 When querying for articles, you can also add classic filters to narrow down your search.
 
@@ -254,7 +254,7 @@ When querying for articles, you can also add classic filters to narrow down your
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article%28%0D%0A++++++++where%3A%7B%0D%0A++++++++++operator%3A+GreaterThanEqual%0D%0A++++++++++path%3A+%5B%22wordCount%22%5D%0D%0A++++++++++valueInt%3A+1000%0D%0A++++++++%7D%0D%0A++++++++limit%3A+10%0D%0A++++++%29+%7B%0D%0A++++++++title%0D%0A++++++++summary%0D%0A++++++++wordCount%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 Do you want to know how many articles, authors and publications there are? This is something you can find using the Aggregate{} function.
 
@@ -292,7 +292,7 @@ Do you want to know how many articles, authors and publications there are? This 
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Aggregate%7B%0D%0A++++Things%7B%0D%0A++++++Publication%7B%0D%0A++++++++meta%7B%0D%0A++++++++++count%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++++Author%7B%0D%0A++++++++meta%7B%0D%0A++++++++++count%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++++Article%7B%0D%0A++++++++meta%7B%0D%0A++++++++++count%0D%0A++++++++%7D%0D%0A++++++++wordCount+%7B%0D%0A++++++++++count%0D%0A++++++++++maximum%0D%0A++++++++++mean%0D%0A++++++++++median%0D%0A++++++++++minimum%0D%0A++++++++++mode%0D%0A++++++++++sum%0D%0A++++++++++type%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ### Explore the smart graph
 
@@ -316,7 +316,7 @@ In Weaviate, you can also semantically explore your datasets. Let's search for a
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article%28%0D%0A++++++++explore%3A+%7B%0D%0A++++++++++concepts%3A+%5B%22money%22%5D%0D%0A++++++++%7D%0D%0A++++++++limit%3A+10%0D%0A++++++%29+%7B%0D%0A++++++++title%0D%0A++++++++summary%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 You can also combine filters!
 
@@ -351,7 +351,7 @@ You can also combine filters!
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article%28%0D%0A++++++++explore%3A+%7B%0D%0A++++++++++concepts%3A+%5B%22rideSharing%22%5D%0D%0A++++++++%7D%0D%0A++++++++where%3A%7B+%0D%0A++++++++++operator%3AAnd%0D%0A++++++++++operands%3A+%5B%7B%0D%0A++++++++++++operator%3A+GreaterThan%0D%0A++++++++++++path%3A+%5B%22wordCount%22%5D%0D%0A++++++++++++valueInt%3A+200%0D%0A++++++++++%7D%2C+%7B%0D%0A++++++++++++operator%3ALike%0D%0A++++++++++++path%3A%5B%22title%22%5D%0D%0A++++++++++++valueString%3A%22%2Atax%2A%22%0D%0A++++++++++%7D%5D%0D%0A++++++++%7D%0D%0A++++++++limit%3A+10%0D%0A++++++%29+%7B%0D%0A++++++++title%0D%0A++++++++summary%0D%0A++++++++wordCount%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 Or group similar topics semantically together.
 
@@ -374,7 +374,7 @@ _Tip: play around with the force variable._
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Publication%28%0D%0A+++++++%09group%3A+%7B%0D%0A++++++++++type%3A+merge%0D%0A++++++++++force%3A+0.05%0D%0A++++++++%7D%0D%0A++++++%29+%7B%0D%0A++++++++name%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ## Automatic Classification
 
@@ -397,7 +397,7 @@ If you run the following query, you might notice that there are no categories cl
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article+%7B%0D%0A++++++++title%0D%0A++++++++OfCategory+%7B%0D%0A++++++++++...+on+Category+%7B%0D%0A++++++++++++name%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 Here we can use Weaviate's auto-classification function to let Weaviate decide which categories to attach to news publications.
 
@@ -436,7 +436,7 @@ When Weaviate is done with the classification, you can rerun the previous query 
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article+%7B%0D%0A++++++++title%0D%0A++++++++OfCategory+%7B%0D%0A++++++++++...+on+Category+%7B%0D%0A++++++++++++name%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 By using the RESTful API, you can even get statistics related to the classification.
 

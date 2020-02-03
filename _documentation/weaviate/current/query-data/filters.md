@@ -120,7 +120,7 @@ For example, this filter selects articles from the class Article with a wordcoun
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article%28where%3A+%7B%0D%0A++++++++++++path%3A+%5B%22wordCount%22%5D%2C++++%23+Path+to+the+property+that+should+be+used%0D%0A++++++++++++operator%3A+GreaterThan%2C++%23+operator%0D%0A++++++++++++valueInt%3A+1000++++++++++%23+value+%28which+is+always+%3D+to+the+type+of+the+path+property%29%0D%0A++++++++%7D%29+%7B%0D%0A++++++++title%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ### Multiple operator filters
 
@@ -150,7 +150,7 @@ For example, these filters select based on the class Article with a wordCount hi
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article%28where%3A+%7B%0D%0A++++++++operator%3A+And%2C%0D%0A++++++++operands%3A+%5B%7B%0D%0A++++++++++++path%3A+%5B%22wordCount%22%5D%2C%0D%0A++++++++++++operator%3A+GreaterThan%0D%0A++++++++++++valueInt%3A+1000%0D%0A++++++++++%7D%2C+%7B%0D%0A++++++++++++path%3A+%5B%22publicationDate%22%5D%2C%0D%0A++++++++++++operator%3A+LessThan%2C%0D%0A++++++++++++valueDate%3A+%222020-01-01T00%3A00%3A00Z%22%0D%0A++++++++++%7D%5D%0D%0A++++++++%7D%29+%7B%0D%0A++++++++title%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ### Like operator
 
@@ -172,7 +172,7 @@ Using the `Like` operator allows you to do string searches based on partial matc
 }
 ```
 
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Publication%28where%3A+%7B%0D%0A++++++++++++path%3A+%5B%22name%22%5D%2C%0D%0A++++++++++++operator%3A+Like%2C%0D%0A++++++++++++valueString%3A+%22New+%2A%22%0D%0A++++++++%7D%29+%7B%0D%0A++++++++name%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 This query would return both the publications with the name `New Yorker`, `New York Times` and `New Scientist` if they are present in the Weaviate instance.
 
@@ -202,7 +202,7 @@ For example, these filters select based on the class Article but who have `inPub
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article%28where%3A+%7B%0D%0A++++++++++path%3A+%5B%22inPublication%22%2C+%22Publication%22%2C+%22name%22%5D%2C%0D%0A++++++++++operator%3A+Equal%2C%0D%0A++++++++++valueString%3A+%22New+Yorker%22%0D%0A++++++++%7D%29+%7B%0D%0A++++++++title%0D%0A++++++++InPublication%7B%0D%0A++++++++++...+on+Publication%7B%0D%0A++++++++++++name%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 You can also combine all filters into one request.
 
@@ -239,7 +239,7 @@ For example, these filters select based on the class Article with a wordcount hi
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article%28where%3A+%7B%0D%0A++++++++operator%3A+And%2C%0D%0A++++++++operands%3A+%5B%7B%0D%0A++++++++++++path%3A+%5B%22wordCount%22%5D%2C%0D%0A++++++++++++operator%3A+GreaterThan%0D%0A++++++++++++valueInt%3A+1000%0D%0A++++++++++%7D%2C+%7B%0D%0A++++++++++++path%3A+%5B%22publicationDate%22%5D%2C%0D%0A++++++++++++operator%3A+LessThan%2C%0D%0A++++++++++++valueDate%3A+%222020-01-01T00%3A00%3A00Z%22%0D%0A++++++++++%7D%2C%7B%0D%0A++++++++++++path%3A+%5B%22inPublication%22%2C+%22Publication%22%2C+%22name%22%5D%2C%0D%0A++++++++++++operator%3A+Equal%2C%0D%0A++++++++++++valueString%3A+%22New+Yorker%22%0D%0A++++++++++%7D%5D%0D%0A++++++++%7D%29+%7B%0D%0A++++++++name%0D%0A++++++++inPublication%7B%0D%0A++++++++++...+on+Publication%7B%0D%0A++++++++++++name%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ## GeoCoordinates filter
 
@@ -257,8 +257,8 @@ For example, this curious returns all in a radius of 2KM around a specific geo-l
         operator: WithinGeoRange,
         valueGeoRange: {
           geoCoordinates: {
-            latitude: 52.4,   # latitude
-            longitude: 4.9    # longitude
+            latitude: 51.51,    # latitude
+            longitude: -0.09    # longitude
           },
           distance: {
             max: 2000           # distance in meters
@@ -276,7 +276,7 @@ For example, this curious returns all in a radius of 2KM around a specific geo-l
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Publication%28where%3A+%7B%0D%0A++++++++operator%3A+WithinGeoRange%2C%0D%0A++++++++valueGeoRange%3A+%7B%0D%0A++++++++++geoCoordinates%3A+%7B%0D%0A++++++++++++latitude%3A+51.51%2C++++%23+latitude%0D%0A++++++++++++longitude%3A+-0.09++++%23+longitude%0D%0A++++++++++%7D%2C%0D%0A++++++++++distance%3A+%7B%0D%0A++++++++++++max%3A+2000+++++++++++%23+distance+in+meters%0D%0A++++++++++%7D%0D%0A++++++++%7D%2C%0D%0A++++++++path%3A+%5B%22headquartersGeoLocation%22%5D+%23+property+needs+to+be+of+geoLocation+type.%0D%0A++++++%7D%29+%7B%0D%0A++++++++name%0D%0A++++++++headquartersGeoLocation+%7B%0D%0A++++++++++latitude%0D%0A++++++++++longitude+%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ## Limit filter
 
@@ -297,6 +297,7 @@ An example of a stand-alone limit filter:
   }
 }
 ```
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article%28limit%3A5%29+%7B%0D%0A++++++++title%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ## Explore filter
 
@@ -367,7 +368,7 @@ An example query:
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get%7B%0D%0A++++Things%7B%0D%0A++++++Article%28%0D%0A++++++++explore%3A+%7B%0D%0A++++++++++concepts%3A+%5B%22Joker%22%5D%2C%0D%0A++++++++++moveAwayFrom%3A+%7B%0D%0A++++++++++++concepts%3A+%5B%22game%22%5D%2C%0D%0A++++++++++++force%3A+0.9%0D%0A++++++++++%7D%2C%0D%0A++++++++++moveTo%3A+%7B%0D%0A++++++++++++concepts%3A+%5B%22movie%22%5D%2C%0D%0A++++++++++++force%3A+0.85%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%29%7B%0D%0A++++++++title+%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ## Group filter
 
@@ -417,7 +418,7 @@ An example query:
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Publication%28%0D%0A++++++++group%3A%7B%0D%0A++++++++++type%3A+merge%0D%0A++++++++++force%3A0.05%0D%0A++++++++%7D%0D%0A++++++%29+%7B%0D%0A++++++++name%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ### Grouping best practices
 
@@ -475,7 +476,7 @@ In the following example, the articles are grouped by the property `isAccessible
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Aggregate+%7B%0D%0A++++Things+%7B%0D%0A++++++Article+%28groupBy%3A%5B%22isAccessible%22%5D%29+%7B%0D%0A++++++++meta+%7B%0D%0A++++++++++count%0D%0A++++++++%7D%0D%0A++++++++wordCount+%7B%0D%0A++++++++++mean%0D%0A++++++++%7D%0D%0A++++++++groupedBy+%7B%0D%0A++++++++++value%0D%0A++++++++++path%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ## More Resources
 
