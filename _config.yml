@@ -1,5 +1,5 @@
 weaviate_version: 0.22.0
-helm_version: 8.2.1
+helm_version: 9.0.0
 markdown: kramdown
 kramdown:
     parse_block_html: false
