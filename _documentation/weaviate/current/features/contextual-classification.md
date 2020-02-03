@@ -32,7 +32,7 @@ Perform contextual classifications through the RESTapi to enhance your dataset.
 
 - Reference properties of data objects can be classified with contextual classification.
 - There is no training data in contextual classification.
-- Use the RESTful api queries `v1/classification/` for classification.
+- Use the RESTful api queries `v1/classifications` for classification.
 - Classification meta information of data objects can be requested by setting `?meta=true` in `GET /things/{kinds}/{id}` requests for things and actions.
 
 ## Introduction
@@ -41,12 +41,12 @@ Weaviate's classification features allows you to classify data objects. Cross-re
 
 ## How to use
 
-Classification can be performed via the `v1/classification/` endpoint on the RESTful API. There are two operations possible. To start a classification job, send a `POST` request to `v1/classification/`, and specify the `type` of the classification to `contextual` in the body (see below). The field `basedOnProperties` currently accepts only one property of the class, but all other properties of the class are also taken into account, since the vector representation of the whole object in the class is taken. The field property must be of the datatype `text`. 
-To view previously created classifications, send a `GET` request to `v1/classification/{classificationId}`.
+Classification can be performed via the `v1/classifications` endpoint on the RESTful API. There are two operations possible. To start a classification job, send a `POST` request to `v1/classifications`, and specify the `type` of the classification to `contextual` in the body (see below). The field `basedOnProperties` currently accepts only one property of the class, but all other properties of the class are also taken into account, since the vector representation of the whole object in the class is taken. The field property must be of the datatype `text`. 
+To view previously created classifications, send a `GET` request to `v1/classifications/{classificationId}`.
 
 ### Start a Classification
 
-To start a classification, send a `POST` request to `v1/classification/` with the following body:
+To start a classification, send a `POST` request to `v1/classifications/` with the following body:
 
 ```js
 POST /v1/classifications
@@ -84,7 +84,7 @@ Which returns a body like the following if the classification was successfully s
 
 ### See the Status of a Classification
 
-The ID returned in the POST request can be used to request information about the classification process, by performing a `GET` on `v1/classification/{classificationId}`. A similar result as above will be returned, containing information about the classification. The status of the classification van 
+The ID returned in the POST request can be used to request information about the classification process, by performing a `GET` on `v1/classifications/{classificationId}`. A similar result as above will be returned, containing information about the classification. The status of the classification van 
 
 ```json
 GET /v1/classifications/<classificationID>
@@ -170,7 +170,7 @@ To explain how to use the API calls to perform classification less abstract, let
 - Data objects of the class `Category`, with the `name` property filled.
 - Data objects of the class `Article`, with the reference property `ofCategory` not filled yet.
 
-We can now send `POST` request with the following body to `/v1/classification`:
+We can now send `POST` request with the following body to `/v1/classifications`:
 
 ```json
 {
@@ -202,7 +202,7 @@ which will return the following `meta` information:
 }
 ```
 
-If we later check the status by performing a GET request to `v1/classification/853c5eb4-6785-4a95-9a30-9cc70ea21fd8`, we will get the following information if the classification has finished.
+If we later check the status by performing a GET request to `v1/classifications/853c5eb4-6785-4a95-9a30-9cc70ea21fd8`, we will get the following information if the classification has finished.
 
 ```json
 {

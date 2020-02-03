@@ -120,7 +120,7 @@ An example query:
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Explore+%28%0D%0A++++concepts%3A+%5B%22New+Yorker%22%5D%2C%0D%0A++++certainty%3A+0.95%2C%0D%0A++++moveTo%3A+%7B%0D%0A++++++concepts%3A+%5B%22publisher%22%2C+%22articles%22%5D%2C%0D%0A++++++force%3A+0.5%0D%0A++++%7D%2C%0D%0A++++moveAwayFrom%3A+%7B%0D%0A++++++concepts%3A+%5B%22fashion%22%2C+%22shop%22%5D%2C%0D%0A++++++force%3A+0.2%0D%0A++++%7D%0D%0A++%29+%7B%0D%0A++++beacon%0D%0A++++certainty%0D%0A++++className%0D%0A++%7D%0D%0A%7D' %}
 
 ### Concepts array function
 

@@ -35,12 +35,12 @@ docs:
     weaviate:
         - Get started
         - Setup
-        - Weaviate Cluster Service
         - Add data
         - Query data
         - Features
         - Datasets
         - Client libs
+        - Weaviate Cluster Service
         - More resources
         - About
     weaviate-cli:

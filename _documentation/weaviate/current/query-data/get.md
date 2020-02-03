@@ -90,7 +90,7 @@ A `Get{}` function is always based on the schema. For example, if you've created
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article+%7B%0D%0A++++++++title%0D%0A++++++++url%0D%0A++++++++wordCount%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 The above query will result in something like the following:
 
@@ -132,7 +132,7 @@ If you've set a [beacon reference](../about/philosophy#basic-terminology) in the
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article+%7B%0D%0A++++++++title%0D%0A++++++++url%0D%0A++++++++wordCount%0D%0A++++++++InPublication+%7B+++++++++++%23+the+reference%0D%0A++++++++++...+on+Publication+%7B++++%23+you+always+set+the+destination+class%0D%0A++++++++++++name++++++++++++++++++%23+the+property+related+to+target+class%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 Note that if you've set the [cardinality](../add-data/define_schema.html#property-object) to `many`, you might have multiple data types. For example:
 
@@ -157,7 +157,7 @@ Note that if you've set the [cardinality](../add-data/define_schema.html#propert
   }
 }
 ```
-{% include molecule-gql-demo.html %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get+%7B%0D%0A++++Things+%7B%0D%0A++++++Article+%7B%0D%0A++++++++title%0D%0A++++++++url%0D%0A++++++++wordCount%0D%0A++++++++HasAuthors+%7B%0D%0A++++++++++...+on+Author+%7B%0D%0A++++++++++++name%0D%0A++++++++++%7D%0D%0A++++++++++...+on+Publication+%7B%0D%0A++++++++++++name%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ## More Resources
 
