@@ -4,7 +4,7 @@ title: Weaviate on DB-engines.com
 description: Compare Weaviate with other solutions on DB-engines.com
 tags: ['DB-engines.com']
 pubdate: October 10th, 2019
-menu-order: 2
+menu-order: 3
 open-graph-type: article
 ---
 
