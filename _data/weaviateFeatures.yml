@@ -125,7 +125,7 @@
   enterprise: true
   enterpriseplus: true
 
-- title: "Dedicated implemantation support"
+- title: "Dedicated implementation support"
   note: ""
   startup: false
   scaleup: false
