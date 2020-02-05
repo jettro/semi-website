@@ -4,7 +4,7 @@ title: Google Cloud's Stackchat
 description: Bob van Luijt was a guest on GCP's Stackchat
 tags: ['Bob van Luijt', 'Youtube', 'Google Cloud', 'Stack chat']
 pubdate: January 26th, 2020
-menu-order: 4
+menu-order: 5
 open-graph-type: article
 ---
 
