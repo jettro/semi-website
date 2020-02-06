@@ -3,8 +3,7 @@ layout: layout-blog-article
 title: Weaviate on DB-engines.com
 description: Compare Weaviate with other solutions on DB-engines.com
 tags: ['DB-engines.com']
-pubdate: October 10th, 2019
-menu-order: 3
+pubdate: 2019-10-10T00:00:00Z
 open-graph-type: article
 ---
 
