@@ -3,8 +3,7 @@ layout: layout-blog-article
 title: Introduction & Demo video
 description: Weaviate introduction and demo during Dev Fest Nantest
 tags: ['Video', 'Demo', 'DevFest', 'Nantes']
-pubdate: November 1st, 2019
-menu-order: 3
+pubdate: 2019-11-01T00:00:00Z
 open-graph-type: article
 ---
 

@@ -9,10 +9,10 @@ menu-order: 999
 open-graph-type: article
 ---
 
-{% assign newsItem = site.news | sort: 'pubdate' %}
+{% assign newsItem = site.news | sort: 'pubdate' | reverse %}
 {% for page in newsItem %}
 {% if page.url != "/news/index" %}
-- [{{ page.title }}]({{ page.url }}) ({{ page.pubdate }})
+- [{{ page.title }}]({{ page.url }}) ({{ page.pubdate | date_to_long_string }})
 {% endif %}
 {% endfor %}
 
