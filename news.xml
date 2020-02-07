@@ -11,6 +11,7 @@ layout: none
             {% if page.url != "/news/index" %}
             <item>
                 <title>{{ page.title | xml_escape }}</title>
+                <pubdate>{{ page.pubdate | date_to_xmlschema }}</pubdate>
                 <link>https://semi.technology{{ page.url }}</link>
                 <description>{{ page.description | xml_escape }}</description>
             </item>
