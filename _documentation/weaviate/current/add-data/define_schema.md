@@ -52,13 +52,13 @@ A Weaviate schema is used to define what kind of [semantic kinds](../about/philo
 
 - A schema consists of classes and properties.
 - Things are distinguished from Actions in schema classes.
-- Words used in the schema must be part of the [contextionary](../about/philosophy#about-the-contextionary).
+- Words used in the schema must be part of the [contextionary](../about/philosophy.html#about-the-contextionary).
 - The schema can be modified through the RESTful API.
 - You can import and export complete schemas with the [weaviate-cli](/documentation/weaviate-cli/current/schema/schema-import.html) tool.
 
 ## Introduction
 
-When you startup an empty Weaviate, you need to define a schema to explain what kind of data you will add. Because Weaviate is a smart graph, the linguistic element plays an important role. When creating concepts, Weaviate will validate if it can understand the schema concepts you want to add based on the [contextionary](../about/philosophy#about-the-contextionary). You might notice that a lot of definitions are related to the everyday language we use. And this is the first best practice to bear in mind. When defining the schema, you should do this in the form like you would explain it to another person, not like tables and columns you would add to a traditional data solution.
+When you startup an empty Weaviate, you need to define a schema to explain what kind of data you will add. Because Weaviate is a smart graph, the linguistic element plays an important role. When creating concepts, Weaviate will validate if it can understand the schema concepts you want to add based on the [contextionary](../about/philosophy.html#about-the-contextionary). You might notice that a lot of definitions are related to the everyday language we use. And this is the first best practice to bear in mind. When defining the schema, you should do this in the form like you would explain it to another person, not like tables and columns you would add to a traditional data solution.
 
 ### Concepts and their Structures
 
@@ -107,7 +107,7 @@ keywords:
 
 ### Weaviate Schema versus Ontology
 
-Because Weaviate uses the [Contextionary](../about/philosophy#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Publication with the name New Yorker`) is semantically similar to `a Magazine with the label New Yorker`.
+Because Weaviate uses the [Contextionary](../about/philosophy.html#about-the-contextionary) to index data, the use of the schema becomes fuzzy. This means that a reference formatted like this: `{Class} {property} {value}` (e.g., `a Publication with the name New Yorker`) is semantically similar to `a Magazine with the label New Yorker`.
 
 Within Weaviate, the schema is _only_ used to define the query and explore syntax.
 
@@ -241,7 +241,7 @@ however, there are a few edge cases that might cause a validation error:
 The list of stopwords is derived from the contextionary version used and is
 published alongside the contextionary files.
 
-Check the [contextionary](../about/contextionary) or a list of stopwords using
+Check the [contextionary](../about/contextionary.html) or a list of stopwords using
 the desired language and version. For example, to see the stopwords used in the
 english language contextionary version 0.5.0, check
 [https://c11y.semi.technology/0.5.0/en/stopwords.json](https://c11y.semi.technology/0.5.0/en/stopwords.json).

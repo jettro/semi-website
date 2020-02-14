@@ -27,7 +27,7 @@ A: Yes, soon, we will release the Weaviate Cluster Service! [Sign up for our new
 
 ### Q: Can I train my own contextionary?
 
-A: No, but the good news is. You don't have to. The [function of the contextionary](../about/philosophy#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By adding data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You just have to [run the Weaviate containers](../get-started/install.html) in a language of choice, and you are good to go!
+A: No, but the good news is. You don't have to. The [function of the contextionary](../about/philosophy.html#about-the-contextionary) within a Weaviate is that it allows a Weaviate to interpret your data semantically. By adding data through the RESTful API endpoints, a Weaviate already has enough context based on your data. You just have to [run the Weaviate containers](../get-started/install.html) in a language of choice, and you are good to go!
 
 ### Q: Why is the contextionary created using GloVe?
 

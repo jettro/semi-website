@@ -31,7 +31,7 @@ You can explore the smart graph based on the semantic meaning of the data concep
 
 ## Basics
 
-- With the `Explore{}` query function, you can fuzzy search for data objects in Weaviate (in contrast to the [`explore filter`](./filters#explore-filter) in the Get{} function).
+- With the `Explore{}` query function, you can fuzzy search for data objects in Weaviate (in contrast to the [`explore filter`](./filters.html#explore-filter) in the Get{} function).
 - Search results are based on given data, meta data and the `Contextionary` used in Weaviate.
 - Some functions have (semantic) [filters](./filters.html) available.
 
@@ -96,7 +96,7 @@ The `Explore{}` function is structured as follows:
 }
 ```
 
-Note that all words in the `concepts` argument array should be present in the Contextionary. More information about beacon interpretation can be found [here](../about/philosophy#basic-terminology).
+Note that all words in the `concepts` argument array should be present in the Contextionary. More information about beacon interpretation can be found [here](../about/philosophy.html#basic-terminology).
 
 An example query:
 
