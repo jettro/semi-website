@@ -35,7 +35,7 @@ When a Weaviate [schema](./define_schema.html) is created, you can populate this
 ## Basics
 
 - Data is added through the RESTful API.
-- Individual [semantic kinds](.././about/philosophy#basic-terminology) can be collected or listed. However, there are seperate documentation pages for [querying](.././query-data/get.html) and [exploring](.././query-data/explore.html).
+- Individual [semantic kinds](.././about/philosophy.html#basic-terminology) can be collected or listed. However, there are seperate documentation pages for [querying](.././query-data/get.html) and [exploring](.././query-data/explore.html).
 - The examples assume that Weaviate runs on port 80 on the localhost without authentication.
 - The entry point to a Weaviate is always `/v1`.
 
@@ -72,7 +72,7 @@ POST /v1/{semanticKind}
 }
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy.html#basic-terminology)).
 - `{contentType}` = JSON or YAML.
 - `{data}` = [data object](#data-object).
 
@@ -125,7 +125,7 @@ PUT /v1/{semanticKind}/{semanticKindUUID}
 }
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy.html#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 - `{contentType}` = JSON or YAML.
 - `{data}` = [data object](#data-object).
@@ -188,7 +188,7 @@ A concept data object can be retrieved from a Weaviate directly via the followin
 GET /v1/{semanticKind}/{semanticKindUUID}
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy.html#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 
 Example of requesting a _thing_.
@@ -208,7 +208,7 @@ A concept data object can be deleted from a Weaviate directly via the following 
 DELETE /v1/{semanticKind}/{semanticKindUUID}
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy.html#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 
 Example of deleting a _thing_.
@@ -318,7 +318,7 @@ POST /v1/{semanticKind}/{semanticKindUUID}/references/{propertyName}
 }
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy.html#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 - `{propertyName}` = the name of the property related to this class.
 - `{contentType}` = JSON or YAML.
@@ -361,7 +361,7 @@ PUT /v1/{semanticKind}/{semanticKindUUID}/references/{propertyName}
 }
 ```
 
-- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy#basic-terminology)).
+- `{semanticKind}` = _things_ or _actions_ ([more info](.././about/philosophy.html#basic-terminology)).
 - `{semanticKindUUID}` = the UUID that points to a concept.
 - `{propertyName}` = the name of the property related to this class.
 - `{contentType}` = JSON or YAML.

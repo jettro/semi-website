@@ -112,7 +112,7 @@ The above query will result in something like the following:
 
 ### Work with graph beacons
 
-If you've set a [beacon reference](../about/philosophy#basic-terminology) in the schema, you can query it as follows:
+If you've set a [beacon reference](../about/philosophy.html#basic-terminology) in the schema, you can query it as follows:
 
 ```graphql
 {
