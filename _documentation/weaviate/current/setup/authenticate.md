@@ -4,7 +4,7 @@ product: weaviate
 sub-menu: Setup
 product-order: 1
 title: Authenticate
-description: How to setup weaviate auhtentication.
+description: How to setup weaviate authentication.
 tags: ['Installation', 'Authentication']
 menu-order: 4
 open-graph-type: article
