@@ -25,6 +25,7 @@ Weaviate has a contextionary endpoint which you can call to see how it indexed w
 
 ## Basics
 
+- The basics of the Contextionary can be found [here](philosophy.html#about-the-contextionary).
 - You can use this functionality to see how Weaviate functions under the hood.
 - All contextionary functionality is consolidated inside Weaviate itself, which means that in practice you will probably not need this end-point often.
 - The more training data is available to create the contextionary the better, and the latest versions are trained on the following corpus-sizes;
