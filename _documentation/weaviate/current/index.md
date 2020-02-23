@@ -41,7 +41,8 @@ Weaviate is an open-source, GraphQL and RESTful API-enabled, smart graph based o
 Want to get started or want to learn more? These resources might help you further
 
 - Learn more:
-    - [Talk and demonstration](/news/dev-fest-nantes.html).
+    - [Talk and demonstration @ FOSDEM 2020](/news/fosdem-2020.html).
+    - [Weaviate introduction on Google Cloud's Stack Chat](https://www.semi.technology/news/gcp-stackchat.html).
     - [Podcast about Weaviate](/news/gcp-podcast.html).
 - Get started:
     - [Weaviate in 10 minutes](./get-started/quick_start.html).

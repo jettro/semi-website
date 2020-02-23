@@ -45,7 +45,7 @@ When a Weaviate [schema](./define_schema.html) is created, you can populate this
 Adding data to Weaviate is very similar to filling traditional graph databases with data. The two differentiating factors within Weaviate are:
 
 1. The ability to make direct and indirect references to nodes in the graph.
-2. Realtime semantic indexing in the [Contextionary](.././about/philosophy#about-the-contextionary).
+2. Realtime semantic indexing in the [Contextionary](.././about/philosophy.html#about-the-contextionary).
 
 ## Data Object
 
