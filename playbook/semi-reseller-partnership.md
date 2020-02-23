@@ -40,8 +40,8 @@ Example calculation
 
 | Region | Situation | Commision SRP-A | Commision SRP-B |
 | ------ | --------- | --------------- | --------------- |
-| Germany | SRP-A sells in own industrieus | 100% of X | 0% of X |
-| Germany | SRP-A sells in industry owned by SRP-B | 60% of X | 40% of X |
+| Germany | SRP-A sells in own industry | 100% of X | 0% of X |
+| Germany | SRP-A sells in an industry owned by SRP-B | 60% of X | 40% of X |
 | Germany | SRP-B sells in an unclaimed industry | 0% of X | 100% of X |
 
 ## SeMI services towards an SRP
