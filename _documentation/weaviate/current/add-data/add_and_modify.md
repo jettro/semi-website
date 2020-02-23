@@ -23,6 +23,7 @@ When a Weaviate [schema](./define_schema.html) is created, you can populate this
 - [Introduction](#introduction)
 - [Data Object](#data-object)
   - [Add a data object](#add-a-data-object)
+    - [Influence Vector Weights](#influence-vector-weights)
   - [Update a data object](#update-a-data-object)
   - [Get a data object](#get-a-data-object)
   - [Delete a data object](#delete-a-data-object)
@@ -44,7 +45,7 @@ When a Weaviate [schema](./define_schema.html) is created, you can populate this
 Adding data to Weaviate is very similar to filling traditional graph databases with data. The two differentiating factors within Weaviate are:
 
 1. The ability to make direct and indirect references to nodes in the graph.
-2. Realtime semantic indexing in the [Contextionary](.././about/philosophy#about-the-contextionary).
+2. Realtime semantic indexing in the [Contextionary](.././about/philosophy.html#about-the-contextionary).
 
 ## Data Object
 
@@ -110,6 +111,55 @@ POST /v1/actions
 ```
 
 - _Note, it is assumed that the beacon f81bfe5e-16ba-4615-a516-46c2ae2e5a80 exsists_
+
+
+### Influence Vector Weights
+
+When adding objects, a vector is created based on the words in the object. The algorithm of the [Contextionary](../about/contextionary.html) gives weights to words based on their general occurence of the word in its original training data. The underlying assumption is that a rare word should take more precedence over a very common word, similar to [tf-idf](https://en.wikipedia.org/wiki/Tf%E2%80%93idf).
+
+This works well in most cases, but in some use-case specific domain languages common words get a new meaning and therefore their importance should change. Imagine the words "far" and "near". They are quite common in overall language, so - especially when mixed with rarer words - they wouldn't get a great weight. However, now assume you're in the domain of optometry or manufacturing glasses. In the terms "far-sighted" and "near-sighted", the words "near" and "far" make a very important distinction. If you want to successfully classify objects based on these terms, more relative importance should be given to them. You can influence, or completely override, the weights of individual words in objects when creating vectors.
+
+To do so, the field `vectorWeights` was introduced to the `Thing` and `Action` objects. The field is a key-value map where both the keys and the values must be strings. The keys are the words you want to influence and the value is a mathematical expression to set the new weight. You can use additions, subtractions, multiplications, divisions or simply overwrite the weight with a fixed number. To reference the original weights, use the single-letter variable `w`. Some examples:
+
+- `"vectorWeights": {"far": "10 * w"}`.
+Give the word "far" 10 times its original weight.
+
+- `"vectorWeights": {"far": "w + 0.5", "near": "w - 0.5"}`.
+Give the word "far" an absolute boost of 0.5, while penalizing the word "near" by 0.5.
+
+- `"vectorWeights": {"sighted": "0.7", "glasses": "2 - 4 * w"}`.
+Let the word "sighted" have a fixed weight of 0.7 whereas the word "glasses" is calculated by subtracting 4 times the original weight from the number 2.
+
+#### Important notes to keep in mind 
+
+- For this feature to work you need a Contextionary version of at least `...v0.4.7`.
+- Spaces in math expressions have no meaning.
+- A word that is not referenced in `"vectorWeights"` will simply use its original weight as returned by the Contextionary.
+- Custom `vectorWeights` only affect the object which they are set on, there is no option to globally manipulate a specific word. If the same vectorWeights are required for multiple objects, simply attach them to all objects where needed.
+- Whenever the mathematical expression is not a fixed number (such as `"17"`) an operator must be present. It is not valid to use implicit operators, such as `"2w"` which would mean "two times the original weight". In this case explicitly use the multiplication operator, e.g. `"2 * w"` or `"w*2"`.
+- The weights can be modified when creating the object, or with a `PUT` or `PATCH` update.
+
+#### Full example
+
+Here's a full example for importing a `Thing` object.
+
+`POST /v1/things`
+
+``` jsos
+{
+ "class": "Glasses",
+ "schema": {
+   "description": "These glasses are meant for far-sighted people"
+ },
+ "vectorWeights": {
+   "far": "5 * w",
+   "near": "5 * w"
+ }
+}
+```
+
+The above example will boost the words "far" or "near" by a factor of 5. Note that the object does not contain the word "near", so only the word "far" is boosted. The other unreferenced words maintain their original weights.
+
 
 ## Update a data object
 

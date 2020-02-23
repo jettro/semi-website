@@ -349,26 +349,27 @@ An example query:
 {
   Get{
     Things{
-      Article(
+      Publication(
         explore: {
-          concepts: ["Joker"],
+          concepts: ["fashion"],
+          certainty: 0.7,
           moveAwayFrom: {
-            concepts: ["game"],
-            force: 0.9
+            concepts: ["finance"],
+            force: 0.45
           },
           moveTo: {
-            concepts: ["movie"],
+            concepts: ["haute couture"],
             force: 0.85
           }
         }
       ){
-        title 
+        name
       }
     }
   }
 }
 ```
-{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get%7B%0D%0A++++Things%7B%0D%0A++++++Article%28%0D%0A++++++++explore%3A+%7B%0D%0A++++++++++concepts%3A+%5B%22Joker%22%5D%2C%0D%0A++++++++++moveAwayFrom%3A+%7B%0D%0A++++++++++++concepts%3A+%5B%22game%22%5D%2C%0D%0A++++++++++++force%3A+0.9%0D%0A++++++++++%7D%2C%0D%0A++++++++++moveTo%3A+%7B%0D%0A++++++++++++concepts%3A+%5B%22movie%22%5D%2C%0D%0A++++++++++++force%3A+0.85%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%29%7B%0D%0A++++++++title+%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
+{% include molecule-gql-demo.html encoded_query='%7B%0D%0A++Get%7B%0D%0A++++Things%7B%0D%0A++++++Publication%28%0D%0A++++++++explore%3A+%7B%0D%0A++++++++++concepts%3A+%5B%22fashion%22%5D%2C%0D%0A++++++++++certainty%3A+0.7%2C%0D%0A++++++++++moveAwayFrom%3A+%7B%0D%0A++++++++++++concepts%3A+%5B%22finance%22%5D%2C%0D%0A++++++++++++force%3A+0.45%0D%0A++++++++++%7D%2C%0D%0A++++++++++moveTo%3A+%7B%0D%0A++++++++++++concepts%3A+%5B%22haute+couture%22%5D%2C%0D%0A++++++++++++force%3A+0.85%0D%0A++++++++++%7D%0D%0A++++++++%7D%0D%0A++++++%29%7B%0D%0A++++++++name%0D%0A++++++%7D%0D%0A++++%7D%0D%0A++%7D%0D%0A%7D' %}
 
 ## Group filter
 
