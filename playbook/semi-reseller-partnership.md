@@ -14,7 +14,7 @@ The following document contains the guiding principles for a SeMI Reseller Partn
 ## SRP Location and Branch definitions
 
 - An SRP operates in a fixed country or territory (e.g., Benelux or North America).
-- An SRP operates in one (1) or more industries based on the [International Standard Industrial Classification (SIC)](https://en.wikipedia.org/wiki/Standard_Industrial_Classification).
+- An SRP operates in one (1) or more industries based on the [International Standard Industrial Classification (ISIC)](https://unstats.un.org/unsd/classifications/Econ/Download/In%20Text/ISIC_Rev_4_publication_English.pdf) ([wiki](https://en.wikipedia.org/wiki/International_Standard_Industrial_Classification#ISIC_Revision_4_broad_structure)).
 - An SRP gets exclusivity in a branch of the selected territory and branches.
 - An SRP can represent multiple branches.
 - An SRP can represent multiple countries.
