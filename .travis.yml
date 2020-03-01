@@ -69,6 +69,8 @@ script:
       gsutil -m rm -r gs://$BUCKET/**
       # cd into website dir
       cd _site
+      # remove robots.dev.txt
+      rm robots.dev.txt
       # Upload data to bucket
       gsutil -m cp -r ./ gs://$BUCKET
       # upload videos with gzip
@@ -99,6 +101,9 @@ script:
       gsutil -m rm -r gs://$BUCKETDEV/**
       # cd into website dir
       cd _site
+      # rename and remove robots.txt
+      rm robots.txt
+      mv robots.dev.txt robots.txt
       # Upload data to bucket, GZIP (-Z) and set Cache Control for CDN
       gsutil -m -h "Cache-Control:public,max-age=900" cp -Z -r ./ gs://$BUCKETDEV
       # upload videos with gzip
