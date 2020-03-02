@@ -43,7 +43,7 @@ h6 {
 
 p, li {
 	font-size: $font-size-body;
-	margin: 0;
+	margin-top: 1rem;
 	// padding-bottom: 1rem;
 	max-width: 32em;
 }
@@ -81,7 +81,7 @@ hr {
 		font-size: 1.25rem;
 	}
 	p, li {
-		margin: 0;
+		margin-top: 1rem;
 		font-size: 1.25rem;
 	}
 	p.intro {
