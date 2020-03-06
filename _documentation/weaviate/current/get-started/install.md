@@ -43,27 +43,26 @@ You can run a Weaviate instance with [Docker Compose](https://docs.docker.com/co
 
 Want another natural language? Make sure to let us know [here](https://github.com/semi-technologies/weaviate/issues).
 
-### Weaviate with an English contextionary
+{% for c11y in site.data.c11y %}
+
+### Weaviate with {{ c11y.title }} Contextionary
 
 ```bash
 # Download the Weaviate configuration file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/config.yaml
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/{{ c11y.short }}/config.yaml
 # Download the Weaviate docker-compose file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/en/docker-compose.yml
+$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/{{ c11y.short }}/docker-compose.yml
 # Run Docker Compose
 $ docker-compose up
 ```
 
-### Weaviate with a Dutch contextionary (EXPERIMENTAL)
+{% if c11y.experimental == true %}
 
-```bash
-# Download the Weaviate configuration file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/nl/config.yaml
-# Download the Weaviate docker-compose file
-$ curl -O https://raw.githubusercontent.com/semi-technologies/weaviate/{{ site.weaviate_version }}/docker-compose/runtime/nl/docker-compose.yml
-# Run Docker Compose
-$ docker-compose up
-```
+_Note: The {{ c11y.name }} version is an experimental contextionary. Any feedback? Please share it with us on [Github](https://github.com/semi-technologies/weaviate/issues) or [Stackoverflow](https://stackoverflow.com/tags/weaviate/)._
+
+{% endif %}
+
+{% endfor %}
 
 Warning: The output is quite verbose, for an alternative see [attaching to only
 the log output of weaviate](#attaching-to-the-log-output-of-only-weaviate).

@@ -64,3 +64,7 @@ A: Two words, user experience. We want to make it as simple as possible to integ
 ### Q: Can I request a feature in Weaviate?
 
 A: Sure (also, feel free to [issue a pull request](https://github.com/semi-technologies/weaviate/pulls) 😉) you can [add those requests here](https://github.com/semi-technologies/weaviate/issues). The only thing you need is a Github account, and while you're there, make sure to give us a star 😇.
+
+### Q: Does Weaviate require NFS volumes on Kubernetes?
+
+A: By default, no NFS volumes are active. In a production setting, we recommend turning etcd disaster recovery on which requires an NFS volume. However, [the helm docs](https://www.semi.technology/documentation/weaviate/current/get-started/install.html#how-can-i-turn-it-on) contain instructions on how to deploy an nfs-provisioner. For more details, see also this [stack overflow answer](https://stackoverflow.com/a/60505796/5322199).
