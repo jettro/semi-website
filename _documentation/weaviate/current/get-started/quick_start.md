@@ -74,6 +74,7 @@ This validates that your Weaviate is running correctly.
 Next, we want to check if the news publication schema was added correctly, you can do this by inspecting the `/v1/schema` endpoint.
 
 ```bash
+$ export $WEAVIATE={you host, localhost:8080 for example}
 $ curl -s http://$WEAVIATE/v1/schema | jq .
 ```
 
@@ -404,7 +405,7 @@ Here we can use Weaviate's auto-classification function to let Weaviate decide w
 To do this, we will use the RESTful API.
 
 ```bash
-$ curl https://{YOUR WEAVIATE HOST}/v1/classifications -X POST -H 'Content-type: application/json' -d \
+$ curl http://$WEAVIATE/v1/classifications -X POST -H 'Content-type: application/json' -d \
 '{
     "class": "Article",
     "type": "contextual",
@@ -441,7 +442,7 @@ When Weaviate is done with the classification, you can rerun the previous query 
 By using the RESTful API, you can even get statistics related to the classification.
 
 ```bash
-$ curl -k https://{YOUR WEAVIATE HOST}/v1/things/{CLASSIFICATION ID}?meta=true | jq .
+$ curl -k http://$WEAVIATE/v1/things/{CLASSIFICATION ID}?meta=true | jq .
 ```
 
 This was a sneak peek of Weaviate. In the documentation, you can find more videos and guides on how to work with Weaviate in depth.
